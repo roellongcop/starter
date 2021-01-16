@@ -3,6 +3,8 @@
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
+use app\widgets\ChangePhoto;
+use app\widgets\ImagePreview;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -21,14 +23,35 @@ use yii\widgets\ActiveForm;
             <?= $model->getFormInput($form) ?>
 
             <?php if ($model->hasImageInput): ?>
-                <?= $form->field($model, 'imageInput')->fileInput([
-                    'onchange' => 'preview(this)'
-                ]) ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'imageInput')->fileInput() ?>
+                    </div>
+                    <div class="col-md-6"> <br>
+                        <?= ChangePhoto::widget([
+                            'buttonTitle' => 'Choose from gallery',
+                            'model' => $model,
+                            'ajaxSuccess' => "function(s) {
+                                if(s.status == 'success') {
+                                    $('#setting-imageinput-preview').attr('src', s.src + '&w=200')
+                                }
+                            }"
+                        ]) ?>
+                    </div>
+                </div>
 
-                <img id="setting-imageinput-preview" 
-                    class="img-thumbnail"
-                    loading="lazy"
-                    src="<?= $model->imagePath ? $model->imagePath . '&w=200': '' ?>">
+
+                <?= ImagePreview::widget([
+                    'model' => $model,
+                    'attribute' => 'imageInput',
+                    'src' => ($model->imagePath)? $model->imagePath . '&w=200': '',
+                    'options' => [
+                        'class' => 'img-thumbnail',
+                        'loading' => 'lazy',
+                        'style' => 'max-width:200px'
+                    ]
+                ]) ?>
+                
             <?php endif ?>
 
             <?= BootstrapSelect::widget([

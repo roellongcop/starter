@@ -1,6 +1,7 @@
 <?php
 
 use app\models\search\FileSearch;
+use app\widgets\Anchor;
 use app\widgets\Anchors;
 use app\widgets\Detail;
 
@@ -18,6 +19,13 @@ $this->params['showCreateButton'] = true;
     <?= Anchors::widget([
     	'names' => ['update', 'delete'], 
     	'model' => $model
+    ]) ?> 
+    <?= Anchor::widget([
+    	'title' => 'Download', 
+    	'link' => ['file/download', 'token' => $model->token],
+    	'options' => [
+    		'class' => 'btn btn-success'
+    	]
     ]) ?> 
     <hr>
     <?= Detail::widget(['model' => $model]) ?>

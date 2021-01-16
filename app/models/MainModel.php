@@ -67,6 +67,40 @@ abstract class MainModel extends \yii\db\ActiveRecord
         return SettingSearch::defaultImage('image_holder');
     }
 
+    public function getSqlFiles()
+    {
+        return $this->hasMany(File::className(), ['id' => 'file_id'])
+            ->onCondition(['extension' => 'sql'])
+            ->via('modelFiles');
+    }
+
+    public function getSqlFile()
+    {
+        return $this->hasOne(File::className(), ['id' => 'file_id'])
+            ->onCondition(['extension' => 'sql'])
+            ->via('modelFile');
+    }
+
+
+    public function getSqlFileLocation()
+    {
+        if(($file = $this->sqlFile) != null) {
+            if ($file) {
+                return  $file->location;
+            }
+        }
+    }
+
+    public function getSqlFilePath()
+    {
+        if(($sqlFiles = $this->sqlFiles) != null) {
+            $file = $sqlFiles[0] ?? '';
+            if ($file) {
+                return Url::to(['file/display', 'token' => $file->token], true);
+            }
+        }
+    }
+
     public function getCreatedAt()
     {
         return App::date_timezone($this->created_at);

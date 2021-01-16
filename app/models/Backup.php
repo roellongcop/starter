@@ -112,36 +112,7 @@ class Backup extends MainModel
         return false;
     }
 
-    public function getSqlFiles()
-    {
-        return $this->hasMany(File::className(), ['model_id' => 'id'])
-            ->onCondition([
-                'extension' => 'sql',
-                'model' => App::getModelName($this)
-            ])
-            ->orderBy(['updated_at' => SORT_DESC]);
-    }
-
-
-    public function getSqlFileLocation()
-    {
-        if(($sqlFiles = $this->sqlFiles) != null) {
-            $file = $sqlFiles[0] ?? '';
-            if ($file) {
-                return  $file->location;
-            }
-        }
-    }
-
-    public function getSqlFilePath()
-    {
-        if(($sqlFiles = $this->sqlFiles) != null) {
-            $file = $sqlFiles[0] ?? '';
-            if ($file) {
-                return Url::to(['file/display', 'token' => $file->token], true);
-            }
-        }
-    }
+    
 
     public function download()
     {
