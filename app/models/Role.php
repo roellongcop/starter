@@ -48,7 +48,9 @@ class Role extends MainModel
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'record_status'], 'required'],
+            [['record_status'], 'default', 'value' => 1],
+            [['created_by', 'updated_by'], 'default', 'value' => 0],
             [['main_navigation', 'role_access', 'module_access'], 'safe'],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],

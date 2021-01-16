@@ -48,7 +48,9 @@ class UserMeta extends MainModel
     {
         return [
             [['user_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['meta_key'], 'required'],
+            [['record_status'], 'default', 'value' => 1],
+            [['created_by', 'updated_by', 'user_id'], 'default', 'value' => 0],
+            [['meta_key', 'record_status'], 'required'],
             [['meta_value'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['meta_key'], 'string', 'max' => 255],

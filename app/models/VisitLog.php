@@ -51,7 +51,9 @@ class VisitLog extends MainModel
     {
         return [
             [['user_id', 'action', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['ip', 'action'], 'required'],
+            [['record_status'], 'default', 'value' => 1],
+            [['created_by', 'updated_by', 'user_id'], 'default', 'value' => 0],
+            [['ip', 'action', 'record_status'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['ip'], 'string', 'max' => 255],
             /*[

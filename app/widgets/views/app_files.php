@@ -14,16 +14,18 @@ $this->registerJs(<<< SCRIPT
                 url: '{$removeImagePath}',
                 data: {
                     file_id: file_id,
+                    model_id: {$model->id},
+                    model_name: '{$modelName}'
                 },
                 method: 'post',
                 dataType: 'json',
                 success: function(s) {
                     if(s.status == 'success') {
-                        Swal.fire("Success", s.message, "success")
+                        alert(s.message)
                         $('div[data-file_id="'+file_id+'"]').remove();
                     }
                     else {
-                        Swal.fire("Error", s.message, "error")
+                        alert(s.message)
                     }
                 },
                 error: function(e) {

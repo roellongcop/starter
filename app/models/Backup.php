@@ -51,9 +51,11 @@ class Backup extends MainModel
     public function rules()
     {
         return [
-            [['filename'], 'required'],
+            [['filename', 'record_status'], 'required'],
             [['description'], 'string'],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
+            [['created_by', 'updated_by'], 'default', 'value' => 0],
+            [['record_status'], 'default', 'value' => 1],
             [['created_at', 'updated_at', 'tables'], 'safe'],
             [['filename'], 'string', 'max' => 255],
             [['filename'], 'unique'],

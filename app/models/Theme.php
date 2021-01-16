@@ -55,7 +55,9 @@ class Theme extends MainModel
     public function rules()
     {
         return [
-            [['name', 'description', 'base_path', 'base_url'], 'required'],
+            [['name', 'description', 'base_path', 'base_url', 'record_status'], 'required'],
+            [['record_status'], 'default', 'value' => 1],
+            [['created_by', 'updated_by'], 'default', 'value' => 0],
             [['base_path', 'base_url'], 'string'],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
             [['bundles', 'path_map'], 'safe'],

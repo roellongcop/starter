@@ -2,77 +2,30 @@
 
 namespace app\controllers;
 
-use Imagine\Gd;
-use Imagine\Gd\Imagine;
-use Imagine\Image\Box;
-use Imagine\Image\BoxInterface;
 use Yii;
-use app\helpers\App;
-use app\models\File;
-use app\models\ModelFile;
-use app\models\form\UploadForm;
-use app\models\search\FileSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Inflector;
-use yii\imagine\Image;
+use app\models\ModelFile;
+use app\models\search\ModelFileSearch;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
+use app\helpers\App;
+use yii\helpers\Inflector;
+use yii\helpers\ArrayHelper;
+
 /**
- * FileController implements the CRUD actions for File model.
+ * ModelFileController implements the CRUD actions for ModelFile model.
  */
-class FileController extends MainController
+class ModelFileController extends MainController 
 {
 
-    public function behaviors()
-    {
-        return App::component('access')
-            ->behaviors(['display']);
-    } 
-    public function actionDisplay($token, $w='', $h='')
-    {
-        $file = File::findOne(['token' => $token]);
-        $crop = App::get('crop')? App::get('crop'): 'false';
-        $ratio = App::get('ratio')? App::get('ratio'): 'true';
-        $quality = App::get('quality')? App::get('quality'): 100;
-        $extension = App::get('extension') ? App::get('extension'): 'png';
-
-        if ($file) { 
-            $path = Yii::getAlias('@webroot') . "/{$file->location}";
-            if (file_exists($path)) {
-                if (in_array($file->extension, App::params('file_extensions')['file'])) {
-                    return Yii::$app->response->sendFile($path);
-                }
-                list($original_width, $original_height) = getimagesize($path);
-                $w = ($w)? (int)$w: $original_width ;
-                $h = ($h)? (int)$h: $original_height ;
-                if ($ratio == 'true') {
-                    $imagineObj = new Imagine();
-                    $image = $imagineObj->open($path);
-                    $image->resize($image->getSize()->widen($w));
-                }
-                elseif ($crop == 'true') {
-                    $image = Image::crop($path, $w, $h); 
-                }
-                else {
-                    $image = Image::getImagine() 
-                        ->open($path) 
-                        ->resize(new Box($w, $h));
-                }
-                $image->show($extension, ['quality' => $quality]); 
-            }
-        }
-    }
-
     /**
-     * Lists all File models.
+     * Lists all ModelFile models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new FileSearch();
-        $dataProvider = $searchModel->search(['FileSearch' => App::queryParams()]);
+        $searchModel = new ModelFileSearch();
+        $dataProvider = $searchModel->search(['ModelFileSearch' => App::queryParams()]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -81,7 +34,7 @@ class FileController extends MainController
     }
 
     /**
-     * Displays a single File model.
+     * Displays a single ModelFile model.
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
@@ -94,13 +47,13 @@ class FileController extends MainController
     }
 
     /**
-     * Creates a new File model.
+     * Creates a new ModelFile model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new File();
+        $model = new ModelFile();
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Created');
@@ -114,7 +67,7 @@ class FileController extends MainController
     }
 
     /**
-     * Updates an existing File model.
+     * Updates an existing ModelFile model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -135,29 +88,50 @@ class FileController extends MainController
     }
 
     /**
-     * Deletes an existing File model.
+     * Deletes an existing ModelFile model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id = '')
+    public function actionDelete($id='')
     {
 
         if (App::isAjax()) {
             if (($post = App::post()) != null) {
-                if (isset($post['fileToken'])) {
-                    $file = $this->findModel($post['fileToken'], 'token');
-                    if ($file && $file->canDelete) {
-                        $file->delete();
-                        return 'success';
+
+                if (isset($post['file_id'])) {
+                    $return = [];
+
+                    $modelFile = ModelFile::find()
+                        ->where([
+                            'file_id' => $post['file_id'],
+                            'model_id' => $post['model_id'],
+                            'model_name' => $post['model_name'],
+                        ])
+                        ->one();
+
+                    if ($modelFile) {
+                        if ($modelFile->canDelete) {
+                            $modelFile->delete();
+                            $return['status'] = 'success';
+                            $return['message'] = 'Image Deleted.';
+                        }
+                        else {
+                            $return['status'] = 'error';
+                            $return['message'] = 'Image cannot be deleted.';
+                        }
                     }
+                    else {
+                        $return['status'] = 'error';
+                        $return['message'] = 'Image not found.';
+                    }
+                    return json_encode($return);
                 }
             }
 
             return ;
         }
-
         $model = $this->findModel($id);
 
         if($model->delete()) {
@@ -171,16 +145,15 @@ class FileController extends MainController
     }
 
     /**
-     * Finds the File model based on its primary key value.
+     * Finds the ModelFile model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return File the loaded model
+     * @return ModelFile the loaded model
      * @throws ForbiddenHttpException if the model cannot be found
      */
     protected function findModel($id, $field='id')
     {
-
-        if (($model = FileSearch::one($id, $field)) != null) {
+        if (($model = ModelFileSearch::one($id, $field)) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }
@@ -222,35 +195,31 @@ class FileController extends MainController
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = FileSearch::all($post['selection']);
+                $models = ModelFileSearch::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            File::updateAll(
+                            ModelFile::updateAll(
                                 ['record_status' => 1],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
-                            File::updateAll(
+                            ModelFile::updateAll(
                                 ['record_status' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'delete':
-                            $files = File::findAll(['id' => $post['selection']]);
-
-                            foreach ($files as $file) {
-                                $file->delete();
-                            }
+                            ModelFile::deleteAll(['id' => $post['selection']]);
                             break;
                         default:
                             # code...
                             break;
                     }
                     App::component('logbook')->log(
-                        new File(), ArrayHelper::map($models, 'id', 'attributes')
+                        new ModelFile(), ArrayHelper::map($models, 'id', 'attributes')
                     );
                     App::success("Data set to '{$process}'");  
                 }
@@ -312,88 +281,9 @@ class FileController extends MainController
     protected function getExportContent($file='excel')
     {
         return ExportContent::widget([
-            'params' => App::get(),
-            'file' => $file,
-            'searchModel' => new FileSearch(),
+            'params'      => App::get(),
+            'file'        => $file,
+            'searchModel' => new ModelFileSearch(),
         ]);
-    }
-
-    public function actionUpload()
-    {
-        $result = [];
-
-        if (($post = App::post()) != null) {
-            $model = new UploadForm();
-            if ($model->load(['UploadForm' => $post])) {
-                $model->fileInput = UploadedFile::getInstance($model, 'fileInput');
-                $referenceModel = $model->upload();
-
-                $result['status'] = 'success';
-                $result['message'] = $referenceModel->imagePath;
-            }
-            else {
-                $result['status'] = 'error';
-                $result['message'] = 'Form not valid';
-            }
-        }
-        else {
-            $result['status'] = 'error';
-            $result['message'] = 'no form data';
-        }
-
-        return json_encode($result);
-    }
-
-    public function actionDownload($token)
-    {
-        $model = $this->findModel($token, 'token');
-        if ($model) {
-            $file = $model->location;
-            if (file_exists($file)) {
-                Yii::$app->response->sendFile($file);
-
-                return true;
-            }
-            return false;
-        }
-        else {
-            App::warning('File don\'t exist');
-            return $this->redirect(App::referrer());
-        }
-    }
-
-    public function actionChangePhoto()
-    {
-        $result = [];
-
-        if (App::isAjax() && (($post = App::post()) != null)) {
-            $file = $this->findModel($post['file_id']);
-
-            if ($file) {
-                $modelFile = new ModelFile();
-                $modelFile->model_name = $post['modelName'];
-                $modelFile->model_id = $post['model_id'];
-                $modelFile->file_id = $file->id;
-                if ($modelFile->save()) {
-                    $result['status'] = 'success';
-                    $result['message'] = 'File added';
-                    $result['src'] = $file->imagePath;
-                }
-                else {
-                    $result['status'] = 'error';
-                    $result['message'] = json_encode($modelFile->errors);
-                }
-            }
-            else {
-                $result['status'] = 'error';
-                $result['message'] = 'No file selected';
-            }
-        }
-        else {
-            $result['status'] = 'error';
-            $result['message'] = 'Request value not found.';
-        }
-
-        return json_encode($result);
     }
 }

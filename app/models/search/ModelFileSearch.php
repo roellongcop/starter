@@ -3,25 +3,25 @@
 namespace app\models\search;
 
 use Yii;
-use app\helpers\App;
-use app\models\Setting;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use app\models\search\SettingSearch;
+use app\models\ModelFile;
+use app\helpers\App;
 
 /**
- * SettingSearch represents the model behind the search form of `app\models\Setting`.
+ * ModelFileSearch represents the model behind the search form of `app\models\ModelFile`.
  */
-class SettingSearch extends Setting
+class ModelFileSearch extends ModelFile
 {
     public $keywords;
     public $date_range;
     public $pagination;
 
-
-    public $searchTemplate = 'setting/_search';
-    public $searchAction = ['setting/index'];
-    public $searchLabel = 'Setting';
+    public $searchTemplate = 'model-file/_search';
+    public $searchAction = ['model-file/index'];
+    public $searchLabel = 'ModelFile';
 
     /**
      * {@inheritdoc}
@@ -29,15 +29,15 @@ class SettingSearch extends Setting
     public function rules()
     {
         return [
-            [['id', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'value', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'model_id', 'file_id', 'created_by', 'updated_by'], 'integer'],
+            [['model_name', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
         ];
     }
 
     public function init()
     {
-        $this->pagination = self::default('pagination');
+        $this->pagination = SettingSearch::default('pagination');
     }
 
     /**
@@ -58,7 +58,7 @@ class SettingSearch extends Setting
      */
     public function search($params)
     {
-        $query = Setting::find();
+        $query = ModelFile::find();
 
         // add conditions that should always apply here
 
@@ -81,6 +81,8 @@ class SettingSearch extends Setting
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'model_id' => $this->model_id,
+            'file_id' => $this->file_id,
             'record_status' => $this->record_status,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
@@ -88,14 +90,14 @@ class SettingSearch extends Setting
             'updated_at' => $this->updated_at,
         ]);
         
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'value', $this->value]);
+        $query->andFilterWhere(['like', 'model_name', $this->model_name]);
         
                 
         if ($this->keywords) {
             $query->andFilterWhere(['or', 
-                ['like', 'name', $this->keywords],  
-                ['like', 'value', $this->keywords],  
+                ['like', 'model_id', $this->keywords],  
+                ['like', 'file_id', $this->keywords],  
+                ['like', 'model_name', $this->keywords],  
             ]);
         }
 
@@ -111,7 +113,7 @@ class SettingSearch extends Setting
 
     public static function one($value, $key='id', $array=false)
     {
-        $model = Setting::find()
+        $model = ModelFile::find()
             ->where([$key => $value]);
 
         $model = ($array) ? $model->asArray()->one(): $model->one();
@@ -122,7 +124,7 @@ class SettingSearch extends Setting
 
     public static function all($value='', $key='id', $array=false)
     {
-        $model = Setting::find()
+        $model = ModelFile::find()
             ->filterWhere([$key => $value]);
 
         $model = ($array) ? $model->asArray()->all(): $model->all();
@@ -132,7 +134,7 @@ class SettingSearch extends Setting
 
     public static function dropdown($key='id', $value='id', $condition=[], $map=true)
     {
-        $models = Setting::find()
+        $models = ModelFile::find()
             ->filterWhere($condition)
             ->orderBy([$value => SORT_ASC])
             ->all();
@@ -144,7 +146,7 @@ class SettingSearch extends Setting
 
     public static function filter($key='id', $condition=[])
     {
-        $models = Setting::find()
+        $models = ModelFile::find()
             ->filterWhere($condition)
             ->orderBy([$key => SORT_ASC])
             ->groupBy($key)
@@ -161,7 +163,7 @@ class SettingSearch extends Setting
             $date = App::dateRange($this->date_range, 'start');
         }
         else {
-            $model = Setting::find()->min('created_at');
+            $model = ModelFile::find()->min('created_at');
 
             $date = ($model)? $model: 'today';
         }
@@ -175,42 +177,11 @@ class SettingSearch extends Setting
             $date = App::dateRange($this->date_range, 'end');
         }
         else {
-            $model = Setting::find()->max('created_at');
+            $model = ModelFile::find()->max('created_at');
 
             $date = ($model)? $model: 'today';
         }
 
         return App::date_timezone($date, 'F d, Y');
-    }
-
-    public static function default($name)
-    {
-        $model = self::one($name, 'name');
-
-        if ($model) {
-            return $model['value'];
-        }
-
-        $general_settings = App::params('general_settings');
-
-        if (!empty($general_settings[$name])) {
-            return $general_settings[$name]['default'];
-        }
-    }
-
-    public static function defaultImage($name)
-    {
-        $model = self::one($name, 'name');
-
-        if($model && $model->imageFile) {
-            return $model->imagePath;
-        }
-
-        if ($name == 'image_holder') {
-            return App::params('general_settings')['image_holder']['default'] ?? '';
-        }
-
-        return self::defaultImage('image_holder');
-
     }
 }

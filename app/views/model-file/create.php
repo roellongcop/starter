@@ -1,0 +1,18 @@
+<?php
+
+use app\models\search\ModelFileSearch;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\ModelFile */
+
+$this->title = 'Create Model File';
+$this->params['breadcrumbs'][] = ['label' => 'Model Files', 'url' => ['index']];
+$this->params['breadcrumbs'][] = 'Create';
+$this->params['searchModel'] = new ModelFileSearch();
+?>
+
+<div>
+	<?= $this->render('_form', [
+		'model' => $model,
+	]) ?>
+</div>

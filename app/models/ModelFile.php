@@ -49,7 +49,9 @@ class ModelFile extends MainModel
     {
         return [
             [['model_id', 'file_id',], 'integer'],
-            [['model_name'], 'required'],
+            [['record_status'], 'default', 'value' => 1],
+            [['created_by', 'updated_by', 'model_id', 'file_id'], 'default', 'value' => 0],
+            [['model_name', 'record_status'], 'required'],
             [['record_status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['model_name'], 'string', 'max' => 255],

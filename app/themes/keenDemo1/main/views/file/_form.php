@@ -24,8 +24,6 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-md-5">
-            <?= $form->field($model, 'model_id')->textInput() ?>
-            <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'extension')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'size')->textInput() ?>

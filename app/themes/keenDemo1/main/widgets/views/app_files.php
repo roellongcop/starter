@@ -20,6 +20,8 @@ $this->registerJs(<<< SCRIPT
                     url: '{$removeImagePath}',
                     data: {
                         file_id: file_id,
+                        model_id: {$model->id},
+                        model_name: '{$modelName}'
                     },
                     method: 'post',
                     dataType: 'json',

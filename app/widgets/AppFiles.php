@@ -13,13 +13,14 @@ class AppFiles extends \yii\base\Widget
     public $removeImageUrl;
     public $fileDisplay = 'file/display';
     public $fileDownload = 'file/download';
+    public $modelName;
 
     public function init() 
     {
         // your logic here
         parent::init();
 
-        $this->removeImageUrl = $this->removeImageUrl ?: ['file/delete'];
+        $this->removeImageUrl = $this->removeImageUrl ?: ['model-file/delete'];
 
         if ($this->imageOnly) {
             $this->files = $this->model->imageFiles ?? '';
@@ -27,6 +28,8 @@ class AppFiles extends \yii\base\Widget
         else {
             $this->files = $this->model->files ?? '';
         }
+
+        $this->modelName = $this->modelName ?: App::getModelName($this->model);
     }
 
 
@@ -41,6 +44,8 @@ class AppFiles extends \yii\base\Widget
             'removeImagePath' => Url::to($this->removeImageUrl),
             'fileDisplay' => $this->fileDisplay,
             'fileDownload' => $this->fileDownload,
+            'modelName' => $this->modelName,
+            'model' => $this->model,
         ]);
     }
 }

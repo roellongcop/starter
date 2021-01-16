@@ -50,7 +50,9 @@ class File extends MainModel
     {
         return [
             [['size', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'extension', 'size'], 'required'],
+            [['record_status'], 'default', 'value' => 1],
+            [['created_by', 'updated_by'], 'default', 'value' => 0],
+            [['name', 'extension', 'size', 'record_status'], 'required'],
             [['token'], 'unique'],
             [['location'], 'string'],
             [['created_at', 'updated_at'], 'safe'],

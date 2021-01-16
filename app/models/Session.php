@@ -54,7 +54,9 @@ class Session extends MainModel
     public function rules()
     {
         return [
-            [['id', 'ip', 'browser', 'os', 'device'], 'required'],
+            [['id', 'ip', 'browser', 'os', 'device', 'record_status'], 'required'],
+            [['record_status'], 'default', 'value' => 1],
+            [['created_by', 'updated_by'], 'default', 'value' => 0],
             [['expire', 'user_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['data'], 'string'],
             [['created_at', 'updated_at'], 'safe'],

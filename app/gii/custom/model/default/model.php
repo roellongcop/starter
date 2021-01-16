@@ -95,6 +95,10 @@ class <?= $className ?> extends MainModel<?= "\n" ?>
                 'extensions' => App::params('file_extensions')['image'], 
                 'checkExtensionByMimeType' => false
             ],
+            [['record_status'], 'required'],
+            [['record_status'], 'default', 'value' => 1],
+            [['created_by', 'updated_by'], 'default', 'value' => 0],
+
             */
         ];
     }

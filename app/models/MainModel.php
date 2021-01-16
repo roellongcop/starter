@@ -28,11 +28,17 @@ abstract class MainModel extends \yii\db\ActiveRecord
             ->orderBy(['id' => SORT_DESC]);
     }
 
+    public function getModelFile()
+    {
+        return $this->hasOne(ModelFile::className(), ['model_id' => 'id'])
+            ->onCondition(['model_name' => App::getModelName($this)])
+            ->orderBy(['id' => SORT_DESC]);
+    }
+
 
     public function getFiles()
     {
         return $this->hasMany(File::className(), ['id' => 'file_id'])
-            ->orderBy(['id' => SORT_DESC])
             ->via('modelFiles');
     }
 
@@ -40,7 +46,6 @@ abstract class MainModel extends \yii\db\ActiveRecord
     {
         return $this->hasMany(File::className(), ['id' => 'file_id'])
             ->onCondition(['extension' => App::params('file_extensions')['image']])
-            ->orderBy(['id' => SORT_DESC])
             ->via('modelFiles');
     }
 
@@ -48,8 +53,7 @@ abstract class MainModel extends \yii\db\ActiveRecord
     {
         return $this->hasOne(File::className(), ['id' => 'file_id'])
             ->onCondition(['extension' => App::params('file_extensions')['image']])
-            ->orderBy(['id' => SORT_DESC])
-            ->via('modelFiles');
+            ->via('modelFile');
     }
 
     public function getImagePath()
@@ -216,7 +220,6 @@ abstract class MainModel extends \yii\db\ActiveRecord
                 $this->created_by = $this->created_by ?: $this->updated_by;
                 $this->created_at = $this->created_at ?: $this->updated_at;
             }
-            $this->record_status = ($this->record_status === NULL)? 1: $this->record_status;
             return true;
         }
     }
