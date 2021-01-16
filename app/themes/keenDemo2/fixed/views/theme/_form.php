@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 $this->registerJs(<<< SCRIPT
     $('form.form').submit(function(event) {
         event.preventDefault();
-        $('#theme-pathmap').val(JSON.stringify(editors['pathMap'].get()))
+        $('#theme-path_map').val(JSON.stringify(editors['path_map'].get()))
         $('#theme-bundles').val(JSON.stringify(editors['bundles'].get()))
 
         // continue the submit unbind preventDefault
@@ -43,8 +43,8 @@ SCRIPT, \yii\web\View::POS_END);
         <div class="col-md-5">
 			<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'basePath')->textInput(['maxlength' => true]) ?>
-			<?= $form->field($model, 'baseUrl')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'base_path')->textInput(['maxlength' => true]) ?>
+			<?= $form->field($model, 'base_url')->textInput(['maxlength' => true]) ?>
             <?= BootstrapSelect::widget([
                 'attribute' => 'record_status',
                 'searchable' => false,
@@ -54,16 +54,16 @@ SCRIPT, \yii\web\View::POS_END);
             ]) ?>
         </div>
         <div class="col-md-7">
-            <?= $form->field($model, 'pathMap')
+            <?= $form->field($model, 'path_map')
                 ->hiddenInput(['value' => ''])
                 ->label(false) ?>
             <?= $form->field($model, 'bundles')
                 ->hiddenInput(['value' => ''])
                 ->label(false) ?>
             <?= JsonEditor::widget([
-                'data' => $model->pathMap,
+                'data' => $model->path_map,
                 'options' => [],
-                'id' => 'pathMap',
+                'id' => 'path_map',
             ]); ?>
             <hr>
             <?= JsonEditor::widget([

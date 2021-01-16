@@ -36,7 +36,7 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
-            'baseUrl' => '/yii2-keen-demo1/web'
+            'baseUrl' => '/starter/web'
         ]
     ],
     'params' => $params,

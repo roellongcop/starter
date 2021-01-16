@@ -4,6 +4,7 @@ namespace app\components;
 use Yii;
 use app\helpers\App;
 use app\models\File;
+use app\models\ModelFile;
 use yii\base\Component;
 use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
@@ -35,11 +36,16 @@ class FileComponent extends Component
         $file->location  = $location;
         $file->extension = $input->extension;
         $file->size      = $input->size;
-        $file->model     = ($model->modelName ?? App::className($model));
-        $file->model_id  = $model->id;
         $file->token  = ($model->fileToken ?? '');
 
         if ($file->save()) {
+
+            $modelFile = new ModelFile();
+            $modelFile->file_id = $file->id;
+            $modelFile->model_id = $model->id;
+            $modelFile->model_name = ($model->modelName ?? App::className($model));
+            $modelFile->save();
+            
             return $file;
         }
         else {

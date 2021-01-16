@@ -9,6 +9,7 @@ use Imagine\Image\BoxInterface;
 use Yii;
 use app\helpers\App;
 use app\models\File;
+use app\models\ModelFile;
 use app\models\form\UploadForm;
 use app\models\search\FileSearch;
 use app\widgets\ExportContent;
@@ -389,22 +390,22 @@ class FileController extends MainController
         $result = [];
 
         if (App::isAjax() && (($post = App::post()) != null)) {
-            $model = $this->findModel($post['file_id']);
+            $file = $this->findModel($post['file_id']);
 
-            if ($model) {
-                $clone = new File();
-                $clone->attributes = $model->attributes;
-                $clone->model = $post['modelName'];
-                $clone->model_id = $post['model_id'];
-                $clone->token = $clone->generateToken();
-                if ($clone->save()) {
+            if ($file) {
+                $modelFile = new ModelFile();
+                $modelFile->attributes = $file->attributes;
+                $modelFile->model_name = $post['modelName'];
+                $modelFile->model_id = $post['model_id'];
+                $modelFile->file_id = $file->id;
+                if ($modelFile->save()) {
                     $result['status'] = 'success';
                     $result['message'] = 'File added';
-                    $result['src'] = $clone->imagePath;
+                    $result['src'] = $file->imagePath;
                 }
                 else {
                     $result['status'] = 'error';
-                    $result['message'] = json_encode($clone->errors);
+                    $result['message'] = json_encode($modelFile->errors);
                 }
             }
             else {

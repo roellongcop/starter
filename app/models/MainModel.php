@@ -21,37 +21,40 @@ abstract class MainModel extends \yii\db\ActiveRecord
         return $this->name ?? $this->id;
     }
 
+    public function getModelFiles()
+    {
+        return $this->hasMany(ModelFile::className(), ['model_id' => 'id'])
+            ->onCondition(['model_name' => App::getModelName($this)])
+            ->orderBy(['id' => SORT_DESC]);
+    }
+
 
     public function getFiles()
     {
-        return $this->hasMany(File::className(), ['model_id' => 'id'])
-            ->onCondition(['model' => App::getModelName($this)]);
+        return $this->hasMany(File::className(), ['id' => 'file_id'])
+            ->orderBy(['id' => SORT_DESC])
+            ->via('modelFiles');
     }
 
     public function getImageFiles()
     {
-        return $this->hasMany(File::className(), ['model_id' => 'id'])
-            ->onCondition([
-                'extension' => App::params('file_extensions')['image'],
-                'model' => App::getModelName($this)
-            ])
-            ->orderBy(['id' => SORT_DESC]);
+        return $this->hasMany(File::className(), ['id' => 'file_id'])
+            ->onCondition(['extension' => App::params('file_extensions')['image']])
+            ->orderBy(['id' => SORT_DESC])
+            ->via('modelFiles');
     }
 
     public function getImageFile()
     {
-        return $this->hasOne(File::className(), ['model_id' => 'id'])
-            ->onCondition([
-                'extension' => App::params('file_extensions')['image'],
-                'model' => App::getModelName($this)
-            ])
-            ->orderBy(['id' => SORT_DESC]);
+        return $this->hasOne(File::className(), ['id' => 'file_id'])
+            ->onCondition(['extension' => App::params('file_extensions')['image']])
+            ->orderBy(['id' => SORT_DESC])
+            ->via('modelFiles');
     }
 
     public function getImagePath()
     {
-        if(($imageFiles = $this->imageFiles) != null) {
-            $file = $imageFiles[0] ?? '';
+        if(($file = $this->imageFile) != null) {
             if ($file) {
                 return Url::to(['file/display', 'token' => $file->token], true);
             }

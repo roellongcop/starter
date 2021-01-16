@@ -9,15 +9,15 @@
 	
 	yii seed
 
-4) visit site @ http://localhost/yii2-keen-demo1/
-5) goto http://localhost/yii2-keen-demo1/api/available-users for active users.
+4) visit site @ http://localhost/starter/
+5) goto http://localhost/starter/api/available-users for active users.
 
 ============================================================================
 IMPORTANT NOTES:
 when renaming the app, make sure to also change the "app\config\console.php"
 
 	'urlManager' => [
-        'baseUrl' => '/yii2-keen-demo1'
+        'baseUrl' => '/starter/web'
     ]
 for the "yii seed/roles 10" to properly generate navigations
 

@@ -18,21 +18,19 @@ class m200913_060452_create_files_table extends Migration
         return [
             'created_by' => 'created_by',
             'updated_by' => 'updated_by',
-            'model_id' => 'model_id',
+            'token' => 'token',
         ];
     }
 
     public function attributes()
     {
         return [
-            'id'            => $this->bigPrimaryKey(),
-            'model_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'model'          => $this->string(255)->notNull(),
-            'name'   => $this->string(255)->notNull(),
-            'extension'   => $this->string(16)->notNull(),
-            'size'   => $this->bigInteger(20)->notNull(),
-            'location'   => $this->text(),
-            'token'   => $this->string(255)->notNull(),
+            'id' => $this->bigPrimaryKey(),
+            'name' => $this->string(255)->notNull(),
+            'extension' => $this->string(16)->notNull(),
+            'size' => $this->bigInteger(20)->notNull(),
+            'location' => $this->text(),
+            'token' => $this->string(255)->notNull(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

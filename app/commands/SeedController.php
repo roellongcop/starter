@@ -54,7 +54,7 @@ class SeedController extends Controller
     public function actionIndex()
     {
         $this->actionRoles(10);
-        $this->actionUsers(50);
+        $this->actionUsers(10, false);
         $this->actionThemes();
     }
 
@@ -69,9 +69,9 @@ class SeedController extends Controller
             $data = [
                 'description' => $theme['description'],
                 'name' => $theme['name'],
-                'basePath' => $theme['basePath'],
-                'baseUrl' => $theme['baseUrl'],
-                'pathMap' => $theme['pathMap'],
+                'base_path' => $theme['basePath'],
+                'base_url' => $theme['baseUrl'],
+                'path_map' => $theme['pathMap'],
                 'bundles' => $theme['bundles'] ?? NULL,
             ];
             $model = new Theme();
@@ -115,7 +115,7 @@ class SeedController extends Controller
         $this->summary(Role::find()->count());
     }
 
-    public function actionUsers($row=1)
+    public function actionUsers($row=1, $random=true)
     {
         $roles = array_keys(RoleSearch::dropdown());
         $faker = Factory::create();
@@ -127,9 +127,18 @@ class SeedController extends Controller
             $model->email         = $faker->email;
             $model->password_hash = App::hash($model->email);
             $model->password_hint = 'Same as Email';
-            $model->status        = $faker->randomElement(App::keyMapParams('user_status'));
-            $model->record_status = $faker->randomElement(App::keyMapParams('record_status'));
-            $model->is_blocked    = $faker->randomElement(App::keyMapParams('is_blocked'));
+            if ($random) {
+                $model->status        = $faker->randomElement(App::keyMapParams('user_status'));
+                $model->record_status = $faker->randomElement(App::keyMapParams('record_status'));
+                $model->is_blocked    = $faker->randomElement(App::keyMapParams('is_blocked'));
+            }
+            else {
+                $model->status        = 10;
+                $model->record_status = 1;
+                $model->is_blocked    = 0;
+            }
+          
+
             $model->created_at = $faker->date . ' ' . $faker->time;
 
             $this->save($model, $i); 

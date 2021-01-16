@@ -30,7 +30,7 @@ class ThemeSearch extends Theme
     {
         return [
             [['id', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'description', 'basePath', 'baseUrl', 'pathMap', 'bundles', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'description', 'base_path', 'base_url', 'path_map', 'bundles', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
         ];
     }
@@ -90,9 +90,9 @@ class ThemeSearch extends Theme
         
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'basePath', $this->basePath])
-            ->andFilterWhere(['like', 'baseUrl', $this->baseUrl])
-            ->andFilterWhere(['like', 'pathMap', $this->pathMap])
+            ->andFilterWhere(['like', 'base_path', $this->base_path])
+            ->andFilterWhere(['like', 'base_url', $this->base_url])
+            ->andFilterWhere(['like', 'path_map', $this->path_map])
             ->andFilterWhere(['like', 'bundles', $this->bundles]);
         
                 
@@ -100,9 +100,9 @@ class ThemeSearch extends Theme
             $query->andFilterWhere(['or', 
                 ['like', 'name', $this->keywords],  
                 ['like', 'description', $this->keywords],  
-                ['like', 'basePath', $this->keywords],  
-                ['like', 'baseUrl', $this->keywords],  
-                ['like', 'pathMap', $this->keywords],  
+                ['like', 'base_path', $this->keywords],  
+                ['like', 'base_url', $this->keywords],  
+                ['like', 'path_map', $this->keywords],  
                 ['like', 'bundles', $this->keywords],  
             ]);
         }

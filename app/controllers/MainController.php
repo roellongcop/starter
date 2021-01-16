@@ -47,9 +47,9 @@ abstract class MainController extends \yii\web\Controller
             }
             
     		$themeModel = new BaseTheme();
-			$themeModel->basePath = $theme->basePath;
-			$themeModel->baseUrl = $theme->baseUrl;
-			$themeModel->pathMap = $theme->pathMap;
+			$themeModel->basePath = $theme->base_path;
+			$themeModel->baseUrl = $theme->base_url;
+			$themeModel->pathMap = $theme->path_map;
 
 			Yii::$app->view->theme = $themeModel;
             Yii::$app->session->timeout = SettingSearch::default('auto_logout_timer');

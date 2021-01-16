@@ -25,13 +25,7 @@ use yii\widgets\ActiveForm;
         
         <?= DateRange::widget(['model' => $model]) ?>
 
-        <?= Filter::widget([
-            'data' => FileSearch::filter('model'),
-            'title' => 'Model',
-            'attribute' => 'model',
-            'model' => $model,
-            'form' => $form,
-        ]) ?>
+       
 
         <?= Filter::widget([
             'data' => FileSearch::filter('extension'),

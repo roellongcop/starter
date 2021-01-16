@@ -3,14 +3,14 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%user_columns}}`.
+ * Handles the creation of table `{{%model_files}}`.
  */
-class m201105_112107_create_user_columns_table extends Migration
+class m210116_162927_create_model_files_table extends Migration
 {
 
     public function tableName()
     {
-        return '{{%user_columns}}';
+        return '{{%model_files}}';
     }
 
     public function tableIndexes()
@@ -18,7 +18,8 @@ class m201105_112107_create_user_columns_table extends Migration
         return [
             'created_by' => 'created_by',
             'updated_by' => 'updated_by',
-            'user_id' => 'user_id',
+            'model_id' => 'model_id',
+            'file_id' => 'file_id',
         ];
     }
 
@@ -26,9 +27,9 @@ class m201105_112107_create_user_columns_table extends Migration
     {
         return [
             'id'            => $this->bigPrimaryKey(),
-            'user_id'       => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'table_name'    => $this->string(255)->notNull(),
-            'columns'       => $this->text(),
+            'model_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'file_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'model_name' => $this->string(255)->notNull(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

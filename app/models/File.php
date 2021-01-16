@@ -14,8 +14,6 @@ use yii\helpers\Url;
  * This is the model class for table "{{%files}}".
  *
  * @property int $id
- * @property int $model_id
- * @property string $model
  * @property string $name
  * @property string $extension
  * @property int $size
@@ -51,12 +49,12 @@ class File extends MainModel
     public function rules()
     {
         return [
-            [['model_id', 'size', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['model', 'name', 'extension', 'size'], 'required'],
+            [['size', 'record_status', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'extension', 'size'], 'required'],
             [['token'], 'unique'],
             [['location'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['model', 'name', 'token'], 'string', 'max' => 255],
+            [['name', 'token'], 'string', 'max' => 255],
             [['extension'], 'string', 'max' => 16],
             /*[
                 ['fileInput'], 
@@ -217,12 +215,7 @@ class File extends MainModel
                     ]);
                 }
             ],
-            'model_id' => [
-                'attribute' => 'model_id', 
-                'format' => 'raw',
-            ],
             
-            'model' => ['attribute' => 'model', 'format' => 'raw'],
             'extension' => ['attribute' => 'extension', 'format' => 'raw'],
             'size' => ['attribute' => 'size', 'format' => 'raw'],
             'location' => ['attribute' => 'location', 'format' => 'raw'],
@@ -248,8 +241,6 @@ class File extends MainModel
     public function getDetailColumns()
     {
         return [
-            'model_id:raw',
-            'model:raw',
             'name:raw',
             'extension:raw',
             'size:raw',

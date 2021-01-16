@@ -29,8 +29,8 @@ class FileSearch extends File
     public function rules()
     {
         return [
-            [['id', 'model_id', 'size', 'created_by', 'updated_by'], 'integer'],
-            [['model', 'name', 'extension', 'location', 'token', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'size', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'extension', 'location', 'token', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
         ];
     }
@@ -81,14 +81,12 @@ class FileSearch extends File
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'model_id' => $this->model_id,
             'size' => $this->size,
             'record_status' => $this->record_status,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'model' => $this->model,
         ]);
         
         $query->andFilterWhere(['like', 'name', $this->name])
@@ -98,8 +96,6 @@ class FileSearch extends File
                 
         if ($this->keywords) {
             $query->andFilterWhere(['or', 
-                ['like', 'model_id', $this->keywords],  
-                ['like', 'model', $this->keywords],  
                 ['like', 'name', $this->keywords],  
                 ['like', 'extension', $this->keywords],  
                 ['like', 'size', $this->keywords],  

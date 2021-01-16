@@ -4,39 +4,32 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
-use app\models\search\SettingSearch;
 use app\widgets\Anchor;
-use app\widgets\Dropzone;
-use app\widgets\JsonEditor;
-use app\widgets\AppImages;
+use app\models\search\SettingSearch;
 use yii\behaviors\SluggableBehavior;
-use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
 
 /**
- * This is the model class for table "{{%themes}}".
+ * This is the model class for table "{{%model_files}}".
  *
  * @property int $id
- * @property string $name
- * @property string $description
- * @property string|null $base_path
- * @property string|null $base_url
- * @property string|null $path_map
- * @property string|null $bundles
+ * @property int $model_id
+ * @property int $file_id
+ * @property string $model
  * @property int $record_status
  * @property int $created_by
  * @property int $updated_by
  * @property string $created_at
  * @property string $updated_at
  */
-class Theme extends MainModel
+class ModelFile extends MainModel
 {
-    public $arrayAttr = ['path_map', 'bundles'];
+    public $arrayAttr = [];
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
-    public $imageInput;
+    //public $imageInput;
     //public $fileLocation; 
 
     /**
@@ -44,7 +37,7 @@ class Theme extends MainModel
      */
     public static function tableName()
     {
-        return '{{%themes}}';
+        return '{{%model_files}}';
     }
  
 
@@ -55,13 +48,11 @@ class Theme extends MainModel
     public function rules()
     {
         return [
-            [['name', 'description', 'base_path', 'base_url'], 'required'],
-            [['base_path', 'base_url'], 'string'],
-            [['record_status', 'created_by', 'updated_by'], 'integer'],
-            [['bundles', 'path_map'], 'safe'],
+            [['model_id', 'file_id',], 'integer'],
+            [['model_name'], 'required'],
+            [['record_status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name'], 'string', 'max' => 255],
-            [['name'], 'unique'],
+            [['model_name'], 'string', 'max' => 255],
             /*[
                 ['fileInput'], 
                 'file', 
@@ -69,19 +60,19 @@ class Theme extends MainModel
                 'extensions' => App::params('file_extensions')['file'], 
                 'checkExtensionByMimeType' => false
             ],
-            */
             [
                 ['imageInput'], 
                 'image', 
-                // 'minWidth' => 100,
-                // 'maxWidth' => 200,
-                // 'minHeight' => 100,
-                // 'maxHeight' => 200,
+                'minWidth' => 100,
+                'maxWidth' => 200,
+                'minHeight' => 100,
+                'maxHeight' => 200,
                 'maxSize' => 1024 * 1024 * 2,
                 'skipOnEmpty' => true, 
                 'extensions' => App::params('file_extensions')['image'], 
                 'checkExtensionByMimeType' => false
             ],
+            */
         ];
     }
 
@@ -92,12 +83,9 @@ class Theme extends MainModel
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'base_path' => 'Base Path',
-            'base_url' => 'Base Url',
-            'path_map' => 'Path Map',
-            'bundles' => 'Bundles',
+            'model_id' => 'Model ID',
+            'file_id' => 'File ID',
+            'model_name' => 'Model',
             'record_status' => 'Record Status',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
@@ -117,28 +105,19 @@ class Theme extends MainModel
                 'class' => 'yii\grid\SerialColumn',
             ],
             'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
-            'preview' => [
-                'attribute' => 'name', 
-                'label' => 'preview', 
-                'format' => 'raw',
-                'value' => 'previewImage'
-            ],
-            'name' => [
-                'attribute' => 'name', 
+            'model_id' => [
+                'attribute' => 'model_id', 
                 'format' => 'raw',
                 'value' => function($model) {
                     return Anchor::widget([
-                        'title' => $model->name,
+                        'title' => $model->model_id,
                         'link' => ['view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }
             ],
-            'description' => ['attribute' => 'description', 'format' => 'raw'],
-            // 'base_path' => ['attribute' => 'base_path', 'format' => 'raw'],
-            // 'base_url' => ['attribute' => 'base_url', 'format' => 'raw'],
-            // 'path_map' => ['attribute' => 'path_map', 'format' => 'raw'],
-            // 'bundles' => ['attribute' => 'bundles', 'format' => 'raw'],
+            'file_id' => ['attribute' => 'file_id', 'format' => 'raw'],
+            'model_name' => ['attribute' => 'model_name', 'format' => 'raw'],
             'created_at' => [
                 'attribute' => 'created_at',
                 'format' => 'fulldate',
@@ -157,57 +136,18 @@ class Theme extends MainModel
         ];
     }
 
-    public function getpath_mapdata()
-    {
-        return JsonEditor::widget([
-            'data' => $this->path_map,
-        ]);
-    }
-
-    public function getBundlesdata()
-    {
-        return JsonEditor::widget([
-            'data' => $this->bundles,
-        ]);
-    }
-
     public function getDetailColumns()
     {
         return [
-            'name:raw',
-            'description:raw',
-            'base_path:raw',
-            'base_url:raw',
-            'path_mapData:raw',
-            'bundlesData:raw',
+            'model_id:raw',
+            'file_id:raw',
+            'model_name:raw',
 			'created_at:fulldate',
 			'updated_at:fulldate',
             'createdByEmail',
             'updatedByEmail',
-            'recordStatusHtml:raw',
-            'previewImages:raw',
+            'recordStatusHtml:raw'
         ];
-    }
-
-    public function getUploadImages()
-    {
-        return Dropzone::widget([
-            'url' => Url::to(['theme/upload-image']),
-            'paramName' => 'Theme[imageInput]',
-            'parameters' => [
-                'Theme[id]' => $this->id
-            ]
-        ]);
-    }
-
-    public function getPreviewImage()
-    {
-        return Html::img($this->imagePath . '&w=100');
-    }
-
-    public function getPreviewImages()
-    {
-        return AppImages::widget(['model' => $this]);
     }
     /**
     public function behaviors()
