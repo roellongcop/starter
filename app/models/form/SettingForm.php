@@ -136,8 +136,12 @@ class SettingForm extends Model
                 $setting->imageInput = UploadedFile::getInstance($this, $attribute);
                 if ($setting->imageInput) {
                     $setting->value = "{$setting->imageInput->baseName}.{$setting->imageInput->extension}";
+                    $setting->record_status = 1;
                     if ($setting->save()) {
                         $setting->upload();
+                    }
+                    else {
+                        App::danger($setting->errors);
                     }
                 }
             }
