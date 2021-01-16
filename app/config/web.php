@@ -81,6 +81,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'my-setting' => 'setting/my-setting',
                 'my-role' => 'role/my-role',
                 'my-account' => 'user/my-account',
                 '<action:index|login|reset-password>' => 'site/<action>',
