@@ -1,0 +1,3 @@
+<label>
+    <?= $checkbox ?>
+</label>

@@ -1,0 +1,48 @@
+<?php
+namespace app\widgets;
+
+use Yii;
+use app\helpers\App;
+use yii\helpers\Inflector;
+ 
+class ImagePreview extends \yii\base\Widget
+{
+
+    public $model;
+    public $attribute;
+    public $options = [
+        'class' => 'img-thumbnail',
+        'loading' => 'lazy',
+    ];
+    public $src;
+    public $imageID;
+    public $imageClass = 'img-thumbnail';
+
+    public function init() 
+    {
+        // your logic here
+        parent::init();
+        $arr = [
+            strtolower(App::getModelName($this->model)), 
+            strtolower($this->attribute),
+        ];
+        $this->imageID = implode('-', $arr);
+
+        $arr[] = 'preview';
+
+        $this->options['id'] = implode('-', $arr);
+        $this->options['class'] = $this->imageClass;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function run()
+    {
+        return $this->render('image_preview', [
+            'src' => $this->src,
+            'options' => $this->options,
+            'imageID' => $this->imageID,
+        ]);
+    }
+}

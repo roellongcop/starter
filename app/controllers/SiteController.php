@@ -1,0 +1,141 @@
+<?php
+
+namespace app\controllers;
+
+use Yii;
+use app\helpers\App;
+use app\models\form\ContactForm;
+use app\models\form\LoginForm;
+use app\models\form\PasswordResetForm;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Response;
+
+class SiteController extends MainController
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return Yii::$app->access->behaviors(
+            ['login', 'logout', 'reset-password'],
+            [
+                'logout' => ['post'],
+            ]
+        );
+    }
+
+ 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+                'layout' => 'error'
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+        ];
+    }
+
+    public function actionResetPassword()
+    {
+        $model = new PasswordResetForm();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->process();
+        }
+
+        return $this->redirect(['login']);
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionIndex()
+    {
+        if (App::isLogin()) {
+            return $this->redirect(['dashboard/index']);
+        }
+
+        return $this->render('index');
+    }
+
+    /**
+     * Login action.
+     *
+     * @return Response|string
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        $PSR = new PasswordResetForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            Yii::$app->logbook->visitLog();
+
+            return $this->goBack();
+        }
+
+        $this->layout = 'login';
+        $model->password = '';
+        return $this->render('login', [
+            'model' => $model,
+            'PSR' => $PSR,
+        ]);
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        Yii::$app->logbook->visitLog(1);
+        Yii::$app->user->logout();
+
+
+
+        return $this->goHome();
+    }
+
+    /**
+     * Displays contact page.
+     *
+     * @return Response|string
+     */
+    public function actionContact()
+    {
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        }
+        return $this->render('contact', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionAbout()
+    {
+        return $this->render('about');
+    }
+}

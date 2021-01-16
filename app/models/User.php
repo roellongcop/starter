@@ -1,0 +1,640 @@
+<?php
+namespace app\models;
+
+use Yii;
+use app\helpers\App;
+use app\models\search\SettingSearch;
+use app\widgets\Anchor;
+use app\widgets\Label;
+use app\widgets\Switcher;
+use yii\base\NotSupportedException;
+use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\IdentityInterface;
+
+/**
+ * User model
+ *
+ * @property integer $id
+ * @property string $username
+ * @property string $password_hash
+ * @property string $password_reset_token
+ * @property string $verification_token
+ * @property string $email
+ * @property string $auth_key
+ * @property integer $status
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property string $password write-only password
+ */
+class User extends MainModel implements IdentityInterface
+{
+    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE = 9;
+    const STATUS_ACTIVE = 10;
+
+    public $arrayAttr = [];
+
+    public $relatedModels = ['role'];
+
+    public $excel_ignore_attr = ['photo'];
+    // public $fileInput;
+    public $imageInput;
+    public $fileLocation; 
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return '{{%users}}';
+    }
+
+    public function getMainAttribute()
+    {
+        return $this->username;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['username', 'role_id', 'status', 'record_status', 'is_blocked'], 'required'],
+            ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            [
+                'status', 
+                'in', 
+                'range' => [
+                    self::STATUS_ACTIVE, 
+                    self::STATUS_INACTIVE, 
+                    self::STATUS_DELETED
+                ]
+            ],
+            ['email', 'email'],
+            ['email', 'trim'],
+            ['email', 'unique'],
+            ['username', 'unique'],
+            [['slug', 'role_id'], 'safe'],
+            [['created_at', 'updated_at', 'password_hint', 'password_reset_token'], 'safe'],
+            ['role_id', 'exist', 'targetRelation' => 'role'],
+
+            // [
+            //     ['fileInput'], 
+            //     'file', 
+            //     'skipOnEmpty' => true, 
+            //     'extensions' => App::params('file_extensions')['file'], 
+            //     'checkExtensionByMimeType' => false
+            // ],
+
+            [
+                ['imageInput'], 
+                'image', 
+                'minWidth' => 100,
+                'maxWidth' => 200,
+                'minHeight' => 100,
+                'maxHeight' => 200,
+                'maxSize' => 1024 * 1024 * 2,
+                'skipOnEmpty' => true, 
+                'extensions' => App::params('file_extensions')['image'], 
+                'checkExtensionByMimeType' => false
+            ],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'role_id' => 'Role',
+        ];
+    }
+
+
+    // public function getVisitLogs()
+    // {
+    //     return $this->hasMany(VisitLog::className(), ['user_id' => 'id']);
+    // }
+
+    // public function getUserInquiries()
+    // {
+    //     return $this->hasMany(UserInquiry::className(), ['user_id' => 'id']);
+    // }
+
+
+    // public function getLogs()
+    // {
+    //     return $this->hasMany(Log::className(), ['user_id' => 'id']);
+    // }
+ 
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username)
+    {
+        return static::findOne(['username' => $username]);
+        // return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+
+
+    public static function findByEmail($email)
+    {
+        return static::findOne(['email' => $email]);
+        // return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Finds user by password reset token
+     *
+     * @param string $token password reset token
+     * @return static|null
+     */
+    public static function findByPasswordResetToken($token)
+    {
+        if (!static::isPasswordResetTokenValid($token)) {
+            return null;
+        }
+
+        return static::findOne([
+            'password_reset_token' => $token,
+            'status' => self::STATUS_ACTIVE,
+        ]);
+    }
+
+    /**
+     * Finds user by verification email token
+     *
+     * @param string $token verify email token
+     * @return static|null
+     */
+    public static function findByVerificationToken($token) {
+        return static::findOne([
+            'verification_token' => $token,
+            'status' => self::STATUS_INACTIVE
+        ]);
+    }
+
+    /**
+     * Finds out if password reset token is valid
+     *
+     * @param string $token password reset token
+     * @return bool
+     */
+    public static function isPasswordResetTokenValid($token)
+    {
+        if (empty($token)) {
+            return false;
+        }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        return $timestamp + $expire >= time();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->getPrimaryKey();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
+
+    /**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
+    /**
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * Generates new password reset token
+     */
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    /**
+     * Generates new token for email verification
+     */
+    public function generateEmailVerificationToken()
+    {
+        $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    /**
+     * Removes password reset token
+     */
+    public function removePasswordResetToken()
+    {
+        $this->password_reset_token = null;
+    }
+
+
+
+    public function getUserStatus()
+    {
+        return App::params('user_status')[$this->status] ?? [];
+    }
+
+
+    public function getUserStatusLabel()
+    {
+        return $this->userStatus['label'] ?? '';
+    }
+
+
+    public function getBlockedStatus()
+    {
+        return App::params('is_blocked')[$this->is_blocked] ?? [];
+    }
+
+
+    public function getBlockedStatusLabel()
+    {
+        return $this->blockedStatus['label'] ?? '';
+    }
+
+    public function getBlockedStatusHtml()
+    {
+        if (in_array(App::actionID(), App::params('export_actions'))) {
+            return $this->blockedStatus['label'];
+        } 
+        
+        return Label::widget([
+            'options' => $this->blockedStatus
+        ]);
+    }
+
+
+    public function getUserStatusHtml()
+    { 
+        return Label::widget([
+            'options' => $this->userStatus
+        ]);
+    }
+
+
+
+   
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->generateAuthKey();
+            $this->generatePasswordResetToken();
+            $this->generateEmailVerificationToken();
+            return true;
+        }
+    }
+
+    public function getThemeMeta()
+    {
+        return $this->hasOne(UserMeta::className(), ['user_id' => 'id'])
+            ->onCondition(['meta_key' => 'theme'])
+            ->orderBy(['id' => SORT_DESC]);
+    }
+
+    public function getTheme()
+    {
+        return $this->hasOne(Theme::className(), ['id' => 'meta_value'])
+            ->via('themeMeta');
+    }
+
+    public function getCurrentTheme()
+    {
+        if (($theme = $this->theme) != null) {
+            return $theme;
+        }
+
+        return Theme::findOne(SettingSearch::default('theme'));
+    }
+
+    public function getRole()
+    {
+        return $this->hasOne(Role::className(), ['id' => 'role_id']);
+    } 
+
+    public function getTableColumns($model)
+    {
+        $user_meta = UserMeta::findOne([
+            'user_id' => $this->id,
+            'meta_key' => 'table_columns'
+        ]);
+
+        $table_name = App::tableName($model, false);
+
+        if ($user_meta) {
+            $table_columns = json_decode($user_meta->meta_value, true);
+
+            if (in_array($table_name, array_keys($table_columns))) {
+                return $table_columns[$table_name];
+            }
+        }
+        
+    }
+
+    public function filterColumns($model, $default=true)
+    {
+        $table_columns = $this->getTableColumns($model);
+
+        if ($default) {
+            return $table_columns ?: array_keys($model->tableColumns());
+        }
+        return $table_columns ?: [];
+    }
+
+
+    public function getMain_navigation()
+    {
+        if (($model = $this->role) != null) {
+            return $model->main_navigation;
+        }
+    }
+
+    public function getModule_access()
+    {
+        if (($model = $this->role) != null) {
+            return $model->module_access;
+        }
+    }
+
+
+    public function getRole_access()
+    {
+        if (($model = $this->role) != null) {
+            return $model->role_access;
+        }
+    }
+
+
+    public function getRoleName()
+    {
+        if (($model = $this->role) != null) {
+            return $model->name;
+        }
+    }
+
+
+
+    public function getModuleAccess()
+    {
+        if (($model = $this->role) != null) {
+            return $model->module_access;
+        }
+    }
+
+
+    public function getMainNavigation()
+    {
+        if (($model = $this->role) != null) {
+            return $model->main_navigation;
+        }
+    }
+
+
+
+    public function behaviors()
+    {
+        return [
+            // TimestampBehavior::className(),
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'email',
+                'slugAttribute' => 'slug',
+                'immutable' => false,
+                'ensureUnique' => true,
+            ],
+        ];
+    }
+
+
+    public function tableColumns()
+    {
+        return [
+            'serial' => [
+                'class' => 'yii\grid\SerialColumn',
+            ],
+            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
+
+            'photo' => [
+                'attribute' => 'id', 
+                'label' => 'Photo',
+                'format' => 'raw',
+                'value' => function($model) {
+                    if ($model->imagePath) {
+                        return Html::img("{$model->imagePath}&w=40&quality=90", [
+                            // 'loading' => 'lazy',
+                            'style' => 'border-radius: 50%;max-width:40px'
+                        ]);
+                    }
+                }
+            ],
+            'username' => [
+                'attribute' => 'username', 
+                'format' => 'raw',
+                'value' => function($model) {
+                    return Anchor::widget([
+                        'title' => $model->username,
+                        'link' => ['view', 'id' => $model->id],
+                        'text' => true
+                    ]);
+                }
+            ],
+            'email' => ['attribute' => 'email', 'format' => 'raw'],
+            'role' => [
+                'attribute' => 'role_id', 
+                'format' => 'raw',
+                'label' => 'Role',
+                'value' => function($model) {
+                    return Anchor::widget([
+                        'title' => $model->roleName,
+                        'link' => ['role/view', 'id' => $model->role_id],
+                        'text' => true
+                    ]);
+                }
+            ],
+            // 'auth_key' => ['attribute' => 'auth_key', 'format' => 'raw'],
+            // 'password_hash' => ['attribute' => 'password_hash', 'format' => 'raw'],
+            // 'password_reset_token' => ['attribute' => 'password_reset_token', 'format' => 'raw'],
+            // 'verification_token' => ['attribute' => 'verification_token', 'format' => 'raw'],
+            // 'slug' => ['attribute' => 'slug', 'format' => 'raw'],
+            // 'is_blocked' => ['attribute' => 'is_blocked', 'format' => 'raw'],
+         
+
+            'created_at' => [
+                'attribute' => 'created_at',
+                'format' => 'fulldate',
+            ],
+            'last_updated' => [
+                'attribute' => 'updated_at',
+                'label' => 'last updated',
+                'format' => 'ago',
+            ],
+            'blocked' => [
+                'attribute' => 'is_blocked',
+                'label' => 'status',
+                'format' => 'raw', 
+                'value' => function($model) {
+                    return $model->blockedStatusHtml;
+                }
+            ],
+            'active' => [
+                'attribute' => 'record_status',
+                'label' => 'active',
+                'format' => 'raw', 
+                'value' => 'recordStatusHtml'
+            ],
+        ];
+    }
+
+    public function getDetailColumns()
+    {
+        return [
+            [
+                'label' => 'Photo',
+                'format' => 'raw',
+                'value' => function($model) {
+                    if ($model->imagePath) {
+                        return Html::img("{$model->imagePath}&w=40&quality=90", [
+                            'loading' => 'lazy',
+                            'style' => 'border-radius: 50%;'
+                        ]);
+                    }
+                }
+            ],
+
+            'roleName:raw',
+            'username:raw',
+            'email:raw',
+            'auth_key:raw',
+            'password_hash:raw',
+            'password_hint:raw',
+            'password_reset_token:raw',
+            'verification_token:raw',
+            // 'slug:raw',
+            'userStatusHtml:raw',
+            'blockedStatusLabel:raw',
+            'created_at:fulldate',
+            'updated_at:fulldate',
+            'createdByEmail',
+            'updatedByEmail',
+            [
+                'label' => 'Record Status',
+                'value' => $this->recordStatusHtml,
+                'format' => 'raw'
+            ]
+        ];
+    }
+
+
+
+
+    public function getBulkActions()
+    {
+        return [
+            [
+                'label' => 'Set as Active',
+                'process' => 'active',
+                'icon' => 'active',
+            ],
+            [
+                'label' => 'Set as In-active',
+                'process' => 'in_active',
+                'icon' => 'in_active',
+            ],
+            [
+                'label' => 'Delete',
+                'process' => 'delete',
+                'icon' => 'delete',
+            ],
+            [
+                'label' => 'Allowed',
+                'process' => 'allowed',
+                'icon' => 'plus',
+            ],
+            [
+                'label' => 'Blocked',
+                'process' => 'blocked',
+                'icon' => 'minus',
+            ],
+        ];
+    }
+
+    public function can($action, $controller='')
+    {
+        return App::component('access')
+            ->userCan($action, $controller);
+    }
+
+    public function getMyImageFiles()
+    {
+        return $this->hasMany(File::className(), ['created_by' => 'id'])
+            ->onCondition(['extension' => App::params('file_extensions')['image']])
+            ->groupBy(['name', 'size', 'extension'])
+            ->orderBy(['id' => SORT_DESC]);
+    }
+ 
+}

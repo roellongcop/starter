@@ -1,0 +1,55 @@
+<?php
+
+use yii\helpers\Inflector;
+use yii\helpers\StringHelper;
+
+/* @var $this yii\web\View */
+/* @var $generator yii\gii\generators\crud\Generator */
+
+/* @var $model \yii\db\ActiveRecord */
+$model = new $generator->modelClass();
+$safeAttributes = $model->safeAttributes();
+if (empty($safeAttributes)) {
+    $safeAttributes = $model->attributes();
+}
+$ignore_attr = ['status', 'record_status', 'created_by', 'updated_by', 'created_at', 'updated_at'];
+echo "<?php\n";
+?>
+
+use app\helpers\App;
+use app\widgets\BootstrapSelect;
+use app\widgets\AnchorForm;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
+/* @var $form yii\widgets\ActiveForm */
+?>
+
+
+<?= "<?php " ?>$form = ActiveForm::begin(); ?>
+
+    <div class="row">
+        <div class="col-md-5">
+<?php foreach ($generator->getColumnNames() as $attribute) {
+if (in_array($attribute, $safeAttributes)) {
+if (! in_array($attribute, $ignore_attr)) {
+echo "\t\t\t<?= " . $generator->generateActiveField($attribute) . " ?>\n";
+}
+}
+} ?>
+			<?= '<?=' ?> BootstrapSelect::widget([
+	            'attribute' => 'record_status',
+	            'searchable' => false,
+	            'model' => $model,
+	            'form' => $form,
+	            'data' => App::mapParams('record_status'),
+	        ]) ?>
+        </div>
+    </div>
+    <div class="form-group">
+		<?= '<?=' ?> AnchorForm::widget() ?>
+    </div>
+
+<?= "<?php " ?>ActiveForm::end(); ?>
+
