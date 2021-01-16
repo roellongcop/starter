@@ -26,7 +26,6 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'form' => $form,
                 'data' => RoleSearch::dropdown(),
             ]) ?>
-           
 
             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
@@ -61,27 +60,32 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'attribute' => 'imageInput',
                 'src' => ($model->imagePath)? $model->imagePath . '&w=200': '',
             ]) ?>
-
-            <?php if ($model->isNewRecord): ?>
-                <?= $form->field($model, 'imageInput')->fileInput() ?>
-                <div class="alert alert-info">
-                    <ul>
-                        <li>Minimum Width: <?= $imageRules->minWidth ?></li>
-                        <li>Maximum Width: <?= $imageRules->maxWidth ?></li>
-                        <li>Minimum Height: <?= $imageRules->minHeight ?></li>
-                        <li>Maximum Height: <?= $imageRules->maxHeight ?></li>
-                    </ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $form->field($model, 'imageInput')->fileInput() ?>
+                    <div class="alert alert-info">
+                        <ul>
+                            <li>Minimum Width: <?= $imageRules->minWidth ?></li>
+                            <li>Maximum Width: <?= $imageRules->maxWidth ?></li>
+                            <li>Minimum Height: <?= $imageRules->minHeight ?></li>
+                            <li>Maximum Height: <?= $imageRules->maxHeight ?></li>
+                        </ul>
+                    </div>
                 </div>
-            <?php else: ?>
-                <?= ChangePhoto::widget([
-                    'model' => $model,
-                    'ajaxSuccess' => "function(s) {
-                        if(s.status == 'success') {
-                            $('#user-imageinput-preview').attr('src', s.src + '&w=200')
-                        }
-                    }"
-                ]) ?>
-            <?php endif ?>
+                <div class="col-md-6">
+                    <?= ChangePhoto::widget([
+                        'buttonTitle' => 'Choose from gallery',
+                        'model' => $model,
+                        'ajaxSuccess' => "function(s) {
+                            if(s.status == 'success') {
+                                $('#user-imageinput-preview').attr('src', s.src + '&w=200')
+                            }
+                        }"
+                    ]) ?> 
+                </div>
+            </div>
+            
+ 
         </div>
     </div>
     <div class="form-group">
