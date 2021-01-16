@@ -4,7 +4,6 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-$uploadUrl = Url::to(['theme/change-image']); 
 $this->registerJs(<<<SCRIPT
 $('.theme-image').on('change', function() {
 
