@@ -38,14 +38,15 @@ for the "yii seed/roles 10" to properly generate navigations
 14) Logs support
 
 # Modules
- Dashboard
- Backup
- File
- Ip
- Log
- Role
- Setting
- User
- User columns
- Visit log
- Session
+1) Dashboard
+2) Backup
+3) File
+4) General Setting
+5) Ip
+6) Log
+7) Role
+8) Setting
+9) User
+10) User columns
+11) Visit log
+11) Session
