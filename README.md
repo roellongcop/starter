@@ -1,5 +1,5 @@
 # yii2 keendashboard demo1
-1) create database "db_yii2_keen_demo1"
+1) create database "db_starter"
 2) you may need to adjust the "app/config/db.php" for credentials
 3) open cmd, goto "app" folder then run:
 
@@ -17,7 +17,7 @@ IMPORTANT NOTES:
 when renaming the app, make sure to also change the "app\config\console.php"
 
 	'urlManager' => [
-        'baseUrl' => '/yii2-keen-demo1'
+        'baseUrl' => '/starter/web'
     ]
 for the "yii seed/roles 10" to properly generate navigations
 
@@ -38,15 +38,14 @@ for the "yii seed/roles 10" to properly generate navigations
 14) Logs support
 
 # Modules
-1) Dashboard
-2) Backup
-3) File
-4) General Setting
-5) Ip
-6) Log
-7) Role
-8) Setting
-9) User
-10) User columns
-11) Visit log
-11) Session
+ Dashboard
+ Backup
+ File
+ Ip
+ Log
+ Role
+ Setting
+ User
+ User columns
+ Visit log
+ Session
