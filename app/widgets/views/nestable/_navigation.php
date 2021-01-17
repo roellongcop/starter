@@ -53,6 +53,16 @@ use app\helpers\App;
                                     <span></span>
                                     New Tab
                             </label>
+                            <label class="checkbox">
+                                <input data-id="group_menu"
+                                    class="checkbox"
+                                    type="checkbox" 
+                                    value="1" 
+                                    <?= (!empty($nav['group_menu'])) ? 'checked': '' ?>
+                                    > 
+                                    <span></span>
+                                    Group Menu
+                            </label>
                         </div>
                     </div>
                     

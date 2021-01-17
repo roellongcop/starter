@@ -29,6 +29,10 @@ var addMainNavigation = function() {
                             html += '<input class="checkbox" data-id="new_tab" type="checkbox"value="1">';
                                 html += '<span></span>New Tab';
                         html += '</label>';
+                        html += '<label class="checkbox">';
+                            html += '<input class="checkbox" data-id="group_menu" type="checkbox"value="1">';
+                                html += '<span></span>Group Menu';
+                        html += '</label>';
                     html += '</div>';
                 html += '</div>';
 
