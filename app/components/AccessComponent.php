@@ -184,7 +184,8 @@ class AccessComponent extends Component
  		$ignoreControllers = [
  			'general-setting',
  			'dashboard',
- 			'site'
+ 			'site',
+ 			'api',
  		];
 
  		foreach ($controller_actions as $controller => $actions) {
