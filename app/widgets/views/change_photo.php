@@ -47,18 +47,34 @@ SCRIPT, \yii\web\View::POS_END);
             </div>
             <div class="modal-body">
                 <div data-scroll="true" data-height="500">
-                	<?php if ($files): ?>
-						<div class="row">
-    						<?php foreach ($files as $file): ?>
-                    			<div class="col-md-2">
-                    				<?= Html::img(['file/display', 'token' => $file->token, 'w' => 150], [
-                    					'class' => 'img-thumbnail pointer my-image-files',
-                    					'data-id' => $file->id,
-                    				]) ?>
-                    			</div>
-   							<?php endforeach; ?>
-						</div>
-					<?php endif ?>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#my-photos-tab-<?= $id ?>">Home</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#upload-tab-<?= $id ?>">Upload</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="my-photos-tab-<?= $id ?>" class="tab-pane fade in active">
+                            <?php if ($files): ?>
+                                <div class="row">
+                                    <?php foreach ($files as $file): ?>
+                                        <div class="col-md-2">
+                                            <?= Html::img(['file/display', 'token' => $file->token, 'w' => 150], [
+                                                'class' => 'img-thumbnail pointer my-image-files',
+                                                'data-id' => $file->id,
+                                            ]) ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                        <div id="upload-tab-<?= $id ?>" class="tab-pane fade">
+                            <?= $fileInput ?>
+                        </div>
+                    </div>
+
+                	
                 </div>
             </div>
             <div class="modal-footer">

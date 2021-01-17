@@ -65,7 +65,6 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
 
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model, 'imageInput')->fileInput() ?>
                     <div class="alert alert-info">
                         <ul>
                             <li>Minimum Width: <?= $imageRules->minWidth ?></li>
@@ -77,6 +76,7 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 </div>
                 <div class="col-md-6">
                     <?= ChangePhoto::widget([
+                        'fileInput' => $form->field($model, 'imageInput')->fileInput(),
                         'buttonTitle' => 'Choose from gallery',
                         'model' => $model,
                         'ajaxSuccess' => "function(s) {

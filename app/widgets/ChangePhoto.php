@@ -17,6 +17,7 @@ class ChangePhoto extends \yii\base\Widget
     public $ajaxSuccess = 'function(s) {console.log(s)}';
     public $ajaxError = 'function(e) {alert(e.responseText)}';
     public $dropzoneComplete;
+    public $fileInput;
 
     public function init() 
     {
@@ -47,6 +48,7 @@ class ChangePhoto extends \yii\base\Widget
             'ajaxError' => $this->ajaxError,
             'model' => $this->model,
             'dropzoneComplete' => $this->dropzoneComplete,
+            'fileInput' => $this->fileInput,
             
         ]);
     }
