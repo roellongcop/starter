@@ -10,7 +10,6 @@ class DateRange extends \yii\base\Widget
     public $name;
     public $attribute = 'date_range';
     public $title = 'Date Range';
-    public $id;
     public $start;
     public $end;
     public $all_start;
@@ -25,9 +24,7 @@ class DateRange extends \yii\base\Widget
             $this->name = $this->attribute;
         }
 
-        if (! $this->id) {
-            $this->id = 'date-range-' . Yii::$app->security->generateRandomString(5);
-        }
+        $this->id = "date-range-{$this->id}";
 
         if (! $this->start) {
             $this->start = (method_exists($this->model, 'getStartDate'))? 
