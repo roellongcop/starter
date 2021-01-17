@@ -8,12 +8,17 @@ use yii\helpers\Html;
 
 function menu($menus)
 {
-    foreach ($menus as &$menu) {
-        $menu['url'] = $menu['link'];
-        unset($menu['link']);
-        if (isset($menu['sub'])) {
-            $menu['items'] = menu($menu['sub']);
-            unset($menu['sub']);
+    foreach ($menus as $key => &$menu) {
+        if (isset($menu['group_menu']) && $menu['group_menu']) {
+            unset($menus[$key]);
+        }
+        else {
+            $menu['url'] = $menu['link'];
+            unset($menu['link']);
+            if (isset($menu['sub'])) {
+                $menu['items'] = menu($menu['sub']);
+                unset($menu['sub']);
+            }
         }
     }
     return $menus;
