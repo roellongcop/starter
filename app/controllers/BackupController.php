@@ -8,6 +8,7 @@ use app\models\Backup;
 use app\models\search\BackupSearch;
 use app\widgets\ExportContent;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -279,6 +280,25 @@ class BackupController extends MainController
         return $this->redirect(['index']);
     }
 
+    public function uploadPath($name)
+    {
+        $folders = [
+            'backup',
+            date('Y'),
+            date('m'),
+        ];
+
+        $file_path = implode('/', $folders);
+        FileHelper::createDirectory($file_path);
+
+
+        App::component('file')->createIndexFile($folders);
+
+        $path = "{$file_path}/{$name}.sql";
+
+        return $path;
+    }
+
     public function backupDB($name='', $tables='') 
     {
         $name = $name ?: time();
@@ -286,7 +306,7 @@ class BackupController extends MainController
 
         $micro_date = microtime();
         $date_array = explode(" ",$micro_date);
-        $filepath = "_backup/{$name}.sql";
+        $filepath = $this->uploadPath($name);
 
         if ($tables == '*') {
             $tables = array();
