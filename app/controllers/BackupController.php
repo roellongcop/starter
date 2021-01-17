@@ -283,7 +283,8 @@ class BackupController extends MainController
     public function uploadPath($name)
     {
         $folders = [
-            'backup',
+            'protected',
+            'backups',
             date('Y'),
             date('m'),
         ];

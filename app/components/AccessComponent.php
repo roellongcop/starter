@@ -186,6 +186,7 @@ class AccessComponent extends Component
  			'dashboard',
  			'site',
  			'api',
+ 			'model-file',
  		];
 
  		foreach ($controller_actions as $controller => $actions) {

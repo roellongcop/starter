@@ -58,6 +58,7 @@ class FileComponent extends Component
     public function uploadPath($model, $input)
     {
         $folders = [
+            'protected',
             'uploads',
             date('Y'),
             date('m'),
@@ -84,13 +85,25 @@ class FileComponent extends Component
         return $path;
     }
 
+
+    public function createHtaccessFile($path)
+    {
+        if (! file_exists($path . '.htaccess')) {
+            $htaccess = fopen($path . '.htaccess', "w");
+            fwrite($htaccess, "deny from all");
+            fclose($htaccess);
+        }
+    }
+
     public function createIndexFile($folders)
     {
         $path = Yii::getAlias('@webroot') . '/';
+
             
         foreach ($folders as $folder) {
             $path .=  "{$folder}/";
 
+            $this->createHtaccessFile($path);
             if (! file_exists($path . 'index.php')) {
                 $index_file = fopen($path . 'index.php', "w");
                 fwrite($index_file, "Forbidden Access");

@@ -4,7 +4,5 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
-uploads/*
-!uploads/.gitkeep
-_backup/*
-!_backup/.gitkeep 
+protected/*
+!protected/.gitkeep 
