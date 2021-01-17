@@ -15,8 +15,6 @@ use app\models\Role;
 use app\models\Theme;
 use app\models\User;
 use app\models\search\RoleSearch;
-use yii\console\Controller;
-use yii\console\ExitCode;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -26,22 +24,8 @@ use yii\console\ExitCode;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class SeedController extends Controller
+class SeedController extends MainController
 {
-    public $success = 0;
-    public $failed = 0;
-    public $print_attributes = false;
-
-    public function truncate($tables=[])
-    {
-        foreach ($tables as $table) {
-            echo "\nTruncate {$table}";
-            Yii::$app->db->createCommand()
-                ->truncateTable(Yii::$app->db->tablePrefix . $table)
-                ->execute();
-        }
-    }
-
     public function actionFresh()
     {
         $this->truncate([
@@ -58,13 +42,14 @@ class SeedController extends Controller
         $this->actionThemes();
     }
 
+    
     public function actionThemes()
     {
         $themes = require __DIR__ . '/themes.php';
         Yii::$app->db->createCommand()
             ->truncateTable(Yii::$app->db->tablePrefix . 'themes')
             ->execute();
-        echo ("\n= Seeding Themes =\n");
+        $this->startProgress(0, count($themes), 'Seeding Themes: ');
         foreach ($themes as $i => $theme) {
             $data = [
                 'description' => $theme['description'],
@@ -73,10 +58,11 @@ class SeedController extends Controller
                 'base_url' => $theme['baseUrl'],
                 'path_map' => $theme['pathMap'],
                 'bundles' => $theme['bundles'] ?? NULL,
+                'record_status' => 1,
             ];
             $model = new Theme();
             $model->load(['Theme' => $data]);
-            $this->save($model, $i); 
+            $this->save($model, $i, count($themes)); 
         }
         $this->summary(Theme::find()->count());
     }
@@ -84,14 +70,15 @@ class SeedController extends Controller
     public function actionIp($row=1)
     {
         $faker = Factory::create();
-        echo ("\n= Seeding ip =\n");
+        $this->startProgress(0, $row, 'Seeding IP: ');
         for ($i=1; $i <= $row; $i++) { 
             $model                  = new Ip();
             $model->name            = $faker->ipv4; 
             $model->description     = $faker->text; 
             $model->type            = $faker->randomElement(App::keyMapParams('ip_type'));
             $model->created_at = $faker->date . ' ' . $faker->time;
-            $this->save($model, $i); 
+            $model->record_status   = $faker->randomElement(App::keyMapParams('record_status'));
+            $this->save($model, $i, $row); 
         }
         $this->summary(Ip::find()->count());
     }
@@ -101,7 +88,7 @@ class SeedController extends Controller
         $faker = Factory::create();
         $controllerActions = Yii::$app->access->controllerActions();
         $createNavigation = Yii::$app->access->createNavigation();
-        echo ("\n= Seeding roles =\n");
+        $this->startProgress(0, $row, 'Seeding Role: ');
         for ($i=1; $i <= $row; $i++) { 
             $model                  = new Role();
             $model->name            = $faker->jobTitle;
@@ -110,7 +97,7 @@ class SeedController extends Controller
             $model->main_navigation = $createNavigation;
             $model->record_status   = $faker->randomElement(App::keyMapParams('record_status'));
             $model->created_at = $faker->date . ' ' . $faker->time;
-            $this->save($model, $i); 
+            $this->save($model, $i, $row); 
         }
         $this->summary(Role::find()->count());
     }
@@ -119,7 +106,7 @@ class SeedController extends Controller
     {
         $roles = array_keys(RoleSearch::dropdown());
         $faker = Factory::create();
-        echo ("\n= Seeding users =\n");
+        $this->startProgress(0, $row, 'Seeding User: ');
         for ($i=1; $i <= $row; $i++) { 
             $model                = new User();
             $model->role_id       = $faker->randomElement($roles);
@@ -141,59 +128,10 @@ class SeedController extends Controller
 
             $model->created_at = $faker->date . ' ' . $faker->time;
 
-            $this->save($model, $i); 
+            $this->save($model, $i, $row); 
         }
         $this->summary(User::find()->count());
     } 
 
-    // ==========================================================================================
-    public function save($model, $row=1, $validation=true)
-    {
-        if ($this->print_attributes) {
-            print ("===================== SEEDING ROW {$row} =====================\n");
-        }
-        else {
-            print ".";
-        }
-        
-        if ($model->save($validation)) {
-            $this->success++;
-
-            if ($this->print_attributes) {
-                print_r([
-                    'status' => 'success',
-                    'attributes' => $model->attributes
-                ]);
-            }
-        }
-        else {
-            $this->failed++;
-            if ($this->print_attributes) {
-                print_r([
-                    'status' => 'failed',
-                    'errors' => $model->errors,
-                    'attributes' => $model->attributes
-                ]);
-            }
-        }
-        return $model;
-    }
-
-    
-
-    public function summary($total=0)
-    {
-        echo ("\n= SUMMARY =\n");
-        echo "Success: " . number_format($this->success);
-        echo "\nFailed: " . number_format($this->failed);
-        echo "\nTotal: " . number_format($total);
-        echo "\n\n\n";
-
-        $this->success = 0;
-        $this->failed = 0;
-
-        return ExitCode::OK;
-    }
- 
-
+   
 }

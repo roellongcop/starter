@@ -6,7 +6,7 @@ return [
     'general_settings' => [
         'theme' => [
             'name' => 'theme',
-            'default' => 1,
+            'default' => 11,
         ],
         'timezone' => [
             'name' => 'timezone',

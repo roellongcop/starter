@@ -17,7 +17,7 @@ use yii\web\AssetBundle;
  */
 class ErrorAsset extends AssetBundle
 {
-    public $sourcePath = '@web/app/assets/assets';
+    public $sourcePath = '@app/assets';
 
     public $css = [
        
