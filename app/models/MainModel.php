@@ -8,6 +8,7 @@ use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\RecordHtml;
 use yii\helpers\Inflector;
+use yii\helpers\Json;
 use yii\helpers\Url;
  
 abstract class MainModel extends \yii\db\ActiveRecord
@@ -263,7 +264,7 @@ abstract class MainModel extends \yii\db\ActiveRecord
         if (isset($this->arrayAttr)) {
             foreach ($this->arrayAttr as $e) {
                 if (is_array($this->{$e})) {
-                    $this->{$e} = json_encode($this->{$e});
+                    $this->{$e} = Json::encode($this->{$e});
                 }
             }
         }
@@ -272,7 +273,7 @@ abstract class MainModel extends \yii\db\ActiveRecord
     {
         if (isset($this->arrayAttr)) {
             foreach ($this->arrayAttr as $e) {
-                $this->{$e} = $this->{$e}? json_decode($this->{$e}, TRUE): [];
+                $this->{$e} = $this->{$e}? Json::decode($this->{$e}, TRUE): [];
             }
         }
     }
