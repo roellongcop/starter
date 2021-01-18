@@ -57,25 +57,7 @@ class AccessComponent extends Component
 		return $actions[$controller] ?? [''];
 	}
  	
-
- 	public function behaviors($actions=[''], $verb_actions=[])
- 	{
- 		return [
- 			'access' => $this->_access($actions),
-            'verbs' => $this->verbs($verb_actions)
-        ];
- 	}
-
- 	public function verbs($verb_actions=[])
- 	{
- 		$actions = empty($verb_actions)? ['delete' => ['POST']] : $verb_actions;
-
- 		return [
-            'class' => VerbFilter::className(),
-            'actions' => $actions,
-        ];
- 	}
-
+ 
 
  	public function my_actions($controller='')
  	{
@@ -89,33 +71,7 @@ class AccessComponent extends Component
  		return $module_access[$controller] ?? [''];
  	}
 
- 	public function _access($actions=[''])
- 	{
- 		$my_actions = $this->my_actions();
-
- 		if ($actions) {
- 			$my_actions = array_merge($my_actions, $actions);
- 		}
-
- 		return [
-			'class' => AccessControl::className(),
-			'only' => $this->actions(),
-            'rules' => [
-                [
-                    // 'actions' => $this->actions(),
-                    'actions' => $my_actions,
-                    'allow' => true,
-                    'roles' => ['@'],
-				],
-				[
-                    'actions' => $actions,
-                    'allow' => true,
-                    'roles' => ['?'],
-				],
-            ],
-		];
- 	}
-
+ 
  	public function userCanRoute($link='')
  	{
  		if (is_array($link)) {

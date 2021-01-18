@@ -3,12 +3,14 @@
 namespace app\controllers;
 
 use Yii;
+use app\filters\AccessControl;
+use app\filters\IpFilter;
+use app\filters\UserFilter;
+use app\filters\VerbFilter;
 use app\helpers\App;
 use app\models\form\ContactForm;
 use app\models\form\LoginForm;
 use app\models\form\PasswordResetForm;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\web\Response;
 
 class SiteController extends Controller
@@ -18,12 +20,22 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
-        return Yii::$app->access->behaviors(
-            ['login', 'logout', 'reset-password'],
+        return [
             [
-                'logout' => ['post'],
-            ]
-        );
+                'class' => UserFilter::className(),
+                'class' => IpFilter::className(),
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'publicActions' => ['login', 'logout', 'reset-password']
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'verbActions' => [
+                    'logout' => ['post'],
+                ]
+            ],
+        ];
     }
 
  

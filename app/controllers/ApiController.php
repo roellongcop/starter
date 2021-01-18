@@ -3,6 +3,10 @@
 namespace app\controllers;
 
 use Yii;
+use app\filters\AccessControl;
+use app\filters\IpFilter;
+use app\filters\UserFilter;
+use app\filters\VerbFilter;
 use app\helpers\App;
 use app\models\User;
 
@@ -11,8 +15,19 @@ class ApiController extends Controller
 
     public function behaviors()
     {
-        return App::component('access')
-            ->behaviors(['available-users']);
+        return [
+            [
+                'class' => UserFilter::className(),
+                'class' => IpFilter::className(),
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'publicActions' => ['available-users']
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className()
+            ],
+        ];
     } 
   
     public function actionAvailableUsers()
