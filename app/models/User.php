@@ -10,7 +10,6 @@ use app\widgets\Switcher;
 use yii\base\NotSupportedException;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\IdentityInterface;
