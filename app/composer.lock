@@ -11,7 +11,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -53,7 +53,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -2606,12 +2606,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "07769690e06ccb321fa16c2b77769207a8a1b232"
+                "reference": "9b174d18ba58bb2e8cc4cecce619d6124df1d83a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/07769690e06ccb321fa16c2b77769207a8a1b232",
-                "reference": "07769690e06ccb321fa16c2b77769207a8a1b232",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/9b174d18ba58bb2e8cc4cecce619d6124df1d83a",
+                "reference": "9b174d18ba58bb2e8cc4cecce619d6124df1d83a",
                 "shasum": ""
             },
             "require": {
@@ -2683,7 +2683,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2021-01-12T00:50:32+00:00"
+            "time": "2021-01-17T19:19:40+00:00"
         },
         {
             "name": "codeception/lib-asserts",
@@ -2737,16 +2737,16 @@
         },
         {
             "name": "codeception/lib-innerbrowser",
-            "version": "1.3.5",
+            "version": "1.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/lib-innerbrowser.git",
-                "reference": "956101b060a0d898a1ed8c106fd4d81adf25fd87"
+                "reference": "41b79ba6761001bdb1f373a347400180693ad4e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/lib-innerbrowser/zipball/956101b060a0d898a1ed8c106fd4d81adf25fd87",
-                "reference": "956101b060a0d898a1ed8c106fd4d81adf25fd87",
+                "url": "https://api.github.com/repos/Codeception/lib-innerbrowser/zipball/41b79ba6761001bdb1f373a347400180693ad4e7",
+                "reference": "41b79ba6761001bdb1f373a347400180693ad4e7",
                 "shasum": ""
             },
             "require": {
@@ -2789,7 +2789,7 @@
             "keywords": [
                 "codeception"
             ],
-            "time": "2021-01-02T18:59:34+00:00"
+            "time": "2021-01-17T11:21:09+00:00"
         },
         {
             "name": "codeception/module-asserts",
@@ -3935,12 +3935,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c2a7f8bc9452ac845f96e9c19116576da7e9f8b9"
+                "reference": "b7485cdc3a127751343636771f1fdc9beb875975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c2a7f8bc9452ac845f96e9c19116576da7e9f8b9",
-                "reference": "c2a7f8bc9452ac845f96e9c19116576da7e9f8b9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b7485cdc3a127751343636771f1fdc9beb875975",
+                "reference": "b7485cdc3a127751343636771f1fdc9beb875975",
                 "shasum": ""
             },
             "require": {
@@ -4010,7 +4010,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2021-01-14T08:01:01+00:00"
+            "time": "2021-01-17T07:47:26+00:00"
         },
         {
             "name": "psr/container",
