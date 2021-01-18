@@ -23,7 +23,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class Backup extends MainModel
+class Backup extends ActiveRecord
 {
     public $arrayAttr = ['tables'];
     public $relatedModels = [];

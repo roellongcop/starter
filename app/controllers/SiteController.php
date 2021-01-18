@@ -11,7 +11,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Response;
 
-class SiteController extends MainController
+class SiteController extends Controller
 {
     /**
      * {@inheritdoc}

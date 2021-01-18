@@ -26,7 +26,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class Session extends MainModel
+class Session extends ActiveRecord
 {
     public $arrayAttr = [];
     public $relatedModels = [];

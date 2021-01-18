@@ -23,7 +23,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class ModelFile extends MainModel
+class ModelFile extends ActiveRecord
 {
     public $arrayAttr = [];
     public $relatedModels = [];

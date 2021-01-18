@@ -36,7 +36,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class Log extends MainModel
+class Log extends ActiveRecord
 {
     public $logAfterSave = false;
     public $logAfterDelete = false;

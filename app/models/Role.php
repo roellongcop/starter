@@ -25,7 +25,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class Role extends MainModel
+class Role extends ActiveRecord
 {
     public $arrayAttr = ['role_access', 'main_navigation', 'module_access'];
     public $relatedModels = [];

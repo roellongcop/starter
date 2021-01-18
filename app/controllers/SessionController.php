@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 /**
  * SessionController implements the CRUD actions for Session model.
  */
-class SessionController extends MainController
+class SessionController extends Controller
 {
     /**
      * Lists all Session models.

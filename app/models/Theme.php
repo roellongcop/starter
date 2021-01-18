@@ -30,7 +30,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class Theme extends MainModel
+class Theme extends ActiveRecord
 {
     public $arrayAttr = ['path_map', 'bundles'];
     public $relatedModels = [];

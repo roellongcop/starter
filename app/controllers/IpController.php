@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 /**
  * IpController implements the CRUD actions for Ip model.
  */
-class IpController extends MainController
+class IpController extends Controller
 {
     /**
      * Lists all Ip models.

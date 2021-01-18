@@ -22,7 +22,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class VisitLog extends MainModel
+class VisitLog extends ActiveRecord
 {
     public $arrayAttr = [];
     public $relatedModels = [];

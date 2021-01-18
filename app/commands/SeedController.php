@@ -24,15 +24,14 @@ use app\models\search\RoleSearch;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class SeedController extends MainController
+class SeedController extends Controller
 {
-    public function actionFresh()
+    public function actionInit()
     {
-        $this->truncate([
-            'roles',
-            'users',
-        ]);
-        $this->actionIndex();
+        $this->truncate(['users', 'roles', 'ips']);
+        $this->actionRoles(10);
+        $this->actionUsers(10, false);
+        $this->actionThemes();
     }
 
     public function actionIndex()
@@ -40,15 +39,14 @@ class SeedController extends MainController
         $this->actionRoles(10);
         $this->actionUsers(10, false);
         $this->actionThemes();
+        $this->actionIp(100);
     }
 
     
     public function actionThemes()
     {
         $themes = require __DIR__ . '/themes.php';
-        Yii::$app->db->createCommand()
-            ->truncateTable(Yii::$app->db->tablePrefix . 'themes')
-            ->execute();
+        $this->truncate(['themes']);
         $this->startProgress(0, count($themes), 'Seeding Themes: ');
         foreach ($themes as $i => $theme) {
             $data = [

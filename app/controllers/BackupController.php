@@ -16,7 +16,7 @@ use yii\web\NotFoundHttpException;
 /**
  * BackupController implements the CRUD actions for Backup model.
  */
-class BackupController extends MainController
+class BackupController extends Controller
 {
     /**
      * Lists all Backup models.

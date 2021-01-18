@@ -41,7 +41,7 @@ use yii\helpers\Url;
 <?php endforeach; ?>
 <?php endif; ?>
  */
-class <?= $className ?> extends MainModel<?= "\n" ?>
+class <?= $className ?> extends ActiveRecord<?= "\n" ?>
 {
     public $arrayAttr = [];
     public $relatedModels = [];

@@ -22,7 +22,7 @@ use yii\web\UploadedFile;
 /**
  * FileController implements the CRUD actions for File model.
  */
-class FileController extends MainController
+class FileController extends Controller
 {
 
     public function behaviors()

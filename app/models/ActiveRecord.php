@@ -11,7 +11,7 @@ use yii\helpers\Inflector;
 use yii\helpers\Json;
 use yii\helpers\Url;
  
-abstract class MainModel extends \yii\db\ActiveRecord
+abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     public $logAfterSave = true;
     public $logAfterDelete = true;

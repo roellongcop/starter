@@ -20,7 +20,7 @@ use yii\web\UploadedFile;
 /**
  * SettingController implements the CRUD actions for Setting model.
  */
-class SettingController extends MainController
+class SettingController extends Controller
 {
     /**
      * Lists all Setting models.

@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 /**
  * VisitLogController implements the CRUD actions for VisitLog model.
  */
-class VisitLogController extends MainController
+class VisitLogController extends Controller
 {
 
     /**

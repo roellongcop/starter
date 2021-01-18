@@ -46,7 +46,7 @@ use yii\helpers\ArrayHelper;
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
  */
-class <?= $controllerClass ?> extends MainController <?= "\n" ?>
+class <?= $controllerClass ?> extends Controller <?= "\n" ?>
 {
 
     /**

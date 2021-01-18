@@ -13,7 +13,7 @@ use yii\web\ForbiddenHttpException;
 /**
  * RoleController implements the CRUD actions for Role model.
  */
-abstract class MainController extends \yii\web\Controller
+abstract class Controller extends \yii\web\Controller
 {
     public function behaviors()
     {

@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 /**
  * ModelFileController implements the CRUD actions for ModelFile model.
  */
-class ModelFileController extends MainController 
+class ModelFileController extends Controller 
 {
 
     /**

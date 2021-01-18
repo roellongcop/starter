@@ -14,7 +14,7 @@ use yii\web\NotFoundHttpException;
 /**
  * LogController implements the CRUD actions for Log model.
  */
-class LogController extends MainController
+class LogController extends Controller
 {
     /**
      * Lists all Log models.

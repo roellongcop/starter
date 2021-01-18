@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 /**
  * RoleController implements the CRUD actions for Role model.
  */
-class RoleController extends MainController
+class RoleController extends Controller
 {
     /**
      * Lists all Role models.

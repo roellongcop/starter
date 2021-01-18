@@ -8,7 +8,7 @@ use app\models\search\DashboardSearch;
 /**
  * BackupController implements the CRUD actions for Backup model.
  */
-class DashboardController extends MainController
+class DashboardController extends Controller
 {
     /**
      * Lists all Backup models.

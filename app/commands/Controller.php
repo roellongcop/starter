@@ -9,7 +9,7 @@ namespace app\commands;
 
 use Yii;
 use app\helpers\App;
-use yii\console\Controller;
+// use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\console\widgets\Table;
 use yii\helpers\Console;
@@ -22,7 +22,7 @@ use yii\helpers\Console;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-abstract class MainController extends Controller
+abstract class Controller extends \yii\console\Controller
 {
     public $success = 0;
     public $failed = 0;

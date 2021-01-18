@@ -18,7 +18,7 @@ use yii\web\UploadedFile;
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends MainController
+class UserController extends Controller
 {
     /**
      * Lists all User models.

@@ -19,7 +19,7 @@ use yii\web\UploadedFile;
 /**
  * ThemeController implements the CRUD actions for Theme model.
  */
-class ThemeController extends MainController 
+class ThemeController extends Controller 
 {
 
     /**

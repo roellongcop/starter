@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\models\User;
 
-class ApiController extends MainController
+class ApiController extends Controller
 {
 
     public function behaviors()

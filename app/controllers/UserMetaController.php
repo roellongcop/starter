@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 /**
  * UserMetaController implements the CRUD actions for UserMeta model.
  */
-class UserMetaController extends MainController
+class UserMetaController extends Controller
 {
 
     /**
