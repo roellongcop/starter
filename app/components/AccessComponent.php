@@ -68,6 +68,10 @@ class AccessComponent extends Component
 
  		$module_access = App::identity('module_access');
 
+ 		if (!is_array($module_access)) {
+ 			$module_access = json_decode($module_access, true);
+ 		}
+
  		return $module_access[$controller] ?? [''];
  	}
 

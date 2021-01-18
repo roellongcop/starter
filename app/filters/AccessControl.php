@@ -29,7 +29,6 @@ class AccessControl extends \yii\filters\AccessControl
                 'roles' => ['?'],
             ],
         ];
-
         parent::init();
     }
 }

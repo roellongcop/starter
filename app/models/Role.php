@@ -3,11 +3,15 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\helpers\Url;
 
 /**
@@ -210,6 +214,16 @@ class Role extends ActiveRecord
                 'slugAttribute' => 'slug',
                 'immutable' => false,
                 'ensureUnique' => true,
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+                'value' => new Expression('UTC_TIMESTAMP'),
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+            ],
+            [
+                'class' => JsonBehavior::className(),
             ],
         ];
     }

@@ -151,18 +151,4 @@ class ModelFile extends ActiveRecord
             'recordStatusHtml:raw'
         ];
     }
-    /**
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'id',
-                'slugAttribute' => 'slug',
-                'immutable' => false,
-                'ensureUnique' => true,
-            ],
-        ];
-    } 
-    */
 }

@@ -211,18 +211,4 @@ class Theme extends ActiveRecord
     {
         return AppImages::widget(['model' => $this]);
     }
-    /**
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'id',
-                'slugAttribute' => 'slug',
-                'immutable' => false,
-                'ensureUnique' => true,
-            ],
-        ];
-    } 
-    */
 }

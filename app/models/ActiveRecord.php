@@ -4,10 +4,12 @@ namespace app\models;
 
 use Yii;
 use app\behaviors\JsonBehavior;
+use app\behaviors\LogBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\RecordHtml;
+use yii\behaviors\AttributeTypecastBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
@@ -17,10 +19,6 @@ use yii\helpers\Url;
  
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
-    public $logAfterSave = true;
-    public $logAfterDelete = true;
-
-
     public function getMainAttribute()
     {
         return $this->name ?? $this->id;
@@ -248,67 +246,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             App::component('file')->upload($this, 'imageInput');
         } 
     }  
-
-    // public function beforeSave($insert)
-    // {
-    //     if (parent::beforeSave($insert)) {
-    //         $this->encodeModelAttribute();
-    //         $this->updated_at = App::timestamp();
-    //         $this->updated_by = App::isLogin()? App::identity('id'): 0;
-    //         if ($this->isNewRecord) {
-    //             $this->created_by = $this->created_by ?: $this->updated_by;
-    //             $this->created_at = $this->created_at ?: $this->updated_at;
-    //         }
-    //         return true;
-    //     }
-    // }
-
-    private function encodeModelAttribute()
-    {
-        if (isset($this->arrayAttr)) {
-            foreach ($this->arrayAttr as $e) {
-                if (is_array($this->{$e})) {
-                    $this->{$e} = Json::encode($this->{$e});
-                }
-            }
-        }
-    }
-    private function decodeModelAttribute()
-    {
-        if (isset($this->arrayAttr)) {
-            foreach ($this->arrayAttr as $e) {
-                $this->{$e} = $this->{$e}? Json::decode($this->{$e}, TRUE): [];
-            }
-        }
-    }
-
-
-    public function afterFind()
-    {
-        parent::afterFind();
-
-        $this->decodeModelAttribute();
-    }
-
-    public function afterSave($insert, $changedAttributes)
-    {
-        if ($this->logAfterSave) {
-            parent::afterSave($insert, $changedAttributes);
-            App::component('logbook')->log($this, $changedAttributes);
-        }
-        
-        return false;
-    }
-
-    public function afterDelete()
-    {
-        if ($this->logAfterDelete) {
-            parent::afterDelete();
-            App::component('logbook')->log($this, $this->attributes);
-        }
-        return false;
-    }
-
+ 
     public function behaviors()
     {
         return [
@@ -316,12 +254,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'value' => new Expression('UTC_TIMESTAMP'),
             ],
-            [
-                'class' => BlameableBehavior::className(),
-            ],
-            [
-                'class' => JsonBehavior::className(),
-            ],
+            ['class' => BlameableBehavior::className()],
+            ['class' => JsonBehavior::className()],
+            ['class' => LogBehavior::className()],
+            ['class' => AttributeTypecastBehavior::className()],
         ];
     }
  
