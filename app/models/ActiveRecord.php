@@ -104,21 +104,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-    public function getCreatedAt()
-    {
-        return App::date_timezone($this->created_at);
-    }
-
-    public function getUpdatedAt()
-    {
-        return App::date_timezone($this->updated_at); 
-    }
-
-    public function getLastUpdated()
-    {
-        return App::ago($this->updated_at);
-    }
-
 
     public function getRecordStatus()
     {
@@ -255,9 +240,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'value' => new Expression('UTC_TIMESTAMP'),
             ],
             ['class' => BlameableBehavior::className()],
+            ['class' => AttributeTypecastBehavior::className()],
             ['class' => JsonBehavior::className()],
             ['class' => LogBehavior::className()],
-            ['class' => AttributeTypecastBehavior::className()],
         ];
     }
  

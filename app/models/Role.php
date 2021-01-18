@@ -219,12 +219,10 @@ class Role extends ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'value' => new Expression('UTC_TIMESTAMP'),
             ],
-            [
-                'class' => BlameableBehavior::className(),
-            ],
-            [
-                'class' => JsonBehavior::className(),
-            ],
+            ['class' => BlameableBehavior::className()],
+            ['class' => AttributeTypecastBehavior::className()],
+            ['class' => JsonBehavior::className()],
+            ['class' => LogBehavior::className()],
         ];
     }
     
