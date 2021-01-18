@@ -3,13 +3,18 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
+use app\widgets\AppImages;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
-use app\widgets\AppImages;
+use yii\behaviors\AttributeTypecastBehavior;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
@@ -31,8 +36,7 @@ use yii\helpers\Url;
  * @property string $updated_at
  */
 class Theme extends ActiveRecord
-{
-    public $arrayAttr = ['path_map', 'bundles'];
+{ 
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -210,5 +214,21 @@ class Theme extends ActiveRecord
     public function getPreviewImages()
     {
         return AppImages::widget(['model' => $this]);
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'value' => new Expression('UTC_TIMESTAMP'),
+            ],
+            ['class' => BlameableBehavior::className()],
+            ['class' => AttributeTypecastBehavior::className()],
+            [
+                'class' => JsonBehavior::className(),
+                'fields' => ['path_map', 'bundles']
+            ], 
+        ];
     }
 }

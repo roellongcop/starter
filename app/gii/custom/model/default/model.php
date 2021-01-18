@@ -25,6 +25,9 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use app\models\search\SettingSearch;
 use yii\behaviors\SluggableBehavior;
+use app\behaviors\JsonBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
 
@@ -43,7 +46,6 @@ use yii\helpers\Url;
  */
 class <?= $className ?> extends ActiveRecord<?= "\n" ?>
 {
-    public $arrayAttr = [];
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -208,18 +210,16 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
             'recordStatusHtml:raw'
         ];
     }
-    /**
     public function behaviors()
     {
         return [
             [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'id',
-                'slugAttribute' => 'slug',
-                'immutable' => false,
-                'ensureUnique' => true,
+                'class' => TimestampBehavior::className(),
+                'value' => new Expression('UTC_TIMESTAMP'),
             ],
+            ['class' => BlameableBehavior::className()],
+            ['class' => AttributeTypecastBehavior::className()],
+            ['class' => JsonBehavior::className()], 
         ];
-    } 
-    */
+    }
 }

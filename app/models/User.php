@@ -38,7 +38,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-    public $arrayAttr = [];
 
     public $relatedModels = ['role'];
 
@@ -475,9 +474,9 @@ class User extends ActiveRecord implements IdentityInterface
                 'value' => new Expression('UTC_TIMESTAMP'),
             ],
             ['class' => BlameableBehavior::className()],
-            ['class' => AttributeTypecastBehavior::className()],
-            ['class' => JsonBehavior::className()],
-            ['class' => LogBehavior::className()],
+            [
+                'class' => JsonBehavior::className(),
+            ], 
         ];
     }
 

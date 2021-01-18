@@ -31,7 +31,6 @@ use yii\helpers\Url;
  */
 class Role extends ActiveRecord
 {
-    public $arrayAttr = ['role_access', 'main_navigation', 'module_access'];
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -220,9 +219,10 @@ class Role extends ActiveRecord
                 'value' => new Expression('UTC_TIMESTAMP'),
             ],
             ['class' => BlameableBehavior::className()],
-            ['class' => AttributeTypecastBehavior::className()],
-            ['class' => JsonBehavior::className()],
-            ['class' => LogBehavior::className()],
+            [
+                'class' => JsonBehavior::className(),
+                'fields' => ['role_access', 'main_navigation', 'module_access']
+            ], 
         ];
     }
     

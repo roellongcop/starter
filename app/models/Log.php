@@ -3,11 +3,16 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
+use yii\behaviors\AttributeTypecastBehavior;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
 
@@ -40,7 +45,7 @@ class Log extends ActiveRecord
 {
     public $logAfterSave = false;
     public $logAfterDelete = false;
-    public $arrayAttr = ['change_attribute', 'request_data'];
+     
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -298,4 +303,19 @@ class Log extends ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'value' => new Expression('UTC_TIMESTAMP'),
+            ],
+            ['class' => BlameableBehavior::className()],
+            ['class' => AttributeTypecastBehavior::className()],
+            [
+                'class' => JsonBehavior::className(),
+                'fields' => ['change_attribute', 'request_data']
+            ], 
+        ];
+    }
 }
