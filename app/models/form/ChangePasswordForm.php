@@ -56,11 +56,14 @@ class ChangePasswordForm extends Model
     public function changePassword()
     {
         $user = App::identity();
+
         $user->setPassword($this->new_password);
         $user->password_hint = $this->password_hint;
-        return $user->save();
+        if ($user->save()) {
+            return $user;
+        }
+        else {
+            App::danger($user->errors);
+        }
     }
-
-
-   
 }

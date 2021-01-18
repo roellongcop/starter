@@ -59,6 +59,7 @@ class UserController extends Controller
 
         if ($model->load(App::post()) && $model->validate()) {
             $model->imageInput = UploadedFile::getInstance($model, 'imageInput');
+            $model->setPassword($model->password);
             if ($model->save()) {
                 $model->upload();
                 App::success('Successfully Created');
@@ -279,9 +280,9 @@ class UserController extends Controller
         $model = new ChangePasswordForm();
 
         if ($model->load(App::post()) && $model->validate()) {
-            $model->changePassword();
+            $user = $model->changePassword();
             App::success('Password Change.');
-            return $this->refresh();
+            return $this->redirect(['change-password', 'token' => $user->password_reset_token]);
         }
         return $this->render('change_password', [
             'model' => $model,

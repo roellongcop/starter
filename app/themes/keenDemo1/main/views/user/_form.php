@@ -39,6 +39,11 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
+            <?php if ($model->isNewRecord): ?>
+                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true]) ?>
+            <?php endif ?>
+
             <?= BootstrapSelect::widget([
                 'attribute' => 'status',
                 'searchable' => false,

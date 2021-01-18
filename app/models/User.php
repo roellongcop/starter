@@ -37,6 +37,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    const SCENARIO_ADMIN_CREATE = 'admin_create';
 
 
     public $relatedModels = ['role'];
@@ -45,7 +46,8 @@ class User extends ActiveRecord implements IdentityInterface
     // public $fileInput;
     public $imageInput;
     public $fileLocation; 
-
+    public $password;
+    public $password_repeat;
 
     /**
      * {@inheritdoc}
@@ -66,6 +68,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+
+            [['password', 'password_repeat'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
+            ['password', 'string', 'min' => 6],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message'=>"Passwords don't match" ],
+
             [['username', 'role_id', 'status', 'record_status', 'is_blocked'], 'required'],
             [['record_status'], 'default', 'value' => 1],
             [['created_by', 'updated_by', 'role_id'], 'default', 'value' => 0],
@@ -109,6 +116,7 @@ class User extends ActiveRecord implements IdentityInterface
             ],
         ];
     }
+ 
 
     public function attributeLabels()
     {
