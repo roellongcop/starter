@@ -16,7 +16,7 @@ class ApiController extends Controller
     public function behaviors()
     {
         return [
-            [
+            'custom' => [
                 'class' => UserFilter::className(),
                 'class' => IpFilter::className(),
             ],
