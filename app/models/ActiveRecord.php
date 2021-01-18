@@ -3,10 +3,14 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\RecordHtml;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\helpers\Inflector;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -245,19 +249,19 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         } 
     }  
 
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            $this->encodeModelAttribute();
-            $this->updated_at = App::timestamp();
-            $this->updated_by = App::isLogin()? App::identity('id'): 0;
-            if ($this->isNewRecord) {
-                $this->created_by = $this->created_by ?: $this->updated_by;
-                $this->created_at = $this->created_at ?: $this->updated_at;
-            }
-            return true;
-        }
-    }
+    // public function beforeSave($insert)
+    // {
+    //     if (parent::beforeSave($insert)) {
+    //         $this->encodeModelAttribute();
+    //         $this->updated_at = App::timestamp();
+    //         $this->updated_by = App::isLogin()? App::identity('id'): 0;
+    //         if ($this->isNewRecord) {
+    //             $this->created_by = $this->created_by ?: $this->updated_by;
+    //             $this->created_at = $this->created_at ?: $this->updated_at;
+    //         }
+    //         return true;
+    //     }
+    // }
 
     private function encodeModelAttribute()
     {
@@ -310,12 +314,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return [
             [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-                ],
-                // if you're using datetime instead of UNIX timestamp:
-                'value' => Expression('UTC_TIMESTAMP'),
+                'value' => new Expression('UTC_TIMESTAMP'),
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+            ],
+            [
+                'class' => JsonBehavior::className(),
             ],
         ];
     }
