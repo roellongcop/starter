@@ -23,8 +23,10 @@ abstract class Controller extends \yii\web\Controller
     public function behaviors()
     {
         return [
-            [
+            'user' => [
                 'class' => UserFilter::className(),
+            ],
+            'ip' => [
                 'class' => IpFilter::className(),
             ],
             'access' => [
