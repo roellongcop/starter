@@ -24,7 +24,8 @@ class AnchorForm extends \yii\base\Widget
             AnchorBack::widget(),
             Html::submitButton('Save', [
                 'class' => 'btn btn-success',
-                'name' => 'confirm_button'
+                'name' => 'confirm_button',
+                'value' => 'Save'
             ])
         ];
 

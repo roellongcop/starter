@@ -25,6 +25,7 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use app\models\search\SettingSearch;
 use yii\behaviors\SluggableBehavior;
+use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -222,6 +223,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
             ],
             ['class' => AttributeTypecastBehavior::className()],
             ['class' => JsonBehavior::className()], 
+            ['class' => LogBehavior::className()], 
         ];
     }
 }

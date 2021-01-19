@@ -19,8 +19,6 @@ use yii\helpers\Url;
  
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
-    public $logAfterSave = true;
-    public $logAfterDelete = true;
     public function getMainAttribute()
     {
         return $this->name ?? $this->id;
@@ -234,21 +232,4 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             App::component('file')->upload($this, 'imageInput');
         } 
     }  
-
-
-    public function afterSave($insert, $changedAttributes)
-    {
-        if ($this->logAfterSave) {
-            parent::afterSave($insert, $changedAttributes);
-            App::component('logbook')->log($this, $changedAttributes);
-        }
-        
-    }
-    public function afterDelete()
-    {
-        if ($this->logAfterDelete) {
-            parent::afterDelete();
-            App::component('logbook')->log($this, $this->attributes);
-        }
-    }
 }

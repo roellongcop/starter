@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
@@ -204,6 +205,7 @@ class VisitLog extends ActiveRecord
             ],
             ['class' => AttributeTypecastBehavior::className()],
             ['class' => JsonBehavior::className()], 
+            ['class' => LogBehavior::className()], 
         ];
     }
 

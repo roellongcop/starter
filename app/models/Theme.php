@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
@@ -231,6 +232,7 @@ class Theme extends ActiveRecord
                 'class' => JsonBehavior::className(),
                 'fields' => ['path_map', 'bundles']
             ], 
+            ['class' => LogBehavior::className()], 
         ];
     }
 }

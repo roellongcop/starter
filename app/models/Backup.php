@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
@@ -200,11 +201,12 @@ class Backup extends ActiveRecord
                 'class' => BlameableBehavior::className(),
                 'defaultValue' => 0
             ],
-            ['class' => AttributeTypecastBehavior::className()],
             [
                 'class' => JsonBehavior::className(),
                 'fields' => ['tables']
             ], 
+            ['class' => AttributeTypecastBehavior::className()],
+            ['class' => LogBehavior::className()], 
         ];
     }
 }

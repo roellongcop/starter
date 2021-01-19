@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
@@ -225,6 +226,7 @@ class Role extends ActiveRecord
                 'class' => JsonBehavior::className(),
                 'fields' => ['role_access', 'main_navigation', 'module_access']
             ], 
+            ['class' => LogBehavior::className()], 
         ];
     }
     

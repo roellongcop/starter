@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
@@ -43,8 +44,6 @@ use yii\helpers\Url;
  */
 class Log extends ActiveRecord
 {
-    public $logAfterSave = false;
-    public $logAfterDelete = false;
      
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
