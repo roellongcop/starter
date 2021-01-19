@@ -99,7 +99,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
             ],
             [['record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
-            [['created_by', 'updated_by'], 'default', 'value' => 0],
 
             */
         ];

@@ -53,7 +53,7 @@ class UserMeta extends ActiveRecord
         return [
             [['user_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['record_status'], 'default', 'value' => 1],
-            [['created_by', 'updated_by', 'user_id'], 'default', 'value' => 0],
+            [['user_id'], 'default', 'value' => 0],
             [['meta_key', 'record_status'], 'required'],
             [['meta_value'], 'string'],
             [['created_at', 'updated_at'], 'safe'],

@@ -54,7 +54,7 @@ class ModelFile extends ActiveRecord
         return [
             [['model_id', 'file_id',], 'integer'],
             [['record_status'], 'default', 'value' => 1],
-            [['created_by', 'updated_by', 'model_id', 'file_id'], 'default', 'value' => 0],
+            [['model_id', 'file_id'], 'default', 'value' => 0],
             [['model_name', 'record_status'], 'required'],
             [['record_status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],

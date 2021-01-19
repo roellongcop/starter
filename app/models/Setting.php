@@ -67,7 +67,6 @@ class Setting extends ActiveRecord
             [['name', 'record_status'], 'required'],
             [['value'], 'string'],
             [['record_status'], 'default', 'value' => 1],
-            [['created_by', 'updated_by'], 'default', 'value' => 0],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at', 'type', 'options'], 'safe'],
             [['name'], 'string', 'max' => 255],

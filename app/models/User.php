@@ -75,7 +75,6 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['username', 'role_id', 'status', 'record_status', 'is_blocked'], 'required'],
             [['record_status'], 'default', 'value' => 1],
-            [['created_by', 'updated_by', 'role_id'], 'default', 'value' => 0],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             [
                 'status', 

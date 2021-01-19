@@ -52,7 +52,6 @@ class Ip extends ActiveRecord
         return [
             [['name', 'type', 'record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
-            [['created_by', 'updated_by'], 'default', 'value' => 0],
             [['description'], 'string'],
             [['type', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],

@@ -55,7 +55,6 @@ class File extends ActiveRecord
         return [
             [['size', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['record_status'], 'default', 'value' => 1],
-            [['created_by', 'updated_by'], 'default', 'value' => 0],
             [['name', 'extension', 'size', 'record_status'], 'required'],
             [['token'], 'unique'],
             [['location'], 'string'],

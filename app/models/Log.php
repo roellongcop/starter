@@ -73,7 +73,7 @@ class Log extends ActiveRecord
         return [
             [['user_id', 'model_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['record_status'], 'default', 'value' => 1],
-            [['created_by', 'updated_by', 'user_id', 'model_id'], 'default', 'value' => 0],
+            [['user_id', 'model_id'], 'default', 'value' => 0],
             [[ 'url', 'user_agent'], 'string'],
             [['request_data', 'change_attribute',], 'safe'],
             [['method', 'action', 'controller', 'table_name', 'model_name', 'ip', 'browser', 'os', 'device', 'record_status'], 'required'],
