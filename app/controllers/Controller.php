@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use app\filters\AccessControl;
-use app\filters\ActionTimeFilter;
 use app\filters\IpFilter;
 use app\filters\UserFilter;
 use app\filters\VerbFilter;

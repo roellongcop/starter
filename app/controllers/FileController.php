@@ -7,6 +7,10 @@ use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\BoxInterface;
 use Yii;
+use app\filters\AccessControl;
+use app\filters\IpFilter;
+use app\filters\UserFilter;
+use app\filters\VerbFilter;
 use app\helpers\App;
 use app\models\File;
 use app\models\ModelFile;
@@ -27,8 +31,19 @@ class FileController extends Controller
 
     public function behaviors()
     {
-        return App::component('access')
-            ->behaviors(['display']);
+        return [
+            'custom' => [
+                'class' => UserFilter::className(),
+                'class' => IpFilter::className(),
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'publicActions' => ['display']
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className()
+            ],
+        ];
     } 
     public function actionDisplay($token, $w='', $h='')
     {
