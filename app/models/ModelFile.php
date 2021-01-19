@@ -163,7 +163,10 @@ class ModelFile extends ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'value' => new Expression('UTC_TIMESTAMP'),
             ],
-            ['class' => BlameableBehavior::className()],
+            [
+                'class' => BlameableBehavior::className(),
+                'defaultValue' => 0
+            ],
             ['class' => AttributeTypecastBehavior::className()],
             ['class' => JsonBehavior::className()], 
         ];
