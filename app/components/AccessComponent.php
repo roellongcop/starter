@@ -119,6 +119,7 @@ class AccessComponent extends Component
  		$count = 1;
 
  		$controllerActions['general-setting'] = ['link' => '/setting/general'];
+ 		$controllerActions['my-setting'] = ['link' => '/my-setting'];
 
 
  		foreach ($controllerActions as $controller => $actions) {
