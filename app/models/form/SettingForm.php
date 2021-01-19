@@ -127,6 +127,7 @@ class SettingForm extends Model
             $setting = $setting ?: new Setting();
             $setting->name = $attribute;
             $setting->logAfterSave = false;
+            $setting->record_status = 1;
 
             if ($setting->value != $value) {
                 $changeAttribute[$attribute] = $value;
@@ -147,7 +148,11 @@ class SettingForm extends Model
             }
             else {
                 $setting->value = $value;
-                $setting->save();
+                if ($setting->save()) {
+                }
+                else {
+                    App::danger($setting->errors);
+                }
             }
         }
         App::component('logbook')->log(
