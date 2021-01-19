@@ -29,8 +29,8 @@ use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
-use yii\helpers\Inflector;
-use yii\helpers\Url;
+use yii\behaviors\AttributeTypecastBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
