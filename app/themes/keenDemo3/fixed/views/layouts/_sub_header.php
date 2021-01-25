@@ -1,10 +1,14 @@
+<?php
+
+use app\models\search\SettingSearch;
+?>
 <div class="subheader bg-white h-100px" id="kt_subheader">
 	<div class="container flex-wrap flex-sm-nowrap">
 		<!--begin::Logo-->
 		<div class="d-none d-lg-flex align-items-center flex-wrap w-250px">
 			<!--begin::Logo-->
 			<a href="index.html">
-				<img alt="Logo" src="assets/media/logos/logo-4.svg" class="max-h-50px" />
+				<img alt="Logo" src="<?= SettingSearch::defaultImage('primary_logo') ?>&w=150" class="max-h-50px" />
 			</a>
 			<!--end::Logo-->
 		</div>
