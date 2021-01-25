@@ -1,0 +1,48 @@
+
+.help-block {
+    color: #F64E60;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+
+
+.switch.switch-outline.switch-danger-custom input:empty ~ span:before {
+    border: 2px solid #f64e60;
+}
+
+.switch.switch-outline.switch-danger-custom input:empty ~ span:after {
+    background-color: #f64e60;
+}
+
+
+.kt_quick_panel {
+    z-index: 9;
+}
+
+.daterangepicker {
+    z-index: 99999;
+}
+
+#kt_quick_panel {
+    overflow: auto;
+}
+
+
+.dropzone.dropzone-default .dz-remove {
+	font-size: 12px !important;
+}
+.dropzone .dz-preview .dz-remove {
+	font-size: 12px !important;
+}
+
+.kt-quick-search__input {
+    width: 20vw;
+}
+
+@media only screen and (max-width: 768px) {
+    .kt-quick-search__input {
+        margin-top: 6px !important;
+        width: 30vw;
+    }
+}
