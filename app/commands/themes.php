@@ -269,4 +269,22 @@ return [
         ],
         'bundles' => $keenDemo2Bundles
     ],
+    15 => [
+        'id' => 15,
+        'description' => 'keenDemo3/fluid',
+        'name' => 'Demo3 Fluid',
+        'basePath' => '@app/themes/keenDemo3/fixed/assets/assets',
+        'baseUrl' => '@web/themes/keenDemo3/fixed',
+        'pathMap' => [
+            '@app/views' => [
+                '@app/themes/keenDemo3/fluid/views',
+                '@app/themes/keenDemo3/fixed/views',
+            ],
+            '@app/widgets' => [
+                '@app/themes/keenDemo3/fluid/widgets',
+                '@app/themes/keenDemo3/fixed/widgets',
+            ],
+        ],
+        'bundles' => $keenDemo2Bundles
+    ],
 ];

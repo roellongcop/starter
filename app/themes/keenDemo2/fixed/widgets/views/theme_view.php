@@ -2,6 +2,7 @@
 
 use app\helpers\App;
 use app\widgets\Anchor;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 $this->registerJs(<<<SCRIPT
@@ -89,6 +90,10 @@ SCRIPT, \yii\web\View::POS_END)
 					'data-method' => 'post',
 					'data-confirm' => 'Are you sure ?'
 				]
+			]) ?>
+			<?= Html::a('View', $theme->imagePath, [
+				'target' => '_blank',
+				'class' => 'btn btn-sm btn-secondary font-weight-bolder py-2',
 			]) ?>
 		</div>
 		<!--end::Container-->
