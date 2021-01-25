@@ -78,7 +78,8 @@ use app\helpers\App;
             	<ol class="dd-list">
 	            	<?= $this->render('_navigation', [
                         'data_id' => $data_id,
-	        			'navigations' => $nav['sub']
+	        			'navigations' => $nav['sub'],
+                    'widget_id' => $widget_id,
 	        		]) ?>
 	        	</ol>
             <?php endif ?>

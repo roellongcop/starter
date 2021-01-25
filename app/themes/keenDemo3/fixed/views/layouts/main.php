@@ -8,6 +8,7 @@ use app\assets\AppAsset as StarterAppAsset;
 use app\models\search\SettingSearch;
 use app\themes\keenDemo3\fixed\assets\AppAsset;
 use app\widgets\Alert;
+use app\widgets\AnchorBack;
 use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
@@ -56,6 +57,18 @@ StarterAppAsset::register($this);
 							<!--begin::Info-->
 							<div class="d-flex align-items-center flex-wrap mr-1">
 								<!--begin::Page Heading-->
+								<div class="d-flex flex-column mr-5">
+									<?= AnchorBack::widget([
+						                'title' => '<i class="fa fa-angle-left"></i>',
+						                'tooltip' => 'Go Back',
+						                'options' => [
+						                    'class' => 'btn btn-secondary tbn-sm',
+						                    'data-original-title' => 'Go back',
+						                    'data-toggle' => "tooltip",
+						                    'data-theme' => "dark",
+						                ]
+						            ]) ?>
+								</div>
 								<div class="d-flex align-items-baseline flex-wrap mr-5">
 									<!--begin::Page Title-->
 									<h4 class="text-dark font-weight-bold my-1 mr-5">
@@ -139,7 +152,7 @@ StarterAppAsset::register($this);
 	<!--end::Quick Panel-->
 
 	<!--begin::Chat Panel-->
-	<?= $this->render('_chat_panel') ?>
+	<?php # $this->render('_chat_panel') ?>
 	<!--end::Chat Panel-->
 
 	<!--begin::Scrolltop-->
@@ -151,7 +164,7 @@ StarterAppAsset::register($this);
 	<!--end::Sticky Toolbar-->
 
 	<!--begin::Demo Panel-->
-	<?= $this->render('_demo_panel') ?>
+	<?php # $this->render('_demo_panel') ?>
 	<!--end::Demo Panel-->
 
 	<script>var HOST_URL = "https://preview.keenthemes.com/keen/theme/tools/preview";</script>

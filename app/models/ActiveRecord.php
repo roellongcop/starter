@@ -169,6 +169,28 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return true;
     }
 
+    public function getLastUpdated()
+    {
+        $formatter = App::component('formatter');
+
+        return $formatter->asAgo($this->updated_at);
+    }
+
+
+    public function getUpdatedAt()
+    {
+        $formatter = App::component('formatter');
+
+        return $formatter->asFulldate($this->updated_at);
+    }
+
+    public function getCreatedAt()
+    {
+        $formatter = App::component('formatter');
+
+        return $formatter->asFulldate($this->created_at);
+    }
+
     public function getCreatedBy()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);

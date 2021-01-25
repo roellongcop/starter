@@ -33,11 +33,9 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'form' => $form,
                 'data' => RoleSearch::dropdown(),
             ]) ?>
-           
-
             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
+            
             <?= BootstrapSelect::widget([
                 'attribute' => 'status',
                 'searchable' => false,
@@ -62,7 +60,7 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'data' => App::mapParams('is_blocked'),
             ]) ?>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-5">
             <div id="sipc" style="max-width: 200px">
                 <?= ImagePreview::widget([
                     'model' => $model,
@@ -95,25 +93,29 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                                 state: 'primary',
                                 message: 'Processing...'
                             });
+
                             setTimeout(function() {
                                 KTApp.unblock('#sipc');
                             }, 1000);
-                            $('#user-imageinput-preview').attr('src', s.src + '&w=200')
-                            $('#profile-image-desktop').attr('src', s.src + '&w=200')
-                            $('#profile-image-dropdown').attr('src', s.src + '&w=200')
+                            var link = s.src + '&w=200';
+
+                            $('#user-imageinput-preview').attr('src', link)
+                            $('#kt_quick_user_toggle>img').attr('src', link)
+                            $('#profile-image-dropdown').css('background-image', 'url('+link+')')
                         }
                     }",
                     'dropzoneComplete' => "
+                        var link = file.dataURL;
                         $('#user-imageinput-preview').attr('src', file.dataURL)
-                        $('#profile-image-desktop').attr('src', file.dataURL)
-                        $('#profile-image-dropdown').attr('src', file.dataURL)
+                        $('#kt_quick_user_toggle>img').attr('src', file.dataURL)
+                        $('#profile-image-dropdown').css('background-image', 'url('+link+')')
                     "
                 ]) ?>
             <?php endif ?>
         </div>
     </div>
     <div class="form-group"><hr>
-		<?= AnchorForm::widget() ?>
+        <?= AnchorForm::widget() ?>
     </div>
 
     <?php ActiveForm::end(); ?>
