@@ -260,7 +260,7 @@ return [
     14 => [
         'id' => 14,
         'description' => 'keenDemo3/fixed',
-        'name' => 'Demo2 Fixed',
+        'name' => 'Demo3 Fixed',
         'basePath' => '@app/themes/keenDemo3/fixed/assets/assets',
         'baseUrl' => '@web/themes/keenDemo3/fixed',
         'pathMap' => [

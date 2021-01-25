@@ -26,7 +26,9 @@ abstract class Controller extends \yii\console\Controller
 {
     public $success = 0;
     public $failed = 0;
-    public $print_attributes = false;
+    public $success_attributes = [];
+    public $error_attributes = [];
+    public $model_errors = [];
 
     public function truncate($tables=[])
     {
@@ -48,30 +50,15 @@ abstract class Controller extends \yii\console\Controller
     // ==========================================================================================
     public function save($model, $done=1, $total=0)
     {
-        if ($this->print_attributes) {
-            Console::output ("===================== SEEDING ROW {$done} =====================\n");
-        }
-        
         if ($model->save()) {
             $this->success++;
 
-            if ($this->print_attributes) {
-                print_r([
-                    'status' => 'success',
-                    'attributes' => $model->attributes
-                ]);
-            }
-
+            $this->success_attributes[$done] = $model->attributes;
         }
         else {
             $this->failed++;
-            if ($this->print_attributes) {
-                print_r([
-                    'status' => 'failed',
-                    'errors' => $model->errors,
-                    'attributes' => $model->attributes
-                ]);
-            }
+            $this->model_errors[$done] = $model->errors;
+            $this->error_attributes[$done] = $model->attributes;
         }
 
         Console::updateProgress($done, $total);
@@ -94,6 +81,20 @@ abstract class Controller extends \yii\console\Controller
                 ],
             ],
         ]));
+
+        if ($this->failed > 0) {
+            Console::output('Unsuccessfull inserts.');
+
+            $rows = [];
+            foreach ($this->model_errors as $row => $validation) {
+                $rows[] = [$row, json_encode($validation)];
+            }
+
+            Console::output(Table::widget([
+                'headers' => ['Row', 'validation'],
+                'rows' => $rows,
+            ]));
+        }
 
         $this->success = 0;
         $this->failed = 0;
