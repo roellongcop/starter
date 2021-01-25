@@ -27,7 +27,7 @@ return [
     1 => [
         'id' => 1,
         'description' => 'keenDemo1/main',
-        'name' => 'Main',
+        'name' => 'Demo1 Main',
         'basePath' => '@app/themes/keenDemo1/main/assets/assets',
         'baseUrl' => '@web/themes/keenDemo1/main',
         'pathMap' => [
@@ -39,7 +39,7 @@ return [
     2 => [
         'id' => 2,
         'description' => 'keenDemo1/fluid',
-        'name' => 'Main Fluid',
+        'name' => 'Demo1 Main Fluid',
         'basePath' => '@app/themes/keenDemo1/main/assets/assets',
         'baseUrl' => '@web/themes/keenDemo1/main',
         'pathMap' => [
