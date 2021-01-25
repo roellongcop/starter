@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\themes\keenDemo2\fixed\assets\ErrorAsset;
+use app\themes\keenDemo3\fixed\assets\ErrorAsset;
 use app\models\search\SettingSearch;
 use yii\helpers\Html;
 

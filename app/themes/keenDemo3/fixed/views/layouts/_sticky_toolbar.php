@@ -18,7 +18,7 @@
 	<!--end::Item-->
 	<!--begin::Item-->
 	<li class="nav-item mb-2" data-toggle="tooltip" title="Layout Builder" data-placement="left">
-		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-primary btn-hover-primary" href="https://preview.keenthemes.com/keen/demo2/builder.html" target="_blank">
+		<a class="btn btn-sm btn-icon btn-bg-light btn-icon-primary btn-hover-primary" href="https://preview.keenthemes.com/keen/demo3/builder.html" target="_blank">
 			<span class="svg-icon svg-icon-lg">
 				<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Settings.svg-->
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

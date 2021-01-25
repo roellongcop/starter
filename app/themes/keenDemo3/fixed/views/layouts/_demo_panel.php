@@ -22,7 +22,7 @@
 				</div>
 			</div>
 			<h5 class="font-weight-bold mb-4 text-center">Demo 2</h5>
-			<div class="overlay rounded-lg mb-8 offcanvas-demo offcanvas-demo-active">
+			<div class="overlay rounded-lg mb-8 offcanvas-demo">
 				<div class="overlay-wrapper rounded-lg">
 					<img src="assets/media/demos/demo2.png" alt="" class="w-100" />
 				</div>
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<h5 class="font-weight-bold mb-4 text-center">Demo 3</h5>
-			<div class="overlay rounded-lg mb-8 offcanvas-demo">
+			<div class="overlay rounded-lg mb-8 offcanvas-demo offcanvas-demo-active">
 				<div class="overlay-wrapper rounded-lg">
 					<img src="assets/media/demos/demo3.png" alt="" class="w-100" />
 				</div>

@@ -4,7 +4,7 @@
 /* @var $content string */
 
 use app\models\search\SettingSearch;
-use app\themes\keenDemo2\fixed\assets\AppAsset;
+use app\themes\keenDemo3\fixed\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 // use app\assets\MainAsset;

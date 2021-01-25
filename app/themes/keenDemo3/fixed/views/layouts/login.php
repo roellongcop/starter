@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\themes\keenDemo2\fixed\assets\LoginAsset;
+use app\themes\keenDemo3\fixed\assets\LoginAsset;
 use app\models\search\SettingSearch;
 use yii\helpers\Html;
 

@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\themes\keenDemo2\fixed\assets;
+namespace app\themes\keenDemo3\fixed\assets;
 
 use yii\web\AssetBundle;
 
@@ -17,7 +17,7 @@ use yii\web\AssetBundle;
  */
 class LoginAsset extends AssetBundle
 {
-    public $sourcePath = '@app/themes/keenDemo2/fixed/assets/assets';
+    public $sourcePath = '@app/themes/keenDemo3/fixed/assets/assets';
 
 
     public $css = [

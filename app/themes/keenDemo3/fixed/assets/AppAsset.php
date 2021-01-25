@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\themes\keenDemo2\fixed\assets;
+namespace app\themes\keenDemo3\fixed\assets;
 use yii\web\AssetBundle;
 /**
  * Main application asset bundle.
@@ -15,7 +15,7 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = '@app/themes/keenDemo2/fixed/assets/assets';
+    public $sourcePath = '@app/themes/keenDemo3/fixed/assets/assets';
 
     public $css = [
         'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700',
