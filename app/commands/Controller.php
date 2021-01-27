@@ -71,7 +71,7 @@ abstract class Controller extends \yii\console\Controller
     {
         Console::endProgress("done." . PHP_EOL);
 
-        Console::output(Table::widget([
+        echo Table::widget([
             'headers' => ['Success', 'Failed', 'Total'],
             'rows' => [
                 [
@@ -80,7 +80,7 @@ abstract class Controller extends \yii\console\Controller
                     number_format($total)
                 ],
             ],
-        ]));
+        ]);
 
         if ($this->failed > 0) {
             Console::output('Unsuccessfull inserts.');
@@ -90,15 +90,16 @@ abstract class Controller extends \yii\console\Controller
                 $rows[] = [$row, json_encode($validation)];
             }
 
-            Console::output(Table::widget([
+            echo Table::widget([
                 'headers' => ['Row', 'validation'],
                 'rows' => $rows,
-            ]));
+            ]);
         }
 
         $this->success = 0;
         $this->failed = 0;
 
+        echo "\n";
         return ExitCode::OK;
     }
  
