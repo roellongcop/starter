@@ -5,6 +5,7 @@
 
 
 use app\assets\AppAsset as StarterAppAsset;
+use app\helpers\App;
 use app\models\search\SettingSearch;
 use app\themes\keenDemo3\fixed\assets\AppAsset;
 use app\widgets\Alert;
@@ -17,6 +18,7 @@ use yii\helpers\Html;
 
 AppAsset::register($this);
 StarterAppAsset::register($this);
+$createController = $this->params['createController'] ?? App::controllerID();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
