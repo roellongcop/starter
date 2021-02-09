@@ -10,6 +10,7 @@ class RecordHtml extends \yii\base\Widget
 {
     public $model;
     public $labelOnly = false;
+    public $controller;
 
     public function init() 
     {
@@ -32,7 +33,7 @@ class RecordHtml extends \yii\base\Widget
         return Switcher::widget([
             'model' => $this->model,
             'checked' => ($this->model->record_status == 1),
-            'controller' => $controller ?? App::controllerID(),
+            'controller' => $this->controller ?: App::controllerID(),
             'action' => 'change-record-status'
         ]);
     }
