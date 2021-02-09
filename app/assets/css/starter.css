@@ -223,3 +223,8 @@ td.jsoneditor-tree, td.jsoneditor-separator {
 .all-scroll {
     cursor: all-scroll;
 }
+
+div.required label.control-label:after {
+    content: " *";
+    color: red;
+}
