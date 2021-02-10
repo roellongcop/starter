@@ -10,6 +10,8 @@ class Checkbox extends \yii\base\Widget
     public $inputClass = 'checkbox';
     public $checkedFunction;
     public $options;
+    public $label;
+    public $wrapperClass = 'checkbox-list';
 
     public function init() 
     {
@@ -33,6 +35,8 @@ class Checkbox extends \yii\base\Widget
     public function run()
     {
         return $this->render('checkbox', [
+            'label' => $this->label,
+            'wrapperClass' => $this->wrapperClass,
             'data' => $this->data,
             'name' => $this->name,
             'inputClass' => $this->inputClass,

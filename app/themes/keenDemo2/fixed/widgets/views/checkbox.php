@@ -1,4 +1,7 @@
-<div class="checkbox-list">
+<?php if ($label): ?>
+	<label><?= $label ?></label>
+<?php endif ?>
+<div class="<?= $wrapperClass ?>">
 	<?php foreach ($data as $key => $value): ?>
 	    <label class="checkbox">
 
