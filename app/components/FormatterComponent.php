@@ -2,7 +2,9 @@
 namespace app\components;
 
 use app\helpers\App;
+use app\widgets\JsonEditor;
 use yii\helpers\Inflector;
+use yii\helpers\Json;
 
 class FormatterComponent extends \yii\i18n\Formatter
 {
@@ -26,5 +28,27 @@ class FormatterComponent extends \yii\i18n\Formatter
         return ucwords(
             str_replace('-', ' ', Inflector::titleize($value))
         );
+    }
+
+    public function asBoolString($value)
+    {
+        return $value ? 'True': 'False';
+    }
+
+    public function asEncode($value)
+    {
+        return Json::encode($value);
+    }
+
+    public function asDecode($value)
+    {
+        return Json::decode($value, true);
+    }
+
+    public function asJsonEditor($value)
+    {
+        return JsonEditor::widget([
+            'data' => $value,
+        ]);
     }
 }
