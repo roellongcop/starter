@@ -34,7 +34,9 @@ class BootstrapSelect extends \yii\base\Widget
         $this->options['name'] = $this->name;
 
         if ($this->searchable) {
-            $this->options['data-live-search'] = 'true';
+            if (count($this->data) > 10) {
+                $this->options['data-live-search'] = 'true';
+            }
             $this->options['options'] = array_map([$this, 'listOptions'], $this->data);
         }
         if ($this->multiple) {

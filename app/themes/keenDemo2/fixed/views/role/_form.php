@@ -2,7 +2,7 @@
 
 use app\helpers\App;
 use app\widgets\AnchorForm;
-use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use yii\widgets\ActiveForm;
 $controller_actions = Yii::$app->access->controllerActions();
 
@@ -66,12 +66,9 @@ $controller_actions = Yii::$app->access->controllerActions();
                     <div class="row">
                         <div class="col-md-12">
                             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-                            <?= BootstrapSelect::widget([
-                                'attribute' => 'record_status',
-                                'searchable' => false,
+                            <?= RecordStatusInput::widget([
                                 'model' => $model,
                                 'form' => $form,
-                                'data' => App::mapParams('record_status'),
                             ]) ?>
                         </div>
                     </div>
