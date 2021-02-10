@@ -4,6 +4,7 @@ use app\helpers\App;
 use app\models\search\RoleSearch;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use app\widgets\ChangePhoto;
 use app\widgets\ImagePreview;
 use yii\widgets\ActiveForm;
@@ -52,12 +53,9 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'data' => App::mapParams('user_status'),
             ]) ?>
 
-            <?= BootstrapSelect::widget([
-                'attribute' => 'record_status',
-                'searchable' => false,
+            <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('record_status'),
             ]) ?>
 
             <?= BootstrapSelect::widget([

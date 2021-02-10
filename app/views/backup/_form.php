@@ -2,7 +2,7 @@
 
 use app\helpers\App;
 use app\widgets\AnchorForm;
-use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use app\widgets\Checkbox;
 use yii\widgets\ActiveForm;
 
@@ -20,12 +20,9 @@ $tables = App::component('general')->getAllTables()
 
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-            <?= BootstrapSelect::widget([
-                'attribute' => 'record_status',
-                'searchable' => false,
+            <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('record_status'),
             ]) ?>
         </div>
         <div class="col-md-7">

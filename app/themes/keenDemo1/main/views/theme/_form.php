@@ -5,7 +5,7 @@ use app\widgets\Anchor;
 use app\widgets\AnchorForm;
 use app\widgets\AppFiles;
 use app\widgets\AppImages;
-use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
 use yii\helpers\Html;
@@ -45,12 +45,9 @@ SCRIPT, \yii\web\View::POS_END);
             <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'base_path')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'base_url')->textInput(['maxlength' => true]) ?>
-            <?= BootstrapSelect::widget([
-                'attribute' => 'record_status',
-                'searchable' => false,
+            <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('record_status'),
             ]) ?>
         </div>
         <div class="col-md-7">

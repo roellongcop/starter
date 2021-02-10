@@ -2,7 +2,7 @@
 
 use app\helpers\App;
 use app\widgets\AnchorForm;
-use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use app\widgets\ChangePhoto;
 use yii\widgets\ActiveForm;
 
@@ -29,12 +29,9 @@ use yii\widgets\ActiveForm;
 
             <?= $model->getFormInput($form) ?>
 
-            <?= BootstrapSelect::widget([
-                'attribute' => 'record_status',
-                'searchable' => false,
+            <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('record_status'),
             ]) ?>
 
             

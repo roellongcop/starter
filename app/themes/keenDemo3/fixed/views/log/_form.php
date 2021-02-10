@@ -2,7 +2,7 @@
 
 use app\helpers\App;
 use app\widgets\AnchorForm;
-use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -37,12 +37,9 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'browser')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'os')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'device')->textInput(['maxlength' => true]) ?>
-            <?= BootstrapSelect::widget([
-                'attribute' => 'record_status',
-                'searchable' => false,
+            <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('record_status'),
             ]) ?>
         </div>
 

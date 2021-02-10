@@ -16,7 +16,7 @@ $ignore_attr = ['status', 'record_status', 'created_by', 'updated_by', 'created_
 echo "<?php\n";
 ?>
 use app\helpers\App;
-use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use app\widgets\AnchorForm;
 use yii\widgets\ActiveForm;
 
@@ -45,12 +45,9 @@ echo "\t\t\t<?= " . $generator->generateActiveField($attribute) . " ?>\n";
 }
 }
 } ?>
-            <?= '<?=' ?> BootstrapSelect::widget([
-                'attribute' => 'record_status',
-                'searchable' => false,
+            <?= '<?=' ?> RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('record_status'),
             ]) ?>
         </div>
     </div>
