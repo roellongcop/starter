@@ -39,6 +39,16 @@ abstract class Controller extends \yii\web\Controller
 
     public function beforeAction($action)
     {
+        $options = Json::htmlEncode([
+            'appName' => Yii::$app->name,
+            'baseUrl' => Url::base(true),
+            'language' => Yii::$app->language,
+        ]);
+        $this->getView()->registerJs(<<<SCRIPT
+            var yiiOptions = {$options};
+            console.log(yiiOptions)
+        SCRIPT , \yii\web\View::POS_HEAD, 'yiiOptions');
+        
         if (App::isLogin()) {
             $theme = App::identity('currentTheme');
         }
