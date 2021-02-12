@@ -192,9 +192,9 @@ class Role extends ActiveRecord
     {
         return [
             'name:raw',
-            'jsonMainNavigation:raw',
-            'jsonRoleAccess:raw',
-            'jsonModuleAccess:raw',
+            'main_navigation:jsonEditor',
+            'role_access:jsonEditor',
+            'module_access:jsonEditor',
             'slug:raw',
 			'created_at:fulldate',
             'updated_at:fulldate',
