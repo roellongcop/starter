@@ -169,27 +169,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return true;
     }
 
-    public function getLastUpdated()
-    {
-        $formatter = App::component('formatter');
-
-        return $formatter->asAgo($this->updated_at);
-    }
-
-
-    public function getUpdatedAt()
-    {
-        $formatter = App::component('formatter');
-
-        return $formatter->asFulldate($this->updated_at);
-    }
-
-    public function getCreatedAt()
-    {
-        $formatter = App::component('formatter');
-
-        return $formatter->asFulldate($this->created_at);
-    }
 
     public function getCreatedBy()
     {
@@ -250,7 +229,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function upload()
     {
-        if ($this->imageInput) {
+        if (isset($this->imageInput) && $this->imageInput) {
             App::component('file')->upload($this, 'imageInput');
         } 
     }  
