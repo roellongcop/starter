@@ -7,11 +7,13 @@ use app\filters\AccessControl;
 use app\filters\IpFilter;
 use app\filters\UserFilter;
 use app\filters\VerbFilter;
+use app\filters\ThemeFilter;
+
 use app\helpers\App;
-use app\models\Theme;
+use yii\helpers\Json;
+use yii\helpers\Url;
 use app\models\search\IpSearch;
 use app\models\search\SettingSearch;
-use yii\base\Theme as BaseTheme;
 use yii\web\ForbiddenHttpException;
 
 /**
@@ -34,6 +36,9 @@ abstract class Controller extends \yii\web\Controller
             'verbs' => [
                 'class' => VerbFilter::className()
             ],
+            'theme' => [
+                'class' => ThemeFilter::className()
+            ],
         ];
     } 
 
@@ -44,32 +49,14 @@ abstract class Controller extends \yii\web\Controller
             'baseUrl' => Url::base(true),
             'language' => Yii::$app->language,
         ]);
-        $this->getView()->registerJs(<<<SCRIPT
+        $this->view->registerJs(<<<SCRIPT
             var yiiOptions = {$options};
             console.log(yiiOptions)
         SCRIPT , \yii\web\View::POS_HEAD, 'yiiOptions');
         
-        if (App::isLogin()) {
-            $theme = App::identity('currentTheme');
-        }
-        else {
-            $theme = Theme::findOne(SettingSearch::default('theme'));
-        }
+        
 
-        if ($theme) {
-            if ($theme->bundles) {
-                Yii::$app->assetManager->bundles = $theme->bundles;
-            }
-            
-    		$themeModel = new BaseTheme();
-    		$themeModel->basePath = $theme->base_path;
-    		$themeModel->baseUrl = $theme->base_url;
-    		$themeModel->pathMap = $theme->path_map;
-
-    		Yii::$app->view->theme = $themeModel;
-            Yii::$app->session->timeout = SettingSearch::default('auto_logout_timer');
-        }
-
+        Yii::$app->session->timeout = SettingSearch::default('auto_logout_timer');
         return parent::beforeAction($action);
     }
 }
