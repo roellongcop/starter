@@ -8,7 +8,8 @@ $db = require __DIR__ . '/db.php';
 
 
 $config = [
-    'id' => 'basic',
+    'id' => 'yii2-basic-starter',
+    'name' => 'Yii2 Basic Starter Template',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [

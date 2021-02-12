@@ -48,11 +48,12 @@ abstract class Controller extends \yii\web\Controller
             'appName' => Yii::$app->name,
             'baseUrl' => Url::base(true),
             'language' => Yii::$app->language,
+            // 'params' => App::params()
         ]);
         $this->view->registerJs(<<<SCRIPT
-            var yiiOptions = {$options};
-            console.log(yiiOptions)
-        SCRIPT , \yii\web\View::POS_HEAD, 'yiiOptions');
+            var app = {$options};
+            console.log(app)
+        SCRIPT , \yii\web\View::POS_HEAD, 'app');
         
         
 
