@@ -149,7 +149,7 @@ class VisitLog extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->actionLabel,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['visit-log/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }

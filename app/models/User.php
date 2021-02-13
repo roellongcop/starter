@@ -518,7 +518,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->username,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['user/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }

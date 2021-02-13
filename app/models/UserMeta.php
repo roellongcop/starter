@@ -142,7 +142,7 @@ class UserMeta extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->meta_key,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['user-meta/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }

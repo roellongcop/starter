@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Inflector;
+$controllerID = Inflector::camel2id($className);
 /**
  * This is the template for generating the model class of a specified table.
  */
@@ -163,7 +164,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model-><?= $name ?>,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['<?= $controllerID ?>/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }

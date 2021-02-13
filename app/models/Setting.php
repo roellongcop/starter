@@ -137,7 +137,7 @@ class Setting extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->name,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['session/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }

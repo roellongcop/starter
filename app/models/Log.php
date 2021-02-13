@@ -186,7 +186,7 @@ class Log extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->action,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['log/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }

@@ -144,7 +144,7 @@ class Session extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->id,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['session/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }

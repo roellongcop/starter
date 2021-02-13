@@ -143,7 +143,7 @@ class Backup extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->filename,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['backup/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }

@@ -118,7 +118,7 @@ class ModelFile extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->model_id,
-                        'link' => ['view', 'id' => $model->id],
+                        'link' => ['model-file/view', 'id' => $model->id],
                         'text' => true
                     ]);
                 }
