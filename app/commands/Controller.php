@@ -30,8 +30,10 @@ abstract class Controller extends \yii\console\Controller
     public $error_attributes = [];
     public $model_errors = [];
 
-    public function truncate($tables=[])
+    public function actionTruncate($tables=[])
     {
+        $tables = is_array($tables)? $tables: [$tables];
+
         foreach ($tables as $table) {
             Console::output("Truncate {$table}");
             Yii::$app->db->createCommand()
