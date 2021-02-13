@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\filters\AccessControl;
 use app\filters\IpFilter;
+use app\filters\ThemeFilter;
 use app\filters\UserFilter;
 use app\filters\VerbFilter;
 use app\helpers\App;
@@ -34,6 +35,9 @@ class SiteController extends Controller
                 'verbActions' => [
                     'logout' => ['post'],
                 ]
+            ],
+            'theme' => [
+                'class' => ThemeFilter::className()
             ],
         ];
     }

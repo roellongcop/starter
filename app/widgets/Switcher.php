@@ -18,10 +18,8 @@ class Switcher extends \yii\base\Widget
     {
         // your logic here
         parent::init();
-        // $this->controller = $this->controller ?: App::controllerID();
-
-        $this->data_link = Url::to([$this->controller . '/' . $this->action]);
         $this->controller = $this->controller ?: App::controllerID();
+        $this->data_link = Url::to([$this->controller . '/' . $this->action]);
     }
 
 

@@ -11,6 +11,7 @@ class RecordHtml extends \yii\base\Widget
     public $model;
     public $labelOnly = false;
     public $controller;
+    public $action = 'change-record-status';
 
     public function init() 
     {
@@ -34,7 +35,7 @@ class RecordHtml extends \yii\base\Widget
             'model' => $this->model,
             'checked' => ($this->model->record_status == 1),
             'controller' => $this->controller ?: App::controllerID(),
-            'action' => 'change-record-status'
+            'action' => $this->action,
         ]);
     }
 }
