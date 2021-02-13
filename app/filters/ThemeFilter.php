@@ -3,8 +3,9 @@ namespace app\filters;
 
 use Yii;
 use app\helpers\App;
-use yii\base\ActionFilter;
 use app\models\Theme;
+use app\models\search\SettingSearch;
+use yii\base\ActionFilter;
 use yii\base\Theme as BaseTheme;
 
 class ThemeFilter extends ActionFilter

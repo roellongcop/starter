@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\filters\AccessControl;
 use app\filters\IpFilter;
+use app\filters\ThemeFilter;
 use app\filters\UserFilter;
 use app\filters\VerbFilter;
 use app\helpers\App;
@@ -26,6 +27,9 @@ class ApiController extends Controller
             ],
             'verbs' => [
                 'class' => VerbFilter::className()
+            ],
+            'theme' => [
+                'class' => ThemeFilter::className()
             ],
         ];
     } 
