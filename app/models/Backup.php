@@ -180,7 +180,7 @@ class Backup extends ActiveRecord
     {
         return [
             'filename:raw',
-            'jsonTables:raw',
+            'tables:jsonEditor',
             'description:raw',
 			'created_at:fulldate',
 			'updated_at:fulldate',

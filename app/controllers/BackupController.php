@@ -53,7 +53,9 @@ class BackupController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Backup();
+        $model = new Backup([
+            'filename' => time(),
+        ]);
 
         if ($model->load(App::post()) && $model->validate()) {
             $backup = $this->backupDB($model->filename, $model->tables);
