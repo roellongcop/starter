@@ -25,6 +25,7 @@ class SiteController extends Controller
             'custom' => [
                 'class' => UserFilter::className(),
                 'class' => IpFilter::className(),
+                'class' => ThemeFilter::className()
             ],
             'access' => [
                 'class' => AccessControl::className(),
@@ -35,9 +36,6 @@ class SiteController extends Controller
                 'verbActions' => [
                     'logout' => ['post'],
                 ]
-            ],
-            'theme' => [
-                'class' => ThemeFilter::className()
             ],
         ];
     }

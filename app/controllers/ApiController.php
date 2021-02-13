@@ -20,6 +20,7 @@ class ApiController extends Controller
             'custom' => [
                 'class' => UserFilter::className(),
                 'class' => IpFilter::className(),
+                'class' => ThemeFilter::className()
             ],
             'access' => [
                 'class' => AccessControl::className(),
@@ -27,9 +28,6 @@ class ApiController extends Controller
             ],
             'verbs' => [
                 'class' => VerbFilter::className()
-            ],
-            'theme' => [
-                'class' => ThemeFilter::className()
             ],
         ];
     } 

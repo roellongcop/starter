@@ -36,6 +36,7 @@ class FileController extends Controller
             'custom' => [
                 'class' => UserFilter::className(),
                 'class' => IpFilter::className(),
+                'class' => ThemeFilter::className()
             ],
             'access' => [
                 'class' => AccessControl::className(),
@@ -43,9 +44,6 @@ class FileController extends Controller
             ],
             'verbs' => [
                 'class' => VerbFilter::className()
-            ],
-            'theme' => [
-                'class' => ThemeFilter::className()
             ],
         ];
     } 
