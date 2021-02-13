@@ -118,13 +118,16 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getRecordStatusHtml()
     {
+        $controller = (property_exists($this, $controllerName))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
+
         if (in_array(App::actionID(), App::params('export_actions'))) {
             return $this->recordStatusLabel;
         }
 
-        if (App::isLogin() && App::component('access')->userCan('change-record-status')) {
+        if (App::isLogin() && App::component('access')->userCan('change-record-status'), $controller) {
             return RecordHtml::widget([
                 'model' => $this,
+                'controller' => $controller
             ]);
         }
 
@@ -196,7 +199,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getPreview()
     {
-        $controller = Inflector::camel2id(App::getModelName($this));
+        $controller = (property_exists($this, $controllerName))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
+
         $url = ["{$controller}/view", 'id' => $this->id];
 
         return Anchor::widget([

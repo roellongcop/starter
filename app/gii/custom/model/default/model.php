@@ -14,7 +14,6 @@ use yii\helpers\Inflector;
 /* @var $labels string[] list of attribute labels (name => label) */
 /* @var $rules string[] list of validation rules */
 /* @var $relations array list of relations (name => relation declaration) */
-$controllerID = Inflector::camel2id($className);
 echo "<?php\n";
 ?>
 
@@ -25,7 +24,6 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use app\models\search\SettingSearch;
 use yii\behaviors\SluggableBehavior;
-use app\behaviors\RecordBehavior;
 use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
 use yii\behaviors\BlameableBehavior;
@@ -221,10 +219,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
             [
                 'class' => BlameableBehavior::className(),
                 'defaultValue' => 0
-            ],
-            [
-                'class' => RecordBehavior::className(),
-                'controller' => '<?= $controllerID ?>'
             ],
             ['class' => AttributeTypecastBehavior::className()],
             ['class' => JsonBehavior::className()], 
