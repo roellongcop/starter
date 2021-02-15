@@ -236,74 +236,7 @@ class App {
         return $l10nDate->format($format);
     }
 
-    public static function ago( $datetime, $type=null )
-    {
-        $today = new \DateTime('now');
-        $datetime = new \DateTime($datetime);
-        $interval = $today->diff( $datetime );
-        $suffix = ( $interval->invert ? ' ago' : ' to go' );
-        
-        if($type) {
-            if ($type == 'year' ) return $interval->y;
-            if ($type == 'month' ) return ($interval->y * 12) + $interval->m;
-            if ($type=='week') return floor($interval->format('%a')/7);
-            if ($type=='day') return $interval->days;
-            if ($type=='hour' ) return $interval->h;
-            if ($type=='minute') return $interval->i;
-            return $interval->s;
-        }
-        else{
-            
-            if ( $v = $interval->y >= 1 ) return self::pluralize( $interval->y, 'year' ) . $suffix;
-            if ( $v = $interval->m >= 1 ) return self::pluralize( $interval->m, 'month' ) . $suffix;
-            if ( $v = $interval->d >= 28 ) return self::pluralize( 4, 'week' ) . $suffix;
-            if ( $v = $interval->d >= 21 ) return self::pluralize( 3, 'week' ) . $suffix;
-            if ( $v = $interval->d >= 14 ) return self::pluralize( 2, 'week' ) . $suffix;
-            if ( $v = $interval->d >= 7 ) return self::pluralize( 1, 'week' ) . $suffix;
-            if ( $v = $interval->d >= 1 ) return self::pluralize( $interval->d, 'day' ) . $suffix;
-            if ( $v = $interval->h >= 1 ) return self::pluralize( $interval->h, 'hour' ) . $suffix;
-            if ( $v = $interval->i >= 1 ) return self::pluralize( $interval->i, 'minute' ) . $suffix;
-
-            if ($interval->s == 0) {
-            	return 'Just now';
-            }
-            
-            return self::pluralize( $interval->s, 'second' ) . $suffix;
-        }
-    }
-
-    public static function pluralize( $count, $text )
-    {
-        return $count . ( ( $count == 1 ) ? ( " $text" ) : ( " $text"."s" ) );
-    }
-
-
-    public static function timestamp($type='utc')
-    {
-        if ($type == 'utc') {
-            return new Expression('UTC_TIMESTAMP');
-        }
-    }
-
-    public static function decodeModelAttribute($model, $arrayAttribute='arrayAttr')
-    {
-    	if (isset($model->{$arrayAttribute})) {
-	        foreach ($model->{$arrayAttribute} as $e) {
-	            $model->{$e} = $model->{$e}? json_decode($model->{$e}, TRUE): [];
-	        }
-    	}
-    }
-
-    public static function encodeModelAttribute($model, $arrayAttribute='arrayAttr')
-    {
-    	if (isset($model->{$arrayAttribute})) {
-	        foreach ($model->{$arrayAttribute} as $e) {
-	            if (is_array($model->{$e})) {
-	                $model->{$e} = json_encode($model->{$e});
-	            }
-	        }
-        }
-    }
+ 
 
     public static function mapParams($params, $key='id', $value='label')
     {
@@ -398,7 +331,7 @@ class App {
 
 			$action = "can{$action}";
 
-	        if (isset($model->{$action})) {
+			if (property_exists($model, $action)) {
 	            return $model->{$action};
 	        }
 	        else {
