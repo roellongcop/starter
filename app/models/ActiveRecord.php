@@ -21,10 +21,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     public function getMainAttribute()
     {
-        if (property_exists($this, 'name')) {
+        if ($this->hasAttribute('name')) {
             return $this->name;
         }
-        else if (property_exists($this, 'id')) {
+        if ($this->hasAttribute('id')) {
             return $this->id;
         }
     }
@@ -123,7 +123,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getRecordStatusHtml()
     {
-        $controller = (property_exists($this, 'controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
+        $controller = ($this->hasAttribute('controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
 
 
         if (in_array(App::actionID(), App::params('export_actions'))) {
@@ -205,7 +205,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getPreview()
     {
-        $controller = (property_exists($this, 'controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
+        $controller = ($this->hasAttribute('controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
 
         $url = ["{$controller}/view", 'id' => $this->id];
 

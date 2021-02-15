@@ -331,7 +331,7 @@ class App {
 
 			$action = "can{$action}";
 
-			if (property_exists($model, $action)) {
+			if ($model->hasAttribute($action)) {
 	            return $model->{$action};
 	        }
 	        else {
