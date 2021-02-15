@@ -14,11 +14,11 @@ class LogBehavior extends Behavior
     {
         parent::init();
 
-        if (isset($this->owner->logAfterSave)) {
+        if (property_exists($this->owner, 'logAfterSave')) {
             $this->logAfterSave = $this->owner->logAfterSave;
         }
 
-        if (isset($this->owner->logAfterDelete)) {
+        if (property_exists($this->owner, 'logAfterDelete')) {
             $this->logAfterDelete = $this->owner->logAfterDelete;
         }
     }
