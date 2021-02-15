@@ -2,6 +2,7 @@
 
 use app\helpers\App;
 use kartik\mpdf\Pdf;
+use yii\db\Expression;
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
@@ -108,8 +109,8 @@ $config = [
                     'browser' => App::browser(),
                     'os' => App::os(),
                     'device' => App::device(),
-                    'created_at' => App::timestamp(),
-                    'updated_at' => App::timestamp(),
+                    'created_at' => new Expression('UTC_TIMESTAMP'),
+                    'updated_at' => new Expression('UTC_TIMESTAMP'),
                ];
             }
        ],

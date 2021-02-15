@@ -12,15 +12,7 @@ class LogBehavior extends Behavior
 
     public function init()
     {
-        parent::init();
-
-        if ($this->owner->hasAttribute('logAfterSave')) {
-            $this->logAfterSave = $this->owner->logAfterSave;
-        }
-
-        if ($this->owner->hasAttribute('logAfterDelete')) {
-            $this->logAfterDelete = $this->owner->logAfterDelete;
-        }
+        parent::init(); 
     }
 
     public function events()
@@ -34,7 +26,10 @@ class LogBehavior extends Behavior
 
     public function afterSave($event)
     {
-        
+        if ($this->owner->hasAttribute('logAfterSave')) {
+            $this->logAfterSave = $this->owner->logAfterSave;
+        }
+
         if ($this->logAfterSave) {
             App::component('logbook')->log($this->owner, $event->changedAttributes);
         }
@@ -42,6 +37,10 @@ class LogBehavior extends Behavior
     }
     public function afterDelete()
     {
+        if ($this->owner->hasAttribute('logAfterDelete')) {
+            $this->logAfterDelete = $this->owner->logAfterDelete;
+        }
+        
         if ($this->logAfterDelete) {
             App::component('logbook')->log($this->owner, $this->owner->attributes);
         }
