@@ -54,9 +54,13 @@ class App {
 		return self::app()->{$component};
 	}
 
-	public static function queryParams()
+	public static function queryParams($key='')
 	{
-		return self::request()->queryParams;
+		if ($key == '') {
+			return self::request()->queryParams;
+		}
+
+		return self::request()->queryParams[$key] ?? '';
 	}
 
 	public static function referrer()
