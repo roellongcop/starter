@@ -8,7 +8,7 @@ use yii\web\Response;
 /**
  * Default controller for the `api` module
  */
-class UserController extends RestController
+class UserController extends ActiveController
 {
     public $modelClass = '\app\modules\api\v1\models\User';
 
