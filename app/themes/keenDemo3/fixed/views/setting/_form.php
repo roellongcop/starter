@@ -51,16 +51,24 @@ use yii\widgets\ActiveForm;
                             }, 1000);
 
                             $('#setting-imageinput-preview').attr('src', s.src + '&w=200')
-                            $('#kt_subheader>div>div>a>img').attr('src', s.src + '&w=200')
-                            $('a.brand-logo>img').attr('src', s.src + '&w=200')
-                            $('#kt_subheader>div>div>a>img').css('width', '50')
+
+                            if($('#setting-name').val() == 'primary_logo') {
+                                $('#kt_subheader>div>div>a>img').attr('src', s.src + '&w=200')
+                                $('a.brand-logo>img').attr('src', s.src + '&w=200')
+                                $('#kt_subheader>div>div>a>img').css('width', '50')
+                                $('#kt_header_mobile > a > img').attr('src', s.src + '&w=200')
+                            }
                         }
                     }",
                     'dropzoneComplete' => "
-                        $('#kt_subheader>div>div>a>img').attr('src', file.dataURL)
-                        $('a.brand-logo>img').attr('src', file.dataURL)
-                        $('#kt_subheader>div>div>a>img').css('width', '50')
                         $('#setting-imageinput-preview').attr('src', file.dataURL)
+
+                        if($('#setting-name').val() == 'primary_logo') {
+                            $('#kt_subheader>div>div>a>img').attr('src', file.dataURL)
+                            $('a.brand-logo>img').attr('src', file.dataURL)
+                            $('#kt_subheader>div>div>a>img').css('width', '50')
+                            $('#kt_header_mobile > a > img').attr('src', s.src + '&w=200')
+                        }
                     "
                 ]) ?>
                 <br>

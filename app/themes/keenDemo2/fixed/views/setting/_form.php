@@ -50,17 +50,22 @@ use yii\widgets\ActiveForm;
                                 KTApp.unblock('#sipc');
                             }, 1000);
 
-                            $('#setting-imageinput-preview').attr('src', s.src + '&w=200')
-                            $('#kt_aside>div>a>img').attr('src', s.src + '&w=200')
-                            $('a.brand-logo>img').attr('src', s.src + '&w=200')
-                            $('#kt_aside>div>a>img').css('width', '50')
+                            $('#setting-imageinput-preview').attr('src', s.src + '&w=200');
+
+                            if($('#setting-name').val() == 'primary_logo') {
+                                $('#kt_aside>div>a>img').attr('src', s.src + '&w=200')
+                                $('a.brand-logo>img').attr('src', s.src + '&w=200')
+                                $('#kt_aside>div>a>img').css('width', '50')
+                            }
                         }
                     }",
                     'dropzoneComplete' => "
-                        $('#kt_aside>div>a>img').attr('src', file.dataURL)
-                        $('a.brand-logo>img').attr('src', file.dataURL)
-                        $('#kt_aside>div>a>img').css('width', '50')
                         $('#setting-imageinput-preview').attr('src', file.dataURL)
+                        if($('#setting-name').val() == 'primary_logo') {
+                            $('#kt_aside>div>a>img').attr('src', file.dataURL)
+                            $('a.brand-logo>img').attr('src', file.dataURL)
+                            $('#kt_aside>div>a>img').css('width', '50')
+                        }
                     "
                 ]) ?>
                 <br>

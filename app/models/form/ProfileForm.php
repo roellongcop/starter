@@ -55,7 +55,7 @@ class ProfileForm extends Model
             ])
             ->all();
         foreach ($user_metas as $user_meta) {
-            if ($this->hasAttribute($user_meta->meta_key)) {
+            if (property_exists($this, $user_meta->meta_key)) {
                 $this->{$user_meta->meta_key} = $user_meta->meta_value; 
             }
         }
