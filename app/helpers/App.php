@@ -125,6 +125,14 @@ class App {
 		return self::controller()->id;
 	}
 
+	public static function controllerAction()
+	{
+		return implode('/', [
+			self::controllerID(),
+			self::actionID(),
+		]);
+	}
+
 	public static function action()
 	{
 		return self::controller()->action;

@@ -3,7 +3,10 @@
 namespace app\modules\api\v1\models;
 
 use Yii;
-
+use app\helpers\App;
+use yii\helpers\Url;
+use yii\web\Link;
+use yii\web\Linkable;
 /**
  * This is the model class for table "{{%users}}".
  *
@@ -25,8 +28,17 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  */
+ // implements Linkable
 class User extends \yii\db\ActiveRecord
 {
+    public function getLinks()
+    {
+        return [
+            Link::REL_SELF => Url::to(['user/view', 'id' => $this->id], true),
+            'edit' => Url::to(['user/view', 'id' => $this->id], true),
+            'index' => Url::to(['api/v1/users'], true),
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -83,16 +95,17 @@ class User extends \yii\db\ActiveRecord
 
     public function fields()
     {
-        return [
-            // field name is the same as the attribute name
-            // 'id',
-            // field name is "email", the corresponding attribute name is "email_address"
-            'email' => 'email',
-            // field name is "name", its value is defined by a PHP callback
-            'passsword' => function ($model) {
-                return $model->email;
-            },
-        ];
+        $fields = parent::fields();
+
+        // remove fields that contain sensitive information
+        unset(
+            $fields['auth_key'], 
+            $fields['password_hash'], 
+            $fields['password_reset_token'],
+            $fields['password_hint'],
+        );
+
+        return $fields;
     }
 
     

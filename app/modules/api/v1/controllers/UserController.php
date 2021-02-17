@@ -2,7 +2,10 @@
 
 namespace app\modules\api\v1\controllers;
 
+use app\helpers\App;
 use app\modules\api\v1\models\User;
+use app\modules\api\v1\models\sub\UserAvailable;
+use yii\data\ActiveDataProvider;
 use yii\web\Response;
 
 /**
@@ -12,17 +15,19 @@ class UserController extends ActiveController
 {
     public $modelClass = '\app\modules\api\v1\models\User';
 
+
     public function actionAvailableUsers()
     {
-        $models = User::find()
-            ->select(['email'])
-            ->where([
-                'record_status' => 1,
-                'status' => 10,
-                'is_blocked' => 0
-            ])
-            ->all();
+        $this->serializer = [
+            'class' => 'yii\rest\Serializer',
+            'collectionEnvelope' => 'users',
+        ];
 
-        return $models;
+        return new ActiveDataProvider([
+            'query' => UserAvailable::find(),
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+        ]);
     } 
 }
