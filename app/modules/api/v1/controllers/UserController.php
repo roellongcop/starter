@@ -14,14 +14,13 @@ use yii\web\Response;
 class UserController extends ActiveController
 {
     public $modelClass = '\app\modules\api\v1\models\User';
-
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+    ];
 
     public function actionAvailableUsers()
     {
-        $this->serializer = [
-            'class' => 'yii\rest\Serializer',
-            'collectionEnvelope' => 'users',
-        ];
+        $this->serializer['collectionEnvelope'] = 'users';
 
         return new ActiveDataProvider([
             'query' => UserAvailable::find(),

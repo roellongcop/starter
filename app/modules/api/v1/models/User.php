@@ -5,8 +5,6 @@ namespace app\modules\api\v1\models;
 use Yii;
 use app\helpers\App;
 use yii\helpers\Url;
-use yii\web\Link;
-use yii\web\Linkable;
 /**
  * This is the model class for table "{{%users}}".
  *
@@ -28,17 +26,8 @@ use yii\web\Linkable;
  * @property string $created_at
  * @property string $updated_at
  */
- // implements Linkable
 class User extends \yii\db\ActiveRecord
 {
-    public function getLinks()
-    {
-        return [
-            Link::REL_SELF => Url::to(['user/view', 'id' => $this->id], true),
-            'edit' => Url::to(['user/view', 'id' => $this->id], true),
-            'index' => Url::to(['api/v1/users'], true),
-        ];
-    }
     /**
      * {@inheritdoc}
      */
