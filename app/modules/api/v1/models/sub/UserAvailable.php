@@ -14,6 +14,13 @@ class UserAvailable extends User
         return $this->email;
     }
 
+    public static function findAll($condition=[])
+    {
+        return self::find()
+            ->andWhere($condition)
+            ->all();
+    }
+
     public static function find()
     {
         return parent::find()

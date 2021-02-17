@@ -20,8 +20,8 @@ class UserController extends ActiveController
 
     public function actionAvailableUsers()
     {
+        return UserAvailable::findAll();
         $this->serializer['collectionEnvelope'] = 'users';
-
         return new ActiveDataProvider([
             'query' => UserAvailable::find(),
             'pagination' => [
