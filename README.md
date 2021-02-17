@@ -9,8 +9,8 @@
 	
 	yii seed
 
-4) visit site @ http://localhost/starter/
-5) goto http://localhost/starter/api/available-users for active users.
+4) visit site @ http://localhost/starter/web
+5) goto http://localhost/starter/web/api/v1/user/available-users for active users.
 
 ============================================================================
 IMPORTANT NOTES:
@@ -21,32 +21,35 @@ when renaming the app, make sure to also change the "app\config\console.php"
     ]
 for the "yii seed/roles 10" to properly generate navigations
 
-# features
-1) Base on keenadmin dashboard demo1 v2
-2) Provide token base image rendering
-3) organize custom gii for template
-4) dynamic roles implementation
-5) search everything from dashboard
-6) dynamic columns filtering
-7) export capabilities (pdf, csv, xls, xlxs, browser print)
-8) bulk action implementation
-9) on click activation of records on gridview
-10) backup and restore application
-11) ip white list and black list support
-12) User Blocking system
-13) User Session with autologout
-14) Logs support
+# Features
+* Base on keenadmin dashboard
+* Provide token base image rendering
+* Organize custom gii for template
+* Dynamic roles implementation
+* Search everything from dashboard
+* Dynamic columns filtering
+* Export capabilities (pdf, csv, xls, xlxs, browser print)
+* Bulk action implementation
+* On click activation of records on gridview
+* Backup and restore application
+* Ip white list and black list support
+* User Blocking system
+* User Session with autologout
+* Logs support
+* Dynamic Themes
+* Rest API setup
 
 # Modules
-1) Dashboard
-2) Backup
-3) File
-4) General Setting
-5) Ip
-6) Log
-7) Role
-8) Setting
-9) User
-10) User columns
-11) Visit log
-11) Session
+* Dashboard
+* Backup
+* File
+* Ip
+* Log
+* Role
+* Setting
+* User
+* User Meta (holding user additional attributes (eg: settings))
+* Model File (holding uploaded files; connected with File module)
+* Visit log
+* Session
+* Theme
