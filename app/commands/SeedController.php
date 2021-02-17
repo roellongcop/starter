@@ -28,7 +28,7 @@ class SeedController extends Controller
 {
     public function actionInit()
     {
-        $this->truncate(['users', 'roles', 'ips']);
+        $this->actionTruncate(['users', 'roles', 'ips']);
         $this->actionRoles(10);
         $this->actionUsers(10, false);
         $this->actionThemes();
@@ -46,7 +46,7 @@ class SeedController extends Controller
     public function actionThemes()
     {
         $themes = require __DIR__ . '/themes.php';
-        $this->truncate(['themes']);
+        $this->actionTruncate(['themes']);
         $this->startProgress(0, count($themes), 'Seeding Themes: ');
         foreach ($themes as $i => $theme) {
             $data = [
