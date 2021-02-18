@@ -45,9 +45,9 @@ abstract class Controller extends \yii\web\Controller
     public function beforeAction($action)
     {
         $options = Json::htmlEncode([
-            'appName' => Yii::$app->name,
+            'appName' => App::appName(),
             'baseUrl' => Url::base(true),
-            'language' => Yii::$app->language,
+            'language' => App::appLanguage(),
             // 'params' => App::params()
         ]);
         $this->view->registerJs(<<<SCRIPT
@@ -57,7 +57,7 @@ abstract class Controller extends \yii\web\Controller
         
         
 
-        Yii::$app->session->timeout = SettingSearch::default('auto_logout_timer');
+        App::session()->timeout = SettingSearch::default('auto_logout_timer');
         return parent::beforeAction($action);
     }
 }

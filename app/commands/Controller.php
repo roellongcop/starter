@@ -36,8 +36,7 @@ abstract class Controller extends \yii\console\Controller
 
         foreach ($tables as $table) {
             Console::output("Truncate {$table}");
-            Yii::$app->db->createCommand()
-                ->truncateTable(Yii::$app->db->tablePrefix . $table)
+            App::truncateTable(App::tablePrefix() . $table)
                 ->execute();
         }
         Console::output("\n");

@@ -21,7 +21,7 @@ class ThemeFilter extends ActionFilter
 
         if ($theme) {
             if ($theme->bundles) {
-                Yii::$app->assetManager->bundles = $theme->bundles;
+                App::assetManager()->bundles = $theme->bundles;
             }
             
             $themeModel = new BaseTheme();
@@ -29,7 +29,7 @@ class ThemeFilter extends ActionFilter
             $themeModel->baseUrl = $theme->base_url;
             $themeModel->pathMap = $theme->path_map;
 
-            Yii::$app->view->theme = $themeModel;
+            App::view()->theme = $themeModel;
         }
         return parent::beforeAction($action);
     }

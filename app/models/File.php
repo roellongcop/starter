@@ -263,7 +263,7 @@ class File extends ActiveRecord
 
     public function generateToken() 
     {
-        $token = Yii::$app->security->generateRandomString(32) . time();
+        $token = App::randomString(32) . time();
 
         if (($model = File::findOne(['token' => $token])) != null) {
             return $this->generateToken();

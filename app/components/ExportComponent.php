@@ -17,7 +17,7 @@ class ExportComponent extends Component
 {
     public function export_pdf($content)
     {
-        $pdf = Yii::$app->pdf;
+        $pdf = App::component('pdf');
         $pdf->filename = App::controllerID() . '-pdf-'.time().'.pdf';;
         $pdf->content = $content;
         return $pdf->render();

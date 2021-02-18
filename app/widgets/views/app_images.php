@@ -43,7 +43,7 @@ SCRIPT, \yii\web\View::POS_END);
                     <a href="<?= Url::to(['file/display', 'token' => $file->token], true) ?>" target="_blank">
                         <?= $file->getPreviewIcon(300) ?>
                     </a>
-                    <?php if (Yii::$app->access->userCanRoute($removeImageUrl)): ?>
+                    <?php if (App::component('access')->userCanRoute($removeImageUrl)): ?>
                         <?= Anchor::widget([
                             'tooltip' => 'Remove Image',
                             'title' => '<i class="fa fa-trash icon-sm text-danger"></i>',

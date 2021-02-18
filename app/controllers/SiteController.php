@@ -63,7 +63,7 @@ class SiteController extends Controller
     public function actionResetPassword()
     {
         $model = new PasswordResetForm();
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(App::post())) {
             $model->process();
         }
 
@@ -91,13 +91,13 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!App::isGuest()) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
         $PSR = new PasswordResetForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(App::post()) && $model->login()) {
             VisitLog::login();
 
             return $this->goBack();
@@ -119,7 +119,7 @@ class SiteController extends Controller
     public function actionLogout()
     {
         VisitLog::logout();
-        Yii::$app->user->logout();
+        App::logout();
 
 
 
@@ -134,9 +134,8 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
+        if ($model->load(App::post()) && $model->contact(App::params('adminEmail'))) {
+            App::success('contactFormSubmitted');
             return $this->refresh();
         }
         return $this->render('contact', [

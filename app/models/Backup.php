@@ -122,7 +122,7 @@ class Backup extends ActiveRecord
     {
         $file = $this->sqlFileLocation;
         if (file_exists($file)) {
-            Yii::$app->response->sendFile($file);
+            App::response()->sendFile($file);
 
             return true;
         }

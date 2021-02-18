@@ -211,7 +211,7 @@ class VisitLog extends ActiveRecord
 
     public static function log($action=0)
     {
-        $visit = new VisitLog();
+        $visit = new self();
         $visit->user_id = App::identity('id');
         $visit->ip = App::ip();
         $visit->action = $action; // login | logout

@@ -60,7 +60,7 @@ class FileController extends Controller
             $path = Yii::getAlias('@webroot') . "/{$file->location}";
             if (file_exists($path)) {
                 if (in_array($file->extension, App::params('file_extensions')['file'])) {
-                    return Yii::$app->response->sendFile($path);
+                    return App::response()->sendFile($path);
                 }
                 list($original_width, $original_height) = getimagesize($path);
                 $w = ($w)? (int)$w: $original_width ;
@@ -366,7 +366,7 @@ class FileController extends Controller
         if ($model) {
             $file = $model->location;
             if (file_exists($file)) {
-                Yii::$app->response->sendFile($file);
+                App::response()->sendFile($file);
 
                 return true;
             }

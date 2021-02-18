@@ -49,6 +49,33 @@ class App {
 		return self::app()->request->{$obj};
 	}
 
+	public static function response($obj='')
+	{
+		if ($obj == '') {
+			return self::app()->response;
+		}
+		return self::app()->response->{$obj};
+	}
+
+	public static function view($obj='')
+	{
+		if ($obj == '') {
+			return self::app()->view;
+		}
+		return self::app()->view->{$obj};
+	}
+
+
+	public static function assetManager($obj='')
+	{
+		if ($obj == '') {
+			return self::app()->assetManager;
+		}
+		return self::app()->assetManager->{$obj};
+	}
+
+
+
 	public static function component($component)
 	{
 		return self::app()->{$component};
@@ -272,12 +299,32 @@ class App {
 		return self::app()->db->{$obj} ?? '';
     }
 
-    public static function createCommand($obj='')
+    public static function tablePrefix()
     {
-    	if ($obj == '') {
+    	return self::db()->tablePrefix;
+    }
+
+    public static function createCommand($sql='')
+    {
+    	if ($sql == '') {
     		return self::db()->createCommand();
     	}
-		return self::db()->createCommand()->{$obj} ?? '';
+		return self::db()->createCommand($sql) ?? '';
+    }
+
+    public static function execute($sql)
+    {
+    	return self::createCommand($sql)->execute();
+    }
+
+    public static function query()
+    {
+    	return self::createCommand($sql)->query();
+    }
+
+    public static function queryOne($sql)
+    {
+    	return self::createCommand($sql)->queryOne();
     }
 
     public static function truncateTable($table_name='')
@@ -476,7 +523,7 @@ class App {
     	if (! $ip) {
     		$ip = self::ip();
     		if ($ip == '::1') {
-    			$ip = Yii::$app->params['default_ip']; 
+    			$ip = self::params('default_ip'); 
     		}
     	}
     	
@@ -546,7 +593,7 @@ class App {
 
     public static function tableExist($table_name)
     {
-    	if (Yii::$app->db->getTableSchema($table_name, true) === null) {
+    	if (self::db()->getTableSchema($table_name, true) === null) {
             return false;
         }
         return true;
@@ -604,5 +651,15 @@ class App {
 		return self::app()->assetManager->getPublishedUrl(
 			self::app()->view->theme->basePath
 		) . $path;
+	}
+
+	public static function appName()
+	{
+		return self::app()->name;
+	}
+
+	public static function appLanguage()
+	{
+		return self::app()->language;
 	}
 }

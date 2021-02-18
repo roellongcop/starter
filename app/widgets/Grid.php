@@ -57,7 +57,7 @@ class Grid extends \yii\base\Widget
             $_controller = $explode_template[1] ?? $controller;
             $action = $explode_template[0] ?? '';
 
-            if (Yii::$app->access->userCan($action, $_controller)) {
+            if (App::component('access')->userCan($action, $_controller)) {
                 $template[] = '{'.$action.'}';
             }
         }

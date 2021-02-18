@@ -50,7 +50,7 @@ class Anchor extends \yii\base\Widget
             return Html::a($this->title, $this->link, $this->options);
         }
 
-        if (Yii::$app->access->userCan($this->action, $this->controller, $this->user)) {
+        if (App::component('access')->userCan($this->action, $this->controller, $this->user)) {
 
             return Html::a($this->title, $this->link, $this->options);
         }

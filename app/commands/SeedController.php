@@ -84,8 +84,8 @@ class SeedController extends Controller
     public function actionRoles($row=1)
     {
         $faker = Factory::create();
-        $controllerActions = Yii::$app->access->controllerActions();
-        $createNavigation = Yii::$app->access->createNavigation();
+        $controllerActions = App::component('access')->controllerActions();
+        $createNavigation = App::component('access')->createNavigation();
         $this->startProgress(0, $row, 'Seeding Role: ');
         for ($i=1; $i <= $row; $i++) { 
             $model                  = new Role();

@@ -275,7 +275,7 @@ class BackupController extends Controller
         $model = $this->findModel($id);
 
         $sql = file_get_contents($model->sqlFileLocation);
-        Yii::$app->db->createCommand($sql)->execute();
+        App::execute($sql);
 
         App::success('Restored.');
         return $this->redirect(['index']);
@@ -312,16 +312,16 @@ class BackupController extends Controller
 
         if ($tables == '*') {
             $tables = array();
-            $tables = Yii::$app->db->schema->getTableNames();
+            $tables = App::getTableNames();
         } 
         else {
             $tables = is_array($tables) ? $tables : explode(',', $tables);
         }
         $return = '';
         foreach ($tables as $table) {
-            $result = Yii::$app->db->createCommand('SELECT * FROM ' . $table)->query();
+            $result = App::query("SELECT * FROM {$table}");
             $return.= 'DROP TABLE IF EXISTS `' . $table . '`;';
-            $row2 = Yii::$app->db->createCommand('SHOW CREATE TABLE ' . $table)->queryOne();
+            $row2 = App::queryOne("SHOW CREATE TABLE {$table}");
             $return.= "\n\n" . $row2['Create Table'] . ";\n\n";
             foreach ($result as $row) {
                 $return.= 'INSERT INTO ' . $table . ' VALUES(';

@@ -51,7 +51,7 @@ SCRIPT, \yii\web\View::POS_END);
                         <?= $file->getPreviewIcon(300) ?>
                        
                     </a>
-                    <?php if (Yii::$app->access->userCanRoute($removeImageUrl)): ?>
+                    <?php if (App::component('access')->userCanRoute($removeImageUrl)): ?>
                         <?= Anchor::widget([
                             'tooltip' => 'Remove Image',
                             'title' => '<i class="fa fa-trash icon-sm text-danger"></i>',

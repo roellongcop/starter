@@ -4,7 +4,7 @@ use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
 use yii\widgets\ActiveForm;
-$controller_actions = Yii::$app->access->controllerActions();
+$controller_actions = App::component('access')->controllerActions();
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
