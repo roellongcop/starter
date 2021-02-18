@@ -3,9 +3,9 @@
 namespace app\modules\api\v1\models\query;
 
 /**
- * This is the ActiveQuery class for [[Backups]].
+ * This is the ActiveQuery class for [[User]].
  *
- * @see Backups
+ * @see User
  */
 class UserQuery extends \yii\db\ActiveQuery
 {
@@ -20,7 +20,7 @@ class UserQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Backups[]|array
+     * @return User[]|array
      */
     public function all($db = null)
     {
@@ -29,7 +29,7 @@ class UserQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Backups|array|null
+     * @return User|array|null
      */
     public function one($db = null)
     {
