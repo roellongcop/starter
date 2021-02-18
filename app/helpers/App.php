@@ -662,4 +662,9 @@ class App {
 	{
 		return self::app()->language;
 	}
+
+	public static function uniqueId()
+	{
+		return self::action()->uniqueId;
+	}
 }

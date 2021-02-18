@@ -4,6 +4,7 @@ namespace app\modules\api\v1\models;
 
 use Yii;
 use app\helpers\App;
+use app\modules\api\v1\models\query\UserQuery;
 use yii\helpers\Url;
 /**
  * This is the model class for table "{{%users}}".
@@ -82,9 +83,21 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function find()
+    {
+        return new UserQuery(get_called_class());
+    }
+
     public function fields()
     {
         $fields = parent::fields();
+
+        if (App::uniqueId() == 'api/v1/user/available-users') {
+            return [
+                'email',
+                'defaultPassword' => 'email',
+            ];
+        }
 
         // remove fields that contain sensitive information
         unset(

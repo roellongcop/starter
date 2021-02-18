@@ -4,7 +4,6 @@ namespace app\modules\api\v1\controllers;
 
 use app\helpers\App;
 use app\modules\api\v1\models\User;
-use app\modules\api\v1\models\sub\UserAvailable;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 
@@ -20,10 +19,13 @@ class UserController extends ActiveController
 
     public function actionAvailableUsers()
     {
-        return UserAvailable::findAll();
+        return User::find()
+            ->available()
+            ->all();
         $this->serializer['collectionEnvelope'] = 'users';
         return new ActiveDataProvider([
-            'query' => UserAvailable::find(),
+            'query' => User::find()
+                ->available(),
             'pagination' => [
                 'pageSize' => 5,
             ],
