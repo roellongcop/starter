@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\Log;
 use app\models\Setting;
 use app\models\Theme;
 use app\models\form\MySettingForm;
@@ -175,9 +176,7 @@ class SettingController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new Setting(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new Setting(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

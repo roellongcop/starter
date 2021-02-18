@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\Log;
 use app\models\UserMeta;
 use app\models\search\UserMetaSearch;
 use app\widgets\ExportContent;
@@ -182,9 +183,7 @@ class UserMetaController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new UserMeta(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new UserMeta(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

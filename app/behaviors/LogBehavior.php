@@ -1,9 +1,9 @@
 <?php
 namespace app\behaviors;
 use app\helpers\App;
+use app\models\Log;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use yii\helpers\Json;
 
 class LogBehavior extends Behavior
 {
@@ -31,10 +31,11 @@ class LogBehavior extends Behavior
         }
 
         if ($this->logAfterSave) {
-            App::component('logbook')->log($this->owner, $event->changedAttributes);
+            Log::record($this->owner, $event->changedAttributes);
         }
         
     }
+
     public function afterDelete()
     {
         if ($this->owner->hasAttribute('logAfterDelete')) {
@@ -42,7 +43,7 @@ class LogBehavior extends Behavior
         }
         
         if ($this->logAfterDelete) {
-            App::component('logbook')->log($this->owner, $this->owner->attributes);
+            Log::record($this->owner, $this->owner->attributes);
         }
     }
 }

@@ -103,7 +103,7 @@ class ModelFileSearch extends ModelFile
 
         if ($this->date_range) {
             $query->andFilterWhere(
-                Yii::$app->general->betweenRange($this->date_range)
+                App::component('general')->betweenRange($this->date_range)
             );
         }
 

@@ -14,7 +14,6 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
-        'logbook' => ['class' => 'app\components\LogBookComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
         'general' => ['class' => 'app\components\General'],
         'user' => [

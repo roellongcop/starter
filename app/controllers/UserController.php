@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\Log;
 use app\models\User;
+use app\models\VisitLog;
 use app\models\form\ChangePasswordForm;
 use app\models\form\ProfileForm;
 use app\models\search\UserSearch;
@@ -205,9 +207,7 @@ class UserController extends Controller
                             break;
                     }
 
-                    App::component('logbook')->log(
-                        new User(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new User(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {
@@ -338,11 +338,11 @@ class UserController extends Controller
             ->one();
 
         if ($model) {
-            Yii::$app->logbook->visitLog(1);
-            Yii::$app->user->logout();
+            VisitLog::logout();
+            App::user()->logout();
 
-            Yii::$app->user->login($model, 0);
-            Yii::$app->logbook->visitLog();
+            App::user()->login($model, 0);
+            VisitLog::login();
 
             return $this->redirect(['dashboard/index']);
         }

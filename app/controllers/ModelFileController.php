@@ -218,9 +218,7 @@ class ModelFileController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new ModelFile(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new ModelFile(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

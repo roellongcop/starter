@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\Log;
 use app\models\Role;
 use app\models\search\RoleSearch;
 use app\widgets\ExportContent;
@@ -208,9 +209,7 @@ class RoleController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new Role(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new Role(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

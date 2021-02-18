@@ -118,7 +118,7 @@ class SessionSearch extends Session
 
         if ($this->date_range) {
             $query->andFilterWhere(
-                Yii::$app->general->betweenRange($this->date_range, 's.created_at')
+                App::component('general')->betweenRange($this->date_range, 's.created_at')
             );
         }
 

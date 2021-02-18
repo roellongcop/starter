@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\helpers\App;
 use app\models\Backup;
+use app\models\Log;
 use app\models\search\BackupSearch;
 use app\widgets\ExportContent;
 use yii\helpers\ArrayHelper;
@@ -201,9 +202,7 @@ class BackupController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new Backup(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new Backup(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

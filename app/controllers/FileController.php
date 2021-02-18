@@ -14,6 +14,7 @@ use app\filters\UserFilter;
 use app\filters\VerbFilter;
 use app\helpers\App;
 use app\models\File;
+use app\models\Log;
 use app\models\ModelFile;
 use app\models\form\UploadForm;
 use app\models\search\FileSearch;
@@ -266,9 +267,7 @@ class FileController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new File(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new File(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

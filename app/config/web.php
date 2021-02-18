@@ -25,7 +25,6 @@ $config = [
     'components' => [
         
         'access' => ['class' => 'app\components\AccessComponent'],
-        'logbook' => ['class' => 'app\components\LogBookComponent'],
         'file' => ['class' => 'app\components\FileComponent'],
         'export' => ['class' => 'app\components\ExportComponent'],
         'general' => ['class' => 'app\components\GeneralComponent'],

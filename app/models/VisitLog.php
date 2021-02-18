@@ -209,4 +209,23 @@ class VisitLog extends ActiveRecord
         ];
     }
 
+    public static function log($action=0)
+    {
+        $visit = new VisitLog();
+        $visit->user_id = App::identity('id');
+        $visit->ip = App::ip();
+        $visit->action = $action; // login | logout
+        return $visit->save();
+    }
+
+    public static function login()
+    {
+        return self::log();
+    }
+
+    public static function logout()
+    {
+        return self::log(1);
+    }
+
 }

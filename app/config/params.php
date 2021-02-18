@@ -78,7 +78,7 @@ return [
         ],
         1 => [
             'id' => 1,
-            'label' => 'Logut',
+            'label' => 'Logout',
             'class' => 'danger'
         ],
     ],

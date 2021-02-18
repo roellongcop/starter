@@ -126,7 +126,7 @@ class LogSearch extends Log
 
         if ($this->date_range) {
             $query->andFilterWhere(
-                Yii::$app->general->betweenRange($this->date_range, 'l.created_at')
+                App::component('general')->betweenRange($this->date_range, 'l.created_at')
             );
         }
 

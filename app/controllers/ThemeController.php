@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\helpers\App;
 use app\models\File;
+use app\models\Log;
 use app\models\Theme;
 use app\models\UserMeta;
 use app\models\form\ThemeForm;
@@ -186,9 +187,7 @@ class ThemeController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new Theme(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new Theme(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

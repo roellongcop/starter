@@ -30,6 +30,7 @@ echo "<?php\n";
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
 use Yii;
+use app\models\Log;
 use app\widgets\ExportContent;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 <?php if (!empty($generator->searchModelClass)): ?>
@@ -234,9 +235,7 @@ if (count($pks) === 1) {
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new <?= $modelClass ?>(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new <?= $modelClass ?>(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

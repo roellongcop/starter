@@ -320,4 +320,29 @@ class Log extends ActiveRecord
             ], 
         ];
     }
+
+
+    public static function record($model, $changedAttributes=[])
+    {
+        if (App::isLogin()) {
+            $log                   = new self();
+            $log->request_data     = App::getBodyParams();
+            $log->method           = App::getMethod();
+            $log->url              = App::absoluteUrl();
+            $log->user_id          = App::identity('id');
+            $log->model_id         = $model->id ?: 0;
+            $log->action           = App::actionID();
+            $log->controller       = App::controllerID();
+            $log->table_name       = App::tableName($model, false);
+            $log->model_name       = App::getModelName($model);
+            $log->user_agent       = App::userAgent();
+            $log->ip               = App::ip();
+            $log->browser          = App::browser();
+            $log->os               = App::os();
+            $log->device           = App::device();
+            $log->change_attribute = $changedAttributes;
+
+            return $log->save();
+        }
+    }
 }

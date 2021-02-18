@@ -4,6 +4,7 @@ namespace app\models\form;
 
 use Yii;
 use app\helpers\App;
+use app\models\Log;
 use app\models\Setting;
 use yii\base\Model;
 use yii\web\UploadedFile;
@@ -155,9 +156,7 @@ class SettingForm extends Model
                 }
             }
         }
-        App::component('logbook')->log(
-            new Setting(), $changeAttribute
-        );
+        Log::record(new Setting(), $changeAttribute);
     }
  
 }

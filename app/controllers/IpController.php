@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\helpers\App;
 use app\models\Ip;
+use app\models\Log;
 use app\models\search\IpSearch;
 use app\widgets\ExportContent;
 use yii\helpers\ArrayHelper;
@@ -192,9 +193,7 @@ class IpController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new Ip(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new Ip(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

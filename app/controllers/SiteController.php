@@ -9,6 +9,7 @@ use app\filters\ThemeFilter;
 use app\filters\UserFilter;
 use app\filters\VerbFilter;
 use app\helpers\App;
+use app\models\VisitLog;
 use app\models\form\ContactForm;
 use app\models\form\LoginForm;
 use app\models\form\PasswordResetForm;
@@ -97,7 +98,7 @@ class SiteController extends Controller
         $model = new LoginForm();
         $PSR = new PasswordResetForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            Yii::$app->logbook->visitLog();
+            VisitLog::login();
 
             return $this->goBack();
         }
@@ -117,7 +118,7 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->logbook->visitLog(1);
+        VisitLog::logout();
         Yii::$app->user->logout();
 
 

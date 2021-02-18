@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\Log;
 use app\models\VisitLog;
 use app\models\search\VisitLogSearch;
 use app\widgets\ExportContent;
@@ -182,9 +183,7 @@ class VisitLogController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new VisitLog(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new VisitLog(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

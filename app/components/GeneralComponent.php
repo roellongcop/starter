@@ -27,7 +27,7 @@ class GeneralComponent extends Component
 
     public function getAllTables()
     {
-        $tables = Yii::$app->db->schema->getTableNames();
+        $tables = App::getTableNames();
         $tables = array_combine($tables, $tables);
         return $tables;
     } 

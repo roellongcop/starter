@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\Log;
 use app\models\Session;
 use app\models\search\SessionSearch;
 use app\widgets\ExportContent;
@@ -181,9 +182,7 @@ class SessionController extends Controller
                             # code...
                             break;
                     }
-                    App::component('logbook')->log(
-                        new Session(), ArrayHelper::map($models, 'id', 'attributes')
-                    );
+                    Log::record(new Session(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {
