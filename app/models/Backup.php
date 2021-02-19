@@ -15,6 +15,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\Url;
+use app\models\query\BackupQuery;
 
 /**
  * This is the model class for table "{{%backup}}".
@@ -104,6 +105,15 @@ class Backup extends ActiveRecord
             'recordStatusHtml' => 'Record Status',
             'recordStatusLabel' => 'Record Status',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\BackupQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new BackupQuery(get_called_class());
     }
     
     public function getCanDelete()

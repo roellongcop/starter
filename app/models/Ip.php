@@ -15,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\models\query\IpQuery;
 
 /**
  * This is the model class for table "{{%ips}}".
@@ -100,6 +101,15 @@ class Ip extends ActiveRecord
             'recordStatusHtml' => 'Record Status',
             'recordStatusLabel' => 'Record Status',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\IpQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new IpQuery(get_called_class());
     }
      
  

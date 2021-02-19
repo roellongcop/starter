@@ -18,6 +18,8 @@ use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
+use app\models\query\SettingQuery;
+
 /**
  * This is the model class for table "{{%settings}}".
  *
@@ -113,6 +115,16 @@ class Setting extends ActiveRecord
             'recordStatusLabel' => 'Record Status',
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\SettingQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new SettingQuery(get_called_class());
+    }
+    
 
     public function getHasImageInput()
     {

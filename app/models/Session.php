@@ -14,6 +14,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\Url;
+use app\models\query\SessionQuery;
 
 /**
  * This is the model class for table "{{%sessions}}".
@@ -113,6 +114,15 @@ class Session extends ActiveRecord
             'recordStatusHtml' => 'Record Status',
             'recordStatusLabel' => 'Record Status',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\SessionQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new SessionQuery(get_called_class());
     }
      
 

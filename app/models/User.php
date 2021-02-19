@@ -17,6 +17,8 @@ use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\IdentityInterface;
+use app\models\query\UserQuery;
+
 
 /**
  * User model
@@ -125,23 +127,15 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\UserQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new UserQuery(get_called_class());
+    }
 
-    // public function getVisitLogs()
-    // {
-    //     return $this->hasMany(VisitLog::className(), ['user_id' => 'id']);
-    // }
-
-    // public function getUserInquiries()
-    // {
-    //     return $this->hasMany(UserInquiry::className(), ['user_id' => 'id']);
-    // }
-
-
-    // public function getLogs()
-    // {
-    //     return $this->hasMany(Log::className(), ['user_id' => 'id']);
-    // }
- 
 
     /**
      * {@inheritdoc}

@@ -16,6 +16,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
+use app\models\query\LogQuery;
 
 /**
  * This is the model class for table "{{%logs}}".
@@ -134,6 +135,15 @@ class Log extends ActiveRecord
             'recordStatusHtml' => 'Record Status',
             'recordStatusLabel' => 'Record Status',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\LogQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new LogQuery(get_called_class());
     }
      
 

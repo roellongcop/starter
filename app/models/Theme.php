@@ -19,6 +19,7 @@ use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
+use app\models\query\ThemeQuery;
 
 /**
  * This is the model class for table "{{%themes}}".
@@ -112,6 +113,16 @@ class Theme extends ActiveRecord
             'recordStatusHtml' => 'Record Status',
             'recordStatusLabel' => 'Record Status',
         ];
+    }
+
+
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\ThemeQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ThemeQuery(get_called_class());
     }
      
      

@@ -15,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\models\query\FileQuery;
 
 /**
  * This is the model class for table "{{%files}}".
@@ -109,6 +110,16 @@ class File extends ActiveRecord
             'recordStatusLabel' => 'Record Status',
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\FileQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new FileQuery(get_called_class());
+    }
+    
      
     public function beforeSave($insert)
     {

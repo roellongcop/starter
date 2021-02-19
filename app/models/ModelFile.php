@@ -15,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
+use app\models\query\ModelFileQuery;
 
 /**
  * This is the model class for table "{{%model_files}}".
@@ -101,6 +102,15 @@ class ModelFile extends ActiveRecord
             'recordStatusHtml' => 'Record Status',
             'recordStatusLabel' => 'Record Status',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \app\models\query\ModelFileQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ModelFileQuery(get_called_class());
     }
      
      

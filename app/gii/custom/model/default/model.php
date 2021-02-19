@@ -15,6 +15,11 @@ $controllerID = Inflector::camel2id($className);
 /* @var $labels string[] list of attribute labels (name => label) */
 /* @var $rules string[] list of validation rules */
 /* @var $relations array list of relations (name => relation declaration) */
+
+if ($queryClassName) {
+    $queryClassFullName = ($generator->ns === $generator->queryNs) ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName;
+
+}
 echo "<?php\n";
 ?>
 
@@ -31,6 +36,8 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\db\Expression;
+use <?= substr($queryClassFullName, 1) ?>;
+
 
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
@@ -132,7 +139,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
 <?php endforeach; ?>
 <?php if ($queryClassName): ?>
 <?php
-    $queryClassFullName = ($generator->ns === $generator->queryNs) ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName;
     echo "\n";
 ?>
     /**
@@ -141,7 +147,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
      */
     public static function find()
     {
-        return new <?= $queryClassFullName ?>(get_called_class());
+        return new <?= $queryClassName ?>(get_called_class());
     }
 <?php endif; ?>
      
