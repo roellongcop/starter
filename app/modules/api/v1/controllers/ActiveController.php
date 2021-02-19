@@ -3,12 +3,26 @@
 namespace app\modules\api\v1\controllers;
 
 use yii\web\Response;
+use app\helpers\App;
 
 /**
  * Default controller for the `api` module
  */
 abstract class ActiveController extends \yii\rest\ActiveController
 {
+
+    public function beforeAction($action)
+    {
+        App::component('response')->formatters = [
+            Response::FORMAT_JSON => [
+                'class' => 'yii\web\JsonResponseFormatter',
+                'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
+                'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
+            ],
+        ];
+
+        return parent::beforeAction($action);
+    }
 
     public function behaviors()
     {

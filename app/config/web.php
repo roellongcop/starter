@@ -82,11 +82,16 @@ $config = [
             ', 
             // refer settings section for all configuration options
         ],
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/user'],
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'api/v1/user',
+                    'pluralize' => false
+                ],
 
                 'my-setting' => 'setting/my-setting',
                 'my-role' => 'role/my-role',
