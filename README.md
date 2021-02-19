@@ -35,9 +35,11 @@ for the "yii seed/roles 10" to properly generate navigations
 * Ip white list and black list support
 * User Blocking system
 * User Session with autologout
-* Logs support
+* Logs support (database interaction, login logout)
 * Dynamic Themes
 * Rest API setup
+* General Settings
+* Change photo Uploader (dropzone)
 
 # Modules
 * Dashboard
