@@ -317,7 +317,7 @@ class App {
     	return self::createCommand($sql)->execute();
     }
 
-    public static function query()
+    public static function query($sql)
     {
     	return self::createCommand($sql)->query();
     }

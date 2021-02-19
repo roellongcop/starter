@@ -116,11 +116,7 @@ class Backup extends ActiveRecord
         return new BackupQuery(get_called_class());
     }
     
-    public function getCanDelete()
-    {
-        return true;
-    }
-    
+  
     public function getCanUpdate()
     {
         return false;
