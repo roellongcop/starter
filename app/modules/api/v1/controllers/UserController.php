@@ -15,11 +15,12 @@ class UserController extends ActiveController
     public $modelClass = '\app\modules\api\v1\models\User';
     public $serializer = [
         'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'users',
     ];
 
     public function actionAvailableUsers()
     {
-        $this->serializer['collectionEnvelope'] = 'users';
+        // $this->serializer['collectionEnvelope'] = 'availableUsers';
         return new ActiveDataProvider([
             'query' => User::find()
                 ->available(),
