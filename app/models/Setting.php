@@ -175,20 +175,25 @@ class Setting extends ActiveRecord
 
     public function getDetailColumns()
     {
-        return [
+        $columns = [
             'name:raw',
             'value:raw',
-			'created_at:fulldate',
+            'created_at:fulldate',
             'updated_at:fulldate',
             'createdByEmail',
             'updatedByEmail',
             'recordStatusHtml:raw',
-            [
+        ];
+
+        if (in_array($this->name, $this->withImageInput)) {
+            $columns[] = [
                 'label' => 'Image',
                 'value' => Html::img($this->imagePath . '&w=200'),
                 'format' => 'raw'
-            ]
-        ];
+            ];
+        }
+
+        return $columns;
     }
     
     public function getIsInput()
