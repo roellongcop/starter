@@ -105,10 +105,10 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
                 'extensions' => App::params('file_extensions')['image'], 
                 'checkExtensionByMimeType' => false
             ],
+            */
             [['record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
 
-            */
         ];
     }
 
