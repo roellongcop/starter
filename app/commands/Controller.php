@@ -36,8 +36,7 @@ abstract class Controller extends \yii\console\Controller
 
         foreach ($tables as $table) {
             Console::output("Truncate {$table}");
-            App::truncateTable(App::tablePrefix() . $table)
-                ->execute();
+            App::truncateTable(App::tablePrefix() . $table);
         }
         Console::output("\n");
     }
