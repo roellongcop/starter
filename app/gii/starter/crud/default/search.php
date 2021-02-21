@@ -62,6 +62,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
     public function init()
     {
+        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 

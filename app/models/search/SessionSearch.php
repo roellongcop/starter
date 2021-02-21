@@ -38,6 +38,7 @@ class SessionSearch extends Session
 
     public function init()
     {
+        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 

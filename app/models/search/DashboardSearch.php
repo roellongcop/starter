@@ -35,6 +35,7 @@ class DashboardSearch extends \yii\base\Model
 
     public function init()
     {
+        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
  

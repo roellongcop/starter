@@ -39,6 +39,7 @@ class VisitLogSearch extends VisitLog
 
     public function init()
     {
+        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 

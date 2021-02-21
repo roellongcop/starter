@@ -37,6 +37,7 @@ class BackupSearch extends Backup
 
     public function init()
     {
+        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 

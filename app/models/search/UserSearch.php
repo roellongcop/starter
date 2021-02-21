@@ -38,6 +38,7 @@ class UserSearch extends User
 
     public function init()
     {
+        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 
