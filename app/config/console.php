@@ -12,6 +12,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
+        '@commands' => '@app/commands',
     ],
     'components' => [
         'access' => ['class' => 'app\components\AccessComponent'],
