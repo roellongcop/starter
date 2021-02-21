@@ -45,7 +45,7 @@ class SeedController extends Controller
     
     public function actionThemes()
     {
-        $data = include Yii::getAlias('@commands').'/data/themes.php';
+        $themes = include Yii::getAlias('@commands').'/data/themes.php';
         $this->actionTruncate(['themes']);
         $this->startProgress(0, count($themes), 'Seeding Themes: ');
         foreach ($themes as $i => $theme) {
