@@ -48,6 +48,7 @@ abstract class Controller extends \yii\web\Controller
             'appName' => App::appName(),
             'baseUrl' => Url::base(true),
             'language' => App::appLanguage(),
+            'api' => Url::base(true) . '/api/v1/',
             // 'params' => App::params()
         ]);
         $this->view->registerJs(<<<SCRIPT
