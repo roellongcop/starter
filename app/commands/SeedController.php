@@ -39,7 +39,7 @@ class SeedController extends Controller
         $this->actionRoles(10);
         $this->actionUsers(10, false);
         $this->actionThemes();
-        $this->actionIp(100);
+        $this->actionIp(10);
     }
 
     
