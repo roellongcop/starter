@@ -64,13 +64,8 @@ class FileComponent extends Component
             date('m'),
         ];
 
-        if (isset($model->modelName)) {
-            $folders[] = strtolower(Inflector::slug($model->modelName));
-        }
-        else {
-            $folders[] = strtolower(Inflector::slug(App::className($model)));
-        }
-
+        $slug = $model->modelName ?? App::className($model);
+        $folders[] = strtolower(Inflector::slug($slug));
 
         $file_path = implode('/', $folders);
         FileHelper::createDirectory($file_path);
