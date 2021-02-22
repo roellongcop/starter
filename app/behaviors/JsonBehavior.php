@@ -3,7 +3,6 @@ namespace app\behaviors;
 
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use yii\helpers\Json;
 
 class JsonBehavior extends Behavior
 {
@@ -22,7 +21,7 @@ class JsonBehavior extends Behavior
     {
         foreach ($this->fields as $e) {
             if (is_array($this->owner->{$e})) {
-                $this->owner->{$e} = Json::encode($this->owner->{$e});
+                $this->owner->{$e} = json_encode($this->owner->{$e});
             }
         }
     }
@@ -31,7 +30,7 @@ class JsonBehavior extends Behavior
     {
         foreach ($this->fields as $e) {
             if (!is_array($this->owner->{$e})) {
-                $this->owner->{$e} = Json::decode($this->owner->{$e}, TRUE);
+                $this->owner->{$e} = json_decode($this->owner->{$e}, TRUE);
             }
         }
     }
