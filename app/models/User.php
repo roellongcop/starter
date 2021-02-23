@@ -547,9 +547,9 @@ class User extends ActiveRecord implements IdentityInterface
                 'label' => 'last updated',
                 'format' => 'ago',
             ],
-            'blocked' => [
+            'is_blocked' => [
                 'attribute' => 'is_blocked',
-                'label' => 'status',
+                'label' => 'is blocked',
                 'format' => 'raw', 
                 'value' => function($model) {
                     return $model->blockedStatusHtml;
