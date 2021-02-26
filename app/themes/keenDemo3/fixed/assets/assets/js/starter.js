@@ -57,6 +57,11 @@ $(document).ready(function() {
             $('._div_filter_columns').removeClass('show');
         }
     });
+
+    $('input[maxlength]').maxlength({
+        warningClass: "label label-info label-rounded label-inline",
+        limitReachedClass: "label label-success label-rounded label-inline"
+    });
 })
 
 
