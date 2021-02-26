@@ -23,6 +23,9 @@ $config = [
             'enableSession' => false,
             // 'enableAutoLogin' => true,
         ],
+        'session' => [ // for use session in console application
+            'class' => 'yii\web\Session'
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
