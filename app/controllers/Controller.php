@@ -12,7 +12,6 @@ use app\filters\ThemeFilter;
 use app\helpers\App;
 use yii\helpers\Json;
 use yii\helpers\Url;
-use app\models\search\IpSearch;
 use app\models\search\SettingSearch;
 use yii\web\ForbiddenHttpException;
 
