@@ -13,11 +13,22 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
-class ProfileForm extends Model
+class ProfileForm extends \app\models\User
 {
-    public $user_id;
     public $first_name;
     public $last_name;
+    public $company_id;
+
+    public function attributeLabels()
+    {
+        return [
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'company_id' => 'Company',
+        ];
+    }
+
+    
     /**
      * @return array the validation rules.
      */
@@ -25,55 +36,62 @@ class ProfileForm extends Model
     {
         return [
             [
-            	[
-                    'user_id',
-            		'first_name',
-				    'last_name',
-            	], 
-	            'required'
-	        ],
-
-	        [
-            	[
-            		'first_name',
+                [
+                    'first_name',
                     'last_name',
-            	], 
-	            'string'
-	        ],
+                ], 
+                'required'
+            ],
 
-            [['user_id'], 'integer'],
- 
+            [
+                [
+                    'company_id',
+                ], 
+                'integer'
+            ],
+
+            [
+                [
+                    'first_name',
+                    'last_name',
+                ], 
+                'string'
+            ],
         ];
     }
 
-    public function setup()
+    public function init()
     {
+        parent::init();
+
         $user_metas = UserMeta::find()
             ->where([
-                'user_id' => $this->user_id,
-                'meta_key' => array_keys($this->attributes)
+                'user_id' => $this->id,
+                'meta_key' => array_keys(self::attributeLabels())
             ])
             ->all();
         foreach ($user_metas as $user_meta) {
-            if (property_exists($this, $user_meta->meta_key)) {
+            if ($this->hasProperty($user_meta->meta_key)) {
                 $this->{$user_meta->meta_key} = $user_meta->meta_value; 
             }
         }
     }
 
-    public function save()
+    public function save($runValidation = true, $attributeNames = NULL)
     {
         if ($this->validate()) {
-            foreach ($this->attributes as $attribute => $value) {
+            foreach ($this->getAttributes(array_keys(self::attributeLabels())) as $attribute => $value) {
                 $user_meta = UserMeta::findOne([
-                    'user_id' => $this->user_id,
+                    'user_id' => $this->id,
                     'meta_key' => $attribute
                 ]);
                 $user_meta = $user_meta ?: new UserMeta();
-                $user_meta->user_id = $this->user_id;
+                $user_meta->user_id = $this->id;
                 $user_meta->meta_key = $attribute;
                 $user_meta->meta_value = $value;
-                $user_meta->save();
+                if (! $user_meta->save()) {
+                    App::danger($user_meta->errors);
+                }
             }
 
             return true;

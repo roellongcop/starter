@@ -248,7 +248,7 @@ class SettingController extends Controller
     {
         if (App::isLogin()) {
             $user = App::identity(); 
-            $model = new MySettingForm();
+            $model = new MySettingForm($user);
             $themes = Theme::find()
                 ->orderBy(['id' => SORT_DESC])
                 ->all();
