@@ -390,7 +390,7 @@ class App {
 
 			$action = "can{$action}";
 
-			if ($model->hasAttribute($action)) {
+			if ($model->hasProperty($action)) {
 	            return $model->{$action};
 	        }
 	        else {

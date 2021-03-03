@@ -26,7 +26,7 @@ class LogBehavior extends Behavior
 
     public function afterSave($event)
     {
-        if ($this->owner->hasAttribute('logAfterSave')) {
+        if ($this->owner->hasProperty('logAfterSave')) {
             $this->logAfterSave = $this->owner->logAfterSave;
         }
 
@@ -38,7 +38,7 @@ class LogBehavior extends Behavior
 
     public function afterDelete()
     {
-        if ($this->owner->hasAttribute('logAfterDelete')) {
+        if ($this->owner->hasProperty('logAfterDelete')) {
             $this->logAfterDelete = $this->owner->logAfterDelete;
         }
         
