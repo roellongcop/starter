@@ -99,16 +99,18 @@ class SettingForm extends Model
 
     public function init()
     {
+        parent::init();
+
         $general_settings = App::params('general_settings');
         foreach ($general_settings as $setting) {
-            if (property_exists($this, $setting['name'])) {
+            if ($this->hasProperty($setting['name'])) {
                 $this->{$setting['name']} = $setting['default']; 
             }
         }
 
         $settings = Setting::findAll(['name' => array_keys($this->attributes)]);
         foreach ($settings as $setting) {
-            if (property_exists($this, $setting->name)) {
+            if ($this->hasProperty($setting->name)) {
                 if (in_array($setting->name, $setting->withImageInput)) {
                     $this->{$setting->name} = $setting->imagepath; 
                 }
