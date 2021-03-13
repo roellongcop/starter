@@ -30,7 +30,7 @@ class AppAsset extends AssetBundle
         'daterangepicker/daterangepicker.js',
         'js/jquery.nestable.js',
         'jsoneditor/jsoneditor.js',
-        'sortable/Sortable.js',
+        // 'sortable/Sortable.js',
         'js/starter.js'
     ];
 
