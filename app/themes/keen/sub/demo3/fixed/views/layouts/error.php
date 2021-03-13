@@ -3,11 +3,11 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\themes\keenDemo3\fixed\assets\ErrorAsset;
+use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedErrorAsset;
 use app\models\search\SettingSearch;
 use yii\helpers\Html;
 
-ErrorAsset::register($this);
+KeenDemo3FixedErrorAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

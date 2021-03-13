@@ -4,10 +4,10 @@
 /* @var $content string */
 
 
-use app\assets\AppAsset as StarterAppAsset;
+use app\assets\AppAsset;
 use app\helpers\App;
 use app\models\search\SettingSearch;
-use app\themes\keenDemo3\fixed\assets\AppAsset;
+use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedAppAsset;
 use app\widgets\Alert;
 use app\widgets\AnchorBack;
 use app\widgets\Anchors;
@@ -17,7 +17,7 @@ use yii\helpers\Html;
 
 
 AppAsset::register($this);
-StarterAppAsset::register($this);
+KeenDemo3FixedAppAsset::register($this);
 $createController = $this->params['createController'] ?? App::controllerID();
 ?>
 <?php $this->beginPage() ?>

@@ -4,15 +4,11 @@
 /* @var $content string */
 
 use app\models\search\SettingSearch;
-use app\themes\keenDemo3\fixed\assets\AppAsset;
+use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedAppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
-// use app\assets\MainAsset;
 
-
-AppAsset::register($this);
-// MainAsset::register($this);
-
+KeenDemo3FixedAppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

@@ -3,11 +3,11 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\themes\keenDemo3\fixed\assets\LoginAsset;
+use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedLoginAsset;
 use app\models\search\SettingSearch;
 use yii\helpers\Html;
 
-LoginAsset::register($this);
+KeenDemo3FixedLoginAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

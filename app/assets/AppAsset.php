@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
     public $sourcePath = '@app/assets';
 
     public $css = [
-        'https://pro.fontawesome.com/releases/v5.10.0/css/all.css',
+        // 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css',
         'daterangepicker/daterangepicker.css',
         'jsoneditor/jsoneditor.css', 
         'css/starter.css'

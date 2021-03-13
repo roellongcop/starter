@@ -274,30 +274,30 @@ return [
     ],
     14 => [
         'id' => 14,
-        'description' => 'keenDemo3/fixed',
+        'description' => 'keen/sub/demo3/fixed',
         'name' => 'Demo3 Fixed',
-        'basePath' => '@app/themes/keenDemo3/fixed/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo3/fixed',
+        'basePath' => '@app/themes/keen/sub/demo3/fixed/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo3/fixed',
         'pathMap' => [
-            '@app/views' => '@app/themes/keenDemo3/fixed/views',
-            '@app/widgets' => '@app/themes/keenDemo3/fixed/widgets',
+            '@app/views' => '@app/themes/keen/sub/demo3/fixed/views',
+            '@app/widgets' => '@app/themes/keen/sub/demo3/fixed/widgets',
         ],
         'bundles' => $keenDemo3Bundles
     ],
     15 => [
         'id' => 15,
-        'description' => 'keenDemo3/fluid',
+        'description' => 'keen/sub/demo3/fluid',
         'name' => 'Demo3 Fluid',
-        'basePath' => '@app/themes/keenDemo3/fixed/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo3/fixed',
+        'basePath' => '@app/themes/keen/sub/demo3/fixed/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo3/fixed',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo3/fluid/views',
-                '@app/themes/keenDemo3/fixed/views',
+                '@app/themes/keen/sub/demo3/fluid/views',
+                '@app/themes/keen/sub/demo3/fixed/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo3/fluid/widgets',
-                '@app/themes/keenDemo3/fixed/widgets',
+                '@app/themes/keen/sub/demo3/fluid/widgets',
+                '@app/themes/keen/sub/demo3/fixed/widgets',
             ],
         ],
         'bundles' => $keenDemo3Bundles
