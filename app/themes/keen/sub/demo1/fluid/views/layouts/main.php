@@ -4,16 +4,16 @@
 /* @var $content string */
 
 
-use app\assets\AppAsset as StarterAppAsset;
+use app\assets\AppAsset;
 use app\models\search\SettingSearch;
-use app\themes\keenDemo1\main\assets\AppAsset;
+use app\themes\keen\sub\demo1\main\assets\KeenDemo1AppAsset;
 use app\widgets\Alert;
 use yii\helpers\Html;
 
 
 
+KeenDemo1AppAsset::register($this);
 AppAsset::register($this);
-StarterAppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

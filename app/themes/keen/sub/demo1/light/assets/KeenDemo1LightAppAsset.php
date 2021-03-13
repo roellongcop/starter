@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\themes\keenDemo1\main\assets;
+namespace app\themes\keen\sub\demo1\light\assets;
 use yii\web\AssetBundle;
 /**
  * Main application asset bundle.
@@ -13,9 +13,9 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class KeenDemo1LightAppAsset extends AssetBundle
 {
-    public $sourcePath = '@app/themes/keenDemo1/main/assets/assets';
+    public $sourcePath = '@app/themes/keen/sub/demo1/main/assets/assets';
 
     public $css = [
         'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700',
@@ -26,17 +26,16 @@ class AppAsset extends AssetBundle
         'css/themes/layout/header/menu/light.css',
         'css/themes/layout/brand/dark.css',
         'css/themes/layout/aside/dark.css',
-
-        // 'css/themes/layout/header/base/dark.css',
-        // 'css/themes/layout/header/menu/dark.css',
-        // 'css/themes/layout/brand/light.css',
-        // 'css/themes/layout/aside/light.css',
+        
+        
+        'css/themes/layout/brand/light.css',
+        'css/themes/layout/aside/light.css',
         'css/starter.css'
     ];
     public $js = [
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        // 'plugins/custom/draggable/draggable.bundle.js',
+        'plugins/custom/draggable/draggable.bundle.js',
         'js/starter.js'
     ];
     public $depends = [

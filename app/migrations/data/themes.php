@@ -2,11 +2,11 @@
 $keenDemo1Bundles = [
     'yii\web\JqueryAsset' => [
         'jsOptions' => ['position' => \yii\web\View::POS_HEAD],
-        'sourcePath' => '@app/themes/keenDemo1/main/assets/assets/plugins/global/',
+        'sourcePath' => '@app/themes/keen/sub/demo1/main/assets/assets/plugins/global/',
         'js' => ['plugins.bundle.js']
     ],  
     'yii\bootstrap\BootstrapAsset' => [
-        'sourcePath' => '@app/themes/keenDemo1/main/assets/assets/plugins/global/',
+        'sourcePath' => '@app/themes/keen/sub/demo1/main/assets/assets/plugins/global/',
         'css' => ['plugins.bundle.css']
     ],  
 ];
@@ -14,204 +14,219 @@ $keenDemo1Bundles = [
 $keenDemo2Bundles = [
     'yii\web\JqueryAsset' => [
         'jsOptions' => ['position' => \yii\web\View::POS_HEAD],
-        'sourcePath' => '@app/themes/keenDemo2/fixed/assets/assets/plugins/global/',
+        'sourcePath' => '@app/themes/keen/sub/demo2/fixed/assets/assets/plugins/global/',
         'js' => ['plugins.bundle.js']
     ],  
     'yii\bootstrap\BootstrapAsset' => [
-        'sourcePath' => '@app/themes/keenDemo2/fixed/assets/assets/plugins/global/',
+        'sourcePath' => '@app/themes/keen/sub/demo2/fixed/assets/assets/plugins/global/',
         'css' => ['plugins.bundle.css']
     ],  
 ];
 
+
+$keenDemo3Bundles = [
+    'yii\web\JqueryAsset' => [
+        'jsOptions' => ['position' => \yii\web\View::POS_HEAD],
+        'sourcePath' => '@app/themes/keen/sub/demo3/fixed/assets/assets/plugins/global/',
+        'js' => ['plugins.bundle.js']
+    ],  
+    'yii\bootstrap\BootstrapAsset' => [
+        'sourcePath' => '@app/themes/keen/sub/demo3/fixed/assets/assets/plugins/global/',
+        'css' => ['plugins.bundle.css']
+    ],  
+];
+
+
+
 return [
     1 => [
         'id' => 1,
-        'description' => 'keenDemo1/main',
+        'description' => 'keen/sub/demo1/main',
         'name' => 'Demo1 Main',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
-            '@app/views' => '@app/themes/keenDemo1/main/views',
-            '@app/widgets' => '@app/themes/keenDemo1/main/widgets',
+            '@app/views' => '@app/themes/keen/sub/demo1/main/views',
+            '@app/widgets' => '@app/themes/keen/sub/demo1/main/widgets',
         ],
         'bundles' => $keenDemo1Bundles
     ],
     2 => [
         'id' => 2,
-        'description' => 'keenDemo1/fluid',
+        'description' => 'keen/sub/demo1/fluid',
         'name' => 'Demo1 Main Fluid',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/fluid/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/fluid/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/fluid/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/fluid/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ]
         ],
         'bundles' => $keenDemo1Bundles
     ],
     3 => [
         'id' => 3,
-        'description' => 'keenDemo1/light',
+        'description' => 'keen/sub/demo1/light',
         'name' => 'Light',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/light/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/light/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/light/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/light/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ],
         ],
         'bundles' => $keenDemo1Bundles
     ],
     4 => [
         'id' => 4,
-        'description' => 'keenDemo1/lightFluid',
+        'description' => 'keen/sub/demo1/lightFluid',
         'name' => 'Light Fluid',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/lightFluid/views',
-                '@app/themes/keenDemo1/light/views',
-                '@app/themes/keenDemo1/fluid/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/lightFluid/views',
+                '@app/themes/keen/sub/demo1/light/views',
+                '@app/themes/keen/sub/demo1/fluid/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/lightFluid/widgets',
-                '@app/themes/keenDemo1/light/widgets',
-                '@app/themes/keenDemo1/fluid/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/lightFluid/widgets',
+                '@app/themes/keen/sub/demo1/light/widgets',
+                '@app/themes/keen/sub/demo1/fluid/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ],
         ],
         'bundles' => $keenDemo1Bundles
     ],
     5 => [
         'id' => 5,
-        'description' => 'keenDemo1/dark',
+        'description' => 'keen/sub/demo1/dark',
         'name' => 'Dark',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/dark/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/dark/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/dark/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/dark/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ],
         ],
         'bundles' => $keenDemo1Bundles
     ],
     6 => [
         'id' => 6,
-        'description' => 'keenDemo1/darkFluid',
+        'description' => 'keen/sub/demo1/darkFluid',
         'name' => 'Dark Fluid',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/darkFluid/views',
-                '@app/themes/keenDemo1/dark/views',
-                '@app/themes/keenDemo1/fluid/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/darkFluid/views',
+                '@app/themes/keen/sub/demo1/dark/views',
+                '@app/themes/keen/sub/demo1/fluid/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/darkFluid/widgets',
-                '@app/themes/keenDemo1/dark/widgets',
-                '@app/themes/keenDemo1/fluid/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/darkFluid/widgets',
+                '@app/themes/keen/sub/demo1/dark/widgets',
+                '@app/themes/keen/sub/demo1/fluid/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ],
         ],
         'bundles' => $keenDemo1Bundles
     ],
     7 => [
         'id' => 7,
-        'description' => 'keenDemo1/noAsideLight',
+        'description' => 'keen/sub/demo1/noAsideLight',
         'name' => 'No-aside Light',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/noAsideLight/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/noAsideLight/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/noAsideLight/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/noAsideLight/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ],
         ],
         'bundles' => $keenDemo1Bundles
     ],
     8 => [
         'id' => 8,
-        'description' => 'keenDemo1/noAsideLightFluid',
+        'description' => 'keen/sub/demo1/noAsideLightFluid',
         'name' => 'No-aside Light Fluid',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/noAsideLightFluid/views',
-                '@app/themes/keenDemo1/noAsideLight/views',
-                '@app/themes/keenDemo1/fluid/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/noAsideLightFluid/views',
+                '@app/themes/keen/sub/demo1/noAsideLight/views',
+                '@app/themes/keen/sub/demo1/fluid/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/noAsideLightFluid/widgets',
-                '@app/themes/keenDemo1/noAsideLight/widgets',
-                '@app/themes/keenDemo1/fluid/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/noAsideLightFluid/widgets',
+                '@app/themes/keen/sub/demo1/noAsideLight/widgets',
+                '@app/themes/keen/sub/demo1/fluid/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ],
         ],
         'bundles' => $keenDemo1Bundles
     ],
     9 => [
         'id' => 9,
-        'description' => 'keenDemo1/noAsideDark',
+        'description' => 'keen/sub/demo1/noAsideDark',
         'name' => 'No-aside Dark',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/noAsideDark/views',
-                '@app/themes/keenDemo1/noAsideLight/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/noAsideDark/views',
+                '@app/themes/keen/sub/demo1/noAsideLight/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/noAsideDark/widgets',
-                '@app/themes/keenDemo1/noAsideLight/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/noAsideDark/widgets',
+                '@app/themes/keen/sub/demo1/noAsideLight/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ],
         ],
         'bundles' => $keenDemo1Bundles
     ],
     10 => [
         'id' => 10,
-        'description' => 'keenDemo1/noAsideDarkFluid',
+        'description' => 'keen/sub/demo1/noAsideDarkFluid',
         'name' => 'No-aside Dark Fluid',
-        'basePath' => '@app/themes/keenDemo1/main/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo1/main',
+        'basePath' => '@app/themes/keen/sub/demo1/main/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo1/main',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo1/noAsideDarkFluid/views',
-                '@app/themes/keenDemo1/noAsideLight/views',
-                '@app/themes/keenDemo1/fluid/views',
-                '@app/themes/keenDemo1/main/views',
+                '@app/themes/keen/sub/demo1/noAsideDarkFluid/views',
+                '@app/themes/keen/sub/demo1/noAsideLight/views',
+                '@app/themes/keen/sub/demo1/fluid/views',
+                '@app/themes/keen/sub/demo1/main/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo1/noAsideDarkFluid/widgets',
-                '@app/themes/keenDemo1/noAsideLight/widgets',
-                '@app/themes/keenDemo1/fluid/widgets',
-                '@app/themes/keenDemo1/main/widgets',
+                '@app/themes/keen/sub/demo1/noAsideDarkFluid/widgets',
+                '@app/themes/keen/sub/demo1/noAsideLight/widgets',
+                '@app/themes/keen/sub/demo1/fluid/widgets',
+                '@app/themes/keen/sub/demo1/main/widgets',
             ],
         ],
         'bundles' => $keenDemo1Bundles
@@ -229,30 +244,30 @@ return [
     ],
     12 => [
         'id' => 12,
-        'description' => 'keenDemo2/fixed',
+        'description' => 'keen/sub/demo2/fixed',
         'name' => 'Demo2 Fixed',
-        'basePath' => '@app/themes/keenDemo2/fixed/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo2/fixed',
+        'basePath' => '@app/themes/keen/sub/demo2/fixed/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo2/fixed',
         'pathMap' => [
-            '@app/views' => '@app/themes/keenDemo2/fixed/views',
-            '@app/widgets' => '@app/themes/keenDemo2/fixed/widgets',
+            '@app/views' => '@app/themes/keen/sub/demo2/fixed/views',
+            '@app/widgets' => '@app/themes/keen/sub/demo2/fixed/widgets',
         ],
         'bundles' => $keenDemo2Bundles
     ],
     13 => [
         'id' => 13,
-        'description' => 'keenDemo2/fluid',
+        'description' => 'keen/sub/demo2/fluid',
         'name' => 'Demo2 Fluid',
-        'basePath' => '@app/themes/keenDemo2/fixed/assets/assets',
-        'baseUrl' => '@web/themes/keenDemo2/fixed',
+        'basePath' => '@app/themes/keen/sub/demo2/fixed/assets/assets',
+        'baseUrl' => '@web/themes/keen/sub/demo2/fixed',
         'pathMap' => [
             '@app/views' => [
-                '@app/themes/keenDemo2/fluid/views',
-                '@app/themes/keenDemo2/fixed/views',
+                '@app/themes/keen/sub/demo2/fluid/views',
+                '@app/themes/keen/sub/demo2/fixed/views',
             ],
             '@app/widgets' => [
-                '@app/themes/keenDemo2/fluid/widgets',
-                '@app/themes/keenDemo2/fixed/widgets',
+                '@app/themes/keen/sub/demo2/fluid/widgets',
+                '@app/themes/keen/sub/demo2/fixed/widgets',
             ],
         ],
         'bundles' => $keenDemo2Bundles
@@ -267,7 +282,7 @@ return [
             '@app/views' => '@app/themes/keenDemo3/fixed/views',
             '@app/widgets' => '@app/themes/keenDemo3/fixed/widgets',
         ],
-        'bundles' => $keenDemo2Bundles
+        'bundles' => $keenDemo3Bundles
     ],
     15 => [
         'id' => 15,
@@ -285,6 +300,6 @@ return [
                 '@app/themes/keenDemo3/fixed/widgets',
             ],
         ],
-        'bundles' => $keenDemo2Bundles
+        'bundles' => $keenDemo3Bundles
     ],
 ];

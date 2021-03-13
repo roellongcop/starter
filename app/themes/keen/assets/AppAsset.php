@@ -16,7 +16,6 @@ use yii\web\AssetBundle;
 class KeenAsset extends AssetBundle
 {
     public $sourcePath = '@app/themes/keen/assets/assets';
-
     public $css = [
         'css/keen.css'
     ];
