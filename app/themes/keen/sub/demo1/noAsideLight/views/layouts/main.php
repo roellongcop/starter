@@ -3,17 +3,14 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-
-use app\assets\AppAsset as StarterAppAsset;
+use app\assets\AppAsset;
 use app\models\search\SettingSearch;
-use app\themes\keenDemo1\noAsideLight\assets\AppAsset;
+use app\themes\keen\sub\demo1\noAsideLight\assets\KeenDemo1NoAsideLightAppAsset;
 use app\widgets\Alert;
 use yii\helpers\Html;
 
-
-
+KeenDemo1NoAsideLightAppAsset::register($this);
 AppAsset::register($this);
-StarterAppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

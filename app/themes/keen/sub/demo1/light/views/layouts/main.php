@@ -10,8 +10,6 @@ use app\themes\keen\sub\demo1\light\assets\KeenDemo1LightAppAsset;
 use app\widgets\Alert;
 use yii\helpers\Html;
 
-
-
 KeenDemo1LightAppAsset::register($this);
 AppAsset::register($this);
 ?>

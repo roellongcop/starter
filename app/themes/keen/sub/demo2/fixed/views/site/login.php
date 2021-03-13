@@ -44,7 +44,7 @@ $publishedUrl = App::publishedUrl();
                     <!--begin::Form-->
                     <?= Alert::widget() ?>
                     <?php $form = ActiveForm::begin([
-                        'id' => 'kt_login_signin_form',
+                        // 'id' => 'kt_login_signin_form',
                         'errorCssClass' => 'is-invalid',
                         'successCssClass' => 'is-valid',
                         'validationStateOn' => 'input',
@@ -87,7 +87,7 @@ $publishedUrl = App::publishedUrl();
 
                         <!--begin::Action-->
                         <div class="pb-lg-0 pb-5">
-                            <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
+                            <button type="submit" id="" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
                         </div>
                         <!--end::Action-->
                     <?php ActiveForm::end(); ?>
