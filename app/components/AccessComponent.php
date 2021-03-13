@@ -17,31 +17,36 @@ use yii\helpers\Url;
 class AccessComponent extends Component
 {
  
-	public function controllerActions($res = [])
+	public function controllerActions()
 	{
 		$controllers = FileHelper::findFiles(Yii::getAlias('@app/controllers'), [
 			'recursive' => true
 		]);
 
+		$data = [];
+
 		foreach ($controllers as $key => $controller) {
-			$contents = file_get_contents($controller);
-			$controller_ID = Inflector::camel2id(substr(basename($controller), 0, -14));
-			preg_match_all('/public function action(\w+?)\(/', $contents, $result);
-			
-			$_actions = $result[1];
+
+			if (($controllerID = Inflector::camel2id(substr(basename($controller), 0, -14))) == '') continue;
+
+			$controllerName = substr(basename($controller), 0, -4);
+			$actions = get_class_methods("\\app\\controllers\\{$controllerName}");
+			$_actions = [];
+
+			foreach ($actions as $action) {
+				if (!preg_match("/^action\w+$/", $action)) continue;
+
+				if (($actionID = substr(Inflector::camel2id($action), 7)) == '') continue;
+
+				$_actions[] = $actionID;
+			}
 
 			asort($_actions);
+			$data[$controllerID] = $_actions;
 
-			foreach ($_actions as $action) {
-				$action_ID = Inflector::camel2id($action);
-
-				if($action_ID !== 's') {
-					$res[$controller_ID][] = $action_ID;
-				}
-			}
 		}
- 		ksort($res);
-		return $res;
+ 		ksort($data);
+		return $data;
 	}
 
 	 
@@ -108,33 +113,7 @@ class AccessComponent extends Component
 
 		return false;
  	}
-
-
- 	public function createNavigation()
- 	{
- 		$controllerActions = $this->controllerActions();
-
- 		$data = [];
-
- 		$count = 1;
-
- 		$controllerActions['general-setting'] = ['link' => '/setting/general'];
- 		$controllerActions['my-setting'] = ['link' => '/my-setting'];
-
-
- 		foreach ($controllerActions as $controller => $actions) {
- 			$data["{$count}-new"] = [
- 				'label' => ucwords(str_replace('-', ' ', Inflector::titleize($controller))),
-                'link' => App::urlManager('baseUrl') . (isset($actions['link'])? $actions['link']: "/{$controller}"),
- 				'icon' => '<i class="fa fa-cog"></i>'
- 			];
- 			$count++;
- 		}
-
-		
- 		return $data;
- 	}
-
+ 
 
  	public function getModuleFilter()
  	{

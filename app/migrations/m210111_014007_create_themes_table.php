@@ -13,6 +13,24 @@ class m210111_014007_create_themes_table extends Migration
         return '{{%themes}}';
     }
 
+    public function seed()
+    {
+        $themes = include Yii::getAlias('@app/migrations/data/themes.php');
+
+        foreach ($themes as $i => $theme) {
+            $data = [
+                'description' => $theme['description'],
+                'name'        => $theme['name'],
+                'base_path'   => $theme['basePath'],
+                'base_url'    => $theme['baseUrl'],
+                'path_map'    => json_encode($theme['pathMap']),
+                'bundles'     => json_encode($theme['bundles'] ?? []),
+                'record_status' => 1,
+            ];
+            $this->insert($this->tableName(), $data);
+        }
+    }
+
     public function tableIndexes()
     {
         return [
@@ -64,6 +82,8 @@ class m210111_014007_create_themes_table extends Migration
         foreach($this->tableIndexes() as $key => $value) {
             $this->createIndex($key, $this->tableName(), $value);
         }
+
+        $this->seed();
 
     }
 

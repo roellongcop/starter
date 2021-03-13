@@ -15,6 +15,7 @@ use app\models\Role;
 use app\models\Theme;
 use app\models\User;
 use app\models\search\RoleSearch;
+use yii\helpers\Inflector;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -29,72 +30,67 @@ class SeedController extends Controller
     public function actionInit()
     {
         $this->actionTruncate(['users', 'roles', 'ips']);
-        $this->actionRoles(10);
-        $this->actionUsers(10, false);
-        $this->actionThemes();
+        $this->actionRoles(5);
+        $this->actionUsers(5, false);
+        $this->actionIp(5);
     }
 
     public function actionIndex()
     {
-        $this->actionRoles(10);
-        $this->actionUsers(10, false);
-        $this->actionThemes();
-        $this->actionIp(10);
+        $this->actionRoles(5);
+        $this->actionUsers(5, false);
+        $this->actionIp(5);
     }
 
     
-    public function actionThemes()
-    {
-        $themes = include Yii::getAlias('@commands').'/data/themes.php';
-        $this->actionTruncate(['themes']);
-        $this->startProgress(0, count($themes), 'Seeding Themes: ');
-        foreach ($themes as $i => $theme) {
-            $data = [
-                'description' => $theme['description'],
-                'name' => $theme['name'],
-                'base_path' => $theme['basePath'],
-                'base_url' => $theme['baseUrl'],
-                'path_map' => $theme['pathMap'],
-                'bundles' => $theme['bundles'] ?? NULL,
-                'record_status' => 1,
-            ];
-            $model = new Theme();
-            $model->load(['Theme' => $data]);
-            $this->save($model, $i, count($themes)); 
-        }
-        $this->summary(Theme::find()->count());
-    }
-
     public function actionIp($row=1)
     {
-        $faker = Factory::create();
         $this->startProgress(0, $row, 'Seeding IP: ');
         for ($i=1; $i <= $row; $i++) { 
-            $model                  = new Ip();
-            $model->name            = $faker->ipv4; 
-            $model->description     = $faker->text; 
-            $model->type            = $faker->randomElement(App::keyMapParams('ip_type'));
-            $model->created_at = $faker->date . ' ' . $faker->time;
-            $model->record_status   = $faker->randomElement(App::keyMapParams('record_status'));
+            $model = new Ip();
+            $model->name = $this->faker->ipv4; 
+            $model->description = $this->faker->text; 
+            $model->type = $this->randomParamsID('ip_type');
+            $model->created_at = $this->faker->date . ' ' . $this->faker->time;
+            $model->record_status = $this->recordStatus();
             $this->save($model, $i, $row); 
         }
         $this->summary(Ip::find()->count());
     }
 
+    public function _roleCreateNavigation($controllerActions)
+    {
+        $data = [];
+
+        $count = 1;
+
+        $controllerActions['general-setting'] = ['link' => '/setting/general'];
+        $controllerActions['my-setting'] = ['link' => '/my-setting'];
+
+        foreach ($controllerActions as $controller => $actions) {
+            $data["{$count}-new"] = [
+                'label' => ucwords(str_replace('-', ' ', Inflector::titleize($controller))),
+                'link' => App::urlManager('baseUrl') . (isset($actions['link'])? $actions['link']: "/{$controller}"),
+                'icon' => '<i class="fa fa-cog"></i>'
+            ];
+            $count++;
+        }
+        
+        return $data;
+    }
+
     public function actionRoles($row=1)
     {
-        $faker = Factory::create();
         $controllerActions = App::component('access')->controllerActions();
-        $createNavigation = App::component('access')->createNavigation();
+        $createNavigation = $this->_roleCreateNavigation($controllerActions);
         $this->startProgress(0, $row, 'Seeding Role: ');
         for ($i=1; $i <= $row; $i++) { 
-            $model                  = new Role();
-            $model->name            = $faker->jobTitle;
-            $model->record_status   = $faker->randomElement(App::keyMapParams('record_status'));
-            $model->module_access   = $controllerActions;
+            $model = new Role();
+            $model->name = $this->faker->jobTitle; 
+            $model->module_access = $controllerActions;
             $model->main_navigation = $createNavigation;
-            $model->record_status   = $faker->randomElement(App::keyMapParams('record_status'));
-            $model->created_at = $faker->date . ' ' . $faker->time;
+            $model->record_status = $this->recordStatus();
+            $model->created_at = $this->created_at();
             $this->save($model, $i, $row); 
         }
         $this->summary(Role::find()->count());
@@ -103,29 +99,26 @@ class SeedController extends Controller
     public function actionUsers($row=1, $random=true)
     {
         $roles = array_keys(RoleSearch::dropdown());
-        $faker = Factory::create();
         $this->startProgress(0, $row, 'Seeding User: ');
         for ($i=1; $i <= $row; $i++) { 
-            $model                = new User();
-            $model->role_id       = $faker->randomElement($roles);
-            $model->username      = $faker->firstName;
-            $model->email         = $faker->email;
+            $model = new User();
+            $model->role_id = $this->faker->randomElement($roles);
+            $model->username = $this->faker->firstName;
+            $model->email = $this->faker->email;
             $model->password_hash = App::hash($model->email);
             $model->password_hint = 'Same as Email';
             if ($random) {
-                $model->status        = $faker->randomElement(App::keyMapParams('user_status'));
-                $model->record_status = $faker->randomElement(App::keyMapParams('record_status'));
-                $model->is_blocked    = $faker->randomElement(App::keyMapParams('is_blocked'));
+                $model->status = $this->randomParamsID('user_status');
+                $model->record_status = $this->randomParamsID('record_status');
+                $model->is_blocked = $this->randomParamsID('is_blocked');
             }
             else {
-                $model->status        = 10;
+                $model->status = 10;
                 $model->record_status = 1;
-                $model->is_blocked    = 0;
+                $model->is_blocked = 0;
             }
           
-
-            $model->created_at = $faker->date . ' ' . $faker->time;
-
+            $model->created_at = $this->created_at();
             $this->save($model, $i, $row); 
         }
         $this->summary(User::find()->count());

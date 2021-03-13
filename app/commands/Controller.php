@@ -7,9 +7,9 @@
 
 namespace app\commands;
 
+use Faker\Factory;
 use Yii;
 use app\helpers\App;
-// use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\console\widgets\Table;
 use yii\helpers\Console;
@@ -29,6 +29,28 @@ abstract class Controller extends \yii\console\Controller
     public $success_attributes = [];
     public $error_attributes = [];
     public $model_errors = [];
+    public $faker;
+
+
+    public function init()
+    {
+        parent::init();
+        $this->faker = Factory::create();
+    }
+
+    public function recordStatus()
+    {
+        return $this->randomParamsID('record_status');
+    }
+    public function created_at()
+    {
+        return implode(' ', [$this->faker->date, $this->faker->time]);
+    }
+
+    public function randomParamsID($key='record_status')
+    {
+        return $this->faker->randomElement(App::keyMapParams($key));
+    }
 
     public function actionTruncate($tables=[])
     {
