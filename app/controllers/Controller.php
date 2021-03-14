@@ -43,6 +43,10 @@ abstract class Controller extends \yii\web\Controller
 
     public function beforeAction($action)
     {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
         $options = Json::htmlEncode([
             'appName' => App::appName(),
             'baseUrl' => Url::base(true),
@@ -50,14 +54,14 @@ abstract class Controller extends \yii\web\Controller
             'api' => Url::base(true) . '/api/v1/',
             // 'params' => App::params()
         ]);
+
         $this->view->registerJs(<<<SCRIPT
             var app = {$options};
             console.log(app)
         SCRIPT , \yii\web\View::POS_HEAD, 'app');
         
-        
-
         App::session()->timeout = SettingSearch::default('auto_logout_timer');
-        return parent::beforeAction($action);
+        
+        return true;
     }
 }

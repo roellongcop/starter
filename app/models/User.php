@@ -348,12 +348,15 @@ class User extends ActiveRecord implements IdentityInterface
    
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert)) {
-            $this->generateAuthKey();
-            $this->generatePasswordResetToken();
-            $this->generateEmailVerificationToken();
-            return true;
+        if (!parent::beforeSave($insert)) {
+            return false;
         }
+        
+        $this->generateAuthKey();
+        $this->generatePasswordResetToken();
+        $this->generateEmailVerificationToken();
+
+        return true;
     }
 
     public function getThemeMeta()

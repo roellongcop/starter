@@ -123,12 +123,16 @@ class File extends ActiveRecord
      
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert)) {
-            if ($this->isNewRecord) {
-                $this->token = $this->token ?: $this->generateToken();
-            }
-            return true;
+        if (!parent::beforeSave($insert)) {
+            return false;
         }
+
+
+        if ($this->isNewRecord) {
+            $this->token = $this->token ?: $this->generateToken();
+        }
+        
+        return true;
     }
 
 
