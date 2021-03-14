@@ -20,12 +20,12 @@ class KeenDemo3FixedAppAsset extends AssetBundle
         'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700',
         'plugins/custom/prismjs/prismjs.bundle.css',
         'css/style.bundle.css',
-        'css/starter.css',
+        'css/demo3.css',
     ];
     public $js = [
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        'js/starter.js',
+        'js/demo3.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

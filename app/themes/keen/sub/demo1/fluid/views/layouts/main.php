@@ -9,10 +9,10 @@ use app\models\search\SettingSearch;
 use app\themes\keen\sub\demo1\main\assets\KeenDemo1AppAsset;
 use app\widgets\Alert;
 use yii\helpers\Html;
-
-
+use app\themes\keen\assets\KeenAsset;
 
 KeenDemo1AppAsset::register($this);
+KeenAsset::register($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

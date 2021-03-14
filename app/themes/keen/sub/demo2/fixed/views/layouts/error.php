@@ -6,8 +6,10 @@
 use app\themes\keen\sub\demo2\fixed\assets\KeenDemo2FixedErrorAsset;
 use app\models\search\SettingSearch;
 use yii\helpers\Html;
+use app\themes\keen\assets\KeenAsset;
 
 KeenDemo2FixedErrorAsset::register($this);
+KeenAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

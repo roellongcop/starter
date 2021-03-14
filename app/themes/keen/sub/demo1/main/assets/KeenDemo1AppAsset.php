@@ -24,12 +24,12 @@ class KeenDemo1AppAsset extends AssetBundle
         'css/themes/layout/header/menu/light.css',
         'css/themes/layout/brand/dark.css',
         'css/themes/layout/aside/dark.css',
-        'css/starter.css'
+        'css/demo1.css'
     ];
     public $js = [
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        'js/starter.js'
+        'js/demo1.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

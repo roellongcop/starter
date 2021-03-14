@@ -8,8 +8,10 @@ use app\models\search\SettingSearch;
 use app\themes\keen\sub\demo1\dark\assets\KeenDemo1DarkAppAsset;
 use app\widgets\Alert;
 use yii\helpers\Html;
+use app\themes\keen\assets\KeenAsset;
 
 KeenDemo1DarkAppAsset::register($this);
+KeenAsset::register($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

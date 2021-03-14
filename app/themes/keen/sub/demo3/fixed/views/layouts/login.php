@@ -6,8 +6,10 @@
 use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedLoginAsset;
 use app\models\search\SettingSearch;
 use yii\helpers\Html;
+use app\themes\keen\assets\KeenAsset;
 
 KeenDemo3FixedLoginAsset::register($this);
+KeenAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

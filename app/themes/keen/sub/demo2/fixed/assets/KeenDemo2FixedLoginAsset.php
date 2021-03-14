@@ -23,14 +23,13 @@ class KeenDemo2FixedLoginAsset extends AssetBundle
         'css/pages/login/login-1.css',
         'plugins/custom/prismjs/prismjs.bundle.css',
         'css/style.bundle.css',
-
-        'css/starter.css'
+        'css/demo2.css'
     ];
     public $js = [
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
         'js/pages/custom/login/login.js',
-        'js/starter.js'
+        'js/demo2.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

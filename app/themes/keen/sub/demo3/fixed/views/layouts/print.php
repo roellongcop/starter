@@ -7,8 +7,10 @@ use app\models\search\SettingSearch;
 use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedAppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\themes\keen\assets\KeenAsset;
 
 KeenDemo3FixedAppAsset::register($this);
+KeenAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

@@ -14,8 +14,10 @@ use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
 use yii\helpers\Html;
+use app\themes\keen\assets\KeenAsset;
 
 AppAsset::register($this);
+KeenAsset::register($this);
 KeenDemo3FixedAppAsset::register($this);
 $createController = $this->params['createController'] ?? App::controllerID();
 ?>

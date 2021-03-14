@@ -4,10 +4,12 @@
 /* @var $content string */
 
 use app\themes\keen\sub\demo1\main\assets\KeenDemo1ErrorAsset;
+use app\themes\keen\assets\KeenAsset;
 use app\models\search\SettingSearch;
 use yii\helpers\Html;
 
 KeenDemo1ErrorAsset::register($this);
+KeenAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
