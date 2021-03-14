@@ -25,6 +25,11 @@ use yii\widgets\ActiveForm;
         
         <?= DateRange::widget(['model' => $model]) ?>
 
+        <hr>
+        <?= $form->field($model, 'model_id')->textInput([
+            'name' => 'model_id'
+        ]) ?>
+
         <?= Filter::widget([
             'data' => LogSearch::filter('method'),
             'title' => 'Method',

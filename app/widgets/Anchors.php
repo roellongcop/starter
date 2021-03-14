@@ -11,8 +11,10 @@ class Anchors extends \yii\base\Widget
     public $model;
     public $titles = [
         'index' => 'List',
+        'log' => 'Data Logs',
     ];
     public $options = [
+        'log' => ['class' => 'btn btn-secondary btn-bold btn-upper btn-font-sm'],
         'index' => ['class' => 'btn btn-secondary btn-bold btn-upper btn-font-sm'],
         'create' => ['class' => 'btn btn-success font-weight-bolder font-size-sm '],
         'view' => ['class' => 'btn btn-default font-weight-bolder font-size-sm '],
@@ -43,6 +45,13 @@ class Anchors extends \yii\base\Widget
             $options = $this->options[$name] ?? $this->defaultOptions;
 
             switch ($name) { 
+                case 'log':
+                    $link = [
+                        'log/index', 
+                        'model_id' => $this->model->id, 
+                        'model_name' => App::className($this->model)
+                    ];
+                    break;
                 case 'index':
                     $link = ["{$controller}/{$name}"];
                     break;
