@@ -71,6 +71,7 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                     'src' => ($model->imagePath)? $model->imagePath . '&w=200': '',
                 ]) ?>
             </div>
+            <?= $model->imagePath ?>
             <br>
             <?php if ($model->isNewRecord): ?>
                 <?= $form->field($model, 'imageInput')->fileInput() ?>
