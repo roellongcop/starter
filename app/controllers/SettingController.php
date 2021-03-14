@@ -63,17 +63,9 @@ class SettingController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(App::post()) && $model->validate()) {
-            $model->imageInput = UploadedFile::getInstance($model, 'imageInput');
-
-            if ($model->imageInput) {
-                $model->value = "{$model->imageInput->baseName}.{$model->imageInput->extension}";
-            }
-            if ($model->save()) {
-                $model->upload();
-                App::success('Successfully Updated');
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Updated');
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [

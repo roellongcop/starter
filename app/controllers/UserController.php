@@ -85,13 +85,9 @@ class UserController extends Controller
     {
         $model = $this->findModel($id); 
 
-        if ($model->load(App::post()) && $model->validate()) {
-            $model->imageInput = UploadedFile::getInstance($model, 'imageInput');
-            if ($model->save()) {
-                $model->upload();
-                App::success('Successfully Updated');
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Updated');
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
