@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use app\behaviors\JsonBehavior;
 use app\behaviors\LogBehavior;
+use app\behaviors\ProcessBehavior;
+use app\behaviors\TokenBehavior;
 use app\helpers\App;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
@@ -14,17 +16,16 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\Inflector;
-use yii\helpers\Json;
 use yii\helpers\Url;
  
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     public function getMainAttribute()
     {
-        if ($this->hasAttribute('name')) {
+        if ($this->hasProperty('name')) {
             return $this->name;
         }
-        if ($this->hasAttribute('id')) {
+        if ($this->hasProperty('id')) {
             return $this->id;
         }
     }
@@ -123,7 +124,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getRecordStatusHtml()
     {
-        $controller = ($this->hasAttribute('controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
+        $controller = ($this->hasProperty('controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
 
 
         if (in_array(App::actionID(), App::params('export_actions'))) {
@@ -156,6 +157,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             }
         }
         return ($res)? false: true;
+    }
+
+    public function getCanCreate()
+    {
+        return true;
     }
     
     public function getCanView()
@@ -205,7 +211,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getPreview()
     {
-        $controller = ($this->hasAttribute('controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
+        $controller = ($this->hasProperty('controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
 
         $url = ["{$controller}/view", 'id' => $this->id];
 
@@ -242,5 +248,34 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if (isset($this->imageInput) && $this->imageInput) {
             App::component('file')->upload($this, 'imageInput');
         } 
-    }  
+    }
+
+    public function behaviors()
+    {
+        return [
+            'TimestampBehavior' => [
+                'class' => TimestampBehavior::className(),
+                'value' => new Expression('UTC_TIMESTAMP'),
+            ],
+            'BlameableBehavior' => [
+                'class' => BlameableBehavior::className(),
+                'defaultValue' => 0
+            ],
+            'AttributeTypecastBehavior' => [
+                'class' => AttributeTypecastBehavior::className()
+            ],
+            'LogBehavior' => [
+                'class' => LogBehavior::className()
+            ], 
+            'ProcessBehavior' => [
+                'class' => ProcessBehavior::className()
+            ], 
+            'TokenBehavior' => [
+                'class' => TokenBehavior::className()
+            ],
+            'JsonBehavior' => [
+                'class' => JsonBehavior::className()
+            ],
+        ];
+    }
 }

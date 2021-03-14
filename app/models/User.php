@@ -2,21 +2,14 @@
 namespace app\models;
 
 use Yii;
-use app\behaviors\JsonBehavior;
-use app\behaviors\LogBehavior;
 use app\helpers\App;
 use app\models\form\ProfileForm;
 use app\models\query\UserQuery;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\Label;
-use app\widgets\Switcher;
-use yii\base\NotSupportedException;
-use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\db\Expression;
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\helpers\Url;
 use yii\web\IdentityInterface;
 
@@ -464,30 +457,22 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
-
     public function behaviors()
     {
-        return [
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'email',
-                'slugAttribute' => 'slug',
-                'immutable' => false,
-                'ensureUnique' => true,
-            ],
-            [
-                'class' => TimestampBehavior::className(),
-                'value' => new Expression('UTC_TIMESTAMP'),
-            ],
-            [
-                'class' => BlameableBehavior::className(),
-                'defaultValue' => 0
-            ],
-            ['class' => JsonBehavior::className()],
-            ['class' => LogBehavior::className()], 
+        $behaviors = parent::behaviors();
+  
+        $behaviors['SluggableBehavior'] = [
+            'class' => SluggableBehavior::className(),
+            'attribute' => 'email',
+            'slugAttribute' => 'slug',
+            'immutable' => false,
+            'ensureUnique' => true,
         ];
+
+        return $behaviors;
     }
 
+ 
 
     public function getTableColumns()
     {

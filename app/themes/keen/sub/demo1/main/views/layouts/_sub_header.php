@@ -1,10 +1,11 @@
 <?php
 
+use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
-$createController = $this->params['createController'] ?? '';
+$createController = $this->params['createController'] ?? App::controllerID();
 
 ?>
 <div class="subheader py-6 py-lg-8 subheader-transparent" id="kt_subheader">

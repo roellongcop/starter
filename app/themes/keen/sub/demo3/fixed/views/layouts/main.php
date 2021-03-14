@@ -13,7 +13,7 @@ use app\widgets\AnchorBack;
 use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
-use yii\helpers\Html;
+use app\helpers\Html;
 use app\themes\keen\assets\KeenAsset;
 
 AppAsset::register($this);
@@ -106,15 +106,14 @@ $createController = $this->params['createController'] ?? App::controllerID();
 					            <!--end::Dropdown-->
 					            &nbsp;
 					            <?php if ($this->params['showCreateButton'] ?? ''): ?>
-					                <?= Anchors::widget([
-					                    'names' => 'create',
-					                    'controller' => $createController,
-					                    'options' => [
-					                    	'create' => [
-					                    		'class' => 'btn btn-primary font-weight-bolder'
-					                    	]
+					                
+					                <?= Html::a(
+					                    $this->params['createLabel'] ?? 'Create', 
+					                    ["{$createController}/create"],
+					                    [
+					                        'class' => 'btn btn-success font-weight-bolder'
 					                    ]
-					                ]); ?>
+					                ) ?>
 					            <?php endif ?>
 							</div>
 							<!--end::Toolbar-->

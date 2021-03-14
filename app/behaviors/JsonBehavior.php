@@ -19,18 +19,22 @@ class JsonBehavior extends Behavior
 
     public function beforeSave($event)
     {
-        foreach ($this->fields as $e) {
-            if (is_array($this->owner->{$e})) {
-                $this->owner->{$e} = json_encode($this->owner->{$e});
+        if ($this->fields) {
+            foreach ($this->fields as $e) {
+                if (is_array($this->owner->{$e})) {
+                    $this->owner->{$e} = json_encode($this->owner->{$e});
+                }
             }
         }
     }
 
     public function afterFind($event)
     {
-        foreach ($this->fields as $e) {
-            if (!is_array($this->owner->{$e})) {
-                $this->owner->{$e} = json_decode($this->owner->{$e}, TRUE);
+        if ($this->fields) {
+            foreach ($this->fields as $e) {
+                if (!is_array($this->owner->{$e})) {
+                    $this->owner->{$e} = json_decode($this->owner->{$e}, TRUE);
+                }
             }
         }
     }

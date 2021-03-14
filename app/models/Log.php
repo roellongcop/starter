@@ -3,17 +3,9 @@
 namespace app\models;
 
 use Yii;
-use app\behaviors\LogBehavior;
-use app\behaviors\JsonBehavior;
 use app\helpers\App;
-use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
-use yii\behaviors\AttributeTypecastBehavior;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\db\Expression;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
 use app\models\query\LogQuery;
@@ -311,24 +303,16 @@ class Log extends ActiveRecord
             'recordStatusHtml:raw'
         ];
     }
-
     public function behaviors()
     {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'value' => new Expression('UTC_TIMESTAMP'),
-            ],
-            [
-                'class' => BlameableBehavior::className(),
-                'defaultValue' => 0
-            ],
-            ['class' => AttributeTypecastBehavior::className()],
-            [
-                'class' => JsonBehavior::className(),
-                'fields' => ['change_attribute', 'request_data']
-            ], 
+        $behaviors = parent::behaviors();
+        $behaviors['JsonBehavior']['fields'] = [
+            'change_attribute', 
+            'request_data',
         ];
+
+        unset($behaviors['LogBehavior']);
+        return $behaviors;
     }
 
 
