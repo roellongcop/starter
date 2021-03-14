@@ -75,7 +75,7 @@ class UserSearch extends User
             ]
         ]);
 
-        $dataProvider->sort->attributes['role'] = [
+        $dataProvider->sort->attributes['roleName'] = [
             'asc' => ['r.name' => SORT_ASC],
             'desc' => ['r.name' => SORT_DESC],
         ];

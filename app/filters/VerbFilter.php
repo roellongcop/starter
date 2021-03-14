@@ -21,6 +21,7 @@ class VerbFilter extends \yii\filters\VerbFilter
 
     public function init()
     {
+        parent::init();
         $this->actions =  $this->verbActions;
     }
 }

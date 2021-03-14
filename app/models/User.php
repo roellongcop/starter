@@ -523,7 +523,7 @@ class User extends ActiveRecord implements IdentityInterface
             ],
             'email' => ['attribute' => 'email', 'format' => 'raw'],
             'role' => [
-                'attribute' => 'role_id', 
+                'attribute' => 'roleName', 
                 'format' => 'raw',
                 'label' => 'Role',
                 'value' => function($model) {

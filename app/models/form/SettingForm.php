@@ -50,7 +50,6 @@ class SettingForm extends Model
 	        [
             	[
             		'timezone',
-				    'app_name',
 				    'admin_email',
 				    'sender_email',
 				    'sender_name',
