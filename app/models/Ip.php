@@ -178,32 +178,17 @@ class Ip extends ActiveRecord
 
     public function getBulkActions()
     {
-        return [
-            [
-                'label' => 'Set as Active',
-                'process' => 'active',
-                'icon' => 'active',
-            ],
-            [
-                'label' => 'Set as In-active',
-                'process' => 'in_active',
-                'icon' => 'in_active',
-            ],
-            [
-                'label' => 'Delete',
-                'process' => 'delete',
-                'icon' => 'delete',
-            ],
-            [
-                'label' => 'White List',
-                'process' => 'white_list',
-                'icon' => 'plus',
-            ],
-            [
-                'label' => 'Black List',
-                'process' => 'black_list',
-                'icon' => 'minus',
-            ],
+        $getBulkActions = parent::getBulkActions();
+        $getBulkActions['white_list'] = [
+            'label' => 'White List',
+            'process' => 'white_list',
+            'icon' => 'plus',
         ];
+        $getBulkActions['black_list'] = [
+            'label' => 'Black List',
+            'process' => 'black_list',
+            'icon' => 'minus',
+        ];
+        return $getBulkActions;
     }
 }
