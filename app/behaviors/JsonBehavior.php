@@ -21,8 +21,10 @@ class JsonBehavior extends Behavior
     {
         if ($this->fields) {
             foreach ($this->fields as $e) {
-                if (is_array($this->owner->{$e})) {
-                    $this->owner->{$e} = json_encode($this->owner->{$e});
+                $data = $this->owner->{$e} ?: [];
+
+                if (is_array($data)) {
+                    $this->owner->{$e} = json_encode($data);
                 }
             }
         }
@@ -32,8 +34,9 @@ class JsonBehavior extends Behavior
     {
         if ($this->fields) {
             foreach ($this->fields as $e) {
-                if (!is_array($this->owner->{$e})) {
-                    $this->owner->{$e} = json_decode($this->owner->{$e}, TRUE);
+                $data = $this->owner->{$e} ?: '[]';
+                if (!is_array($data)) {
+                    $this->owner->{$e} = json_decode($data, TRUE);
                 }
             }
         }
