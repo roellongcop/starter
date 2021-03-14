@@ -7,5 +7,5 @@ use yii\helpers\Url;
 
 <?= Nestable::widget([
     'controller_actions' => $controller_actions,
-    'role' => $model
+    'navigations' => $model->main_navigation
 ]) ?>

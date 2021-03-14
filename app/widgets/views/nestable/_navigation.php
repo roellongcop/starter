@@ -25,7 +25,7 @@ use app\helpers\App;
                     <div class="col-md-3">
                         <input data-id="link"
                             required
-                            list="link-list-<?= $widget_id ?>" 
+                                list="link-list-<?= $id ?>" 
                             value="<?= $nav['link'] ?? '' ?>" 
                             placeholder="Link"
                             class="form-control">
@@ -79,7 +79,7 @@ use app\helpers\App;
 	            	<?= $this->render('_navigation', [
                         'data_id' => $data_id,
 	        			'navigations' => $nav['sub'],
-                    'widget_id' => $widget_id,
+                        'id' => $id,
 	        		]) ?>
 	        	</ol>
             <?php endif ?>
