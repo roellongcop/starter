@@ -9,7 +9,7 @@ $this->registerJs(<<<SCRIPT
 $('.theme-image').on('change', function() {
 
 	var input = this;
-
+	var container = $(input).data('container')
     var imageInput = input.files[0]; 
     var id = $(input).parents('div.image-input')
     	.find('input.theme_id')
@@ -20,6 +20,8 @@ $('.theme-image').on('change', function() {
     formData.append('Theme[imageInput]', imageInput);
     formData.append('Theme[id]', id);
 
+
+    KTApp.block('#' + container, {});
 	$.ajax( {
 		url: '{$uploadUrl}',
 		type: 'POST',
@@ -28,11 +30,14 @@ $('.theme-image').on('change', function() {
 		processData: false,
 		contentType: false,
 		success: function(s) {
+            KTApp.unblock('#' + container);
+
 			$(input).parents('div.image-input')
             	.find('img.img-thumbnail')
             	.attr('src', s)
 		},
 		error: function(e) {
+            KTApp.unblockPage();
 			alert(e.responseText)
 		}
 	});
@@ -40,7 +45,7 @@ $('.theme-image').on('change', function() {
 SCRIPT, \yii\web\View::POS_END)
 ?>
 
-<div class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
+<div id="container-<?= $id ?>" class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
 	<!--begin::Header-->
 	<div class="card-header border-0 pt-6 p11">
 		<h3 class="card-title align-items-start flex-column">
@@ -70,7 +75,10 @@ SCRIPT, \yii\web\View::POS_END)
 							data-original-title="Change Image">
 							<i class="fa fa-pen icon-sm text-muted"></i>
 							<?= $form->field($theme, 'imageInput')
-								->fileInput(['class' => 'theme-image'])
+								->fileInput([
+									'class' => 'theme-image',
+									'data-container' => "container-{$id}"
+								])
 								->label(false) ?>
 						</label>
 					<?php ActiveForm::end(); ?>

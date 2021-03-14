@@ -34,6 +34,7 @@ class ThemeView extends \yii\base\Widget
             'theme' => $this->theme,
             'currentTheme' => $this->currentTheme,
             'uploadUrl' => $this->uploadUrl,
+            'id' => $this->id,
         ]);
     }
 }
