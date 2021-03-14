@@ -67,21 +67,14 @@ AppAsset::register($this);
 							<!--begin::Dashboard-->
 							 
 							<!--begin::Table Widget 6-->
-							<div class="card card-custom gutter-b">
-
-								<!--begin::Header-->
-								<?php # $this->render('_header') ?>
-								<!--end::Header-->
-
-								<!--begin::Body-->
-								<div class="card-body py-0"><br>
-									<!--begin::Table-->
-                            		<?= Alert::widget() ?>
+							<?= Alert::widget() ?>
+		                    <?php if ($this->params['wrapCard'] ?? true): ?>
+			                    <?php $this->beginContent('@app/views/layouts/_card_wrapper.php'); ?>
 									<?= $content ?>
-									<!--end::Table-->
-								</div>
-								<!--end::Body-->
-							</div>
+								<?php $this->endContent(); ?>
+							<?php else: ?>
+								<?= $content ?>
+		                    <?php endif ?>
 							<!--end::Table Widget 6-->
 							<!--end::Dashboard-->
 						</div>

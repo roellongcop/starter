@@ -125,12 +125,14 @@ $createController = $this->params['createController'] ?? App::controllerID();
 					<div class="d-flex flex-column-fluid">
 						<!--begin::Container-->
 						<div class="container-fluid">
-							<div class="card card-custom">
-								<?php # $this->render('_card_header') ?>
-								<div class="card-body">
+							<?= Alert::widget() ?>
+		                    <?php if ($this->params['wrapCard'] ?? true): ?>
+			                    <?php $this->beginContent('@app/views/layouts/_card_wrapper.php'); ?>
 									<?= $content ?>
-								</div>
-							</div>
+								<?php $this->endContent(); ?>
+							<?php else: ?>
+								<?= $content ?>
+		                    <?php endif ?>
 						</div>
 						<!--end::Container-->
 					</div>

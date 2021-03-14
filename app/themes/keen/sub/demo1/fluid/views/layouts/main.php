@@ -64,14 +64,14 @@ AppAsset::register($this);
 				            <!--end::Notice-->
 				            <div class="row">
 				                <div class="col-xl-12">
-				                    <!--begin::Card-->
-				                    <div class="card card-custom gutter-b">
-				                        <div class="card-body">
-                            				<?= Alert::widget() ?>
-    										<?= $content ?> 
-										</div>
-			                    	</div>
-			                    <!--end::Card-->
+				                    <?= Alert::widget() ?>
+				                    <?php if ($this->params['wrapCard'] ?? true): ?>
+					                    <?php $this->beginContent('@app/views/layouts/_card_wrapper.php'); ?>
+											<?= $content ?>
+										<?php $this->endContent(); ?>
+									<?php else: ?>
+										<?= $content ?>
+				                    <?php endif ?>
 			                	</div>
 			            	</div>
 			        	</div>
