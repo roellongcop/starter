@@ -38,6 +38,22 @@ class Setting extends ActiveRecord
         'favicon'
     ];
 
+    public function getArrayAttributes()
+    {
+        return [
+
+        ];
+    }
+
+    public function getFormattedValue()
+    {
+        if (in_array($this->name, $this->arrayAttributes)) {
+            return App::formatter('asJsonEditor', $this->value);
+        }
+
+        return $this->value;
+    }
+
 
     public function getMainAttribute()
     {
@@ -96,7 +112,11 @@ class Setting extends ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'value' => 'Value',
+            [
+                'label' => 'Value',
+                'format' => 'raw',
+                'value' => 'formattedValue'
+            ],
             'record_status' => 'Record Status',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
@@ -242,5 +262,7 @@ class Setting extends ActiveRecord
 
         return $input;
     }
+
+
 
 }
