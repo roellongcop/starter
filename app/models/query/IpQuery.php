@@ -7,30 +7,10 @@ namespace app\models\query;
  *
  * @see \app\models\Ip
  */
-class IpQuery extends \yii\db\ActiveQuery
+class IpQuery extends ActiveQuery
 {
-    public function active()
+    public function controllerID()
     {
-        return $this->andWhere([
-            'record_status' => 1
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Ip[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Ip|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
+        return 'ip';
     }
 }

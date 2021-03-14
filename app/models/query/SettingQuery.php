@@ -7,30 +7,10 @@ namespace app\models\query;
  *
  * @see \app\models\Setting
  */
-class SettingQuery extends \yii\db\ActiveQuery
+class SettingQuery extends ActiveQuery
 {
-    public function active()
+    public function controllerID()
     {
-        return $this->andWhere([
-            'record_status' => 1
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Setting[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Setting|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
+        return 'setting';
     }
 }

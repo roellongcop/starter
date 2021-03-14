@@ -7,30 +7,10 @@ namespace app\models\query;
  *
  * @see \app\models\Session
  */
-class SessionQuery extends \yii\db\ActiveQuery
+class SessionQuery extends ActiveQuery
 {
-    public function active()
+    public function controllerID()
     {
-        return $this->andWhere([
-            'record_status' => 1
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Session[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Session|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
+        return 'session';
     }
 }

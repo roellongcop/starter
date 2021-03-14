@@ -7,30 +7,10 @@ namespace app\models\query;
  *
  * @see \app\models\Log
  */
-class LogQuery extends \yii\db\ActiveQuery
+class LogQuery extends ActiveQuery
 {
-    public function active()
+    public function controllerID()
     {
-        return $this->andWhere([
-            'record_status' => 1
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Log[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Log|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
+        return 'log';
     }
 }

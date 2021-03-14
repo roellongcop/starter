@@ -7,30 +7,10 @@ namespace app\models\query;
  *
  * @see \app\models\Backup
  */
-class BackupQuery extends \yii\db\ActiveQuery
+class BackupQuery extends ActiveQuery
 {
-    public function active()
+    public function controllerID()
     {
-        return $this->andWhere([
-            'record_status' => 1
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Backup[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\Backup|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
+        return 'backup';
     }
 }

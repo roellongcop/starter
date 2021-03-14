@@ -76,4 +76,10 @@ class FormatterComponent extends \yii\i18n\Formatter
             'data' => $value,
         ]);
     }
+
+    public function asQuery2ControllerID($value)
+    {
+        $get_called_class = explode("\\", $value);
+        return Inflector::camel2id(substr(end($get_called_class), 0, -5));
+    }
 }

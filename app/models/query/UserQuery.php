@@ -7,30 +7,10 @@ namespace app\models\query;
  *
  * @see \app\models\User
  */
-class UserQuery extends \yii\db\ActiveQuery
+class UserQuery extends ActiveQuery
 {
-    public function active()
+    public function controllerID()
     {
-        return $this->andWhere([
-            'record_status' => 1
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\User[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\User|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
+        return 'user';
     }
 }

@@ -7,30 +7,10 @@ namespace app\models\query;
  *
  * @see \app\models\UserMeta
  */
-class UserMetaQuery extends \yii\db\ActiveQuery
+class UserMetaQuery extends ActiveQuery
 {
-    public function active()
+    public function controllerID()
     {
-        return $this->andWhere([
-            'record_status' => 1
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\UserMeta[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return \app\models\UserMeta|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
+        return 'user-meta';
     }
 }
