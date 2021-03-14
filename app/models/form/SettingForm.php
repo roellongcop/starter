@@ -136,6 +136,7 @@ class SettingForm extends Model
             $setting->name = $attribute;
             $setting->logAfterSave = false;
             $setting->record_status = 1;
+            $setting->type = 'general';
 
             if ($setting->value != $value) {
                 $changeAttribute[$attribute] = $value;

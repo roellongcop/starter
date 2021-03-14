@@ -273,4 +273,9 @@ class UserMetaController extends Controller
         }
         return $this->redirect(App::referrer());
     }
+
+    public function actionInActiveData()
+    {
+        # dont delete; use in condition if user has access to in-active data
+    }
 }

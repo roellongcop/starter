@@ -302,4 +302,9 @@ class RoleController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionInActiveData()
+    {
+        # dont delete; use in condition if user has access to in-active data
+    }
 }

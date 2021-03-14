@@ -259,4 +259,9 @@ class IpController extends Controller
             'searchModel' => new IpSearch(),
         ]);
     }
+
+    public function actionInActiveData()
+    {
+        # dont delete; use in condition if user has access to in-active data
+    }
 }

@@ -24,9 +24,12 @@ class m201111_135954_create_settings_table extends Migration
     public function attributes()
     {
         return [
-            'id'            => $this->bigPrimaryKey(),
-            'name'          => $this->string(255)->notNull()->unique(),
-            'value'         => $this->text(),
+            'id' => $this->bigPrimaryKey(),
+            'name' => $this->string(255)->notNull(),
+            'value' => $this->text(),
+            'slug' => $this->string(255)->notNull(),
+            'type' => $this->string(128)->notNull(),
+            'sort_order' => $this->integer(11)->notNull()->defaultValue(0),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

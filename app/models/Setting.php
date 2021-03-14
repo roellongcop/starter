@@ -4,12 +4,13 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Html;
+use app\models\query\SettingQuery;
 use app\widgets\Anchor;
 use app\widgets\BootstrapSelect;
-use app\helpers\Html;
+use yii\behaviors\SluggableBehavior;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
-use app\models\query\SettingQuery;
 
 /**
  * This is the model class for table "{{%settings}}".
@@ -74,13 +75,12 @@ class Setting extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'record_status'], 'required'],
+            [['name', 'record_status', 'type'], 'required'],
             [['value'], 'string'],
             [['record_status'], 'default', 'value' => 1],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at', 'type', 'options'], 'safe'],
-            [['name'], 'string', 'max' => 255],
-            [['name'], 'unique'],
+            [['created_at', 'updated_at', 'type', 'options', 'sort_order'], 'safe'],
+            [['name', 'slug'], 'string', 'max' => 255],
             /*[
                 ['fileInput'], 
                 'file', 
@@ -263,6 +263,18 @@ class Setting extends ActiveRecord
         return $input;
     }
 
-
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        
+        $behaviors['SluggableBehavior'] = [
+            'class' => SluggableBehavior::className(),
+            'attribute' => 'name',
+            'slugAttribute' => 'slug',
+            'immutable' => false,
+            'ensureUnique' => true,
+        ];
+        return $behaviors;
+    }
 
 }

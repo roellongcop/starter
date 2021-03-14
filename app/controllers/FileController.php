@@ -401,4 +401,9 @@ class FileController extends Controller
 
         return json_encode($result);
     }
+
+    public function actionInActiveData()
+    {
+        # dont delete; use in condition if user has access to in-active data
+    }
 }

@@ -284,4 +284,9 @@ class ModelFileController extends Controller
             'searchModel' => new ModelFileSearch(),
         ]);
     }
+
+    public function actionInActiveData()
+    {
+        # dont delete; use in condition if user has access to in-active data
+    }
 }
