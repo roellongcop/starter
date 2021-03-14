@@ -211,7 +211,7 @@ class File extends ActiveRecord
         return SettingSearch::defaultImage('image_holder');
     }
 
-    public function tableColumns()
+    public function getTableColumns()
     {
         return [
             'serial' => [

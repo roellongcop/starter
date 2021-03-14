@@ -25,7 +25,7 @@ class Grid extends \yii\base\Widget
         parent::init();
         $filterColumns = App::identity()->filterColumns($this->searchModel);
 
-        $columns = $this->searchModel->tableColumns();
+        $columns = $this->searchModel->tableColumns;
 
         foreach ($columns as $key => &$column) {
             if (! isset($column['visible'])) {

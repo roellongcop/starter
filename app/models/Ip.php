@@ -124,7 +124,7 @@ class Ip extends ActiveRecord
         return $this->ipType['label'] ?? '';
     }
  
-    public function tableColumns()
+    public function getTableColumns()
     {
         return [
             'serial' => [

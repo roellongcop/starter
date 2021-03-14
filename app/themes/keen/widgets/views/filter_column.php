@@ -56,7 +56,7 @@ SCRIPT, \yii\web\View::POS_END);
                 </li>
                 <li class="navi-item">
                     <div class="checkbox-list">
-                        <?php foreach ($searchModel->tableColumns() as $key => $value): ?>
+                        <?php foreach ($searchModel->tableColumns as $key => $value): ?>
                             <label class="checkbox ">
                                 <?= Html::activeInput('checkbox', $model, 'columns[]', [
                                     'value' => $key,

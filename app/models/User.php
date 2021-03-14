@@ -386,7 +386,7 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Role::className(), ['id' => 'role_id']);
     } 
 
-    public function getTableColumns($model)
+    public function getTableColumnsMeta($model)
     {
         $user_meta = UserMeta::findOne([
             'user_id' => $this->id,
@@ -407,10 +407,10 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function filterColumns($model, $default=true)
     {
-        $table_columns = $this->getTableColumns($model);
+        $table_columns = $this->getTableColumnsMeta($model);
 
         if ($default) {
-            return $table_columns ?: array_keys($model->tableColumns());
+            return $table_columns ?: array_keys($model->tableColumns);
         }
         return $table_columns ?: [];
     }
@@ -489,7 +489,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
-    public function tableColumns()
+    public function getTableColumns()
     {
         return [
             'serial' => [

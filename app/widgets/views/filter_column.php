@@ -41,7 +41,7 @@ SCRIPT, \yii\web\View::POS_END);
                 CHECK ALL
             </label>
             <ul> 
-                <?php foreach ($searchModel->tableColumns() as $key => $value): ?>
+                <?php foreach ($searchModel->tableColumns as $key => $value): ?>
                     <li> 
                         <label class="checkbox ">
                             <?= Html::activeInput('checkbox', $model, 'columns[]', [

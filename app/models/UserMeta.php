@@ -128,7 +128,7 @@ class UserMeta extends ActiveRecord
      
    
 
-    public function tableColumns()
+    public function getTableColumns()
     {
         return [
             'serial' => [

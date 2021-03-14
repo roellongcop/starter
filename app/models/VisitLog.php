@@ -134,7 +134,7 @@ class VisitLog extends ActiveRecord
         return App::params('visit_logs_action')[$this->action];
     }
 
-    public function tableColumns()
+    public function getTableColumns()
     {
         return [
             'serial' => [

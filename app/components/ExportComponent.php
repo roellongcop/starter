@@ -74,7 +74,7 @@ class ExportComponent extends Component
     public function processTableColumns($model)
     {
         $filterColumns = App::identity()->filterColumns($model);
-        $columns = $model->tableColumns();
+        $columns = $model->tableColumns;
 
         foreach ($columns as $key => &$column) {
             if (! isset($column['visible'])) {
@@ -87,7 +87,7 @@ class ExportComponent extends Component
 
     public function getExportColumns($searchModel, $type='excel')
     {
-        $columns = array_keys($searchModel->tableColumns());
+        $columns = array_keys($searchModel->tableColumns);
         $search_model_columns = $this->processTableColumns($searchModel);
         $res = [];
         $ignore_attr = ['checkbox', 'actions'];

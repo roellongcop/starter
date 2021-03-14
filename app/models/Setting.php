@@ -136,7 +136,7 @@ class Setting extends ActiveRecord
         return Inflector::camel2words($this->name);
     }
 
-    public function tableColumns()
+    public function getTableColumns()
     {
         return [
             'serial' => [

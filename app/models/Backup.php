@@ -136,7 +136,7 @@ class Backup extends ActiveRecord
     }
 
 
-    public function tableColumns()
+    public function getTableColumns()
     {
         return [
             'serial' => [

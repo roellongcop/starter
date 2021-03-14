@@ -153,7 +153,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
      
      
 
-    public function tableColumns()
+    public function getTableColumns()
     {
         return [
             'serial' => [
@@ -216,6 +216,13 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
             'recordStatusHtml:raw'
         ];
     }
+
+    /**
+    public function getExportColumns()
+    {
+        return [];
+    }
+    */
     public function behaviors()
     {
         return [
