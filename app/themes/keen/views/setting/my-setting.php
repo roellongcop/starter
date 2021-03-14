@@ -5,7 +5,7 @@ use app\models\search\ThemeSearch;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ThemeView;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
@@ -19,7 +19,7 @@ $this->params['searchModel'] = new ThemeSearch();
 ?>
 
 <div>
-	<?php $form = ActiveForm::begin([
+	<?php $form = KeenActiveForm::begin([
         'errorCssClass' => 'is-invalid',
             'successCssClass' => 'is-valid',
             'validationStateOn' => 'input',
@@ -32,7 +32,7 @@ $this->params['searchModel'] = new ThemeSearch();
 		<div class="form-group">
 			<?= AnchorForm::widget() ?>
 		</div>
-	<?php ActiveForm::end(); ?>
+	<?php KeenActiveForm::end(); ?>
 
 	<div class="row">
 		<?php foreach ($themes as $theme): ?>

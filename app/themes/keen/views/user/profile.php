@@ -2,7 +2,7 @@
 
 use app\models\search\UserSearch;
 use app\widgets\AnchorForm;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
@@ -15,15 +15,7 @@ $this->params['searchModel'] = new UserSearch();
 ?>
 
 <div>
-	<?php $form = ActiveForm::begin([
-		'errorCssClass' => 'is-invalid',
-	        'successCssClass' => 'is-valid',
-	        'validationStateOn' => 'input',
-	        'options' => [
-			'class' => 'form',
-			'novalidate' => 'novalidate'
-	        ],
-	]); ?>
+	<?php $form = KeenActiveForm::begin(); ?>
 		<div class="row">
 			<div class="col-md-5">
 				<?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
@@ -33,5 +25,5 @@ $this->params['searchModel'] = new UserSearch();
 		<div class="form-group">
 			<?= AnchorForm::widget() ?>
 		</div>
-	<?php ActiveForm::end(); ?>
+	<?php KeenActiveForm::end(); ?>
 </div>

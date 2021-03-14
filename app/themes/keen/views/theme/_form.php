@@ -10,11 +10,11 @@ use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\widgets\KeenActiveForm */
 $this->registerJs(<<< SCRIPT
     $('form.form').submit(function(event) {
         event.preventDefault();
@@ -29,7 +29,7 @@ SCRIPT, \yii\web\View::POS_END);
 ?>
 
 
-<?php $form = ActiveForm::begin([
+<?php $form = KeenActiveForm::begin([
     'errorCssClass' => 'is-invalid',
         'successCssClass' => 'is-valid',
         'validationStateOn' => 'input',
@@ -74,7 +74,7 @@ SCRIPT, \yii\web\View::POS_END);
         <?= AnchorForm::widget() ?>
     </div>
 
-<?php ActiveForm::end(); ?>
+<?php KeenActiveForm::end(); ?>
 
 <?php if ($model->imageFiles): ?>
     <p class="lead">Preview Images</p>

@@ -3,24 +3,16 @@
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 $controller_actions = App::component('access')->controllerActions();
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\widgets\KeenActiveForm */
 ?>
 
 
-<?php $form = ActiveForm::begin([
-    'errorCssClass' => 'is-invalid',
-        'successCssClass' => 'is-valid',
-        'validationStateOn' => 'input',
-        'options' => [
-            'class' => 'form',
-            'novalidate' => 'novalidate'
-        ],
-]); ?>
+<?php $form = KeenActiveForm::begin(); ?>
  
 
     <div class="form-group">
@@ -100,4 +92,4 @@ $controller_actions = App::component('access')->controllerActions();
         <?= AnchorForm::widget() ?>
     </div>
 
-<?php ActiveForm::end(); ?>
+<?php KeenActiveForm::end(); ?>

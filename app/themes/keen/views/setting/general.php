@@ -7,7 +7,7 @@ use app\widgets\Anchor;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ImagePreview;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
@@ -31,7 +31,7 @@ $this->params['searchModel'] = new DashboardSearch();
 		]) ?>
 	</p>
 
-	<?php $form = ActiveForm::begin([
+	<?php $form = KeenActiveForm::begin([
 		'errorCssClass' => 'is-invalid',
 	        'successCssClass' => 'is-valid',
 	        'validationStateOn' => 'input',
@@ -140,5 +140,5 @@ $this->params['searchModel'] = new DashboardSearch();
 			<?= AnchorForm::widget() ?>
 		</div>
 
-	<?php ActiveForm::end(); ?>
+	<?php KeenActiveForm::end(); ?>
 </div>

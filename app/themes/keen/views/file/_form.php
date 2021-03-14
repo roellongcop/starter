@@ -4,23 +4,15 @@ use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\File */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\widgets\KeenActiveForm */
 ?>
 
 
-    <?php $form = ActiveForm::begin([
-        'errorCssClass' => 'is-invalid',
-            'successCssClass' => 'is-valid',
-            'validationStateOn' => 'input',
-            'options' => [
-                'class' => 'form',
-                'novalidate' => 'novalidate'
-            ],
-    ]); ?>
+    <?php $form = KeenActiveForm::begin(); ?>
 
     <div class="row">
         <div class="col-md-5">
@@ -40,5 +32,5 @@ use yii\widgets\ActiveForm;
 		<?= AnchorForm::widget() ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php KeenActiveForm::end(); ?>
 

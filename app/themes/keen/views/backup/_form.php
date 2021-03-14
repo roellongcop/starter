@@ -4,7 +4,7 @@ use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
 use app\widgets\Checkbox;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Backup */
@@ -27,15 +27,7 @@ SCRIPT, \yii\web\View::POS_END);
 ?>
 
 
-    <?php $form = ActiveForm::begin([
-        'errorCssClass' => 'is-invalid',
-        'successCssClass' => 'is-valid',
-        'validationStateOn' => 'input',
-        'options' => [
-            'class' => 'form',
-            'novalidate' => 'novalidate'
-        ],
-    ]); ?>
+    <?php $form = KeenActiveForm::begin(); ?>
 
     <div class="row">
         <div class="col-md-5">
@@ -68,5 +60,5 @@ SCRIPT, \yii\web\View::POS_END);
 		<?= AnchorForm::widget() ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php KeenActiveForm::end(); ?>
 

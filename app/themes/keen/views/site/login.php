@@ -1,9 +1,9 @@
 <?php
-/* @var $form yii\bootstrap\ActiveForm */
+/* @var $form yii\bootstrap\KeenActiveForm */
 /* @var $model app\models\LoginForm */
 use app\helpers\App;
 use app\widgets\Alert;
-use yii\bootstrap\ActiveForm;
+use app\widgets\KeenActiveForm;
 use yii\helpers\Html;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -43,7 +43,7 @@ $publishedUrl = App::publishedUrl();
                 <div class="login-form login-signin">
                     <!--begin::Form-->
                     <?= Alert::widget() ?>
-                    <?php $form = ActiveForm::begin([
+                    <?php $form = KeenActiveForm::begin([
                         'id' => 'kt_login_signin_form',
                         'errorCssClass' => 'is-invalid',
                         'successCssClass' => 'is-valid',
@@ -90,7 +90,7 @@ $publishedUrl = App::publishedUrl();
                             <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
                         </div>
                         <!--end::Action-->
-                    <?php ActiveForm::end(); ?>
+                    <?php KeenActiveForm::end(); ?>
                     <!--end::Form-->
                 </div>
                 <!--end::Signin-->
@@ -153,7 +153,7 @@ $publishedUrl = App::publishedUrl();
                 <!--begin::Forgot-->
                 <div class="login-form login-forgot">
                     <!--begin::Form-->
-                    <?php $form = ActiveForm::begin([
+                    <?php $form = KeenActiveForm::begin([
                         'id' => 'kt_login_forgot_form',
                         'errorCssClass' => 'is-invalid',
                         'successCssClass' => 'is-valid',
@@ -202,7 +202,7 @@ $publishedUrl = App::publishedUrl();
                             <button type="button" id="kt_login_forgot_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</button>
                         </div>
                         <!--end::Form group-->
-                    <?php ActiveForm::end(); ?>
+                    <?php KeenActiveForm::end(); ?>
                     <!--end::Form-->
                 </div>
                 <!--end::Forgot-->

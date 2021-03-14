@@ -4,7 +4,7 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 $this->registerJs(<<<SCRIPT
 $('.theme-image').on('change', function() {
 
@@ -64,7 +64,7 @@ SCRIPT, \yii\web\View::POS_END)
 			<div class="image-input">
 				<img src="<?= $theme->imagePath ?>&w=300" class="img-thumbnail theme-image">
 				<?php if (App::identity()->can('change-image', 'theme')): ?>
-					<?php $form = ActiveForm::begin(); ?>
+					<?php $form = KeenActiveForm::begin(); ?>
 	              		<?= $form->field($theme, 'id')
 	              			->hiddenInput(['class' => 'theme_id'])
 	              			->label(false) ?>
@@ -81,7 +81,7 @@ SCRIPT, \yii\web\View::POS_END)
 								])
 								->label(false) ?>
 						</label>
-					<?php ActiveForm::end(); ?>
+					<?php KeenActiveForm::end(); ?>
 				<?php else: ?>
 					<p></p>
 				<?php endif ?>
