@@ -8,10 +8,6 @@ use Imagine\Image\Box;
 use Imagine\Image\BoxInterface;
 use Yii;
 use app\filters\AccessControl;
-use app\filters\IpFilter;
-use app\filters\ThemeFilter;
-use app\filters\UserFilter;
-use app\filters\VerbFilter;
 use app\helpers\App;
 use app\models\File;
 use app\models\Log;
@@ -33,20 +29,13 @@ class FileController extends Controller
 
     public function behaviors()
     {
-        return [
-            'custom' => [
-                'class' => UserFilter::className(),
-                'class' => IpFilter::className(),
-                'class' => ThemeFilter::className()
-            ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'publicActions' => ['display']
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className()
-            ],
+        $behaviors = parent::behaviors();
+        $behaviors['access'] = [
+            'class' => AccessControl::className(),
+            'publicActions' => ['display', 'upload', 'download']
         ];
+
+        return $behaviors;
     } 
     public function actionDisplay($token, $w='', $h='')
     {

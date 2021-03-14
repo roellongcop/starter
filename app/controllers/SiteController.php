@@ -4,9 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use app\filters\AccessControl;
-use app\filters\IpFilter;
-use app\filters\ThemeFilter;
-use app\filters\UserFilter;
 use app\filters\VerbFilter;
 use app\helpers\App;
 use app\models\VisitLog;
@@ -17,30 +14,22 @@ use yii\web\Response;
 
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
-        return [
-            'custom' => [
-                'class' => UserFilter::className(),
-                'class' => IpFilter::className(),
-                'class' => ThemeFilter::className()
-            ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'publicActions' => ['login', 'logout', 'reset-password']
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'verbActions' => [
-                    'logout' => ['post'],
-                ]
-            ],
+        $behaviors = parent::behaviors();
+        $behaviors['access'] = [
+            'class' => AccessControl::className(),
+            'publicActions' => ['login', 'logout', 'reset-password']
         ];
-    }
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'verbActions' => [
+                'logout' => ['post'],
+            ]
+        ];
 
+        return $behaviors;
+    }
  
 
     /**
