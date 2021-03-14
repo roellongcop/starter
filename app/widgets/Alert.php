@@ -53,12 +53,17 @@ class Alert extends \yii\bootstrap\Widget
         $flashes = $session->getAllFlashes();
         $appendClass = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
 
+        $alerts = [];
+
         foreach ($flashes as $key => $message) {
             $alertMessage = (is_array($message))? json_encode($message): $message;
-            return $this->render('alert', [
+
+            $alerts[] = $this->render('alert', [
                 'key' => $key,
                 'alertMessage' => $alertMessage,
             ]);
         }
+
+        return implode(' ', $alerts);
     }
 }

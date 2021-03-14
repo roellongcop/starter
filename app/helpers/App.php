@@ -667,4 +667,11 @@ class App {
 	{
 		return self::action()->uniqueId;
 	}
+
+	public static function formatter($functionName='', $value='')
+	{
+		if ($functionName) {
+			return self::component('formatter')->$functionName($value);
+		}
+	}
 }

@@ -17,14 +17,12 @@ class ProfileForm extends \app\models\User
 {
     public $first_name;
     public $last_name;
-    public $company_id;
 
     public function attributeLabels()
     {
         return [
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
-            'company_id' => 'Company',
         ];
     }
 
@@ -41,13 +39,6 @@ class ProfileForm extends \app\models\User
                     'last_name',
                 ], 
                 'required'
-            ],
-
-            [
-                [
-                    'company_id',
-                ], 
-                'integer'
             ],
 
             [

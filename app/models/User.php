@@ -2,9 +2,11 @@
 namespace app\models;
 
 use Yii;
-use app\behaviors\LogBehavior;
 use app\behaviors\JsonBehavior;
+use app\behaviors\LogBehavior;
 use app\helpers\App;
+use app\models\form\ProfileForm;
+use app\models\query\UserQuery;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\Label;
@@ -17,7 +19,6 @@ use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\IdentityInterface;
-use app\models\query\UserQuery;
 
 
 /**
@@ -649,6 +650,11 @@ class User extends ActiveRecord implements IdentityInterface
             ->onCondition(['extension' => App::params('file_extensions')['image']])
             ->groupBy(['name', 'size', 'extension'])
             ->orderBy(['id' => SORT_DESC]);
+    }
+
+    public function getProfile()
+    {
+        return new ProfileForm($this);
     }
  
 }

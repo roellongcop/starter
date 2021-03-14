@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\Detail;
 use yii\helpers\Inflector;
@@ -32,7 +33,10 @@ use yii\helpers\Inflector;
 					aria-expanded="false">
 					<?= $counter ?>) 
 					<?= $model->mainAttribute ?>
-					&nbsp; <small>(<?= $model->createdAt ?>)</small>
+					&nbsp; 
+					<small>
+						(<?= App::formatter('asFulldate', $model->created_at) ?>)
+					</small>
 				</div>
 			</div>
 			<div id="<?= $module ?>-tab-<?= $model->id ?>" class="collapse" data-parent="#<?= $module ?>" style="">

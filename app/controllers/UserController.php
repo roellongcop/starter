@@ -292,9 +292,7 @@ class UserController extends Controller
     public function actionProfile($id)
     {
         $user = $this->findModel($id); 
-        $model = new ProfileForm();
-        $model->user_id = $user->id;
-        $model->setup();
+        $model = $user->profile;
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Profile Updated');
