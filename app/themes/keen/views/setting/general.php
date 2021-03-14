@@ -31,15 +31,7 @@ $this->params['searchModel'] = new DashboardSearch();
 		]) ?>
 	</p>
 
-	<?php $form = KeenActiveForm::begin([
-		'errorCssClass' => 'is-invalid',
-	        'successCssClass' => 'is-valid',
-	        'validationStateOn' => 'input',
-	        'options' => [
-				'class' => 'form',
-				'novalidate' => 'novalidate'
-	        ],
-	]); ?>
+	<?php $form = KeenActiveForm::begin(); ?>
 	 
 		<p class="lead">General</p>
 		<div class="row">

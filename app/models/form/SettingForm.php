@@ -105,7 +105,11 @@ class SettingForm extends Model
             }
         }
 
-        $settings = Setting::findAll(['name' => array_keys($this->attributes)]);
+        $settings = Setting::find()
+            ->where(['name' => array_keys($this->attributes)])
+            ->general()
+            ->all();
+
         foreach ($settings as $setting) {
             if ($this->hasProperty($setting->name)) {
                 if (in_array($setting->name, $setting->withImageInput)) {
@@ -123,7 +127,11 @@ class SettingForm extends Model
         $changeAttribute = [];
 
         foreach ($this->attributes as $attribute => $value) {
-            $setting = Setting::findOne(['name' => $attribute]);
+            $setting = Setting::find()
+                ->where(['name' => $attribute])
+                ->general()
+                ->one();
+
             $setting = $setting ?: new Setting();
             $setting->name = $attribute;
             $setting->logAfterSave = false;
@@ -155,7 +163,7 @@ class SettingForm extends Model
                 }
             }
         }
-        Log::record(new Setting(), $changeAttribute);
+        Log::record(new Setting(['type' => 'general']), $changeAttribute);
     }
  
 }

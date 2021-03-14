@@ -19,15 +19,7 @@ $this->params['searchModel'] = new ThemeSearch();
 ?>
 
 <div>
-	<?php $form = KeenActiveForm::begin([
-        'errorCssClass' => 'is-invalid',
-            'successCssClass' => 'is-valid',
-            'validationStateOn' => 'input',
-            'options' => [
-                'class' => 'form',
-                'novalidate' => 'novalidate'
-            ],
-    ]); ?>
+	<?php $form = KeenActiveForm::begin(); ?>
 		
 		<div class="form-group">
 			<?= AnchorForm::widget() ?>

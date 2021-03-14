@@ -13,4 +13,13 @@ class SettingQuery extends ActiveQuery
     {
         return 'setting';
     }
+
+    public function general($alias='')
+    {
+    	$field = ($alias)? "{$alias}.type": 'type';
+
+    	return $this->andWhere([
+            $field => 'general'
+        ]);
+    }
 }
