@@ -109,87 +109,14 @@ class SettingSearch extends Setting
         return $dataProvider;
     }
 
-
-    public static function one($value, $key='id', $array=false)
-    {
-        $model = Setting::find()
-            ->where([$key => $value]);
-
-        $model = ($array) ? $model->asArray()->one(): $model->one();
-
-        return ($model)? $model: '';
-    }
-
-
-    public static function all($value='', $key='id', $array=false)
-    {
-        $model = Setting::find()
-            ->filterWhere([$key => $value]);
-
-        $model = ($array) ? $model->asArray()->all(): $model->all();
-
-        return ($model)? $model: '';
-    }
-
-    public static function dropdown($key='id', $value='id', $condition=[], $map=true)
-    {
-        $models = Setting::find()
-            ->filterWhere($condition)
-            ->orderBy([$value => SORT_ASC])
-            ->all();
-
-        $models = ($map)? ArrayHelper::map($models, $key, $value): $models;
-
-        return $models;
-    }
-
-    public static function filter($key='id', $condition=[])
-    {
-        $models = Setting::find()
-            ->filterWhere($condition)
-            ->orderBy([$key => SORT_ASC])
-            ->groupBy($key)
-            ->all();
-
-        $models = ArrayHelper::map($models, $key, $key);
-
-        return $models;
-    }
-
-    public function getStartDate($from_database = false)
-    {
-        if ($this->date_range && $from_database == false) {
-            $date = App::dateRange($this->date_range, 'start');
-        }
-        else {
-            $model = Setting::find()->min('created_at');
-
-            $date = ($model)? $model: 'today';
-        }
-
-        return App::date_timezone($date, 'F d, Y');
-    }
-
-    public function getEndDate($from_database = false)
-    {
-        if ($this->date_range && $from_database == false) {
-            $date = App::dateRange($this->date_range, 'end');
-        }
-        else {
-            $model = Setting::find()->max('created_at');
-
-            $date = ($model)? $model: 'today';
-        }
-
-        return App::date_timezone($date, 'F d, Y');
-    }
-
     public static function default($name)
     {
-        $model = self::one($name, 'name');
-
+        $model = Setting::findOne([
+            'name' => $name,
+            'type' => 'general'
+        ]);
         if ($model) {
-            return $model['value'];
+            return $model->value;
         }
 
         $general_settings = App::params('general_settings');
@@ -201,7 +128,10 @@ class SettingSearch extends Setting
 
     public static function defaultImage($name)
     {
-        $model = self::one($name, 'name');
+        $model = Setting::findOne([
+            'name' => $name,
+            'type' => 'general'
+        ]);
 
         if($model && $model->imageFile) {
             return $model->imagePath;

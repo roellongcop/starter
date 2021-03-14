@@ -15,6 +15,7 @@ use yii\behaviors\AttributeTypecastBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
  
@@ -277,5 +278,85 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'class' => JsonBehavior::className()
             ],
         ];
+    }
+
+
+    public static function one($value, $key='id', $array=false)
+    {
+        $model = static::find()
+            ->visible()
+            ->andWhere([$key => $value]);
+
+        $model = ($array) ? $model->asArray()->one(): $model->one();
+
+        return ($model)? $model: '';
+    }
+
+
+    public static function all($value='', $key='id', $array=false)
+    {
+        $model = static::find()
+            ->andFilterWhere([$key => $value]);
+
+        $model = ($array) ? $model->asArray()->all(): $model->all();
+
+        return ($model)? $model: '';
+    }
+
+    public static function dropdown($key='id', $value='name', $condition=[], $map=true)
+    {
+        $models = static::find()
+            ->andFilterWhere($condition)
+            ->orderBy([$value => SORT_ASC])
+            ->all();
+
+        $models = ($map)? ArrayHelper::map($models, $key, $value): $models;
+
+        return $models;
+    }
+
+    public static function filter($key='id', $condition=[])
+    {
+        $models = static::find()
+            ->andFilterWhere($condition)
+            ->orderBy([$key => SORT_ASC])
+            ->groupBy($key)
+            ->all();
+
+        $models = ArrayHelper::map($models, $key, $key);
+
+        return $models;
+    }
+
+    public function getStartDate($from_database = false)
+    {
+        if ($this->date_range && $from_database == false) {
+            $date = App::dateRange($this->date_range, 'start');
+        }
+        else {
+            $model = static::find()
+                ->visible()
+                ->min('created_at');
+
+            $date = ($model)? $model: 'today';
+        }
+
+        return App::date_timezone($date, 'F d, Y');
+    }
+
+    public function getEndDate($from_database = false)
+    {
+        if ($this->date_range && $from_database == false) {
+            $date = App::dateRange($this->date_range, 'end');
+        }
+        else {
+            $model = static::find()
+                ->visible()
+                ->max('created_at');
+
+            $date = ($model)? $model: 'today';
+        }
+
+        return App::date_timezone($date, 'F d, Y');
     }
 }
