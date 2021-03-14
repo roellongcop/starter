@@ -5,7 +5,6 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 use app\models\search\SettingSearch;
 use app\models\Backup;
 use app\helpers\App;

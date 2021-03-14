@@ -1,4 +1,6 @@
 <?php
+
+use yii\helpers\Inflector;
 /**
  * This is the template for generating the ActiveQuery class.
  */
@@ -29,30 +31,12 @@ namespace <?= $generator->queryNs ?>;
  *
  * @see <?= $modelFullClassName . "\n" ?>
  */
-class <?= $className ?> extends <?= '\\' . ltrim($generator->queryBaseClass, '\\') . "\n" ?>
+class <?= $className ?> extends <?= "ActiveQuery\n" ?>
 {
-    public function active()
+
+    public function controllerID()
     {
-        return $this->andWhere([
-            'record_status' => 1
-        ]);
+        return '<?= Inflector::camel2id($modelClassName) ?>';
     }
 
-    /**
-     * {@inheritdoc}
-     * @return <?= $modelFullClassName ?>[]|array
-     */
-    public function all($db = null)
-    {
-        return parent::all($db);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return <?= $modelFullClassName ?>|array|null
-     */
-    public function one($db = null)
-    {
-        return parent::one($db);
-    }
 }

@@ -18,23 +18,15 @@ echo "<?php\n";
 use app\helpers\App;
 use app\widgets\RecordStatusInput;
 use app\widgets\AnchorForm;
-use yii\widgets\ActiveForm;
+use app\widgets\KeenActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\widgets\KeenActiveForm */
 ?>
 
 
-<?= "<?php " ?>$form = ActiveForm::begin([
-    'errorCssClass' => 'is-invalid',
-        'successCssClass' => 'is-valid',
-        'validationStateOn' => 'input',
-        'options' => [
-            'class' => 'form',
-            'novalidate' => 'novalidate'
-        ],
-]); ?>
+<?= "<?php " ?>$form = KeenActiveForm::begin(); ?>
 
     <div class="row">
         <div class="col-md-5">
@@ -55,5 +47,5 @@ echo "\t\t\t<?= " . $generator->generateActiveField($attribute) . " ?>\n";
         <?= '<?=' ?> AnchorForm::widget() ?>
     </div>
 
-<?= "<?php " ?>ActiveForm::end(); ?>
+<?= "<?php " ?>KeenActiveForm::end(); ?>
 

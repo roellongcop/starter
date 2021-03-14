@@ -301,4 +301,9 @@ if (count($pks) === 1) {
             'searchModel' => new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>(),
         ]);
     }
+
+    public function actionInActiveData()
+    {
+        # dont delete; use in condition if user has access to in-active data
+    }
 }

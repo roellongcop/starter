@@ -30,7 +30,6 @@ namespace <?= StringHelper::dirname(ltrim($generator->searchModelClass, '\\')) ?
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 use app\models\search\SettingSearch;
 use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelAlias" : "") ?>;
 use app\helpers\App;
@@ -60,9 +59,8 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         ];
     }
 
-    public function init()
+    public function setPagination()
     {
-        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 
@@ -88,6 +86,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
         // add conditions that should always apply here
 
+        $this->setPagination();
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
@@ -129,80 +128,5 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         }
 
         return $dataProvider;
-    }
-
-
-    public static function one($value, $key='id', $array=false)
-    {
-        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find()
-            ->where([$key => $value]);
-
-        $model = ($array) ? $model->asArray()->one(): $model->one();
-
-        return ($model)? $model: '';
-    }
-
-
-    public static function all($value='', $key='id', $array=false)
-    {
-        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find()
-            ->filterWhere([$key => $value]);
-
-        $model = ($array) ? $model->asArray()->all(): $model->all();
-
-        return ($model)? $model: '';
-    }
-
-    public static function dropdown($key='id', $value='id', $condition=[], $map=true)
-    {
-        $models = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find()
-            ->filterWhere($condition)
-            ->orderBy([$value => SORT_ASC])
-            ->all();
-
-        $models = ($map)? ArrayHelper::map($models, $key, $value): $models;
-
-        return $models;
-    }
-
-    public static function filter($key='id', $condition=[])
-    {
-        $models = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find()
-            ->filterWhere($condition)
-            ->orderBy([$key => SORT_ASC])
-            ->groupBy($key)
-            ->all();
-
-        $models = ArrayHelper::map($models, $key, $key);
-
-        return $models;
-    }
-
-    public function getStartDate($from_database = false)
-    {
-        if ($this->date_range && $from_database == false) {
-            $date = App::dateRange($this->date_range, 'start');
-        }
-        else {
-            $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find()->min('created_at');
-
-            $date = ($model)? $model: 'today';
-        }
-
-        return App::date_timezone($date, 'F d, Y');
-    }
-
-    public function getEndDate($from_database = false)
-    {
-        if ($this->date_range && $from_database == false) {
-            $date = App::dateRange($this->date_range, 'end');
-        }
-        else {
-            $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find()->max('created_at');
-
-            $date = ($model)? $model: 'today';
-        }
-
-        return App::date_timezone($date, 'F d, Y');
     }
 }

@@ -7,7 +7,6 @@ use app\helpers\App;
 use app\models\Setting;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 
 /**
  * SettingSearch represents the model behind the search form of `app\models\Setting`.

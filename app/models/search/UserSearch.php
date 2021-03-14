@@ -8,7 +8,6 @@ use app\models\User;
 use app\models\search\SettingSearch;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 
 /**
  * UserSearch represents the model behind the search form of `app\models\User`.

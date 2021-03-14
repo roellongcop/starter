@@ -28,14 +28,6 @@ namespace <?= $generator->ns ?>;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-use app\models\search\SettingSearch;
-use yii\behaviors\SluggableBehavior;
-use app\behaviors\LogBehavior;
-use app\behaviors\JsonBehavior;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\behaviors\AttributeTypecastBehavior;
-use yii\db\Expression;
 use <?= substr($queryClassFullName, 1) ?>;
 
 
@@ -223,20 +215,4 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
         return [];
     }
     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'value' => new Expression('UTC_TIMESTAMP'),
-            ],
-            [
-                'class' => BlameableBehavior::className(),
-                'defaultValue' => 0
-            ],
-            ['class' => AttributeTypecastBehavior::className()],
-            ['class' => JsonBehavior::className()], 
-            ['class' => LogBehavior::className()], 
-        ];
-    }
 }

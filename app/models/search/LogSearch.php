@@ -8,7 +8,6 @@ use app\models\Log;
 use app\models\search\SettingSearch;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 
 /**
  * LogSearch represents the model behind the search form of `app\models\Log`.
