@@ -118,7 +118,7 @@ class UserMetaController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = UserMetaSearch::one($id, $field)) != null) {
+        if (($model = UserMeta::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

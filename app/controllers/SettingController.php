@@ -103,7 +103,7 @@ class SettingController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = SettingSearch::one($id, $field)) != null) {
+        if (($model = Setting::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

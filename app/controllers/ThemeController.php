@@ -122,7 +122,7 @@ class ThemeController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = ThemeSearch::one($id, $field)) != null) {
+        if (($model = Theme::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

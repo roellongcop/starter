@@ -153,7 +153,7 @@ class ModelFileController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = ModelFileSearch::one($id, $field)) != null) {
+        if (($model = ModelFile::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

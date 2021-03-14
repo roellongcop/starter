@@ -12,7 +12,7 @@ use app\models\search\RoleSearch;
 <p></p>
 
 <?= Checkbox::widget([
-    'data' => RoleSearch::getAll(),
+    'data' => RoleSearch::getAllRecord(),
     'name' => 'Role[role_access][]',
     'inputClass' => 'checkbox role_access',
     'checkedFunction' => function($key, $value) use ($model) {

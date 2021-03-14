@@ -170,7 +170,7 @@ if (count($pks) === 1) {
     $condition = '[' . implode(', ', $condition) . ']';
 }
 ?>
-        if (($model = <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>::one($id, $field)) != null) {
+        if (($model = <?= $modelClass ?>::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

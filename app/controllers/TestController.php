@@ -3,30 +3,30 @@
 namespace app\controllers;
 
 use Yii;
-use app\helpers\App;
-use app\models\Backup;
 use app\models\Log;
-use app\models\search\BackupSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
-use yii\helpers\FileHelper;
-use yii\helpers\Inflector;
+use app\models\Test;
+use app\models\search\TestSearch;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use app\helpers\App;
+use yii\helpers\Inflector;
+use yii\helpers\ArrayHelper;
 
 /**
- * BackupController implements the CRUD actions for Backup model.
+ * TestController implements the CRUD actions for Test model.
  */
-class BackupController extends Controller
+class TestController extends Controller 
 {
+
     /**
-     * Lists all Backup models.
+     * Lists all Test models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BackupSearch();
-        $dataProvider = $searchModel->search(['BackupSearch' => App::queryParams()]);
+        $searchModel = new TestSearch();
+        $dataProvider = $searchModel->search(['TestSearch' => App::queryParams()]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -35,7 +35,7 @@ class BackupController extends Controller
     }
 
     /**
-     * Displays a single Backup model.
+     * Displays a single Test model.
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
@@ -48,35 +48,16 @@ class BackupController extends Controller
     }
 
     /**
-     * Creates a new Backup model.
+     * Creates a new Test model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Backup([
-            'filename' => time(),
-        ]);
+        $model = new Test();
 
-        if ($model->load(App::post()) && $model->validate()) {
-            $backup = $this->backupDB($model->filename, $model->tables);
-            $model->tables = $model->tables ?: App::component('general')->getAllTables();
-            
-            if ($backup) {
-                $model->save();
-
-                $fileInput = new \StdClass();
-                $fileInput->baseName = $model->filename;
-                $fileInput->extension = 'sql';
-                $fileInput->size = $backup['filesize'];
-
-                App::component('file')->saveFile($model, $fileInput, $backup['filepath']);
-
-                App::success('Successfully Created');
-            }
-            else {
-                App::danger('Error in creating backup file.');
-            }
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Created');
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -87,13 +68,13 @@ class BackupController extends Controller
     }
 
     /**
-     * Updates an existing Backup model.
+     * Updates an existing Test model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    /*ublic function actionUpdate($id)
+    public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -105,39 +86,39 @@ class BackupController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }*/
+    }
 
     /**
-     * Deletes an existing Backup model.
+     * Deletes an existing Test model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    // ublic function actionDelete($id)
-    // {
-    //     $model = $this->findModel($id);
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
 
-    //     if($model->delete()) {
-    //         App::success('Successfully Deleted');
-    //     }
-    //     else {
-    //         App::danger(json_encode($model->errors));
-    //     }
+        if($model->delete()) {
+            App::success('Successfully Deleted');
+        }
+        else {
+            App::danger(json_encode($model->errors));
+        }
 
-    //     return $this->redirect(['index']);
-    // }
+        return $this->redirect(['index']);
+    }
 
     /**
-     * Finds the Backup model based on its primary key value.
+     * Finds the Test model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Backup the loaded model
+     * @return Test the loaded model
      * @throws ForbiddenHttpException if the model cannot be found
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = Backup::findOne([$field => $id])) != null) {
+        if (($model = Test::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }
@@ -179,30 +160,30 @@ class BackupController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = BackupSearch::all($post['selection']);
+                $models = TestSearch::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Backup::updateAll(
+                            Test::updateAll(
                                 ['record_status' => 1],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
-                            Backup::updateAll(
+                            Test::updateAll(
                                 ['record_status' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'delete':
-                            Backup::deleteAll(['id' => $post['selection']]);
+                            Test::deleteAll(['id' => $post['selection']]);
                             break;
                         default:
                             # code...
                             break;
                     }
-                    Log::record(new Backup(), ArrayHelper::map($models, 'id', 'attributes'));
+                    Log::record(new Test(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {
@@ -263,108 +244,10 @@ class BackupController extends Controller
     protected function getExportContent($file='excel')
     {
         return ExportContent::widget([
-            'params' => App::get(),
-            'file' => $file,
-            'searchModel' => new BackupSearch(),
+            'params'      => App::get(),
+            'file'        => $file,
+            'searchModel' => new TestSearch(),
         ]);
-    }
-
-
-    public function actionRestore($id)
-    {
-        $model = $this->findModel($id);
-
-        $sql = file_get_contents($model->sqlFileLocation);
-        App::execute($sql);
-
-        App::success('Restored.');
-        return $this->redirect(['index']);
-    }
-
-    public function uploadPath($name)
-    {
-        $folders = [
-            'protected',
-            'backups',
-            date('Y'),
-            date('m'),
-        ];
-
-        $file_path = implode('/', $folders);
-        FileHelper::createDirectory($file_path);
-
-
-        App::component('file')->createIndexFile($folders);
-
-        $path = "{$file_path}/{$name}.sql";
-
-        return $path;
-    }
-
-    public function backupDB($name='', $tables='') 
-    {
-        $name = $name ?: time();
-        $tables = $tables ?: '*';
-
-        $micro_date = microtime();
-        $date_array = explode(" ",$micro_date);
-        $filepath = $this->uploadPath($name);
-
-        if ($tables == '*') {
-            $tables = array();
-            $tables = App::getTableNames();
-        } 
-        else {
-            $tables = is_array($tables) ? $tables : explode(',', $tables);
-        }
-        $return = '';
-        foreach ($tables as $table) {
-            $result = App::query("SELECT * FROM {$table}");
-            $return.= 'DROP TABLE IF EXISTS `' . $table . '`;';
-            $row2 = App::queryOne("SHOW CREATE TABLE {$table}");
-            $return.= "\n\n" . $row2['Create Table'] . ";\n\n";
-            foreach ($result as $row) {
-                $return.= 'INSERT INTO ' . $table . ' VALUES(';
-                foreach ($row as $data) {
-                    $data = addslashes($data);
-                    $data = preg_replace("/\n/", "\\n", $data);
-                    if (isset($data)) {
-                        $return.= '"' . $data . '"';
-                    } 
-                    else {
-                        $return.= '""';
-                    }
-                    $return.= ',';
-                }
-                $return = substr($return, 0, strlen($return) - 1);
-                $return.= ");\n";
-            }
-            $return.="\n\n\n";
-        }
-        $handle = fopen($filepath, 'w+');
-        fwrite($handle, $return);
-        fclose($handle);
-
-        if (file_exists($filepath)) {
-
-            return [
-                'filesize' => filesize($filepath),
-                'filepath' => $filepath,
-            ];
-        }
-        return false;
-    }
-
-    public function actionDownload($id)
-    {
-        $model = $this->findModel($id);
-        if ($model) {
-            $model->download();
-        }
-        else {
-            App::warning('File don\'t exist');
-            return $this->redirect(['index']);
-        }
     }
 
     public function actionInActiveData()

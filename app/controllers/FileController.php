@@ -186,8 +186,7 @@ class FileController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-
-        if (($model = FileSearch::one($id, $field)) != null) {
+        if (($model = File::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

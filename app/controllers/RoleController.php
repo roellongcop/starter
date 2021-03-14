@@ -144,7 +144,7 @@ class RoleController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = RoleSearch::one($id, $field)) != null) {
+        if (($model = Role::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }
