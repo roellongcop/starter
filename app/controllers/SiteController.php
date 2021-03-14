@@ -17,11 +17,11 @@ class SiteController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['access'] = [
+        $behaviors['AccessControl'] = [
             'class' => AccessControl::className(),
             'publicActions' => ['login', 'logout', 'reset-password']
         ];
-        $behaviors['verbs'] = [
+        $behaviors['VerbFilter'] = [
             'class' => VerbFilter::className(),
             'verbActions' => [
                 'logout' => ['post'],

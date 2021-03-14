@@ -30,7 +30,7 @@ class FileController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['access'] = [
+        $behaviors['AccessControl'] = [
             'class' => AccessControl::className(),
             'publicActions' => ['display', 'upload', 'download']
         ];
