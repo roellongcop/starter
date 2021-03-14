@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\Html;
 use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
@@ -47,10 +48,13 @@ $createController = $this->params['createController'] ?? '';
             <!--end::Dropdown-->
 
             <?php if ($this->params['showCreateButton'] ?? ''): ?>
-                <?= Anchors::widget([
-                    'names' => 'create',
-                    'controller' => $createController,
-                ]); ?>
+                <?= Html::a(
+                    $this->params['createLabel'] ?? 'Create', 
+                    ["{$createController}/create"],
+                    [
+                        'class' => 'btn btn-success'
+                    ]
+                ) ?>
             <?php endif ?>
             
         </div>

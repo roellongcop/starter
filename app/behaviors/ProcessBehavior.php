@@ -1,0 +1,42 @@
+<?php
+namespace app\behaviors;
+
+use app\helpers\App;
+use yii\base\Behavior;
+use yii\db\ActiveRecord;
+
+class ProcessBehavior extends Behavior
+{
+    public function events()
+    {
+        return [
+            ActiveRecord::EVENT_BEFORE_INSERT => 'beforeInsert',
+            ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeUpdate',
+            ActiveRecord::EVENT_BEFORE_DELETE => 'beforeDelete',
+        ];
+    }
+
+    public function beforeInsert($event)
+    {
+        $event->isValid = $this->owner->canCreate;
+        if (! $event->isValid) {
+            App::warning('Data cannot be created');
+        }
+    }
+
+    public function beforeUpdate($event)
+    {
+        $event->isValid = $this->owner->canUpdate;
+        if (! $event->isValid) {
+            App::warning('Data cannot be updated');
+        }
+    }
+
+    public function beforeDelete($event)
+    {
+        $event->isValid = $this->owner->canDelete;
+        if (! $event->isValid) {
+            App::warning('Data cannot be deleted');
+        }
+    }
+}

@@ -3,9 +3,19 @@ namespace app\helpers;
 
 use Yii;
 use app\helpers\App;
+use app\widgets\Anchor;
 
-class Element
+class Html extends \yii\helpers\Html
 {
+    public static function a($text, $url = NULL, $options = [])
+    {
+        return Anchor::widget([
+            'title' => $text ,
+            'link' => $url,
+            'options' => $options,
+        ]);
+    }
+    
     public static function nbsp($count=1)
     {
         $space = '';
