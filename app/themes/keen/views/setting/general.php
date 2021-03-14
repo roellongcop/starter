@@ -44,9 +44,6 @@ $this->params['searchModel'] = new DashboardSearch();
 		<p class="lead">General</p>
 		<div class="row">
 			<div class="col-md-4">
-				<?= $form->field($model, 'app_name')->textInput(['maxlength' => true]) ?>
-			</div>
-			<div class="col-md-4">
 				<?= $form->field($model, 'timezone')->textInput(['maxlength' => true]) ?>
 			</div>
 			<div class="col-md-4">
@@ -56,12 +53,13 @@ $this->params['searchModel'] = new DashboardSearch();
 				    ]
 				) ?>
 			</div>
-		</div>
-
-		<div class="row">
 			<div class="col-md-4">
 				<?= $form->field($model, 'auto_logout_timer')->textInput(['maxlength' => true]) ?>
 			</div>
+		</div>
+
+		<div class="row">
+			
 
 			<div class="col-md-4">
 				<?= BootstrapSelect::widget([

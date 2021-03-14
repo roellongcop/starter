@@ -16,10 +16,7 @@ return [
             'name' => 'pagination',
             'default' => 20,
         ],
-        'app_name' => [
-            'name' => 'app_name',
-            'default' => 'Starter'
-        ],
+      
         'admin_email' => [
             'name' => 'admin_email',
             'default' => 'admin@example.com'

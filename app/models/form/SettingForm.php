@@ -19,7 +19,6 @@ class SettingForm extends Model
 {
     public $timezone;
     public $pagination;
-    public $app_name;
     public $admin_email;
     public $sender_email;
     public $sender_name;
@@ -39,7 +38,6 @@ class SettingForm extends Model
             	[
             		'timezone',
 				    'pagination',
-				    'app_name',
 				    'admin_email',
 				    'sender_email',
 				    'sender_name',
