@@ -11,13 +11,18 @@ class IpFilter extends ActionFilter
 {
     public function beforeAction($action)
     {
-        if (! App::isController('site')) {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+           
+        if (! App::controllerAction('site/error')) {
             if (in_array(App::ip(), IpSearch::blocked())) {
                 throw new ForbiddenHttpException('IP is Blocked !');
                 return false;
             }
         }
-
-        return parent::beforeAction($action);
+        
+        return true;
     }
 }

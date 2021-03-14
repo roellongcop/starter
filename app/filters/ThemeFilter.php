@@ -12,6 +12,10 @@ class ThemeFilter extends ActionFilter
 {
     public function beforeAction($action)
     {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
         if (App::isLogin()) {
             $theme = App::identity('currentTheme');
         }
@@ -31,6 +35,6 @@ class ThemeFilter extends ActionFilter
 
             App::view()->theme = $themeModel;
         }
-        return parent::beforeAction($action);
+        return true;
     }
 }

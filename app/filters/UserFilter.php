@@ -10,13 +10,17 @@ class UserFilter extends ActionFilter
 {
     public function beforeAction($action)
     {
-        if (! App::isController('site')) {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        
+        if (! App::controllerAction('site/error')) {
             if (App::isLogin() && App::identity('is_blocked')) {
                 throw new ForbiddenHttpException('User is Blocked !');
                 return false;
             }
         }
 
-        return parent::beforeAction($action);
+        return true;
     }
 }
