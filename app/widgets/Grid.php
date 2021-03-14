@@ -18,6 +18,7 @@ class Grid extends \yii\base\Widget
     public $controller;
     public $formatter = ['class' => '\app\components\FormatterComponent'];
     
+    public $parameter = 'id';
 
     public function init() 
     {
@@ -73,7 +74,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'view')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/view'). $this->actionName('View'),
-                            'link' =>  ["{$controller}/view", 'id' => $model->id],
+                            'link' =>  ["{$controller}/view", $this->parameter => $model->{$this->parameter}],
                             'options' => [
                                 'class' => 'navi-link',
                                 'title' => 'View',
@@ -85,7 +86,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'update')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/edit'). $this->actionName('Update'),
-                            'link' =>  ["{$controller}/update", 'id' => $model->id],
+                            'link' =>  ["{$controller}/update", $this->parameter => $model->{$this->parameter}],
                             'options' => [
                                 'class' => 'navi-link',
                                 'title' => 'Update',
@@ -97,7 +98,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'delete')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/delete'). $this->actionName('Delete'),
-                            'link' =>  ["{$controller}/delete", 'id' => $model->id],
+                            'link' =>  ["{$controller}/delete", $this->parameter => $model->{$this->parameter}],
                             'options' => [
                                 'class' => 'navi-link delete',
                                 'title' => 'Delete',
@@ -111,7 +112,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'activate')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/delete'). $this->actionName('Activate'),
-                            'link' => ['theme/activate', 'id' => $model->id],
+                            'link' => ['theme/activate', $this->parameter => $model->{$this->parameter}],
                             'options' => [
                                 'class' => 'navi-link delete',
                                 'data-method' => 'post',
