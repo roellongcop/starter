@@ -36,9 +36,8 @@ class LogSearch extends Log
         ];
     }
 
-    public function init()
+    public function setPagination()
     {
-        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 
@@ -65,6 +64,7 @@ class LogSearch extends Log
 
         // add conditions that should always apply here
 
+        $this->setPagination();
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

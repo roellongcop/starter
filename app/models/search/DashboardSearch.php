@@ -33,9 +33,8 @@ class DashboardSearch extends \yii\base\Model
         ];
     }
 
-    public function init()
+    public function setPagination()
     {
-        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
  
@@ -44,6 +43,7 @@ class DashboardSearch extends \yii\base\Model
 
     public function search($params)
     {
+        $this->setPagination();
         $this->load($params);
 
 

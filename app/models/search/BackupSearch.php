@@ -35,9 +35,8 @@ class BackupSearch extends Backup
         ];
     }
 
-    public function init()
+    public function setPagination()
     {
-        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 
@@ -63,6 +62,7 @@ class BackupSearch extends Backup
 
         // add conditions that should always apply here
 
+        $this->setPagination();
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

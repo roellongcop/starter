@@ -37,9 +37,8 @@ class UserMetaSearch extends UserMeta
         ];
     }
 
-    public function init()
+    public function setPagination()
     {
-        parent::init();
         $this->pagination = SettingSearch::default('pagination');
     }
 
@@ -66,6 +65,7 @@ class UserMetaSearch extends UserMeta
 
         // add conditions that should always apply here
 
+        $this->setPagination();
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
