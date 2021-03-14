@@ -87,6 +87,10 @@ class ExportComponent extends Component
 
     public function getExportColumns($searchModel, $type='excel')
     {
+        if ($searchModel->hasProperty('exportColumns') && $searchModel->exportColumns) {
+            return $searchModel->exportColumns;
+        }
+        
         $columns = array_keys($searchModel->tableColumns);
         $search_model_columns = $this->processTableColumns($searchModel);
         $res = [];
