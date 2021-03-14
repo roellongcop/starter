@@ -113,21 +113,6 @@ class File extends ActiveRecord
         return new FileQuery(get_called_class());
     }
     
-     
-    public function beforeSave($insert)
-    {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-
-
-        if ($this->isNewRecord) {
-            $this->token = $this->token ?: $this->generateToken();
-        }
-        
-        return true;
-    }
-
 
     public function getPreviewIcon($w=60)
     {
@@ -266,17 +251,5 @@ class File extends ActiveRecord
             'updatedByEmail',
             'recordStatusHtml:raw'
         ];
-    }
-
-
-    public function generateToken() 
-    {
-        $token = App::randomString(32) . time();
-
-        if (($model = File::findOne(['token' => $token])) != null) {
-            return $this->generateToken();
-        }
-
-        return $token;
     }
 }

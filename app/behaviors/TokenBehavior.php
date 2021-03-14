@@ -24,7 +24,7 @@ class TokenBehavior extends Behavior
     }
 
 
-    protected function generateToken($length = 5)
+    protected function generateToken($length = 10)
     {
         $token = App::randomString($length) . time();
         $model = $this->owner::findOne([$this->tokenField => $token]);

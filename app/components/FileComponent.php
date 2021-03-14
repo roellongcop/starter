@@ -36,7 +36,10 @@ class FileComponent extends Component
         $file->location  = $location;
         $file->extension = $input->extension;
         $file->size      = $input->size;
-        $file->token  = ($model->fileToken ?? '');
+
+        if (isset($model->fileToken)) {
+            $file->token = $model->fileToken . '-' . time();
+        }
 
         if ($file->save()) {
 
