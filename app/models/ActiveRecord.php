@@ -43,6 +43,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ModelFile::className(), ['model_id' => 'id'])
             ->onCondition(['model_name' => App::getModelName($this)])
+            ->groupBy('file_id')
             ->orderBy(['id' => SORT_DESC]);
     }
 
