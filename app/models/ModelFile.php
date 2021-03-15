@@ -158,4 +158,9 @@ class ModelFile extends ActiveRecord
             'recordStatusHtml:raw'
         ];
     }
+
+    public function getFile()
+    {
+        return $this->hasOne(File::className(), ['id' => 'file_id']);
+    }
 }

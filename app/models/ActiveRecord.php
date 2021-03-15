@@ -35,37 +35,53 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ModelFile::className(), ['model_id' => 'id'])
             ->onCondition(['model_name' => App::getModelName($this)])
-            ->groupBy('file_id')
             ->orderBy(['id' => SORT_DESC]);
     }
 
     public function getModelFile()
     {
-        return $this->hasOne(ModelFile::className(), ['model_id' => 'id'])
-            ->onCondition(['model_name' => App::getModelName($this)])
-            ->groupBy('file_id')
-            ->orderBy(['id' => SORT_DESC]);
+        return $this->modelFiles[0] ?? '';
     }
 
 
-    public function getFiles()
+    public function getDocumentFiles()
     {
-        return $this->hasMany(File::className(), ['id' => 'file_id'])
-            ->via('modelFiles');
+        $models = [];
+
+        if (($modelFiles = $this->modelFiles) != null) {
+            foreach ($modelFiles as $modelFile) {
+                if (in_array($modelFile->file->extension, App::params('file_extensions')['file'])) {
+                    $models[] = $modelFile->file;
+                }
+            }
+        }
+
+        return $models;
+    }
+
+    public function getDocumentFile()
+    {
+        return $this->documentFiles[0] ?? '';
     }
 
     public function getImageFiles()
     {
-        return $this->hasMany(File::className(), ['id' => 'file_id'])
-            ->onCondition(['extension' => App::params('file_extensions')['image']])
-            ->via('modelFiles');
+        $models = [];
+
+        if (($modelFiles = $this->modelFiles) != null) {
+            foreach ($modelFiles as $modelFile) {
+                if (in_array($modelFile->file->extension, App::params('file_extensions')['image'])) {
+                    $models[] = $modelFile->file;
+                }
+            }
+        }
+
+        return $models;
     }
 
     public function getImageFile()
     {
-        return $this->hasOne(File::className(), ['id' => 'file_id'])
-            ->onCondition(['extension' => App::params('file_extensions')['image']])
-            ->via('modelFile');
+        return $this->imageFiles[0] ?? '';
     }
 
     public function getImagePath()
@@ -81,16 +97,22 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getSqlFiles()
     {
-        return $this->hasMany(File::className(), ['id' => 'file_id'])
-            ->onCondition(['extension' => 'sql'])
-            ->via('modelFiles');
+        $models = [];
+
+        if (($modelFiles = $this->modelFiles) != null) {
+            foreach ($modelFiles as $modelFile) {
+                if (in_array($modelFile->file->extension, ['sql'])) {
+                    $models[] = $modelFile->file;
+                }
+            }
+        }
+
+        return $models;
     }
 
     public function getSqlFile()
     {
-        return $this->hasOne(File::className(), ['id' => 'file_id'])
-            ->onCondition(['extension' => 'sql'])
-            ->via('modelFile');
+        return $this->sqlFiles[0] ?? '';
     }
 
 
