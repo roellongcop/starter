@@ -55,10 +55,10 @@ abstract class Controller extends \yii\web\Controller
             // 'params' => App::params()
         ]);
 
-        $this->view->registerJs(<<<SCRIPT
+        $this->view->registerJs("
             var app = {$options};
             console.log(app)
-        SCRIPT , \yii\web\View::POS_HEAD, 'app');
+        ", \yii\web\View::POS_HEAD, 'app');
         
         App::session()->timeout = SettingSearch::default('auto_logout_timer');
         
