@@ -34,8 +34,20 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getModelFiles()
     {
         return $this->hasMany(ModelFile::className(), ['model_id' => 'id'])
+            ->select([
+                'MAX(id) AS id',
+                'model_id',
+                'file_id',
+                'model_name',
+                'record_status',
+                'created_by',
+                'updated_by',
+                'created_at',
+                'updated_at',
+            ])
             ->onCondition(['model_name' => App::getModelName($this)])
-            ->orderBy(['id' => SORT_DESC]);
+            ->groupBy(['file_id'])
+            ->orderBy(['MAX(id)' => SORT_DESC]);
     }
 
     public function getModelFile()
