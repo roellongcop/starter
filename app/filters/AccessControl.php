@@ -14,7 +14,10 @@ class AccessControl extends \yii\filters\AccessControl
     {
         $access =  App::component('access');
 
-        $this->adminActions = $this->adminActions ?: $access->my_actions();
+        $adminActions = $this->adminActions ?: $access->my_actions();
+        $adminActions = array_merge($adminActions, $this->publicActions);
+        
+        $this->adminActions = array_unique($adminActions);
         $this->only = $access->actions();
 
         $this->rules = [
