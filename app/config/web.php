@@ -1,11 +1,10 @@
 <?php
 
-use app\helpers\App;
-use kartik\mpdf\Pdf;
-use yii\db\Expression;
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$db      = require __DIR__ . '/db.php';
+$pdf     = require __DIR__ . '/pdf.php';
+$params  = require __DIR__ . '/params.php';
+$session = require __DIR__ . '/session.php';
 
 
 $config = [
@@ -62,26 +61,8 @@ $config = [
             ],
         ],
         'db' => $db,
-        'pdf' => [
-            'class' => Pdf::classname(),
-            'format' => Pdf::FORMAT_A4,
-            'orientation' => Pdf::ORIENT_PORTRAIT,
-            // 'destination' => Pdf::DEST_BROWSER,
-            'destination' => Pdf::DEST_DOWNLOAD,
-
-            'cssInline' => '
-                table, span, span.btn-font-sm {
-                    font-size:10px !important;
-                },
-                th {
-                    text-transform: uppercase !important;
-                } 
-                .mx40 {
-                    max-width: 40px;
-                } 
-            ', 
-            // refer settings section for all configuration options
-        ],
+        'pdf' => $pdf,
+        'session' => $session,
         
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -108,22 +89,6 @@ $config = [
             'linkAssets' => false,
             'class' => 'yii\web\AssetManager',
         ],
-        'session' => [
-            'class'         => 'yii\web\DbSession',
-            'sessionTable' => '{{%sessions}}',
-            // 'timeout' => 1440,
-            'writeCallback' => function ($session) { 
-                return [
-                    'user_id' => App::user('id'),
-                    'ip' => App::ip(),
-                    'browser' => App::browser(),
-                    'os' => App::os(),
-                    'device' => App::device(),
-                    'created_at' => new Expression('UTC_TIMESTAMP'),
-                    'updated_at' => new Expression('UTC_TIMESTAMP'),
-               ];
-            }
-       ],
        // 'view' => [
        //      'theme' => [
        //          'basePath' => '@web/app/themes/keenDemo1/assets/assets/',

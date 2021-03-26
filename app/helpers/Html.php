@@ -4,6 +4,8 @@ namespace app\helpers;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
+use yii\helpers\Url;
+use yii\web\Request;
 
 class Html extends \yii\helpers\Html
 {
@@ -36,6 +38,16 @@ class Html extends \yii\helpers\Html
 
     public static function navController($menu)
     {
+        $request = new Request(['url' => parse_url(Url::to($menu['link'], true), PHP_URL_PATH)]);
+        $current = App::urlManager()->parseRequest($request)[0] ?? '';
+
+        if ($current && is_array($current)) {
+            list($controller, $action) = explode('/', $current);
+
+            return $controller;
+        }
+
+        
         $controller = explode('/', $menu['link'])[3] ?? ''; 
         if (! $controller) {
             $controller = explode('/', $menu['link'])[1] ?? ''; 

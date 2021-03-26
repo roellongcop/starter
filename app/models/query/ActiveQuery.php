@@ -7,23 +7,25 @@ abstract class ActiveQuery extends \yii\db\ActiveQuery
 {
     abstract public function controllerID();
 
-
-    public function visible($alias = '')
+    public function _getAlias()
     {
-        $field = "record_status";
-
-        if ($alias) {
-            $field = "{$alias}.record_status";
-        }
-
         if ($this->from && is_array($this->from)) {
             $alias = array_keys($this->from)[0] ?? '';
 
-            if ($alias) {
-                $field = "{$alias}.record_status";
-            }
+            return $alias;
         }
+    }
+    public function field($field)
+    {
+        if (($alias = $this->_getAlias()) != null) {
+            return "{$alias}.{$field}";
+        }
+        return $field;
+    }
 
+    public function visible($alias = '')
+    {
+        $field = $this->field('record_status');
 
 
         $condition[$field] = 1;
@@ -52,7 +54,7 @@ abstract class ActiveQuery extends \yii\db\ActiveQuery
         }
 
         return $this->andWhere([
-            'record_status' => 1
+            $this->field('record_status') => 1
         ]);
     }
 
@@ -71,7 +73,7 @@ abstract class ActiveQuery extends \yii\db\ActiveQuery
         }
 
         return $this->andWhere([
-            'record_status' => 0
+            $this->field('record_status') => 0
         ]);
     }
 
@@ -89,7 +91,6 @@ abstract class ActiveQuery extends \yii\db\ActiveQuery
 
     public function one($db = null)
     {
-        // $this->visible();
         return parent::one($db);
     }
 }

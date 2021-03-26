@@ -1,0 +1,1 @@
+password_reset_token: <?= $user->password_reset_token ?>

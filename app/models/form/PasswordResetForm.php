@@ -5,6 +5,7 @@ namespace app\models\form;
 use Yii;
 use app\helpers\App;
 use app\models\User;
+use app\models\form\CustomEmailForm;
 use yii\base\Model;
 
 /**
@@ -48,7 +49,19 @@ class PasswordResetForm extends Model
                     App::success("Your password hint is: '{$user->password_hint}'.");
                 }
                 else {
-                    App::info("Sending Email not yet supported.");
+                    $mail = new CustomEmailForm([
+                        'template' => 'password_reset',
+                        'parameters' => [
+                            'user' => $user
+                        ]
+                    ]);
+                    $mail->to = 'longcoproel@gmail.com';
+                    if ($mail->send()) {
+                        App::success("Email sent.");
+                    }
+                    else {
+                        App::danger("Email not sent.");
+                    }
                 }
             }
             else {

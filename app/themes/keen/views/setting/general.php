@@ -36,7 +36,12 @@ $this->params['searchModel'] = new DashboardSearch();
 		<p class="lead">General</p>
 		<div class="row">
 			<div class="col-md-4">
-				<?= $form->field($model, 'timezone')->textInput(['maxlength' => true]) ?>
+				<?= BootstrapSelect::widget([
+	                'attribute' => 'timezone',
+	                'model' => $model,
+	                'form' => $form,
+	                'data' => App::component('general')->timezoneList(),
+	            ]) ?>
 			</div>
 			<div class="col-md-4">
 		        <?= $form->field($model, 'pagination')->dropDownList(
