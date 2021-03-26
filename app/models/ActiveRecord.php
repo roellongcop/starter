@@ -61,8 +61,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $models = [];
 
         if (($modelFiles = $this->modelFiles) != null) {
+            $file_extensions = App::params('file_extensions')['file'];
             foreach ($modelFiles as $modelFile) {
-                if (in_array($modelFile->file->extension, App::params('file_extensions')['file'])) {
+                if (in_array($modelFile->file->extension, $file_extensions)) {
                     $models[] = $modelFile->file;
                 }
             }
@@ -81,8 +82,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $models = [];
 
         if (($modelFiles = $this->modelFiles) != null) {
+            $file_extensions = App::params('file_extensions')['image'];
             foreach ($modelFiles as $modelFile) {
-                if (in_array($modelFile->file->extension, App::params('file_extensions')['image'])) {
+                if (in_array($modelFile->file->extension, $file_extensions)) {
                     $models[] = $modelFile->file;
                 }
             }
@@ -99,9 +101,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getImagePath()
     {
         if(($file = $this->imageFile) != null) {
-            if ($file) {
-                return Url::to(['file/display', 'token' => $file->token], true);
-            }
+            return Url::to(['file/display', 'token' => $file->token], true);
         } 
 
         return SettingSearch::defaultImage('image_holder');

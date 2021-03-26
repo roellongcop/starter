@@ -3,13 +3,29 @@
 use app\helpers\App;
 use app\widgets\Dropzone;
 use yii\helpers\Html;
+use yii\helpers\Url;
 $this->registerJs(<<< SCRIPT
+	var disableButton = function() {
+    	$('#change-photo-confirm-{$id}').prop('disabled', false);
+	}
+
     var selectedFile = 0;
     $('.my-image-files').on('click', function() {
-    	selectedFile = $(this).data('id');
-    	$('.my-image-files').css('border', '');
-    	$(this).css('border', '2px solid #1bc5bd');
-    	$('#change-photo-confirm-{$id}').prop('disabled', false)
+    	var image = $(this);
+
+    	selectedFile = image.data('id');
+
+    	$('.image-properties-panel #name').text(image.data('name'));
+    	$('.image-properties-panel #extension').text(image.data('extension'));
+    	$('.image-properties-panel #size').text(image.data('size'));
+    	$('.image-properties-panel #location').text(image.data('location'));
+    	$('.image-properties-panel #token').text(image.data('token'));
+    	$('.image-properties-panel #created_by').text(image.data('created_by'));
+    	$('.image-properties-panel #created_at').text(image.data('created_at'));
+
+    	$('.my-image-files').removeClass('selected-image');
+    	image.addClass('selected-image');
+    	disableButton();
 	})
 
 	$('#change-photo-confirm-{$id}').on('click', function() {
@@ -27,6 +43,24 @@ $this->registerJs(<<< SCRIPT
 		})
 	})
 SCRIPT, \yii\web\View::POS_END);
+$this->registerCSS(<<<CSS
+	.selected-image {
+		border: 2px solid #1bc5bd;
+	}
+	.image-properties-panel {
+		border-left: 2px solid #ddd;
+	}
+	.image-properties-panel .table-bordered th, .table-bordered td {
+	    padding: 5px 5px;
+	}
+	.table-bordered td {
+	    word-wrap:break-word;
+	    max-width: 300px;
+	}
+	.image-properties-panel .table-bordered {
+		table-layout: fixed;
+	}
+CSS);
 ?>
 
 <!-- Button trigger modal-->
@@ -47,7 +81,7 @@ SCRIPT, \yii\web\View::POS_END);
                 </button>
             </div>
             <div class="modal-body">
-                <div data-scroll="true" data-height="500">
+                <div >
 	                <ul class="nav nav-tabs nav-bold nav-tabs-line">
 	                    <li class="nav-item">
 	                        <a class="nav-link active" data-toggle="tab" href="#my_files-<?= $id ?>">
@@ -66,20 +100,67 @@ SCRIPT, \yii\web\View::POS_END);
 	                        </a>
 	                    </li>
 	                </ul>
-					<div class="tab-content">
+					<div class="tab-content pt-10">
         				<div class="tab-pane fade show active" id="my_files-<?= $id ?>" role="tabpanel" aria-labelledby="my_files-<?= $id ?>">
-        					<?php if ($files): ?>
-        						<div class="row">
-	        						<?php foreach ($files as $file): ?>
-	                        			<div class="col-md-2">
-	                        				<?= Html::img(['file/display', 'token' => $file->token, 'w' => 150], [
-	                        					'class' => 'img-thumbnail pointer my-image-files',
-	                        					'data-id' => $file->id,
-	                        				]) ?>
-	                        			</div>
-	       							<?php endforeach; ?>
+        					<div class="row">
+        						<div class="col-md-7 col-sm-6">
+        							<?php if ($files): ?>
+		        						<div class="row">
+			        						<?php foreach ($files as $file): ?>
+			                        			<div class="col-md-3">
+			                        				<?= Html::img(['file/display', 'token' => $file->token, 'w' => 150], [
+			                        					'class' => 'img-thumbnail pointer my-image-files',
+			                        					'data-id' => $file->id,
+			                        					'data-name' => $file->name,
+			                        					'data-extension' => $file->extension,
+			                        					'data-size' => $file->fileSize,
+			                        					'data-location' => $file->location,
+			                        					'data-token' => $file->token,
+			                        					'data-created_by' => $file->createdByEmail,
+			                        					'data-created_at' => $file->created_at,
+			                        				]) ?>
+			                        			</div>
+			       							<?php endforeach; ?>
+		        						</div>
+		        					<?php endif ?>
         						</div>
-        					<?php endif ?>
+        						<div class="col-md-5 col-sm-6 image-properties-panel">
+        							<p class="lead">Image Properties</p>
+        							<table class="table-bordered font-size-sm">
+        								<tbody>
+        									<tr>
+        										<th>Name</th>
+        										<td id="name"> None </td>
+        									</tr>
+        									<tr>
+        										<th>Extension</th>
+        										<td id="extension"> None </td>
+        									</tr>
+        									<tr>
+        										<th>Size</th>
+        										<td id="size"> None </td>
+        									</tr>
+        									<tr>
+        										<th>Location</th>
+        										<td id="location"> None </td>
+        									</tr>
+        									<tr>
+        										<th>Token</th>
+        										<td id="token"> None </td>
+        									</tr>
+        									<tr>
+        										<th>Created By</th>
+        										<td id="created_by"> None </td>
+        									</tr>
+        									<tr>
+        										<th>Created At</th>
+        										<td id="created_at"> None </td>
+        									</tr>
+        								</tbody>
+        							</table>
+        						</div>
+        					</div>
+        					
 	        			</div>
         				<div class="tab-pane fade" id="cp_dropzone-<?= $id ?>" role="tabpanel" aria-labelledby="cp_dropzone-<?= $id ?>">
 							<?= Dropzone::widget([
@@ -101,7 +182,7 @@ SCRIPT, \yii\web\View::POS_END);
                 <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                 <button 
                 	data-dismiss="modal"
-	                disabled="disabled"
+                	disabled="disabled"
                 	type="button" 
                 	class="btn btn-primary font-weight-bold"
                 	id="change-photo-confirm-<?= $id ?>">

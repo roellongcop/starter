@@ -252,4 +252,9 @@ class File extends ActiveRecord
             'recordStatusHtml:raw'
         ];
     }
+
+    public function getFileSize()
+    {
+        return App::formatter('asFileSize', $this->size);
+    }
 }
