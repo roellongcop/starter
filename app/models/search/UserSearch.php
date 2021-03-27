@@ -115,11 +115,7 @@ class UserSearch extends User
             ]);
         }
 
-        if ($this->date_range) {
-            $query->andFilterWhere(
-                App::component('general')->betweenRange($this->date_range, 'u.created_at')
-            );
-        }
+        $query->daterange($this->date_range);
 
         $query->joinWith('role r');
 

@@ -7,6 +7,24 @@ abstract class ActiveQuery extends \yii\db\ActiveQuery
 {
     abstract public function controllerID();
 
+    public function daterange($daterange='', $field='created_at')
+    {
+        if ($daterange) {
+            $field = $this->field($field);
+            
+            $hours = App::date_timezone(date("Y-m-d H:i:s"), "P");
+
+            return $this->andFilterWhere([
+                "between", 
+                "date(DATE_ADD({$field},INTERVAL '{$hours}' HOUR_MINUTE))", 
+                App::dateRange($daterange, 'start'), 
+                App::dateRange($daterange, 'end'), 
+            ]);
+        }
+
+        return $this;
+    }
+
     public function _getAlias()
     {
         if ($this->from && is_array($this->from)) {

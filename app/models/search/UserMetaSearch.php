@@ -109,11 +109,7 @@ class UserMetaSearch extends UserMeta
             ]);
         }
 
-        if ($this->date_range) {
-            $query->andFilterWhere(
-                App::component('general')->betweenRange($this->date_range)
-            );
-        }
+        $query->daterange($this->date_range);
 
         $query->joinWith('user u');
         return $dataProvider;
