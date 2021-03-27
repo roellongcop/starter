@@ -2,10 +2,6 @@
 
 namespace app\controllers;
 
-use Imagine\Gd;
-use Imagine\Gd\Imagine;
-use Imagine\Image\Box;
-use Imagine\Image\BoxInterface;
 use Yii;
 use app\filters\AccessControl;
 use app\helpers\App;
@@ -17,7 +13,6 @@ use app\models\search\FileSearch;
 use app\widgets\ExportContent;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
-use yii\imagine\Image;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
@@ -37,37 +32,38 @@ class FileController extends Controller
 
         return $behaviors;
     } 
-    public function actionDisplay($token, $w='', $h='')
+    public function actionDisplay($token='', $w='', $h='')
     {
+        $crop      = App::get('crop')      ?: 'false';
+        $ratio     = App::get('ratio')     ?: 'true';
+        $quality   = App::get('quality')   ?: 100;
+        $extension = App::get('extension') ?: 'png';
+
         $file = File::findOne(['token' => $token]);
-        $crop = App::get('crop')? App::get('crop'): 'false';
-        $ratio = App::get('ratio')? App::get('ratio'): 'true';
-        $quality = App::get('quality')? App::get('quality'): 100;
-        $extension = App::get('extension') ? App::get('extension'): 'png';
+
 
         if ($file) { 
-            $path = Yii::getAlias('@webroot') . "/{$file->location}";
+            $path = $file->rootPath;
+
             if (file_exists($path)) {
-                if (in_array($file->extension, App::params('file_extensions')['file'])) {
+                if ($file->isDocument) {
                     return App::response()->sendFile($path);
                 }
-                list($original_width, $original_height) = getimagesize($path);
-                $w = ($w)? (int)$w: $original_width ;
-                $h = ($h)? (int)$h: $original_height ;
-                if ($ratio == 'true') {
-                    $imagineObj = new Imagine();
-                    $image = $imagineObj->open($path);
-                    $image->resize($image->getSize()->widen($w));
+                elseif ($file->isImage) {
+                    
+                    $w = ($w)? (int)$w: $file->width;
+                    $h = ($h)? (int)$h: $file->height;
+
+                    if ($ratio == 'true') {
+                        return $file->getImageRatio($w, $quality, $extension);
+                    }
+                    elseif ($crop == 'true') {
+                        return $file->getImageCrop($w, $h, $quality, $extension);
+                    }
+                    else {
+                        return $file->getImage($w, $h, $quality, $extension);
+                    }
                 }
-                elseif ($crop == 'true') {
-                    $image = Image::crop($path, $w, $h); 
-                }
-                else {
-                    $image = Image::getImagine() 
-                        ->open($path) 
-                        ->resize(new Box($w, $h));
-                }
-                $image->show($extension, ['quality' => $quality]); 
             }
         }
     }

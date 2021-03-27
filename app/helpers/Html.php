@@ -3,8 +3,8 @@ namespace app\helpers;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Url;
 use app\widgets\Anchor;
-use yii\helpers\Url;
 use yii\web\Request;
 
 class Html extends \yii\helpers\Html
@@ -53,5 +53,10 @@ class Html extends \yii\helpers\Html
             $controller = explode('/', $menu['link'])[1] ?? ''; 
         }
         return $controller;
+    }
+
+    public static function image($path, $params=[], $options=[])
+    {
+        return parent::img(Url::imagePath($path, $params), $options);
     }
 }

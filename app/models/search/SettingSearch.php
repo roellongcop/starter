@@ -4,6 +4,7 @@ namespace app\models\search;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Url;
 use app\models\Setting;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -121,7 +122,7 @@ class SettingSearch extends Setting
         }
     }
 
-    public static function defaultImage($name)
+    public static function defaultImage($name, $params=[])
     {
         $model = Setting::findOne([
             'name' => $name,
@@ -129,7 +130,7 @@ class SettingSearch extends Setting
         ]);
 
         if($model && $model->imageFile) {
-            return $model->imagePath;
+            return Url::imagePath($model->imagePath, $params);
         }
 
         if ($name == 'image_holder') {

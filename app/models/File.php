@@ -3,6 +3,13 @@
 namespace app\models;
 
 use Yii;
+
+use Imagine\Gd;
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use Imagine\Image\BoxInterface;
+use yii\imagine\Image;
+
 use app\helpers\App;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
@@ -162,16 +169,17 @@ class File extends ActiveRecord
         }
 
 
-        if (in_array($this->extension, App::params('file_extensions')['image'])) {
-            return Html::img($path. "&w={$w}", [
+        if ($this->isImage) {
+            return Html::image($path, ['w' => $w, 'h' => $w, 'ratio' => 'false'], [
                 'class' => 'img-thumbnail'
-            ]) ;
+            ]);
+
         }
 
-        return Html::img($path, [
+        return Html::image($path, '', [
             'style' => "width:{$w}px;height:auto",
             'class' => 'img-thumbnail'
-        ]) ;
+        ]);
     }
 
     public function getImageFiles()
@@ -216,7 +224,7 @@ class File extends ActiveRecord
             ],
             
             'extension' => ['attribute' => 'extension', 'format' => 'raw'],
-            'size' => ['attribute' => 'size', 'format' => 'raw'],
+            'size' => ['attribute' => 'size', 'format' => 'fileSize'],
             'location' => ['attribute' => 'location', 'format' => 'raw'],
             // 'token' => ['attribute' => 'token', 'format' => 'raw'],
             'created_at' => [
@@ -256,5 +264,67 @@ class File extends ActiveRecord
     public function getFileSize()
     {
         return App::formatter('asFileSize', $this->size);
+    }
+
+    public function getRootPath($value='')
+    {
+        $paths = [
+            Yii::getAlias('@webroot'),
+            $this->location
+        ];
+
+        return implode('/', $paths);
+    }
+
+    public function getIsDocument()
+    {
+        return in_array($this->extension, App::params('file_extensions')['file']);
+    }
+
+    public function getIsImage()
+    {
+        return in_array($this->extension, App::params('file_extensions')['image']);
+    }
+
+    public function getWidth()
+    {
+        return $this->dimension['width'];
+    }
+
+    public function getHeight()
+    {
+        return $this->dimension['height'];
+    }
+
+    public function getDimension($value='')
+    {
+        list($width, $height) = getimagesize($this->rootPath);
+        return [
+            'width' => $width,
+            'height' => $height,
+        ];
+    }
+
+    public function getImageRatio($w, $quality=100, $extension='png')
+    {
+        $imagineObj = new Imagine();
+        $image = $imagineObj->open($this->rootPath);
+        $image->resize($image->getSize()->widen($w));
+        return $image->show($extension, ['quality' => $quality]); 
+    }
+
+    public function getImageCrop($w, $h, $quality=100, $extension='png')
+    {
+        $image = Image::crop($this->rootPath, $w, $h); 
+        return $image->show($extension, ['quality' => $quality]); 
+    }
+
+    public function getImage($w, $h, $quality=100, $extension='png')
+    {
+        $image = Image::getImagine() 
+            ->open($this->rootPath) 
+            ->resize(new Box($w, $h));
+
+        return $image->show($extension, ['quality' => $quality]);
     }
 }
