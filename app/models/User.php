@@ -487,12 +487,18 @@ class User extends ActiveRecord implements IdentityInterface
                 'label' => 'Photo',
                 'format' => 'raw',
                 'value' => function($model) {
-                    if ($model->imagePath) {
-                        return Html::img("{$model->imagePath}&w=40&quality=90", [
-                            // 'loading' => 'lazy',
+                    return Html::image($model->imagePath, 
+                        [
+                            'w' => 50,
+                            'h' => 50,
+                            'quality' => 90,
+                            'ratio' => 'false',
+                        ], 
+                        [
+                            'loading' => 'lazy',
                             'style' => 'border-radius: 50%;max-width:40px'
-                        ]);
-                    }
+                        ]
+                    );
                 }
             ],
             'username' => [

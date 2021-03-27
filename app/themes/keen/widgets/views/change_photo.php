@@ -2,8 +2,8 @@
 
 use app\helpers\App;
 use app\widgets\Dropzone;
-use yii\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Html;
+use app\helpers\Url;
 $this->registerJs(<<< SCRIPT
 	var disableButton = function() {
     	$('#change-photo-confirm-{$id}').prop('disabled', false);
@@ -57,7 +57,7 @@ $this->registerCSS(<<<CSS
 	}
 	.table-bordered td {
 	    word-wrap:break-word;
-	    # max-width: 300px;
+	    max-width: 300px;
 	}
 	.image-properties-panel .table-bordered {
 		table-layout: fixed;
@@ -110,7 +110,7 @@ CSS);
 		        						<div class="row">
 			        						<?php foreach ($files as $file): ?>
 			                        			<div class="col-md-3">
-			                        				<?= Html::img(['file/display', 'token' => $file->token, 'w' => 150], [
+			                        				<?= Html::img(['file/display', 'token' => $file->token, 'w' => 150, 'h' => 150, 'ratio' => 'false'], [
 			                        					'class' => 'img-thumbnail pointer my-image-files',
 			                        					'data-id' => $file->id,
 			                        					'data-name' => $file->name,
