@@ -7,8 +7,8 @@ use yii\helpers\Url;
  
 class ChangePhoto extends \yii\base\Widget
 {
-    public $modelTitle = 'Change Photo';
-    public $buttonTitle = 'Change Photo';
+    public $modelTitle = 'Choose from Gallery';
+    public $buttonTitle = 'Choose from Gallery';
     public $files;
     public $uploadUrl;
     public $model;
