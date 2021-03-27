@@ -17,7 +17,9 @@ $this->registerJs(<<< SCRIPT
 
     	$('.image-properties-panel #name').text(image.data('name'));
     	$('.image-properties-panel #extension').text(image.data('extension'));
-    	$('.image-properties-panel #size').text(image.data('size'));
+        $('.image-properties-panel #size').text(image.data('size'));
+        $('.image-properties-panel #width').text(image.data('width') + 'px');
+    	$('.image-properties-panel #height').text(image.data('height') + 'px');
     	$('.image-properties-panel #location').text(image.data('location'));
     	$('.image-properties-panel #token').text(image.data('token'));
     	$('.image-properties-panel #created_by').text(image.data('created_by'));
@@ -113,7 +115,9 @@ CSS);
 			                        					'data-id' => $file->id,
 			                        					'data-name' => $file->name,
 			                        					'data-extension' => $file->extension,
-			                        					'data-size' => $file->fileSize,
+                                                        'data-size' => $file->fileSize,
+                                                        'data-width' => $file->width,
+			                        					'data-height' => $file->height,
 			                        					'data-location' => $file->location,
 			                        					'data-token' => $file->token,
 			                        					'data-created_by' => $file->createdByEmail,
@@ -140,6 +144,14 @@ CSS);
         										<th>Size</th>
         										<td id="size"> None </td>
         									</tr>
+                                            <tr>
+                                                <th>Width</th>
+                                                <td id="width"> None </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Height</th>
+                                                <td id="height"> None </td>
+                                            </tr>
         									<tr>
         										<th>Location</th>
         										<td id="location"> None </td>
