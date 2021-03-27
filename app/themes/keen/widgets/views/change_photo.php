@@ -57,7 +57,7 @@ $this->registerCSS(<<<CSS
 	}
 	.table-bordered td {
 	    word-wrap:break-word;
-	    max-width: 300px;
+	    # max-width: 300px;
 	}
 	.image-properties-panel .table-bordered {
 		table-layout: fixed;
@@ -121,7 +121,7 @@ CSS);
 			                        					'data-location' => $file->location,
 			                        					'data-token' => $file->token,
 			                        					'data-created_by' => $file->createdByEmail,
-			                        					'data-created_at' => $file->created_at,
+			                        					'data-created_at' => App::formatter('asFulldate', $file->created_at),
 			                        				]) ?>
 			                        			</div>
 			       							<?php endforeach; ?>
@@ -129,7 +129,7 @@ CSS);
 		        					<?php endif ?>
         						</div>
         						<div class="col-md-5 col-sm-6 image-properties-panel">
-        							<p class="lead">Image Properties</p>
+        							<p class="lead text-warning">Image Properties</p>
         							<table class="table-bordered font-size-sm">
         								<tbody>
         									<tr>
