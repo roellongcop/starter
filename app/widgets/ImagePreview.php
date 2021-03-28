@@ -13,6 +13,7 @@ class ImagePreview extends \yii\base\Widget
     public $options = [
         'class' => 'img-thumbnail',
         'loading' => 'lazy',
+        'style' => 'max-height:200px',
     ];
     public $src;
     public $imageID;

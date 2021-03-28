@@ -43,6 +43,30 @@ $this->registerJs(<<< SCRIPT
             success: {$ajaxSuccess},
             error: {$ajaxError},
         })
+    });
+
+    $('#upload-tab-{$id} input[type="file"]').on('change', function() {
+        var input = this;
+
+        var fileInput = input.files[0]; 
+
+        let formData = new FormData();
+        formData.append('UploadForm[fileInput]', fileInput);
+        formData.append('modelName', '{$modelName}');
+        formData.append('id', {$model_id});
+        formData.append('fileToken', Date.now());
+
+        $.ajax( {
+            url: app.baseUrl + '/file/upload',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: {$ajaxSuccess},
+            error: {$ajaxError},
+        });
     })
 SCRIPT, \yii\web\View::POS_END);
 $this->registerCSS(<<<CSS
