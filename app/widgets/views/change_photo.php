@@ -54,7 +54,7 @@ $this->registerJs(<<< SCRIPT
         formData.append('UploadForm[fileInput]', fileInput);
         formData.append('modelName', '{$modelName}');
         formData.append('id', {$model_id});
-        formData.append('fileToken', Date.now());
+        // formData.append('fileToken', Date.now());
 
         $.ajax( {
             url: app.baseUrl + '/file/upload',

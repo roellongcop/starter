@@ -330,6 +330,7 @@ class FileController extends Controller
 
                 $result['status'] = 'success';
                 $result['message'] = $referenceModel->imagePath;
+                $result['src'] = $referenceModel->imagePath;
             }
             else {
                 $result['status'] = 'error';
