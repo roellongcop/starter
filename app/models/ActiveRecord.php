@@ -368,6 +368,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         if ($this->date_range && $from_database == false) {
             $date = App::dateRange($this->date_range, 'start');
+            return date('F d, Y', strtotime($date));
         }
         else {
             $model = static::find()
@@ -384,6 +385,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         if ($this->date_range && $from_database == false) {
             $date = App::dateRange($this->date_range, 'end');
+            return date('F d, Y', strtotime($date));
         }
         else {
             $model = static::find()
