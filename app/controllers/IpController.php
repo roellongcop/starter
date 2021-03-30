@@ -158,7 +158,7 @@ class IpController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = IpSearch::all($post['selection']);
+                $models = Ip::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {

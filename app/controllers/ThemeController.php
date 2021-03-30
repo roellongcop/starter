@@ -164,7 +164,7 @@ class ThemeController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = ThemeSearch::all($post['selection']);
+                $models = Theme::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {

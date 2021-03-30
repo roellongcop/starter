@@ -212,7 +212,7 @@ if (count($pks) === 1) {
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>::all($post['selection']);
+                $models = <?= $modelClass ?>::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {

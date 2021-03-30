@@ -160,7 +160,7 @@ class UserMetaController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = UserMetaSearch::all($post['selection']);
+                $models = UserMeta::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {

@@ -160,7 +160,7 @@ class VisitLogController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = VisitLogSearch::all($post['selection']);
+                $models = VisitLog::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {

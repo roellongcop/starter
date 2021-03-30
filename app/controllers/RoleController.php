@@ -186,7 +186,7 @@ class RoleController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = RoleSearch::all($post['selection']);
+                $models = Role::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {

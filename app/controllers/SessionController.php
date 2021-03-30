@@ -159,7 +159,7 @@ class SessionController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = SessionSearch::all($post['selection']);
+                $models = Session::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {

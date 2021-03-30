@@ -179,7 +179,7 @@ class BackupController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = BackupSearch::all($post['selection']);
+                $models = Backup::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {

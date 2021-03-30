@@ -157,7 +157,7 @@ class LogController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = LogSearch::all($post['selection']);
+                $models = Log::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
