@@ -22,6 +22,9 @@ use app\models\query\UserMetaQuery;
  */
 class UserMeta extends ActiveRecord
 {
+    const RECORD_ACTIVE = 1;
+    const RECORD_INACTIVE = 0;
+    
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -45,6 +48,7 @@ class UserMeta extends ActiveRecord
         return [
             [['user_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['record_status'], 'default', 'value' => 1],
+            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
             [['user_id'], 'default', 'value' => 0],
             [['meta_key', 'record_status'], 'required'],
             [['meta_value'], 'string'],

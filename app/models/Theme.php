@@ -30,6 +30,9 @@ use app\models\query\ThemeQuery;
  */
 class Theme extends ActiveRecord
 { 
+    const RECORD_ACTIVE = 1;
+    const RECORD_INACTIVE = 0;
+    
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -54,6 +57,7 @@ class Theme extends ActiveRecord
         return [
             [['name', 'description', 'base_path', 'base_url', 'record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
+            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
             [['base_path', 'base_url'], 'string'],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
             [['bundles', 'path_map'], 'safe'],

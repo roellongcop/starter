@@ -27,6 +27,9 @@ use app\models\query\SessionQuery;
  */
 class Session extends ActiveRecord
 {
+    const RECORD_ACTIVE = 1;
+    const RECORD_INACTIVE = 0;
+    
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -54,6 +57,7 @@ class Session extends ActiveRecord
         return [
             [['id', 'ip', 'browser', 'os', 'device', 'record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
+            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
             [['expire', 'user_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['data'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
