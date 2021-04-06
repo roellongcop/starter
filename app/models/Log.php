@@ -37,9 +37,6 @@ use app\models\query\LogQuery;
  */
 class Log extends ActiveRecord
 {
-    const RECORD_ACTIVE = 1;
-    const RECORD_INACTIVE = 0;
-    
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -67,7 +64,7 @@ class Log extends ActiveRecord
         return [
             [['user_id', 'model_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
+            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['user_id', 'model_id'], 'default', 'value' => 0],
             [[ 'url', 'user_agent'], 'string'],
             [['request_data', 'change_attribute',], 'safe'],

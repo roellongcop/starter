@@ -21,6 +21,9 @@ use yii\helpers\Url;
  
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
+    const RECORD_ACTIVE = 1;
+    const RECORD_INACTIVE = 0;
+    
     public function getMainAttribute()
     {
         if ($this->hasProperty('name')) {

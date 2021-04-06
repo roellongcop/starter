@@ -31,9 +31,6 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const RECORD_ACTIVE = 1;
-    const RECORD_INACTIVE = 0;
-    
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
@@ -75,7 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['username', 'role_id', 'status', 'record_status', 'is_blocked'], 'required'],
             [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
+            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             [
                 'status', 

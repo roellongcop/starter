@@ -22,9 +22,6 @@ use app\models\query\VisitLogQuery;
  */
 class VisitLog extends ActiveRecord
 {
-    const RECORD_ACTIVE = 1;
-    const RECORD_INACTIVE = 0;
-    
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -52,7 +49,7 @@ class VisitLog extends ActiveRecord
         return [
             [['user_id', 'action', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
+            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['user_id'], 'default', 'value' => 0],
             [['ip', 'action', 'record_status'], 'required'],
             [['created_at', 'updated_at'], 'safe'],

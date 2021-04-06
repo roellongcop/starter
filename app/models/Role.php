@@ -27,9 +27,6 @@ use app\models\query\RoleQuery;
  */
 class Role extends ActiveRecord
 {
-    const RECORD_ACTIVE = 1;
-    const RECORD_INACTIVE = 0;
-    
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -52,7 +49,7 @@ class Role extends ActiveRecord
         return [
             [['name', 'record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
+            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['main_navigation', 'role_access', 'module_access'], 'safe'],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],

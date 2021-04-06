@@ -26,9 +26,6 @@ use yii\helpers\Url;
  */
 class Setting extends ActiveRecord
 {
-    const RECORD_ACTIVE = 1;
-    const RECORD_INACTIVE = 0;
-    
     public $relatedModels = [];
     public $options;
     //public $excel_ignore_attr = [];
@@ -81,7 +78,7 @@ class Setting extends ActiveRecord
             [['name', 'record_status', 'type'], 'required'],
             [['value'], 'string'],
             [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
+            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at', 'type', 'options', 'sort_order'], 'safe'],
             [['name', 'slug'], 'string', 'max' => 255],
