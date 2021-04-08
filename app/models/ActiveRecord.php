@@ -23,6 +23,19 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
+
+    public function setActive()
+    {
+        if ($this->hasProperty('record_status')) {
+            $this->record_status = self::RECORD_ACTIVE;
+        }
+    }
+    public function setInactive()
+    {
+        if ($this->hasProperty('record_status')) {
+            $this->record_status = self::RECORD_INACTIVE;
+        }
+    }
     
     public function getMainAttribute()
     {
