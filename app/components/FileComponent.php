@@ -88,7 +88,16 @@ class FileComponent extends Component
     {
         if (! file_exists($path . '.htaccess')) {
             $htaccess = fopen($path . '.htaccess', "w");
-            fwrite($htaccess, "deny from all");
+            fwrite($htaccess, "
+                # disable directory browsing
+                Options -Indexes
+
+                # prevent folder listing
+                IndexIgnore *
+
+                #If you want to deny access to all files:
+                #deny from all
+            ");
             fclose($htaccess);
         }
     }
