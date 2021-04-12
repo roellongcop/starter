@@ -86,18 +86,11 @@ class FileComponent extends Component
 
     public function createHtaccessFile($path)
     {
+        $content = "#disable directory browsing \nOptions -Indexes\n\n#prevent folder listing\nIndexIgnore *\n\n#If you want to deny access to all files: \n#deny from all";
+
         if (! file_exists($path . '.htaccess')) {
             $htaccess = fopen($path . '.htaccess', "w");
-            fwrite($htaccess, "
-                # disable directory browsing
-                Options -Indexes
-
-                # prevent folder listing
-                IndexIgnore *
-
-                #If you want to deny access to all files:
-                #deny from all
-            ");
+            fwrite($htaccess, $content);
             fclose($htaccess);
         }
     }
