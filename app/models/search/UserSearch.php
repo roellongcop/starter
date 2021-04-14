@@ -118,6 +118,7 @@ class UserSearch extends User
         $query->daterange($this->date_range);
 
         $query->joinWith('role r');
+        $query->groupBy('u.id');
 
         return $dataProvider;
     }

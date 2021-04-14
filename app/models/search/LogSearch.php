@@ -127,7 +127,7 @@ class LogSearch extends Log
         $query->daterange($this->date_range);
 
         $query->joinWith('user u');
-
+        $query->groupBy('l.id');
         return $dataProvider;
     }
 }
