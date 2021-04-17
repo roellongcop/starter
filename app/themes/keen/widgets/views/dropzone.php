@@ -25,6 +25,11 @@ $this->registerJs(<<< SCRIPT
                 {$complete}
             });
 
+            this.on('success', function (file, s) {
+                console.log(s)
+                {$success}
+            });
+
         }
     });
 SCRIPT, \yii\web\View::POS_END);

@@ -48,7 +48,7 @@ class FileComponent extends Component
             $modelFile->model_id = $model->id;
             $modelFile->model_name = ($model->modelName ?? App::className($model));
             $modelFile->save();
-            
+
             return $file;
         }
         else {

@@ -21,6 +21,7 @@ class Dropzone extends \yii\base\Widget
     public $model;
     public $removeFileUrl;
     public $complete;
+    public $success;
     public $removedFile;
     public $acceptedFiles;
     public function init() 
@@ -34,7 +35,7 @@ class Dropzone extends \yii\base\Widget
         $this->parameters[App::request('csrfParam')] = App::request('csrfToken');
 
         $this->parameters['modelName'] = App::className($this->model);
-        $this->parameters['id'] = $this->model->id;
+        $this->parameters['id'] = $this->model->id ?: 0;
 
         $this->url = $this->url ?: Url::to(['file/upload']);
         $this->removeFileUrl = $this->removeFileUrl ?: Url::to(['file/delete']);
@@ -90,6 +91,7 @@ class Dropzone extends \yii\base\Widget
             'complete' => $this->complete,
             'removedFile' => $this->removedFile,
             'acceptedFiles' => $this->acceptedFiles,
+            'success' => $this->success,
         ]);
     }
 }

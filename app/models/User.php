@@ -568,10 +568,11 @@ class User extends ActiveRecord implements IdentityInterface
                 'format' => 'raw',
                 'value' => function($model) {
                     if ($model->imagePath) {
-                        return Html::img("{$model->imagePath}&w=40&quality=90", [
-                            'loading' => 'lazy',
-                            'style' => 'border-radius: 50%;'
-                        ]);
+                        return Html::image(
+                            $model->imagePath,
+                            ['w'=>40, 'h'=>40, 'ratio'=>'false', 'quality'=>90],
+                            ['style' => 'border-radius: 50%;']
+                        );
                     }
                 }
             ],

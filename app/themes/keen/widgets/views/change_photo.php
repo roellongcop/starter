@@ -171,7 +171,11 @@ CSS);
     						        'model' => $model,
     						        'maxFiles' => 1,
     						        'removedFile' => '//',
-    						        'complete' => $dropzoneComplete,
+    						        'complete' => "
+                                        {$dropzoneComplete}
+
+                                        $('#change_photo-{$id}').modal('hide')
+                                    ",
     						        'acceptedFiles' => array_map(
     						            function($val) { 
     						                return ".{$val}"; 

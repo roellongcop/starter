@@ -17,6 +17,7 @@ class ChooseFromGallery extends \yii\base\Widget
     public $ajaxSuccess;
     public $ajaxError = 'function(e) {alert(e.responseText)}';
     public $dropzoneComplete;
+    public $dropzoneSuccess;
     public $fileInput;
 
     public function init() 
@@ -50,6 +51,7 @@ class ChooseFromGallery extends \yii\base\Widget
             'model' => $this->model,
             'dropzoneComplete' => $this->dropzoneComplete,
             'fileInput' => $this->fileInput,
+            'dropzoneSuccess' => $this->dropzoneSuccess,
         ]);
     }
 }
