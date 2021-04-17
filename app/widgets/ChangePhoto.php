@@ -7,9 +7,10 @@ use yii\helpers\Url;
  
 class ChangePhoto extends \yii\base\Widget
 {
-    public $modelTitle = 'Choose from Gallery';
-    public $buttonTitle = 'Choose from Gallery';
+    public $modelTitle = 'Change Photo';
+    public $buttonTitle = 'Change Photo';
     public $files;
+    public $changePhotoUrl;
     public $uploadUrl;
     public $model;
     public $modelName;
@@ -24,7 +25,9 @@ class ChangePhoto extends \yii\base\Widget
         // your logic here
         parent::init();
 
-        $this->uploadUrl = $this->uploadUrl ?: Url::to(['file/change-photo']);
+        $this->changePhotoUrl = $this->changePhotoUrl ?: Url::to(['file/change-photo']);
+        $this->uploadUrl = $this->uploadUrl ?: Url::to(['file/upload']);
+
         $this->modelName = App::className($this->model);
         $this->model_id = $this->model->id;
         $this->files = $this->files ?: App::identity('myImageFiles');
@@ -41,6 +44,7 @@ class ChangePhoto extends \yii\base\Widget
             'buttonTitle' => $this->buttonTitle,
             'id' => $this->id,
             'files' => $this->files,
+            'changePhotoUrl' => $this->changePhotoUrl,
             'uploadUrl' => $this->uploadUrl,
             'modelName' => $this->modelName,
             'model_id' => $this->model_id,

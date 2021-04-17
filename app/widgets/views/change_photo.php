@@ -5,34 +5,34 @@ use app\widgets\Dropzone;
 use app\helpers\Html;
 use app\helpers\Url;
 $this->registerJs(<<< SCRIPT
-    var disableButton = function() {
+    var enableButton = function() {
         $('#change-photo-confirm-{$id}').prop('disabled', false);
     }
 
     var selectedFile = 0;
-    $('.my-image-files').on('click', function() {
+    $('.my-image-files-{$id}').on('click', function() {
         var image = $(this);
 
         selectedFile = image.data('id');
 
-        $('.image-properties-panel #name').text(image.data('name'));
-        $('.image-properties-panel #extension').text(image.data('extension'));
-        $('.image-properties-panel #size').text(image.data('size'));
-        $('.image-properties-panel #width').text(image.data('width') + 'px');
-        $('.image-properties-panel #height').text(image.data('height') + 'px');
-        $('.image-properties-panel #location').text(image.data('location'));
-        $('.image-properties-panel #token').text(image.data('token'));
-        $('.image-properties-panel #created_by').text(image.data('created_by'));
-        $('.image-properties-panel #created_at').text(image.data('created_at'));
+        $('#change-photo-container-{$id} #{$id}-name').text(image.data('name'));
+        $('#change-photo-container-{$id} #{$id}-extension').text(image.data('extension'));
+        $('#change-photo-container-{$id} #{$id}-size').text(image.data('size'));
+        $('#change-photo-container-{$id} #{$id}-width').text(image.data('width') + 'px');
+        $('#change-photo-container-{$id} #{$id}-height').text(image.data('height') + 'px');
+        $('#change-photo-container-{$id} #{$id}-location').text(image.data('location'));
+        $('#change-photo-container-{$id} #{$id}-token').text(image.data('token'));
+        $('#change-photo-container-{$id} #{$id}-created_by').text(image.data('created_by'));
+        $('#change-photo-container-{$id} #{$id}-created_at').text(image.data('created_at'));
 
-        $('.my-image-files').removeClass('selected-image');
-        image.addClass('selected-image');
-        disableButton();
+        $('.my-image-files-{$id}').css('border', '');
+        image.css('border', '2px solid #1bc5bd');
+        enableButton();
     })
 
     $('#change-photo-confirm-{$id}').on('click', function() {
         $.ajax({
-            url: '{$uploadUrl}',
+            url: '{$changePhotoUrl}',
             data: {
                 file_id: selectedFile,
                 model_id: {$model_id},
@@ -57,7 +57,7 @@ $this->registerJs(<<< SCRIPT
         // formData.append('fileToken', Date.now());
 
         $.ajax( {
-            url: app.baseUrl + '/file/upload',
+            url: '{$uploadUrl}',
             type: 'POST',
             data: formData,
             dataType: 'json',
@@ -70,141 +70,137 @@ $this->registerJs(<<< SCRIPT
     })
 SCRIPT, \yii\web\View::POS_END);
 $this->registerCSS(<<<CSS
-    .selected-image {
-        border: 2px solid #1bc5bd;
+    #change-photo-container-{$id} table tbody tr td {
+        overflow-wrap: anywhere;
+        padding: 5px;
     }
-    .image-properties-panel {
-        border-left: 2px solid #ddd;
-    }
-    .image-properties-panel .table-bordered th, .table-bordered td {
-        padding: 5px 5px;
-    }
-    .table-bordered td {
-        word-wrap:break-word;
-        max-width: 200px;
-    }
-    .image-properties-panel .table-bordered {
-        table-layout: fixed;
+    #change-photo-container-{$id} table tbody tr th {
+        padding: 5px;
     }
 CSS);
 ?>
 
-<!-- Button trigger modal-->
-<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_photo-<?= $id ?>">
-    <?= $buttonTitle ?>
-</button>
 
-<!-- Modal-->
-<div class="modal fade" id="change_photo-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    <?= $modelTitle ?>
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div data-scroll="true" data-height="500">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a data-toggle="tab" href="#my-photos-tab-<?= $id ?>">Home</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#upload-tab-<?= $id ?>">Upload</a></li>
-                    </ul>
+<div id="change-photo-container-<?= $id ?>">
+    
+    <!-- Button trigger modal-->
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#change_photo-<?= $id ?>">
+        <?= $buttonTitle ?>
+    </button>
 
-                    <div class="tab-content">
-                        <div id="my-photos-tab-<?= $id ?>" class="tab-pane fade in active">
-                            <div class="row">
-                                <div class="col-md-7 col-sm-6">
-                                    <?php if ($files): ?>
-                                        <div class="row">
-                                            <?php foreach ($files as $file): ?>
-                                                <div class="col-md-3">
-                                                    <?= Html::img(['file/display', 'token' => $file->token, 'w' => 150, 'h' => 150, 'ratio' => 'false'], [
-                                                        'class' => 'img-thumbnail pointer my-image-files',
-                                                        'data-id' => $file->id,
-                                                        'data-name' => $file->name,
-                                                        'data-extension' => $file->extension,
-                                                        'data-size' => $file->fileSize,
-                                                        'data-width' => $file->width,
-                                                        'data-height' => $file->height,
-                                                        'data-location' => $file->location,
-                                                        'data-token' => $file->token,
-                                                        'data-created_by' => $file->createdByEmail,
-                                                        'data-created_at' => App::formatter('asFulldate', $file->created_at),
-                                                    ]) ?>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    <?php endif ?>
-                                </div>
-                                <div class="col-md-5 col-sm-6 image-properties-panel">
-                                    <p class="lead text-warning">Image Properties</p>
-                                    <table class="table-bordered font-size-sm">
-                                        <tbody>
-                                            <tr>
-                                                <th>Name</th>
-                                                <td id="name"> None </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Extension</th>
-                                                <td id="extension"> None </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Size</th>
-                                                <td id="size"> None </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Width</th>
-                                                <td id="width"> None </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Height</th>
-                                                <td id="height"> None </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Location</th>
-                                                <td id="location"> None </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Token</th>
-                                                <td id="token"> None </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Created By</th>
-                                                <td id="created_by"> None </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Created At</th>
-                                                <td id="created_at"> None </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+    <!-- Modal-->
+    <div class="modal fade" id="change_photo-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <?= $modelTitle ?>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div data-scroll="true" data-height="500">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#my-photos-tab-<?= $id ?>">My Photos</a>
+                            </li>
+                            <li><a data-toggle="tab" href="#upload-tab-<?= $id ?>">Upload</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="my-photos-tab-<?= $id ?>" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-6">
+                                        <?php if ($files): ?>
+                                            <div class="row">
+                                                <?php foreach ($files as $file): ?>
+                                                    <div class="col-md-3">
+                                                        <?= Html::img(['file/display', 'token' => $file->token, 'w' => 150, 'h' => 150, 'ratio' => 'false'], [
+                                                            'class' => "img-thumbnail pointer my-image-files-{$id}",
+                                                            'data-id' => $file->id,
+                                                            'data-name' => $file->name,
+                                                            'data-extension' => $file->extension,
+                                                            'data-size' => $file->fileSize,
+                                                            'data-width' => $file->width,
+                                                            'data-height' => $file->height,
+                                                            'data-location' => $file->location,
+                                                            'data-token' => $file->token,
+                                                            'data-created_by' => $file->createdByEmail,
+                                                            'data-created_at' => App::formatter('asFulldate', $file->created_at),
+                                                        ]) ?>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php endif ?>
+                                    </div>
+                                    <div class="col-md-5 col-sm-6 image-properties-panel">
+                                        <p class="lead text-warning">Image Properties</p>
+                                        <table class="table-bordered font-size-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <td id="<?= $id ?>-name"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Extension</th>
+                                                    <td id="<?= $id ?>-extension"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <td id="<?= $id ?>-size"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Width</th>
+                                                    <td id="<?= $id ?>-width"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Height</th>
+                                                    <td id="<?= $id ?>-height"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Location</th>
+                                                    <td id="<?= $id ?>-location"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Token</th>
+                                                    <td id="<?= $id ?>-token"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Created By</th>
+                                                    <td id="<?= $id ?>-created_by"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Created At</th>
+                                                    <td id="<?= $id ?>-created_at"> None </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+                            <div id="upload-tab-<?= $id ?>" class="tab-pane fade">
+                                <?= $fileInput ?>
+                            </div>
                         </div>
-                        <div id="upload-tab-<?= $id ?>" class="tab-pane fade">
-                            <?= $fileInput ?>
-                        </div>
-                    </div>
 
-                    
+                        
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                <button 
-                    data-dismiss="modal"
-                    disabled="disabled"
-                    type="button" 
-                    class="btn btn-primary font-weight-bold"
-                    id="change-photo-confirm-<?= $id ?>">
-                        Confirm
-                </button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                    <button 
+                        data-dismiss="modal"
+                        disabled="disabled"
+                        type="button" 
+                        class="btn btn-primary font-weight-bold"
+                        id="change-photo-confirm-<?= $id ?>">
+                            Confirm
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+
 </div>

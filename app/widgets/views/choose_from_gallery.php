@@ -121,7 +121,7 @@ CSS)
                         <ul class="nav nav-tabs">
                             <li class="active">
                                 <a data-toggle="tab" href="#my-photos-tab-<?= $id ?>">
-                                    Image Files
+                                    My Photos
                                 </a>
                             </li>
                             <li><a data-toggle="tab" href="#upload-tab-<?= $id ?>">Upload</a></li>
