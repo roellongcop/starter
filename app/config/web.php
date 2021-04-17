@@ -88,6 +88,7 @@ $config = [
             // 'forceCopy' => true,
             'linkAssets' => false,
             'class' => 'yii\web\AssetManager',
+            'appendTimestamp' => true,
         ],
        // 'view' => [
        //      'theme' => [
