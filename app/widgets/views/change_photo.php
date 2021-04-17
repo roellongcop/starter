@@ -113,27 +113,29 @@ CSS);
                             <div id="my-photos-tab-<?= $id ?>" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6">
-                                        <?php if ($files): ?>
-                                            <div class="row">
-                                                <?php foreach ($files as $file): ?>
-                                                    <div class="col-md-3">
-                                                        <?= Html::img(['file/display', 'token' => $file->token, 'w' => 150, 'h' => 150, 'ratio' => 'false'], [
-                                                            'class' => "img-thumbnail pointer my-image-files-{$id}",
-                                                            'data-id' => $file->id,
-                                                            'data-name' => $file->name,
-                                                            'data-extension' => $file->extension,
-                                                            'data-size' => $file->fileSize,
-                                                            'data-width' => $file->width,
-                                                            'data-height' => $file->height,
-                                                            'data-location' => $file->location,
-                                                            'data-token' => $file->token,
-                                                            'data-created_by' => $file->createdByEmail,
-                                                            'data-created_at' => App::formatter('asFulldate', $file->created_at),
-                                                        ]) ?>
-                                                    </div>
-                                                <?php endforeach; ?>
-                                            </div>
-                                        <?php endif ?>
+                                        <div class="modal-my-photos">
+                                            <?php if ($files): ?>
+                                                <div class="row">
+                                                    <?php foreach ($files as $file): ?>
+                                                        <div class="col-md-3">
+                                                            <?= Html::img(['file/display', 'token' => $file->token, 'w' => 150, 'h' => 150, 'ratio' => 'false'], [
+                                                                'class' => "img-thumbnail pointer my-image-files-{$id}",
+                                                                'data-id' => $file->id,
+                                                                'data-name' => $file->name,
+                                                                'data-extension' => $file->extension,
+                                                                'data-size' => $file->fileSize,
+                                                                'data-width' => $file->width,
+                                                                'data-height' => $file->height,
+                                                                'data-location' => $file->location,
+                                                                'data-token' => $file->token,
+                                                                'data-created_by' => $file->createdByEmail,
+                                                                'data-created_at' => App::formatter('asFulldate', $file->created_at),
+                                                            ]) ?>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php endif ?>
+                                        </div>
                                     </div>
                                     <div class="col-md-5 col-sm-6 image-properties-panel">
                                         <p class="lead text-warning">Image Properties</p>

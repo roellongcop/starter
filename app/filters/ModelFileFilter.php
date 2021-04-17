@@ -8,7 +8,7 @@ use yii\base\ActionFilter;
 
 class ModelFileFilter extends ActionFilter
 {
-    public $model_file_id_name = 'model_file_id';
+    public $model_file_id_name = '_model_file_id';
 
     public function checkModelFile($model)
     {
