@@ -43,7 +43,7 @@ $this->registerJs(<<< SCRIPT
                 {$ajaxSuccess}
 
                 if(s.status == 'success') {
-                    $('#choose-from-gallery-container-{$id} input[name="model_file_id"]').val(s.model_file_id);
+                    $('#choose-from-gallery-container-{$id} input[name="_model_file_id"]').val(s.model_file_id);
                 }
             },
             error: {$ajaxError},
@@ -72,7 +72,7 @@ $this->registerJs(<<< SCRIPT
                 {$ajaxSuccess}
                 if(s.status == 'success') {
                     $('#choose-from-gallery-{$id}').modal('hide')
-                    $('#choose-from-gallery-container-{$id} input[name="model_file_id"]').val(s.model_file_id);
+                    $('#choose-from-gallery-container-{$id} input[name="_model_file_id"]').val(s.model_file_id);
 
                 }
 
