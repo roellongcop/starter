@@ -5,14 +5,14 @@ namespace app\controllers;
 use Yii;
 use app\filters\AccessControl;
 use app\filters\IpFilter;
+use app\filters\ModelFileFilter;
+use app\filters\ThemeFilter;
 use app\filters\UserFilter;
 use app\filters\VerbFilter;
-use app\filters\ThemeFilter;
-
 use app\helpers\App;
+use app\models\search\SettingSearch;
 use yii\helpers\Json;
 use yii\helpers\Url;
-use app\models\search\SettingSearch;
 use yii\web\ForbiddenHttpException;
 
 /**
@@ -38,6 +38,9 @@ abstract class Controller extends \yii\web\Controller
             'ThemeFilter' => [
                 'class' => ThemeFilter::className()
             ],
+            'ModelFileFilter' => [
+                'class' => ModelFileFilter::className()
+            ]
         ];
     } 
 

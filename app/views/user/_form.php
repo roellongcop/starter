@@ -4,9 +4,10 @@ use app\helpers\App;
 use app\models\search\RoleSearch;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
-use app\widgets\RecordStatusInput;
 use app\widgets\ChangePhoto;
+use app\widgets\ChooseFromGallery;
 use app\widgets\ImagePreview;
+use app\widgets\RecordStatusInput;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -64,9 +65,16 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'src' => ($model->imagePath)? $model->imagePath . '&w=200': '',
             ]) ?>
             <div class="row">
+
                 <?php if ($model->isNewRecord): ?>
                     <div class="col-md-6">
-                        <?= $form->field($model, 'imageInput')->fileInput() ?>
+                        <?= ChooseFromGallery::widget([
+                            'fileInput' => $form->field($model, 'imageInput')->fileInput(),
+                            'model' => $model,
+                            'ajaxSuccess' => "
+                                $('#user-imageinput-preview').attr('src', s.src + '&w=200')
+                            "
+                        ]) ?> 
                         <div class="alert alert-info">
                             <ul>
                                 <li>Minimum Width: <?= $imageRules->minWidth ?></li>
@@ -83,7 +91,6 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                             'model' => $model,
                             'ajaxSuccess' => "function(s) {
                                 if(s.status == 'success') {
-                                    alert('Uploaded');
                                     $('.modal').modal('hide')
                                     $('#user-imageinput-preview').attr('src', s.src + '&w=200')
                                 }

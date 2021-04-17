@@ -63,6 +63,7 @@ class UserController extends Controller
             $model->imageInput = UploadedFile::getInstance($model, 'imageInput');
             $model->setPassword($model->password);
             if ($model->save()) {
+                $this->checkModelFile($model);
                 $model->upload();
                 App::success('Successfully Created');
                 return $this->redirect(['view', 'id' => $model->id]);
