@@ -46,9 +46,6 @@ use <?= substr($queryClassFullName, 1) ?>;
  */
 class <?= $className ?> extends ActiveRecord<?= "\n" ?>
 {
-    const RECORD_ACTIVE = 1;
-    const RECORD_INACTIVE = 0;
-    
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
     //public $fileInput;
@@ -103,7 +100,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
             */
             [['record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
+            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
         ];
     }
 
