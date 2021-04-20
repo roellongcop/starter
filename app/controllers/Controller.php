@@ -55,7 +55,9 @@ abstract class Controller extends \yii\web\Controller
             'baseUrl' => Url::base(true) . '/',
             'language' => App::appLanguage(),
             'api' => Url::base(true) . '/api/v1/',
-            // 'params' => App::params()
+            'csrfToken' => App::request('csrfToken'),
+            'csrfParam' => App::request('csrfParam'),
+            'params' => App::params()
         ]);
 
         $this->view->registerJs("
