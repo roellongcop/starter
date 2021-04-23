@@ -394,7 +394,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             $date = ($model)? $model: 'today';
         }
 
-        return App::date_timezone($date, 'F d, Y');
+        return App::formatter()->asDateToTimezone($date, 'F d, Y');
     }
 
     public function getEndDate($from_database = false)
@@ -411,6 +411,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             $date = ($model)? $model: 'today';
         }
 
-        return App::date_timezone($date, 'F d, Y');
+        return App::formatter()->asDateToTimezone($date, 'F d, Y');
     }
 }

@@ -6,7 +6,6 @@
 
 use app\assets\AppAsset;
 use app\helpers\App;
-use app\models\search\SettingSearch;
 use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedAppAsset;
 use app\widgets\Alert;
 use app\widgets\AnchorBack;
@@ -28,7 +27,7 @@ $createController = $this->params['createController'] ?? App::controllerID();
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="<?= SettingSearch::defaultImage('favicon') ?>&w=16" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?= App::setting('favicon') ?>&w=16" type="image/x-icon" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <?php $this->registerCsrfMetaTags() ?>

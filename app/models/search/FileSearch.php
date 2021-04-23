@@ -5,7 +5,6 @@ namespace app\models\search;
 use Yii;
 use app\helpers\App;
 use app\models\File;
-use app\models\search\SettingSearch;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -36,7 +35,7 @@ class FileSearch extends File
 
     public function setPagination()
     {
-        $this->pagination = SettingSearch::default('pagination');
+        $this->pagination = App::setting('pagination');
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\search\SettingSearch;
+use app\helpers\App;
 use app\widgets\AnchorBack;
 use app\widgets\Menu;
 use app\widgets\Search;
@@ -14,9 +14,9 @@ $searchAction = $searchModel->searchAction ?? ['index'];
     <!--begin::Header Logo-->
     <div class="header-logo">
         <a href="index.html">
-            <?= Html::img(SettingSearch::defaultImage('primary_logo') . '&w=90&quality=90', [
+            <?= Html::img(App::setting('primary_logo') . '&w=90&quality=90', [
                 'class' => 'h-30px',
-                'alt' => SettingSearch::default('app_name')
+                'alt' => App::setting('app_name')
             ]) ?>
         </a>
     </div>

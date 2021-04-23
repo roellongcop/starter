@@ -5,7 +5,6 @@ namespace app\models\search;
 use Yii;
 use app\helpers\App;
 use app\models\Role;
-use app\models\search\SettingSearch;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -37,7 +36,7 @@ class RoleSearch extends Role
 
     public function setPagination()
     {
-        $this->pagination = SettingSearch::default('pagination');
+        $this->pagination = App::setting('pagination');
     }
 
     /**

@@ -5,7 +5,6 @@ use Yii;
 use app\helpers\App;
 use app\models\File;
 use app\models\form\ThemeForm;
-use app\models\search\SettingSearch;
 use yii\helpers\Url;
  
 class ThemeView extends \yii\base\Widget

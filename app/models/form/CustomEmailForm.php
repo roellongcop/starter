@@ -2,7 +2,7 @@
 namespace app\models\form;
 
 use Yii;
-use app\models\search\SettingSearch;
+use app\helpers\App;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -34,8 +34,8 @@ class CustomEmailForm extends Model
     public function init()
     {
         parent::init();
-        $this->from = SettingSearch::default('sender_email');
-        $this->sender_name = SettingSearch::default('sender_name');
+        $this->from = App::setting('sender_email');
+        $this->sender_name = App::setting('sender_name');
     }
 
 

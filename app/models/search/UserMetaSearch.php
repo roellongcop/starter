@@ -5,7 +5,6 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\search\SettingSearch;
 use app\models\UserMeta;
 use app\helpers\App;
 
@@ -38,7 +37,7 @@ class UserMetaSearch extends UserMeta
 
     public function setPagination()
     {
-        $this->pagination = SettingSearch::default('pagination');
+        $this->pagination = App::setting('pagination');
     }
 
     /**

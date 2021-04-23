@@ -30,7 +30,6 @@ namespace <?= StringHelper::dirname(ltrim($generator->searchModelClass, '\\')) ?
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\search\SettingSearch;
 use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelAlias" : "") ?>;
 use app\helpers\App;
 
@@ -61,7 +60,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
     public function setPagination()
     {
-        $this->pagination = SettingSearch::default('pagination');
+        $this->pagination = App::setting('pagination');
     }
 
     /**

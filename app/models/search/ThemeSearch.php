@@ -5,7 +5,6 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\search\SettingSearch;
 use app\models\Theme;
 use app\helpers\App;
 
@@ -36,7 +35,7 @@ class ThemeSearch extends Theme
 
     public function setPagination()
     {
-        $this->pagination = SettingSearch::default('pagination');
+        $this->pagination = App::setting('pagination');
     }
 
     /**

@@ -1,0 +1,52 @@
+<?php
+
+use app\helpers\App;
+use app\models\search\ThemeSearch;
+use app\widgets\AnchorForm;
+use app\widgets\BootstrapSelect;
+use app\widgets\KeenActiveForm;
+
+?>
+
+<?php $form = KeenActiveForm::begin(); ?>
+	<p class="lead">General</p>
+	<div class="row">
+		<div class="col-md-4">
+			<?= BootstrapSelect::widget([
+	            'attribute' => 'timezone',
+	            'model' => $model,
+	            'form' => $form,
+	            'data' => App::component('general')->timezoneList(),
+	        ]) ?>
+		</div>
+		<div class="col-md-4">
+	        <?= $form->field($model, 'pagination')->dropDownList(
+			    App::params('pagination'), [
+			        'class' => "form-control kt-selectpicker",
+			    ]
+			) ?>
+		</div>
+		<div class="col-md-4">
+			<?= $form->field($model, 'auto_logout_timer')->textInput(['maxlength' => true]) ?>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<?= BootstrapSelect::widget([
+	            'attribute' => 'theme',
+	            'model' => $model,
+	            'form' => $form,
+	            'data' => ThemeSearch::dropdown(),
+	            'searchable' => false,
+	            'options' => [
+			        'class' => 'kt-selectpicker form-control',
+			    ]
+	        ]) ?>
+		</div>
+	</div>
+	<div class="form-group"> <hr>
+		<?= AnchorForm::widget() ?>
+	</div>
+
+<?php KeenActiveForm::end(); ?>

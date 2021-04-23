@@ -5,7 +5,6 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\search\SettingSearch;
 use app\models\Backup;
 use app\helpers\App;
 
@@ -36,7 +35,7 @@ class BackupSearch extends Backup
 
     public function setPagination()
     {
-        $this->pagination = SettingSearch::default('pagination');
+        $this->pagination = App::setting('pagination');
     }
 
     /**

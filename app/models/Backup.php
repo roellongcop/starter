@@ -111,7 +111,7 @@ class Backup extends ActiveRecord
   
     public function getCanUpdate()
     {
-        return false;
+        return true;
     }
 
     

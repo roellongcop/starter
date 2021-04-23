@@ -1,6 +1,6 @@
 <?php
 
-use app\models\search\SettingSearch;
+use app\helpers\App;
 use app\widgets\AnchorBack;
 use app\widgets\Search;
 use yii\widgets\ActiveForm;
@@ -10,7 +10,7 @@ $searchAction = $searchModel->searchAction ?? ['index'];
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
     <!--begin::Logo-->
     <a href="index.html">
-        <img alt="Logo" src="<?= SettingSearch::defaultImage('primary_logo') ?>&w=50" />
+        <img alt="Logo" src="<?= App::setting('primary_logo') ?>&w=50" />
     </a>
     <!--end::Logo-->
 

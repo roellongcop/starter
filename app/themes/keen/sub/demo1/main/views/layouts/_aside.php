@@ -1,7 +1,6 @@
 <?php
 
 use app\helpers\App;
-use app\models\search\SettingSearch;
 
 ?>
 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
@@ -9,7 +8,7 @@ use app\models\search\SettingSearch;
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
         <a href="index.html" class="brand-logo">
-            <img alt="Logo" src="<?= SettingSearch::defaultImage('primary_logo') ?>&quality=90" class="h-30px" />
+            <img alt="Logo" src="<?= App::setting('primary_logo') ?>&quality=90" class="h-30px" />
         </a>
         <!--end::Logo-->
         <!--begin::Toggle-->

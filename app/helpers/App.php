@@ -255,28 +255,6 @@ class App {
 		return self::user()->login($user, $remember_key);
 	}
 
-	public static function date_timezone($date='', $format='F d, Y h:i:s A', $timezone_string="")
-    {
-        if ($timezone_string == "") {
-            if (!empty(self::session('user_timezone'))) {
-                $timezone_string = self::session('user_timezone');
-            }
-            else {
-            	$timezone_string = self::params('general_settings')['timezone']['default'] ?? '';
-            }
-        }
-
-        $date = ($date)? $date: date('Y-m-d');
-
-        $usersTimezone = new \DateTimeZone($timezone_string);
-        $l10nDate = new \DateTime($date);
-        $l10nDate->setTimeZone($usersTimezone);
-
-        return $l10nDate->format($format);
-    }
-
- 
-
     public static function mapParams($params, $key='id', $value='label')
     {
     	if (!empty(self::params($params))) {
@@ -523,7 +501,7 @@ class App {
     	if (! $ip) {
     		$ip = self::ip();
     		if ($ip == '::1') {
-    			$ip = self::params('default_ip'); 
+    			$ip = '192.168.1.1'; 
     		}
     	}
     	
@@ -670,8 +648,20 @@ class App {
 
 	public static function formatter($functionName='', $value='')
 	{
+		$formatter = self::component('formatter');
+		
 		if ($functionName) {
-			return self::component('formatter')->$functionName($value);
+			return $formatter->$functionName($value);
 		}
+
+		return $formatter;
+	}
+
+	public static function setting($attr='')
+	{
+		if ($attr) {
+			return self::component('setting')->{$attr};
+		}
+		return self::component('setting');
 	}
 }

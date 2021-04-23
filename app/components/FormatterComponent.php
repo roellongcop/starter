@@ -45,7 +45,24 @@ class FormatterComponent extends \yii\i18n\Formatter
 
     public function asFulldate($value)
     {
-        return App::date_timezone($value);
+        return $this->asDateToTimezone($value);
+    }
+
+    public function asDateToTimezone($date, $format='F d, Y h:i:s A', $timezone="")
+    {
+        if (!$timezone) {
+            if (($timezone = App::setting('timezone')) == null) {
+                $timezone = App::params('general_settings')['timezone']['default'];
+            }
+        }
+
+        $date = ($date)? $date: date('Y-m-d');
+
+        $usersTimezone = new \DateTimeZone($timezone);
+        $l10nDate = new \DateTime($date);
+        $l10nDate->setTimeZone($usersTimezone);
+
+        return $l10nDate->format($format);
     }
 
     public function asController2Menu($value)

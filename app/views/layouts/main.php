@@ -5,7 +5,6 @@
 
 use app\assets\AppAsset;
 use app\helpers\App;
-use app\models\search\SettingSearch;
 use app\widgets\Alert;
 use app\widgets\Anchor;
 use app\widgets\ExportButton;
@@ -28,7 +27,7 @@ $showExportButton = $this->params['showExportButton'] ?? '';
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="<?= SettingSearch::defaultImage('favicon') ?>&w=16" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?= App::setting('favicon') ?>&w=16" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>

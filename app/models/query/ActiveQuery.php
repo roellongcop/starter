@@ -12,7 +12,7 @@ abstract class ActiveQuery extends \yii\db\ActiveQuery
         if ($daterange) {
             $field = $this->field($field);
             
-            $hours = App::date_timezone(date("Y-m-d H:i:s"), "P");
+            $hours = App::formatter()->asDateToTimezone(date("Y-m-d H:i:s"), "P");
 
             return $this->andFilterWhere([
                 "between", 

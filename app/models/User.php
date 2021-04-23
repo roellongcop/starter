@@ -5,7 +5,6 @@ use Yii;
 use app\helpers\App;
 use app\models\form\ProfileForm;
 use app\models\query\UserQuery;
-use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\Label;
 use yii\behaviors\SluggableBehavior;
@@ -372,7 +371,7 @@ class User extends ActiveRecord implements IdentityInterface
             return $theme;
         }
 
-        return Theme::findOne(SettingSearch::default('theme'));
+        return Theme::findOne(App::setting('theme'));
     }
 
     public function getRole()

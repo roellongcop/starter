@@ -4,7 +4,6 @@ namespace app\filters;
 use Yii;
 use app\helpers\App;
 use app\models\Theme;
-use app\models\search\SettingSearch;
 use yii\base\ActionFilter;
 use yii\base\Theme as BaseTheme;
 
@@ -20,7 +19,7 @@ class ThemeFilter extends ActionFilter
             $theme = App::identity('currentTheme');
         }
         else {
-            $theme = Theme::findOne(SettingSearch::default('theme'));
+            $theme = Theme::findOne(App::setting('theme'));
         }
 
         if ($theme) {

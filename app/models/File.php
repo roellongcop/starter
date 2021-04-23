@@ -11,7 +11,6 @@ use Imagine\Image\BoxInterface;
 use yii\imagine\Image;
 
 use app\helpers\App;
-use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\helpers\Html;
 use yii\helpers\Url;
@@ -195,7 +194,7 @@ class File extends ActiveRecord
         if($this->token) {
             return Url::to(['file/display', 'token' => $this->token], true);
         }
-        return SettingSearch::defaultImage('image_holder');
+        return App::setting('image_holder');
     }
 
     public function getTableColumns()

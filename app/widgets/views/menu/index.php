@@ -1,7 +1,6 @@
 <?php
 
 use app\helpers\App;
-use app\models\search\SettingSearch;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
@@ -40,7 +39,7 @@ else {
 }
 
 NavBar::begin([
-    'brandLabel' => SettingSearch::default('app_name'),
+    'brandLabel' => App::appName(),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-inverse navbar-fixed-top',
