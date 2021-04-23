@@ -111,13 +111,11 @@ class SettingForm extends Model
             ->all();
 
         foreach ($settings as $setting) {
-            if ($this->hasProperty($setting->name)) {
-                if (in_array($setting->name, $setting->withImageInput)) {
-                    $this->{$setting->name} = $setting->imagepath; 
-                }
-                else {
-                    $this->{$setting->name} = $setting->value; 
-                }
+            if (in_array($setting->name, $setting->withImageInput)) {
+                $this->{$setting->name} = $setting->imagepath; 
+            }
+            else {
+                $this->{$setting->name} = $setting->value; 
             }
         }
     }
