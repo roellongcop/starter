@@ -2,11 +2,13 @@
 namespace app\widgets;
 
 use Yii;
+use app\helpers\App;
 class FilterColumn extends \yii\base\Widget
 {
     public $searchModel;
     public $title = 'Filter Columns';
     public $buttonTitle = 'Filter';
+    public $filterColumns;
     
 
     public function init() 
@@ -14,6 +16,7 @@ class FilterColumn extends \yii\base\Widget
         // your logic here
         parent::init();
 
+        $this->filterColumns = App::identity()->filterColumns($this->searchModel);
     }
 
 
@@ -27,6 +30,7 @@ class FilterColumn extends \yii\base\Widget
             'title' => $this->title,
             'buttonTitle' => $this->buttonTitle,
             'id' => $this->id,
+            'filterColumns' => $this->filterColumns
         ]);
     }
 }

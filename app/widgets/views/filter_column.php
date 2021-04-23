@@ -21,6 +21,7 @@ $('.check-all-filter').on('change', function() {
     }
 })
 SCRIPT, \yii\web\View::POS_END);
+
 ?> 
 
 
@@ -47,7 +48,7 @@ SCRIPT, \yii\web\View::POS_END);
                             <?= Html::activeInput('checkbox', $model, 'columns[]', [
                                 'value' => $key,
                                 'class' => '_filter_column_checkbox',
-                                'checked' => in_array($key, App::identity()->filterColumns($searchModel))
+                                'checked' => in_array($key, $filterColumns)
                             ]) ?>
                             <span></span>
                             <?= Inflector::humanize(strtoupper($key)) ?>
