@@ -15,6 +15,7 @@ $config = [
         '@commands' => '@app/commands',
     ],
     'components' => [
+        'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
         'general' => ['class' => 'app\components\General'],
         'user' => [
