@@ -298,10 +298,12 @@ class File extends ActiveRecord
 
     public function getDimension($value='')
     {
-        list($width, $height) = getimagesize($this->rootPath);
+        if (file_exists($this->rootPath)) {
+            list($width, $height) = getimagesize($this->rootPath);
+        }
         return [
-            'width' => $width,
-            'height' => $height,
+            'width' => $width ?? 0,
+            'height' => $height ?? 0,
         ];
     }
 

@@ -134,7 +134,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return Url::to(['file/display', 'token' => $file->token], true);
         } 
 
-        return App::setting('image_holder');
+        return SettingSearch::defaultImage('image_holder');
     }
 
     public function getSqlFiles()
