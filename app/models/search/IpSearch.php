@@ -33,7 +33,7 @@ class IpSearch extends Ip
         ];
     }
 
-    public function setPagination()
+    public function init()
     {
         $this->pagination = App::setting('pagination');
     }
@@ -60,7 +60,7 @@ class IpSearch extends Ip
 
         // add conditions that should always apply here
 
-        $this->setPagination();
+        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

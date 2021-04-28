@@ -33,7 +33,7 @@ class FileSearch extends File
         ];
     }
 
-    public function setPagination()
+    public function init()
     {
         $this->pagination = App::setting('pagination');
     }
@@ -60,7 +60,7 @@ class FileSearch extends File
 
         // add conditions that should always apply here
 
-        $this->setPagination();
+        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

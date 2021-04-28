@@ -35,7 +35,7 @@ class SettingSearch extends Setting
         ];
     }
 
-    public function setPagination()
+    public function init()
     {
         $this->pagination = self::default('pagination');
     }
@@ -62,7 +62,7 @@ class SettingSearch extends Setting
 
         // add conditions that should always apply here
 
-        $this->setPagination();
+        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

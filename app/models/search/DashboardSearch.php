@@ -31,7 +31,7 @@ class DashboardSearch extends \yii\base\Model
         ];
     }
 
-    public function setPagination()
+    public function init()
     {
         $this->pagination = App::setting('pagination');
     }
@@ -41,7 +41,7 @@ class DashboardSearch extends \yii\base\Model
 
     public function search($params)
     {
-        $this->setPagination();
+        
         $this->load($params);
 
 

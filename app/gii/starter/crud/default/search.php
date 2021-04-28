@@ -58,7 +58,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         ];
     }
 
-    public function setPagination()
+    public function init()
     {
         $this->pagination = App::setting('pagination');
     }
@@ -85,7 +85,6 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
         // add conditions that should always apply here
 
-        $this->setPagination();
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
