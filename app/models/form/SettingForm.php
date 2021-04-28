@@ -53,7 +53,6 @@ class SettingForm extends Model
 				    'admin_email',
 				    'sender_email',
 				    'sender_name',
-                    'theme',
             	], 
 	            'string'
 	        ],
@@ -70,6 +69,7 @@ class SettingForm extends Model
             	[
 				    'pagination',
 				    'auto_logout_timer',
+                    'theme',
             	], 
 	            'integer'
 	        ],
