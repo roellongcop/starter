@@ -33,13 +33,14 @@ class SettingComponent extends \yii\base\Component
     {
         parent::init();
 
-
         $general_settings = App::params('general_settings');
         foreach ($general_settings as $setting) {
             if ($this->hasProperty($setting['name'])) {
                 $this->{$setting['name']} = $setting['default']; 
             }
         }
+        
+        $this->image_holder = SettingSearch::defaultImage('image_holder');
 
         $settings = Setting::findAll([
             'name' => array_keys(get_object_vars($this)),
@@ -47,7 +48,9 @@ class SettingComponent extends \yii\base\Component
         ]);
         foreach ($settings as $setting) {
             if (in_array($setting->name, $setting->withImageInput)) {
-                $this->{$setting->name} = $this->getImagePath($setting); 
+                if ($setting->name != 'image_holder') {
+                    $this->{$setting->name} = $this->getImagePath($setting); 
+                }
             }
             else {
                 $this->{$setting->name} = $setting->value; 
@@ -85,11 +88,6 @@ class SettingComponent extends \yii\base\Component
                 }
             }
         }
-
-        if ($this->image_holder) {
-            return $this->image_holder;
-        }
-        $this->image_holder = SettingSearch::defaultImage('image_holder');
 
         return $this->image_holder;
     }
