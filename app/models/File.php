@@ -329,4 +329,8 @@ class File extends ActiveRecord
 
         return $image->show($extension, ['quality' => $quality]);
     }
+    public function getIsSql()
+    {
+        return in_array($this->extension, ['sql']);
+    }
 }

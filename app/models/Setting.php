@@ -76,7 +76,7 @@ class Setting extends ActiveRecord
     {
         return [
             [['name', 'record_status', 'type'], 'required'],
-            [['value'], 'string'],
+            [['value'], 'safe'],
             [['record_status'], 'default', 'value' => 1],
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['record_status', 'created_by', 'updated_by'], 'integer'],

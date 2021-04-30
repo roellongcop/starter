@@ -24,6 +24,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
 
+    public $imageUrl;
+
     public function setActive()
     {
         if ($this->hasProperty('record_status')) {
@@ -86,14 +88,20 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
 
+    public function getFiles()
+    {
+        return $this->hasMany(File::ClassName(), ['id' => 'file_id'])
+            ->via('modelFiles');
+    }
+
+
     public function getDocumentFiles()
     {
         $models = [];
 
         if (($modelFiles = $this->modelFiles) != null) {
-            $file_extensions = App::params('file_extensions')['file'];
             foreach ($modelFiles as $modelFile) {
-                if (in_array($modelFile->file->extension, $file_extensions)) {
+                if ($modelFile->file && $modelFile->file->isDocument) {
                     $models[] = $modelFile->file;
                 }
             }
@@ -104,7 +112,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getDocumentFile()
     {
-        return $this->documentFiles[0] ?? '';
+        if (($modelFile = $this->modelFile) != null) {
+            if ($modelFile->file && $modelFile->file->isDocument) {
+                return $modelFile->file;
+            }
+        }
     }
 
     public function getImageFiles()
@@ -112,9 +124,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $models = [];
 
         if (($modelFiles = $this->modelFiles) != null) {
-            $file_extensions = App::params('file_extensions')['image'];
             foreach ($modelFiles as $modelFile) {
-                if (in_array($modelFile->file->extension, $file_extensions)) {
+                if ($modelFile->file && $modelFile->file->isImage) {
                     $models[] = $modelFile->file;
                 }
             }
@@ -125,16 +136,27 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getImageFile()
     {
-        return $this->imageFiles[0] ?? '';
+        if (($modelFile = $this->modelFile) != null) {
+            if ($modelFile->file && $modelFile->file->isImage) {
+                return $modelFile->file;
+            }
+        }
     }
 
     public function getImagePath()
     {
-        if(($file = $this->imageFile) != null) {
-            return Url::to(['file/display', 'token' => $file->token], true);
-        } 
+        if ($this->imageUrl) {
+            return $this->imageUrl;
+        }
 
-        return SettingSearch::defaultImage('image_holder');
+        if(($file = $this->imageFile) != null) {
+            $this->imageUrl = Url::to(['file/display', 'token' => $file->token], true);
+        }
+        else {
+            $this->imageUrl = App::setting('image_holder');
+        }
+
+        return $this->imageUrl;
     }
 
     public function getSqlFiles()
@@ -143,7 +165,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
         if (($modelFiles = $this->modelFiles) != null) {
             foreach ($modelFiles as $modelFile) {
-                if (in_array($modelFile->file->extension, ['sql'])) {
+                if ($modelFile->file && $modelFile->file->isSql) {
                     $models[] = $modelFile->file;
                 }
             }
@@ -154,7 +176,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getSqlFile()
     {
-        return $this->sqlFiles[0] ?? '';
+        if (($modelFile = $this->modelFile) != null) {
+            if ($modelFile->file && $modelFile->file->isSql) {
+                return $modelFile->file;
+            }
+        }
     }
 
 

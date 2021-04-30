@@ -4,7 +4,10 @@ namespace app\components;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Url;
+use app\models\ModelFile;
 use app\models\Setting;
+use app\models\search\SettingSearch;
 
 class SettingComponent extends \yii\base\Component
 {
@@ -44,11 +47,50 @@ class SettingComponent extends \yii\base\Component
         ]);
         foreach ($settings as $setting) {
             if (in_array($setting->name, $setting->withImageInput)) {
-                $this->{$setting->name} = $setting->imagepath; 
+                $this->{$setting->name} = $this->getImagePath($setting); 
             }
             else {
                 $this->{$setting->name} = $setting->value; 
             }
         }
+    }
+
+    public function getImagePath($setting)
+    {
+        $modelFile = ModelFile::find()
+            ->select([
+                'MAX(id) AS id',
+                'model_id',
+                'file_id',
+                'model_name',
+                'record_status',
+                'created_by',
+                'updated_by',
+                'created_at',
+                'updated_at',
+            ])
+            ->where([
+                'model_id' => $setting->id,
+                'model_name' => 'Setting'
+            ])
+            ->groupBy(['file_id'])
+            ->orderBy(['MAX(id)' => SORT_DESC])
+            ->one();
+
+
+        if ($modelFile) {
+            if ($modelFile->file && $modelFile->file->isImage) {
+                if(($file = $modelFile->file) != null) {
+                    return Url::to(['file/display', 'token' => $file->token], true);
+                }
+            }
+        }
+
+        if ($this->image_holder) {
+            return $this->image_holder;
+        }
+        $this->image_holder = SettingSearch::defaultImage('image_holder');
+
+        return $this->image_holder;
     }
 }
