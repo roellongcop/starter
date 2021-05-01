@@ -50,7 +50,7 @@ $config = [
         // ],
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
-            // 'migrationTable' => 'migrations',
+            'migrationTable' => 'migrations',
             'generatorTemplateFiles' => [
                 'create_table'    => '@app/migrations/templates/createTableMigration.php',
                 'drop_table'      => '@app/migrations/templates/dropTableMigration.php',
