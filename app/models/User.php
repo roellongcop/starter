@@ -35,7 +35,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
     const SCENARIO_ADMIN_CREATE = 'admin_create';
 
-    public $_tableColumnsMeta;
+    public $_tableColumnsMeta = false;
     public $_currentTheme;
 
 
@@ -390,7 +390,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getTableColumnsMeta($model)
     {
-        $user_meta = $this->_tableColumnsMeta ?: UserMeta::findOne([
+        $user_meta = ($this->_tableColumnsMeta !== false) ? $this->_tableColumnsMeta: UserMeta::findOne([
             'user_id' => $this->id,
             'meta_key' => 'table_columns'
         ]);
