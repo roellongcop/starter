@@ -38,6 +38,7 @@ use app\models\query\LogQuery;
 class Log extends ActiveRecord
 {
     public $relatedModels = [];
+    public $_username;
     //public $excel_ignore_attr = [];
     //public $fileInput;
     // public $imageInput;
@@ -153,9 +154,15 @@ class Log extends ActiveRecord
 
     public function getUsername()
     {
-        if(($model = $this->user) != null) {
-            return $model->username;
+        if ($this->_username) {
+            return $this->_username;
         }
+
+        if(($user = $this->user) != null) {
+            $this->_username = $user->username;
+        }
+
+        return $this->_username;
     }
    
     public function getTableColumns()

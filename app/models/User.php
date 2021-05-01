@@ -35,6 +35,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
     const SCENARIO_ADMIN_CREATE = 'admin_create';
 
+    public $_tableColumnsMeta;
+    public $_currentTheme;
+
 
     public $relatedModels = ['role'];
 
@@ -367,11 +370,17 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getCurrentTheme()
     {
+        if ($this->_currentTheme) {
+            return $this->_currentTheme;
+        }
         if (($theme = $this->theme) != null) {
-            return $theme;
+            $this->_currentTheme = $theme;
+            return $this->_currentTheme;
         }
 
-        return Theme::findOne(App::setting('theme'));
+        $this->_currentTheme = Theme::findOne(App::setting('theme'));
+
+        return $this->_currentTheme;
     }
 
     public function getRole()
@@ -381,10 +390,12 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getTableColumnsMeta($model)
     {
-        $user_meta = UserMeta::findOne([
+        $user_meta = $this->_tableColumnsMeta ?: UserMeta::findOne([
             'user_id' => $this->id,
             'meta_key' => 'table_columns'
         ]);
+
+        $this->_tableColumnsMeta = $user_meta;
 
         $table_name = App::tableName($model, false);
 
@@ -395,6 +406,7 @@ class User extends ActiveRecord implements IdentityInterface
                 return $table_columns[$table_name];
             }
         }
+
         
     }
 

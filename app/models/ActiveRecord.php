@@ -24,7 +24,14 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
 
-    public $imageUrl;
+    public $_imagePath;
+    public $_startDate;
+    public $_endDate;
+    public $_createdByEmail;
+    public $_updatedByEmail;
+
+    public $_modelFiles;
+    public $_modelFile;
 
     public function setActive()
     {
@@ -51,7 +58,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getModelFiles()
     {
-        return $this->hasMany(ModelFile::className(), ['model_id' => 'id'])
+        if ($this->_modelFiles) {
+            return $this->_modelFiles;
+        }
+
+        $this->_modelFiles = ModelFile::find()
             ->select([
                 'MAX(id) AS id',
                 'model_id',
@@ -63,14 +74,24 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'created_at',
                 'updated_at',
             ])
-            ->onCondition(['model_name' => App::getModelName($this)])
+            ->where([
+                'model_id' => $this->id,
+                'model_name' => App::getModelName($this)
+            ])
             ->groupBy(['file_id'])
-            ->orderBy(['MAX(id)' => SORT_DESC]);
+            ->orderBy(['MAX(id)' => SORT_DESC])
+            ->all();
+
+        return $this->_modelFiles;
     }
 
     public function getModelFile()
     {
-        return $this->hasOne(ModelFile::className(), ['model_id' => 'id'])
+        if ($this->_modelFile) {
+            return $this->_modelFile;
+        }
+        
+        $this->_modelFile = ModelFile::find()
             ->select([
                 'MAX(id) AS id',
                 'model_id',
@@ -82,16 +103,22 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'created_at',
                 'updated_at',
             ])
-            ->onCondition(['model_name' => App::getModelName($this)])
+            ->where([
+                'model_id' => $this->id,
+                'model_name' => App::getModelName($this)
+            ])
             ->groupBy(['file_id'])
-            ->orderBy(['MAX(id)' => SORT_DESC]);
+            ->orderBy(['MAX(id)' => SORT_DESC])
+            ->one();
+
+        return $this->_modelFile;
     }
 
 
     public function getFiles()
     {
         return $this->hasMany(File::ClassName(), ['id' => 'file_id'])
-            ->via('modelFiles');
+            ->viaTable('{{%model_files}}', ['model_id' => 'id']);
     }
 
 
@@ -101,8 +128,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
         if (($modelFiles = $this->modelFiles) != null) {
             foreach ($modelFiles as $modelFile) {
-                if ($modelFile->file && $modelFile->file->isDocument) {
-                    $models[] = $modelFile->file;
+                if (($file = $modelFile->file) != null) {
+                    if ($file->isDocument) {
+                        $models[] = $file;
+                    }
                 }
             }
         }
@@ -113,8 +142,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getDocumentFile()
     {
         if (($modelFile = $this->modelFile) != null) {
-            if ($modelFile->file && $modelFile->file->isDocument) {
-                return $modelFile->file;
+            if (($file = $modelFile->file) != null) {
+                if ($file->isDocument) {
+                    return $file;
+                }
             }
         }
     }
@@ -125,8 +156,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
         if (($modelFiles = $this->modelFiles) != null) {
             foreach ($modelFiles as $modelFile) {
-                if ($modelFile->file && $modelFile->file->isImage) {
-                    $models[] = $modelFile->file;
+                if (($file = $modelFile->file) != null) {
+                    if ($file->isImage) {
+                        $models[] = $file;
+                    }
                 }
             }
         }
@@ -137,26 +170,28 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getImageFile()
     {
         if (($modelFile = $this->modelFile) != null) {
-            if ($modelFile->file && $modelFile->file->isImage) {
-                return $modelFile->file;
+            if (($file = $modelFile->file) != null) {
+                if ($file->isImage) {
+                    return $file;
+                }
             }
         }
     }
 
     public function getImagePath()
     {
-        if ($this->imageUrl) {
-            return $this->imageUrl;
+        if ($this->_imagePath) {
+            return $this->_imagePath;
         }
 
         if(($file = $this->imageFile) != null) {
-            $this->imageUrl = Url::to(['file/display', 'token' => $file->token], true);
+            $this->_imagePath = Url::to(['file/display', 'token' => $file->token], true);
         }
         else {
-            $this->imageUrl = App::setting('image_holder');
+            $this->_imagePath = App::setting('image_holder');
         }
 
-        return $this->imageUrl;
+        return $this->_imagePath;
     }
 
     public function getSqlFiles()
@@ -290,15 +325,44 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCreatedByEmail()
     {
+        if ($this->created_by == 0) {
+            return;
+        }
+        if ($this->_createdByEmail) {
+            return $this->_createdByEmail;
+        }
+
+        if ($this->created_by == $this->updated_by) {
+            if ($this->_updatedByEmail) {
+                return $this->_updatedByEmail;
+            }
+        }
+
         if(($model = $this->createdBy) != null) {
-            return $model->email;
+            $this->_createdByEmail = $model->email;
+            return $this->_createdByEmail;
         }
     }
 
     public function getUpdatedByEmail()
     {
+        if ($this->updated_by == 0) {
+            return;
+        }
+
+        if ($this->_updatedByEmail) {
+            return $this->_updatedByEmail;
+        }
+
+        if ($this->created_by == $this->updated_by) {
+            if ($this->_createdByEmail) {
+                return $this->_createdByEmail;
+            }
+        }
+
         if(($model = $this->updatedBy) != null) {
-            return $model->email;
+            $this->_updatedByEmail = $model->email;
+            return $this->_updatedByEmail;
         }
     }
 
@@ -427,9 +491,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return date('F d, Y', strtotime($date));
         }
         else {
-            $model = static::find()
+            $model = $this->_startDate ?: static::find()
                 ->visible()
                 ->min('created_at');
+
+            $this->_startDate = $model;
 
             $date = ($model)? $model: 'today';
         }
@@ -444,9 +510,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return date('F d, Y', strtotime($date));
         }
         else {
-            $model = static::find()
+            $model = $this->_endDate ?: static::find()
                 ->visible()
                 ->max('created_at');
+
+            $this->_endDate = $model;
 
             $date = ($model)? $model: 'today';
         }
