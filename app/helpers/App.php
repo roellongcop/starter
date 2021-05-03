@@ -325,31 +325,31 @@ class App {
     public static function success($message='')
     {
     	$message = (is_array($message))? json_encode($message): $message;
-        self::session()->setFlash('success', $message);
+        self::session()->addFlash('success', $message);
     }
 
     public static function danger($message='')
     {
     	$message = (is_array($message))? json_encode($message): $message;
-        self::session()->setFlash('danger', $message);
+        self::session()->addFlash('danger', $message);
     }
 
 
     public static function info($message='')
     {
     	$message = (is_array($message))? json_encode($message): $message;
-        self::session()->setFlash('info', $message);
+        self::session()->addFlash('info', $message);
     }
 
     public static function primary($message='')
     {
     	$message = (is_array($message))? json_encode($message): $message;
-        self::session()->setFlash('primary', $message);
+        self::session()->addFlash('primary', $message);
     }
     public static function warning($message='')
     {
     	$message = (is_array($message))? json_encode($message): $message;
-        self::session()->setFlash('warning', $message);
+        self::session()->addFlash('warning', $message);
     }
 
     public static function modelCannot($model, $action='')
