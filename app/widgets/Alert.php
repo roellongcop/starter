@@ -56,12 +56,20 @@ class Alert extends \yii\bootstrap\Widget
         $alerts = [];
 
         foreach ($flashes as $key => $message) {
-            $alertMessage = (is_array($message))? json_encode($message): $message;
-
-            $alerts[] = $this->render('alert', [
-                'key' => $key,
-                'alertMessage' => $alertMessage,
-            ]);
+            if (is_array($message)) {
+                foreach ($message as $alertMessage) {
+                    $alerts[] = $this->render('alert', [
+                        'key' => $key,
+                        'alertMessage' => $alertMessage,
+                    ]);
+                }
+            }
+            else {
+                $alerts[] = $this->render('alert', [
+                    'key' => $key,
+                    'alertMessage' => $message,
+                ]);
+            }
         }
 
         return implode(' ', $alerts);
