@@ -136,7 +136,7 @@ CSS)
                                                 <div class="row">
                                                     <?php foreach ($files as $file): ?>
                                                         <div class="col-md-3">
-                                                            <?= Html::img(['file/display', 'token' => $file->token, 'w' => 150, 'h' => 150, 'ratio' => 'false'], [
+                                                            <?= Html::img(['file/display', 'token' => $file->token, 'w' => 150], [
                                                                 'class' => "img-thumbnail pointer my-image-files-{$id}",
                                                                 'data-id' => $file->id,
                                                                 'data-name' => $file->name,
@@ -192,7 +192,7 @@ CSS)
                                                     <td id="<?= $id ?>-created_by"> None </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Created At</th>
+                                                    <th width="30%">Created At</th>
                                                     <td id="<?= $id ?>-created_at"> None </td>
                                                 </tr>
                                             </tbody>

@@ -103,12 +103,7 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                         $('#sipc img').attr('src', file.dataURL)
                     "
                 ]) ?> 
-                <ul>
-                    <li>Minimum Width: <?= $imageRules->minWidth ?></li>
-                    <li>Maximum Width: <?= $imageRules->maxWidth ?></li>
-                    <li>Minimum Height: <?= $imageRules->minHeight ?></li>
-                    <li>Maximum Height: <?= $imageRules->maxHeight ?></li>
-                </ul>
+                
             <?php else: ?>
                 <?= ChangePhoto::widget([
                     'model' => $model,
