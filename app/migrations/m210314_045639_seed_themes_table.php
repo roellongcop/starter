@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use yii\helpers\Inflector;
 
 /**
  * Class m210314_045639_seed_themes_table
@@ -27,6 +28,7 @@ class m210314_045639_seed_themes_table extends Migration
                 'base_url'    => $theme['baseUrl'],
                 'path_map'    => json_encode($theme['pathMap']),
                 'bundles'     => json_encode($theme['bundles'] ?? []),
+                'slug'        => Inflector::slug($theme['name']),
                 'record_status' => 1,
             ];
             $this->insert($this->tableName(), $data);

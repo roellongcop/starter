@@ -4,13 +4,14 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Html;
+use app\models\query\ThemeQuery;
 use app\widgets\Anchor;
 use app\widgets\AppImages;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
-use app\helpers\Html;
+use yii\behaviors\SluggableBehavior;
 use yii\helpers\Url;
-use app\models\query\ThemeQuery;
 
 /**
  * This is the model class for table "{{%themes}}".
@@ -57,7 +58,7 @@ class Theme extends ActiveRecord
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['base_path', 'base_url'], 'string'],
             [['record_status', 'created_by', 'updated_by'], 'integer'],
-            [['bundles', 'path_map'], 'safe'],
+            [['bundles', 'path_map', 'slug'], 'safe'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
@@ -225,6 +226,14 @@ class Theme extends ActiveRecord
         $behaviors['JsonBehavior']['fields'] = [
             'path_map', 
             'bundles',
+        ];
+
+        $behaviors['SluggableBehavior'] = [
+            'class' => SluggableBehavior::className(),
+            'attribute' => 'name',
+            'slugAttribute' => 'slug',
+            'immutable' => false,
+            'ensureUnique' => true,
         ];
         return $behaviors;
     }

@@ -3,10 +3,10 @@ use app\widgets\Filter;
 use app\widgets\Pagination;
 use app\widgets\Search;
 use app\widgets\SearchButton;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 
 $modules = $model->loadModules();
 $model->modules = $model->modules ?: array_keys($modules);

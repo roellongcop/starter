@@ -5,11 +5,11 @@ use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
 use app\widgets\ChangePhoto;
 use app\widgets\ImagePreview;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Setting */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 ?>
 
 

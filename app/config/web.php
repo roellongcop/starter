@@ -128,7 +128,6 @@ if (YII_ENV_DEV) {
                 'templates' => [
                     // template name => path to template
                     'starter' => '@app/gii/starter/crud/default',
-                    'keen' => '@app/gii/keen/crud/default',
                 ]
             ],
             'model' => [

@@ -4,11 +4,11 @@ use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\RecordStatusInput;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 ?>
 
 

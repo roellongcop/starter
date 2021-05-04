@@ -1,6 +1,6 @@
 <?php
 use app\widgets\AnchorForm;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 ?>
 
 

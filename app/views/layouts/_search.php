@@ -3,7 +3,7 @@
 use app\helpers\App;
 use app\models\search\DashboardSearch;
 use app\widgets\Search;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 $searchModel = $this->params['searchModel'] ?? '';
 $searchTemplate = $searchModel->searchTemplate ?? "/".App::controllerID()."/_search";
 $searchAction = $searchModel->searchAction ?? ['index'];

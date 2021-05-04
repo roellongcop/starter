@@ -19,11 +19,11 @@ echo "<?php\n";
 use app\helpers\App;
 use app\widgets\BootstrapSelect;
 use app\widgets\AnchorForm;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 ?>
 
 

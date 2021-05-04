@@ -31,6 +31,7 @@ class m210111_014007_create_themes_table extends Migration
             'base_url'   => $this->text(),
             'path_map'   => $this->text(),
             'bundles'   => $this->text(),
+            'slug' => $this->string()->notNull()->unique(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

@@ -5,12 +5,12 @@ use app\widgets\Search;
 use app\widgets\DateRange;
 use app\widgets\Filter;
 use app\helpers\App;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 use app\widgets\SearchButton;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\search\ThemeSearch */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 ?>
  
 

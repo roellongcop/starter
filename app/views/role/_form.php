@@ -3,12 +3,12 @@
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 $controller_actions = App::component('access')->controllerActions();
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 ?>
 
 

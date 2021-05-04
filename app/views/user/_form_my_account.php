@@ -7,11 +7,11 @@ use app\widgets\BootstrapSelect;
 use app\widgets\RecordStatusInput;
 use app\widgets\ChangePhoto;
 use app\widgets\ImagePreview;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 
 $imageRules = $model->getActiveValidators('imageInput')[0];
 ?>

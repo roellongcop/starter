@@ -2,7 +2,7 @@
 
 use app\models\search\UserSearch;
 use app\widgets\AnchorForm;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */

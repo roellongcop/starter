@@ -4,13 +4,13 @@
 
 <div class="<?= $wrapperClass ?>">
 	<?php foreach ($data as $key => $value): ?>
-	    <label>
+	    <label style="display: inline-flex">
 	        <input <?= $options ?> value="<?= $key ?>" 
 	        	name="<?= $name ?>" 
 	        	class="<?= $inputClass ?>" 
 	        	<?= ($checkedFunction)? call_user_func($checkedFunction, $key, $value): '' ?>
 	        	type="checkbox">
-	        <?= $value ?>
+	        &nbsp; <?= $value ?>
 	    </label>
 	    <br>
 	<?php endforeach ?>
