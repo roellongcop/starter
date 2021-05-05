@@ -2,11 +2,11 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=db_starter',
+    'dsn' => 'mysql:host=localhost;dbname=pluginbuilderpro',
     'username' => 'root',
     'password' => 'password',
     'charset' => 'utf8',
-    'tablePrefix' => 'tbl_',
+    'tablePrefix' => 'pb_',
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
