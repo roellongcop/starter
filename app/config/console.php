@@ -40,7 +40,7 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
-            'baseUrl' => '/pluginbuilderpro/web'
+            'baseUrl' => '/starter/web'
         ]
     ],
     'params' => $params,
