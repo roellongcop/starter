@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\ModelFile;
 use app\filters\AccessControl;
 use app\filters\IpFilter;
 use app\filters\ModelFileFilter;
@@ -10,8 +11,6 @@ use app\filters\ThemeFilter;
 use app\filters\UserFilter;
 use app\filters\VerbFilter;
 use app\helpers\App;
-use yii\helpers\Json;
-use yii\helpers\Url;
 use yii\web\ForbiddenHttpException;
 
 /**
@@ -19,6 +18,8 @@ use yii\web\ForbiddenHttpException;
  */
 abstract class Controller extends \yii\web\Controller
 {
+    public $model_file_id_name = '_model_file_id';
+
     public function behaviors()
     {
         return [
@@ -37,35 +38,26 @@ abstract class Controller extends \yii\web\Controller
             'ThemeFilter' => [
                 'class' => ThemeFilter::className()
             ],
-            'ModelFileFilter' => [
-                'class' => ModelFileFilter::className()
-            ]
+            'SettingFilter' => [
+                'class' => SettingFilter::className()
+            ],
         ];
     } 
 
-    public function beforeAction($action)
+
+    public function checkModelFile($model)
     {
-        if (!parent::beforeAction($action)) {
-            return false;
+        if (($post = App::post()) != null) {
+            if (!empty($post[$this->model_file_id_name])) {
+                $modelFile = ModelFile::findOne($post[$this->model_file_id_name]);
+
+                if ($modelFile) {
+                    $modelFile->model_id = $model->id;
+                    $modelFile->save();
+
+                    return $modelFile;
+                }
+            }
         }
-
-        $options = Json::htmlEncode([
-            'appName' => App::appName(),
-            'baseUrl' => Url::base(true) . '/',
-            'language' => App::appLanguage(),
-            'api' => Url::base(true) . '/api/v1/',
-            'csrfToken' => App::request('csrfToken'),
-            'csrfParam' => App::request('csrfParam'),
-            'params' => App::params()
-        ]);
-
-        $this->view->registerJs("
-            var app = {$options};
-            console.log(app)
-        ", \yii\web\View::POS_HEAD, 'app');
-        
-        App::session()->timeout = App::setting('auto_logout_timer');
-        
-        return true;
     }
 }
