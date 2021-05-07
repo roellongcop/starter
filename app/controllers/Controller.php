@@ -3,15 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\ModelFile;
-use app\filters\AccessControl;
-use app\filters\IpFilter;
-use app\filters\ModelFileFilter;
-use app\filters\ThemeFilter;
-use app\filters\UserFilter;
-use app\filters\VerbFilter;
 use app\helpers\App;
-use yii\web\ForbiddenHttpException;
+use app\models\ModelFile;
 
 /**
  * RoleController implements the CRUD actions for Role model.
@@ -24,22 +17,22 @@ abstract class Controller extends \yii\web\Controller
     {
         return [
             'UserFilter' => [
-                'class' => UserFilter::className(),
+                'class' => \app\filters\UserFilter::className(),
             ],
             'IpFilter' => [
-                'class' => IpFilter::className(),
+                'class' => \app\filters\IpFilter::className(),
             ],
             'AccessControl' => [
-                'class' => AccessControl::className()
+                'class' => \app\filters\AccessControl::className()
             ],
             'VerbFilter' => [
-                'class' => VerbFilter::className()
+                'class' => \app\filters\VerbFilter::className()
             ],
             'ThemeFilter' => [
-                'class' => ThemeFilter::className()
+                'class' => \app\filters\ThemeFilter::className()
             ],
             'SettingFilter' => [
-                'class' => SettingFilter::className()
+                'class' => \app\filters\SettingFilter::className()
             ],
         ];
     } 
@@ -47,9 +40,23 @@ abstract class Controller extends \yii\web\Controller
 
     public function checkModelFile($model)
     {
-        if (($post = App::post()) != null) {
-            if (!empty($post[$this->model_file_id_name])) {
-                $modelFile = ModelFile::findOne($post[$this->model_file_id_name]);
+        if (($model_file_id = App::post($this->model_file_id_name)) != null) {
+
+            if (is_array($model_file_id)) {
+                $modelFiles = [];
+                foreach ($model_file_id as $key => $id) {
+                    $modelFile = ModelFile::findOne($id);
+
+                    if ($modelFile) {
+                        $modelFile->model_id = $model->id;
+                        $modelFile->save();
+                        $modelFiles[] = $modelFile;
+                    }
+                }
+                return $modelFiles;
+            }
+            else {
+                $modelFile = ModelFile::findOne($model_file_id);
 
                 if ($modelFile) {
                     $modelFile->model_id = $model->id;

@@ -25,7 +25,7 @@ class SettingFilter extends ActionFilter
             'params' => App::params()
         ]);
 
-        $this->view->registerJs("
+        App::view()->registerJs("
             var app = {$options};
             console.log(app)
         ", \yii\web\View::POS_HEAD, 'app');

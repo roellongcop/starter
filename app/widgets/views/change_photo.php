@@ -22,7 +22,6 @@ $this->registerJs(<<< SCRIPT
         $('#change-photo-container-{$id} #{$id}-height').text(image.data('height') + 'px');
         $('#change-photo-container-{$id} #{$id}-location').text(image.data('location'));
         $('#change-photo-container-{$id} #{$id}-token').text(image.data('token'));
-        $('#change-photo-container-{$id} #{$id}-created_by').text(image.data('created_by'));
         $('#change-photo-container-{$id} #{$id}-created_at').text(image.data('created_at'));
 
         $('.my-image-files-{$id}').css('border', '');
@@ -128,7 +127,6 @@ CSS);
                                                                 'data-height' => $file->height,
                                                                 'data-location' => $file->location,
                                                                 'data-token' => $file->token,
-                                                                'data-created_by' => $file->createdByEmail,
                                                                 'data-created_at' => App::formatter('asFulldate', $file->created_at),
                                                             ]) ?>
                                                         </div>
@@ -168,10 +166,6 @@ CSS);
                                                 <tr>
                                                     <th>Token</th>
                                                     <td id="<?= $id ?>-token"> None </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Created_By</th>
-                                                    <td id="<?= $id ?>-created_by"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Created_At</th>
