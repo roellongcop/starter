@@ -33,6 +33,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_modelFiles;
     public $_modelFile;
 
+    public $_documentFile;
+    public $_imageFile;
+    public $_sqlFile;
+
     public function setActive()
     {
         if ($this->hasProperty('record_status')) {
@@ -141,6 +145,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getDocumentFile()
     {
+        if ($this->_documentFile) {
+            return $this->_documentFile;
+        }
+
+        $this->_documentFile = $this->documentFiles[0] ?? '';
+        return $this->_documentFile;
+
         if (($modelFile = $this->modelFile) != null) {
             if (($file = $modelFile->file) != null) {
                 if ($file->isDocument) {
@@ -169,6 +180,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getImageFile()
     {
+        if ($this->_imageFile) {
+            return $this->_imageFile;
+        }
+
+        $this->_imageFile = $this->imageFiles[0] ?? '';
+        return $this->_imageFile;
+
         if (($modelFile = $this->modelFile) != null) {
             if (($file = $modelFile->file) != null) {
                 if ($file->isImage) {
@@ -211,6 +229,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getSqlFile()
     {
+        if ($this->_sqlFile) {
+            return $this->_sqlFile;
+        }
+
+        $this->_sqlFile = $this->sqlFiles[0] ?? '';
+        return $this->_sqlFile;
         if (($modelFile = $this->modelFile) != null) {
             if ($modelFile->file && $modelFile->file->isSql) {
                 return $modelFile->file;
