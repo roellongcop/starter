@@ -36,7 +36,7 @@ class BackupController extends Controller
 
     /**
      * Displays a single Backup model.
-     * @param integer $id
+     * @param integer $slug
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
