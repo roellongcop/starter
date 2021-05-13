@@ -86,6 +86,7 @@ class FileSearch extends File
             'updated_by' => $this->updated_by,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'extension' => $this->extension,
         ]);
         
         $query->andFilterWhere(['like', 'name', $this->name])

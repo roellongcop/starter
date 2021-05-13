@@ -229,5 +229,5 @@ div.required label.control-label:after {
     color: red;
 }
 .modal-my-photos {
-    overflow-y: scroll;height: 350px;overflow-x: hidden;
+    /*overflow-y: scroll;height: 350px;overflow-x: hidden;*/
 }

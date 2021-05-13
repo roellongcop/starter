@@ -467,4 +467,23 @@ class FileController extends Controller
 
         return $this->asJson($result);
     }
+
+
+    public function actionMyImageFiles()
+    {
+        $searchModel = new FileSearch([
+            'extension' => App::params('file_extensions')['image'],
+            'created_by' => App::identity('id')
+        ]);
+
+        $searchModel->pagination = 12;
+        $dataProvider = $searchModel->search(['FileSearch' => App::queryParams()]);
+        $dataProvider->query->groupBy(['name', 'size', 'extension']);
+
+
+        return $this->renderPartial('my-image-files', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 }

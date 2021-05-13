@@ -20,6 +20,8 @@ class ChangePhoto extends \yii\base\Widget
     public $dropzoneComplete;
     public $fileInput;
 
+    public $myImageFilesUrl = ['file/my-image-files'];
+
     public function init() 
     {
         // your logic here
@@ -53,7 +55,7 @@ class ChangePhoto extends \yii\base\Widget
             'model' => $this->model,
             'dropzoneComplete' => $this->dropzoneComplete,
             'fileInput' => $this->fileInput,
-            
+            'myImageFilesUrl' => Url::to($this->myImageFilesUrl),
         ]);
     }
 }

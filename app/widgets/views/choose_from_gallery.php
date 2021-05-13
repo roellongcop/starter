@@ -10,7 +10,7 @@ $this->registerJs(<<< SCRIPT
     }
 
     var selectedFile = 0;
-    $('.my-image-files-{$id}').on('click', function() {
+    $(document).on('click', '#my_files-{$id} img', function() {
         var image = $(this);
 
         selectedFile = image.data('id');
@@ -25,7 +25,7 @@ $this->registerJs(<<< SCRIPT
         $('#choose-from-gallery-{$id} #{$id}-created_by').text(image.data('created_by'));
         $('#choose-from-gallery-{$id} #{$id}-created_at').text(image.data('created_at'));
 
-        $('.my-image-files-{$id}').css('border', '');
+        $('#my_files-{$id} img').css('border', '');
         image.css('border', '2px solid #1bc5bd');
         enableButton();
     })
@@ -80,6 +80,36 @@ $this->registerJs(<<< SCRIPT
             error: {$ajaxError},
         });
     })
+
+
+    var getMyFiles = function(url) {
+        $('#my_files-{$id} .modal-my-photos').html('');
+        let conf = {
+            url: url,
+            method: 'get',
+            cache: false,
+            success: function(s) {
+                $('#my_files-{$id} .modal-my-photos').html(s);
+            },
+            error: function(e) {
+            }
+        }   
+
+        $.ajax(conf);
+    }
+
+
+    $('#choose-from-gallery-btn-{$id}').on('click', function() {
+        getMyFiles('{$myImageFilesUrl}');
+    })
+
+
+    $(document).on('click', '#my_files-{$id} .modal-my-photos a.btn', function() {
+        let href = $(this).attr('href')
+
+        getMyFiles(href)
+        return false;    
+    });
 SCRIPT, \yii\web\View::POS_END);
 
 $this->registerCSS(<<<CSS
@@ -90,6 +120,9 @@ $this->registerCSS(<<<CSS
     #choose-from-gallery-container-{$id} table tbody tr th {
         padding: 5px;
     }
+    #choose-from-gallery-container-{$id} .d-flex {
+        display: grid !important;
+    }
 CSS)
 ?>
 
@@ -97,7 +130,7 @@ CSS)
 <div id="choose-from-gallery-container-<?= $id ?>">
     
     <!-- Button trigger modal-->
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#choose-from-gallery-<?= $id ?>">
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#choose-from-gallery-<?= $id ?>" id="choose-from-gallery-btn-<?= $id ?>">
         <?= $buttonTitle ?>
     </button>
 
@@ -120,7 +153,7 @@ CSS)
                     <div data-scroll="true" data-height="500">
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a data-toggle="tab" href="#my-photos-tab-<?= $id ?>">
+                                <a data-toggle="tab" href="#my_files-<?= $id ?>">
                                     My Photos
                                 </a>
                             </li>
@@ -128,31 +161,10 @@ CSS)
                         </ul>
 
                         <div class="tab-content">
-                            <div id="my-photos-tab-<?= $id ?>" class="tab-pane fade in active">
+                            <div id="my_files-<?= $id ?>" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6">
-                                        <div class="modal-my-photos">
-                                            <?php if ($files): ?>
-                                                <div class="row">
-                                                    <?php foreach ($files as $file): ?>
-                                                        <div class="col-md-3">
-                                                            <?= Html::img(['file/display', 'token' => $file->token, 'w' => 150], [
-                                                                'class' => "img-thumbnail pointer my-image-files-{$id}",
-                                                                'data-id' => $file->id,
-                                                                'data-name' => $file->name,
-                                                                'data-extension' => $file->extension,
-                                                                'data-size' => $file->fileSize,
-                                                                'data-width' => $file->width,
-                                                                'data-height' => $file->height,
-                                                                'data-location' => $file->location,
-                                                                'data-token' => $file->token,
-                                                                'data-created_by' => $file->createdByEmail,
-                                                                'data-created_at' => App::formatter('asFulldate', $file->created_at),
-                                                            ]) ?>
-                                                        </div>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            <?php endif ?>
+                                        <div class="modal-my-photos"> 
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-sm-6 image-properties-panel">

@@ -19,6 +19,7 @@ class ChooseFromGallery extends \yii\base\Widget
     public $dropzoneComplete;
     public $dropzoneSuccess;
     public $fileInput;
+    public $myImageFilesUrl = ['file/my-image-files'];
 
     public function init() 
     {
@@ -52,6 +53,7 @@ class ChooseFromGallery extends \yii\base\Widget
             'dropzoneComplete' => $this->dropzoneComplete,
             'fileInput' => $this->fileInput,
             'dropzoneSuccess' => $this->dropzoneSuccess,
+            'myImageFilesUrl' => Url::to($this->myImageFilesUrl),
         ]);
     }
 }
