@@ -23,12 +23,12 @@ class m210314_045639_seed_themes_table extends Migration
         foreach ($themes as $i => $theme) {
             $data = [
                 'description' => $theme['description'],
-                'name'        => $theme['name'],
-                'base_path'   => $theme['basePath'],
-                'base_url'    => $theme['baseUrl'],
-                'path_map'    => json_encode($theme['pathMap']),
-                'bundles'     => json_encode($theme['bundles'] ?? []),
-                'slug'        => Inflector::slug($theme['name']),
+                'name' => $theme['name'],
+                'base_path' => $theme['basePath'],
+                'base_url' => $theme['baseUrl'],
+                'path_map' => json_encode($theme['pathMap']),
+                'bundles' => json_encode($theme['bundles'] ?? []),
+                'slug' => Inflector::slug($theme['name']),
                 'record_status' => 1,
             ];
             $this->insert($this->tableName(), $data);

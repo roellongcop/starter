@@ -25,14 +25,14 @@ class m201201_043253_create_sessions_table extends Migration
     public function attributes()
     {
         return [
-            'id'            => $this->string(40)->notNull(),
-            'expire'        => $this->bigInteger(20),
-            'data'          => $this->binary(),
-            'user_id'       => $this->bigInteger(20)->null()->defaultValue(0),
-            'ip'            => $this->string(32)->notNull(),
-            'browser'       => $this->string(128)->notNull(),
-            'os'            => $this->string(128)->notNull(),
-            'device'        => $this->string(128)->notNull(),
+            'id' => $this->string(40)->notNull(),
+            'expire' => $this->bigInteger(20),
+            'data' => $this->binary(),
+            'user_id' => $this->bigInteger(20)->null()->defaultValue(0),
+            'ip' => $this->string(32)->notNull(),
+            'browser' => $this->string(128)->notNull(),
+            'os' => $this->string(128)->notNull(),
+            'device' => $this->string(128)->notNull(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

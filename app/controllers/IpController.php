@@ -38,10 +38,10 @@ class IpController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($slug, 'slug'),
         ]);
     }
 
@@ -57,11 +57,36 @@ class IpController extends Controller
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Created');
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'slug' => $model->slug]);
         }
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+
+    /**
+     * Duplicates a new Ip model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionDuplicate($slug)
+    {
+        $originalModel = $this->findModel($slug, 'slug');
+        $model = new Ip();
+        $model->attributes = $originalModel->attributes;
+
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Duplicated');
+
+            return $this->redirect(['view', 'slug' => $model->slug]);
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
         ]);
     }
 
@@ -72,13 +97,13 @@ class IpController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'slug' => $model->slug]);
         }
 
         return $this->render('update', [
@@ -93,9 +118,9 @@ class IpController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
 
         if($model->delete()) {
             App::success('Successfully Deleted');

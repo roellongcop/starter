@@ -24,7 +24,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
 
-    public $_imagePath;
     public $_startDate;
     public $_endDate;
     public $_createdByEmail;
@@ -149,13 +148,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_documentFile;
         }
 
-        $this->_documentFile = $this->documentFiles[0] ?? '';
-        return $this->_documentFile;
 
         if (($modelFile = $this->modelFile) != null) {
             if (($file = $modelFile->file) != null) {
                 if ($file->isDocument) {
-                    return $file;
+                    $this->_documentFile = $file;
+                    return $this->_documentFile;
                 }
             }
         }
@@ -184,13 +182,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_imageFile;
         }
 
-        $this->_imageFile = $this->imageFiles[0] ?? '';
-        return $this->_imageFile;
 
         if (($modelFile = $this->modelFile) != null) {
             if (($file = $modelFile->file) != null) {
                 if ($file->isImage) {
-                    return $file;
+                    $this->_imageFile = $file;
+
+                    return $this->_imageFile;
                 }
             }
         }
@@ -198,18 +196,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getImagePath()
     {
-        if ($this->_imagePath) {
-            return $this->_imagePath;
-        }
-
         if(($file = $this->imageFile) != null) {
-            $this->_imagePath = Url::to(['file/display', 'token' => $file->token], true);
+            return Url::to(['file/display', 'token' => $file->token], true);
         }
-        else {
-            $this->_imagePath = App::setting('image_holder');
-        }
-
-        return $this->_imagePath;
+        return App::setting('image_holder');
     }
 
     public function getSqlFiles()
@@ -233,11 +223,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_sqlFile;
         }
 
-        $this->_sqlFile = $this->sqlFiles[0] ?? '';
-        return $this->_sqlFile;
         if (($modelFile = $this->modelFile) != null) {
             if ($modelFile->file && $modelFile->file->isSql) {
-                return $modelFile->file;
+                $this->_sqlFile = $modelFile->file;
+                return $this->_sqlFile;
             }
         }
     }

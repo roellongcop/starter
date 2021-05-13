@@ -4,9 +4,10 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
+use app\models\query\BackupQuery;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
-use app\models\query\BackupQuery;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * This is the model class for table "{{%backup}}".
@@ -141,7 +142,7 @@ class Backup extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->filename,
-                        'link' => ['backup/view', 'id' => $model->id],
+                        'link' => ['backup/view', 'slug' => $model->slug],
                         'text' => true
                     ]);
                 }
@@ -193,6 +194,12 @@ class Backup extends ActiveRecord
         $behaviors = parent::behaviors();
         $behaviors['JsonBehavior']['fields'] = [
             'tables'
+        ];
+
+        $behaviors['SluggableBehavior'] = [
+            'class' => SluggableBehavior::className(),
+            'attribute' => 'filename',
+            'ensureUnique' => true,
         ];
         return $behaviors;
     }

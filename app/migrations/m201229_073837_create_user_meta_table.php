@@ -25,10 +25,10 @@ class m201229_073837_create_user_meta_table extends Migration
     public function attributes()
     {
         return [
-            'id'            => $this->bigPrimaryKey(),
+            'id' => $this->bigPrimaryKey(),
             'user_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'meta_key'      => $this->string(255)->notNull(),
-            'meta_value'    => $this->text(),
+            'meta_key' => $this->string(255)->notNull(),
+            'meta_value' => $this->text(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

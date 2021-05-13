@@ -24,13 +24,13 @@ class m210111_014007_create_themes_table extends Migration
     public function attributes()
     {
         return [
-            'id'        => $this->bigPrimaryKey(),
-            'name'      => $this->string(255)->notNull()->unique(),
-            'description'  => $this->text(),
-            'base_path'  => $this->text(),
-            'base_url'   => $this->text(),
-            'path_map'   => $this->text(),
-            'bundles'   => $this->text(),
+            'id' => $this->bigPrimaryKey(),
+            'name' => $this->string(255)->notNull()->unique(),
+            'description' => $this->text(),
+            'base_path' => $this->text(),
+            'base_url' => $this->text(),
+            'path_map' => $this->text(),
+            'bundles' => $this->text(),
             'slug' => $this->string()->notNull()->unique(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

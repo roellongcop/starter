@@ -4,10 +4,11 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
-use app\widgets\Anchor;
 use app\helpers\Html;
-use yii\helpers\Url;
 use app\models\query\IpQuery;
+use app\widgets\Anchor;
+use yii\behaviors\SluggableBehavior;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%ips}}".
@@ -130,7 +131,7 @@ class Ip extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->name,
-                        'link' => ['ip/view', 'id' => $model->id],
+                        'link' => ['ip/view', 'slug' => $model->slug],
                         'text' => true
                     ]);
                 }
@@ -191,5 +192,17 @@ class Ip extends ActiveRecord
             'icon' => 'minus',
         ];
         return $getBulkActions;
+    }
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['SluggableBehavior'] = [
+            'class' => SluggableBehavior::className(),
+            'attribute' => 'name',
+            'ensureUnique' => true,
+        ];
+
+        return $behaviors;
     }
 }

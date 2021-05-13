@@ -89,10 +89,10 @@ class FileController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($token)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($token, 'token'),
         ]);
     }
 
@@ -116,6 +116,30 @@ class FileController extends Controller
         ]);
     }
 
+
+    /**
+     * Duplicate a new File model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionDuplicate($token)
+    {
+        $originalModel = $this->findModel($token, 'token');
+        $model = new File();
+        $model->attributes = $originalModel->attributes;
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Duplicated');
+
+            return $this->redirect(['view', 'token' => $model->token]);
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
+        ]);
+    }
+
     /**
      * Updates an existing File model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -123,13 +147,13 @@ class FileController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($token)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($token, 'token');
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'token' => $model->token]);
         }
 
         return $this->render('update', [
@@ -144,7 +168,7 @@ class FileController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id = '')
+    public function actionDelete($token = '')
     {
 
         if (App::isAjax()) {
@@ -161,7 +185,7 @@ class FileController extends Controller
             return ;
         }
 
-        $model = $this->findModel($id);
+        $model = $this->findModel($token, 'token');
 
         if($model->delete()) {
             App::success('Successfully Deleted');

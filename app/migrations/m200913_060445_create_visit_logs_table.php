@@ -25,10 +25,10 @@ class m200913_060445_create_visit_logs_table extends Migration
     public function attributes()
     {
         return [
-            'id'            => $this->bigPrimaryKey(),
-            'user_id'       => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'ip'            => $this->string(255)->notNull(),
-            'action'        => $this->tinyInteger(2)->notNull()->defaultValue(0),
+            'id' => $this->bigPrimaryKey(),
+            'user_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'ip' => $this->string(255)->notNull(),
+            'action' => $this->tinyInteger(2)->notNull()->defaultValue(0),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

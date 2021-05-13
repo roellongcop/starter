@@ -9,6 +9,7 @@ class Anchors extends \yii\base\Widget
     public $controller;
     public $names;
     public $model;
+    public $paramName = 'id';
     public $titles = [
         'index' => 'List',
         'log' => 'Data Logs',
@@ -19,6 +20,7 @@ class Anchors extends \yii\base\Widget
         'create' => ['class' => 'btn btn-success font-weight-bolder font-size-sm '],
         'view' => ['class' => 'btn btn-default font-weight-bolder font-size-sm '],
         'update' => ['class' => 'btn btn-primary font-weight-bolder font-size-sm '],
+        'duplicate' => ['class' => 'btn btn-default font-weight-bolder font-size-sm '],
         'delete' => [
             'class' => 'btn btn-danger btn-bold btn-upper btn-font-sm ',
             'data' => [
@@ -53,20 +55,15 @@ class Anchors extends \yii\base\Widget
                     ];
                     break;
                 case 'index':
-                    $link = ["{$controller}/{$name}"];
-                    break;
                 case 'create':
                     $link = ["{$controller}/{$name}"];
                     break;
                 case 'view':
-                    $link = ["{$controller}/{$name}", 'id' => $this->model->id];
-                    break;
                 case 'update':
-                    $link = ["{$controller}/{$name}", 'id' => $this->model->id];
-                    break;
+                case 'duplicate':
                 case 'delete':
-                    $link = ["{$controller}/{$name}", 'id' => $this->model->id];
-                    break; 
+                    $link = ["{$controller}/{$name}", $this->paramName => $this->model->{$this->paramName}];
+                    break;
                 default:
                     break;
             }

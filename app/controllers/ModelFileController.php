@@ -67,6 +67,29 @@ class ModelFileController extends Controller
     }
 
     /**
+     * Duplicates an existing ModelFile model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws ForbiddenHttpException if the model cannot be found
+     */
+    public function actionDuplicate($id)
+    {
+        $originalModel = $this->findModel($id);
+        $model = new ModelFile();
+        $model->attributes = $originalModel->attributes;
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Duplicated');
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Updates an existing ModelFile model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id

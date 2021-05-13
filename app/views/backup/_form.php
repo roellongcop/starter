@@ -49,6 +49,9 @@ SCRIPT, \yii\web\View::POS_END);
             <?= Checkbox::widget([
                 'data' => $tables,
                 'name' => 'Backup[tables][]',
+                'checkedFunction' => function($key, $value) use ($model) {
+                    return $model->tables && in_array($key, $model->tables)? 'checked': '';
+                }
             ]) ?>
         </div>
 

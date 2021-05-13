@@ -24,10 +24,11 @@ class m201129_112459_create_backups_table extends Migration
     public function attributes()
     {
         return [
-            'id'            => $this->bigPrimaryKey(),
-            'filename'      => $this->string(255)->notNull()->unique(),
-            'tables'        => $this->text(),
-            'description'   => $this->text(),
+            'id' => $this->bigPrimaryKey(),
+            'filename' => $this->string(255)->notNull()->unique(),
+            'tables' => $this->text(),
+            'description' => $this->text(),
+            'slug' => $this->string()->notNull()->unique(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

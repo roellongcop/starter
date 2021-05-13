@@ -8,9 +8,9 @@ use app\widgets\Detail;
 /* @var $this yii\web\View */
 /* @var $model app\models\Backup */
 
-$this->title = 'Backup: ' . $model->filename;
+$this->title = 'Backup: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->filename;
+$this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new BackupSearch();
 $this->params['showCreateButton'] = true; 
 ?>
@@ -18,13 +18,13 @@ $this->params['showCreateButton'] = true;
 <div>
 	<?= Anchor::widget([
 		'title' => 'Download File',
-		'link' => ['download', 'id' => $model->id],
+		'link' => ['download', 'slug' => $model->slug],
 		'options' => ['class' => 'btn btn-primary']
 	]) ?>
 
 	<?= Anchor::widget([
 		'title' => 'Restore',
-		'link' =>  ['restore', 'id' => $model->id],
+		'link' =>  ['restore', 'slug' => $model->slug],
 		'options' => [
 			'class' => 'btn btn-warning',
 			'data-method' => 'post',
@@ -32,8 +32,9 @@ $this->params['showCreateButton'] = true;
 		]
 	]) ?>
 	<?= Anchors::widget([
-		'names' => ['update', 'delete', 'log'],
-		'model' => $model
+		'names' => ['duplicate', 'delete', 'log'],
+		'model' => $model,
+		'paramName' => 'slug'
 	]) ?>
     <hr>
     <?= Detail::widget(['model' => $model]) ?>

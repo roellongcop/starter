@@ -65,6 +65,30 @@ class LogController extends Controller
     }
 
     /**
+     * Duplicates a new Log model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionDuplicate($id)
+    {
+        $originalModel = $this->findModel($id);
+        $model = new Log();
+        $model->attributes = $originalModel->attributes;
+
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Duplicated');
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
+        ]);
+    }
+
+    /**
      * Updates an existing Log model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id

@@ -40,10 +40,10 @@ class BackupController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($slug, 'slug'),
         ]);
     }
 
@@ -78,11 +78,53 @@ class BackupController extends Controller
                 App::danger('Error in creating backup file.');
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'slug' => $model->slug]);
         }
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+
+    /**
+     * Duplicates a new Backup model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionDuplicate($slug)
+    {
+        $originalModel = $this->findModel($slug, 'slug');
+
+        $model = new Backup();
+        $model->attributes = $originalModel->attributes;
+        
+        if ($model->load(App::post()) && $model->validate()) {
+            $backup = $this->backupDB($model->filename, $model->tables);
+            $model->tables = $model->tables ?: App::component('general')->getAllTables();
+            
+            if ($backup) {
+                $model->save();
+
+                $fileInput = new \StdClass();
+                $fileInput->baseName = $model->filename;
+                $fileInput->extension = 'sql';
+                $fileInput->size = $backup['filesize'];
+
+                App::component('file')->saveFile($model, $fileInput, $backup['filepath']);
+
+                App::success('Successfully Duplicated');
+            }
+            else {
+                App::danger('Error in duplicating backup file.');
+            }
+
+            return $this->redirect(['view', 'slug' => $model->slug]);
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
         ]);
     }
 
@@ -270,9 +312,9 @@ class BackupController extends Controller
     }
 
 
-    public function actionRestore($id)
+    public function actionRestore($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
 
         $sql = file_get_contents($model->sqlFileLocation);
         App::execute($sql);
@@ -355,9 +397,9 @@ class BackupController extends Controller
         return false;
     }
 
-    public function actionDownload($id)
+    public function actionDownload($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
         if ($model) {
             $model->download();
         }

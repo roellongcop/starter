@@ -24,10 +24,11 @@ class m200924_130808_create_ips_table extends Migration
     public function attributes()
     {
         return [
-            'id'            => $this->bigPrimaryKey(),
-            'name'          => $this->string(255)->notNull()->unique(),
-            'description'   => $this->text(),
+            'id' => $this->bigPrimaryKey(),
+            'name' => $this->string(255)->notNull()->unique(),
+            'description' => $this->text(),
             'type' => $this->tinyInteger(2)->notNull()->defaultValue(0),
+            'slug' => $this->string()->notNull()->unique(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

@@ -26,7 +26,7 @@ class m210116_162927_create_model_files_table extends Migration
     public function attributes()
     {
         return [
-            'id'            => $this->bigPrimaryKey(),
+            'id' => $this->bigPrimaryKey(),
             'model_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'file_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'model_name' => $this->string(255)->notNull(),

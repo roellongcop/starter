@@ -15,7 +15,7 @@ class Anchor extends \yii\base\Widget
     public $controller;
     public $action;
     public $user;
-    public $tooltip = 'Click to view';
+    public $tooltip;
 
     public function init() 
     {
