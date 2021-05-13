@@ -92,7 +92,7 @@ SCRIPT, \yii\web\View::POS_END)
 			</p>
 			<?= Anchor::widget([
 				'title' => 'Activate',
-				'link' => ['theme/activate', 'id' => $theme->id],
+				'link' => ['theme/activate', 'slug' => $theme->slug],
 				'options' => [
 					'class' => 'btn btn-sm btn-primary font-weight-bolder py-2',
 					'data-method' => 'post',

@@ -16,7 +16,7 @@ $searchAction = $searchModel->searchAction ?? ['index'];
         <a href="index.html">
             <?= Html::img(App::setting('primary_logo') . '&w=90&quality=90', [
                 'class' => 'h-30px',
-                'alt' => App::setting('app_name')
+                'alt' => App::appName()
             ]) ?>
         </a>
     </div>

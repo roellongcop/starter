@@ -44,10 +44,10 @@ class ThemeController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($slug, 'slug'),
         ]);
     }
 
@@ -63,7 +63,7 @@ class ThemeController extends Controller
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Created');
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'slug' => $model->slug]);
         }
 
         return $this->render('create', [
@@ -74,17 +74,17 @@ class ThemeController extends Controller
     /**
      * Updates an existing Theme model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $slug
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'slug' => $model->slug]);
         }
 
         return $this->render('update', [
@@ -95,13 +95,13 @@ class ThemeController extends Controller
     /**
      * Deletes an existing Theme model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $slug
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -270,8 +270,9 @@ class ThemeController extends Controller
         }
     }
 
-    public function actionActivate($id)
+    public function actionActivate($slug)
     {
+        $theme = $this->findModel($slug, 'slug');
         $model = UserMeta::findOne([
             'user_id' => App::identity('id'),
             'meta_key' => 'theme'
@@ -282,7 +283,7 @@ class ThemeController extends Controller
             'meta_key' => 'theme'
         ]);
 
-        $model->meta_value = $id;
+        $model->meta_value = $theme->id;
        if ( $model->save()) {
             App::success('Theme Changed.');
        }

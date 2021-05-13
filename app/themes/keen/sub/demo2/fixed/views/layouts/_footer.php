@@ -10,7 +10,7 @@ use app\helpers\App;
 		<div class="text-dark order-2 order-md-1">
 			<span class="text-muted font-weight-bold mr-2"><?= date('Y') ?>©</span>
 			<a href="http://keenthemes.com/keen" target="_blank" class="text-dark-75 text-hover-primary">
-				<?= App::setting('app_name') ?>
+				<?= App::appName() ?>
 			</a>
 		</div>
 		<!--end::Copyright-->

@@ -108,6 +108,31 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
         ]);
     }
 
+
+    /**
+     * Duplicates a new <?= $modelClass ?> model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionDuplicate(<?= $actionParams ?>)
+    {
+        $originalModel = $this->findModel(<?= $actionParams ?>);
+        $model = new <?= $modelClass ?>();
+        $model->attributes = $originalModel->attributes;
+
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Duplicated');
+
+            return $this->redirect(['view', <?= $urlParams ?>]);
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
+        ]);
+    }
+
     /**
      * Updates an existing <?= $modelClass ?> model.
      * If update is successful, the browser will be redirected to the 'view' page.

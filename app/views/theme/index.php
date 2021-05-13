@@ -26,6 +26,7 @@ $this->params['showExportButton'] = true;
         <?= Grid::widget([
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'paramName' => 'slug',
             'template' => ['view', 'update', 'delete', 'activate'],
         ]); ?>
                                 

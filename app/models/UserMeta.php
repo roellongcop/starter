@@ -48,8 +48,7 @@ class UserMeta extends ActiveRecord
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['user_id'], 'default', 'value' => 0],
             [['meta_key', 'record_status'], 'required'],
-            [['meta_value'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'meta_value'], 'safe'],
             [['meta_key'], 'string', 'max' => 255],
             ['user_id', 'exist', 'targetRelation' => 'user', 'message' => 'User not found'],
             /*[
