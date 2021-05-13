@@ -7,7 +7,7 @@ use app\models\search\UserSearch;
 
 $this->title = 'Update Account';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => ['view', 'slug' => $model->slug]];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new UserSearch();
 $this->params['showCreateButton'] = true; 

@@ -7,9 +7,9 @@ use app\widgets\Detail;
 /* @var $this yii\web\View */
 /* @var $model app\models\Setting */
 
-$this->title = 'Setting: ' . $model->name;
+$this->title = 'Setting: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->name;
+$this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new SettingSearch();
 $this->params['showCreateButton'] = true; 
 ?>

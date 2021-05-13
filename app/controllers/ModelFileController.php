@@ -86,6 +86,7 @@ class ModelFileController extends Controller
 
         return $this->render('duplicate', [
             'model' => $model,
+            'originalModel' => $originalModel,
         ]);
     }
 

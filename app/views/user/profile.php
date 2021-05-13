@@ -7,9 +7,9 @@ use app\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
 
-$this->title = "Profile : {$user->username}";
+$this->title = 'Profile : ' . $user->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $user->username, 'url' => ['view', 'id' => $user->id]];
+$this->params['breadcrumbs'][] = ['label' => $user->mainAttribute, 'url' => ['view', 'slug' => $user->slug]];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new UserSearch();
 ?>

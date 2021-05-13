@@ -39,14 +39,14 @@ class UserController extends Controller
 
     /**
      * Displays a single User model.
-     * @param integer $id
+     * @param integer $slug
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($slug, 'slug'),
         ]);
     }
 
@@ -66,7 +66,7 @@ class UserController extends Controller
                 $this->checkModelFile($model);
                 $model->upload();
                 App::success('Successfully Created');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'slug' => $model->slug]);
             }
         }
 
@@ -75,20 +75,50 @@ class UserController extends Controller
         ]);
     }
 
+
     /**
-     * Updates an existing User model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * Duplicates an existing User model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @param integer $slug
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionDuplicate($slug)
     {
-        $model = $this->findModel($id); 
+        $originalModel = $this->findModel($slug, 'slug');
+        $model = new User();
+        $model->attributes = $originalModel->attributes;
+
+
+        if ($model->load(App::post()) && $model->validate()) {
+            $model->setPassword($model->password);
+            if ($model->save()) {
+                $this->checkModelFile($model);
+                App::success('Successfully Duplicated');
+                return $this->redirect(['view', 'slug' => $model->slug]);
+            }
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
+        ]);
+    }
+
+    /**
+     * Updates an existing User model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $slug
+     * @return mixed
+     * @throws ForbiddenHttpException if the model cannot be found
+     */
+    public function actionUpdate($slug)
+    {
+        $model = $this->findModel($slug, 'slug'); 
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'slug' => $model->slug]);
         }
 
         return $this->render('update', [
@@ -99,13 +129,13 @@ class UserController extends Controller
     /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $slug
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -286,14 +316,14 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionProfile($id)
+    public function actionProfile($slug)
     {
-        $user = $this->findModel($id); 
+        $user = $this->findModel($slug, 'slug'); 
         $model = $user->profile;
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Profile Updated');
-            return $this->redirect(['profile', 'id' => $user->id]);
+            return $this->redirect(['profile', 'slug' => $user->slug]);
         }
 
         return $this->render('profile', [
@@ -321,11 +351,11 @@ class UserController extends Controller
     }
 
 
-    public function actionDashboard($id)
+    public function actionDashboard($slug)
     {
         $model = User::find()
             ->where([
-                'id' => $id,
+                'slug' => $slug,
                 'status' => 10,
                 'is_blocked' => 0,
                 'record_status' => 1

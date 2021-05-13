@@ -7,17 +7,18 @@ use app\widgets\Detail;
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
 
-$this->title = "Role: {$model->name}";
+$this->title = 'Role: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->name;
+$this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new RoleSearch();
 $this->params['showCreateButton'] = true; 
 ?>
 
 <div>
     <?= Anchors::widget([
-    	'names' => ['update', 'delete', 'log'], 
-    	'model' => $model
+    	'names' => ['update', 'duplicate', 'delete', 'log'], 
+    	'model' => $model,
+    	'paramName' => 'slug'
     ]) ?>  
     <hr>
     <?= Detail::widget(['model' => $model]) ?>

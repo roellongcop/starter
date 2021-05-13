@@ -166,7 +166,7 @@ class Role extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->name,
-                        'link' => ['role/view', 'id' => $model->id],
+                        'link' => ['role/view', 'slug' => $model->slug],
                         'text' => true
                     ]);
                 }

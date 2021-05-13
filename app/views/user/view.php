@@ -8,9 +8,9 @@ use app\widgets\Detail;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = "User: {$model->username}";
+$this->title = 'User: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->username;
+$this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new UserSearch();
 $this->params['showCreateButton'] = true; 
 
@@ -18,17 +18,18 @@ $this->params['showCreateButton'] = true;
 
 <div>
     <?= Anchors::widget([
-    	'names' => ['update', 'delete', 'log'], 
-    	'model' => $model
+    	'names' => ['update', 'duplicate', 'delete', 'log'], 
+    	'model' => $model,
+        'paramName' => 'slug'
     ]) ?>  
     <?= Anchor::widget([
     	'title' => 'Profile', 
-    	'link' => ['profile', 'id' => $model->id],
+    	'link' => ['profile', 'slug' => $model->slug],
     	'options' => ['class' => 'btn btn-success']
     ]) ?>
     <?= Anchor::widget([
         'title' => 'User Dashboard', 
-        'link' => ['user/dashboard', 'id' => $model->id],
+        'link' => ['user/dashboard', 'slug' => $model->slug],
         'options' => [
             'class' => 'btn btn-warning',
             'data-method' => 'post',

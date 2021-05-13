@@ -39,10 +39,10 @@ class RoleController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($slug, 'slug'),
         ]);
     }
 
@@ -69,12 +69,51 @@ class RoleController extends Controller
             }
             if ($model->save()) {
                 App::success('Successfully Created');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'slug' => $model->slug]);
             }
         }
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+
+    /**
+     * Duplicates an existing Role model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws ForbiddenHttpException if the model cannot be found
+     */
+    public function actionDuplicate($slug)
+    {
+        $originalModel = $this->findModel($slug, 'slug');
+        $model = new Role();
+        $model->attributes = $originalModel->attributes;
+
+        if ($model->load(App::post()) && $model->validate()) {
+
+            $post = App::post();
+            $model->load($post);
+            if (empty($post['Role']['main_navigation'])) {
+                $model->main_navigation = NULL;
+            }
+            if (empty($post['Role']['role_access'])) {
+                $model->role_access = NULL;
+            }
+            if (empty($post['Role']['module_access'])) {
+                $model->module_access = NULL;
+            }
+            if ($model->save()) {
+                App::success('Successfully Duplicated');
+                return $this->redirect(['view', 'slug' => $model->slug]);
+            }
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
         ]);
     }
 
@@ -85,9 +124,9 @@ class RoleController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
 
         if ($model->load(App::post()) && $model->validate()) {
 
@@ -104,7 +143,7 @@ class RoleController extends Controller
             }
             if ($model->save()) {
                 App::success('Successfully Updated');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'slug' => $model->slug]);
             }
         }
 
@@ -121,9 +160,9 @@ class RoleController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug, 'slug');
 
         if($model->delete()) {
             App::success('Successfully Deleted');

@@ -519,7 +519,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->username,
-                        'link' => ['user/view', 'id' => $model->id],
+                        'link' => ['user/view', 'slug' => $model->slug],
                         'text' => true
                     ]);
                 }
@@ -532,7 +532,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->roleName,
-                        'link' => ['role/view', 'id' => $model->role_id],
+                        'link' => ['role/view', 'slug' => $model->role->slug],
                         'text' => true
                     ]);
                 }

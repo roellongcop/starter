@@ -7,9 +7,9 @@ use app\widgets\Detail;
 /* @var $this yii\web\View */
 /* @var $model app\models\Session */
 
-$this->title = 'Session: ' . $model->id;
+$this->title = 'Session: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Sessions', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->id;
+$this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new SessionSearch();
 $this->params['showCreateButton'] = true; 
 ?>
