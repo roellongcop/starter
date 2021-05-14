@@ -18,16 +18,6 @@ class ProfileForm extends \yii\base\Model
     public $user_id;
     public $first_name;
     public $last_name;
-
-    public function attributeLabels()
-    {
-        return [
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'user_id' => 'User ID',
-        ];
-    }
-
     
     /**
      * @return array the validation rules.
@@ -35,21 +25,18 @@ class ProfileForm extends \yii\base\Model
     public function rules()
     {
         return [
-            [
-                [
-                    'first_name',
-                    'last_name',
-                ], 
-                'required'
-            ],
+            [['first_name', 'last_name', ], 'required'],
+            [['user_id'], 'safe'],
+            [['first_name', 'last_name', ], 'string'],
+        ];
+    }
 
-            [
-                [
-                    'first_name',
-                    'last_name',
-                ], 
-                'string'
-            ],
+    public function attributeLabels()
+    {
+        return [
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -88,5 +75,4 @@ class ProfileForm extends \yii\base\Model
             return true;
         }
     }
- 
 }
