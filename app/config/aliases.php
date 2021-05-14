@@ -1,5 +1,4 @@
 <?php
-use Yii;
 
 $alises = [
 	'@uploads' => dirname(dirname(__DIR__)) . '/web/protected/uploads',
@@ -7,5 +6,5 @@ $alises = [
 ];
 
 foreach ($alises as $key => $value) {
-	Yii::setAlias($key, $value);
+	\Yii::setAlias($key, $value);
 }

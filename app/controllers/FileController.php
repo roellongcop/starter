@@ -442,7 +442,7 @@ class FileController extends Controller
             if ($file) {
                 $modelFile = new ModelFile();
                 $modelFile->model_name = $post['modelName'];
-                $modelFile->model_id = 0;
+                $modelFile->model_id = $post['model_id'];
                 $modelFile->file_id = $file->id;
                 if ($modelFile->save()) {
                     $result['status'] = 'success';

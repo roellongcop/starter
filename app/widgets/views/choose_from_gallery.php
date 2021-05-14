@@ -34,6 +34,7 @@ $this->registerJs(<<< SCRIPT
         $.ajax({
             url: '{$chooseImageUrl}',
             data: {
+                model_id: {$modelID},
                 file_id: selectedFile,
                 modelName: '{$modelName}',
             },
@@ -137,7 +138,9 @@ CSS)
         <?= $buttonTitle ?>
     </button>
 
-    <input name="_model_file_id" type="hidden">
+    <?php if ($model->isNewRecord): ?>
+        <input name="_model_file_id" type="hidden">
+    <?php endif ?>
         
 
     <!-- Modal-->

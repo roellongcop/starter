@@ -54,6 +54,7 @@ class ChooseFromGallery extends \yii\base\Widget
             'fileInput' => $this->fileInput,
             'dropzoneSuccess' => $this->dropzoneSuccess,
             'myImageFilesUrl' => Url::to($this->myImageFilesUrl),
+            'modelID' => $this->model->isNewRecord ? 0: $this->model->id,
         ]);
     }
 }

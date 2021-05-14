@@ -4,6 +4,8 @@ use app\helpers\App;
 use app\widgets\Dropzone;
 use app\helpers\Html;
 use app\helpers\Url;
+
+
 $this->registerJs(<<< SCRIPT
     var enableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', false);
@@ -34,6 +36,7 @@ $this->registerJs(<<< SCRIPT
         $.ajax({
             url: '{$chooseImageUrl}',
             data: {
+                model_id: {$modelID},
                 file_id: selectedFile,
                 modelName: '{$modelName}',
             },
@@ -50,36 +53,7 @@ $this->registerJs(<<< SCRIPT
         })
     });
 
-    $('#upload-tab-{$id} input[type="file"]').on('change', function() {
-        var input = this;
-
-        var fileInput = input.files[0]; 
-
-        let formData = new FormData();
-        formData.append('UploadForm[fileInput]', fileInput);
-        formData.append('modelName', '{$modelName}');
-        // formData.append('fileToken', Date.now());
-
-        $.ajax( {
-            url: '{$uploadUrl}',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            cache: false,
-            processData: false,
-            contentType: false,
-            success: function(s) {
-                {$ajaxSuccess}
-                if(s.status == 'success') {
-                    $('#choose-from-gallery-{$id}').modal('hide')
-                    $('#choose-from-gallery-container-{$id} input[name="_model_file_id"]').val(s.model_file_id);
-
-                }
-
-            },
-            error: {$ajaxError},
-        });
-    })
+    
 
     var getMyFiles = function(url) {
         $('#my_files-{$id} .modal-my-photos').html('');
@@ -145,7 +119,9 @@ CSS)
         <?= $buttonTitle ?>
     </button>
 
-    <input name="_model_file_id" type="hidden">
+    <?php if ($model->isNewRecord): ?>
+        <input name="_model_file_id" type="hidden">
+    <?php endif ?>
         
 
     <!-- Modal-->
