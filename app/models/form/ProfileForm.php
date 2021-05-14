@@ -4,8 +4,8 @@ namespace app\models\form;
 
 use Yii;
 use app\helpers\App;
+use app\models\User;
 use app\models\UserMeta;
-use yii\base\Model;
 
 /**
  * LoginForm is the model behind the login form.
@@ -13,8 +13,9 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
-class ProfileForm extends \app\models\User
+class ProfileForm extends \yii\base\Model
 {
+    public $user_id;
     public $first_name;
     public $last_name;
 
@@ -23,6 +24,7 @@ class ProfileForm extends \app\models\User
         return [
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -55,35 +57,33 @@ class ProfileForm extends \app\models\User
     {
         parent::init();
 
-        $user_metas = UserMeta::find()
-            ->where([
-                'user_id' => $this->id,
-                'meta_key' => array_keys(self::attributeLabels())
-            ])
-            ->all();
-        foreach ($user_metas as $user_meta) {
-            if ($this->hasProperty($user_meta->meta_key)) {
-                $this->{$user_meta->meta_key} = $user_meta->meta_value; 
+        $profile = $this->user->meta('profile');
+
+        if ($profile) {
+            $profileAttributes = json_decode($profile, true);
+
+            foreach ($profileAttributes as $key => $value) {
+                if ($this->hasProperty($key)) {
+                    $this->{$key} = $value; 
+                }
             }
         }
     }
 
+    public function getUser()
+    {
+        return User::findOne($this->user_id);
+    }
+
     public function save($runValidation = true, $attributeNames = NULL)
     {
+        $user = $this->user;
+        
         if ($this->validate()) {
-            foreach ($this->getAttributes(array_keys(self::attributeLabels())) as $attribute => $value) {
-                $user_meta = UserMeta::findOne([
-                    'user_id' => $this->id,
-                    'meta_key' => $attribute
-                ]);
-                $user_meta = $user_meta ?: new UserMeta();
-                $user_meta->user_id = $this->id;
-                $user_meta->meta_key = $attribute;
-                $user_meta->meta_value = $value;
-                if (! $user_meta->save()) {
-                    App::danger($user_meta->errors);
-                }
-            }
+            $profile = $user->meta('profile');
+           
+            $profile = $profile ?: new UserMeta();
+            $user->saveMeta(['profile' => $this->attributes]);
 
             return true;
         }

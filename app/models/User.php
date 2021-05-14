@@ -646,7 +646,53 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getProfile()
     {
-        return new ProfileForm($this);
+        return new ProfileForm(['user_id' => $this->id]);
     }
- 
+    
+    public function metas($meta_key='')
+    {
+        $meta_key = is_array($meta_key)? $meta_key: [$meta_key];
+
+        $meta = UserMeta::dropdown('meta_key', 'meta_value', [
+            'user_id' => $this->id,
+            'meta_key' => $meta_key
+        ]);
+
+        return $meta;
+    }
+
+    public function meta($meta_key='')
+    {
+        $meta = $this->metas($meta_key);
+
+        return $meta[$meta_key] ?? '';
+    }
+
+    public function saveMeta($data)
+    {
+        $success = [];
+        $failed = [];
+
+        foreach ($data as $meta_key => $meta_value) {
+            $condition = [
+                'user_id' => $this->id,
+                'meta_key' => $meta_key,
+            ];
+            $meta = UserMeta::findOne($condition);
+
+            $meta = $meta ?: new UserMeta($condition);
+            $meta->meta_value = is_array($meta_value)? json_encode($meta_value): $meta_value;
+            if ($meta->save()) {
+                $success[] = $meta->attributes;
+            }
+            else {
+                $failed[] = $meta->errors;
+            }
+        }
+
+        return [
+            'success' => $success,
+            'failed' => $failed,
+        ];
+    }
 }
