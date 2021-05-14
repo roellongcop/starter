@@ -107,6 +107,9 @@ $this->registerCSS(<<<CSS
     #change-photo-container-{$id} .d-flex {
         display: grid !important;
     }
+    #my_files-{$id} img:hover {
+        border: 2px solid #1bc5bd;
+    }
 CSS);
 ?>
 

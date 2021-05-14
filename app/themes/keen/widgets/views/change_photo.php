@@ -96,6 +96,9 @@ $this->registerCSS(<<<CSS
         display: grid !important;
         width: fit-content !important;
     }
+    #my_files-{$id} img:hover {
+        border: 2px solid #1bc5bd;
+    }
 CSS);
 ?>
 
