@@ -178,7 +178,7 @@ CSS);
             										<td id="<?= $id ?>-token"> None </td>
             									</tr>
             									<tr>
-            										<th>Created_At</th>
+            										<th width="30%">Created At</th>
             										<td id="<?= $id ?>-created_at"> None </td>
             									</tr>
             								</tbody>

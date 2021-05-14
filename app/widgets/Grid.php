@@ -123,7 +123,7 @@ class Grid extends \yii\base\Widget
                 'activate' => function($url, $model) use ($controller) {
                     if (App::modelCan($model, 'activate')) {
                         return Anchor::widget([
-                            'title' => $this->render('icon/delete'). $this->actionName('Activate'),
+                            'title' => $this->render('icon/check'). $this->actionName('Activate'),
                             'link' => ['theme/activate', $this->paramName => $model->{$this->paramName}],
                             'options' => [
                                 'class' => 'navi-link delete',
