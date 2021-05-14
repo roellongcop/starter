@@ -2,9 +2,11 @@
 
 use app\helpers\App;
 use app\helpers\Html;
+use app\helpers\Url;
 ?>
 <?= Html::img(['file/display', 'token' => $model->token, 'w' => 150,], [
     'class' => "img-thumbnail pointer",
+    'data-src' => Url::to(['file/display', 'token' => $model->token]),
     'data-id' => $model->id,
     'data-name' => $model->name,
     'data-extension' => $model->extension,
