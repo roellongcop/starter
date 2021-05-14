@@ -24,7 +24,6 @@ $this->registerJs(<<< SCRIPT
         $('#choose-from-gallery-{$id} #{$id}-height').text(image.data('height') + 'px');
         $('#choose-from-gallery-{$id} #{$id}-location').text(image.data('location'));
         $('#choose-from-gallery-{$id} #{$id}-token').text(image.data('token'));
-        $('#choose-from-gallery-{$id} #{$id}-created_by').text(image.data('created_by'));
         $('#choose-from-gallery-{$id} #{$id}-created_at').text(image.data('created_at'));
 
         $('#my_files-{$id} img').css('border', '');
@@ -195,10 +194,6 @@ CSS)
                                                 <tr>
                                                     <th>Token</th>
                                                     <td id="<?= $id ?>-token"> None </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Created By</th>
-                                                    <td id="<?= $id ?>-created_by"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th width="30%">Created At</th>
