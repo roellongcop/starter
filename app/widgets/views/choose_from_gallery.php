@@ -166,7 +166,7 @@ CSS)
                         <div class="tab-content">
                             <div id="my_files-<?= $id ?>" class="tab-pane fade in active">
                                 <div class="row">
-                                    <div class="col-md-7 col-sm-6">
+                                    <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
                                         <div class="modal-my-photos"> 
                                         </div>
                                     </div>

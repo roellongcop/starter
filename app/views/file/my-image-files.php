@@ -12,7 +12,7 @@ use yii\widgets\ListView;
             <div class='col-md-1' style='border-right: 1px dashed #ccc;'>
                 {pager}
             </div>
-            <div class='col-md-10' style='border-right: 1px dashed #ccc;'>
+            <div class='col-md-10'>
                 <div class='row'>
                     {items}
                 </div>
