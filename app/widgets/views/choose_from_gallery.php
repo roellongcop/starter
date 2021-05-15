@@ -101,6 +101,7 @@ $this->registerJs(<<< SCRIPT
 
 
     $('#choose-from-gallery-btn-{$id}').on('click', function() {
+        let keywords = $('#my_files-{$id} input.search-photo').val()
         getMyFiles('{$myImageFilesUrl}');
     })
 
@@ -111,6 +112,15 @@ $this->registerJs(<<< SCRIPT
         getMyFiles(href)
         return false;    
     });
+
+
+    var search{$id} = function(input) {
+        if(event.key === 'Enter') {
+                   
+            event.preventDefault();
+            getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
+        }
+    }
 SCRIPT, \yii\web\View::POS_END);
 
 $this->registerCSS(<<<CSS
@@ -170,6 +180,7 @@ CSS)
                             <div id="my_files-<?= $id ?>" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
+                                        <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
                                         <div class="modal-my-photos"> 
                                         </div>
                                     </div>

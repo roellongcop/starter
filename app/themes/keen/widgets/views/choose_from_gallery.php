@@ -29,7 +29,8 @@ $this->registerJs(<<< SCRIPT
         $('#my_files-{$id} img').css('border', '');
         image.css('border', '2px solid #1bc5bd');
         enableButton();
-    })
+    }); 
+    
 
     $('#choose-photo-confirm-{$id}').on('click', function() {
         $.ajax({
@@ -79,7 +80,8 @@ $this->registerJs(<<< SCRIPT
     }
 
     $('#choose-from-gallery-btn-{$id}').on('click', function() {
-        getMyFiles('{$myImageFilesUrl}');
+        let keywords = $('#my_files-{$id} input.search-photo').val()
+        getMyFiles('{$myImageFilesUrl}?keywords=' + keywords);
     })
 
 
@@ -90,6 +92,15 @@ $this->registerJs(<<< SCRIPT
         getMyFiles(href)
         return false;    
     });
+
+
+    var search{$id} = function(input) {
+        if(event.key === 'Enter') {
+                   
+            event.preventDefault();
+            getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
+        }
+    }
 
 
 SCRIPT, \yii\web\View::POS_END);
@@ -160,6 +171,7 @@ CSS)
                             <div class="tab-pane fade show active" id="my_files-<?= $id ?>" role="tabpanel" aria-labelledby="my_files-<?= $id ?>">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
+                                        <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
                                         <div class="modal-my-photos">
                                         </div>
                                     </div>
