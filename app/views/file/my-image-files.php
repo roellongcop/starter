@@ -12,7 +12,7 @@ use yii\widgets\ListView;
             <div class='col-md-1' style='border-right: 1px dashed #ccc;'>
                 {pager}
             </div>
-            <div class='col-md-10'>
+            <div class='col-md-11'>
                 <div class='row'>
                     {items}
                 </div>
@@ -22,8 +22,9 @@ use yii\widgets\ListView;
     ",
     'itemView' => '_my-image-files',
     'options' => ['class' => 'row'],
-    'beforeItem' => function ($model, $key, $index, $widget) {
-        return '<div class="col-md-3">';
+    'beforeItem' => function ($model, $key, $index, $widget) use ($dataProvider) {
+        $col = $dataProvider->totalCount < 3 ? '6': '3';
+        return "<div class='col-md-{$col}'>";
     },
     'afterItem' => function ($model, $key, $index, $widget) {
         return '</div>';
