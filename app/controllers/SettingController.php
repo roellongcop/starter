@@ -269,16 +269,9 @@ class SettingController extends Controller
             return $this->redirect(['general', 'tab' => $tab]);
         }
 
-        $menus = [
-            'general' => ['label' => 'General', 'icon' => '<i class="fas fa-cog"></i>'],
-            'email' => ['label' => 'Email', 'icon' => '<i class="far fa-envelope"></i>'],
-            'image' => ['label' => 'Image', 'icon' => '<i class="far fa-file-image"></i>'],
-        ];
-
         return $this->render('general', [
             'model' => $model,
             'tab' => $tab,
-            'menus' => $menus,
         ]);
     }
 

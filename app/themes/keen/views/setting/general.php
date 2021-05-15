@@ -12,6 +12,12 @@ $this->title = 'General Settings';
 // $this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Set Up';
 $this->params['searchModel'] = new DashboardSearch();
+
+$menus = [
+    'general' => ['label' => 'General', 'icon' => '<i class="fas fa-cog"></i>'],
+    'email' => ['label' => 'Email', 'icon' => '<i class="far fa-envelope"></i>'],
+    'image' => ['label' => 'Image', 'icon' => '<i class="far fa-file-image"></i>'],
+];
 ?>
 
 <div>
@@ -41,7 +47,6 @@ $this->params['searchModel'] = new DashboardSearch();
 				            </span>
 				        </a>
 				    </li>
-
 				<?php endforeach ?>
 			</ul>
 		</div>

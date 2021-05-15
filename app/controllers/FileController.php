@@ -176,8 +176,21 @@ class FileController extends Controller
                 if (isset($post['fileToken'])) {
                     $file = $this->findModel($post['fileToken'], 'token');
                     if ($file && $file->canDelete) {
-                        $file->delete();
-                        return 'success';
+                        if ($file->delete()) {
+                            return $this->asJson([
+                                'status' => 'success',
+                                'post' => $post['fileToken'],
+                                'message' => 'File Deleted'
+                            ]);
+                        }
+                        else {
+                            return $this->asJson([
+                                'status' => 'failed',
+                                'post' => $post['fileToken'],
+                                'errors' => $model->errors
+                            ]);
+                        }
+                        
                     }
                 }
             }
@@ -480,10 +493,16 @@ class FileController extends Controller
         $dataProvider = $searchModel->search(['FileSearch' => App::queryParams()]);
         $dataProvider->query->groupBy(['name', 'size', 'extension']);
 
-
-        return $this->renderAjax('my-image-files', [
+        $data = [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+        ];
+
+        if (App::isAjax()) {
+            return $this->renderAjax('my-image-files-ajax', $data);
+        }
+
+
+        return $this->render('my-image-files', $data); 
     }
 }

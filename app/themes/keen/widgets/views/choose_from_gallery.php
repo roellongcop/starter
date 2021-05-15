@@ -119,7 +119,7 @@ $this->registerCSS(<<<CSS
     #my_files-{$id} img:hover {
         border: 2px solid #1bc5bd;
     }
-CSS)
+CSS);
 ?>
 
 <div id="choose-from-gallery-container-<?= $id ?>">

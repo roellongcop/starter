@@ -5,7 +5,7 @@ use app\models\search\RoleSearch;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\RecordStatusInput;
-use app\widgets\ChangePhoto;
+use app\widgets\ChooseFromGallery;
 use app\widgets\ImagePreview;
 use app\widgets\KeenActiveForm;
 
@@ -63,45 +63,40 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 ]) ?>
             </div>
             <br>
-            <?php if ($model->isNewRecord): ?>
-                <?= $form->field($model, 'imageInput')->fileInput() ?>
-                <div class="alert alert-info">
-                    <ul>
-                        <li>Minimum Width: <?= $imageRules->minWidth ?></li>
-                        <li>Maximum Width: <?= $imageRules->maxWidth ?></li>
-                        <li>Minimum Height: <?= $imageRules->minHeight ?></li>
-                        <li>Maximum Height: <?= $imageRules->maxHeight ?></li>
-                    </ul>
-                </div>
-            <?php else: ?>
-                <?= ChangePhoto::widget([
-                    'model' => $model,
-                    'ajaxSuccess' => "function(s) {
-                        if(s.status == 'success') {
-                            KTApp.block('#sipc', {
-                                overlayColor: '#000000',
-                                state: 'primary',
-                                message: 'Processing...'
-                            });
+            <?= ChooseFromGallery::widget([
+                'model' => $model,
+                'ajaxSuccess' => "
+                    if(s.status == 'success') {
+                        KTApp.block('#sipc', {
+                            overlayColor: '#000000',
+                            state: 'primary',
+                            message: 'Processing...'
+                        });
 
-                            setTimeout(function() {
-                                KTApp.unblock('#sipc');
-                            }, 1000);
-                            var link = s.src + '&w=200';
+                        setTimeout(function() {
+                            KTApp.unblock('#sipc');
+                        }, 1000);
+                        $('#sipc img').attr('src', s.src + '&w=200');
+                        $('#profile-image-desktop').attr('src', s.src + '&w=200');
+                        $('#profile-image-dropdown').attr('src', s.src + '&w=200');
+                    }
+                ",
+                'dropzoneSuccess' => "
+                    KTApp.block('#sipc', {
+                        overlayColor: '#000000',
+                        state: 'primary',
+                        message: 'Processing...'
+                    });
 
-                            $('#user-imageinput-preview').attr('src', link)
-                            $('#kt_quick_user_toggle>img').attr('src', link)
-                            $('#profile-image-dropdown').css('background-image', 'url('+link+')')
-                        }
-                    }",
-                    'dropzoneComplete' => "
-                        var link = file.dataURL;
-                        $('#user-imageinput-preview').attr('src', file.dataURL)
-                        $('#kt_quick_user_toggle>img').attr('src', file.dataURL)
-                        $('#profile-image-dropdown').css('background-image', 'url('+link+')')
-                    "
-                ]) ?>
-            <?php endif ?>
+                    setTimeout(function() {
+                        KTApp.unblock('#sipc');
+                    }, 1000);
+                    $('#sipc img').attr('src', file.dataURL);
+                    $('#profile-image-desktop').attr('src', file.dataURL);
+                    $('#profile-image-dropdown').attr('src', file.dataURL);
+                    
+                "
+            ]) ?> 
         </div>
     </div>
     <div class="form-group"><hr>
