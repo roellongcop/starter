@@ -13,35 +13,8 @@ $this->params['searchModel'] = new FileSearch();
 $this->params['showCreateButton'] = true; 
 
 
-$totalCount = $dataProvider->totalCount;
 $myImageFilesUrl = Url::to(['file/my-image-files']);
 $deleteFileUrl = Url::to(['file/delete']);
-
-if ($totalCount > 12) {
-    $layout = "
-        <div class='col-md-12'>
-            <p>{summary}</p>
-        </div>
-        <div class='col-md-2 text-center' style='border-right: 1px dashed #ccc;'>
-            {pager}
-        </div>
-        <div class='col-md-10'>
-            <div class='row'>
-                {items}
-            </div>
-        </div>
-    ";
-}
-else {
-    $layout = "
-        <div class='col-md-12'>
-            <p>{summary}</p>
-        </div>
-        <div class='row'>
-            {items}
-        </div>
-    ";
-}
 
 $this->registerJs(<<< SCRIPT
     var selectedFile = 0;
@@ -160,20 +133,9 @@ CSS);
     <div class="col-md-7">
         <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="searchMyImage(this)">
         <div class="my-photos">
-            <?= ListView::widget([
+            <?= $this->render('my-image-files-ajax', [
                 'dataProvider' => $dataProvider,
-                'layout' => $layout,
-                'itemView' => '_my-image-files',
-                'options' => ['class' => 'row'],
-                'beforeItem' => function ($model, $key, $index, $widget) use ($totalCount) {
-                    $col = ($totalCount < 3)? (12 / $totalCount): '3';
-                    return "<div class='col-md-3'>";
-                },
-                'afterItem' => function ($model, $key, $index, $widget) {
-                    return '</div>';
-                },
-                'pager' => ['class' => 'app\widgets\LinkPager']
-            ]); ?>
+            ]) ?>
         </div>
     </div>
     <div class="col-md-5">

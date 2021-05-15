@@ -38,7 +38,8 @@ else {
     'itemView' => '_my-image-files',
     'options' => ['class' => 'row'],
     'beforeItem' => function ($model, $key, $index, $widget) use ($dataProvider) {
-        $col = (count($dataProvider->models) < 3)? (12 / count($dataProvider->models)): '3';
+        $totalCount = count($dataProvider->models);
+        $col = ($totalCount < 3)? (12 / $totalCount): 3;
 
         return "<div class='col-md-{$col}'>";
     },
