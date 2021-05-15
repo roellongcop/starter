@@ -159,7 +159,7 @@ CSS);
 
 <div class="row" id="my-image-files">
     <div class="col-md-7">
-        <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="searchMyImage(this)">
+        <input type="text" class="form-control search-photo" placeholder="Search File" onkeydown="searchMyImage(this)">
         <div class="my-photos">
             <?= ListView::widget([
                 'dataProvider' => $dataProvider,

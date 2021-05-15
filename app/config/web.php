@@ -75,6 +75,7 @@ $config = [
                     'pluralize' => false
                 ],
 
+                'my-files' => 'file/my-files',
                 'my-setting' => 'setting/my-setting',
                 'my-role' => 'role/my-role',
                 'my-account' => 'user/my-account',

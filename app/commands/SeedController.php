@@ -66,6 +66,7 @@ class SeedController extends Controller
 
         $controllerActions['general-setting'] = ['link' => '/setting/general'];
         $controllerActions['my-setting'] = ['link' => '/my-setting'];
+        $controllerActions['my-files'] = ['link' => '/my-files'];
 
         foreach ($controllerActions as $controller => $actions) {
             $data["{$count}-new"] = [
