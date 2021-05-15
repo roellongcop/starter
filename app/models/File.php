@@ -119,54 +119,61 @@ class File extends ActiveRecord
     {
         return new FileQuery(get_called_class());
     }
-    
 
-    public function getPreviewIcon($w=60)
+    public function getDocumentPreviewPath()
     {
-        $path = App::publishedUrl() . '/media/svg/files/';
         switch ($this->extension) {
             case 'css':
-                $path .= 'css.svg';
+                $path = 'css.svg';
                 break;
             case 'zip':
             case 'sql':
-                $path .= 'zip.svg';
+                $path = 'zip.svg';
                 break;
 
             case 'csv':
-                $path .= 'csv.svg';
+                $path = 'csv.svg';
                 break;
 
             case 'docx':
             case 'doc':
             case 'txt':
-                $path .= 'doc.svg';
+                $path = 'doc.svg';
                 break;
 
             case 'html':
-                $path .= 'html.svg';
+                $path = 'html.svg';
                 break;
 
             case 'javacript':
-                $path .= 'javacript.svg';
+                $path = 'javacript.svg';
                 break;
 
             case 'mp4':
-                $path .= 'mp4.svg';
+                $path = 'mp4.svg';
                 break;
 
             case 'pdf':
-                $path .= 'pdf.svg';
+                $path = 'pdf.svg';
                 break;
 
             case 'xml':
-                $path .= 'xml.svg';
+                $path = 'xml.svg';
                 break;
             
             default:
                 $path = $this->imagePath;
                 break;
         }
+
+        return $path;
+    }
+    
+
+    public function getPreviewIcon($w=60)
+    {
+        $path = App::publishedUrl() . '/media/svg/files/';
+        $path .= $this->documentPreviewPath;
 
 
         if ($this->isImage) {

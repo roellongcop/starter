@@ -505,4 +505,27 @@ class FileController extends Controller
 
         return $this->render('my-image-files', $data); 
     }
+
+    public function actionMyFiles()
+    {
+        $searchModel = new FileSearch([
+            'created_by' => App::identity('id')
+        ]);
+
+        $searchModel->pagination = 12;
+        $dataProvider = $searchModel->search(['FileSearch' => App::queryParams()]);
+        $dataProvider->query->groupBy(['name', 'size', 'extension']);
+
+        $data = [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ];
+
+        if (App::isAjax()) {
+            return $this->renderAjax('my-files-ajax', $data);
+        }
+
+
+        return $this->render('my-files', $data); 
+    }
 }
