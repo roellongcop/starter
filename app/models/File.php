@@ -127,8 +127,10 @@ class File extends ActiveRecord
                 $path = 'css.svg';
                 break;
             case 'zip':
-            case 'sql':
                 $path = 'zip.svg';
+                break;
+            case 'sql':
+                $path = 'sql.png';
                 break;
 
             case 'csv':
