@@ -481,7 +481,7 @@ class FileController extends Controller
         $dataProvider->query->groupBy(['name', 'size', 'extension']);
 
 
-        return $this->renderPartial('my-image-files', [
+        return $this->renderAjax('my-image-files', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

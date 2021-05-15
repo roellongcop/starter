@@ -63,43 +63,22 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'model' => $model,
                 'attribute' => 'imageInput',
                 'src' => ($model->imagePath)? $model->imagePath . '&w=200': '',
-            ]) ?>
-            <div class="row">
-
-                <?php if ($model->isNewRecord): ?>
-                    <div class="col-md-6">
-                        <?= ChooseFromGallery::widget([
-                            'fileInput' => $form->field($model, 'imageInput')->fileInput(),
-                            'model' => $model,
-                            'ajaxSuccess' => "
-                                $('#user-imageinput-preview').attr('src', s.src + '&w=200')
-                            "
-                        ]) ?> 
-                        <div class="alert alert-info">
-                            <ul>
-                                <li>Minimum Width: <?= $imageRules->minWidth ?></li>
-                                <li>Maximum Width: <?= $imageRules->maxWidth ?></li>
-                                <li>Minimum Height: <?= $imageRules->minHeight ?></li>
-                                <li>Maximum Height: <?= $imageRules->maxHeight ?></li>
-                            </ul>
-                        </div>
-                    </div>
-                <?php else: ?>
-                    <div class="col-md-6">
-                        <?= ChangePhoto::widget([
-                            'fileInput' => $form->field($model, 'imageInput')->fileInput(),
-                            'model' => $model,
-                            'ajaxSuccess' => "function(s) {
-                                if(s.status == 'success') {
-                                    $('.modal').modal('hide')
-                                    $('#user-imageinput-preview').attr('src', s.src + '&w=200')
-                                }
-                            }"
-                        ]) ?> 
-                    </div>
-                <?php endif ?>
+            ]) ?> 
+            <?= ChooseFromGallery::widget([
+                'fileInput' => $form->field($model, 'imageInput')->fileInput()->label('Upload Photo'),
+                'model' => $model,
+                'ajaxSuccess' => "
+                    $('#user-imageinput-preview').attr('src', s.src + '&w=200')
+                "
+            ]) ?> 
+            <div class="alert alert-info">
+                <ul>
+                    <li>Minimum Width: <?= $imageRules->minWidth ?></li>
+                    <li>Maximum Width: <?= $imageRules->maxWidth ?></li>
+                    <li>Minimum Height: <?= $imageRules->minHeight ?></li>
+                    <li>Maximum Height: <?= $imageRules->maxHeight ?></li>
+                </ul>
             </div>
-            
  
         </div>
     </div>

@@ -189,11 +189,12 @@ class File extends ActiveRecord
             ->all();
     }
 
-    public function getImagePath()
+    public function getImagePath($params = [])
     {
         if($this->token) {
             return Url::to(['file/display', 'token' => $this->token], true);
         }
+        
         return App::setting('image_holder');
     }
 
@@ -309,25 +310,61 @@ class File extends ActiveRecord
 
     public function getImageRatio($w, $quality=100, $extension='png')
     {
-        $imagineObj = new Imagine();
-        $image = $imagineObj->open($this->rootPath);
-        $image->resize($image->getSize()->widen($w));
-        return $image->show($extension, ['quality' => $quality]); 
+        if (file_exists($this->rootPath)) {
+            $imagineObj = new Imagine();
+            $image = $imagineObj->open($this->rootPath);
+            $image->resize($image->getSize()->widen($w));
+
+            // $path = "{$this->pathNoExt}-w{$w}-h0-q{$quality}.{$extension}";
+            // if (! file_exists($path)) {
+            //     $image->save($path, ['quality' => $quality]);
+            // }
+
+            return $image->show($extension, ['quality' => $quality]); 
+        }
     }
 
     public function getImageCrop($w, $h, $quality=100, $extension='png')
     {
-        $image = Image::crop($this->rootPath, $w, $h); 
-        return $image->show($extension, ['quality' => $quality]); 
+        if (file_exists($this->rootPath)) {
+            $image = Image::crop($this->rootPath, $w, $h); 
+
+            // $path = "{$this->pathNoExt}-w{$w}-h{$h}-q{$quality}.{$extension}";
+            // if (! file_exists($path)) {
+            //     $image->save($path, ['quality' => $quality]);
+            // }
+
+            return $image->show($extension, ['quality' => $quality]); 
+        }
     }
 
     public function getImage($w, $h, $quality=100, $extension='png')
     {
-        $image = Image::getImagine() 
-            ->open($this->rootPath) 
-            ->resize(new Box($w, $h));
+        if (file_exists($this->rootPath)) {
+            $image = Image::getImagine() 
+                ->open($this->rootPath) 
+                ->resize(new Box($w, $h));
 
-        return $image->show($extension, ['quality' => $quality]);
+
+            // $path = "{$this->pathNoExt}-w{$w}-h{$h}-q{$quality}.{$extension}";
+            // if (! file_exists($path)) {
+            //     $image->save($path, ['quality' => $quality]);
+            // }
+
+            return $image->show($extension, ['quality' => $quality]);
+        }
+    }
+
+    public function getPathNoExt($path='')
+    {
+        $path = $path ?: $this->rootPath;
+
+        $explodedPath = explode('.', $path);
+        array_pop($explodedPath);
+        $path = implode('', $explodedPath);
+
+
+        return $path;
     }
     public function getIsSql()
     {

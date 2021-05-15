@@ -195,10 +195,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-    public function getImagePath()
+    public function getImagePath($params=[])
     {
         if(($file = $this->imageFile) != null) {
-            return Url::to(['file/display', 'token' => $file->token], true);
+            $path = array_merge(['file/display', 'token' => $file->token], $params);
+            return Url::to($path, true);
         }
         return App::setting('image_holder');
     }
