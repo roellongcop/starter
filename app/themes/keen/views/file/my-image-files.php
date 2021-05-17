@@ -52,14 +52,22 @@ $this->registerJs(<<< SCRIPT
 
     var getMyFiles = function(url) {
         $('#my-image-files .my-photos').html('');
+        KTApp.block('#my-image-files .my-photos', {
+            overlayColor: '#000000',
+            message: 'Loading Images...',
+            state: 'primary' // a bootstrap color
+        });
+
         let conf = {
             url: url,
             method: 'get',
             cache: false,
             success: function(s) {
                 $('#my-image-files .my-photos').html(s);
+                KTApp.unblock('#my-image-files .my-photos');
             },
             error: function(e) {
+                KTApp.unblock('#my-image-files .my-photos');
             }
         }   
 
@@ -67,6 +75,22 @@ $this->registerJs(<<< SCRIPT
     }
 
   
+
+    $(document).on("pjax:beforeSend",function(){
+        KTApp.block('#my-image-files .my-photos', {
+            overlayColor: '#000000',
+            message: 'Loading Images...',
+            state: 'primary' // a bootstrap color
+        });
+    });
+    
+    // $(document).on('click', '#my-image-files .my-photos a.btn', function() {
+    //     let href = $(this).attr('href')
+
+    //     getMyFiles(href)
+    //     return false;    
+    // });
+
 
     var searchMyImage = function(input) {
         if(event.key === 'Enter') {

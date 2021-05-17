@@ -499,7 +499,7 @@ class FileController extends Controller
         ];
 
         if (App::isAjax()) {
-            return $this->renderAjax('my-image-files-ajax', $data);
+            return $this->renderPartial('my-image-files-ajax', $data);
         }
 
 
@@ -522,7 +522,7 @@ class FileController extends Controller
         ];
 
         if (App::isAjax()) {
-            return $this->renderAjax('my-files-ajax', $data);
+            return $this->renderPartial('my-files-ajax', $data);
         }
 
 

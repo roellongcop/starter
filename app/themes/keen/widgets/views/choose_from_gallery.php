@@ -1,9 +1,10 @@
 <?php
 
 use app\helpers\App;
-use app\widgets\Dropzone;
 use app\helpers\Html;
 use app\helpers\Url;
+use app\widgets\Dropzone;
+use yii\widgets\Pjax;
 
 
 $this->registerJs(<<< SCRIPT
@@ -53,7 +54,6 @@ $this->registerJs(<<< SCRIPT
         })
     });
 
-    
 
     var getMyFiles = function(url) {
         $('#my_files-{$id} .modal-my-photos').html('');
@@ -86,13 +86,20 @@ $this->registerJs(<<< SCRIPT
 
 
 
-    $(document).on('click', '#my_files-{$id} .modal-my-photos a.btn', function() {
-        let href = $(this).attr('href')
+    // $(document).on('click', '#my_files-{$id} .modal-my-photos a.btn', function() {
+    //     let href = $(this).attr('href')
 
-        getMyFiles(href)
-        return false;    
+    //     getMyFiles(href)
+    //     return false;    
+    // });
+    
+    $(document).on("pjax:beforeSend",function(){
+        KTApp.block('#my_files-{$id} .modal-my-photos', {
+            overlayColor: '#000000',
+            message: 'Loading Images...',
+            state: 'primary' // a bootstrap color
+        });
     });
-
 
     var search{$id} = function(input) {
         if(event.key === 'Enter') {
@@ -172,8 +179,8 @@ CSS);
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
                                         <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
-                                        <div class="modal-my-photos">
-                                        </div>
+                                        <?php Pjax::begin(['options' => ['class' => 'modal-my-photos']]); ?>
+                                        <?php Pjax::end(); ?>
                                     </div>
                                     <div class="col-md-5 col-sm-6 image-properties-panel">
                                         <p class="lead text-warning">Image Properties</p>

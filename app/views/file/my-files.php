@@ -3,6 +3,7 @@
 use app\helpers\Url;
 use app\models\search\FileSearch;
 use yii\widgets\ListView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\File */
@@ -27,22 +28,22 @@ $this->registerJs(<<< SCRIPT
         $('#remove-file-btn').prop('disabled', true);
     } 
 
-    $(document).on('click', '#my-image-files img', function() {
+    $(document).on('click', '#my-files img', function() {
         var image = $(this);
 
         selectedFile = image.data('id');
         selectedToken = image.data('token');
 
-        $('#my-image-files #td-name').text(image.data('name'));
-        $('#my-image-files #td-extension').text(image.data('extension'));
-        $('#my-image-files #td-size').text(image.data('size'));
-        $('#my-image-files #td-width').text(image.data('width') + 'px');
-        $('#my-image-files #td-height').text(image.data('height') + 'px');
-        $('#my-image-files #td-location').text(image.data('location'));
-        $('#my-image-files #td-token').text(image.data('token'));
-        $('#my-image-files #td-created_at').text(image.data('created_at'));
+        $('#my-files #td-name').text(image.data('name'));
+        $('#my-files #td-extension').text(image.data('extension'));
+        $('#my-files #td-size').text(image.data('size'));
+        $('#my-files #td-width').text(image.data('width') + 'px');
+        $('#my-files #td-height').text(image.data('height') + 'px');
+        $('#my-files #td-location').text(image.data('location'));
+        $('#my-files #td-token').text(image.data('token'));
+        $('#my-files #td-created_at').text(image.data('created_at'));
 
-        $('#my-image-files img').css('border', '');
+        $('#my-files img').css('border', '');
         image.css('border', '2px solid #1bc5bd');
         enableButton();
     }); 
@@ -50,39 +51,21 @@ $this->registerJs(<<< SCRIPT
  
 
     var getMyFiles = function(url) {
-        $('#my-image-files .my-photos').html('');
-        KTApp.block('#my-image-files .my-photos', {
-            overlayColor: '#000000',
-            message: 'Loading Images...',
-            state: 'primary' // a bootstrap color
-        });
+        $('#my-files .my-photos').html('');
 
         let conf = {
             url: url,
             method: 'get',
             cache: false,
             success: function(s) {
-                $('#my-image-files .my-photos').html(s);
-                KTApp.unblock('#my-image-files .my-photos');
+                $('#my-files .my-photos').html(s);
             },
             error: function(e) {
-                KTApp.unblock('#my-image-files .my-photos');
             }
         }   
 
         $.ajax(conf);
     }
-
-  
-
-
-    $(document).on('click', '#my-image-files .my-photos a.btn', function() {
-        let href = $(this).attr('href')
-
-        getMyFiles(href)
-        return false;    
-    });
-
 
     var searchMyImage = function(input) {
         if(event.key === 'Enter') {
@@ -118,26 +101,26 @@ $this->registerJs(<<< SCRIPT
 SCRIPT, \yii\web\View::POS_END);
 
 $this->registerCSS(<<<CSS
-    #my-image-files table tbody tr td {
+    #my-files table tbody tr td {
         overflow-wrap: anywhere;
     }
-    #my-image-files .d-flex {
+    #my-files .d-flex {
         display: grid !important;
     }
-    #my-image-files img:hover {
+    #my-files img:hover {
         border: 2px solid #1bc5bd;
     }
 CSS);
 ?>
 
-<div class="row" id="my-image-files">
+<div class="row" id="my-files">
     <div class="col-md-7">
         <input type="text" class="form-control search-photo" placeholder="Search File" onkeydown="searchMyImage(this)">
-        <div class="my-photos">
+        <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
             <?= $this->render('my-files-ajax', [
                 'dataProvider' => $dataProvider,
             ]) ?>
-        </div>
+        <?php Pjax::end(); ?>
     </div>
     <div class="col-md-5">
         <p class="lead text-warning">Image Properties

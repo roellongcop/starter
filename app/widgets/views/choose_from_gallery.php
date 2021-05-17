@@ -1,9 +1,10 @@
 <?php
 
 use app\helpers\App;
-use app\widgets\Dropzone;
 use app\helpers\Html;
 use app\helpers\Url;
+use app\widgets\Dropzone;
+use yii\widgets\Pjax;
 $this->registerJs(<<< SCRIPT
     var enableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', false);
@@ -104,14 +105,13 @@ $this->registerJs(<<< SCRIPT
         let keywords = $('#my_files-{$id} input.search-photo').val()
         getMyFiles('{$myImageFilesUrl}');
     })
+    
+    // $(document).on('click', '#my_files-{$id} .modal-my-photos a.btn', function() {
+    //     let href = $(this).attr('href')
 
-
-    $(document).on('click', '#my_files-{$id} .modal-my-photos a.btn', function() {
-        let href = $(this).attr('href')
-
-        getMyFiles(href)
-        return false;    
-    });
+    //     getMyFiles(href)
+    //     return false;    
+    // });
 
 
     var search{$id} = function(input) {
@@ -181,8 +181,8 @@ CSS)
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
                                         <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
-                                        <div class="modal-my-photos"> 
-                                        </div>
+                                        <?php Pjax::begin(['options' => ['class' => 'modal-my-photos']]); ?>
+                                        <?php Pjax::end(); ?>
                                     </div>
                                     <div class="col-md-5 col-sm-6 image-properties-panel">
                                         <p class="lead text-warning">Image Properties</p>
