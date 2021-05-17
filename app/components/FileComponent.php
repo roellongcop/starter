@@ -31,23 +31,23 @@ class FileComponent extends Component
 
     public function saveFile($model, $input, $location='')
     {
-        $file            = new File();
-        $file->name      = $input->baseName;
-        $file->location  = $location;
+        $file = new File();
+        $file->name = $input->baseName;
+        $file->location = $location;
         $file->extension = $input->extension;
-        $file->size      = $input->size;
+        $file->size = $input->size;
 
-        if (isset($model->fileToken)) {
+        if ($model->hasProperty('fileToken') && $model->fileToken) {
             $file->token = $model->fileToken . '-' . time();
         }
 
         if ($file->save()) {
 
-            $modelFile = new ModelFile();
-            $modelFile->file_id = $file->id;
-            $modelFile->model_id = $model->id;
-            $modelFile->model_name = ($model->modelName ?? App::className($model));
-            $modelFile->save();
+            // $modelFile = new ModelFile();
+            // $modelFile->file_id = $file->id;
+            // $modelFile->model_id = $model->id;
+            // $modelFile->model_name = ($model->modelName ?? App::className($model));
+            // $modelFile->save();
 
             return $file;
         }
@@ -75,8 +75,8 @@ class FileComponent extends Component
 
         $time = time();
         $string = App::randomString(10);
-        // $path = "{$file_path}/{$input->baseName}-{$time}.{$input->extension}";
-        $path = "{$file_path}/{$string}-{$time}.{$input->extension}";
+        $path = "{$file_path}/{$input->baseName}-{$time}.{$input->extension}";
+        // $path = "{$file_path}/{$string}-{$time}.{$input->extension}";
 
         $this->createIndexFile($folders);
 

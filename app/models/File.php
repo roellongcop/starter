@@ -122,45 +122,46 @@ class File extends ActiveRecord
 
     public function getDocumentPreviewPath()
     {
+        $path = App::publishedUrl() . '/media/svg/files/';
         switch ($this->extension) {
             case 'css':
-                $path = 'css.svg';
+                $path .= 'css.svg';
                 break;
             case 'zip':
-                $path = 'zip.svg';
+                $path .= 'zip.svg';
                 break;
             case 'sql':
-                $path = 'sql.png';
+                $path .= 'sql.png';
                 break;
 
             case 'csv':
-                $path = 'csv.svg';
+                $path .= 'csv.svg';
                 break;
 
             case 'docx':
             case 'doc':
             case 'txt':
-                $path = 'doc.svg';
+                $path .= 'doc.svg';
                 break;
 
             case 'html':
-                $path = 'html.svg';
+                $path .= 'html.svg';
                 break;
 
             case 'javacript':
-                $path = 'javacript.svg';
+                $path .= 'javacript.svg';
                 break;
 
             case 'mp4':
-                $path = 'mp4.svg';
+                $path .= 'mp4.svg';
                 break;
 
             case 'pdf':
-                $path = 'pdf.svg';
+                $path .= 'pdf.svg';
                 break;
 
             case 'xml':
-                $path = 'xml.svg';
+                $path .= 'xml.svg';
                 break;
             
             default:
@@ -174,9 +175,7 @@ class File extends ActiveRecord
 
     public function getPreviewIcon($w=60)
     {
-        $path = App::publishedUrl() . '/media/svg/files/';
-        $path .= $this->documentPreviewPath;
-
+        $path = $this->documentPreviewPath;
 
         if ($this->isImage) {
             return Html::image($path, ['w' => $w, 'h' => $w, 'ratio' => 'false'], [

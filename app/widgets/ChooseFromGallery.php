@@ -10,8 +10,8 @@ class ChooseFromGallery extends \yii\base\Widget
     public $modelTitle = 'Choose from Gallery';
     public $buttonTitle = 'Choose from Gallery';
     public $files;
-    public $chooseImageUrl;
-    public $uploadUrl;
+    public $chooseImageUrl = ['file/choose-from-gallery'];
+    public $uploadUrl = ['file/upload'];
     public $model;
     public $modelName;
     public $ajaxSuccess;
@@ -26,8 +26,8 @@ class ChooseFromGallery extends \yii\base\Widget
         // your logic here
         parent::init();
 
-        $this->chooseImageUrl = $this->chooseImageUrl ?: Url::to(['file/choose-from-gallery']);
-        $this->uploadUrl = $this->uploadUrl ?: Url::to(['file/upload']);
+        $this->chooseImageUrl = Url::to($this->chooseImageUrl);
+        $this->uploadUrl = Url::to($this->uploadUrl);
         $this->modelName = App::className($this->model);
         $this->files = $this->files ?: App::identity('myImageFiles');
     }
@@ -45,7 +45,6 @@ class ChooseFromGallery extends \yii\base\Widget
             'files' => $this->files,
             'chooseImageUrl' => $this->chooseImageUrl,
             'uploadUrl' => $this->uploadUrl,
-
             'modelName' => $this->modelName,
             'ajaxSuccess' => $this->ajaxSuccess,
             'ajaxError' => $this->ajaxError,
