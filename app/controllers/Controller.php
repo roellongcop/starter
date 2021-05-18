@@ -39,13 +39,13 @@ abstract class Controller extends \yii\web\Controller
     } 
 
 
-    public function checkFileUpload($model)
+    public function checkFileUpload($model, $file_ids = [])
     {
-        if (($file_ids = App::post($this->file_id_name)) != null) {
+        $arr = [];
+        $file_ids = $file_ids ?: App::post($this->file_id_name);
+        
+        if ($file_ids) {
             $file_ids = is_array($file_ids)? $file_ids: [$file_ids];
-
-            $arr = [];
-
             foreach ($file_ids as $key => $file_id) {
                 $file = File::findOne($file_id);
 
@@ -54,6 +54,7 @@ abstract class Controller extends \yii\web\Controller
                         'file_id' => $file->id,
                         'model_id' => $model->id,
                         'record_status' => 1,
+                        'extension' => $file->extension,
                         'model_name' => App::getModelName($model),
                     ]);
 
@@ -62,7 +63,7 @@ abstract class Controller extends \yii\web\Controller
                     }
                 }
             }
-            return $arr;
         }
+        return $arr;
     }
 }

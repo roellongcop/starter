@@ -72,6 +72,7 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
             </div>
             
             <?= ChooseFromGallery::widget([
+                'model' => $model,
                 'fileInput' => $form->field($model, 'imageInput')
                     ->fileInput()
                     ->label('Upload Photo'),

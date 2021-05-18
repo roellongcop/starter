@@ -74,6 +74,7 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
             </div>
             <br>
             <?= ChooseFromGallery::widget([
+                'model' => $model,
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
                         KTApp.block('#sipc', {

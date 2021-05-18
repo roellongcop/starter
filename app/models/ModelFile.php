@@ -145,4 +145,18 @@ class ModelFile extends ActiveRecord
     {
         return $this->hasOne(File::className(), ['id' => 'file_id']);
     }
+
+    public function getFileToken()
+    {
+        if (($file = $this->file) != null) {
+            return $file->token;
+        }
+    }
+
+    public function getFileLocation()
+    {
+        if (($file = $this->file) != null) {
+            return $file->location;
+        }
+    }
 }

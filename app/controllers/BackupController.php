@@ -70,8 +70,8 @@ class BackupController extends Controller
                 $fileInput->extension = 'sql';
                 $fileInput->size = $backup['filesize'];
 
-                App::component('file')->saveFile($model, $fileInput, $backup['filepath']);
-
+                $file = App::component('file')->saveFile($model, $fileInput, $backup['filepath']);
+                $this->checkFileUpload($model, $file->id);
                 App::success('Successfully Created');
             }
             else {

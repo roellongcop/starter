@@ -75,7 +75,7 @@ class FileComponent extends Component
 
         $time = time();
         $string = App::randomString(10);
-        // $path = "{$file_path}/{$input->baseName}-{$time}.{$input->extension}";
+        $path = "{$file_path}/{$input->baseName}-{$time}.{$input->extension}";
         $path = "{$file_path}/{$string}-{$time}.{$input->extension}";
 
         $this->createIndexFile($folders);

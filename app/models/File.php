@@ -200,7 +200,8 @@ class File extends ActiveRecord
     public function getImagePath($params = [])
     {
         if($this->token) {
-            return Url::to(['file/display', 'token' => $this->token], true);
+            $path = array_merge(['file/display', 'token' => $this->token], $params);
+            return Url::to($path, true);
         }
         
         return App::setting('image_holder');

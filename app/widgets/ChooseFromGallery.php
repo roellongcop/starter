@@ -14,6 +14,8 @@ class ChooseFromGallery extends \yii\base\Widget
     public $chooseImageUrl = ['file/choose-from-gallery'];
     public $uploadUrl = ['file/upload'];
     public $ajaxSuccess;
+    public $model;
+    public $modelName;
     public $ajaxError = 'function(e) {alert(e.responseText)}';
     public $dropzoneComplete;
     public $dropzoneSuccess;
@@ -28,6 +30,9 @@ class ChooseFromGallery extends \yii\base\Widget
         $this->chooseImageUrl = Url::to($this->chooseImageUrl);
         $this->uploadUrl = Url::to($this->uploadUrl);
         $this->files = $this->files ?: App::identity('myImageFiles');
+        if ($this->model) {
+            $this->modelName = App::getModelName($this->model);
+        }
     }
 
 
@@ -37,6 +42,8 @@ class ChooseFromGallery extends \yii\base\Widget
     public function run()
     {
         return $this->render('choose_from_gallery', [
+            'model' => $this->model,
+            'modelName' => $this->modelName,
             'modalTitle' => $this->modalTitle,
             'buttonTitle' => $this->buttonTitle,
             'id' => $this->id,
