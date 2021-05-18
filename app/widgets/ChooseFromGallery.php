@@ -7,13 +7,12 @@ use yii\helpers\Url;
  
 class ChooseFromGallery extends \yii\base\Widget
 {
-    public $modelTitle = 'Choose from Gallery';
+    public $file_id;
+    public $modalTitle = 'Choose from Gallery';
     public $buttonTitle = 'Choose from Gallery';
     public $files;
     public $chooseImageUrl = ['file/choose-from-gallery'];
     public $uploadUrl = ['file/upload'];
-    public $model;
-    public $modelName;
     public $ajaxSuccess;
     public $ajaxError = 'function(e) {alert(e.responseText)}';
     public $dropzoneComplete;
@@ -28,7 +27,6 @@ class ChooseFromGallery extends \yii\base\Widget
 
         $this->chooseImageUrl = Url::to($this->chooseImageUrl);
         $this->uploadUrl = Url::to($this->uploadUrl);
-        $this->modelName = App::className($this->model);
         $this->files = $this->files ?: App::identity('myImageFiles');
     }
 
@@ -39,21 +37,19 @@ class ChooseFromGallery extends \yii\base\Widget
     public function run()
     {
         return $this->render('choose_from_gallery', [
-            'modelTitle' => $this->modelTitle,
+            'modalTitle' => $this->modalTitle,
             'buttonTitle' => $this->buttonTitle,
             'id' => $this->id,
             'files' => $this->files,
             'chooseImageUrl' => $this->chooseImageUrl,
             'uploadUrl' => $this->uploadUrl,
-            'modelName' => $this->modelName,
             'ajaxSuccess' => $this->ajaxSuccess,
             'ajaxError' => $this->ajaxError,
-            'model' => $this->model,
             'dropzoneComplete' => $this->dropzoneComplete,
             'fileInput' => $this->fileInput,
             'dropzoneSuccess' => $this->dropzoneSuccess,
             'myImageFilesUrl' => Url::to($this->myImageFilesUrl),
-            'modelID' => $this->model->isNewRecord ? 0: $this->model->id,
+            'file_id' => $this->file_id,
         ]);
     }
 }

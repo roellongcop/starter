@@ -83,14 +83,6 @@ $this->registerJs(<<< SCRIPT
             state: 'primary' // a bootstrap color
         });
     });
-    
-    // $(document).on('click', '#my-image-files .my-photos a.btn', function() {
-    //     let href = $(this).attr('href')
-
-    //     getMyFiles(href)
-    //     return false;    
-    // });
-
 
     var searchMyImage = function(input) {
         if(event.key === 'Enter') {

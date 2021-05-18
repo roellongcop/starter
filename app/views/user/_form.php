@@ -1,14 +1,15 @@
 <?php
 
 use app\helpers\App;
+use app\helpers\Html;
 use app\models\search\RoleSearch;
+use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ChangePhoto;
 use app\widgets\ChooseFromGallery;
 use app\widgets\ImagePreview;
 use app\widgets\RecordStatusInput;
-use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -59,16 +60,23 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
  
         </div>
         <div class="col-md-7">
-            <?= ImagePreview::widget([
-                'model' => $model,
-                'attribute' => 'imageInput',
-                'src' => ($model->imagePath)? $model->imagePath . '&w=200': '',
-            ]) ?> 
+            <div id="sipc" style="max-width: 200px">
+                <?= Html::image(
+                    $model->imagePath,
+                    ['w'=>200],
+                    [
+                        'class' => 'img-thumbnail',
+                        'loading' => 'lazy',
+                    ]
+                ) ?>
+            </div>
+            
             <?= ChooseFromGallery::widget([
-                'fileInput' => $form->field($model, 'imageInput')->fileInput()->label('Upload Photo'),
-                'model' => $model,
+                'fileInput' => $form->field($model, 'imageInput')
+                    ->fileInput()
+                    ->label('Upload Photo'),
                 'ajaxSuccess' => "
-                    $('#user-imageinput-preview').attr('src', s.src + '&w=200')
+                    $('#sipc img').attr('src', s.src + '&w=200');
                 "
             ]) ?> 
             <div class="alert alert-info">

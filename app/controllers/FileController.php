@@ -361,21 +361,14 @@ class FileController extends Controller
             $model = new UploadForm();
             if ($model->load(['UploadForm' => $post])) {
                 $model->fileInput = UploadedFile::getInstance($model, 'fileInput');
-                $referenceModel = $model->upload();
+                $file = $model->upload();
+
+                $file->refresh();
 
                 $result['status'] = 'success';
-                $result['message'] = $referenceModel->imagePath;
-                $result['src'] = $referenceModel->imagePath;
-
-                $modelFile = ModelFile::find()
-                    ->where([
-                        'file_id' => $referenceModel->id,
-                        'model_name' => $model->modelName
-                    ])
-                    ->orderBy(['id' => SORT_DESC])
-                    ->one();
-
-                $result['model_file_id'] = ($modelFile)? $modelFile->id: 0;
+                $result['message'] = 'Uploaded';
+                $result['src'] = $file->imagePath;
+                $result['file'] = $file;
             }
             else {
                 $result['status'] = 'error';
@@ -447,39 +440,6 @@ class FileController extends Controller
         # dont delete; use in condition if user has access to in-active data
     }
 
-    public function actionChooseFromGallery()
-    {
-        if (App::isAjax() && (($post = App::post()) != null)) {
-            $file = $this->findModel($post['file_id']);
-
-            if ($file) {
-                $modelFile = new ModelFile();
-                $modelFile->model_name = $post['modelName'];
-                $modelFile->model_id = $post['model_id'];
-                $modelFile->file_id = $file->id;
-                if ($modelFile->save()) {
-                    $result['status'] = 'success';
-                    $result['message'] = 'File added';
-                    $result['src'] = $file->imagePath;
-                    $result['model_file_id'] = $modelFile->id;
-                }
-                else {
-                    $result['status'] = 'error';
-                    $result['message'] = $modelFile->errors;
-                }
-            }
-            else {
-                $result['status'] = 'error';
-                $result['message'] = 'No file selected';
-            }
-        }
-        else {
-            $result['status'] = 'error';
-            $result['message'] = 'Request value not found.';
-        }
-
-        return $this->asJson($result);
-    }
 
 
     public function actionMyImageFiles()

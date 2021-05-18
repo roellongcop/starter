@@ -1,13 +1,14 @@
 <?php
 
 use app\helpers\App;
+use app\helpers\Html;
 use app\models\search\RoleSearch;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
-use app\widgets\RecordStatusInput;
 use app\widgets\ChooseFromGallery;
 use app\widgets\ImagePreview;
 use app\widgets\KeenActiveForm;
+use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -52,19 +53,17 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
         </div>
         <div class="col-md-5">
             <div id="sipc" style="max-width: 200px">
-                <?= ImagePreview::widget([
-                    'model' => $model,
-                    'options' => [
+                <?= Html::image(
+                    $model->imagePath,
+                    ['w' => 200],
+                    [
                         'class' => 'img-thumbnail',
                         'loading' => 'lazy',
-                    ],
-                    'attribute' => 'imageInput',
-                    'src' => ($model->imagePath)? $model->imagePath . '&w=200': '',
-                ]) ?>
+                    ]
+                ) ?>
             </div>
             <br>
             <?= ChooseFromGallery::widget([
-                'model' => $model,
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
                         KTApp.block('#sipc', {

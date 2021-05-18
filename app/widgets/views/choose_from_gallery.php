@@ -11,10 +11,12 @@ $this->registerJs(<<< SCRIPT
     }
 
     var selectedFile = 0;
+    var selectedFilePath = '';
     $(document).on('click', '#my_files-{$id} img', function() {
         var image = $(this);
 
         selectedFile = image.data('id');
+        selectedFilePath = image.attr('src');
 
         $('#choose-from-gallery-{$id} #{$id}-name').text(image.data('name'));
         $('#choose-from-gallery-{$id} #{$id}-extension').text(image.data('extension'));
@@ -31,24 +33,13 @@ $this->registerJs(<<< SCRIPT
     })
 
     $('#choose-photo-confirm-{$id}').on('click', function() {
-        $.ajax({
-            url: '{$chooseImageUrl}',
-            data: {
-                model_id: {$modelID},
-                file_id: selectedFile,
-                modelName: '{$modelName}',
-            },
-            method: 'post',
-            dataType: 'json',
-            success: function(s) {
-                {$ajaxSuccess}
+        var s = {
+            status: 'success',
+            src: selectedFilePath
+        };
 
-                if(s.status == 'success') {
-                    $('#choose-from-gallery-container-{$id} input[name="_model_file_id"]').val(s.model_file_id);
-                }
-            },
-            error: {$ajaxError},
-        })
+        {$ajaxSuccess}
+        $('#choose-from-gallery-container-{$id} input[name="_file_id"]').val(selectedFile);
     });
 
     $('#upload-tab-{$id} input[type="file"]').on('change', function() {
@@ -74,8 +65,8 @@ $this->registerJs(<<< SCRIPT
                 {$ajaxSuccess}
                 if(s.status == 'success') {
                     $('#choose-from-gallery-{$id}').modal('hide')
-                    $('#choose-from-gallery-container-{$id} input[name="_model_file_id"]').val(s.model_file_id);
-
+                    $('#choose-from-gallery-container-{$id} input[name="_file_id"]').val(s.file.id);
+                    input.value = '';
                 }
 
             },
@@ -105,14 +96,11 @@ $this->registerJs(<<< SCRIPT
         let keywords = $('#my_files-{$id} input.search-photo').val()
         getMyFiles('{$myImageFilesUrl}');
     })
+
+    $(document).on("pjax:beforeSend",function(){
+        $('#my_files-{$id} .modal-my-photos').html('Loading...');
+    });
     
-    // $(document).on('click', '#my_files-{$id} .modal-my-photos a.btn', function() {
-    //     let href = $(this).attr('href')
-
-    //     getMyFiles(href)
-    //     return false;    
-    // });
-
 
     var search{$id} = function(input) {
         if(event.key === 'Enter') {
@@ -148,9 +136,7 @@ CSS)
         <?= $buttonTitle ?>
     </button>
 
-    <?php if ($model->isNewRecord): ?>
-        <input name="_model_file_id" type="hidden">
-    <?php endif ?>
+    <input name="_file_id" type="hidden" value="<?= $file_id ?>">
         
 
     <!-- Modal-->
@@ -159,7 +145,7 @@ CSS)
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <?= $modelTitle ?>
+                        <?= $modalTitle ?>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="ki ki-close"></i>

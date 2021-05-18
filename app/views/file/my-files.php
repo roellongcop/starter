@@ -85,7 +85,7 @@ $this->registerJs(<<< SCRIPT
             dataType: 'json',
             success: function(s) {
                 if(s.status == 'success') {
-                    toastr.success(s.message);
+                    alert(s.message);
                     getMyFiles('{$myImageFilesUrl}');
                 }
                 selectedFile = 0;
@@ -96,6 +96,10 @@ $this->registerJs(<<< SCRIPT
                 console.log(e)    
             },
         })
+    });
+
+    $(document).on("pjax:beforeSend",function(){
+        $('#my-files .my-photos').html('Loading');
     });
 
 SCRIPT, \yii\web\View::POS_END);

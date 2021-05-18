@@ -97,6 +97,10 @@ $this->registerJs(<<< SCRIPT
         })
     });
 
+    $(document).on("pjax:beforeSend",function(){
+        $('#my-image-files .my-photos').html('Loading');
+    });
+
 SCRIPT, \yii\web\View::POS_END);
 
 $this->registerCSS(<<<CSS

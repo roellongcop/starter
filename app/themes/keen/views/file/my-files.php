@@ -82,16 +82,6 @@ $this->registerJs(<<< SCRIPT
         });
     });
 
-
-
-    // $(document).on('click', '#my-files .my-photos a.btn', function() {
-    //     let href = $(this).attr('href')
-
-    //     getMyFiles(href)
-    //     return false;    
-    // });
-
-
     var searchMyImage = function(input) {
         if(event.key === 'Enter') {
                    

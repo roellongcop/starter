@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\File;
 use app\models\ModelFile;
 
 /**
@@ -11,7 +12,7 @@ use app\models\ModelFile;
  */
 abstract class Controller extends \yii\web\Controller
 {
-    public $model_file_id_name = '_model_file_id';
+    public $file_id_name = '_file_id';
 
     public function behaviors()
     {
@@ -38,33 +39,30 @@ abstract class Controller extends \yii\web\Controller
     } 
 
 
-    public function checkModelFile($model)
+    public function checkFileUpload($model)
     {
-        if (($model_file_id = App::post($this->model_file_id_name)) != null) {
+        if (($file_ids = App::post($this->file_id_name)) != null) {
+            $file_ids = is_array($file_ids)? $file_ids: [$file_ids];
 
-            if (is_array($model_file_id)) {
-                $modelFiles = [];
-                foreach ($model_file_id as $key => $id) {
-                    $modelFile = ModelFile::findOne($id);
+            $arr = [];
 
-                    if ($modelFile) {
-                        $modelFile->model_id = $model->id;
-                        $modelFile->save();
-                        $modelFiles[] = $modelFile;
+            foreach ($file_ids as $key => $file_id) {
+                $file = File::findOne($file_id);
+
+                if ($file) {
+                    $modelFile = new ModelFile([
+                        'file_id' => $file->id,
+                        'model_id' => $model->id,
+                        'record_status' => 1,
+                        'model_name' => App::getModelName($model),
+                    ]);
+
+                    if ($modelFile->save()) {
+                        array_push($arr, $modelFile);
                     }
                 }
-                return $modelFiles;
             }
-            else {
-                $modelFile = ModelFile::findOne($model_file_id);
-
-                if ($modelFile) {
-                    $modelFile->model_id = $model->id;
-                    $modelFile->save();
-
-                    return $modelFile;
-                }
-            }
+            return $arr;
         }
     }
 }

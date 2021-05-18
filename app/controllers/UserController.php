@@ -60,11 +60,9 @@ class UserController extends Controller
         $model = new User();
 
         if ($model->load(App::post()) && $model->validate()) {
-            $model->imageInput = UploadedFile::getInstance($model, 'imageInput');
             $model->setPassword($model->password);
             if ($model->save()) {
-                $this->checkModelFile($model);
-                $model->upload();
+                $this->checkFileUpload($model);
                 App::success('Successfully Created');
                 return $this->redirect(['view', 'slug' => $model->slug]);
             }
@@ -89,11 +87,10 @@ class UserController extends Controller
         $model = new User();
         $model->attributes = $originalModel->attributes;
 
-
         if ($model->load(App::post()) && $model->validate()) {
             $model->setPassword($model->password);
             if ($model->save()) {
-                $this->checkModelFile($model);
+                $this->checkFileUpload($model);
                 App::success('Successfully Duplicated');
                 return $this->redirect(['view', 'slug' => $model->slug]);
             }
@@ -117,6 +114,7 @@ class UserController extends Controller
         $model = $this->findModel($slug, 'slug'); 
 
         if ($model->load(App::post()) && $model->save()) {
+            $this->checkFileUpload($model);
             App::success('Successfully Updated');
             return $this->redirect(['view', 'slug' => $model->slug]);
         }
@@ -336,13 +334,11 @@ class UserController extends Controller
     {
         $model = App::identity();
 
-        if ($model->load(App::post()) && $model->validate()) {
-            $model->imageInput = UploadedFile::getInstance($model, 'imageInput');
-            if ($model->save()) {
-                $model->upload();
-                App::success('Successfully Updated');
-                return $this->refresh();
-            }
+        if ($model->load(App::post()) && $model->save()) {
+            $this->checkFileUpload($model);
+            
+            App::success('Successfully Updated');
+            return $this->refresh();
         } 
 
         return $this->render('my_account', [

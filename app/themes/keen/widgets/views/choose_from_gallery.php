@@ -13,10 +13,13 @@ $this->registerJs(<<< SCRIPT
     }
 
     var selectedFile = 0;
+    var selectedFilePath = '';
+
     $(document).on('click', '#my_files-{$id} img', function() {
         var image = $(this);
 
         selectedFile = image.data('id');
+        selectedFilePath = image.attr('src');
 
         $('#choose-from-gallery-{$id} #{$id}-name').text(image.data('name'));
         $('#choose-from-gallery-{$id} #{$id}-extension').text(image.data('extension'));
@@ -34,24 +37,13 @@ $this->registerJs(<<< SCRIPT
     
 
     $('#choose-photo-confirm-{$id}').on('click', function() {
-        $.ajax({
-            url: '{$chooseImageUrl}',
-            data: {
-                model_id: {$modelID},
-                file_id: selectedFile,
-                modelName: '{$modelName}',
-            },
-            method: 'post',
-            dataType: 'json',
-            success: function(s) {
-                {$ajaxSuccess}
+        var s = {
+            status: 'success',
+            src: selectedFilePath
+        };
 
-                if(s.status == 'success') {
-                    $('#choose-from-gallery-container-{$id} input[name="_model_file_id"]').val(s.model_file_id);
-                }
-            },
-            error: {$ajaxError},
-        })
+        {$ajaxSuccess}
+        $('#choose-from-gallery-container-{$id} input[name="_file_id"]').val(selectedFile);
     });
 
 
@@ -84,15 +76,6 @@ $this->registerJs(<<< SCRIPT
         getMyFiles('{$myImageFilesUrl}?keywords=' + keywords);
     })
 
-
-
-    // $(document).on('click', '#my_files-{$id} .modal-my-photos a.btn', function() {
-    //     let href = $(this).attr('href')
-
-    //     getMyFiles(href)
-    //     return false;    
-    // });
-    
     $(document).on("pjax:beforeSend",function(){
         KTApp.block('#my_files-{$id} .modal-my-photos', {
             overlayColor: '#000000',
@@ -136,19 +119,15 @@ CSS);
         <?= $buttonTitle ?>
     </button>
 
-    <?php if ($model->isNewRecord): ?>
-        <input name="_model_file_id" type="hidden">
-    <?php endif ?>
+    <input name="_file_id" type="hidden" value="<?= $file_id ?>">
         
 
-    <!-- Modal-->
-    <!-- Modal-->
     <div class="modal fade" id="choose-from-gallery-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <?= $modelTitle ?>
+                        <?= $modalTitle ?>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="ki ki-close"></i>
@@ -179,7 +158,10 @@ CSS);
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
                                         <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
-                                        <?php Pjax::begin(['options' => ['class' => 'modal-my-photos']]); ?>
+                                        <?php Pjax::begin([
+                                            'options' => ['class' => 'modal-my-photos'],
+                                            'enablePushState' => false
+                                        ]); ?>
                                         <?php Pjax::end(); ?>
                                     </div>
                                     <div class="col-md-5 col-sm-6 image-properties-panel">
@@ -231,9 +213,10 @@ CSS);
                                     'removedFile' => '//',
                                     'success' => "
                                         {$dropzoneSuccess}
-                                        $('#choose-from-gallery-container-{$id} input[name=_model_file_id]').val(s.model_file_id);
+                                        $('#choose-from-gallery-container-{$id} input[name=_file_id]').val(s.file.id);
+                                        this.removeFile(file);
 
-                                        $('#choose-from-gallery-{$id}').modal('hide')
+                                        $('#choose-from-gallery-{$id}').modal('hide');
                                     ",
                                     'acceptedFiles' => array_map(
                                         function($val) { 
