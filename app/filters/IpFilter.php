@@ -16,7 +16,7 @@ class IpFilter extends ActionFilter
         }
 
            
-        if (! App::controllerAction('site/error')) {
+        if (! App::isControllerAction('site/error')) {
             if (in_array(App::ip(), IpSearch::blocked())) {
                 throw new ForbiddenHttpException('IP is Blocked !');
                 return false;

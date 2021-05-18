@@ -160,6 +160,11 @@ class App {
 		]);
 	}
 
+	public static function isControllerAction($ca)
+	{
+		return $ca == self::controllerAction();
+	}
+
 	public static function action()
 	{
 		return self::controller()->action;

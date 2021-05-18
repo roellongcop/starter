@@ -14,7 +14,7 @@ class UserFilter extends ActionFilter
             return false;
         }
         
-        if (! App::controllerAction('site/error')) {
+        if (! App::isControllerAction('site/error')) {
             if (App::isLogin() && App::identity('is_blocked')) {
                 throw new ForbiddenHttpException('User is Blocked !');
                 return false;
