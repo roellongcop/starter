@@ -20,11 +20,7 @@ $params = [
 ];
 
 if ($model->isDocument) {
-    $path = implode('/', [
-        App::publishedUrl(),
-        'media/svg/files',
-        $model->documentPreviewPath
-    ]);
+    $path = $model->documentPreviewPath;
 
     $params['style'] = "width:200px;height:auto";
 
