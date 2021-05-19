@@ -22,10 +22,14 @@ class ChooseFromGallery extends \yii\base\Widget
     public $fileInput;
     public $myImageFilesUrl = ['file/my-image-files'];
 
+    public $file_id_name;
+
+
     public function init() 
     {
         // your logic here
         parent::init();
+        $this->file_id_name = $this->file_id_name ?: App::controller('file_id_name');
 
         $this->chooseImageUrl = Url::to($this->chooseImageUrl);
         $this->uploadUrl = Url::to($this->uploadUrl);
@@ -42,6 +46,7 @@ class ChooseFromGallery extends \yii\base\Widget
     public function run()
     {
         return $this->render('choose_from_gallery', [
+            'file_id_name' => $this->file_id_name,
             'model' => $this->model,
             'modelName' => $this->modelName,
             'modalTitle' => $this->modalTitle,

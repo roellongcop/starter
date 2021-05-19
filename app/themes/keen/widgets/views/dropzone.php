@@ -10,6 +10,24 @@ $this->registerJs(<<< SCRIPT
         dictRemoveFile: '{$dictRemoveFile}',
         acceptedFiles: '{$acceptedFiles}',
         init: function() {
+            var myDropzone = this;
+            let files = {$files};
+            if (files) {
+                for (var i = 0; i < files.length; i++) {
+                    var mockFile = { 
+                        name: files[i].fullname, 
+                        size: files[i].size, 
+                        accepted: true,
+                        status: Dropzone.ADDED, 
+                    };
+
+                    myDropzone.emit("addedfile", files[i]);                                
+                    myDropzone.emit("thumbnail", files[i], files[i].imagePath);
+                    myDropzone.emit("complete", files[i]);
+                    myDropzone.files.push(files[i]);
+                }
+            }
+            
             this.on("sending", function(file, xhr, formData) {
             	var parameters = {$parameters};
             	for ( var key in parameters ) {
@@ -26,13 +44,13 @@ $this->registerJs(<<< SCRIPT
             });
 
             this.on('success', function (file, s) {
-                console.log(s)
                 {$success}
             });
 
         }
     });
 SCRIPT, \yii\web\View::POS_END);
+
 ?>
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">
     <div class="dropzone-msg dz-message needsclick">

@@ -39,7 +39,7 @@ $this->registerJs(<<< SCRIPT
         };
 
         {$ajaxSuccess}
-        $('#choose-from-gallery-container-{$id} input[name="_file_id"]').val(selectedFile);
+        $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(selectedFile);
     });
 
     $('#upload-tab-{$id} input[type="file"]').on('change', function() {
@@ -65,7 +65,7 @@ $this->registerJs(<<< SCRIPT
                 {$ajaxSuccess}
                 if(s.status == 'success') {
                     $('#choose-from-gallery-{$id}').modal('hide')
-                    $('#choose-from-gallery-container-{$id} input[name="_file_id"]').val(s.file.id);
+                    $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(s.file.id);
                     input.value = '';
                 }
 
@@ -136,7 +136,7 @@ CSS)
         <?= $buttonTitle ?>
     </button>
 
-    <input name="_file_id" type="hidden" value="<?= $file_id ?>">
+    <input name="<?= $file_id_name ?>" type="hidden" value="<?= $file_id ?>">
         
 
     <!-- Modal-->

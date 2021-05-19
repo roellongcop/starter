@@ -178,7 +178,7 @@ class File extends ActiveRecord
         $path = $this->documentPreviewPath;
 
         if ($this->isImage) {
-            return Html::image($path, ['w' => $w, 'h' => $w, 'ratio' => 'false'], [
+            return Html::image($path, ['w' => $w, 'quality' => 50], [
                 'class' => 'img-thumbnail'
             ]);
 

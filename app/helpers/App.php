@@ -142,8 +142,11 @@ class App {
 		return self::app()->params[$key] ?? '';
 	}
 
-	public static function controller()
+	public static function controller($attr='')
 	{
+		if ($attr) {
+			return self::app()->controller->{$attr};
+		}
 		return self::app()->controller;
 	}
 

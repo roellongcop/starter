@@ -38,7 +38,7 @@ class FileComponent extends Component
         $file->size = $input->size;
 
         if ($model->hasProperty('fileToken') && $model->fileToken) {
-            $file->token = $model->fileToken . '-' . time();
+            $file->token = $model->fileToken;
         }
 
         if ($file->save()) {

@@ -43,7 +43,7 @@ $this->registerJs(<<< SCRIPT
         };
 
         {$ajaxSuccess}
-        $('#choose-from-gallery-container-{$id} input[name="_file_id"]').val(selectedFile);
+        $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(selectedFile);
     });
 
 
@@ -119,7 +119,7 @@ CSS);
         <?= $buttonTitle ?>
     </button>
 
-    <input name="_file_id" type="hidden" value="<?= $file_id ?>">
+    <input name="<?= $file_id_name ?>" type="hidden" value="<?= $file_id ?>">
         
 
     <div class="modal fade" id="choose-from-gallery-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
@@ -208,12 +208,13 @@ CSS);
                             </div>
                             <div class="tab-pane fade" id="cp_dropzone-<?= $id ?>" role="tabpanel" aria-labelledby="cp_dropzone-<?= $id ?>">
                                 <?= Dropzone::widget([
+                                    'hiddenInput' => false,
                                     'model' => $model,
                                     'maxFiles' => 1,
                                     'removedFile' => '//',
                                     'success' => "
                                         {$dropzoneSuccess}
-                                        $('#choose-from-gallery-container-{$id} input[name=_file_id]').val(s.file.id);
+                                        $('#choose-from-gallery-container-{$id} input[name={$file_id_name}]').val(s.file.id);
                                         this.removeFile(file);
 
                                         $('#choose-from-gallery-{$id}').modal('hide');

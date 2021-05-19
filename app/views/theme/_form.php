@@ -66,26 +66,20 @@ SCRIPT, \yii\web\View::POS_END);
         <?= AnchorForm::widget() ?>
     </div>
 
+
+    <?php if (!$model->isNewRecord): ?>
+        <br>
+        <p class="lead">Upload Images</p>
+        <?= Dropzone::widget([
+            'files' => $model->imageFiles,
+            'model' => $model,
+            'acceptedFiles' => array_map(
+                function($val) { 
+                    return ".{$val}"; 
+                }, App::params('file_extensions')['image']
+            )
+        ]) ?>
+    <?php endif ?>
+
 <?php ActiveForm::end(); ?>
-
-<?php if ($model->imageFiles): ?>
-    <p class="lead">Preview Images</p>
-    <?= AppFiles::widget([
-        'model' => $model,
-        'imageOnly' => true,
-    ]) ?>
-<?php endif ?>
-
-<?php if (!$model->isNewRecord): ?>
-    <br>
-    <p class="lead">Upload Images</p>
-    <?= Dropzone::widget([
-        'model' => $model,
-        'acceptedFiles' => array_map(
-            function($val) { 
-                return ".{$val}"; 
-            }, App::params('file_extensions')['image']
-        )
-    ]) ?>
-<?php endif ?>
 

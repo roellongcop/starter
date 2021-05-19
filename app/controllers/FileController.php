@@ -176,10 +176,12 @@ class FileController extends Controller
                 if (isset($post['fileToken'])) {
                     $file = $this->findModel($post['fileToken'], 'token');
                     if ($file && $file->canDelete) {
+                        $_file = $file;
                         if ($file->delete()) {
                             return $this->asJson([
                                 'status' => 'success',
                                 'post' => $post['fileToken'],
+                                'file' => $_file,
                                 'message' => 'File Deleted'
                             ]);
                         }

@@ -48,21 +48,22 @@ SCRIPT, \yii\web\View::POS_END);
             <div class="col-md-3" data-file_id="<?= $file->id ?>">
                 <div class="image-input">
                     <a href="<?= Url::to(['file/display', 'token' => $file->token], true) ?>" target="_blank">
-                        <?= $file->getPreviewIcon(300) ?>
-                       
+                        <?= $file->getPreviewIcon(120) ?>
                     </a>
                     <?php if (App::component('access')->userCanRoute($removeImageUrl)): ?>
                         <?= Anchor::widget([
                             'tooltip' => 'Remove Image',
                             'title' => '<i class="fa fa-trash icon-sm text-danger"></i>',
-                            'link' => '#!',
+                            'link' => Url::to(['file/delete', 'token' => $file->token]),
                             'options' => [
+                                'data-confirm' => 'Delete Image',
+                                'data-method' => 'POST',
                                 'class' => 'btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow',
                                 'data-action' => 'change',
                                 'data-toggle' => 'tooltip',
                                 'data-original-title' => 'Remove Image',
                                 'data-file_id' => $file->id,
-                                'onclick' => 'removeImage(this)'
+                                // 'onclick' => 'removeImage(this)'
                             ]
                         ]) ?>
                     <?php endif ?>

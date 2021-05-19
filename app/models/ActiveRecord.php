@@ -84,11 +84,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'created_at',
                 'updated_at',
             ])
-            ->andFilterWhere([
-                'extension' => $extension,
+            ->where([
                 'model_id' => $this->id,
                 'model_name' => App::getModelName($this)
             ])
+            ->andFilterWhere(['extension' => $extension ])
             ->groupBy(['file_id'])
             ->orderBy(['MAX(id)' => SORT_DESC])
             ->all();
@@ -109,11 +109,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'created_at',
                 'updated_at',
             ])
-            ->andFilterWhere([
-                'extension' => $extension,
+            ->where([
                 'model_id' => $this->id,
                 'model_name' => App::getModelName($this)
             ])
+            ->andFilterWhere(['extension' => $extension])
+
             ->groupBy(['file_id'])
             ->orderBy(['MAX(id)' => SORT_DESC])
             ->one();
@@ -128,6 +129,18 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $this->_modelImageFiles = $this->getModelFiles(App::params('file_extensions')['image']);
 
         return $this->_modelImageFiles; 
+    }
+
+    public function getImageFiles()
+    {
+        if (($_modelImageFiles = $this->modelImageFiles) != null) {
+            $files = [];
+
+            foreach ($_modelImageFiles as $modelFile) {
+                array_push($files, $modelFile->file);
+            }
+            return $files;
+        }
     }
 
     public function getModelImageFile()

@@ -4,6 +4,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
  
 class Dropzone extends \yii\base\Widget
 {
@@ -24,10 +25,17 @@ class Dropzone extends \yii\base\Widget
     public $success;
     public $removedFile;
     public $acceptedFiles;
+
+    public $hiddenInput = true;
+    public $files = [];
+    public $file_id_name;
+
+
     public function init() 
     {
         // your logic here
         parent::init();
+        $this->file_id_name = $this->file_id_name ?: App::controller('file_id_name');
 
         if (!$this->description) {
             $this->description = "Upload up to {$this->maxFiles} file(s)";
@@ -40,6 +48,7 @@ class Dropzone extends \yii\base\Widget
         $this->url = Url::to($this->url);
         $this->removeFileUrl = Url::to($this->removeFileUrl);
 
+
         if (!$this->removedFile) {
             $this->removedFile = "$.ajax({
                 url: '{$this->removeFileUrl}',
@@ -48,10 +57,14 @@ class Dropzone extends \yii\base\Widget
                 dataType: 'json',
                 cache: false,
                 success: function(s) {
-                    console.log('success')
+                    let inp = $('input[data-uuid=\"'+ file.upload.uuid +'\"]');
+
+                    if(inp.length) {
+                        inp.remove();
+                    }
                 },
                 error: function(e) {
-                    console.log('error')
+                    console.log(e)
                 }
             })";
         }
@@ -67,8 +80,43 @@ class Dropzone extends \yii\base\Widget
         if (is_array($this->acceptedFiles)) {
             $this->acceptedFiles = implode(',', $this->acceptedFiles);
         }
-    }
 
+        if ($this->hiddenInput) {
+            $this->success .= "
+                $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->file_id_name}[]' data-uuid='\"+ file.upload.uuid +\"' type='hidden' value='\"+ s.file.id +\"'> \");
+            ";
+        }
+
+        if ($this->files) {
+            $this->files = ArrayHelper::toArray($this->files, [
+                'app\models\File' => [
+                    'id',
+                    'size',
+                    'token',
+                    'extension',
+                    'name',
+                    'location',
+                    'upload' => function($model) {
+                        return [
+                            'uuid' => $model->token
+                        ];
+                    },
+                    'fullname' => function($model) {
+                        return implode('.', [$model->name, $model->extension]);
+                    },
+                    'imagePath' => function($model) {
+                        return $model->getImagePath([
+                            'w' => 120, 
+                            'quality' => 90,
+                            // 'h' => 120, 
+                            // 'crop' => 'true',
+                            // 'ratio' => 'false',
+                        ]);
+                    }
+                ]
+            ]);
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -76,6 +124,7 @@ class Dropzone extends \yii\base\Widget
     public function run()
     {
         return $this->render('dropzone', [
+            'files' => json_encode($this->files),
             'id' => $this->id,
             'parameters' => json_encode($this->parameters),
             'paramName' => $this->paramName,
@@ -92,6 +141,7 @@ class Dropzone extends \yii\base\Widget
             'removedFile' => $this->removedFile,
             'acceptedFiles' => $this->acceptedFiles,
             'success' => $this->success,
+            'hiddenInput' => $this->hiddenInput
         ]);
     }
 }
