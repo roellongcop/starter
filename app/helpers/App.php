@@ -672,4 +672,13 @@ class App {
 		}
 		return self::component('setting');
 	}
+
+	public static function server($attr='')
+	{
+		if ($attr) {
+			return $_SERVER[$attr] ?? '';
+		}
+
+		return $_SERVER;
+	}
 }

@@ -24,7 +24,7 @@ use app\models\query\LogQuery;
  * @property string $controller
  * @property string $table_name
  * @property string $model_name
- * @property string|null $user_agent
+ * @property string|null $server
  * @property string $ip
  * @property string $browser
  * @property string $os
@@ -67,8 +67,8 @@ class Log extends ActiveRecord
             [['record_status'], 'default', 'value' => 1],
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['user_id', 'model_id'], 'default', 'value' => 0],
-            [[ 'url', 'user_agent'], 'string'],
-            [['request_data', 'change_attribute',], 'safe'],
+            [[ 'url'], 'string'],
+            [['request_data', 'change_attribute', 'server'], 'safe'],
             [['method', 'action', 'controller', 'table_name', 'model_name', 'ip', 'browser', 'os', 'device', 'record_status'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['method', 'ip'], 'string', 'max' => 32],
@@ -115,7 +115,7 @@ class Log extends ActiveRecord
             'controller' => 'Controller',
             'table_name' => 'Table Name',
             'model_name' => 'Model Name',
-            'user_agent' => 'User Agent',
+            'server' => 'Server',
             'ip' => 'Ip',
             'browser' => 'Browser',
             'os' => 'Os',
@@ -207,7 +207,7 @@ class Log extends ActiveRecord
             'url' => ['attribute' => 'url', 'format' => 'raw'],
             'table_name' => ['attribute' => 'table_name', 'format' => 'raw'],
             'model_name' => ['attribute' => 'model_name', 'format' => 'raw'],
-            // 'user_agent' => ['attribute' => 'user_agent', 'format' => 'raw'],
+            // 'server' => ['attribute' => 'server', 'format' => 'raw'],
             'ip' => ['attribute' => 'ip', 'format' => 'raw'],
             'browser' => ['attribute' => 'browser', 'format' => 'raw'],
             'os' => ['attribute' => 'os', 'format' => 'raw'],
@@ -228,20 +228,6 @@ class Log extends ActiveRecord
                 'value' => 'recordStatusHtml'
             ],
         ];
-    }
-
-    public function getRequestData()
-    {
-        return JsonEditor::widget([
-            'data' => $this->request_data,
-        ]);
-    }
-
-    public function getChangeAttribute()
-    {
-        return JsonEditor::widget([
-            'data' => $this->change_attribute,
-        ]);
     }
 
     public function getPreview($anchor = true)
@@ -291,14 +277,14 @@ class Log extends ActiveRecord
             ],*/
             'preview:raw',
             'action:raw',
-            'requestData:raw',
-            'changeAttribute:raw',
+            'request_data:jsonEditor',
+            'change_attribute:jsonEditor',
             'method:raw',
             'url:raw',
             'controller:raw',
             'table_name:raw',
             'model_name:raw',
-            'user_agent:raw',
+            'server:jsonEditor',
             'ip:raw',
             'browser:raw',
             'os:raw',
@@ -316,6 +302,7 @@ class Log extends ActiveRecord
         $behaviors['JsonBehavior']['fields'] = [
             'change_attribute', 
             'request_data',
+            'server',
         ];
 
         unset($behaviors['LogBehavior']);
@@ -336,14 +323,17 @@ class Log extends ActiveRecord
             $log->controller       = App::controllerID();
             $log->table_name       = App::tableName($model, false);
             $log->model_name       = App::getModelName($model);
-            $log->user_agent       = App::userAgent();
+            $log->server           = App::server();
             $log->ip               = App::ip();
             $log->browser          = App::browser();
             $log->os               = App::os();
             $log->device           = App::device();
             $log->change_attribute = $changedAttributes;
 
-            return $log->save();
+            if ($log->save()) {
+                return true;
+            }
+            App::danger($log->errors);
         }
     }
 }

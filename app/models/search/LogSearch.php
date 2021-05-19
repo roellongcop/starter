@@ -29,7 +29,7 @@ class LogSearch extends Log
     {
         return [
             [['id', 'model_id', 'created_by', 'updated_by'], 'integer'],
-            [['request_data', 'change_attribute', 'method', 'url', 'action', 'controller', 'table_name', 'model_name', 'user_agent', 'ip', 'browser', 'os', 'device', 'created_at', 'updated_at'], 'safe'],
+            [['request_data', 'change_attribute', 'method', 'url', 'action', 'controller', 'table_name', 'model_name', 'server', 'ip', 'browser', 'os', 'device', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status', 'user_id', 'username'], 'safe'],
         ];
     }
@@ -108,7 +108,6 @@ class LogSearch extends Log
         $query->andFilterWhere(['like', 'l.request_data', $this->request_data])
             ->andFilterWhere(['like', 'l.change_attribute', $this->change_attribute])
             ->andFilterWhere(['like', 'l.url', $this->url])
-            ->andFilterWhere(['like', 'l.user_agent', $this->user_agent])
             ->andFilterWhere(['like', 'l.ip', $this->ip]);
         
                 
