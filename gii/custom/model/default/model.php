@@ -159,7 +159,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
      
      
 
-    public function getTableColumns()
+    public function tableColumns()
     {
         return [
 <?php $viewAttr = true; ?>
@@ -186,11 +186,11 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
         ];
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
 <?php foreach ($labels as $name => $label): ?>
-<?php if (!in_array($name, ['id', 'status', 'created_by', 'updated_by', 'record_status'])): ?>
+<?php if (!in_array($name, ['id', 'status', 'created_by', 'updated_by', 'record_status', 'created_at', 'updated_at'])): ?>
             '<?= $name ?>:raw',
 <?php endif ?>
 <?php endforeach; ?>

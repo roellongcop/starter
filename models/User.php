@@ -586,15 +586,6 @@ class User extends ActiveRecord implements IdentityInterface
             // 'slug:raw',
             'userStatusHtml:raw',
             'blockedStatusLabel:raw',
-            'created_at:fulldate',
-            'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            [
-                'label' => 'Record Status',
-                'value' => $this->recordStatusHtml,
-                'format' => 'raw'
-            ]
         ];
     }
 

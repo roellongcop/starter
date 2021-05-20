@@ -196,7 +196,6 @@ class Role extends ActiveRecord
             'main_navigation:jsonEditor',
             'role_access:jsonEditor',
             'module_access:jsonEditor',
-            'slug:raw',
         ];
     }
 
