@@ -160,7 +160,8 @@ CSS);
                                         <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
                                         <?php Pjax::begin([
                                             'options' => ['class' => 'modal-my-photos'],
-                                            'enablePushState' => false
+                                            'enablePushState' => false,
+                                            'timeout' => false
                                         ]); ?>
                                         <?php Pjax::end(); ?>
                                     </div>

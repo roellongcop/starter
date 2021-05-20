@@ -5,7 +5,7 @@ use app\helpers\Html;
 use app\helpers\Url;
 use yii\helpers\StringHelper;
 ?>
-<?= Html::img(['file/display', 'token' => $model->token, 'w' => 150,], [
+<?= Html::img(['file/display', 'token' => $model->token, 'w' => 120], [
     'class' => "img-thumbnail pointer",
     'loading' => 'lazy',
     'data-id' => $model->id,

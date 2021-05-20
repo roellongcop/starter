@@ -66,6 +66,7 @@ class SettingComponent extends \yii\base\Component
                 'model_id',
                 'file_id',
                 'model_name',
+                'extension',
                 'record_status',
                 'created_by',
                 'updated_by',
@@ -74,19 +75,16 @@ class SettingComponent extends \yii\base\Component
             ])
             ->where([
                 'model_id' => $setting->id,
-                'model_name' => 'Setting'
+                'model_name' => App::getModelName($setting)
             ])
+            ->andFilterWhere(['extension' => App::params('file_extensions')['image']])
             ->groupBy(['file_id'])
             ->orderBy(['MAX(id)' => SORT_DESC])
             ->one();
 
 
-        if ($modelFile) {
-            if ($modelFile->file && $modelFile->file->isImage) {
-                if(($file = $modelFile->file) != null) {
-                    return Url::to(['file/display', 'token' => $file->token], true);
-                }
-            }
+        if ($modelFile && (($file = $modelFile->file) != null)) {
+            return Url::to(['file/display', 'token' => $file->token], true);
         }
 
         return $this->image_holder;

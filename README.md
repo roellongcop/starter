@@ -9,17 +9,12 @@
 	
 	yii seed
 
-4) visit site @ http://localhost/starter/web
-5) goto http://localhost/starter/web/api/v1/user/available-users for active users.
+	yii serve
+
+4) goto [domain]/api/v1/user/available-users for active users.
 
 ============================================================================
-IMPORTANT NOTES:
-when renaming the app, make sure to also change the "app\config\console.php"
 
-	'urlManager' => [
-        'baseUrl' => '/starter/web'
-    ]
-for the "yii seed/roles 10" to properly generate navigations
 
 # Features
 * Base on keenadmin dashboard

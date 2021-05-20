@@ -114,7 +114,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'model_name' => App::getModelName($this)
             ])
             ->andFilterWhere(['extension' => $extension])
-
             ->groupBy(['file_id'])
             ->orderBy(['MAX(id)' => SORT_DESC])
             ->one();
@@ -131,18 +130,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $this->_modelImageFiles; 
     }
 
-    public function getImageFiles()
-    {
-        if (($_modelImageFiles = $this->modelImageFiles) != null) {
-            $files = [];
-
-            foreach ($_modelImageFiles as $modelFile) {
-                array_push($files, $modelFile->file);
-            }
-            return $files;
-        }
-    }
-
     public function getModelImageFile()
     {
         if ($this->_modelImageFile) {
@@ -152,6 +139,25 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $this->_modelImageFile = $this->getModelFile(App::params('file_extensions')['image']);
 
         return $this->_modelImageFile; 
+    }
+
+    public function getImageFiles()
+    {
+        if (($modelImageFiles = $this->modelImageFiles) != null) {
+            $files = [];
+
+            foreach ($modelImageFiles as $modelFile) {
+                array_push($files, $modelFile->file);
+            }
+            return $files;
+        }
+    }
+
+    public function getImageFile()
+    {
+        if (($modelImageFile = $this->modelImageFile) != null) {
+            return $modelImageFile->file;
+        }
     }
 
     public function getImagePath($params=[])
@@ -386,7 +392,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function upload()
     {
         if (isset($this->imageInput) && $this->imageInput) {
-            App::component('file')->upload($this, 'imageInput');
+            return App::component('file')->upload($this, 'imageInput');
         } 
     }
 

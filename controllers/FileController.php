@@ -152,7 +152,7 @@ class FileController extends Controller
         $model = $this->findModel($token, 'token');
 
         if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Updated');
+            App::success('Successfully Updated.');
             return $this->redirect(['view', 'token' => $model->token]);
         }
 

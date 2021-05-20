@@ -40,7 +40,7 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
-            'baseUrl' => '/starter/web'
+            'baseUrl' => '/'
         ]
     ],
     'params' => $params,

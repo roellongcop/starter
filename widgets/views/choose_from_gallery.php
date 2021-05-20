@@ -167,7 +167,11 @@ CSS)
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
                                         <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
-                                        <?php Pjax::begin(['options' => ['class' => 'modal-my-photos']]); ?>
+                                        <?php Pjax::begin([
+                                            'options' => ['class' => 'modal-my-photos'],
+                                            'enablePushState' => false,
+                                            'timeout' => false
+                                        ]); ?>
                                         <?php Pjax::end(); ?>
                                     </div>
                                     <div class="col-md-5 col-sm-6 image-properties-panel">

@@ -6,6 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\models\Log;
 use app\models\Setting;
+use app\models\ModelFile;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
@@ -112,7 +113,7 @@ class SettingForm extends Model
 
         foreach ($settings as $setting) {
             if (in_array($setting->name, $setting->withImageInput)) {
-                $this->{$setting->name} = $setting->imagepath; 
+                $this->{$setting->name} = $setting->imagePath; 
             }
             else {
                 $this->{$setting->name} = $setting->value; 
@@ -146,7 +147,16 @@ class SettingForm extends Model
                     $setting->value = "{$setting->imageInput->baseName}.{$setting->imageInput->extension}";
                     $setting->record_status = 1;
                     if ($setting->save()) {
-                        $setting->upload();
+                        $file = $setting->upload();
+
+                        if ($file) {
+                            $modelFile = new ModelFile();
+                            $modelFile->file_id = $file->id;
+                            $modelFile->extension = $file->extension;
+                            $modelFile->model_id = $setting->id;
+                            $modelFile->model_name = App::className($setting);
+                            $modelFile->save();
+                        }
                     }
                     else {
                         App::danger($setting->errors);
