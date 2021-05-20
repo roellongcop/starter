@@ -50,7 +50,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
     //public $excel_ignore_attr = [];
     //public $fileInput;
     //public $imageInput;
-    //public $fileLocation; 
 
     /**
      * {@inheritdoc}
@@ -58,6 +57,16 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
     public static function tableName()
     {
         return '<?= $generator->generateTableName($tableName) ?>';
+    }
+
+    public function controllerID()
+    {
+        return '<?= Inflector::camel2id($className) ?>';
+    }
+
+    public function mainAttribute()
+    {
+        return 'id';
     }
  
 
@@ -148,10 +157,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
     public function getTableColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
 <?php $viewAttr = true; ?>
 <?php foreach ($labels as $name => $label): ?>
 <?php if (!in_array($name, ['id', 'status', 'created_by', 'updated_by', 'created_at', 'updated_at', 'record_status'])): ?>
@@ -173,21 +178,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
 <?php endif ?>
 <?php endif ?>
 <?php endforeach; ?>
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
@@ -196,16 +186,9 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
         return [
 <?php foreach ($labels as $name => $label): ?>
 <?php if (!in_array($name, ['id', 'status', 'created_by', 'updated_by', 'record_status'])): ?>
-<?php if (in_array($name, ['created_at', 'updated_at'])) : ?>
-<?= "\t\t\t'{$name}:fulldate',\n";?>
-<?php else: ?>
             '<?= $name ?>:raw',
 <?php endif ?>
-<?php endif ?>
 <?php endforeach; ?>
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
         ];
     }
 

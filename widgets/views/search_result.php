@@ -38,7 +38,7 @@ use yii\helpers\Inflector;
 					<p>
 						<?= Anchor::widget([
 							'title' => 'View Details',
-							'link' => [$controller . '/view', 'id' => $model->id],
+							'link' => $model->viewUrl,
 							'options' => ['class' => 'btn btn-info btn-sm']
 						]) ?>
 					</p>

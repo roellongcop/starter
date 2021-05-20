@@ -56,9 +56,14 @@ class User extends ActiveRecord implements IdentityInterface
         return '{{%users}}';
     }
 
-    public function getMainAttribute()
+    public function controllerID()
     {
-        return $this->username;
+        return 'user';
+    }
+
+    public function mainAttribute()
+    {
+        return 'username';
     }
 
     /**
@@ -486,14 +491,9 @@ class User extends ActiveRecord implements IdentityInterface
 
  
 
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
-
             'photo' => [
                 'attribute' => 'id', 
                 'label' => 'Photo',
@@ -542,18 +542,6 @@ class User extends ActiveRecord implements IdentityInterface
             // 'password_reset_token' => ['attribute' => 'password_reset_token', 'format' => 'raw'],
             // 'verification_token' => ['attribute' => 'verification_token', 'format' => 'raw'],
             // 'slug' => ['attribute' => 'slug', 'format' => 'raw'],
-            // 'is_blocked' => ['attribute' => 'is_blocked', 'format' => 'raw'],
-         
-
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
             'is_blocked' => [
                 'attribute' => 'is_blocked',
                 'label' => 'is blocked',
@@ -562,16 +550,10 @@ class User extends ActiveRecord implements IdentityInterface
                     return $model->blockedStatusHtml;
                 }
             ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             [
@@ -620,12 +602,12 @@ class User extends ActiveRecord implements IdentityInterface
         $getBulkActions['allowed'] = [
             'label' => 'Allowed',
             'process' => 'allowed',
-            'icon' => 'plus',
+            'icon' => 'check',
         ];
         $getBulkActions['blocked'] = [
             'label' => 'Blocked',
             'process' => 'blocked',
-            'icon' => 'minus',
+            'icon' => '<i class="far fa-window-close text-danger"></i>',
         ];
         return $getBulkActions;
     }

@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class IpQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'ip';
-    }
 }

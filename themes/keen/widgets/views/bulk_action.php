@@ -2,7 +2,7 @@
 
 use app\helpers\App;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+use app\helpers\Html;
 
 $this->registerJs(<<<SCRIPT
     $('a.bulk-action').on('click', function() {
@@ -32,7 +32,11 @@ SCRIPT, \yii\web\View::POS_END);
                         <?php foreach ($bulkActions as $bulkAction): ?>
                             <li class="navi-item">
                                 <a href="#" class="navi-link bulk-action" data-process="<?= $bulkAction['process'] ?>">
-                                    <?= $this->render('icon/'. $bulkAction['icon']) ?>
+                                    <?php if (Html::isHtml($bulkAction['icon'])): ?>
+                                        <?= $bulkAction['icon'] ?>
+                                    <?php else: ?>
+                                        <?= $this->render('icon/'. $bulkAction['icon']) ?>
+                                    <?php endif ?>
                                     &nbsp;
                                     <span class="navi-text">
                                         <?= $bulkAction['label'] ?>

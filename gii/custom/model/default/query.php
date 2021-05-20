@@ -33,10 +33,4 @@ namespace <?= $generator->queryNs ?>;
  */
 class <?= $className ?> extends <?= "ActiveQuery\n" ?>
 {
-
-    public function controllerID()
-    {
-        return '<?= Inflector::camel2id($modelClassName) ?>';
-    }
-
 }

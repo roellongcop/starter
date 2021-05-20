@@ -46,6 +46,15 @@ class File extends ActiveRecord
     {
         return '{{%files}}';
     }
+    public function controllerID()
+    {
+        return 'file';
+    }
+
+    public function mainAttribute()
+    {
+        return 'name';
+    }
 
 
     /**
@@ -207,13 +216,9 @@ class File extends ActiveRecord
         return App::setting('image_holder');
     }
 
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'icon' => [
                 'attribute' => 'name', 
                 'label' => 'Preview', 
@@ -237,25 +242,10 @@ class File extends ActiveRecord
             'size' => ['attribute' => 'size', 'format' => 'fileSize'],
             'location' => ['attribute' => 'location', 'format' => 'raw'],
             // 'token' => ['attribute' => 'token', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             'name:raw',
@@ -263,11 +253,6 @@ class File extends ActiveRecord
             'size:raw',
             'location:raw',
             'token:raw',
-			'created_at:fulldate',
-            'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
         ];
     }
 

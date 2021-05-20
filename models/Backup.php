@@ -38,10 +38,16 @@ class Backup extends ActiveRecord
         return '{{%backups}}';
     }
 
-    public function getMainAttribute()
+    public function controllerID()
     {
-        return $this->filename;
+        return 'backup';
     }
+
+    public function mainAttribute()
+    {
+        return 'filename';
+    }
+
 
     /**
      * {@inheritdoc}
@@ -129,13 +135,9 @@ class Backup extends ActiveRecord
     }
 
 
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'filename' => [
                 'attribute' => 'filename', 
                 'format' => 'raw',
@@ -149,21 +151,6 @@ class Backup extends ActiveRecord
             ],
             // 'tables' => ['attribute' => 'tables', 'format' => 'raw'],
             'description' => ['attribute' => 'description', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
@@ -175,17 +162,12 @@ class Backup extends ActiveRecord
         ]);
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             'filename:raw',
             'tables:jsonEditor',
             'description:raw',
-			'created_at:fulldate',
-			'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
         ];
     }
 

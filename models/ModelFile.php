@@ -37,9 +37,17 @@ class ModelFile extends ActiveRecord
     {
         return '{{%model_files}}';
     }
+
+    public function controllerID()
+    {
+        return 'model-file';
+    }
+
+    public function mainAttribute()
+    {
+        return 'id';
+    }
  
-
-
     /**
      * {@inheritdoc}
      */
@@ -89,13 +97,9 @@ class ModelFile extends ActiveRecord
      
      
 
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'model_id' => [
                 'attribute' => 'model_id', 
                 'format' => 'raw',
@@ -109,35 +113,15 @@ class ModelFile extends ActiveRecord
             ],
             'file_id' => ['attribute' => 'file_id', 'format' => 'raw'],
             'model_name' => ['attribute' => 'model_name', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             'model_id:raw',
             'file_id:raw',
             'model_name:raw',
-			'created_at:fulldate',
-			'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
         ];
     }
 

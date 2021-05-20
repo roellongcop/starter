@@ -5,8 +5,6 @@ use app\helpers\App;
 
 abstract class ActiveQuery extends \yii\db\ActiveQuery
 {
-    abstract public function controllerID();
-
     public function daterange($daterange='', $field='created_at')
     {
         if ($daterange) {
@@ -43,18 +41,24 @@ abstract class ActiveQuery extends \yii\db\ActiveQuery
 
     public function visible($alias = '')
     {
-        $field = $this->field('record_status');
+        $modelClass = $this->modelClass;
+        $class = new $modelClass();
 
+        if ($class && $class->hasMethod('controllerID')) {
+            $field = $this->field('record_status');
 
-        $condition[$field] = 1;
+            $condition[$field] = 1;
 
-        if (App::isLogin()) {
-            if (App::identity()->can('in-active-data', $this->controllerID())) {
-                $condition[$field] = '';
+            if (App::isLogin()) {
+                if (App::identity()->can('in-active-data', $class->controllerID())) {
+                    $condition[$field] = '';
+                }
             }
+
+            return $this->andFilterWhere($condition);
         }
 
-        return $this->andFilterWhere($condition);
+        return $this;
     }
 
     public function active($alias='')

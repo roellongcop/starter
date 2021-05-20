@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class ModelFileQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'model-file';
-    }
 }

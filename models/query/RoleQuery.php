@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class RoleQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'role';
-    }
 }

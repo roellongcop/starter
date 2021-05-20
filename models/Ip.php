@@ -39,6 +39,16 @@ class Ip extends ActiveRecord
         return '{{%ips}}';
     }
 
+    public function controllerID()
+    {
+        return 'ip';
+    }
+
+    public function mainAttribute()
+    {
+        return 'name';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -118,13 +128,9 @@ class Ip extends ActiveRecord
         return $this->ipType['label'] ?? '';
     }
  
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'name' => [
                 'attribute' => 'name', 
                 'format' => 'raw',
@@ -145,35 +151,15 @@ class Ip extends ActiveRecord
             ],
 
             'description' => ['attribute' => 'description', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             'name:raw',
             'description:raw',
             'ipTypeLabel:raw',
-			'created_at:fulldate',
-            'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
         ];
     }
  

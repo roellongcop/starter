@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class UserMetaQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'user-meta';
-    }
 }

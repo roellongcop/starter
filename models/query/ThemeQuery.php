@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class ThemeQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'theme';
-    }
 }

@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class SessionQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'session';
-    }
 }

@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class FileQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'file';
-    }
 }

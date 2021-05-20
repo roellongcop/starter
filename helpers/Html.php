@@ -59,4 +59,16 @@ class Html extends \yii\helpers\Html
     {
         return parent::img(Url::imagePath($path, $params), $options);
     }
+
+    public static function isHtml($string)
+    {
+        if($string != strip_tags($string)) {
+            // is HTML
+            return true;
+        }
+        else {
+            // not HTML
+            return false;
+        }
+    }
 }

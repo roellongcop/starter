@@ -35,6 +35,16 @@ class UserMeta extends ActiveRecord
     {
         return '{{%user_metas}}';
     }
+
+    public function controllerID()
+    {
+        return 'user-meta';
+    }
+
+    public function mainAttribute()
+    {
+        return 'id';
+    }
  
 
     /**
@@ -118,13 +128,9 @@ class UserMeta extends ActiveRecord
      
    
 
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'user_id' => [
                 'attribute' => 'user_id', 
                 'format' => 'raw',
@@ -149,35 +155,15 @@ class UserMeta extends ActiveRecord
                 }
             ],
             'meta_value' => ['attribute' => 'meta_value', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             'user_id:raw',
             'meta_key:raw',
             'meta_value:raw',
-			'created_at:fulldate',
-            'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
         ];
     }
     

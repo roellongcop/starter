@@ -22,6 +22,11 @@ use yii\helpers\Url;
  
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
+    public abstract function controllerID();
+    public abstract function mainAttribute();
+    public abstract function gridColumns();
+    public abstract function detailColumns();
+    
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
 
@@ -53,13 +58,97 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
+
+    public function getHeaderDetailColumns()
+    {
+        return [
+        ];
+    }
+
+    public function getFooterDetailColumns()
+    {
+        return [
+            'created_at:fulldate',
+            'updated_at:fulldate',
+            'createdByEmail',
+            'updatedByEmail',
+            'recordStatusHtml:raw'
+        ];
+    }
+
+    public function getDetailColumns()
+    {
+        return array_merge(
+            $this->getHeaderDetailColumns(),
+            $this->detailColumns(),
+            $this->getFooterDetailColumns(),
+        );
+    }
+
+
+    public function getHeaderGridColumns()
+    {
+        return [
+            'serial' => ['class' => 'yii\grid\SerialColumn'],
+            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
+        ];
+    }
+
+    public function getFooterGridColumns()
+    {
+        return [
+            'created_at' => ['attribute' => 'created_at', 'format' => 'fulldate'],
+            'last_updated' => [
+                'attribute' => 'updated_at',
+                'label' => 'last updated',
+                'format' => 'ago',
+            ],
+            'active' => [
+                'attribute' => 'record_status',
+                'label' => 'active',
+                'format' => 'raw', 
+                'value' => 'recordStatusHtml'
+            ],
+        ];
+    }
+
+    public function getGridColumns()
+    {
+        return array_merge(
+            $this->getHeaderGridColumns(),
+            $this->gridColumns(),
+            $this->getFooterGridColumns(),
+        );
+    }
+
+    public function getTableColumns()
+    {
+        return $this->getGridColumns();
+    }
+
+    public function getViewUrl()
+    {
+        return Url::to([$this->controllerID() . "/view", 'id' => ($this->id ?? '')], true);
+    }
+    public function getUpdateUrl()
+    {
+        return Url::to([$this->controllerID() . "/update", 'id' => ($this->id ?? '')], true);
+    }
+    public function getDuplicateUrl()
+    {
+        return Url::to([$this->controllerID() . "/duplicate", 'id' => ($this->id ?? '')], true);
+    }
+    public function getDeleteUrl()
+    {
+        return Url::to([$this->controllerID() . "/delete", 'id' => ($this->id ?? '')], true);
+    }
+
     public function getMainAttribute()
     {
-        if ($this->hasProperty('name')) {
-            return $this->name;
-        }
-        if ($this->hasProperty('id')) {
-            return $this->id;
+        $mainAttribute = $this->mainAttribute();
+
+        if ($this->hasProperty($mainAttribute)) {
+            return $this->{$mainAttribute};
         }
     }
 
@@ -241,8 +330,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getRecordStatusHtml()
     {
-        $controller = ($this->hasProperty('controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
-
+        $controller = $this->controllerID();
 
         if (in_array(App::actionID(), App::params('export_actions'))) {
             return $this->recordStatusLabel;
@@ -357,7 +445,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getPreview()
     {
-        $controller = ($this->hasProperty('controllerName'))? $this->controllerName: Inflector::camel2id(App::getModelName($this));
+        $controller = $this->controllerID();
 
         $url = ["{$controller}/view", 'id' => $this->id];
 

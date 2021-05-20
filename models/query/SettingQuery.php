@@ -9,11 +9,6 @@ namespace app\models\query;
  */
 class SettingQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'setting';
-    }
-
     public function general($alias='')
     {
     	$field = ($alias)? "{$alias}.type": 'type';

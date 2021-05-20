@@ -36,9 +36,14 @@ class VisitLog extends ActiveRecord
         return '{{%visit_logs}}';
     }
 
-    public function getMainAttribute()
+    public function controllerID()
     {
-        return $this->actionLabel;
+        return 'visit-log';
+    }
+
+    public function mainAttribute()
+    {
+        return 'actionLabel';
     }
 
     /**
@@ -126,13 +131,9 @@ class VisitLog extends ActiveRecord
         return App::params('visit_logs_action')[$this->action];
     }
 
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'username' => [
                 'attribute' => 'username', 
                 'label' => 'Username',
@@ -157,21 +158,6 @@ class VisitLog extends ActiveRecord
                 }
             ],
             'ip' => ['attribute' => 'ip', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
@@ -180,17 +166,12 @@ class VisitLog extends ActiveRecord
         return $this->visitLogsAction['label'];
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             'userName:raw',
             'ip:raw',
             'actionLabel:raw',
-			'created_at:fulldate',
-            'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
         ];
     }
 

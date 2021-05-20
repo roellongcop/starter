@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class LogQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'log';
-    }
 }

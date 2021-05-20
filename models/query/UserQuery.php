@@ -9,8 +9,4 @@ namespace app\models\query;
  */
 class UserQuery extends ActiveQuery
 {
-    public function controllerID()
-    {
-        return 'user';
-    }
 }

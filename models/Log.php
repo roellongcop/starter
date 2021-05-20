@@ -52,9 +52,14 @@ class Log extends ActiveRecord
         return '{{%logs}}';
     }
 
-    public function getMainAttribute()
+    public function controllerID()
     {
-        return $this->action;
+        return 'log';
+    }
+
+    public function mainAttribute()
+    {
+        return 'action';
     }
 
     /**
@@ -165,13 +170,9 @@ class Log extends ActiveRecord
         return $this->_username;
     }
    
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'username' => [
                 'attribute' => 'username', 
                 'label' => 'Username',
@@ -212,21 +213,6 @@ class Log extends ActiveRecord
             'browser' => ['attribute' => 'browser', 'format' => 'raw'],
             'os' => ['attribute' => 'os', 'format' => 'raw'],
             'device' => ['attribute' => 'device', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
@@ -256,7 +242,7 @@ class Log extends ActiveRecord
         }
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             [
@@ -289,11 +275,6 @@ class Log extends ActiveRecord
             'browser:raw',
             'os:raw',
             'device:raw',
-			'created_at:fulldate',
-            'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
         ];
     }
     public function behaviors()

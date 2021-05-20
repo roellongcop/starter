@@ -39,6 +39,24 @@ class Setting extends ActiveRecord
         'favicon'
     ];
 
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return '{{%settings}}';
+    }
+
+    public function controllerID()
+    {
+        return 'setting';
+    }
+
+    public function mainAttribute()
+    {
+        return 'name';
+    }
+
     public function getArrayAttributes()
     {
         return [
@@ -55,19 +73,6 @@ class Setting extends ActiveRecord
         return $this->value;
     }
 
-
-    public function getMainAttribute()
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%settings}}';
-    }
 
     /**
      * {@inheritdoc}
@@ -148,13 +153,9 @@ class Setting extends ActiveRecord
         return Inflector::camel2words($this->name);
     }
 
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'name' => [
                 'attribute' => 'name', 
                 'format' => 'raw',
@@ -167,34 +168,14 @@ class Setting extends ActiveRecord
                 }
             ],
             'value' => ['attribute' => 'value', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         $columns = [
             'name:raw',
             'value:raw',
-            'created_at:fulldate',
-            'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw',
         ];
 
         if (in_array($this->name, $this->withImageInput)) {

@@ -44,8 +44,16 @@ class Theme extends ActiveRecord
     {
         return '{{%themes}}';
     }
- 
 
+    public function controllerID()
+    {
+        return 'theme';
+    }
+ 
+    public function mainAttribute()
+    {
+        return 'name';
+    }
 
     /**
      * {@inheritdoc}
@@ -120,13 +128,9 @@ class Theme extends ActiveRecord
      
      
 
-    public function getTableColumns()
+    public function gridColumns()
     {
         return [
-            'serial' => [
-                'class' => 'yii\grid\SerialColumn',
-            ],
-            'checkbox' => ['class' => 'app\widgets\CheckboxColumn'],
             'preview' => [
                 'attribute' => 'name', 
                 'label' => 'preview', 
@@ -149,21 +153,6 @@ class Theme extends ActiveRecord
             // 'base_url' => ['attribute' => 'base_url', 'format' => 'raw'],
             // 'path_map' => ['attribute' => 'path_map', 'format' => 'raw'],
             // 'bundles' => ['attribute' => 'bundles', 'format' => 'raw'],
-            'created_at' => [
-                'attribute' => 'created_at',
-                'format' => 'fulldate',
-            ],
-            'last_updated' => [
-                'attribute' => 'updated_at',
-                'label' => 'last updated',
-                'format' => 'ago',
-            ],
-            'active' => [
-                'attribute' => 'record_status',
-                'label' => 'active',
-                'format' => 'raw', 
-                'value' => 'recordStatusHtml'
-            ],
         ];
     }
 
@@ -181,7 +170,7 @@ class Theme extends ActiveRecord
         ]);
     }
 
-    public function getDetailColumns()
+    public function detailColumns()
     {
         return [
             'name:raw',
@@ -190,11 +179,6 @@ class Theme extends ActiveRecord
             'base_url:raw',
             'path_mapData:raw',
             'bundlesData:raw',
-			'created_at:fulldate',
-			'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw',
             'previewImages:raw',
         ];
     }
