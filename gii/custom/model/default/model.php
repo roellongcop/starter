@@ -68,6 +68,11 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
     {
         return 'id';
     }
+
+    public function paramName()
+    {
+        return 'id';
+    }
  
 
 <?php if ($generator->db !== 'db'): ?>
@@ -167,7 +172,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model-><?= $name ?>,
-                        'link' => ['<?= $controllerID ?>/view', 'id' => $model->id],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

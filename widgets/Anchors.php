@@ -48,21 +48,23 @@ class Anchors extends \yii\base\Widget
 
             switch ($name) { 
                 case 'log':
-                    $link = [
-                        'log/index', 
-                        'model_id' => $this->model->id, 
-                        'model_name' => App::className($this->model)
-                    ];
+                    $link = $this->model->logUrl;
                     break;
                 case 'index':
                 case 'create':
                     $link = ["{$controller}/{$name}"];
                     break;
                 case 'view':
+                    $link = $this->model->viewUrl;
+                    break;
                 case 'update':
+                    $link = $this->model->updateUrl;
+                    break;
                 case 'duplicate':
+                    $link = $this->model->duplicateUrl;
+                    break;
                 case 'delete':
-                    $link = ["{$controller}/{$name}", $this->paramName => $this->model->{$this->paramName}];
+                    $link = $this->model->deleteUrl;
                     break;
                 default:
                     break;

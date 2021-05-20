@@ -46,6 +46,11 @@ class VisitLog extends ActiveRecord
         return 'actionLabel';
     }
 
+    public function paramName()
+    {
+        return 'id';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -141,7 +146,7 @@ class VisitLog extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->username,
-                        'link' => ['user/view', 'id' => $model->user_id],
+                        'link' => $model->user->viewUrl,
                         'text' => true
                     ]);
                 }
@@ -152,7 +157,7 @@ class VisitLog extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->actionLabel,
-                        'link' => ['visit-log/view', 'id' => $model->id],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

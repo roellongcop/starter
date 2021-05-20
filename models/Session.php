@@ -50,6 +50,10 @@ class Session extends ActiveRecord
     {
         return 'browser';
     }
+    public function paramName()
+    {
+        return 'id';
+    }
 
     /**
      * {@inheritdoc}
@@ -148,7 +152,7 @@ class Session extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->id,
-                        'link' => ['session/view', 'id' => $model->id],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }
@@ -165,7 +169,7 @@ class Session extends ActiveRecord
                     if ($model->username) {
                         return Anchor::widget([
                             'title' => $model->username,
-                            'link' => ['user/view', 'id' => $model->user_id],
+                            'link' => $model->user->viewUrl,
                             'text' => true
                         ]);
                     }

@@ -55,6 +55,11 @@ class Theme extends ActiveRecord
         return 'name';
     }
 
+    public function paramName()
+    {
+        return 'slug';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -125,6 +130,11 @@ class Theme extends ActiveRecord
     {
         return new ThemeQuery(get_called_class());
     }
+
+    public function getActivateUrl()
+    {
+        return Url::to(['theme/activate', 'slug' => $this->slug], true);
+    }
      
      
 
@@ -143,7 +153,7 @@ class Theme extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->name,
-                        'link' => ['theme/view', 'slug' => $model->slug],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

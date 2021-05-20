@@ -66,6 +66,11 @@ class User extends ActiveRecord implements IdentityInterface
         return 'username';
     }
 
+    public function paramName()
+    {
+        return 'slug';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -519,7 +524,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->username,
-                        'link' => ['user/view', 'slug' => $model->slug],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }
@@ -532,7 +537,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->roleName,
-                        'link' => ['role/view', 'slug' => $model->role->slug],
+                        'link' => $model->role->viewUrl,
                         'text' => true
                     ]);
                 }

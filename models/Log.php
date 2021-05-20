@@ -62,6 +62,11 @@ class Log extends ActiveRecord
         return 'action';
     }
 
+    public function paramName()
+    {
+        return 'id';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -180,7 +185,7 @@ class Log extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->username,
-                        'link' => ['user/view', 'id' => $model->user_id],
+                        'link' => $model->user->viewUrl,
                         'text' => true
                     ]);
                 }
@@ -196,7 +201,7 @@ class Log extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->action,
-                        'link' => ['log/view', 'id' => $model->id],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

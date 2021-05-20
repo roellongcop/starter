@@ -74,7 +74,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'view')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/view'). $this->actionName('View'),
-                            'link' =>  ["{$controller}/view", $this->paramName => $model->{$this->paramName}],
+                            'link' =>  $model->viewUrl,
                             'options' => [
                                 'class' => 'navi-link',
                                 'title' => 'View',
@@ -86,7 +86,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'update')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/edit'). $this->actionName('Update'),
-                            'link' =>  ["{$controller}/update", $this->paramName => $model->{$this->paramName}],
+                            'link' =>  $model->updateUrl,
                             'options' => [
                                 'class' => 'navi-link',
                                 'title' => 'Update',
@@ -98,7 +98,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'duplicate')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/copy'). $this->actionName('Duplicate'),
-                            'link' =>  ["{$controller}/duplicate", $this->paramName => $model->{$this->paramName}],
+                            'link' =>  $model->duplicateUrl,
                             'options' => [
                                 'class' => 'navi-link',
                                 'title' => 'Duplicate',
@@ -110,7 +110,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'delete')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/delete'). $this->actionName('Delete'),
-                            'link' =>  ["{$controller}/delete", $this->paramName => $model->{$this->paramName}],
+                            'link' =>  $model->deleteUrl,
                             'options' => [
                                 'class' => 'navi-link delete',
                                 'title' => 'Delete',
@@ -124,7 +124,7 @@ class Grid extends \yii\base\Widget
                     if (App::modelCan($model, 'activate')) {
                         return Anchor::widget([
                             'title' => $this->render('icon/check'). $this->actionName('Activate'),
-                            'link' => ['theme/activate', $this->paramName => $model->{$this->paramName}],
+                            'link' => $model->activateUrl,
                             'options' => [
                                 'class' => 'navi-link delete',
                                 'data-method' => 'post',

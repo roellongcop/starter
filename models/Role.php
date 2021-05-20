@@ -51,6 +51,11 @@ class Role extends ActiveRecord
         return 'name';
     }
 
+    public function paramName()
+    {
+        return 'slug';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -172,7 +177,7 @@ class Role extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->name,
-                        'link' => ['role/view', 'slug' => $model->slug],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

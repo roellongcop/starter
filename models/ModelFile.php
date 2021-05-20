@@ -47,6 +47,10 @@ class ModelFile extends ActiveRecord
     {
         return 'id';
     }
+    public function paramName()
+    {
+        return 'id';
+    }
  
     /**
      * {@inheritdoc}
@@ -106,7 +110,7 @@ class ModelFile extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->model_id,
-                        'link' => ['model-file/view', 'id' => $model->id],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

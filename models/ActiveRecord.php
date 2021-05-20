@@ -26,6 +26,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public abstract function mainAttribute();
     public abstract function gridColumns();
     public abstract function detailColumns();
+    public abstract function paramName();
     
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
@@ -126,21 +127,45 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $this->getGridColumns();
     }
 
+    public function getLogUrl()
+    {
+        return Url::to([
+            'log/index', 
+            'model_id' => ($this->id ?? ''),
+            'model_name' => App::className($this)
+        ], true);
+    }
     public function getViewUrl()
     {
-        return Url::to([$this->controllerID() . "/view", 'id' => ($this->id ?? '')], true);
+        $paramName = $this->paramName();
+        return Url::to([
+            $this->controllerID() . "/view", 
+            $paramName => $this->{$paramName}
+        ], true);
     }
     public function getUpdateUrl()
     {
-        return Url::to([$this->controllerID() . "/update", 'id' => ($this->id ?? '')], true);
+        $paramName = $this->paramName();
+        return Url::to([
+            $this->controllerID() . "/update", 
+            $paramName => $this->{$paramName}
+        ], true);
     }
     public function getDuplicateUrl()
     {
-        return Url::to([$this->controllerID() . "/duplicate", 'id' => ($this->id ?? '')], true);
+        $paramName = $this->paramName();
+        return Url::to([
+            $this->controllerID() . "/duplicate", 
+            $paramName => $this->{$paramName}
+        ], true);
     }
     public function getDeleteUrl()
     {
-        return Url::to([$this->controllerID() . "/delete", 'id' => ($this->id ?? '')], true);
+        $paramName = $this->paramName();
+        return Url::to([
+            $this->controllerID() . "/delete", 
+            $paramName => $this->{$paramName}
+        ], true);
     }
 
     public function getMainAttribute()

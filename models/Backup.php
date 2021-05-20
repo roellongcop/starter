@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Url;
 use app\models\query\BackupQuery;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
@@ -46,6 +47,10 @@ class Backup extends ActiveRecord
     public function mainAttribute()
     {
         return 'filename';
+    }
+    public function paramName()
+    {
+        return 'slug';
     }
 
 
@@ -134,6 +139,21 @@ class Backup extends ActiveRecord
         return false;
     }
 
+    public function getViewUrl()
+    {
+        return Url::to(['backup/view', 'slug' => $this->slug], true);
+    }
+
+    public function getDeleteUrl()
+    {
+        return Url::to(['backup/delete', 'slug' => $this->slug], true);
+    }
+
+    public function getDuplicateUrl()
+    {
+        return Url::to(['backup/duplicate', 'slug' => $this->slug], true);
+    }
+
 
     public function gridColumns()
     {
@@ -144,7 +164,7 @@ class Backup extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->filename,
-                        'link' => ['backup/view', 'slug' => $model->slug],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

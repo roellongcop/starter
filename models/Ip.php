@@ -48,6 +48,10 @@ class Ip extends ActiveRecord
     {
         return 'name';
     }
+    public function paramName()
+    {
+        return 'slug';
+    }
 
     /**
      * {@inheritdoc}
@@ -137,7 +141,7 @@ class Ip extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->name,
-                        'link' => ['ip/view', 'slug' => $model->slug],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

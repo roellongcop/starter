@@ -57,6 +57,11 @@ class Setting extends ActiveRecord
         return 'name';
     }
 
+    public function paramName()
+    {
+        return 'id';
+    }
+
     public function getArrayAttributes()
     {
         return [
@@ -162,7 +167,7 @@ class Setting extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->name,
-                        'link' => ['setting/view', 'id' => $model->id],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

@@ -45,6 +45,10 @@ class UserMeta extends ActiveRecord
     {
         return 'id';
     }
+    public function paramName()
+    {
+        return 'id';
+    }
  
 
     /**
@@ -138,7 +142,7 @@ class UserMeta extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->username,
-                        'link' => ['user/view', 'id' => $model->user_id],
+                        'link' => $model->user->viewUrl,
                         'text' => true
                     ]);
                 }
@@ -149,7 +153,7 @@ class UserMeta extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->meta_key,
-                        'link' => ['user-meta/view', 'id' => $model->id],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }

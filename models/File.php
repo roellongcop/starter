@@ -50,10 +50,13 @@ class File extends ActiveRecord
     {
         return 'file';
     }
-
     public function mainAttribute()
     {
         return 'name';
+    }
+    public function paramName()
+    {
+        return 'token';
     }
 
 
@@ -216,6 +219,7 @@ class File extends ActiveRecord
         return App::setting('image_holder');
     }
 
+
     public function gridColumns()
     {
         return [
@@ -232,7 +236,7 @@ class File extends ActiveRecord
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->name,
-                        'link' => ['file/view', 'token' => $model->token],
+                        'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }
