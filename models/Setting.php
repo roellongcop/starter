@@ -59,7 +59,7 @@ class Setting extends ActiveRecord
 
     public function paramName()
     {
-        return 'id';
+        return 'name';
     }
 
     public function getArrayAttributes()

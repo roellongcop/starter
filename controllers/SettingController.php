@@ -44,10 +44,10 @@ class SettingController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($name)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($name, 'name'),
         ]);
     }
 
@@ -59,13 +59,14 @@ class SettingController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($name)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($name, 'name');
 
         if ($model->load(App::post()) && $model->save()) {
+            $this->checkFileUpload($model);
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'name' => $model->name]);
         }
 
         return $this->render('update', [
@@ -80,9 +81,9 @@ class SettingController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($name)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($name, 'name');
 
         if($model->delete()) {
             App::success('Successfully Deleted');

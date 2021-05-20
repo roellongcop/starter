@@ -3,7 +3,7 @@
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
-use app\widgets\ChangePhoto;
+use app\widgets\ChooseFromGallery;
 use app\widgets\KeenActiveForm;
 
 /* @var $this yii\web\View */
@@ -29,9 +29,9 @@ use app\widgets\KeenActiveForm;
             
 
             <?php if ($model->hasImageInput): ?>
-               <?= ChangePhoto::widget([
+                <?= ChooseFromGallery::widget([
                     'model' => $model,
-                    'ajaxSuccess' => "function(s) {
+                    'ajaxSuccess' => "
                         if(s.status == 'success') {
                             KTApp.block('#sipc', {
                                 overlayColor: '#000000',
@@ -42,24 +42,22 @@ use app\widgets\KeenActiveForm;
                             setTimeout(function() {
                                 KTApp.unblock('#sipc');
                             }, 1000);
+                            $('#sipc img').attr('src', s.src + '&w=200')
+                        }
+                    ",
+                    'dropzoneSuccess' => "
+                        KTApp.block('#sipc', {
+                            overlayColor: '#000000',
+                            state: 'primary',
+                            message: 'Processing...'
+                        });
 
-                            $('#setting-imageinput-preview').attr('src', s.src + '&w=200')
-                            if($('#setting-name').val() == 'primary_logo') {
-                                $('#kt_header_mobile>a>img').attr('src', s.src + '&w=200')
-                                $('a.brand-logo>img').attr('src', s.src + '&w=200')
-                                $('#kt_header_mobile>a>img').css('width', '50')
-                            }
-                        }
-                    }",
-                    'dropzoneComplete' => "
-                        $('#setting-imageinput-preview').attr('src', file.dataURL)
-                        if($('#setting-name').val() == 'primary_logo') {
-                            $('#kt_header_mobile>a>img').attr('src', file.dataURL)
-                            $('a.brand-logo>img').attr('src', file.dataURL)
-                            $('#kt_header_mobile>a>img').css('width', '50')
-                        }
+                        setTimeout(function() {
+                            KTApp.unblock('#sipc');
+                        }, 1000);
+                        $('#sipc img').attr('src', file.dataURL)
                     "
-                ]) ?>
+                ]) ?> 
                 <br>
                 <div id="sipc" style="max-width: 200px">
                     <img id="setting-imageinput-preview" 

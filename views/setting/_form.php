@@ -1,9 +1,10 @@
 <?php
 
 use app\helpers\App;
+use app\helpers\Html;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
-use app\widgets\ChangePhoto;
+use app\widgets\ChooseFromGallery;
 use app\widgets\ImagePreview;
 use app\widgets\ActiveForm;
 
@@ -25,32 +26,27 @@ use app\widgets\ActiveForm;
             <?php if ($model->hasImageInput): ?>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'imageInput')->fileInput() ?>
+                        <div id="sipc" style="max-width: 200px">
+                            <?= Html::img(
+                                $model->getImagePath(['w'=>200]),
+                                ['class' => 'img-thumbnail', 'loading' => 'lazy']
+                            ) ?>
+                        </div>
                     </div>
                     <div class="col-md-6"> <br>
-                        <?= ChangePhoto::widget([
-                            'buttonTitle' => 'Choose from gallery',
+                        <?= ChooseFromGallery::widget([
                             'model' => $model,
-                            'ajaxSuccess' => "function(s) {
+                            'fileInput' => $form->field($model, 'imageInput')
+                                ->fileInput()
+                                ->label('Upload Photo'),
+                            'ajaxSuccess' => "
                                 if(s.status == 'success') {
-                                    $('#setting-imageinput-preview').attr('src', s.src + '&w=200')
+                                    $('#sipc img').attr('src', s.src + '&w=200')
                                 }
-                            }"
-                        ]) ?>
+                            ",
+                        ]) ?> 
                     </div>
                 </div>
-
-
-                <?= ImagePreview::widget([
-                    'model' => $model,
-                    'attribute' => 'imageInput',
-                    'src' => ($model->imagePath)? $model->imagePath . '&w=200': '',
-                    'options' => [
-                        'class' => 'img-thumbnail',
-                        'loading' => 'lazy',
-                        'style' => 'max-width:200px'
-                    ]
-                ]) ?>
                 
             <?php endif ?>
 

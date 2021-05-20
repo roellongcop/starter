@@ -77,7 +77,9 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                     ->fileInput()
                     ->label('Upload Photo'),
                 'ajaxSuccess' => "
-                    $('#sipc img').attr('src', s.src + '&w=200');
+                    if(s.status == 'success') {
+                        $('#sipc img').attr('src', s.src + '&w=200');
+                    }
                 "
             ]) ?> 
             <div class="alert alert-info">
