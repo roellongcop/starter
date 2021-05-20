@@ -78,7 +78,7 @@ class BackupController extends Controller
                 App::danger('Error in creating backup file.');
             }
 
-            return $this->redirect(['view', 'slug' => $model->slug]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('create', [
@@ -119,7 +119,7 @@ class BackupController extends Controller
                 App::danger('Error in duplicating backup file.');
             }
 
-            return $this->redirect(['view', 'slug' => $model->slug]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('duplicate', [
@@ -141,7 +141,7 @@ class BackupController extends Controller
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('update', [

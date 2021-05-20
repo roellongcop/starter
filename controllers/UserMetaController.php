@@ -59,7 +59,7 @@ class UserMetaController extends Controller
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Created');
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('create', [
@@ -80,7 +80,7 @@ class UserMetaController extends Controller
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('update', [

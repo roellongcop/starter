@@ -64,7 +64,7 @@ class UserController extends Controller
             if ($model->save()) {
                 $this->checkFileUpload($model);
                 App::success('Successfully Created');
-                return $this->redirect(['view', 'slug' => $model->slug]);
+                return $this->redirect($model->viewUrl);
             }
         }
 
@@ -92,7 +92,7 @@ class UserController extends Controller
             if ($model->save()) {
                 $this->checkFileUpload($model);
                 App::success('Successfully Duplicated');
-                return $this->redirect(['view', 'slug' => $model->slug]);
+                return $this->redirect($model->viewUrl);
             }
         }
 
@@ -116,7 +116,7 @@ class UserController extends Controller
         if ($model->load(App::post()) && $model->save()) {
             $this->checkFileUpload($model);
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'slug' => $model->slug]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('update', [

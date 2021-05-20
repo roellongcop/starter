@@ -100,7 +100,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Created');
 
-            return $this->redirect(['view', <?= $urlParams ?>]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('create', [
@@ -124,7 +124,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Duplicated');
 
-            return $this->redirect(['view', <?= $urlParams ?>]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('duplicate', [
@@ -146,7 +146,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
-            return $this->redirect(['view', <?= $urlParams ?>]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('update', [

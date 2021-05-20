@@ -69,7 +69,7 @@ class RoleController extends Controller
             }
             if ($model->save()) {
                 App::success('Successfully Created');
-                return $this->redirect(['view', 'slug' => $model->slug]);
+                return $this->redirect($model->viewUrl);
             }
         }
 
@@ -107,7 +107,7 @@ class RoleController extends Controller
             }
             if ($model->save()) {
                 App::success('Successfully Duplicated');
-                return $this->redirect(['view', 'slug' => $model->slug]);
+                return $this->redirect($model->viewUrl);
             }
         }
 
@@ -143,7 +143,7 @@ class RoleController extends Controller
             }
             if ($model->save()) {
                 App::success('Successfully Updated');
-                return $this->redirect(['view', 'slug' => $model->slug]);
+                return $this->redirect($model->viewUrl);
             }
         }
 

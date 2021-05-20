@@ -58,7 +58,7 @@ class ModelFileController extends Controller
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Created');
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('create', [
@@ -81,7 +81,7 @@ class ModelFileController extends Controller
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Duplicated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('duplicate', [
@@ -103,7 +103,7 @@ class ModelFileController extends Controller
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('update', [
