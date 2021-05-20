@@ -1,7 +1,7 @@
 # yii2 keen admin dashboard
 1) create database "db_starter"
 2) you may need to adjust the "app/config/db.php" for credentials
-3) open cmd, goto "app" folder then run:
+3) open cmd, goto root folder then run:
 
 	composer install or composer update
 	
@@ -34,7 +34,7 @@
 * Dynamic Themes
 * Rest API setup
 * General Settings
-* Change photo Uploader (dropzone)
+* Photo Uploader (dropzone)
 
 # Modules
 * Dashboard
