@@ -6,7 +6,7 @@ use app\models\search\BackupSearch;
 
 $this->title = 'Update Backup: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new BackupSearch();
 $this->params['showCreateButton'] = true; 

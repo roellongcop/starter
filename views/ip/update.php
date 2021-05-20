@@ -7,7 +7,7 @@ use app\models\search\IpSearch;
 
 $this->title = 'Update Ip: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => ['view', 'slug' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new IpSearch();
 $this->params['showCreateButton'] = true; 

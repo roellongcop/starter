@@ -7,7 +7,7 @@ use app\models\search\SettingSearch;
 
 $this->title = 'Update Setting: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new SettingSearch();
 $this->params['showCreateButton'] = true; 

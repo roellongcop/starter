@@ -6,7 +6,7 @@ use app\models\search\FileSearch;
 
 $this->title = 'Update File: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new FileSearch();
 $this->params['showCreateButton'] = true; 

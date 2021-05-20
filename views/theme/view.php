@@ -8,9 +8,9 @@ use app\widgets\Detail;
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
 
-$this->title = 'Theme: ' . $model->name;
+$this->title = 'Theme: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Themes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->name;
+$this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new ThemeSearch();
 $this->params['showCreateButton'] = true; 
 ?>

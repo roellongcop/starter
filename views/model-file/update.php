@@ -7,7 +7,7 @@ use app\models\search\ModelFileSearch;
 
 $this->title = 'Update Model File: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Model Files', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new ModelFileSearch();
 $this->params['showCreateButton'] = true; 

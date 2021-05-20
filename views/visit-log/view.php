@@ -7,9 +7,9 @@ use app\widgets\Detail;
 /* @var $this yii\web\View */
 /* @var $model app\models\VisitLog */
 
-$this->title = "Visit Log: {$model->actionLabel}";
+$this->title = 'Visit Log: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Visit Logs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->actionLabel;
+$this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new VisitLogSearch();
 $this->params['showCreateButton'] = true; 
 ?>

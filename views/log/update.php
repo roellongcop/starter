@@ -7,7 +7,7 @@ use app\models\search\LogSearch;
 
 $this->title = 'Update Log: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Logs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new LogSearch();
 $this->params['showCreateButton'] = true; 

@@ -9,7 +9,7 @@ use app\widgets\ActiveForm;
 
 $this->title = 'Profile : ' . $user->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $user->mainAttribute, 'url' => ['view', 'slug' => $user->slug]];
+$this->params['breadcrumbs'][] = ['label' => $user->mainAttribute, 'url' => $user->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new UserSearch();
 ?>

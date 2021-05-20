@@ -43,7 +43,7 @@ class UserMeta extends ActiveRecord
 
     public function mainAttribute()
     {
-        return 'id';
+        return 'meta_key';
     }
     public function paramName()
     {
