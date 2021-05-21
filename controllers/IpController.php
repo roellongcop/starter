@@ -189,13 +189,13 @@ class IpController extends Controller
                     switch ($post['process-selected']) {
                         case 'active':
                             Ip::updateAll(
-                                ['record_status' => 1],
+                                ['record_status' => 1, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
                             Ip::updateAll(
-                                ['record_status' => 0],
+                                ['record_status' => 0, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
@@ -204,13 +204,13 @@ class IpController extends Controller
                             break;
                         case 'white_list':
                             Ip::updateAll(
-                                ['type' => 1],
+                                ['type' => 1, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'black_list':
                             Ip::updateAll(
-                                ['type' => 0],
+                                ['type' => 0, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;

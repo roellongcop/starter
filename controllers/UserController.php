@@ -202,13 +202,13 @@ class UserController extends Controller
                     switch ($post['process-selected']) {
                         case 'active':
                             User::updateAll(
-                                ['record_status' => 1],
+                                ['record_status' => 1, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
                             User::updateAll(
-                                ['record_status' => 0],
+                                ['record_status' => 0, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
@@ -217,13 +217,13 @@ class UserController extends Controller
                             break;
                         case 'allowed':
                             User::updateAll(
-                                ['is_blocked' => 0],
+                                ['is_blocked' => 0, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'blocked':
                             User::updateAll(
-                                ['is_blocked' => 1],
+                                ['is_blocked' => 1, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;

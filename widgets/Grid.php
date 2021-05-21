@@ -19,7 +19,7 @@ class Grid extends \yii\base\Widget
     public $formatter = ['class' => '\app\components\FormatterComponent'];
     
     public $paramName = 'id';
-
+    public $layout;
     public function init() 
     {
         // your logic here
@@ -36,7 +36,7 @@ class Grid extends \yii\base\Widget
         $this->columns = $columns;
 
         $this->columns['actions'] = $this->columns['actions'] ?? $this->actionColumns();
-        
+        $this->layout = $this->layout ?: $this->render('grid/layout');
     }
 
     public function actionName($name)
@@ -144,6 +144,7 @@ class Grid extends \yii\base\Widget
     public function run()
     {
         return GridView::widget([
+            'layout' => $this->layout,
             'dataProvider' => $this->dataProvider,
             'options' => $this->options,
             'columns' => $this->columns,

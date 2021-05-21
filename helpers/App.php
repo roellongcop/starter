@@ -13,6 +13,11 @@ class App {
 		return Yii::$app;
 	}
 
+	public static function timestamp()
+	{
+		return new Expression('UTC_TIMESTAMP');
+	}
+
 	public static function isLogin()
 	{
 		return ! self::isGuest();

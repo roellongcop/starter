@@ -152,13 +152,13 @@ class SettingController extends Controller
                     switch ($post['process-selected']) {
                         case 'active':
                             Setting::updateAll(
-                                ['record_status' => 1],
+                                ['record_status' => 1, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
                             Setting::updateAll(
-                                ['record_status' => 0],
+                                ['record_status' => 0, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;

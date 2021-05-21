@@ -187,13 +187,13 @@ class LogController extends Controller
                     switch ($post['process-selected']) {
                         case 'active':
                             Log::updateAll(
-                                ['record_status' => 1],
+                                ['record_status' => 1, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
                             Log::updateAll(
-                                ['record_status' => 0],
+                                ['record_status' => 0, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
