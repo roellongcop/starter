@@ -75,4 +75,13 @@ class ProfileForm extends \yii\base\Model
             return true;
         }
     }
+
+    public function getDetailColumns()
+    {
+        return [
+            'user_id:raw',
+            'first_name:raw',
+            'last_name:raw',
+        ];
+    }
 }

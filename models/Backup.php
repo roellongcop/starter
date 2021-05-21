@@ -48,6 +48,7 @@ class Backup extends ActiveRecord
     {
         return 'filename';
     }
+    
     public function paramName()
     {
         return 'slug';
@@ -138,22 +139,6 @@ class Backup extends ActiveRecord
         }
         return false;
     }
-
-    public function getViewUrl()
-    {
-        return Url::to(['backup/view', 'slug' => $this->slug], true);
-    }
-
-    public function getDeleteUrl()
-    {
-        return Url::to(['backup/delete', 'slug' => $this->slug], true);
-    }
-
-    public function getDuplicateUrl()
-    {
-        return Url::to(['backup/duplicate', 'slug' => $this->slug], true);
-    }
-
 
     public function gridColumns()
     {

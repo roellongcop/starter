@@ -38,4 +38,7 @@ $this->params['showCreateButton'] = true;
     ]) ?>
     <hr>
     <?= Detail::widget(['model' => $model]) ?>
+
+    <p class="lead">Profile</p>
+    <?= Detail::widget(['model' => $model->profile]) ?>
 </div>
