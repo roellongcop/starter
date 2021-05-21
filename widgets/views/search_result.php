@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\Detail;
 use yii\helpers\Inflector;
@@ -29,8 +30,8 @@ use yii\helpers\Inflector;
 					data-target="#<?= $module ?>-tab-<?= $model->id ?>" 
 					aria-expanded="false">
 					<?= $counter ?>) 
-					<?= $model->mainAttribute ?>
-					&nbsp; <small>(<?= $model->createdAt ?>)</small>
+					<button type="button"><?= $model->mainAttribute ?></button>
+					(<?= App::formatter('asFulldate', $model->created_at) ?>)
 				</div>
 			</div>
 			<div id="<?= $module ?>-tab-<?= $model->id ?>" class="collapse" data-parent="#<?= $module ?>" style="">

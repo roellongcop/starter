@@ -487,17 +487,17 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             'active' => [
                 'label' => 'Set as Active',
                 'process' => 'active',
-                'icon' => 'active',
+                'icon' => '<i class="far fa-eye text-success"></i>',
             ],
             'in_active' => [
                 'label' => 'Set as In-active',
                 'process' => 'in_active',
-                'icon' => 'in_active',
+                'icon' => '<i class="far fa-eye-slash text-warning"></i>',
             ],
             'delete' => [
                 'label' => 'Delete',
                 'process' => 'delete',
-                'icon' => 'delete',
+                'icon' => '<i class="far fa-trash-alt text-danger"></i>',
             ]
         ];
     }

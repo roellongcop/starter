@@ -40,22 +40,22 @@ use yii\helpers\Html;
 							data-toggle="collapse" 
 							data-target="#collapse-action-<?= $model->id ?>">
 
-							<?= $this->render('icon/double_angle_left') ?>
-							<?= number_format(($key + 1)) ?>. 
-
 							<div class="card-label pl-4">
-								<?= $model->mainAttribute ?>
+								<?= number_format(($key + 1)) ?>. 
+								<button type="button">
+									<?= $model->mainAttribute ?>
+								</button>
+								<span>
+									<?php if (App::modelCan($model, $post['process-selected'])): ?>
+										<input type="hidden" 
+											name="selection[]" 
+											value="<?= $model->id ?>">
+										<span class="label label-success">Applicable</span>
+									<?php else: ?>
+										<span class="label label-danger">Not Applicable</span>
+									<?php endif ?>
+								</span>
 							</div>
-							<span>
-								<?php if (App::modelCan($model, $post['process-selected'])): ?>
-									<input type="hidden" 
-										name="selection[]" 
-										value="<?= $model->id ?>">
-									<span class="badge badge-success">Applicable</span>
-								<?php else: ?>
-									<span class="badge badge-danger">Not Applicable</span>
-								<?php endif ?>
-							</span>
 						</div>
 					</div>
 					<div id="collapse-action-<?= $model->id ?>" 

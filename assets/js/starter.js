@@ -39,7 +39,7 @@ var checkAllRole = function(self) {
 $(document).ready(function() {
 
 
-    $('input[name="selection[]"]').on('change', function() {
+    $(document).on('change', 'input[name="selection[]"]', function() {
         var is_checked = $(this).is(':checked');
         var tr = $(this).closest('tr');
 

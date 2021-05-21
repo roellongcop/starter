@@ -4,7 +4,6 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-use yii\grid\GridView;
 
  
 class Grid extends \yii\base\Widget
@@ -12,7 +11,7 @@ class Grid extends \yii\base\Widget
     public $dataProvider;
     public $columns;
     public $options = ['class' => 'table-responsive'];
-    public $pager = ['class' => 'app\widgets\LinkPager'];
+    public $pager = ['class' => 'yii\widgets\LinkPager'];
     public $searchModel;
     public $template = ['view', 'update', 'duplicate', 'delete'];
     public $controller;
@@ -24,6 +23,12 @@ class Grid extends \yii\base\Widget
     {
         // your logic here
         parent::init();
+        $currentTheme = App::identity('currentTheme');
+        $keenThemes = App::params('keen_themes');
+        if (in_array($currentTheme->slug, $keenThemes)) {
+            $this->pager['class'] = 'app\widgets\LinkPager';
+        }
+
         $filterColumns = App::identity()->filterColumns($this->searchModel);
 
         $columns = $this->searchModel->tableColumns;
@@ -73,7 +78,7 @@ class Grid extends \yii\base\Widget
                 'view' => function($url, $model) use($controller) {
                     if (App::modelCan($model, 'view')) {
                         return Anchor::widget([
-                            'title' => $this->render('icon/view'). $this->actionName('View'),
+                            'title' => '<i class="far fa-dot-circle text-info"></i>'. $this->actionName('View'),
                             'link' =>  $model->viewUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -85,7 +90,7 @@ class Grid extends \yii\base\Widget
                 'update' => function($url, $model) use ($controller){
                     if (App::modelCan($model, 'update')) {
                         return Anchor::widget([
-                            'title' => $this->render('icon/edit'). $this->actionName('Update'),
+                            'title' => '<i class="far fa-edit text-warning"></i>'. $this->actionName('Update'),
                             'link' =>  $model->updateUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -97,7 +102,7 @@ class Grid extends \yii\base\Widget
                 'duplicate' => function($url, $model) use ($controller){
                     if (App::modelCan($model, 'duplicate')) {
                         return Anchor::widget([
-                            'title' => $this->render('icon/copy'). $this->actionName('Duplicate'),
+                            'title' => '<i class="far fa-copy text-default"></i>'. $this->actionName('Duplicate'),
                             'link' =>  $model->duplicateUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -109,7 +114,7 @@ class Grid extends \yii\base\Widget
                 'delete' => function($url, $model) use ($controller) {
                     if (App::modelCan($model, 'delete')) {
                         return Anchor::widget([
-                            'title' => $this->render('icon/delete'). $this->actionName('Delete'),
+                            'title' => '<i class="far fa-trash-alt text-danger"></i>'. $this->actionName('Delete'),
                             'link' =>  $model->deleteUrl,
                             'options' => [
                                 'class' => 'navi-link delete',
@@ -123,7 +128,7 @@ class Grid extends \yii\base\Widget
                 'activate' => function($url, $model) use ($controller) {
                     if (App::modelCan($model, 'activate')) {
                         return Anchor::widget([
-                            'title' => $this->render('icon/check'). $this->actionName('Activate'),
+                            'title' => '<i class="fa fa-check text-success"></i>'. $this->actionName('Activate'),
                             'link' => $model->activateUrl,
                             'options' => [
                                 'class' => 'navi-link delete',
@@ -143,7 +148,8 @@ class Grid extends \yii\base\Widget
      */
     public function run()
     {
-        return GridView::widget([
+        return $this->render('grid/index', [
+            'id' => $this->id,
             'layout' => $this->layout,
             'dataProvider' => $this->dataProvider,
             'options' => $this->options,

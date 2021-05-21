@@ -23,7 +23,7 @@ use app\widgets\ActiveForm;
                 'label' => 'Username',
                 'model' => $model,
                 'form' => $form,
-                'data' => UserSearch::dropdown(),
+                'data' => UserSearch::dropdown('id', 'email'),
             ]) ?>
 
             <?= $form->field($model, 'ip')->textInput(['maxlength' => true]) ?>

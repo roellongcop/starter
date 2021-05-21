@@ -127,7 +127,6 @@ return [
         ],
     ],
 
-
     'ip_type' => [
         0 => [
             'id' => 0,
@@ -141,7 +140,6 @@ return [
         ],
     ],
 
-
     'pagination' => [
         20 => 20,
         50 => 50,
@@ -150,4 +148,21 @@ return [
         500 => 500,
         1000 => 1000,
     ], 
+
+    'keen_themes' => [
+        'demo1-main',
+        'demo1-main-fluid',
+        'light',
+        'light-fluid',
+        'dark',
+        'dark-fluid',
+        'no-aside-light',
+        'no-aside-light-fluid',
+        'no-aside-dark',
+        'no-aside-dark-fluid',
+        'demo2-fixed',
+        'demo2-fluid',
+        'demo3-fixed',
+        'demo3-fluid',
+    ],
 ];
