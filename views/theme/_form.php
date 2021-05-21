@@ -16,7 +16,7 @@ use app\widgets\ActiveForm;
 /* @var $model app\models\Theme */
 /* @var $form yii\widgets\ActiveForm */
 $this->registerJs(<<< SCRIPT
-    $('form.form').submit(function(event) {
+    $('form.form').on('beforeSubmit', function(event) {
         event.preventDefault();
         $('#theme-path_map').val(JSON.stringify(editors['path_map'].get()))
         $('#theme-bundles').val(JSON.stringify(editors['bundles'].get()))
