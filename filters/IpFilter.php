@@ -22,7 +22,8 @@ class IpFilter extends ActionFilter
                 $model = new Ip([
                     'record_status' => 1,
                     'name' => $ip,
-                    'type' => 1
+                    'type' => 1,
+                    'description' => 'IP Session: ' . App::session('id')
                 ]);
 
                 $model->save();

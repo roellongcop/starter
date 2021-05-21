@@ -2,6 +2,7 @@
 
 use yii\db\Migration;
 use yii\helpers\Inflector;
+use yii\db\Expression;
 
 /**
  * Class m210314_045639_seed_themes_table
@@ -30,6 +31,8 @@ class m210314_045639_seed_themes_table extends Migration
                 'bundles' => json_encode($theme['bundles'] ?? []),
                 'slug' => Inflector::slug($theme['name']),
                 'record_status' => 1,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
             ];
             $this->insert($this->tableName(), $data);
         }
