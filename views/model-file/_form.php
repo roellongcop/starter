@@ -1,7 +1,7 @@
 <?php
 
 use app\helpers\App;
-use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use app\widgets\AnchorForm;
 use app\widgets\ActiveForm;
 
@@ -18,13 +18,10 @@ use app\widgets\ActiveForm;
 			<?= $form->field($model, 'model_id')->textInput() ?>
 			<?= $form->field($model, 'file_id')->textInput() ?>
 			<?= $form->field($model, 'model_name')->textInput(['maxlength' => true]) ?>
-			<?= BootstrapSelect::widget([
-	            'attribute' => 'record_status',
-	            'searchable' => false,
-	            'model' => $model,
-	            'form' => $form,
-	            'data' => App::mapParams('record_status'),
-	        ]) ?>
+			<?= RecordStatusInput::widget([
+                'model' => $model,
+                'form' => $form,
+            ]) ?>
         </div>
     </div>
     <div class="form-group">

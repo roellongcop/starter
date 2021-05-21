@@ -159,7 +159,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
      
      
 
-    public function tableColumns()
+    public function gridColumns()
     {
         return [
 <?php $viewAttr = true; ?>

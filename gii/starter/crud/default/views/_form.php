@@ -17,7 +17,7 @@ echo "<?php\n";
 ?>
 
 use app\helpers\App;
-use app\widgets\BootstrapSelect;
+use app\widgets\RecordStatusInput;
 use app\widgets\AnchorForm;
 use app\widgets\ActiveForm;
 
@@ -38,13 +38,10 @@ echo "\t\t\t<?= " . $generator->generateActiveField($attribute) . " ?>\n";
 }
 }
 } ?>
-			<?= '<?=' ?> BootstrapSelect::widget([
-	            'attribute' => 'record_status',
-	            'searchable' => false,
-	            'model' => $model,
-	            'form' => $form,
-	            'data' => App::mapParams('record_status'),
-	        ]) ?>
+			<?= '<?=' ?> RecordStatusInput::widget([
+                'model' => $model,
+                'form' => $form,
+            ]) ?>
         </div>
     </div>
     <div class="form-group">
