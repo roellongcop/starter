@@ -262,12 +262,16 @@ class SettingController extends Controller
     public function actionGeneral($tab='general')
     {
         $model = new SettingForm();
+        if (($post = App::post()) != null) {
+            $post['SettingForm']['whitelist_ip_only'] = $post['SettingForm']['whitelist_ip_only'] ?? 0;
 
-        if ($model->load(App::post()) && $model->validate()) {
-            $model->save();
-            App::success('Successfully Changed');
+            if ($model->load($post) && $model->validate()) {
 
-            return $this->redirect(['general', 'tab' => $tab]);
+                $model->save();
+                App::success('Successfully Changed');
+
+                return $this->redirect(['general', 'tab' => $tab]);
+            }
         }
 
         return $this->render('general', [

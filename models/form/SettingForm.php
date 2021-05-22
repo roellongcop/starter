@@ -18,17 +18,24 @@ use yii\web\UploadedFile;
  */
 class SettingForm extends Model
 {
+    /* GENERAL */
     public $timezone;
     public $pagination;
+    public $auto_logout_timer;
+    public $theme;
+    public $whitelist_ip_only;
+
+    /* EMAIL */
     public $admin_email;
     public $sender_email;
     public $sender_name;
+
+    /* IMAGE */
     public $primary_logo;
     public $secondary_logo;
     public $image_holder;
     public $favicon;
-    public $auto_logout_timer;
-    public $theme;
+    
     /**
      * @return array the validation rules.
      */
@@ -48,32 +55,12 @@ class SettingForm extends Model
 	            'required'
 	        ],
 
-	        [
-            	[
-            		'timezone',
-				    'admin_email',
-				    'sender_email',
-				    'sender_name',
-            	], 
-	            'string'
-	        ],
+	        [['timezone', 'admin_email', 'sender_email', 'sender_name', ], 'string'],
 
-	        [
-            	[
-				    'admin_email',
-				    'sender_email',
-            	], 
-	            'email'
-	        ],
+            [['admin_email', 'sender_email', ], 'email'],
+	        [['whitelist_ip_only'], 'safe'],
 
-	        [
-            	[
-				    'pagination',
-				    'auto_logout_timer',
-                    'theme',
-            	], 
-	            'integer'
-	        ],
+	        [['pagination', 'auto_logout_timer', 'theme', ], 'integer'],
 
 	        [
                 [

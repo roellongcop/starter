@@ -16,6 +16,7 @@ class SettingComponent extends \yii\base\Component
     public $pagination;
     public $auto_logout_timer;
     public $theme;
+    public $whitelist_ip_only;
 
     /* EMAIL */
     public $admin_email;

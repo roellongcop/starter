@@ -4,6 +4,7 @@ use app\helpers\App;
 use app\models\search\ThemeSearch;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
+use app\widgets\Checkbox;
 use app\widgets\KeenActiveForm;
 
 ?>
@@ -43,6 +44,17 @@ use app\widgets\KeenActiveForm;
 			        'class' => 'kt-selectpicker form-control',
 			    ]
 	        ]) ?>
+		</div>
+		<div class="col-md-4">
+			<div class="mt-10">
+				<?= Checkbox::widget([
+	                'data' => [1 => 'Whitelist IP can only access'],
+	                'name' => "SettingForm[whitelist_ip_only]",
+	                'checkedFunction' => function($key, $value) use ($model) {
+	                	return $key == $model->whitelist_ip_only ? 'checked': '';
+	                },
+	            ]) ?>
+			</div>
 		</div>
 	</div>
 	<div class="form-group"> <hr>

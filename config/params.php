@@ -4,6 +4,12 @@
 return [
 
     'general_settings' => [
+        
+        'whitelist_ip_only' => [
+            'name' => 'whitelist_ip_only',
+            'default' => 0,
+        ],
+
         'theme' => [
             'name' => 'theme',
             'default' => 1,

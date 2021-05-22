@@ -106,9 +106,16 @@ class IpSearch extends Ip
         return $dataProvider;
     }
 
-    public static function blocked()
+    public static function blackList()
     {
         $models = self::filter('name', ['type' => 0]);
+
+        return array_values($models);
+    }
+
+    public static function whiteList()
+    {
+        $models = self::filter('name', ['type' => 1]);
 
         return array_values($models);
     }

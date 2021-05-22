@@ -23,8 +23,10 @@ else {
         <div class='col-md-12'>
             <p>{summary}</p>
         </div>
-        <div class='row'>
-            {items}
+        <div class='col-md-12'>
+            <div class='row'>
+                {items}
+            </div>
         </div>
     ";
 }
