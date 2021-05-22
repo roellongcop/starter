@@ -81,11 +81,14 @@ $config = [
                 'my-account' => 'user/my-account',
                 '<action:index|login|reset-password>' => 'site/<action>',
 
-                '<controller>' => '<controller>/index',
 
+                'setting/<name>' => 'setting/view',
+                'setting/<action>/<name>' => 'setting/<action>',
 
                 'file/<token>' => 'file/view',
                 'file/<action>/<token>' => 'file/<action>',
+
+                '<controller>' => '<controller>/index',
 
                 '<controller:ip|user|theme|backup|role>/<slug>' => '<controller>/view',
                 '<controller:ip|user|theme|backup|role>/<action>/<slug>' => '<controller>/<action>',
