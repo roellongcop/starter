@@ -50,7 +50,6 @@ $this->registerJs(<<< SCRIPT
         let formData = new FormData();
         formData.append('UploadForm[fileInput]', fileInput);
         formData.append('modelName', '{$modelName}');
-        formData.append('id', '{$modelID}');
         // formData.append('fileToken', Date.now());
 
         $.ajax( {

@@ -36,7 +36,7 @@ SCRIPT, \yii\web\View::POS_END);
                 'value' => App::tableName($searchModel, false)
             ]) ?>
 
-            <label>
+            <label style="margin-left: 20px;">
                 <input type="checkbox" class="check-all-filter">
                 <span></span>
                 CHECK ALL

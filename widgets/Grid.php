@@ -78,7 +78,7 @@ class Grid extends \yii\base\Widget
                 'view' => function($url, $model) use($controller) {
                     if (App::modelCan($model, 'view')) {
                         return Anchor::widget([
-                            'title' => '<i class="far fa-dot-circle text-info"></i>'. $this->actionName('View'),
+                            'title' => '<i class="glyphicon glyphicon-eye-open text-info"></i>'. $this->actionName('View'),
                             'link' =>  $model->viewUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -90,7 +90,7 @@ class Grid extends \yii\base\Widget
                 'update' => function($url, $model) use ($controller){
                     if (App::modelCan($model, 'update')) {
                         return Anchor::widget([
-                            'title' => '<i class="far fa-edit text-warning"></i>'. $this->actionName('Update'),
+                            'title' => '<i class="glyphicon glyphicon-edit text-warning"></i>'. $this->actionName('Update'),
                             'link' =>  $model->updateUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -102,7 +102,7 @@ class Grid extends \yii\base\Widget
                 'duplicate' => function($url, $model) use ($controller){
                     if (App::modelCan($model, 'duplicate')) {
                         return Anchor::widget([
-                            'title' => '<i class="far fa-copy text-default"></i>'. $this->actionName('Duplicate'),
+                            'title' => '<i class="glyphicon glyphicon-copy text-default"></i>'. $this->actionName('Duplicate'),
                             'link' =>  $model->duplicateUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -114,7 +114,7 @@ class Grid extends \yii\base\Widget
                 'delete' => function($url, $model) use ($controller) {
                     if (App::modelCan($model, 'delete')) {
                         return Anchor::widget([
-                            'title' => '<i class="far fa-trash-alt text-danger"></i>'. $this->actionName('Delete'),
+                            'title' => '<i class="glyphicon glyphicon-trash text-danger"></i>'. $this->actionName('Delete'),
                             'link' =>  $model->deleteUrl,
                             'options' => [
                                 'class' => 'navi-link delete',
@@ -128,7 +128,7 @@ class Grid extends \yii\base\Widget
                 'activate' => function($url, $model) use ($controller) {
                     if (App::modelCan($model, 'activate')) {
                         return Anchor::widget([
-                            'title' => '<i class="fa fa-check text-success"></i>'. $this->actionName('Activate'),
+                            'title' => '<i class="glyphicon glyphicon-ok text-success"></i>'. $this->actionName('Activate'),
                             'link' => $model->activateUrl,
                             'options' => [
                                 'class' => 'navi-link delete',

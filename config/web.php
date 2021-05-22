@@ -80,9 +80,18 @@ $config = [
                 'my-role' => 'role/my-role',
                 'my-account' => 'user/my-account',
                 '<action:index|login|reset-password>' => 'site/<action>',
+
                 '<controller>' => '<controller>/index',
-                '<controller>/<id:\d+>' => '<controller>/view',
-                '<controller>/<action>/<id:\d+>' => '<controller>/<action>',
+
+
+                'file/<token>' => 'file/view',
+                'file/<action>/<token>' => 'file/<action>',
+
+                '<controller:ip|user|theme|backup|role>/<slug>' => '<controller>/view',
+                '<controller:ip|user|theme|backup|role>/<action>/<slug>' => '<controller>/<action>',
+
+                '<controller>/<id>' => '<controller>/view',
+                '<controller>/<action>/<id>' => '<controller>/<action>',
                 '<controller>/<action>' => '<controller>/<action>', 
             ],
         ],

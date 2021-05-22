@@ -588,7 +588,7 @@ class User extends ActiveRecord implements IdentityInterface
             'verification_token:raw',
             // 'slug:raw',
             'userStatusHtml:raw',
-            'blockedStatusLabel:raw',
+            'blockedStatusHtml:raw',
         ];
     }
 
@@ -601,12 +601,12 @@ class User extends ActiveRecord implements IdentityInterface
         $getBulkActions['allowed'] = [
             'label' => 'Allowed',
             'process' => 'allowed',
-            'icon' => 'check',
+            'icon' => '<i class="glyphicon glyphicon-ok text-success"></i>',
         ];
         $getBulkActions['blocked'] = [
             'label' => 'Blocked',
             'process' => 'blocked',
-            'icon' => '<i class="far fa-window-close text-danger"></i>',
+            'icon' => '<i class="glyphicon glyphicon-remove text-danger"></i>',
         ];
         return $getBulkActions;
     }

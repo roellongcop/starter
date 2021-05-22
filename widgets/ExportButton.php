@@ -3,6 +3,7 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Html;
 use yii\helpers\Url; 
  
 class ExportButton extends \yii\base\Widget
@@ -10,26 +11,27 @@ class ExportButton extends \yii\base\Widget
     public $actions = [
         'print' => [
             'title' => 'Print',
-            'icon' => 'print',
+            'icon' => '<i class="glyphicon glyphicon-print"></i>',
         ],
         'export-pdf' => [
             'title' => 'PDF',
-            'icon' => 'file',
+            'icon' => '<i class="glyphicon glyphicon-save-file"></i>',
         ],
         'export-csv' => [
             'title' => 'CSV',
-            'icon' => 'comfiled_file',
+            'icon' => '<i class="glyphicon glyphicon-save-file"></i>',
         ],
         'export-xls' => [
             'title' => 'XLS 95',
-            'icon' => 'selected_file',
+            'icon' => '<i class="glyphicon glyphicon-save-file"></i>',
         ],
 
         'export-xlsx' => [
             'title' => 'XLSX 2007',
-            'icon' => 'selected_file',
+            'icon' => '<i class="glyphicon glyphicon-save-file"></i>',
         ],
     ]; 
+    
 
     public $exports = [];
     public $controller;
@@ -49,8 +51,10 @@ class ExportButton extends \yii\base\Widget
                 $params = App::queryParams();
                 array_unshift($params, $action);
                 $link = Url::to($params);
-                $title = $this->render("icon/{$data['icon']}") . 
-                    "<span class='navi-text'> &nbsp; {$data['title']}</span>";
+
+                $icon = Html::isHtml($data['icon'])? $data['icon']: $this->render("icon/{$data['icon']}");
+
+                $title = "{$icon}<span class='navi-text'> &nbsp; {$data['title']}</span>";
 
 
                 if ($action == 'print') {
