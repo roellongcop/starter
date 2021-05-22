@@ -82,8 +82,10 @@ class SeedController extends Controller
 
     public function actionRoles($row=1)
     {
+
         $controllerActions = App::component('access')->controllerActions();
-        $createNavigation = $this->_roleCreateNavigation($controllerActions);
+        // $createNavigation = $this->_roleCreateNavigation($controllerActions);
+        $createNavigation = include Yii::getAlias('@commands').'/data/navigation.php';
         $this->startProgress(0, $row, 'Seeding Role: ');
         for ($i=1; $i <= $row; $i++) { 
             $model = new Role();

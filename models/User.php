@@ -358,9 +358,12 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
         
-        $this->generateAuthKey();
-        $this->generatePasswordResetToken();
-        $this->generateEmailVerificationToken();
+        if ($this->isNewRecord) {
+            $this->generateAuthKey();
+            $this->generatePasswordResetToken();
+            $this->generateEmailVerificationToken();
+        }
+        
 
         return true;
     }

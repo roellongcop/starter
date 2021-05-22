@@ -17,7 +17,7 @@ class IpFilter extends ActionFilter
         }
 
         if (($ip = App::ip()) != null) {
-            $modelIP = Ip::findOne($modelIP);
+            $modelIP = Ip::findOne($ip);
             if (!$modelIP) {
                 $model = new Ip([
                     'record_status' => 1,
