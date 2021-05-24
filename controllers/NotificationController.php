@@ -40,11 +40,13 @@ class NotificationController extends Controller
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($token)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($token, 'token');
+        $model->setToRead();
+        $model->save();
+
+        return $this->redirect($model->link);
     }
 
     /**
@@ -67,51 +69,6 @@ class NotificationController extends Controller
         ]);
     }
 
-
-    /**
-     * Duplicates a new Notification model.
-     * If duplication is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionDuplicate($id)
-    {
-        $originalModel = $this->findModel($id);
-        $model = new Notification();
-        $model->attributes = $originalModel->attributes;
-
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Duplicated');
-
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('duplicate', [
-            'model' => $model,
-            'originalModel' => $originalModel,
-        ]);
-    }
-
-    /**
-     * Updates an existing Notification model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Updated');
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
 
     /**
      * Deletes an existing Notification model.
@@ -189,6 +146,20 @@ class NotificationController extends Controller
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
+                        case 'read':
+                            Notification::updateAll(
+                                ['status' => 0, 'updated_at' => App::timestamp()],
+                                ['id' => $post['selection']]
+                            );
+                            break;
+
+                        case 'unread':
+                            Notification::updateAll(
+                                ['status' => 1, 'updated_at' => App::timestamp()],
+                                ['id' => $post['selection']]
+                            );
+                            break;
+
                         case 'active':
                             Notification::updateAll(
                                 ['record_status' => 1, 'updated_at' => App::timestamp()],

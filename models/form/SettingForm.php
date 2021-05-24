@@ -35,6 +35,9 @@ class SettingForm extends Model
     public $secondary_logo;
     public $image_holder;
     public $favicon;
+
+    /* Notification */
+    public $notification_change_password;
     
     /**
      * @return array the validation rules.
@@ -58,7 +61,7 @@ class SettingForm extends Model
 	        [['timezone', 'admin_email', 'sender_email', 'sender_name', ], 'string'],
 
             [['admin_email', 'sender_email', ], 'email'],
-	        [['whitelist_ip_only'], 'safe'],
+	        [['whitelist_ip_only', 'notification_change_password'], 'safe'],
 
 	        [['pagination', 'auto_logout_timer', 'theme', ], 'integer'],
 

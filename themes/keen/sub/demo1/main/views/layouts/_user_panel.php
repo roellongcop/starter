@@ -108,8 +108,8 @@ $access = App::component('access');
             <?php endif ?>
             <!--end:Item-->
             <!--begin::Item-->
-            <?php if ($access->userCan('change-password', 'user')): ?>
-                <a href="<?= Url::to(['user/change-password', 'token' => $identity->password_reset_token]) ?>" class="navi-item">
+            <?php if ($access->userCan('my-password', 'user')): ?>
+                <a href="<?= Url::to(['user/my-password']) ?>" class="navi-item">
                     <div class="navi-link">
                         <div class="symbol symbol-40 bg-light mr-3">
                             <div class="symbol-label">

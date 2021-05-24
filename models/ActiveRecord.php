@@ -69,11 +69,26 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getFooterDetailColumns()
     {
         return [
-            'created_at:fulldate',
-            'updated_at:fulldate',
-            'createdByEmail',
-            'updatedByEmail',
-            'recordStatusHtml:raw'
+            'created_at' => [
+                'attribute' => 'created_at',
+                'format' => 'raw'
+            ],
+            'updated_at' => [
+                'attribute' => 'updated_at',
+                'format' => 'raw'
+            ],
+            'createdByEmail' => [
+                'attribute' => 'createdByEmail',
+                'format' => 'raw'
+            ],
+            'updatedByEmail' => [
+                'attribute' => 'updatedByEmail',
+                'format' => 'raw'
+            ],
+            'recordStatusHtml' => [
+                'attribute' => 'recordStatusHtml',
+                'format' => 'raw'
+            ]
         ];
     }
 
@@ -487,17 +502,17 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             'active' => [
                 'label' => 'Set as Active',
                 'process' => 'active',
-                'icon' => '<i class="glyphicon glyphicon-eye-open text-success"></i>',
+                'icon' => 'active',
             ],
             'in_active' => [
                 'label' => 'Set as In-active',
                 'process' => 'in_active',
-                'icon' => '<i class="glyphicon glyphicon-eye-close text-warning"></i>',
+                'icon' => 'in_active',
             ],
             'delete' => [
                 'label' => 'Delete',
                 'process' => 'delete',
-                'icon' => '<i class="glyphicon glyphicon-trash text-danger"></i>',
+                'icon' => 'delete',
             ]
         ];
     }

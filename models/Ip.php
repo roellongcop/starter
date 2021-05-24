@@ -174,12 +174,12 @@ class Ip extends ActiveRecord
         $getBulkActions['white_list'] = [
             'label' => 'White List',
             'process' => 'white_list',
-            'icon' => '<i class="fa fa-check text-success"></i>',
+            'icon' => 'plus',
         ];
         $getBulkActions['black_list'] = [
             'label' => 'Black List',
             'process' => 'black_list',
-            'icon' => '<i class="far fa-window-close text-danger"></i>',
+            'icon' => 'minus',
         ];
         return $getBulkActions;
     }

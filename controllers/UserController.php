@@ -299,17 +299,21 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionChangePassword($token='')
+    public function actionMyPassword($token='')
     {
+        $token = $token ?: App::identity('password_reset_token');
+
         $user = $this->findModel($token, 'password_reset_token');
-        $model = new ChangePasswordForm();
+        $model = new ChangePasswordForm([
+            'password_hint' => $user->password_hint
+        ]);
 
         if ($model->load(App::post()) && $model->validate()) {
             $user = $model->changePassword();
             App::success('Password Change.');
-            return $this->redirect(['change-password', 'token' => $user->password_reset_token]);
+            return $this->redirect(['user/my-password']);
         }
-        return $this->render('change_password', [
+        return $this->render('my_password', [
             'model' => $model,
         ]);
     }

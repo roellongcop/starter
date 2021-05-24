@@ -4,8 +4,9 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
-use app\widgets\Anchor;
 use app\models\query\NotificationQuery;
+use app\widgets\Anchor;
+use app\widgets\Label;
 
 
 /**
@@ -46,12 +47,12 @@ class Notification extends ActiveRecord
 
     public function mainAttribute()
     {
-        return 'id';
+        return 'message';
     }
 
     public function paramName()
     {
-        return 'id';
+        return 'token';
     }
  
 
@@ -64,7 +65,7 @@ class Notification extends ActiveRecord
         return [
             [['user_id', 'status', 'record_status', 'created_by', 'updated_by'], 'integer'],
             [['message', 'link'], 'string'],
-            [['type', 'token'], 'required'],
+            [['type', 'user_id'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 128],
             [['token'], 'string', 'max' => 255],
@@ -131,32 +132,109 @@ class Notification extends ActiveRecord
     public function gridColumns()
     {
         return [
-            'user_id' => [
-                'attribute' => 'user_id', 
+            'message' => [
+                'attribute' => 'message', 
                 'format' => 'raw',
                 'value' => function($model) {
                     return Anchor::widget([
-                        'title' => $model->user_id,
+                        'title' => $model->message,
                         'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }
             ],
-            'message' => ['attribute' => 'message', 'format' => 'raw'],
-            'link' => ['attribute' => 'link', 'format' => 'raw'],
-            'type' => ['attribute' => 'type', 'format' => 'raw'],
-            'token' => ['attribute' => 'token', 'format' => 'raw'],
+            'link' => [
+                'attribute' => 'id', 
+                'value' => 'statusHtml', 
+                'label' => 'Status', 
+                'format' => 'raw'
+            ],
+            // 'type' => ['attribute' => 'type', 'format' => 'raw'],
+            // 'token' => ['attribute' => 'token', 'format' => 'raw'],
         ];
     }
+
 
     public function detailColumns()
     {
         return [
-            'user_id:raw',
             'message:raw',
-            'link:raw',
-            'type:raw',
-            'token:raw',
+            'statusHtml' => [
+                'label' => 'status',
+                'attribute' => 'statusHtml',
+                'format' => 'raw'
+            ],
+        ];
+    }
+
+    public function getFooterDetailColumns()
+    {
+        $col = parent::getFooterDetailColumns();
+        unset($col['recordStatusHtml']);
+
+        return $col;
+    }
+
+    public function getStatusData()
+    {
+        return App::params('notification_status')[$this->status] ?? [];
+    }
+
+    public function getStatusHtml()
+    {
+        return Label::widget([
+            'options' => $this->statusData
+        ]);
+    }
+
+    public function getIsNew()
+    {
+        return $this->status == 1;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        
+        
+        $this->message = $this->message ?: App::setting($this->type);
+
+        
+
+        return true;
+    }
+
+    public function setToRead()
+    {
+        $this->status = 0;
+    }
+
+    public function setToNew()
+    {
+        $this->status = 1;
+    }
+
+
+    public function getBulkActions()
+    {
+        return [
+            'read' => [
+                'label' => 'Read',
+                'process' => 'read',
+                'icon' => 'read',
+            ],
+            'unread' => [
+                'label' => 'Un-Read',
+                'process' => 'unread',
+                'icon' => 'in_active',
+            ],
+            'delete' => [
+                'label' => 'Delete',
+                'process' => 'delete',
+                'icon' => 'delete',
+            ]
         ];
     }
 

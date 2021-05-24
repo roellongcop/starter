@@ -28,6 +28,9 @@ class SettingComponent extends \yii\base\Component
     public $secondary_logo;
     public $image_holder;
     public $favicon;
+
+    /* Notification */
+    public $notification_change_password;
     
 
 	public function init()

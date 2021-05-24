@@ -601,12 +601,12 @@ class User extends ActiveRecord implements IdentityInterface
         $getBulkActions['allowed'] = [
             'label' => 'Allowed',
             'process' => 'allowed',
-            'icon' => '<i class="glyphicon glyphicon-ok text-success"></i>',
+            'icon' => 'check',
         ];
         $getBulkActions['blocked'] = [
             'label' => 'Blocked',
             'process' => 'blocked',
-            'icon' => '<i class="glyphicon glyphicon-remove text-danger"></i>',
+            'icon' => 'close',
         ];
         return $getBulkActions;
     }

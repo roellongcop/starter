@@ -5,7 +5,7 @@ use app\models\search\UserSearch;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = 'Change Password';
+$this->title = 'My Password';
 $this->params['breadcrumbs'][] = 'Change Password';
 $this->params['searchModel'] = new UserSearch();
 ?>

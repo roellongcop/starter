@@ -88,7 +88,10 @@ $config = [
                 'my-setting' => 'setting/my-setting',
                 'my-role' => 'role/my-role',
                 'my-account' => 'user/my-account',
+                'my-password' => 'user/my-password',
+
                 '<action:index|login|reset-password>' => 'site/<action>',
+
 
 
                 'setting/general/<tab>' => 'setting/general',

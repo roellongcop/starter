@@ -4,12 +4,10 @@
 return [
 
     'general_settings' => [
-        
         'whitelist_ip_only' => [
             'name' => 'whitelist_ip_only',
             'default' => 0,
         ],
-
         'theme' => [
             'name' => 'theme',
             'default' => 1,
@@ -54,6 +52,10 @@ return [
         'auto_logout_timer' => [
             'name' => 'auto_logout_timer',
             'default' => 1440
+        ],
+        'notification_change_password' => [
+            'name' => 'notification_change_password',
+            'default' => 'You\'ve Change your password'
         ],
     ],
   
@@ -176,5 +178,18 @@ return [
         'system' => ['label' => 'System', 'icon' => '<i class="fas fa-cog"></i>'],
         'email' => ['label' => 'Email', 'icon' => '<i class="far fa-envelope"></i>'],
         'image' => ['label' => 'Image', 'icon' => '<i class="far fa-file-image"></i>'],
-    ]
+    ],
+
+    'notification_status' => [
+        0 => [
+            'id' => 0,
+            'label' => 'Read',
+            'class' => 'success'
+        ],
+        1 => [
+            'id' => 1,
+            'label' => 'New',
+            'class' => 'danger'
+        ],
+    ],
 ];
