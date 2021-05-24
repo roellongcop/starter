@@ -488,7 +488,7 @@ class User extends ActiveRecord implements IdentityInterface
   
         $behaviors['SluggableBehavior'] = [
             'class' => SluggableBehavior::className(),
-            'attribute' => 'email',
+            'attribute' => 'username',
             'slugAttribute' => 'slug',
             'immutable' => false,
             'ensureUnique' => true,

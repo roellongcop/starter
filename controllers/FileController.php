@@ -32,11 +32,13 @@ class FileController extends Controller
 
         return $behaviors;
     } 
-    public function actionDisplay($token='', $w='', $h='')
+    public function actionDisplay($token='')
     {
-        $crop      = App::get('crop')      ?: 'false';
-        $ratio     = App::get('ratio')     ?: 'true';
-        $quality   = App::get('quality')   ?: 100;
+        $w = App::get('w') ?: '';
+        $h = App::get('h') ?: '';
+        $crop = App::get('crop') ?: 'false';
+        $ratio = App::get('ratio') ?: 'true';
+        $quality = App::get('quality') ?: 100;
         $extension = App::get('extension') ?: 'png';
 
         $file = File::findOne(['token' => $token]);
