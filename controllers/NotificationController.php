@@ -3,34 +3,30 @@
 namespace app\controllers;
 
 use Yii;
-use app\helpers\App;
 use app\models\Log;
-use app\models\Setting;
-use app\models\Theme;
-use app\models\form\MySettingForm;
-use app\models\form\SettingForm;
-use app\models\search\SettingSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
-use yii\helpers\Inflector;
+use app\models\Notification;
+use app\models\search\NotificationSearch;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
+use app\helpers\App;
+use yii\helpers\Inflector;
+use yii\helpers\ArrayHelper;
 
 /**
- * SettingController implements the CRUD actions for Setting model.
+ * NotificationController implements the CRUD actions for Notification model.
  */
-class SettingController extends Controller
+class NotificationController extends Controller 
 {
+
     /**
-     * Lists all Setting models.
+     * Lists all Notification models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SettingSearch();
-        $dataProvider = $searchModel->search(['SettingSearch' => App::queryParams()]);
+        $searchModel = new NotificationSearch();
+        $dataProvider = $searchModel->search(['NotificationSearch' => App::queryParams()]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -39,32 +35,75 @@ class SettingController extends Controller
     }
 
     /**
-     * Displays a single Setting model.
+     * Displays a single Notification model.
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($name)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($name, 'name'),
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Notification model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new Notification();
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Created');
+
+            return $this->redirect($model->viewUrl);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
         ]);
     }
 
 
     /**
-     * Updates an existing Setting model.
+     * Duplicates a new Notification model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionDuplicate($id)
+    {
+        $originalModel = $this->findModel($id);
+        $model = new Notification();
+        $model->attributes = $originalModel->attributes;
+
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Duplicated');
+
+            return $this->redirect($model->viewUrl);
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
+        ]);
+    }
+
+    /**
+     * Updates an existing Notification model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionUpdate($name)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($name, 'name');
+        $model = $this->findModel($id);
 
         if ($model->load(App::post()) && $model->save()) {
-            $this->checkFileUpload($model);
             App::success('Successfully Updated');
             return $this->redirect($model->viewUrl);
         }
@@ -75,15 +114,15 @@ class SettingController extends Controller
     }
 
     /**
-     * Deletes an existing Setting model.
+     * Deletes an existing Notification model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($name)
+    public function actionDelete($id)
     {
-        $model = $this->findModel($name, 'name');
+        $model = $this->findModel($id);
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -96,15 +135,15 @@ class SettingController extends Controller
     }
 
     /**
-     * Finds the Setting model based on its primary key value.
+     * Finds the Notification model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Setting the loaded model
+     * @return Notification the loaded model
      * @throws ForbiddenHttpException if the model cannot be found
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = Setting::findOne([$field => $id])) != null) {
+        if (($model = Notification::findOne([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }
@@ -146,30 +185,30 @@ class SettingController extends Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = Setting::all($post['selection']);
+                $models = Notification::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Setting::updateAll(
+                            Notification::updateAll(
                                 ['record_status' => 1, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
-                            Setting::updateAll(
+                            Notification::updateAll(
                                 ['record_status' => 0, 'updated_at' => App::timestamp()],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'delete':
-                            Setting::deleteAll(['id' => $post['selection']]);
+                            Notification::deleteAll(['id' => $post['selection']]);
                             break;
                         default:
                             # code...
                             break;
                     }
-                    Log::record(new Setting(), ArrayHelper::map($models, 'id', 'attributes'));
+                    Log::record(new Notification(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {
@@ -230,53 +269,9 @@ class SettingController extends Controller
     protected function getExportContent($file='excel')
     {
         return ExportContent::widget([
-            'params' => App::get(),
-            'file' => $file,
-            'searchModel' => new SettingSearch(),
-        ]);
-    }
-    
-
-    public function actionMySetting()
-    {
-        if (App::isLogin()) {
-            $user = App::identity(); 
-            $model = new MySettingForm($user);
-            $themes = Theme::find()
-                ->orderBy(['id' => SORT_DESC])
-                ->all();
-
-            if ($model->load(App::post()) && $model->save()) {
-                App::success('Settings Updated');
-                return $this->redirect(['my-setting']);
-            }
-
-            return $this->render('my-setting', [
-                'user' => $user,
-                'model' => $model,
-                'themes' => $themes,
-            ]);
-        }
-    }
-
-    public function actionGeneral($tab='system')
-    {
-        $model = new SettingForm();
-        if (($post = App::post()) != null) {
-            $post['SettingForm']['whitelist_ip_only'] = $post['SettingForm']['whitelist_ip_only'] ?? 0;
-
-            if ($model->load($post) && $model->validate()) {
-
-                $model->save();
-                App::success('Successfully Changed');
-
-                return $this->redirect(['general', 'tab' => $tab]);
-            }
-        }
-
-        return $this->render('general', [
-            'model' => $model,
-            'tab' => $tab,
+            'params'      => App::get(),
+            'file'        => $file,
+            'searchModel' => new NotificationSearch(),
         ]);
     }
 
@@ -284,5 +279,4 @@ class SettingController extends Controller
     {
         # dont delete; use in condition if user has access to in-active data
     }
-
 }

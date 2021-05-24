@@ -91,6 +91,9 @@ $config = [
                 '<action:index|login|reset-password>' => 'site/<action>',
 
 
+                'setting/general/<tab>' => 'setting/general',
+                'setting/general' => 'setting/general',
+                
                 'setting/<name>' => 'setting/view',
                 'setting/<action>/<name>' => 'setting/<action>',
 

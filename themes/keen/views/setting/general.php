@@ -7,17 +7,13 @@ use app\widgets\Anchor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
+$setting_modules = App::params('setting_modules');
 
 $this->title = 'General Settings';
-// $this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Set Up';
+$this->params['breadcrumbs'][] = $setting_modules[$tab]['label'];
 $this->params['searchModel'] = new DashboardSearch();
 
-$menus = [
-    'general' => ['label' => 'General', 'icon' => '<i class="fas fa-cog"></i>'],
-    'email' => ['label' => 'Email', 'icon' => '<i class="far fa-envelope"></i>'],
-    'image' => ['label' => 'Image', 'icon' => '<i class="far fa-file-image"></i>'],
-];
 ?>
 
 <div>
@@ -36,7 +32,7 @@ $menus = [
 	<div class="row">
 		<div class="col-md-3">
 			<ul class="navi navi-accent navi-hover navi-bold navi-border">
-				<?php foreach ($menus as $keyTab => $menu): ?>
+				<?php foreach ($setting_modules as $keyTab => $menu): ?>
 					<li class="navi-item">
 				        <a class="navi-link <?= ($keyTab == $tab)? 'active': '' ?>" href="<?= Url::to(['setting/general', 'tab' => $keyTab]) ?>">
 				            <span class="navi-icon">

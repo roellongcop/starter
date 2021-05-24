@@ -10,7 +10,7 @@ use app\widgets\KeenActiveForm;
 ?>
 
 <?php $form = KeenActiveForm::begin(); ?>
-	<p class="lead">General</p>
+	<p class="lead">System</p>
 	<div class="row">
 		<div class="col-md-4">
 			<?= BootstrapSelect::widget([

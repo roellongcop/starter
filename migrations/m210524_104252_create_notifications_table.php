@@ -1,36 +1,16 @@
 <?php
-/**
- * This view is used by console/controllers/MigrateController.php.
- *
- * The following variables are available in this view:
- */
-/* @var $className string the new migration class name without namespace */
-/* @var $namespace string the new migration class namespace */
-/* @var $table string the name table */
-/* @var $tableComment string the comment table */
-/* @var $fields array the fields */
-/* @var $foreignKeys array the foreign keys */
-
-echo "<?php\n";
-if (!empty($namespace)) {
-    echo "\nnamespace {$namespace};\n";
-}
-?>
 
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `<?= $table ?>`.
-<?= $this->render('_foreignTables', [
-    'foreignKeys' => $foreignKeys,
-]) ?>
+ * Handles the creation of table `{{%notifications}}`.
  */
-class <?= $className ?> extends Migration
+class m210524_104252_create_notifications_table extends Migration
 {
 
     public function tableName()
     {
-        return '<?= $table ?>';
+        return '{{%notifications}}';
     }
 
     public function tableIndexes()
@@ -38,6 +18,7 @@ class <?= $className ?> extends Migration
         return [
             'created_by' => 'created_by',
             'updated_by' => 'updated_by',
+            'user_id' => 'user_id',
         ];
     }
 
@@ -45,8 +26,12 @@ class <?= $className ?> extends Migration
     {
         return [
             'id' => $this->bigPrimaryKey(),
-            'name' => $this->string(255)->notNull()->unique(),
-            'description' => $this->text(),
+            'user_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'message' => $this->text(),
+            'link' => $this->text(),
+            'type' => $this->string(128)->notNull(),
+            'token' => $this->string()->notNull(),
+            'status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
@@ -75,19 +60,7 @@ class <?= $className ?> extends Migration
     public function safeUp()
     {
         
-<?= $this->render('_createTable', [
-    'table' => $table,
-    'fields' => $fields,
-    'foreignKeys' => $foreignKeys,
-])
-?>
-<?php if (!empty($tableComment)) {
-    echo $this->render('_addComments', [
-        'table' => $table,
-        'tableComment' => $tableComment,
-    ]);
-}
-?>
+        $this->_createTable($this->tableName(), $this->attributes());
 
         foreach($this->tableIndexes() as $key => $value) {
             $this->createIndex($key, $this->tableName(), $value);
@@ -100,10 +73,6 @@ class <?= $className ?> extends Migration
      */
     public function safeDown()
     {
-<?= $this->render('_dropTable', [
-    'table' => $table,
-    'foreignKeys' => $foreignKeys,
-])
-?>
+        $this->dropTable($this->tableName());
     }
 }

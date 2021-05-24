@@ -171,4 +171,10 @@ return [
         'demo3-fixed',
         'demo3-fluid',
     ],
+
+    'setting_modules' => [
+        'system' => ['label' => 'System', 'icon' => '<i class="fas fa-cog"></i>'],
+        'email' => ['label' => 'Email', 'icon' => '<i class="far fa-envelope"></i>'],
+        'image' => ['label' => 'Image', 'icon' => '<i class="far fa-file-image"></i>'],
+    ]
 ];

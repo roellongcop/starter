@@ -75,6 +75,11 @@ return [
                 'link' => '/visit-log',
                 'icon' => '<i class="fa fa-cog"></i>',
             ],
+            '4.6' => [
+                'label' => 'Queues',
+                'link' => '/queue',
+                'icon' => '<i class="fa fa-cog"></i>',
+            ],
         ],
     ],
     '5' => [
@@ -108,5 +113,10 @@ return [
                 'icon' => '<i class="fa fa-cog"></i>',
             ]
         ]
-    ]
+    ],
+    '6' => [
+        'label' => 'Notifications', 
+        'link' => '/notification', 
+        'icon' => '<i class="fa fa-cog"></i>',
+    ],
 ];

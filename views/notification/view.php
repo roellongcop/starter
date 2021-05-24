@@ -1,0 +1,24 @@
+<?php
+
+use app\widgets\Anchors;
+use app\widgets\Detail;
+use app\models\search\NotificationSearch;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Notification */
+
+$this->title = 'Notification: ' . $model->mainAttribute;
+$this->params['breadcrumbs'][] = ['label' => 'Notifications', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->mainAttribute;
+$this->params['searchModel'] = new NotificationSearch();
+$this->params['showCreateButton'] = true; 
+?>
+
+<div>
+    <?= Anchors::widget([
+    	'names' => ['update', 'duplicate', 'delete', 'log'], 
+    	'model' => $model
+    ]) ?> 
+    <hr>
+    <?= Detail::widget(['model' => $model]) ?>
+</div>
