@@ -11,7 +11,7 @@ $config = [
     'id' => 'yii2-basic-starter',
     'name' => 'Yii2 Basic Starter Template',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'queue'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -22,7 +22,16 @@ $config = [
         ],
     ],
     'components' => [
-        
+        'queue' => [
+            'class' => \yii\queue\db\Queue::class,
+            'db' => 'db', // DB connection component or its config 
+            'tableName' => '{{%queues}}', // Table name
+            'channel' => 'default', // Queue channel key
+            'mutex' => \yii\mutex\MysqlMutex::class, // Mutex that used to sync queries
+            'as log' => \yii\queue\LogBehavior::class,
+            'ttr' => 5 * 60, // Max time for job execution
+            'attempts' => 3, // Max number of attempts
+        ],
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
         'file' => ['class' => 'app\components\FileComponent'],
