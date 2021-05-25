@@ -49,13 +49,9 @@ class PasswordResetForm extends Model
                     App::success("Your password hint is: '{$user->password_hint}'.");
                 }
                 else {
-                    $mail = new CustomEmailForm([
-                        'template' => 'password_reset',
-                        'parameters' => [
-                            'user' => $user
-                        ]
-                    ]);
-                    $mail->to = 'longcoproel@gmail.com';
+                    $mail = new CustomEmailForm();
+                    $mail->content = 'test';
+                    $mail->to = $user->email;
                     if ($mail->send()) {
                         App::success("Email sent.");
                     }

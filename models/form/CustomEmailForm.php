@@ -34,16 +34,23 @@ class CustomEmailForm extends Model
     public function init()
     {
         parent::init();
-        $this->from = App::setting('sender_email');
-        $this->sender_name = App::setting('sender_name');
+        $this->from = $this->from ?: App::setting('sender_email');
+        $this->sender_name = $this->sender_name ?: App::setting('sender_name');
     }
 
 
     public function send($type = 'single')
     {
         if ($this->validate()) {
-            $mailer = Yii::$app->mailer->compose($this->template, $this->parameters)
-                ->setSubject($this->subject)
+
+            if ($this->template) {
+                $mailer = Yii::$app->mailer->compose($this->template, $this->parameters);
+            }
+            else {
+                $mailer = Yii::$app->mailer->compose();
+            }
+
+            $mailer->setSubject($this->subject)
                 ->setFrom([$this->from => $this->sender_name])
                 ->setTo($this->to);
 
@@ -55,7 +62,6 @@ class CustomEmailForm extends Model
                 $mailer->setBcc($this->cc);
             }
             
-
             if ($this->content) {
                 $mailer->setHtmlBody($this->content);
             }

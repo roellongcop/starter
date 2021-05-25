@@ -5,6 +5,7 @@ namespace app\models\form;
 use Yii;
 use app\helpers\App;
 use app\helpers\Url;
+use app\jobs\EmailJob;
 use app\jobs\NotificationJob;
 use app\models\User;
 use yii\base\Model;
@@ -62,11 +63,18 @@ class ChangePasswordForm extends Model
         $user->setPassword($this->new_password);
         $user->password_hint = $this->password_hint;
         if ($user->save()) {
+            $message = App::setting('notification_change_password');
 
             Yii::$app->queue->push(new NotificationJob([
                 'user_id' => $user->id,
                 'type' => 'notification_change_password',
+                'message' => $message,
                 'link' => Url::to(['user/my-password'], true),
+            ]));
+
+            Yii::$app->queue->push(new EmailJob([
+                'to' => $user->email,
+                'content' => $message,
             ]));
 
             return $user;
