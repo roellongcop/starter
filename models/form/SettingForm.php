@@ -38,6 +38,9 @@ class SettingForm extends Model
 
     /* Notification */
     public $notification_change_password;
+
+    /* Email */
+    public $email_change_password;
     
     /**
      * @return array the validation rules.
@@ -61,7 +64,7 @@ class SettingForm extends Model
 	        [['timezone', 'admin_email', 'sender_email', 'sender_name', ], 'string'],
 
             [['admin_email', 'sender_email', ], 'email'],
-	        [['whitelist_ip_only', 'notification_change_password'], 'safe'],
+	        [['whitelist_ip_only', 'notification_change_password', 'email_change_password'], 'safe'],
 
 	        [['pagination', 'auto_logout_timer', 'theme', ], 'integer'],
 

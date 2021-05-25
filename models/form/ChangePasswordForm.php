@@ -63,18 +63,17 @@ class ChangePasswordForm extends Model
         $user->setPassword($this->new_password);
         $user->password_hint = $this->password_hint;
         if ($user->save()) {
-            $message = App::setting('notification_change_password');
 
             Yii::$app->queue->push(new NotificationJob([
                 'user_id' => $user->id,
                 'type' => 'notification_change_password',
-                'message' => $message,
+                'message' => App::setting('notification_change_password'),
                 'link' => Url::to(['user/my-password'], true),
             ]));
 
             Yii::$app->queue->push(new EmailJob([
                 'to' => $user->email,
-                'content' => $message,
+                'content' => App::setting('email_change_password'),
             ]));
 
             return $user;

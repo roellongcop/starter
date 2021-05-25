@@ -57,6 +57,10 @@ return [
             'name' => 'notification_change_password',
             'default' => 'You\'ve Change your password'
         ],
+        'email_change_password' => [
+            'name' => 'email_change_password',
+            'default' => 'You\'ve Change your password'
+        ],
     ],
   
 
@@ -178,6 +182,7 @@ return [
         'system' => ['label' => 'System', 'icon' => '<i class="fas fa-cog"></i>'],
         'email' => ['label' => 'Email', 'icon' => '<i class="far fa-envelope"></i>'],
         'image' => ['label' => 'Image', 'icon' => '<i class="far fa-file-image"></i>'],
+        'notification' => ['label' => 'Notification', 'icon' => '<i class="far fa-file-image"></i>'],
     ],
 
     'notification_status' => [

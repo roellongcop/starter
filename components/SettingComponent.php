@@ -31,6 +31,10 @@ class SettingComponent extends \yii\base\Component
 
     /* Notification */
     public $notification_change_password;
+
+
+    /* Email */
+    public $email_change_password;
     
 
 	public function init()
