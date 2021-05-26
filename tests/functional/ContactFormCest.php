@@ -9,7 +9,7 @@ class ContactFormCest
 
     public function openContactPage(\FunctionalTester $I)
     {
-        $I->see('Contact', 'h1');        
+        $I->see('Contact', 'h1');
     }
 
     public function submitEmptyForm(\FunctionalTester $I)
@@ -45,13 +45,11 @@ class ContactFormCest
     {
         $I->submitForm('#contact-form', [
             'ContactForm[name]' => 'tester',
-            'ContactForm[email]' => 'tester@example.com',
+            'ContactForm[email]' => 'tester@gmail.com',
             'ContactForm[subject]' => 'test subject',
             'ContactForm[body]' => 'test content',
             'ContactForm[verifyCode]' => 'testme',
         ]);
         $I->seeEmailIsSent();
-        $I->dontSeeElement('#contact-form');
-        $I->see('Thank you for contacting us. We will respond to you as soon as possible.');        
     }
 }

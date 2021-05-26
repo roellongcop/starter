@@ -90,7 +90,7 @@ $config = [
                 'my-account' => 'user/my-account',
                 'my-password' => 'user/my-password',
 
-                '<action:index|login|reset-password>' => 'site/<action>',
+                '<action:index|login|reset-password|contact>' => 'site/<action>',
 
                 'setting/general/<tab>' => 'setting/general',
                 'setting/general' => 'setting/general',

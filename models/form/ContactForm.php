@@ -3,6 +3,7 @@
 namespace app\models\form;
 
 use Yii;
+use app\helpers\App;
 use yii\base\Model;
 
 /**
@@ -47,14 +48,14 @@ class ContactForm extends Model
      * @param string $email the target email address
      * @return bool whether the model passes validation
      */
-    public function contact($email)
+    public function contact()
     {
         if ($this->validate()) {
             App::component('mailer')
                 ->compose()
-                ->setTo($email)
-                ->setFrom([App::params('senderEmail') => App::params('senderName')])
-                ->setReplyTo([$this->email => $this->name])
+                ->setTo($this->email)
+                ->setFrom([App::setting('admin_email') => App::setting('sender_name')])
+                ->setReplyTo([App::setting('admin_email') => App::setting('sender_name')])
                 ->setSubject($this->subject)
                 ->setTextBody($this->body)
                 ->send();

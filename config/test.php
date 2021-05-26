@@ -14,8 +14,15 @@ return [
     ],
     'language' => 'en-US',
     'components' => [
+        'access' => ['class' => 'app\components\AccessComponent'],
+        'setting' => ['class' => 'app\components\SettingComponent'],
+        'general' => ['class' => 'app\components\General'],
         'db' => $db,
         'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
         'assetManager' => [
@@ -25,7 +32,10 @@ return [
             'showScriptName' => true,
         ],
         'user' => [
+            'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',
+            'enableSession' => false,
+            // 'enableAutoLogin' => true,
         ],
         'request' => [
             'cookieValidationKey' => 'test',

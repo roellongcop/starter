@@ -130,18 +130,11 @@ class Role extends ActiveRecord
 
     public function getCanDelete()
     {
-        $dontDelete = [];
-
-        foreach ($this->relatedModels as $model) {
-            if ($this->{$model}) {
-                $dontDelete[] = $model;
-            }
-        }
+        $dontDelete = parent::getCanDelete();
 
         if (App::identity('role_id') == $this->id) {
             $dontDelete = true;
         }
-
 
         return ($dontDelete)? false: true;
     }

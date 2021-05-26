@@ -19,7 +19,7 @@ class SiteController extends Controller
         $behaviors = parent::behaviors();
         $behaviors['AccessControl'] = [
             'class' => AccessControl::className(),
-            'publicActions' => ['login', 'logout', 'reset-password']
+            'publicActions' => ['login', 'logout', 'reset-password', 'contact']
         ];
         $behaviors['VerbFilter'] = [
             'class' => VerbFilter::className(),
@@ -30,7 +30,22 @@ class SiteController extends Controller
 
         return $behaviors;
     }
- 
+
+    public function beforeAction($action)
+    {
+        switch ($action->id) {
+            case 'login':
+            case 'reset-password':
+            case 'contact':
+                $this->layout = 'login';
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        return parent::beforeAction($action);
+    }
 
     /**
      * {@inheritdoc}
@@ -92,7 +107,6 @@ class SiteController extends Controller
             return $this->goBack();
         }
 
-        $this->layout = 'login';
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
@@ -110,8 +124,6 @@ class SiteController extends Controller
         VisitLog::logout();
         App::logout();
 
-
-
         return $this->goHome();
     }
 
@@ -123,8 +135,8 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(App::post()) && $model->contact(App::params('adminEmail'))) {
-            App::success('contactFormSubmitted');
+        if ($model->load(App::post()) && $model->contact()) {
+            App::success('Thank you for contacting us. We will respond to you as soon as possible.');
             return $this->refresh();
         }
         return $this->render('contact', [
