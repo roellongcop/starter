@@ -21,7 +21,7 @@ use yii\helpers\Inflector;
 
 <div class="accordion accordion-light accordion-toggle-arrow" id="<?= $module ?>">
 
-	<?php foreach ($models as $model): $counter++; ?>
+	<?php foreach ($models as $key => $model): ?>
 		
 		<div class="card">
 			<div class="card-header" id="headingOne2">
@@ -29,7 +29,7 @@ use yii\helpers\Inflector;
 					data-toggle="collapse" 
 					data-target="#<?= $module ?>-tab-<?= $model->id ?>" 
 					aria-expanded="false">
-					<?= $counter ?>) 
+					<?= $key + 1 ?>) 
 					<button type="button"><?= $model->mainAttribute ?></button>
 					(<?= App::formatter('asFulldate', $model->created_at) ?>)
 				</div>
@@ -48,7 +48,5 @@ use yii\helpers\Inflector;
 			</div>
 		</div>
 	<?php endforeach ?>
-
-
 </div>
 <?php endif ?>

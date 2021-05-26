@@ -92,17 +92,14 @@ $config = [
 
                 '<action:index|login|reset-password>' => 'site/<action>',
 
-
-
                 'setting/general/<tab>' => 'setting/general',
                 'setting/general' => 'setting/general',
                 
                 'setting/<name>' => 'setting/view',
                 'setting/<action>/<name>' => 'setting/<action>',
 
+                
                 '<controller>' => '<controller>/index',
-                '<controller:(ip|user|theme|backup|role)>/create' => '<controller>/create',
-                '<controller:(ip|user|theme|backup|role)>/<slug>' => '<controller>/view',
                 '<controller:(ip|user|theme|backup|role)>/<action>/<slug>' => '<controller>/<action>',
 
                 '<controller>/<id:\d+>' => '<controller>/view',

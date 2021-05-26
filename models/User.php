@@ -100,7 +100,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique'],
             ['username', 'unique'],
             [['slug', 'role_id'], 'safe'],
-            [['created_at', 'updated_at', 'password_hint', 'password_reset_token'], 'safe'],
+            [['created_at', 'updated_at', 'password_hint', 'password_reset_token', 'password_hash'], 'safe'],
             ['role_id', 'exist', 'targetRelation' => 'role'],
 
             // [

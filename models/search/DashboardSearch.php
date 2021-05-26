@@ -35,20 +35,12 @@ class DashboardSearch extends \yii\base\Model
     {
         $this->pagination = App::setting('pagination');
     }
- 
-
-
 
     public function search($params)
     {
-        
         $this->load($params);
-
-
         $this->modules = $this->modules ?: array_keys($this->loadModules());
-
         $dataProviders = [];
-
         foreach ($this->modules as $module) {
             $class = "\\app\\models\\search\\{$module}";
 
@@ -70,11 +62,8 @@ class DashboardSearch extends \yii\base\Model
         return $dataProviders;
     }
 
-
     public function loadModules()
     {
         return App::component('access')->getModuleFilter();
     }
-
-     
 }
