@@ -149,7 +149,5 @@ class RoleSeeder extends Seeder
 		        'icon' => '<i class="fa fa-cog"></i>',
 		    ],
 		];
-
 	}
-	
 }

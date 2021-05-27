@@ -6,6 +6,7 @@
 use app\helpers\App;
 use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo1\main\assets\KeenDemo1LoginAsset;
+use app\widgets\Alert;
 use yii\helpers\Html;
 
 KeenDemo1LoginAsset::register($this);
@@ -26,6 +27,7 @@ KeenAsset::register($this);
 <body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 <?php $this->beginBody() ?>
 
+        <?= Alert::widget() ?>
         <?= $content ?>
 
     <script>var HOST_URL = "https://preview.keenthemes.com/keen/theme/tools/preview";</script>

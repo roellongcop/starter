@@ -48,12 +48,12 @@ class ContactForm extends Model
      * @param string $email the target email address
      * @return bool whether the model passes validation
      */
-    public function contact()
+    public function contact($email = '')
     {
         if ($this->validate()) {
             App::component('mailer')
                 ->compose()
-                ->setTo($this->email)
+                ->setTo(($email ?: $this->email))
                 ->setFrom([App::setting('admin_email') => App::setting('sender_name')])
                 ->setReplyTo([App::setting('admin_email') => App::setting('sender_name')])
                 ->setSubject($this->subject)
