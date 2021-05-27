@@ -35,6 +35,7 @@ class IpSearch extends Ip
 
     public function init()
     {
+        parent::init();
         $this->pagination = App::setting('pagination');
     }
 

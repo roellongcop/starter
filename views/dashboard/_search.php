@@ -1,9 +1,11 @@
 <?php
+use app\helpers\App;
+use app\widgets\ActiveForm;
+use app\widgets\DateRange;
 use app\widgets\Filter;
 use app\widgets\Pagination;
 use app\widgets\Search;
 use app\widgets\SearchButton;
-use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form app\widgets\ActiveForm */
@@ -18,6 +20,22 @@ $model->modules = $model->modules ?: array_keys($modules);
     ]); ?>
 
         <?= Search::widget(['model' => $model]) ?>
+
+        <?= DateRange::widget([
+            'model' => $model,
+            'start' => $model->startDate(),
+            'end' => $model->endDate(),
+            'ranges' => [
+                'Today',
+                'Yesterday',
+                'Last 7 Days',
+                'Last 30 Days',
+                'This Month',
+                'Last Month',
+                'This Year',
+                'Last Year',
+            ]
+        ]) ?>
          
         <?= Filter::widget([
             'data' => $modules,

@@ -37,6 +37,7 @@ class SettingSearch extends Setting
 
     public function init()
     {
+        parent::init();
         $this->pagination = self::default('pagination');
     }
 

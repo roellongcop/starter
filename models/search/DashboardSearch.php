@@ -14,6 +14,7 @@ use yii\data\ActiveDataProvider;
 class DashboardSearch extends \yii\base\Model
 {
     public $keywords;
+    public $date_range;
     public $modules;
     public $pagination;
 
@@ -27,12 +28,13 @@ class DashboardSearch extends \yii\base\Model
     public function rules()
     {
         return [
-            [['keywords', 'modules', 'pagination'], 'safe'],
+            [['keywords', 'modules', 'pagination', 'date_range'], 'safe'],
         ];
     }
 
     public function init()
     {
+        parent::init();
         $this->pagination = App::setting('pagination');
     }
 
@@ -49,6 +51,7 @@ class DashboardSearch extends \yii\base\Model
                 $dataProvider = $searchModel->search([
                     "{$module}" => [
                         'keywords' => $this->keywords,
+                        'date_range' => $this->date_range,
                         'pagination' => $this->pagination
                     ],
                 ]);
@@ -65,5 +68,29 @@ class DashboardSearch extends \yii\base\Model
     public function loadModules()
     {
         return App::component('access')->getModuleFilter();
+    }
+
+    public function getStartDate($from_database = false)
+    {
+        return date('Y-01-01');
+    }
+
+    public function getEndDate($from_database = false)
+    {
+        return date('Y-12-31');
+    }
+
+    public function startDate()
+    {
+        if ($this->date_range) {
+            return date('F d, Y', strtotime(App::dateRange($this->date_range, 'start')));
+        }
+    }
+
+    public function endDate()
+    {
+        if ($this->date_range) {
+            return date('F d, Y', strtotime(App::dateRange($this->date_range, 'end')));
+        }
     }
 }

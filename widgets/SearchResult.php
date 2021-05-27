@@ -22,7 +22,7 @@ class SearchResult extends \yii\base\Widget
     {
         return $this->render('search-result/index', [
             'dataProviders' => $this->dataProviders,
-            'dataProviders' => $this->dataProviders,
+            'searchModel' => $this->searchModel,
         ]);
     }
         

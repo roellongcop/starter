@@ -1,9 +1,19 @@
 <?php
 
+use app\helpers\App;
 use yii\helpers\Inflector;
 ?>
 <?php if ($dataProviders) : ?>
-    <h4>Search result for <?= $searchModel->keywords ?></h4>
+    <h4>Search result for "<?= $searchModel->keywords ?>"</h4>
+    <p>Date Range: 
+        <strong>
+            <?= $searchModel->startDate() ?>
+        </strong>
+        and
+        <strong>
+            <?= $searchModel->endDate() ?>
+        </strong>
+    </p>
     <?php foreach ($dataProviders as $module => $dataProvider): $nameModule = str_replace('Search', '', $module); ?>
 
         <?= $this->render('_result', [
@@ -17,5 +27,17 @@ use yii\helpers\Inflector;
     <?php endforeach ?>
 
 <?php else: ?>
-    <p class="lead">No data found</p>
+    <p class="lead">No data found </p>
+    <p>
+        Keyword: <?= $searchModel->keywords ?>
+    </p>
+    <p>Date Range: 
+        <strong>
+            <?= $searchModel->startDate() ?>
+        </strong>
+        and
+        <strong>
+            <?= $searchModel->endDate() ?>
+        </strong>
+    </p>
 <?php endif ?>

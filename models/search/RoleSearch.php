@@ -36,6 +36,7 @@ class RoleSearch extends Role
 
     public function init()
     {
+        parent::init();
         $this->pagination = App::setting('pagination');
     }
 

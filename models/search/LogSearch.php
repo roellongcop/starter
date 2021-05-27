@@ -36,6 +36,7 @@ class LogSearch extends Log
 
     public function init()
     {
+        parent::init();
         $this->pagination = App::setting('pagination');
     }
 
