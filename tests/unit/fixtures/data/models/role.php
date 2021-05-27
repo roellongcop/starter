@@ -125,10 +125,26 @@ $createNavigation = [
 return [
     'admin' => [
         'name' => 'admin', 
-        'role_access' => [],
-        'module_access' => $controllerActions,
-        'main_navigation' => $createNavigation,
+        'role_access' => json_encode([]),
+        'module_access' => json_encode($controllerActions),
+        'main_navigation' => json_encode($createNavigation),
         'slug' => 'admin', 
+        'record_status' => 1,
+    ],
+    'superadmin' => [
+        'name' => 'superadmin', 
+        'role_access' => json_encode([]),
+        'module_access' => json_encode($controllerActions),
+        'main_navigation' => json_encode($createNavigation),
+        'slug' => 'superadmin', 
+        'record_status' => 1,
+    ],
+    'developer' => [
+        'name' => 'developer', 
+        'role_access' => json_encode([]),
+        'module_access' => json_encode($controllerActions),
+        'main_navigation' => json_encode($createNavigation),
+        'slug' => 'developer', 
         'record_status' => 1,
     ]
 ];

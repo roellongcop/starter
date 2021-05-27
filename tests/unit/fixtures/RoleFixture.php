@@ -1,9 +1,8 @@
 <?php
 namespace tests\unit\fixtures;
-use yii\test\ActiveFixture;
 
-class RoleFixture extends ActiveFixture
+class RoleFixture extends \yii\test\ActiveFixture
 {
     public $modelClass = 'app\models\Role';
-    public $dataFile = _DIR_ . 'data/role.php';
+    public $dataFile = '@tests/unit/fixtures/data/models/role.php';
 }
