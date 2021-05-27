@@ -92,13 +92,10 @@ class SettingSearch extends Setting
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'value', $this->value]);
         
-                
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'name', $this->keywords],  
-                ['like', 'value', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'name', $this->keywords],  
+            ['like', 'value', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

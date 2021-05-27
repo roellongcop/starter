@@ -104,15 +104,12 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'u.password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'u.verification_token', $this->verification_token])
             ->andFilterWhere(['like', 'u.slug', $this->slug]);
-        
                 
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'r.name', $this->keywords],  
-                ['like', 'u.username', $this->keywords],  
-                ['like', 'u.email', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'r.name', $this->keywords],  
+            ['like', 'u.username', $this->keywords],  
+            ['like', 'u.email', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

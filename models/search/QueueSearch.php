@@ -96,20 +96,17 @@ class QueueSearch extends Queue
         $query->andFilterWhere(['like', 'channel', $this->channel])
             ->andFilterWhere(['like', 'job', $this->job]);
         
-                
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'channel', $this->keywords],  
-                ['like', 'job', $this->keywords],  
-                ['like', 'pushed_at', $this->keywords],  
-                ['like', 'ttr', $this->keywords],  
-                ['like', 'delay', $this->keywords],  
-                ['like', 'priority', $this->keywords],  
-                ['like', 'reserved_at', $this->keywords],  
-                ['like', 'attempt', $this->keywords],  
-                ['like', 'done_at', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'channel', $this->keywords],  
+            ['like', 'job', $this->keywords],  
+            ['like', 'pushed_at', $this->keywords],  
+            ['like', 'ttr', $this->keywords],  
+            ['like', 'delay', $this->keywords],  
+            ['like', 'priority', $this->keywords],  
+            ['like', 'reserved_at', $this->keywords],  
+            ['like', 'attempt', $this->keywords],  
+            ['like', 'done_at', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

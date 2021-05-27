@@ -109,15 +109,13 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         <?php endforeach; ?>
         <?php $ignore_attr = ['id', 'status', 'record_status', 'created_by', 'updated_by', 'created_at', 'updated_at']; ?>
 
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
+        $query->andFilterWhere(['or', 
 <?php foreach ($generator->getColumnNames() as $attribute) : ?>
 <?php if (! in_array($attribute, $ignore_attr)) : ?>
-                ['like', '<?= $attribute ?>', $this->keywords],  
+            ['like', '<?= $attribute ?>', $this->keywords],  
 <?php endif ?>
 <?php endforeach ?>
-            ]);
-        }
+        ]);
 
         $query->daterange($this->date_range);
 

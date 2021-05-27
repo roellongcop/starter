@@ -99,14 +99,11 @@ class UserMetaSearch extends UserMeta
         $query->andFilterWhere(['like', 'um.meta_key', $this->meta_key])
             ->andFilterWhere(['like', 'um.meta_value', $this->meta_value]);
         
-                
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'u.username', $this->keywords],  
-                ['like', 'um.meta_key', $this->keywords],  
-                ['like', 'um.meta_value', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'u.username', $this->keywords],  
+            ['like', 'um.meta_key', $this->keywords],  
+            ['like', 'um.meta_value', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

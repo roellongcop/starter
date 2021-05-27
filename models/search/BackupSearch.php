@@ -92,13 +92,11 @@ class BackupSearch extends Backup
             ->andFilterWhere(['like', 'description', $this->description]);
         
                 
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'filename', $this->keywords],  
-                ['like', 'tables', $this->keywords],  
-                ['like', 'description', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'filename', $this->keywords],  
+            ['like', 'tables', $this->keywords],  
+            ['like', 'description', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

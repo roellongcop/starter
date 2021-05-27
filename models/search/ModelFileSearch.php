@@ -91,14 +91,11 @@ class ModelFileSearch extends ModelFile
         
         $query->andFilterWhere(['like', 'model_name', $this->model_name]);
         
-                
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'model_id', $this->keywords],  
-                ['like', 'file_id', $this->keywords],  
-                ['like', 'model_name', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'model_id', $this->keywords],  
+            ['like', 'file_id', $this->keywords],  
+            ['like', 'model_name', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

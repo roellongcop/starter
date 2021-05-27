@@ -93,16 +93,13 @@ class NotificationSearch extends Notification
             ->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'token', $this->token]);
         
-                
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'user_id', $this->keywords],  
-                ['like', 'message', $this->keywords],  
-                ['like', 'link', $this->keywords],  
-                ['like', 'type', $this->keywords],  
-                ['like', 'token', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'user_id', $this->keywords],  
+            ['like', 'message', $this->keywords],  
+            ['like', 'link', $this->keywords],  
+            ['like', 'type', $this->keywords],  
+            ['like', 'token', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

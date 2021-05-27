@@ -94,12 +94,9 @@ class RoleSearch extends Role
             ->andFilterWhere(['like', 'module_access', $this->module_access])
             ->andFilterWhere(['like', 'slug', $this->slug]);
         
-                
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'name', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'name', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

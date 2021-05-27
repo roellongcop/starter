@@ -109,18 +109,15 @@ class LogSearch extends Log
             ->andFilterWhere(['like', 'l.change_attribute', $this->change_attribute])
             ->andFilterWhere(['like', 'l.url', $this->url])
             ->andFilterWhere(['like', 'l.ip', $this->ip]);
-        
                 
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 'u.username', $this->keywords],  
-                ['like', 'l.method', $this->keywords],  
-                ['like', 'l.action', $this->keywords],  
-                ['like', 'l.controller', $this->keywords],  
-                ['like', 'l.table_name', $this->keywords],  
-                ['like', 'l.model_name', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 'u.username', $this->keywords],  
+            ['like', 'l.method', $this->keywords],  
+            ['like', 'l.action', $this->keywords],  
+            ['like', 'l.controller', $this->keywords],  
+            ['like', 'l.table_name', $this->keywords],  
+            ['like', 'l.model_name', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 

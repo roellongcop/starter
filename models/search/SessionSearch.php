@@ -103,17 +103,14 @@ class SessionSearch extends Session
             ->andFilterWhere(['like', 's.data', $this->data])
             ->andFilterWhere(['like', 's.ip', $this->ip]);
         
-                
-        if ($this->keywords) {
-            $query->andFilterWhere(['or', 
-                ['like', 's.expire', $this->keywords],  
-                ['like', 's.data', $this->keywords],  
-                ['like', 's.ip', $this->keywords],  
-                ['like', 's.browser', $this->keywords],  
-                ['like', 's.os', $this->keywords],  
-                ['like', 's.device', $this->keywords],  
-            ]);
-        }
+        $query->andFilterWhere(['or', 
+            ['like', 's.expire', $this->keywords],  
+            ['like', 's.data', $this->keywords],  
+            ['like', 's.ip', $this->keywords],  
+            ['like', 's.browser', $this->keywords],  
+            ['like', 's.os', $this->keywords],  
+            ['like', 's.device', $this->keywords],  
+        ]);
 
         $query->daterange($this->date_range);
 
