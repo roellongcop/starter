@@ -21,7 +21,6 @@ use yii\web\UploadedFile;
  */
 class FileController extends Controller
 {
-
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -30,8 +29,17 @@ class FileController extends Controller
             'publicActions' => ['display', 'upload', 'download']
         ];
 
+        if (App::isAction('display')) {
+            unset(
+                $behaviors['UserFilter'],
+                $behaviors['ThemeFilter'],
+                $behaviors['SettingFilter'],
+            );
+        }
+
         return $behaviors;
-    } 
+    }
+    
     public function actionDisplay($token='')
     {
         $w = App::get('w') ?: '';
