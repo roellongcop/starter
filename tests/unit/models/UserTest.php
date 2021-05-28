@@ -52,8 +52,8 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($user->validateAuthKey('nq74j8c0ETbVr60piMEj6HWSbnVqYd31'));
         expect_not($user->validateAuthKey('nq74j8c0ETbVr60piMEj6HWSbnVqYd36-test'));
 
-        expect_that($user->validatePassword('admin@gmail.com'));
-        expect_not($user->validatePassword('not-admin@gmail.com'));        
+        expect_that($user->validatePassword('admin@admin.com'));
+        expect_not($user->validatePassword('not-admin@not-admin.com'));        
     }
 
 }

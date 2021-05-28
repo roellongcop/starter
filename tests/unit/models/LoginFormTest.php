@@ -41,7 +41,7 @@ class LoginFormTest extends \Codeception\Test\Unit
     {
         $this->model = new LoginForm([
             'username' => 'blocked_user',
-            'password' => 'blocked_user@gmail.com',
+            'password' => 'blocked_user@blocked_user.com',
         ]);
 
         expect_not($this->model->login());
@@ -52,7 +52,7 @@ class LoginFormTest extends \Codeception\Test\Unit
     {
         $this->model = new LoginForm([
             'username' => 'novalidate_user',
-            'password' => 'novalidate_user@gmail.com',
+            'password' => 'novalidate_user@novalidate_user.com',
         ]);
 
         expect_not($this->model->login());
@@ -63,7 +63,7 @@ class LoginFormTest extends \Codeception\Test\Unit
     {
         $this->model = new LoginForm([
             'username' => 'inactive_user',
-            'password' => 'inactive_user@gmail.com',
+            'password' => 'inactive_user@inactive_user.com',
         ]);
 
         expect_not($this->model->login());
@@ -73,8 +73,8 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function testLoginCorrect()
     {
         $this->model = new LoginForm([
-            'username' => 'admin@gmail.com',
-            'password' => 'admin@gmail.com',
+            'username' => 'admin@admin.com',
+            'password' => 'admin@admin.com',
         ]);
 
         expect_that($this->model->login());

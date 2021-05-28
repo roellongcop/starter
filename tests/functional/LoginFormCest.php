@@ -49,8 +49,8 @@ class LoginFormCest
     public function loginSuccessfully(\FunctionalTester $I)
     {
         $I->submitForm('#kt_login_signin_form', [
-            'LoginForm[username]' => 'admin@gmail.com',
-            'LoginForm[password]' => 'admin@gmail.com',
+            'LoginForm[username]' => 'admin@admin.com',
+            'LoginForm[password]' => 'admin@admin.com',
         ]);
         $I->see('Sign Out');
         $I->dontSeeElement('form#kt_login_signin_form');              
