@@ -3,22 +3,22 @@
 2) you may need to adjust the "app/config/db.php" for credentials
 3) open cmd, goto root folder then run:
 
-	```composer install or composer update (install dependency)```
+	```composer install or composer update``` - (install dependency)
 	
-	yii migrate (create database structure)
+	```yii migrate``` (create database structure)
 
-	yii fixture * (create fixed set of data)
+	```yii fixture *``` (create fixed set of data)
 	
-	yii serve
+	```yii serve```
 
 4) Additional Command
 
-	php vendor/bin/codecept run (Running tests: [must run fixture first])
+	```php vendor/bin/codecept run``` (Running tests: [must run fixture first])
 
-	yii seed (generate random data on [roles, users, ips])
-	yii seed Role 10 (generate 10 roles)
-	yii seed Users 10 (generate 10 users)
-	yii seed Ip 10 (generate 10 ips)
+	```yii seed``` (generate random data on [roles, users, ips])
+	```yii seed Role 10``` (generate 10 roles)
+	```yii seed Users 10``` (generate 10 users)
+	```yii seed Ip 10``` (generate 10 ips)
 
 ============================================================================
 
