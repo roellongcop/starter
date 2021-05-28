@@ -63,7 +63,7 @@ abstract class Seeder
         Console::startProgress($done, $total, $prefix, $width);
     }
  
-    public function save($model, $done=1, $total=0)
+    public function save($model, $done=1)
     {
         if ($model->save()) {
             $this->success++;
@@ -76,7 +76,7 @@ abstract class Seeder
             $this->error_attributes[$done] = $model->attributes;
         }
 
-        Console::updateProgress($done, $total);
+        Console::updateProgress($done, $this->rows);
         return $model;
     }
 
@@ -130,7 +130,7 @@ abstract class Seeder
                 $model->logAfterSave = false;
             }
 
-            $newModel = $this->save($model, $i, $this->rows);
+            $newModel = $this->save($model, $i);
         }
         $this->summary($modelClass::find()->count());
     }
