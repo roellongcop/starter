@@ -171,7 +171,7 @@ class SessionController extends Controller
                             break;
                         case 'in_active':
                             Session::updateAll(
-                                ['record_status' => 0]
+                                ['record_status' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;

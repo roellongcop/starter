@@ -39,20 +39,26 @@ class Html extends \yii\helpers\Html
     public static function navController($menu)
     {
         $request = new Request(['url' => parse_url(Url::to($menu['link'], true), PHP_URL_PATH)]);
-        $current = App::urlManager()->parseRequest($request)[0] ?? '';
+        $url = App::urlManager()->parseRequest($request);
+        list($controller, $actionID) = App::app()->createController($url[0]);
 
-        if ($current && is_array($current)) {
-            list($controller, $action) = explode('/', $current);
+        return $controller->id;
 
-            return $controller;
-        }
+        // $request = new Request(['url' => parse_url(Url::to($menu['link'], true), PHP_URL_PATH)]);
+        // $current = App::urlManager()->parseRequest($request)[0] ?? '';
+
+        // if ($current && is_array($current)) {
+        //     list($controller, $action) = explode('/', $current);
+
+        //     return $controller;
+        // }
 
         
-        $controller = explode('/', $menu['link'])[3] ?? ''; 
-        if (! $controller) {
-            $controller = explode('/', $menu['link'])[1] ?? ''; 
-        }
-        return $controller;
+        // $controller = explode('/', $menu['link'])[3] ?? ''; 
+        // if (! $controller) {
+        //     $controller = explode('/', $menu['link'])[1] ?? ''; 
+        // }
+        // return $controller;
     }
 
     public static function image($path, $params=[], $options=[])

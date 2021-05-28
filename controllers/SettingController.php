@@ -158,7 +158,7 @@ class SettingController extends Controller
                             break;
                         case 'in_active':
                             Setting::updateAll(
-                                ['record_status' => 0]
+                                ['record_status' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;

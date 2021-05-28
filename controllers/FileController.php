@@ -285,7 +285,7 @@ class FileController extends Controller
                             break;
                         case 'in_active':
                             File::updateAll(
-                                ['record_status' => 0]
+                                ['record_status' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;

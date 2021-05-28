@@ -233,7 +233,7 @@ class BackupController extends Controller
                             break;
                         case 'in_active':
                             Backup::updateAll(
-                                ['record_status' => 0]
+                                ['record_status' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;
