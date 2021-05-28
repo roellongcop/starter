@@ -10,12 +10,10 @@ use app\widgets\SearchButton;
 
 /* @var $this yii\web\View */
 /* @var $form app\widgets\ActiveForm */
-
 $modules = $model->loadModules();
 $model->modules = $model->modules ?: array_keys($modules);
-array_unshift($modules, ['name' => 'Check All', 'tags' => 'onclick="checkAllAccessModule(this)"']);
- 
-
+$modules['*checkAll'] = ['name' => 'Check All', 'tags' => 'onclick="checkAllAccessModule(this)"'];
+ksort($modules);
 ?>
     <?php $form = ActiveForm::begin([
         'action' => $model->searchAction,
