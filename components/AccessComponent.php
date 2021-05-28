@@ -100,9 +100,8 @@ class AccessComponent extends Component
  	}
  
  
-	public function userCan($action='', $controller='', $user='')
+	public function userCan($action, $controller='', $user='')
  	{
-		$action = ($action === '') ? App::actionID() : $action;
 		$controller = ($controller === '') ? App::controllerID() : $controller;
 
 		$module_access = ($user)? $user->identity->module_access: App::identity('module_access');

@@ -18,7 +18,6 @@ $this->params['showCreateButton'] = true;
     <?= Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model,
-    	'paramName' => 'slug'
     ]) ?>  
     <hr>
     <?= Detail::widget(['model' => $model]) ?>

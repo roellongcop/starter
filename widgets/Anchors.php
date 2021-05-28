@@ -18,7 +18,7 @@ class Anchors extends \yii\base\Widget
         'log' => ['class' => 'btn btn-secondary btn-bold btn-upper btn-font-sm'],
         'index' => ['class' => 'btn btn-secondary btn-bold btn-upper btn-font-sm'],
         'create' => ['class' => 'btn btn-success font-weight-bolder font-size-sm '],
-        'view' => ['class' => 'btn btn-default font-weight-bolder font-size-sm '],
+        'view' => ['class' => 'btn btn-info font-weight-bolder font-size-sm '],
         'update' => ['class' => 'btn btn-primary font-weight-bolder font-size-sm '],
         'duplicate' => ['class' => 'btn btn-default font-weight-bolder font-size-sm '],
         'delete' => [

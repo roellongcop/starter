@@ -19,7 +19,6 @@ $this->params['showCreateButton'] = true;
     <?= Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model,
-        'paramName' => 'token'
     ]) ?> 
     <?= Anchor::widget([
     	'title' => 'Download', 

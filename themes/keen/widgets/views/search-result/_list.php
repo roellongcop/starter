@@ -1,7 +1,7 @@
 <?php
 
 use app\helpers\App;
-use app\widgets\Anchor;
+use app\widgets\Anchors;
 use app\widgets\Detail;
 ?>
 
@@ -23,11 +23,10 @@ use app\widgets\Detail;
 	<div id="<?= $module ?>-tab-<?= $model->id ?>" class="collapse" data-parent="#<?= $module ?>" style="">
 		<div class="card-body">
 			<p>
-				<?= Anchor::widget([
-					'title' => 'View Details',
-					'link' => $model->viewUrl,
-					'options' => ['class' => 'btn btn-info btn-sm']
-				]) ?>
+				<?= Anchors::widget([
+			    	'names' => ['view', 'update', 'duplicate', 'delete', 'log'], 
+			    	'model' => $model,
+			    ]) ?> 
 			</p>
 			<?= Detail::widget(['model' => $model]) ?>
 		</div>

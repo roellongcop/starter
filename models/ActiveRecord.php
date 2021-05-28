@@ -155,45 +155,64 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $this->getGridColumns();
     }
 
+    protected function checkLinkAccess($action, $controllerID='')
+    {
+        $controllerID = $controllerID ?: $this->controllerID();
+
+        if (App::isLogin()) {
+            return App::identity()->can($action, $controllerID);
+        }
+    }
+
     public function getLogUrl()
     {
-        return Url::to([
-            'log/index', 
-            'model_id' => ($this->id ?? ''),
-            'model_name' => App::className($this)
-        ], true);
+        if ($this->checkLinkAccess('index', 'log')) {
+            return Url::to([
+                'log/index', 
+                'model_id' => ($this->id ?? ''),
+                'model_name' => App::className($this)
+            ], true);
+        }
     }
     public function getViewUrl()
     {
-        $paramName = $this->paramName();
-        return Url::to([
-            $this->controllerID() . "/view", 
-            $paramName => $this->{$paramName}
-        ], true);
+        if ($this->checkLinkAccess('view')) {
+            $paramName = $this->paramName();
+            return Url::to([
+                $this->controllerID() . "/view", 
+                $paramName => $this->{$paramName}
+            ], true);
+        }
     }
     public function getUpdateUrl()
     {
-        $paramName = $this->paramName();
-        return Url::to([
-            $this->controllerID() . "/update", 
-            $paramName => $this->{$paramName}
-        ], true);
+        if ($this->checkLinkAccess('update')) {
+            $paramName = $this->paramName();
+            return Url::to([
+                $this->controllerID() . "/update", 
+                $paramName => $this->{$paramName}
+            ], true);
+        }
     }
     public function getDuplicateUrl()
     {
-        $paramName = $this->paramName();
-        return Url::to([
-            $this->controllerID() . "/duplicate", 
-            $paramName => $this->{$paramName}
-        ], true);
+        if ($this->checkLinkAccess('duplicate')) {
+            $paramName = $this->paramName();
+            return Url::to([
+                $this->controllerID() . "/duplicate", 
+                $paramName => $this->{$paramName}
+            ], true);
+        }
     }
     public function getDeleteUrl()
     {
-        $paramName = $this->paramName();
-        return Url::to([
-            $this->controllerID() . "/delete", 
-            $paramName => $this->{$paramName}
-        ], true);
+        if ($this->checkLinkAccess('delete')) {
+            $paramName = $this->paramName();
+            return Url::to([
+                $this->controllerID() . "/delete", 
+                $paramName => $this->{$paramName}
+            ], true);
+        }
     }
 
     public function getMainAttribute()
