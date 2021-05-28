@@ -53,23 +53,24 @@
 
 # Modules
 * Dashboard
-* Backup
-* File
-* Ip
-* Log
-* Role
-* Setting
-* User
-* User Meta (holding user additional attributes (eg: settings))
-* Model File (holding uploaded files; connected with File module)
-* Visit log
-* Session
-* Theme
-* Notification
-* Queue
-
-
-* Unordered sub-list.
-	* asdasd
-	* asdasd
-	* asdasd
+* Users
+	* List
+	* User Meta
+* Files
+	* List
+	* My Files
+	* Model Files
+* System
+	* Roles
+	* Backups
+	* Sessions
+	* Logs
+	* Visit Logs
+	* Queues
+* Settings
+	* List
+	* My Settings
+	* General Setting
+	* Ip
+	* Themes
+	* Notifications
