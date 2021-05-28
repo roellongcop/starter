@@ -3,7 +3,7 @@
 2) you may need to adjust the "app/config/db.php" for credentials
 3) open cmd, goto root folder then run:
 
-	```composer install or composer update``` (install dependency)
+	```composer install or composer update (install dependency)```
 	
 	yii migrate (create database structure)
 
