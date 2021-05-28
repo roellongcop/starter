@@ -184,18 +184,19 @@ class IpController extends Controller
             if (isset($post['selection'])) {
 
                 $models = Ip::all($post['selection']);
+                $user = App::identity();
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
                             Ip::updateAll(
-                                ['record_status' => 1, 'updated_at' => App::timestamp()],
-                                ['id' => $post['selection']]
-                            );
+                                ['record_status' => 1], 
+                                ['id' => $post['selection']
+                            ]);
                             break;
                         case 'in_active':
                             Ip::updateAll(
-                                ['record_status' => 0, 'updated_at' => App::timestamp()],
+                                ['record_status' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;
@@ -204,13 +205,13 @@ class IpController extends Controller
                             break;
                         case 'white_list':
                             Ip::updateAll(
-                                ['type' => 1, 'updated_at' => App::timestamp()],
+                                ['type' => 1],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'black_list':
                             Ip::updateAll(
-                                ['type' => 0, 'updated_at' => App::timestamp()],
+                                ['type' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;

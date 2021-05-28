@@ -45,6 +45,15 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_modelSqlFiles;
     public $_modelSqlFile;
 
+
+    public static function updateAll($attributes, $condition = '', $params = [])
+    {
+        $attributes['updated_at'] = App::timestamp();
+        $attributes['updated_by'] = App::identity('id');
+
+        return parent::updateAll($attributes, $condition, $params);
+    }
+
     public function setActive()
     {
         if ($this->hasProperty('record_status')) {
@@ -84,11 +93,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return [
             'created_at' => [
                 'attribute' => 'created_at',
-                'format' => 'raw'
+                'format' => 'fulldate'
             ],
             'updated_at' => [
                 'attribute' => 'updated_at',
-                'format' => 'raw'
+                'format' => 'fulldate'
             ],
             'createdByEmail' => [
                 'attribute' => 'createdByEmail',

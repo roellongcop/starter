@@ -191,13 +191,13 @@ class QueueController extends Controller
                     switch ($post['process-selected']) {
                         case 'active':
                             Queue::updateAll(
-                                ['record_status' => 1, 'updated_at' => App::timestamp()],
+                                ['record_status' => 1],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
                             Queue::updateAll(
-                                ['record_status' => 0, 'updated_at' => App::timestamp()],
+                                ['record_status' => 0]
                                 ['id' => $post['selection']]
                             );
                             break;

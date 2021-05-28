@@ -148,27 +148,27 @@ class NotificationController extends Controller
                     switch ($post['process-selected']) {
                         case 'read':
                             Notification::updateAll(
-                                ['status' => 0, 'updated_at' => App::timestamp()],
+                                ['status' => 0],
                                 ['id' => $post['selection']]
                             );
                             break;
 
                         case 'unread':
                             Notification::updateAll(
-                                ['status' => 1, 'updated_at' => App::timestamp()],
+                                ['status' => 1],
                                 ['id' => $post['selection']]
                             );
                             break;
 
                         case 'active':
                             Notification::updateAll(
-                                ['record_status' => 1, 'updated_at' => App::timestamp()],
+                                ['record_status' => 1],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
                             Notification::updateAll(
-                                ['record_status' => 0, 'updated_at' => App::timestamp()],
+                                ['record_status' => 0]
                                 ['id' => $post['selection']]
                             );
                             break;

@@ -279,13 +279,13 @@ class FileController extends Controller
                     switch ($post['process-selected']) {
                         case 'active':
                             File::updateAll(
-                                ['record_status' => 1, 'updated_at' => App::timestamp()],
+                                ['record_status' => 1],
                                 ['id' => $post['selection']]
                             );
                             break;
                         case 'in_active':
                             File::updateAll(
-                                ['record_status' => 0, 'updated_at' => App::timestamp()],
+                                ['record_status' => 0]
                                 ['id' => $post['selection']]
                             );
                             break;
