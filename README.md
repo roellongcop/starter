@@ -9,7 +9,7 @@
 	
 	```yii serve``` (start server)
 
-4) goto development server created: [[host]/api/v1/user/available-users]([host]/api/v1/user/available-users) for available user
+4) goto development server created: [http://[host]/api/v1/user/available-users]([http://host]/api/v1/user/available-users) for available user
 5) Additional Command
 
 	```php vendor/bin/codecept run``` (Running tests: [must run fixture first])
