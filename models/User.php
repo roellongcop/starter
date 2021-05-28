@@ -676,4 +676,24 @@ class User extends ActiveRecord implements IdentityInterface
             'failed' => $failed,
         ];
     }
+
+    public function getIsDeleted()
+    {
+        return $this->status == self::STATUS_DELETED;
+    }
+
+    public function getIsNotVerified()
+    {
+        return $this->status == self::STATUS_INACTIVE;
+    }
+
+    public function getIsVerified()
+    {
+        return $this->status == self::STATUS_ACTIVE;
+    }
+
+    public function getIsBlocked()
+    {
+        return $this->is_blocked == 1;
+    }
 }

@@ -51,6 +51,23 @@ class LoginForm extends Model
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
+            if ($user) {
+                if ($user->isInactive) {
+                    $this->addError($attribute, 'User is inactive');
+                }
+
+                if ($user->isNotVerified) {
+                    $this->addError($attribute, 'User is not verified');
+                }
+
+                if ($user->isBlocked) {
+                    $this->addError($attribute, 'User is blocked');
+                }
+
+                if ($user->role->isInactive) {
+                    $this->addError($attribute, 'Role is inactive');
+                }
+            }
         }
     }
 
@@ -75,6 +92,7 @@ class LoginForm extends Model
     {
         if ($this->_user === false) {
             $this->_user = User::findByEmail($this->username);
+            $this->_user = $this->_user ?: User::findByUsername($this->username);
         }
 
         return $this->_user;

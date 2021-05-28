@@ -58,6 +58,19 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             $this->record_status = self::RECORD_INACTIVE;
         }
     }
+    public function getIsActive()
+    {
+        if ($this->hasProperty('record_status')) {
+            return $this->record_status == self::RECORD_ACTIVE;
+        }
+    }
+
+    public function getIsInactive()
+    {
+        if ($this->hasProperty('record_status')) {
+            return $this->record_status == self::RECORD_INACTIVE;
+        }
+    }
 
 
     public function getHeaderDetailColumns()

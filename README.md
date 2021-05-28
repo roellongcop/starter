@@ -5,15 +5,15 @@
 
 	```composer install or composer update``` - (install dependency)
 	
-	```yii migrate``` (create database structure)
-
-	```yii fixture *``` (create fixed set of data)
+	```yii migrate``` (create database structure and create fixed set of data)
 	
 	```yii serve``` (start server)
 
 4) Additional Command
 
 	```php vendor/bin/codecept run``` (Running tests: [must run fixture first])
+
+	```yii fixture *``` (create fixed set of data)
 
 	```yii seed``` (generate random data on [roles, users, ips])
 

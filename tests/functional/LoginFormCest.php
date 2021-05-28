@@ -46,6 +46,47 @@ class LoginFormCest
         $I->see('Incorrect username or password.');
     }
 
+
+    public function loginInactiveUser(\FunctionalTester $I)
+    {
+         $I->submitForm('#kt_login_signin_form', [
+            'LoginForm[username]' => 'inactive_user@inactive_user.com',
+            'LoginForm[password]' => 'inactive_user@inactive_user.com',
+        ]);
+        $I->expectTo('see validations errors');
+        $I->see('User is inactive');
+    }
+
+    public function loginNotVerifiedUser(\FunctionalTester $I)
+    {
+        $I->submitForm('#kt_login_signin_form', [
+            'LoginForm[username]' => 'not_verified_user@not_verified_user.com',
+            'LoginForm[password]' => 'not_verified_user@not_verified_user.com',
+        ]);
+        $I->expectTo('see validations errors');
+        $I->see('User is not verified');
+    }
+
+    public function loginBlockedUser(\FunctionalTester $I)
+    {
+        $I->submitForm('#kt_login_signin_form', [
+            'LoginForm[username]' => 'blocked_user@blocked_user.com',
+            'LoginForm[password]' => 'blocked_user@blocked_user.com',
+        ]);
+        $I->expectTo('see validations errors');
+        $I->see('User is blocked');
+    }
+
+    public function loginInactiveRoleUser(\FunctionalTester $I)
+    {
+        $I->submitForm('#kt_login_signin_form', [
+            'LoginForm[username]' => 'inactive_role_user@inactive_role_user.com',
+            'LoginForm[password]' => 'inactive_role_user@inactive_role_user.com',
+        ]);
+        $I->expectTo('see validations errors');
+        $I->see('Role is inactive');
+    }
+
     public function loginSuccessfully(\FunctionalTester $I)
     {
         $I->submitForm('#kt_login_signin_form', [

@@ -29,5 +29,13 @@ return [
         'main_navigation' => json_encode($defaultNavigation),
         'slug' => 'developer', 
         'record_status' => 1,
+    ],
+    'inactive_role' => [
+        'name' => 'inactive_role', 
+        'role_access' => json_encode([]),
+        'module_access' => json_encode($controllerActions),
+        'main_navigation' => json_encode($defaultNavigation),
+        'slug' => 'inactive_role', 
+        'record_status' => 0,
     ]
 ];

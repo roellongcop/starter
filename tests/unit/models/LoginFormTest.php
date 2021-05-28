@@ -13,7 +13,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         \Yii::$app->user->logout();
     }
 
-    public function testLoginNoUser()
+    public function testNotExistingUserCannotLogin()
     {
         $this->model = new LoginForm([
             'username' => 'not_existing_username',
@@ -24,7 +24,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
-    public function testLoginWrongPassword()
+    public function testCannotLoginWithWrongPassword()
     {
         $this->model = new LoginForm([
             'username' => 'demo',
@@ -37,7 +37,7 @@ class LoginFormTest extends \Codeception\Test\Unit
     }
 
 
-    public function testBlockedUserLogin()
+    public function testBlockedUserCannotLogin()
     {
         $this->model = new LoginForm([
             'username' => 'blocked_user',
@@ -48,7 +48,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
-    public function testNotValidateUserLogin()
+    public function testNotVerifiedUserCannotLogin()
     {
         $this->model = new LoginForm([
             'username' => 'novalidate_user',
@@ -59,11 +59,22 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
-    public function testInactiveUserLogin()
+    public function testInactiveUserCannotLogin()
     {
         $this->model = new LoginForm([
             'username' => 'inactive_user',
             'password' => 'inactive_user@inactive_user.com',
+        ]);
+
+        expect_not($this->model->login());
+        expect_that(\Yii::$app->user->isGuest);
+    }
+
+    public function testInactiveRoleUserCannotLogin()
+    {
+        $this->model = new LoginForm([
+            'username' => 'inactive_role_user',
+            'password' => 'inactive_role_user@inactive_role_user.com',
         ]);
 
         expect_not($this->model->login());
