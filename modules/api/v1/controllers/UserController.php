@@ -10,7 +10,7 @@ use yii\data\ActiveDataProvider;
  */
 class UserController extends ActiveController
 {
-    public $modelClass = '\app\modules\api\v1\models\User';
+    public $modelClass = 'app\modules\api\v1\models\User';
     public $serializer = [
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'user',

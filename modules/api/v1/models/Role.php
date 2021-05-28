@@ -19,7 +19,7 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  */
-class Role extends \yii\db\ActiveRecord
+class Role extends ActiveRecord
 {
     /**
      * {@inheritdoc}

@@ -27,7 +27,7 @@ use yii\helpers\Url;
  * @property string $created_at
  * @property string $updated_at
  */
-class User extends \yii\db\ActiveRecord
+class User extends ActiveRecord
 {
     /**
      * {@inheritdoc}

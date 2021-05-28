@@ -148,14 +148,20 @@ if (YII_ENV_DEV) {
                 'class' => 'yii\gii\generators\crud\Generator',
                 'templates' => [
                     // template name => path to template
-                    'starter' => '@app/gii/starter/crud/default',
+                    'starter' => '@app/gii/crud/starter/default',
                 ]
             ],
             'model' => [
                 'class' => 'yii\gii\generators\model\Generator',
                 'templates' => [ 
-                    'api' => '@app/gii/api/model/default', 
-                    'custom' => '@app/gii/custom/model/default', 
+                    'api' => '@app/gii/model/api/default', 
+                    'starter' => '@app/gii/model/starter/default', 
+                ]
+            ],
+            'controller' => [
+                'class' => 'yii\gii\generators\controller\Generator',
+                'templates' => [ 
+                    'api' => '@app/gii/controller/api/default', 
                 ]
             ]
         ],
