@@ -45,6 +45,14 @@ $model->modules = $model->modules ?: array_keys($modules);
             'form' => $form,
         ]) ?>
 
+        <?= Filter::widget([
+            'data' => App::mapParams('record_status'),
+            'title' => 'Record Status',
+            'attribute' => 'record_status',
+            'model' => $model,
+            'form' => $form,
+        ]) ?>
+
         <?= Pagination::widget([
             'model' => $model,
             'form' => $form,

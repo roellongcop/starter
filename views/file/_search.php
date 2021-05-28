@@ -25,8 +25,6 @@ use app\widgets\ActiveForm;
         
         <?= DateRange::widget(['model' => $model]) ?>
 
-       
-
         <?= Filter::widget([
             'data' => FileSearch::filter('extension'),
             'title' => 'Extension',
@@ -35,7 +33,6 @@ use app\widgets\ActiveForm;
             'form' => $form,
         ]) ?>
 
-        
         <?= Filter::widget([
             'data' => App::mapParams('record_status'),
             'title' => 'Record Status',

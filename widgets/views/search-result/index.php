@@ -1,7 +1,6 @@
 <?php
 
 use app\helpers\App;
-use yii\helpers\Inflector;
 ?>
 <?php if ($dataProviders) : ?>
     <h4>Search result for "<?= $searchModel->keywords ?>"</h4>
@@ -14,12 +13,12 @@ use yii\helpers\Inflector;
             <?= $searchModel->endDate() ?>
         </strong>
     </p>
-    <?php foreach ($dataProviders as $module => $dataProvider): $nameModule = str_replace('Search', '', $module); ?>
+    <?php foreach ($dataProviders as $module => $dataProvider):
+        $moduleSearch = Yii::createObject("app\\models\\search\\{$module}"); ?>
 
         <?= $this->render('_result', [
-            'nameModule' => $nameModule,
-            'controller' => Inflector::camel2id($nameModule),
-            'counter' => 0,
+            'nameModule' => str_replace('Search', '', App::className($moduleSearch)),
+            'controller' => $moduleSearch->controllerID(),
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'module' => $module,

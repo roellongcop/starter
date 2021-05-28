@@ -9,7 +9,7 @@
 
 	```yii fixture *``` (create fixed set of data)
 	
-	```yii serve```
+	```yii serve``` (start server)
 
 4) Additional Command
 
@@ -20,7 +20,7 @@
 	```yii seed Role 10``` (generate 10 roles)
 
 	```yii seed Users 10``` (generate 10 users)
-	
+
 	```yii seed Ip 10``` (generate 10 ips)
 
 ============================================================================

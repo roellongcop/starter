@@ -17,6 +17,7 @@ class DashboardSearch extends \yii\base\Model
     public $date_range;
     public $modules;
     public $pagination;
+    public $record_status;
 
     public $searchTemplate = 'dashboard/_search';
     public $searchAction = ['dashboard/index'];
@@ -28,7 +29,7 @@ class DashboardSearch extends \yii\base\Model
     public function rules()
     {
         return [
-            [['keywords', 'modules', 'pagination', 'date_range'], 'safe'],
+            [['keywords', 'modules', 'pagination', 'date_range', 'record_status'], 'safe'],
         ];
     }
 
@@ -49,7 +50,8 @@ class DashboardSearch extends \yii\base\Model
                 'class' => "\\app\\models\\search\\{$module}",
                 'keywords' => $this->keywords,
                 'date_range' => $this->date_range,
-                'pagination' => $this->pagination
+                'pagination' => $this->pagination,
+                'record_status' => $this->record_status,
             ]);
 
             $dataProvider = $searchModel->search([]);
