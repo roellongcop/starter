@@ -13,7 +13,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         \Yii::$app->user->logout();
     }
 
-    public function testNotExistingUserCannotLogin()
+    public function testLoginNotExistingUser()
     {
         $this->model = new LoginForm([
             'username' => 'not_existing_username',
@@ -24,7 +24,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
-    public function testCannotLoginWithWrongPassword()
+    public function testLoginWithWrongPassword()
     {
         $this->model = new LoginForm([
             'username' => 'demo',
@@ -37,7 +37,7 @@ class LoginFormTest extends \Codeception\Test\Unit
     }
 
 
-    public function testBlockedUserCannotLogin()
+    public function testLoginBlockedUser()
     {
         $this->model = new LoginForm([
             'username' => 'blocked_user',
@@ -48,7 +48,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
-    public function testNotVerifiedUserCannotLogin()
+    public function testLoginNotVerifiedUser()
     {
         $this->model = new LoginForm([
             'username' => 'novalidate_user',
@@ -59,7 +59,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
-    public function testInactiveUserCannotLogin()
+    public function testLoginInactiveUser()
     {
         $this->model = new LoginForm([
             'username' => 'inactive_user',
@@ -70,7 +70,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
-    public function testInactiveRoleUserCannotLogin()
+    public function testLoginInactiveRoleUser()
     {
         $this->model = new LoginForm([
             'username' => 'inactive_role_user',
@@ -81,7 +81,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(\Yii::$app->user->isGuest);
     }
 
-    public function testLoginCorrect()
+    public function testLoginCorrectCredential()
     {
         $this->model = new LoginForm([
             'username' => 'admin@admin.com',
