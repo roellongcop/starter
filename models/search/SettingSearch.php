@@ -105,37 +105,11 @@ class SettingSearch extends Setting
 
     public static function default($name)
     {
-        $model = Setting::findOne([
-            'name' => $name,
-            'type' => 'general'
-        ]);
-        if ($model) {
-            return $model->value;
-        }
-
-        $general_settings = App::params('general_settings');
-
-        if (!empty($general_settings[$name])) {
-            return $general_settings[$name]['default'];
-        }
+        return App::setting($name);
     }
 
     public static function defaultImage($name, $params=[])
     {
-        $model = Setting::findOne([
-            'name' => $name,
-            'type' => 'general'
-        ]);
-
-        if($model && $model->imageFile) {
-            return Url::imagePath($model->imagePath, $params);
-        }
-
-        if ($name == 'image_holder') {
-            return App::params('general_settings')['image_holder']['default'] ?? '';
-        }
-
-        return self::defaultImage('image_holder');
-
+        return App::setting($name);
     }
 }

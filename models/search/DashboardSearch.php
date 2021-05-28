@@ -23,6 +23,8 @@ class DashboardSearch extends \yii\base\Model
     public $searchAction = ['dashboard/index'];
     public $searchLabel = 'Dashboard';
 
+    public $totalRecords = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -57,6 +59,7 @@ class DashboardSearch extends \yii\base\Model
             $dataProvider = $searchModel->search([]);
             if ($dataProvider->models) {
                 $dataProviders[$module] = $dataProvider;
+                $this->totalRecords += $dataProvider->totalCount;
             }
         }
         ksort($dataProviders);

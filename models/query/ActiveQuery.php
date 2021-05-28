@@ -1,6 +1,6 @@
 <?php
 namespace app\models\query;
-
+use Yii;
 use app\helpers\App;
 
 abstract class ActiveQuery extends \yii\db\ActiveQuery
@@ -41,8 +41,7 @@ abstract class ActiveQuery extends \yii\db\ActiveQuery
 
     public function visible($alias = '')
     {
-        $modelClass = $this->modelClass;
-        $class = new $modelClass();
+        $class = Yii::createObject($this->modelClass);
 
         if ($class && $class->hasMethod('controllerID')) {
             $field = $this->field('record_status');

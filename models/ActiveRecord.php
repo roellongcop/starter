@@ -449,12 +449,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_createdByEmail;
         }
 
-        if ($this->created_by == $this->updated_by) {
-            if ($this->_updatedByEmail) {
-                return $this->_updatedByEmail;
-            }
-        }
-
         if(($model = $this->createdBy) != null) {
             $this->_createdByEmail = $model->email;
             return $this->_createdByEmail;
@@ -471,12 +465,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_updatedByEmail;
         }
 
-        if ($this->created_by == $this->updated_by) {
-            if ($this->_createdByEmail) {
-                return $this->_createdByEmail;
-            }
-        }
-
         if(($model = $this->updatedBy) != null) {
             $this->_updatedByEmail = $model->email;
             return $this->_updatedByEmail;
@@ -485,9 +473,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getPreview()
     {
-        $controller = $this->controllerID();
-
-        $url = ["{$controller}/view", 'id' => $this->id];
+        $url = $this->viewUrl;
 
         return Anchor::widget([
             'title' => Url::to($url, true),

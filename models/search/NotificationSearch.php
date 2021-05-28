@@ -80,7 +80,7 @@ class NotificationSearch extends Notification
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'user_id' => App::identity('id'),
             'status' => $this->status,
             'record_status' => $this->record_status,
             'created_by' => $this->created_by,

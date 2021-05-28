@@ -4,7 +4,14 @@ use app\helpers\App;
 ?>
 <?php if ($dataProviders) : ?>
     <h4>Search result for "<?= $searchModel->keywords ?>"</h4>
-    <p>Date Range: 
+    <p>
+        Total Records Found: 
+        <strong>
+            <?= number_format($searchModel->totalRecords) ?>
+        </strong>
+    </p>
+    <p>
+        Date Range: 
         <strong>
             <?= $searchModel->startDate() ?>
         </strong>
@@ -13,6 +20,7 @@ use app\helpers\App;
             <?= $searchModel->endDate() ?>
         </strong>
     </p>
+    
     <?php foreach ($dataProviders as $module => $dataProvider):
         $moduleSearch = Yii::createObject("app\\models\\search\\{$module}"); ?>
 
