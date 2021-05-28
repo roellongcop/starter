@@ -109,4 +109,9 @@ class User extends \yii\db\ActiveRecord
 
         return $fields;
     }
+
+    public function getRole()
+    {
+        return $this->hasOne(Role::className(), ['id' => 'role_id']);
+    }
 }

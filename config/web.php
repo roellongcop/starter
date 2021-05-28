@@ -154,6 +154,7 @@ if (YII_ENV_DEV) {
             'model' => [
                 'class' => 'yii\gii\generators\model\Generator',
                 'templates' => [ 
+                    'api' => '@app/gii/api/model/default', 
                     'custom' => '@app/gii/custom/model/default', 
                 ]
             ]

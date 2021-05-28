@@ -3,7 +3,7 @@ namespace app\models\query;
 use Yii;
 use app\helpers\App;
 
-abstract class ActiveQuery extends \yii\db\ActiveQuery
+class ActiveQuery extends \yii\db\ActiveQuery
 {
     public function daterange($daterange='', $field='created_at')
     {
