@@ -36,11 +36,45 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect($this->model->errors)->hasKey('password');
     }
 
+
+    public function testBlockedUserLogin()
+    {
+        $this->model = new LoginForm([
+            'username' => 'blocked_user',
+            'password' => 'blocked_user@gmail.com',
+        ]);
+
+        expect_not($this->model->login());
+        expect_that(\Yii::$app->user->isGuest);
+    }
+
+    public function testNotValidateUserLogin()
+    {
+        $this->model = new LoginForm([
+            'username' => 'novalidate_user',
+            'password' => 'novalidate_user@gmail.com',
+        ]);
+
+        expect_not($this->model->login());
+        expect_that(\Yii::$app->user->isGuest);
+    }
+
+    public function testInactiveUserLogin()
+    {
+        $this->model = new LoginForm([
+            'username' => 'inactive_user',
+            'password' => 'inactive_user@gmail.com',
+        ]);
+
+        expect_not($this->model->login());
+        expect_that(\Yii::$app->user->isGuest);
+    }
+
     public function testLoginCorrect()
     {
         $this->model = new LoginForm([
-            'username' => 'eldora02@gmail.com',
-            'password' => 'eldora02@gmail.com',
+            'username' => 'admin@gmail.com',
+            'password' => 'admin@gmail.com',
         ]);
 
         expect_that($this->model->login());

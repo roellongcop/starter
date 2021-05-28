@@ -1,8 +1,8 @@
 <?php
-namespace tests\unit\fixtures;
+namespace app\tests\unit\fixtures;
 
 class RoleFixture extends \yii\test\ActiveFixture
 {
     public $modelClass = 'app\models\Role';
-    public $dataFile = '@tests/unit/fixtures/data/models/role.php';
+    public $dataFile = '@app/tests/unit/fixtures/data/models/role.php';
 }

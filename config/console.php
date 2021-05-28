@@ -62,9 +62,11 @@ $config = [
     ],
     'params' => $params,
     'controllerMap' => [
-        // 'fixture' => [ // Fixture generation command line.
-        //     'class' => 'yii\faker\FixtureController',
-        // ],
+        'fixture' => [ // Fixture generation command line.
+            // 'class' => 'yii\faker\FixtureController',
+            'class' => 'yii\console\controllers\FixtureController',
+            'namespace' => 'app\tests\unit\fixtures',
+        ],
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationTable' => '{{%migrations}}',
