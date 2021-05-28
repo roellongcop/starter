@@ -53,9 +53,6 @@ class ActiveQuery extends \yii\db\ActiveQuery
                     $condition[$field] = '';
                 }
             }
-            if (\Yii::$app->id == 'basic-console') {
-                $condition[$field] = '';
-            }
 
             return $this->andFilterWhere($condition);
         }

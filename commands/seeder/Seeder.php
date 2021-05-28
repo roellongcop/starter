@@ -132,6 +132,12 @@ abstract class Seeder
 
             $newModel = $this->save($model, $i);
         }
-        $this->summary($modelClass::find()->count());
+
+        $result = $modelClass::find()
+            ->select(['COUNT("*") as total'])
+            ->createCommand()
+            ->queryOne();
+            
+        $this->summary($result['total']);
     }
 }
