@@ -32,9 +32,13 @@ class Filter extends \yii\base\Widget
         foreach ($this->data as $id => $name) {
             $checked = in_array($id, $filters)? 'checked': '';
 
+            $_name = is_array($name)? $name['name']: $name;
+            $tags = is_array($name)? $name['tags']: '';
+
             $this->inputs .= $this->render('filter/checkbox', [
                 'id' => $id,
-                'name' => $name,
+                'tags' => $tags,
+                'name' => $_name,
                 'checked' => $checked,
                 'inputName' => $this->name,
             ]);

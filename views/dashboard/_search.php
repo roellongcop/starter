@@ -1,6 +1,7 @@
 <?php
 use app\helpers\App;
 use app\widgets\ActiveForm;
+use app\widgets\Checkbox;
 use app\widgets\DateRange;
 use app\widgets\Filter;
 use app\widgets\Pagination;
@@ -12,6 +13,9 @@ use app\widgets\SearchButton;
 
 $modules = $model->loadModules();
 $model->modules = $model->modules ?: array_keys($modules);
+array_unshift($modules, ['name' => 'Check All', 'tags' => 'onclick="checkAllAccessModule(this)"']);
+ 
+
 ?>
     <?php $form = ActiveForm::begin([
         'action' => $model->searchAction,
@@ -36,7 +40,9 @@ $model->modules = $model->modules ?: array_keys($modules);
                 'Last Year',
             ]
         ]) ?>
-         
+
+        <br>
+
         <?= Filter::widget([
             'data' => $modules,
             'title' => 'Module',

@@ -1,4 +1,15 @@
 var editors = []; // for editors. important. dont delete
+var checkAllAccessModule = function(self) {
+    var is_checked = $(self).is(':checked');
+    if (is_checked) {
+        $('input[name="modules[]"]').prop('checked', true);
+    }
+    else {
+        $('input[name="modules[]"]').prop('checked', false);
+    }
+}
+
+
 var checkAllActions = function(self) {
     var is_checked = $(self).is(':checked');
     var controller = $(self).data('controller');
