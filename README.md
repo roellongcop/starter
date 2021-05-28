@@ -14,15 +14,17 @@
 
 	```php vendor/bin/codecept run``` (Running tests)
 
-	```yii fixture *``` (create fixed set of data)
+	```yii fixture *``` Ccreate fixed set of data)
 
-	```yii seed``` (generate random data on [roles, users, ips])
+	```yii seed``` (Generate random data on [roles, users, ips])
 
-	```yii seed Role 10``` (generate 10 roles)
+	```yii seed Role 10``` (Generate 10 roles)
 
-	```yii seed Users 10``` (generate 10 users)
+	```yii seed Users 10``` (Generate 10 users)
 
-	```yii seed Ip 10``` (generate 10 ips)
+	```yii seed Ip 10``` (Generate 10 ips)
+
+	```yii queue/run``` (Running queue jobs, must set to cron job on live-production)
 
 ============================================================================
 
@@ -46,6 +48,7 @@
 * Rest API setup
 * General Settings
 * Photo Uploader (dropzone)
+* Queuing System
 * Fixture Setup | for testing
 
 # Modules
@@ -62,3 +65,5 @@
 * Visit log
 * Session
 * Theme
+* Notification
+* Queue
