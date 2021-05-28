@@ -12,7 +12,7 @@
 4) goto development server created: ```[http://host]/api/v1/user/available-users``` for available user
 5) Additional Command
 
-	```php vendor/bin/codecept run``` (Running tests: [must run fixture first])
+	```php vendor/bin/codecept run``` (Running tests)
 
 	```yii fixture *``` (create fixed set of data)
 
