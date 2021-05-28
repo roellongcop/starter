@@ -8,12 +8,15 @@ use app\models\Role;
 class UserSeeder extends Seeder
 {
 	public $roles;
-	public $modelClass = '\app\models\User';
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->roles = array_keys(Role::dropdown());
+		$this->modelClass = [
+			'class' => 'app\models\User',
+			'password_hint' => 'Same as Email',
+		];
 	}
 
 	public function attributes()
@@ -25,7 +28,6 @@ class UserSeeder extends Seeder
             'username' => $this->faker->firstName,
             'email' => $email,
             'password_hash' => App::hash($email),
-            'password_hint' => 'Same as Email',
             'status' => $this->randomParamsID('user_status'),
             'record_status' => $this->randomParamsID('record_status'),
             'is_blocked' => $this->randomParamsID('is_blocked'),

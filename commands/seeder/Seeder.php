@@ -116,15 +116,15 @@ abstract class Seeder
         return ExitCode::OK;
     }
  
-
     public function seed()
     {
         $modelClass = is_array($this->modelClass)? $this->modelClass['class']: $this->modelClass;
+        $modelName = 
         $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
 
         for ($i=1; $i <= $this->rows; $i++) { 
             $model = Yii::createObject($this->modelClass);
-            $model->attributes = $this->attributes();
+            $model->load([App::className($model) => $this->attributes()]);
 
             if ($model->hasProperty('logAfterSave')) {
                 $model->logAfterSave = false;
