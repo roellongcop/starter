@@ -16,7 +16,6 @@ use yii\helpers\Url;
  */
 class AccessComponent extends Component
 {
- 
 	public function controllerActions()
 	{
 		$controllers = FileHelper::findFiles(Yii::getAlias('@app/controllers'), [
@@ -30,7 +29,8 @@ class AccessComponent extends Component
 			if (($controllerID = Inflector::camel2id(substr(basename($controller), 0, -14))) == '') continue;
 
 			$controllerName = substr(basename($controller), 0, -4);
-			$actions = get_class_methods("\\app\\controllers\\{$controllerName}");
+			$controllerObject = Yii::createObject("\\app\\controllers\\{$controllerName}");
+			$actions = get_class_methods($controllerObject);
 			$_actions = [];
 
 			foreach ($actions as $action) {

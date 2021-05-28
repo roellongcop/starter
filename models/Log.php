@@ -240,11 +240,9 @@ class Log extends ActiveRecord
 
     public function getModelInstance()
     {
-        $class = "\\app\\models\\{$this->model_name}";
+        $class = Yii::createObject("\\app\\models\\{$this->model_name}");
         
-        if (class_exists($class)) {
-            return $this->hasOne($class::className(), ['id' => 'model_id']);
-        }
+        return $this->hasOne($class::className(), ['id' => 'model_id']);
     }
 
     public function detailColumns()

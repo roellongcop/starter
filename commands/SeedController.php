@@ -37,10 +37,10 @@ class SeedController extends Controller
 
     public function actionIndex($class, $rows=1)
     {
-        $namespaceClass = "\\app\\commands\\seeder\\{$class}Seeder";
-
-        $model = new $namespaceClass();
-        $model->rows = $rows;
+        $model = Yii::createObject([
+            'class' => "\\app\\commands\\seeder\\{$class}Seeder",
+            'rows' => $rows
+        ]);
         $model->seed();
     }
 }

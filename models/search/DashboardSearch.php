@@ -44,20 +44,17 @@ class DashboardSearch extends \yii\base\Model
         $this->modules = $this->modules ?: array_keys($this->loadModules());
         $dataProviders = [];
         foreach ($this->modules as $module) {
-            $class = "\\app\\models\\search\\{$module}";
 
-            if (class_exists($class)) {
-                $searchModel = new $class();
-                $dataProvider = $searchModel->search([
-                    "{$module}" => [
-                        'keywords' => $this->keywords,
-                        'date_range' => $this->date_range,
-                        'pagination' => $this->pagination
-                    ],
-                ]);
-                if ($dataProvider->models) {
-                    $dataProviders[$module] = $dataProvider;
-                }
+            $searchModel = Yii::createObject([
+                'class' => "\\app\\models\\search\\{$module}",
+                'keywords' => $this->keywords,
+                'date_range' => $this->date_range,
+                'pagination' => $this->pagination
+            ]);
+
+            $dataProvider = $searchModel->search([]);
+            if ($dataProvider->models) {
+                $dataProviders[$module] = $dataProvider;
             }
         }
         ksort($dataProviders);
@@ -85,6 +82,8 @@ class DashboardSearch extends \yii\base\Model
         if ($this->date_range) {
             return date('F d, Y', strtotime(App::dateRange($this->date_range, 'start')));
         }
+
+        return date('F d, Y', strtotime($this->startDate));
     }
 
     public function endDate()
@@ -92,5 +91,7 @@ class DashboardSearch extends \yii\base\Model
         if ($this->date_range) {
             return date('F d, Y', strtotime(App::dateRange($this->date_range, 'end')));
         }
+
+        return date('F d, Y', strtotime($this->endDate));
     }
 }
