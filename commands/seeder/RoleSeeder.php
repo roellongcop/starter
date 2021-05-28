@@ -4,18 +4,17 @@ namespace app\commands\seeder;
 use app\helpers\App;
 class RoleSeeder extends Seeder
 {
+	public $modelClass = '\app\models\Role';
 	public $controllerActions;
 	public $defaultNavigation;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->controllerActions = App::component('access')->controllerActions();
-		$this->defaultNavigation = App::component('access')->defaultNavigation();
-	}
-	public function modelClass()
-	{
-		return '\app\models\Role';
+		$access = App::component('access');
+
+		$this->controllerActions = $access->controllerActions();
+		$this->defaultNavigation = $access->defaultNavigation();
 	}
 
 	public function attributes()

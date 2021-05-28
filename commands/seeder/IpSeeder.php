@@ -3,11 +3,8 @@ namespace app\commands\seeder;
 
 class IpSeeder extends Seeder
 {
-	public function modelClass()
-	{
-		return '\app\models\Ip';
-	}
-
+	public $modelClass = '\app\models\Ip';
+	
 	public function attributes()
 	{
 		return [

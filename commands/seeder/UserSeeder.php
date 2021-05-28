@@ -8,16 +8,12 @@ use app\models\Role;
 class UserSeeder extends Seeder
 {
 	public $roles;
+	public $modelClass = '\app\models\User';
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->roles = array_keys(Role::dropdown());
-	}
-
-	public function modelClass()
-	{
-		return '\app\models\User';
 	}
 
 	public function attributes()

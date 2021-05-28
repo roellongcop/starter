@@ -5,6 +5,7 @@ use app\helpers\App;
 use yii\console\ExitCode;
 use yii\console\widgets\Table;
 use yii\helpers\Console;
+use Yii;
 /**
  * This command echoes the first argument that you have entered.
  *
@@ -15,7 +16,6 @@ use yii\helpers\Console;
  */
 abstract class Seeder
 {
-    public abstract function modelClass();
     public abstract function attributes();
 
     public $success = 0;
@@ -26,7 +26,7 @@ abstract class Seeder
     public $faker;
 
     public $rows;
-
+    public $modelClass;
 
     public function __construct()
     {
@@ -119,11 +119,11 @@ abstract class Seeder
 
     public function seed()
     {
-        $modelClass = $this->modelClass();
+        $modelClass = is_array($this->modelClass)? $this->modelClass['class']: $this->modelClass;
         $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
 
         for ($i=1; $i <= $this->rows; $i++) { 
-            $model = new $modelClass();
+            $model = Yii::createObject($this->modelClass);
             $model->attributes = $this->attributes();
 
             if ($model->hasProperty('logAfterSave')) {
@@ -132,6 +132,6 @@ abstract class Seeder
 
             $newModel = $this->save($model, $i, $this->rows);
         }
-        $this->summary( $modelClass::find()->count());
+        $this->summary($modelClass::find()->count());
     }
 }
