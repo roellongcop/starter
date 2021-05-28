@@ -227,7 +227,7 @@ class Log extends ActiveRecord
             if (isset($model->preview)) {
                 return $model->preview;
             }
-            $url = [Inflector::camel2id($this->model_name) . '/view', 'id' => $this->model_id];
+            $url = $model->viewUrl;
             return Anchor::widget([
                 'title' => Url::to($url, true),
                 'link' => $url,
