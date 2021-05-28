@@ -69,8 +69,7 @@
 * Queue
 
 
-⋅⋅* Unordered sub-list. 
-	⋅⋅* Unordered sub-list. 
-	⋅⋅* Unordered sub-list. 
-		⋅⋅* Unordered sub-list. 
-		⋅⋅* Unordered sub-list. 
+* Unordered sub-list.
+	* asdasd
+	* asdasd
+	* asdasd
