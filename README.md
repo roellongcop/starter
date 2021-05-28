@@ -16,8 +16,11 @@
 	```php vendor/bin/codecept run``` (Running tests: [must run fixture first])
 
 	```yii seed``` (generate random data on [roles, users, ips])
+
 	```yii seed Role 10``` (generate 10 roles)
+
 	```yii seed Users 10``` (generate 10 users)
+	
 	```yii seed Ip 10``` (generate 10 ips)
 
 ============================================================================
