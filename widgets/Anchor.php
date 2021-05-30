@@ -28,19 +28,20 @@ class Anchor extends \yii\base\Widget
 
         $this->controller = $controller ? $controller->id: '';
         $this->action = $actionID;
-        // if (is_array($this->link)) {
-        //     $url = $this->link[0];
 
-        //     $explodedLink = explode('/', $url);
-        //     if (count($explodedLink) == 1) {
-        //         $this->controller = App::controllerID();
-        //         $this->action = $explodedLink[0];
-        //     }
-        //     else {
-        //         $this->controller = $explodedLink[0];
-        //         $this->action = $explodedLink[1];
-        //     }
-        // }
+        if (is_array($this->link)) {
+            $url = $this->link[0] ?? '';
+
+            $explodedLink = explode('/', $url);
+            if (count($explodedLink) == 1) {
+                $this->controller = $this->controller ?: App::controllerID();
+                $this->action = $this->action ?: $explodedLink[0];
+            }
+            else {
+                $this->controller = $this->controller ?: $explodedLink[0];
+                $this->action = $this->action ?: $explodedLink[1];
+            }
+        }
         $this->user = $this->user ?: App::user();
         $this->options['title'] = $this->tooltip;
     }
