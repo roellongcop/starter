@@ -14,15 +14,15 @@
 
 	```php vendor/bin/codecept run``` (Running tests)
 
-	```yii fixture *``` Ccreate fixed set of data)
+	```yii fixture *``` Create fixed set of data, Overwrite migration fixed data)
 
-	```yii seed``` (Generate random data on [roles, users, ips])
+	```yii seed/init``` (Generate random data on [roles, users, ips], Overwrite migration fixed data)
 
-	```yii seed Role 10``` (Generate 10 roles)
+	```yii seed Role 10``` (Generate Additional 10 roles)
 
-	```yii seed Users 10``` (Generate 10 users)
+	```yii seed Users 10``` (Generate Additional 10 users)
 
-	```yii seed Ip 10``` (Generate 10 ips)
+	```yii seed Ip 10``` (Generate Additional 10 ips)
 
 	```yii queue/run``` (Running queue jobs, must set to cron job on live-production)
 
