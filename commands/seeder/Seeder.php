@@ -119,8 +119,7 @@ abstract class Seeder
     public function seed()
     {
         $modelClass = is_array($this->modelClass)? $this->modelClass['class']: $this->modelClass;
-        $modelName = 
-        $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
+        $modelName = $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
 
         for ($i=1; $i <= $this->rows; $i++) { 
             $model = Yii::createObject($this->modelClass);
