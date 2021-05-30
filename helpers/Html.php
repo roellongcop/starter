@@ -42,7 +42,7 @@ class Html extends \yii\helpers\Html
         $url = App::urlManager()->parseRequest($request);
         list($controller, $actionID) = App::app()->createController($url[0]);
 
-        return $controller->id;
+        return $controller ? $controller->id: '';
 
         // $request = new Request(['url' => parse_url(Url::to($menu['link'], true), PHP_URL_PATH)]);
         // $current = App::urlManager()->parseRequest($request)[0] ?? '';

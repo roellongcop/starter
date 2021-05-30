@@ -26,7 +26,7 @@ class Anchor extends \yii\base\Widget
         $url = App::urlManager()->parseRequest($request);
         list($controller, $actionID) = App::app()->createController($url[0]);
 
-        $this->controller = $controller->id;
+        $this->controller = $controller ? $controller->id: '';
         $this->action = $actionID;
         // if (is_array($this->link)) {
         //     $url = $this->link[0];
