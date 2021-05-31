@@ -25,8 +25,8 @@ class UserSeeder extends Seeder
 
 	public function afterDepend()
 	{
-		$this->roles = array_keys(Role::dropdown());
 		parent::afterDepend();
+		$this->roles = array_keys(Role::dropdown());
 	}
 
 	public function attributes()
