@@ -6,6 +6,10 @@ use app\helpers\Url;
 use app\widgets\Dropzone;
 use yii\widgets\Pjax;
 $this->registerJs(<<< SCRIPT
+    var disableButton = function() {
+        $('#choose-photo-confirm-{$id}').prop('disabled', true);
+    }
+    
     var enableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', false);
     }
@@ -94,6 +98,7 @@ $this->registerJs(<<< SCRIPT
     $('#choose-from-gallery-btn-{$id}').on('click', function() {
         let keywords = $('#my_files-{$id} input.search-photo').val()
         getMyFiles('{$myImageFilesUrl}');
+        disableButton();
     })
 
     $(document).on("pjax:beforeSend",function(){
