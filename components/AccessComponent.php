@@ -104,7 +104,7 @@ class AccessComponent extends Component
  	{
 		$controller = ($controller === '') ? App::controllerID() : $controller;
 
-		$module_access = ($user)? $user->identity->module_access: App::identity('module_access');
+		$module_access = ($user)? $user->module_access: App::identity('module_access');
 
 		if (isset($module_access[$controller])) {
 			return in_array($action, $module_access[$controller]) ? true: false;
