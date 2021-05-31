@@ -17,15 +17,6 @@ class UserSeeder extends Seeder
 			'password_hint' => 'Same as Email',
 		];
 
-		$this->dependSeeder = [
-			'class' => 'app\commands\seeder\RoleSeeder',
-			'rows' => 5,
-		];
-	}
-
-	public function afterDepend()
-	{
-		parent::afterDepend();
 		$this->roles = array_keys(Role::dropdown());
 	}
 

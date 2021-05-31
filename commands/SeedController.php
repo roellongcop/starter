@@ -25,6 +25,7 @@ class SeedController extends Controller
     {
         $this->actionTruncate(['users', 'roles', 'ips']);
         $classes = [
+            'Role',
             'User',
             'Ip',
         ];
