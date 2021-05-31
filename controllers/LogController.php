@@ -186,16 +186,10 @@ class LogController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Log::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Log::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            Log::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Log::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             Log::deleteAll(['id' => $post['selection']]);

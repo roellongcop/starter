@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Log;
 use app\widgets\ExportContent;
 use app\models\Queue;
 use app\models\search\QueueSearch;
@@ -11,7 +10,6 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use app\helpers\App;
 use yii\helpers\Inflector;
-use yii\helpers\ArrayHelper;
 
 /**
  * QueueController implements the CRUD actions for Queue model.
@@ -190,16 +188,10 @@ class QueueController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Queue::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Queue::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            Queue::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Queue::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             Queue::deleteAll(['id' => $post['selection']]);
@@ -208,7 +200,6 @@ class QueueController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new Queue(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

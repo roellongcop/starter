@@ -5,10 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\helpers\App;
 use app\models\Backup;
-use app\models\Log;
 use app\models\search\BackupSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
@@ -226,16 +224,10 @@ class BackupController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Backup::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Backup::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            Backup::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Backup::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             Backup::deleteAll(['id' => $post['selection']]);
@@ -244,7 +236,6 @@ class BackupController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new Backup(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

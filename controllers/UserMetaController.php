@@ -4,11 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
-use app\models\Log;
 use app\models\UserMeta;
 use app\models\search\UserMetaSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -165,16 +163,10 @@ class UserMetaController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            UserMeta::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            UserMeta::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            UserMeta::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            UserMeta::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             UserMeta::deleteAll(['id' => $post['selection']]);
@@ -183,7 +175,6 @@ class UserMetaController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new UserMeta(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

@@ -4,11 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
-use app\models\Log;
 use app\models\Session;
 use app\models\search\SessionSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -164,16 +162,10 @@ class SessionController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Session::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Session::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            Session::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Session::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             Session::deleteAll(['id' => $post['selection']]);
@@ -182,7 +174,6 @@ class SessionController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new Session(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

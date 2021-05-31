@@ -4,11 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
-use app\models\Log;
 use app\models\VisitLog;
 use app\models\search\VisitLogSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -165,16 +163,10 @@ class VisitLogController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            VisitLog::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            VisitLog::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            VisitLog::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            VisitLog::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             VisitLog::deleteAll(['id' => $post['selection']]);
@@ -183,7 +175,6 @@ class VisitLogController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new VisitLog(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

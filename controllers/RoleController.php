@@ -4,11 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
-use app\models\Log;
 use app\models\Role;
 use app\models\search\RoleSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -230,16 +228,10 @@ class RoleController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Role::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Role::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            Role::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Role::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             Role::deleteAll(['id' => $post['selection']]);
@@ -248,7 +240,6 @@ class RoleController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new Role(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

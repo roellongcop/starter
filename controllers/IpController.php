@@ -5,10 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\helpers\App;
 use app\models\Ip;
-use app\models\Log;
 use app\models\search\IpSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -189,37 +187,24 @@ class IpController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Ip::updateAll(
-                                ['record_status' => 1], 
-                                ['id' => $post['selection']
-                            ]);
+                            Ip::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            Ip::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Ip::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             Ip::deleteAll(['id' => $post['selection']]);
                             break;
                         case 'white_list':
-                            Ip::updateAll(
-                                ['type' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Ip::whitelistAll(['id' => $post['selection']]);
                             break;
                         case 'black_list':
-                            Ip::updateAll(
-                                ['type' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Ip::blacklistAll(['id' => $post['selection']]);
                             break;
                         default:
                             # code...
                             break;
                     }
-                    Log::record(new Ip(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

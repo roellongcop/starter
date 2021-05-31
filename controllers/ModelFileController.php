@@ -10,7 +10,6 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use app\helpers\App;
 use yii\helpers\Inflector;
-use yii\helpers\ArrayHelper;
 
 /**
  * ModelFileController implements the CRUD actions for ModelFile model.
@@ -224,16 +223,10 @@ class ModelFileController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            ModelFile::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            ModelFile::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            ModelFile::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            ModelFile::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             ModelFile::deleteAll(['id' => $post['selection']]);
@@ -242,7 +235,6 @@ class ModelFileController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new ModelFile(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

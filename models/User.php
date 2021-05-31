@@ -696,4 +696,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->is_blocked == 1;
     }
+
+    public static function allowedAll($condition='')
+    {
+        return parent::updateAll(['is_blocked' => 0], $condition);
+    }
+
+    public static function blockedAll($condition='')
+    {
+        return parent::updateAll(['is_blocked' => 1], $condition);
+    }
 }

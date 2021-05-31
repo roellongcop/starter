@@ -4,14 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
-use app\models\Log;
 use app\models\User;
 use app\models\VisitLog;
 use app\models\form\ChangePasswordForm;
 use app\models\form\ProfileForm;
 use app\models\search\UserSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -201,38 +199,24 @@ class UserController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            User::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            User::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            User::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            User::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             User::deleteAll(['id' => $post['selection']]);
                             break;
                         case 'allowed':
-                            User::updateAll(
-                                ['is_blocked' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            User::allowedAll(['id' => $post['selection']]);
                             break;
                         case 'blocked':
-                            User::updateAll(
-                                ['is_blocked' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            User::blockedAll(['id' => $post['selection']]);
                             break;
                         default:
                             # code...
                             break;
                     }
-
-                    Log::record(new User(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

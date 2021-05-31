@@ -4,14 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
-use app\models\Log;
 use app\models\Setting;
 use app\models\Theme;
 use app\models\form\MySettingForm;
 use app\models\form\SettingForm;
 use app\models\search\SettingSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
@@ -151,16 +149,10 @@ class SettingController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            Setting::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Setting::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            Setting::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Setting::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             Setting::deleteAll(['id' => $post['selection']]);
@@ -169,7 +161,6 @@ class SettingController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new Setting(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

@@ -244,4 +244,13 @@ class Notification extends ActiveRecord
         return [];
     }
     */
+    public static function readAll($condition='')
+    {
+        return parent::updateAll(['status' => 0], $condition);
+    }
+
+    public static function unreadAll($condition='')
+    {
+        return parent::updateAll(['status' => 1], $condition);
+    }
 }

@@ -30,7 +30,6 @@ echo "<?php\n";
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
 use Yii;
-use app\models\Log;
 use app\widgets\ExportContent;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 <?php if (!empty($generator->searchModelClass)): ?>
@@ -42,7 +41,6 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use app\helpers\App;
 use yii\helpers\Inflector;
-use yii\helpers\ArrayHelper;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
@@ -242,16 +240,10 @@ if (count($pks) === 1) {
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            <?= $modelClass ?>::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            <?= $modelClass ?>::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            <?= $modelClass ?>::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            <?= $modelClass ?>::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             <?= $modelClass ?>::deleteAll(['id' => $post['selection']]);
@@ -260,7 +252,6 @@ if (count($pks) === 1) {
                             # code...
                             break;
                     }
-                    Log::record(new <?= $modelClass ?>(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

@@ -195,4 +195,14 @@ class Ip extends ActiveRecord
 
         return $behaviors;
     }
+
+    public static function whitelistAll($condition='')
+    {
+        return parent::updateAll(['type' => 1], $condition);
+    }
+
+    public static function blacklistAll($condition='')
+    {
+        return parent::updateAll(['type' => 0], $condition);
+    }
 }

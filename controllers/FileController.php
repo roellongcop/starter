@@ -6,12 +6,10 @@ use Yii;
 use app\filters\AccessControl;
 use app\helpers\App;
 use app\models\File;
-use app\models\Log;
 use app\models\ModelFile;
 use app\models\form\UploadForm;
 use app\models\search\FileSearch;
 use app\widgets\ExportContent;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -278,29 +276,17 @@ class FileController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'active':
-                            File::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            File::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            File::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            File::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
-                            $files = File::findAll(['id' => $post['selection']]);
-
-                            foreach ($files as $file) {
-                                $file->delete();
-                            }
+                            File::deleteAll(['id' => $post['selection']]);
                             break;
                         default:
-                            # code...
                             break;
                     }
-                    Log::record(new File(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

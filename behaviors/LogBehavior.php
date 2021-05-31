@@ -10,10 +10,6 @@ class LogBehavior extends Behavior
     public $logAfterSave = true;
     public $logAfterDelete = true;
 
-    public function init()
-    {
-        parent::init(); 
-    }
 
     public function events()
     {

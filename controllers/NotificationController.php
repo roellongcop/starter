@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Log;
 use app\widgets\ExportContent;
 use app\models\Notification;
 use app\models\search\NotificationSearch;
@@ -11,7 +10,6 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use app\helpers\App;
 use yii\helpers\Inflector;
-use yii\helpers\ArrayHelper;
 
 /**
  * NotificationController implements the CRUD actions for Notification model.
@@ -147,30 +145,16 @@ class NotificationController extends Controller
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
                         case 'read':
-                            Notification::updateAll(
-                                ['status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Notification::readAll(['id' => $post['selection']]);
                             break;
-
                         case 'unread':
-                            Notification::updateAll(
-                                ['status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Notification::unreadAll(['id' => $post['selection']]);
                             break;
-
                         case 'active':
-                            Notification::updateAll(
-                                ['record_status' => 1],
-                                ['id' => $post['selection']]
-                            );
+                            Notification::activeAll(['id' => $post['selection']]);
                             break;
                         case 'in_active':
-                            Notification::updateAll(
-                                ['record_status' => 0],
-                                ['id' => $post['selection']]
-                            );
+                            Notification::inactiveAll(['id' => $post['selection']]);
                             break;
                         case 'delete':
                             Notification::deleteAll(['id' => $post['selection']]);
@@ -179,7 +163,6 @@ class NotificationController extends Controller
                             # code...
                             break;
                     }
-                    Log::record(new Notification(), ArrayHelper::map($models, 'id', 'attributes'));
                     App::success("Data set to '{$process}'");  
                 }
                 else {

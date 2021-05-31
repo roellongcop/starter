@@ -9,6 +9,7 @@ use app\behaviors\LogBehavior;
 use app\behaviors\ProcessBehavior;
 use app\behaviors\TokenBehavior;
 use app\helpers\App;
+use app\models\Log;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\RecordHtml;
@@ -46,12 +47,38 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_modelSqlFile;
 
 
+    public static function activeAll($condition = '')
+    {
+        return self::updateAll(['record_status' => 1], $condition);
+    }
+
+    public static function inactiveAll($condition = '')
+    {
+        return self::updateAll(['record_status' => 0], $condition);
+    }
+
+    public static function deleteAll($condition = null, $params = []) 
+    {
+        $models = static::findAll($condition);
+        $deleteAll = parent::deleteAll($condition);
+
+        Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
+
+        return $deleteAll;
+    }
+
     public static function updateAll($attributes, $condition = '', $params = [])
     {
+        $models = static::findAll($condition);
+
         $attributes['updated_at'] = App::timestamp();
         $attributes['updated_by'] = App::identity('id');
 
-        return parent::updateAll($attributes, $condition, $params);
+        $updateAll = parent::updateAll($attributes, $condition, $params);
+
+        Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
+
+        return $updateAll;
     }
 
     public function setActive()
