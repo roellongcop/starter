@@ -144,4 +144,10 @@ abstract class Seeder
             
         $this->summary($result['total']);
     }
+
+    public function seeder($conf='')
+    {
+        $seeder = Yii::createObject($conf);
+        $seeder->seed();
+    }
 }
