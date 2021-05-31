@@ -21,7 +21,6 @@ $src = <<< SCRIPT
     for(key in ranges) {
         newRanges[ranges[key]] = defaultRanges[ranges[key]];
     }
-    console.log(newRanges)
 
     $('#{$id}').daterangepicker({
         // buttonClasses: 'btn btn-sm',
