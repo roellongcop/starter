@@ -27,6 +27,8 @@ abstract class Seeder
 
     public $rows;
     public $modelClass;
+    public $dependSeeder;
+
 
     public function __construct()
     {
@@ -115,9 +117,25 @@ abstract class Seeder
         echo "\n";
         return ExitCode::OK;
     }
- 
+
+    public function afterDepend()
+    {
+        // code...
+    }
+
+    public function depend()
+    {
+        if ($this->dependSeeder) {
+            $dependSeederModel = Yii::createObject($this->dependSeeder);
+            $dependSeederModel->seed();
+            $this->afterDepend();
+        }
+    }
+
     public function seed()
     {
+        $this->depend();
+
         $modelClass = is_array($this->modelClass)? $this->modelClass['class']: $this->modelClass;
         $modelName = $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
 

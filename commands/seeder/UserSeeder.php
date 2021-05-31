@@ -12,11 +12,21 @@ class UserSeeder extends Seeder
 	public function __construct()
 	{
 		parent::__construct();
-		$this->roles = array_keys(Role::dropdown());
 		$this->modelClass = [
 			'class' => 'app\commands\models\User',
 			'password_hint' => 'Same as Email',
 		];
+
+		$this->dependSeeder = [
+			'class' => 'app\commands\seeder\RoleSeeder',
+			'rows' => 5,
+		];
+	}
+
+	public function afterDepend()
+	{
+		$this->roles = array_keys(Role::dropdown());
+		parent::afterDepend();
 	}
 
 	public function attributes()
