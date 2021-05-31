@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
 		parent::__construct();
 		$this->roles = array_keys(Role::dropdown());
 		$this->modelClass = [
-			'class' => 'app\models\User',
+			'class' => 'app\commands\models\User',
 			'password_hint' => 'Same as Email',
 		];
 	}
@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
 	public function attributes()
 	{
 		$email = $this->faker->email;
+		$created_at = $this->created_at();
 
 		return [
            	'role_id' => $this->faker->randomElement($this->roles),
@@ -31,7 +32,8 @@ class UserSeeder extends Seeder
             'status' => $this->randomParamsID('user_status'),
             'record_status' => $this->randomParamsID('record_status'),
             'is_blocked' => $this->randomParamsID('is_blocked'),
-            'created_at' => $this->created_at(),
+            'created_at' => $created_at,
+            'updated_at' => $created_at,
 		];
 	}
 }

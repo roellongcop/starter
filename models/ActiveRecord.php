@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use app\behaviors\FileBehavior;
 use app\behaviors\JsonBehavior;
 use app\behaviors\LogBehavior;
 use app\behaviors\ProcessBehavior;
@@ -594,7 +593,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             'ProcessBehavior' => ['class' => ProcessBehavior::className()],
             'TokenBehavior' => ['class' => TokenBehavior::className()],
             'JsonBehavior' => ['class' => JsonBehavior::className()],
-            'FileBehavior' => ['class' => FileBehavior::className()],
         ];
     }
 

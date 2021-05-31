@@ -3,16 +3,19 @@ namespace app\commands\seeder;
 
 class IpSeeder extends Seeder
 {
-	public $modelClass = 'app\models\Ip';
-	
+	public $modelClass = 'app\commands\models\Ip';
+
 	public function attributes()
 	{
+		$created_at = $this->created_at();
+
 		return [
             'name' => $this->faker->ipv4,
             'description' => $this->faker->text,
             'type' => $this->randomParamsID('ip_type'),
             'record_status' => $this->recordStatus(),
-            'created_at' => $this->created_at(),
+            'created_at' => $created_at,
+            'updated_at' => $created_at,
 		];
 	}
 }

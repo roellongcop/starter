@@ -10,7 +10,7 @@ class RoleSeeder extends Seeder
 		$access = App::component('access');
 
 		$this->modelClass = [
-			'class' => 'app\models\Role',
+			'class' => 'app\commands\models\Role',
 			'module_access' => $access->controllerActions(),
 			'main_navigation' => $access->defaultNavigation(),
 		];
@@ -18,10 +18,12 @@ class RoleSeeder extends Seeder
 
 	public function attributes()
 	{
+		$created_at = $this->created_at();
 		return [
             'name' => $this->faker->jobTitle, 
             'record_status' => $this->recordStatus(),
-            'created_at' => $this->created_at(),
+            'created_at' => $created_at,
+            'updated_at' => $created_at,
 		];
 	}
 }

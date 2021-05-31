@@ -15,6 +15,7 @@ use app\widgets\Anchor;
 use app\helpers\Html;
 use yii\helpers\Url;
 use app\models\query\FileQuery;
+use app\behaviors\FileBehavior;
 
 /**
  * This is the model class for table "{{%files}}".
@@ -367,5 +368,12 @@ class File extends ActiveRecord
     public function getIsSql()
     {
         return in_array($this->extension, ['sql']);
+    }
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['FileBehavior'] = ['class' => FileBehavior::className()];
+        return $behaviors;
     }
 }
