@@ -68,6 +68,8 @@ $publishedUrl = App::publishedUrl();
                             Thank you.
                         </p>
 
+                        <?= Alert::widget() ?>
+
 
                         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 

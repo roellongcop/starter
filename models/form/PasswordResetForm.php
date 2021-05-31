@@ -47,6 +47,7 @@ class PasswordResetForm extends Model
             if ($user) {
                 if ($this->hint) {
                     App::success("Your password hint is: '{$user->password_hint}'.");
+                    return true;
                 }
                 else {
                     $mail = new CustomEmailForm();
@@ -54,6 +55,7 @@ class PasswordResetForm extends Model
                     $mail->to = $user->email;
                     if ($mail->send()) {
                         App::success("Email sent.");
+                        return true;
                     }
                     else {
                         App::danger("Email not sent.");
