@@ -40,10 +40,7 @@ else {
     'itemView' => '_my-image-files',
     'options' => ['class' => 'row'],
     'beforeItem' => function ($model, $key, $index, $widget) use ($dataProvider) {
-        $totalCount = count($dataProvider->models);
-        $col = ($totalCount < 3)? (12 / $totalCount): 3;
-
-        return "<div class='col-md-{$col}'>";
+        return "<div class='col-md-3'>";
     },
     'afterItem' => function ($model, $key, $index, $widget) {
         return '</div>';
