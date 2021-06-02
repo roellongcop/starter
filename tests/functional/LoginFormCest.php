@@ -50,8 +50,8 @@ class LoginFormCest
     public function loginInactiveUser(\FunctionalTester $I)
     {
          $I->submitForm('#kt_login_signin_form', [
-            'LoginForm[username]' => 'inactive_user@inactive_user.com',
-            'LoginForm[password]' => 'inactive_user@inactive_user.com',
+            'LoginForm[username]' => 'inactiveuser@inactiveuser.com',
+            'LoginForm[password]' => 'inactiveuser@inactiveuser.com',
         ]);
         $I->expectTo('see validations errors');
         $I->see('User is inactive');
@@ -60,8 +60,8 @@ class LoginFormCest
     public function loginNotVerifiedUser(\FunctionalTester $I)
     {
         $I->submitForm('#kt_login_signin_form', [
-            'LoginForm[username]' => 'not_verified_user@not_verified_user.com',
-            'LoginForm[password]' => 'not_verified_user@not_verified_user.com',
+            'LoginForm[username]' => 'notverifieduser@notverifieduser.com',
+            'LoginForm[password]' => 'notverifieduser@notverifieduser.com',
         ]);
         $I->expectTo('see validations errors');
         $I->see('User is not verified');
@@ -70,8 +70,8 @@ class LoginFormCest
     public function loginBlockedUser(\FunctionalTester $I)
     {
         $I->submitForm('#kt_login_signin_form', [
-            'LoginForm[username]' => 'blocked_user@blocked_user.com',
-            'LoginForm[password]' => 'blocked_user@blocked_user.com',
+            'LoginForm[username]' => 'blockeduser@blockeduser.com',
+            'LoginForm[password]' => 'blockeduser@blockeduser.com',
         ]);
         $I->expectTo('see validations errors');
         $I->see('User is blocked');
@@ -80,8 +80,8 @@ class LoginFormCest
     public function loginInactiveRoleUser(\FunctionalTester $I)
     {
         $I->submitForm('#kt_login_signin_form', [
-            'LoginForm[username]' => 'inactive_role_user@inactive_role_user.com',
-            'LoginForm[password]' => 'inactive_role_user@inactive_role_user.com',
+            'LoginForm[username]' => 'inactiveroleuser@inactiveroleuser.com',
+            'LoginForm[password]' => 'inactiveroleuser@inactiveroleuser.com',
         ]);
         $I->expectTo('see validations errors');
         $I->see('Role is inactive');

@@ -40,8 +40,8 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function testLoginBlockedUser()
     {
         $this->model = new LoginForm([
-            'username' => 'blocked_user',
-            'password' => 'blocked_user@blocked_user.com',
+            'username' => 'blockeduser',
+            'password' => 'blockeduser@blockeduser.com',
         ]);
 
         expect_not($this->model->login());
@@ -51,8 +51,8 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function testLoginNotVerifiedUser()
     {
         $this->model = new LoginForm([
-            'username' => 'novalidate_user',
-            'password' => 'novalidate_user@novalidate_user.com',
+            'username' => 'notverifieduser',
+            'password' => 'notverifieduser@notverifieduser.com',
         ]);
 
         expect_not($this->model->login());
@@ -62,8 +62,8 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function testLoginInactiveUser()
     {
         $this->model = new LoginForm([
-            'username' => 'inactive_user',
-            'password' => 'inactive_user@inactive_user.com',
+            'username' => 'inactiveuser',
+            'password' => 'inactiveuser@inactiveuser.com',
         ]);
 
         expect_not($this->model->login());
@@ -73,8 +73,8 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function testLoginInactiveRoleUser()
     {
         $this->model = new LoginForm([
-            'username' => 'inactive_role_user',
-            'password' => 'inactive_role_user@inactive_role_user.com',
+            'username' => 'inactiveroleuser',
+            'password' => 'inactiveroleuser@inactiveroleuser.com',
         ]);
 
         expect_not($this->model->login());
