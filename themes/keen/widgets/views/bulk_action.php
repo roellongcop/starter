@@ -4,13 +4,15 @@ use app\helpers\App;
 use yii\helpers\ArrayHelper;
 use app\helpers\Html;
 
-$this->registerJs(<<<SCRIPT
+$registerJs = <<<SCRIPT
     $('a.bulk-action').on('click', function() {
         var data_process = $(this).data('process');
         $('input[name="process-selected"]').val(data_process);
         $(this).closest('form').submit();
     })
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <?php if(App::component('access')->userCan('process-checkbox')): ?>
     <?php if (isset($searchModel->bulkActions)): ?>

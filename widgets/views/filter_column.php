@@ -6,8 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Inflector;
 $model = new UserMeta();
 
-
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
 $('.check-all-filter').on('change', function() {
     var is_checked = $(this).is(':checked');
 
@@ -20,7 +19,8 @@ $('.check-all-filter').on('change', function() {
         inputs.prop('checked', false);
     }
 })
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 
 ?> 
 

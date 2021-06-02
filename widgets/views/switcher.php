@@ -1,6 +1,6 @@
 <?php
 
-$src = <<< SCRIPT
+$registerJs = <<< SCRIPT
 $('.input-switcher-{$id}').on('change', function() {
     var self = this;
     var is_checked = $(self).is(':checked');
@@ -29,7 +29,7 @@ $('.input-switcher-{$id}').on('change', function() {
     })
 });
 SCRIPT;
-$this->registerJs($src, \yii\web\View::POS_END);
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 
 <span data-widget_id="<?= $id ?>">

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Inflector;
 $model = new UserMeta();
 
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
 $('.check-all-filter').on('change', function() {
     var is_checked = $(this).is(':checked');
 
@@ -19,7 +19,9 @@ $('.check-all-filter').on('change', function() {
         inputs.prop('checked', false);
     }
 })
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline _div_filter_columns" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;z-index: 1"> 
     <a href="#!" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm  mr-3 btn-sm _filter_columns"  aria-haspopup="true" aria-expanded="false" style="border: 1px solid #ccc;">

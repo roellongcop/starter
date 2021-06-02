@@ -1,5 +1,5 @@
 <?php
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
     $('#dropzone-{$id}').dropzone({
         url: "{$url}", // Set the url for your upload script location
         paramName: "{$paramName}", // The name that will be used to transfer the file
@@ -29,10 +29,10 @@ $this->registerJs(<<< SCRIPT
             }
             
             this.on("sending", function(file, xhr, formData) {
-            	var parameters = {$parameters};
-            	for ( var key in parameters ) {
-                	formData.append(key, parameters[key]);
-            	}
+                var parameters = {$parameters};
+                for ( var key in parameters ) {
+                    formData.append(key, parameters[key]);
+                }
                 formData.append('fileToken', file.upload.uuid);
             });
             this.on('removedfile', function (file) {
@@ -49,7 +49,8 @@ $this->registerJs(<<< SCRIPT
 
         }
     });
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 
 ?>
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">

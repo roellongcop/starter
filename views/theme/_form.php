@@ -15,7 +15,7 @@ use app\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
 /* @var $form yii\widgets\ActiveForm */
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
     $('form.form').on('beforeSubmit', function(event) {
         event.preventDefault();
         $('#theme-path_map').val(JSON.stringify(editors['path_map'].get()))
@@ -24,7 +24,9 @@ $this->registerJs(<<< SCRIPT
         // continue the submit unbind preventDefault
         $(this).unbind('submit').submit(); 
     })
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 
 ?>
 

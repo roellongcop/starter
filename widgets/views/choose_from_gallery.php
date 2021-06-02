@@ -5,7 +5,7 @@ use app\helpers\Html;
 use app\helpers\Url;
 use app\widgets\Dropzone;
 use yii\widgets\Pjax;
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
     var disableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', true);
     }
@@ -113,9 +113,11 @@ $this->registerJs(<<< SCRIPT
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
         }
     }
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
 
-$this->registerCSS(<<<CSS
+$this->registerJs($registerJs, \yii\web\View::POS_END);
+
+$registerCSS = <<<CSS
     #choose-from-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
         padding: 5px;
@@ -129,7 +131,9 @@ $this->registerCSS(<<<CSS
     #my_files-{$id} img:hover {
         border: 2px solid #1bc5bd;
     }
-CSS)
+CSS;
+
+$this->registerCSS($registerCSS);
 ?>
 
 

@@ -17,7 +17,7 @@ $this->params['showCreateButton'] = true;
 $myImageFilesUrl = Url::to(['file/my-files']);
 $deleteFileUrl = Url::to(['file/delete']);
 
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
     var selectedFile = 0;
     var selectedToken = 0;
 
@@ -102,9 +102,11 @@ $this->registerJs(<<< SCRIPT
         $('#my-files .my-photos').html('Loading');
     });
 
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
 
-$this->registerCSS(<<<CSS
+$this->registerJs($registerJs, \yii\web\View::POS_END);
+
+$registerCSS = <<<CSS
     #my-files table tbody tr td {
         overflow-wrap: anywhere;
     }
@@ -114,7 +116,9 @@ $this->registerCSS(<<<CSS
     #my-files img:hover {
         border: 2px solid #1bc5bd;
     }
-CSS);
+CSS;
+
+$this->registerCSS($registerCSS);
 ?>
 
 <div class="row" id="my-files">

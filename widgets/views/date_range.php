@@ -1,6 +1,6 @@
 <?php
 
-$src = <<< SCRIPT
+$registerJs = <<< SCRIPT
     var start = moment('{$start}');
     var end = moment('{$end}');
 
@@ -38,7 +38,7 @@ $src = <<< SCRIPT
     $('#{$id} span').html( start.format('MMMM DD, YYYY') + ' - ' + end.format('MMMM DD, YYYY'));
     $('#{$id} input').val( start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
 SCRIPT;
-$this->registerJs($src);
+$this->registerJs($registerJs);
 ?>
 <br>
 <p class=""><?= $title ?></p>

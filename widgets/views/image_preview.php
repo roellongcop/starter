@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-$this->registerJs(<<<SCRIPT
+$registerJs = <<< SCRIPT
 	$('#{$imageID}').on('change', function() {
 		var input = this;
 		if (input.files && input.files[0]) {
@@ -15,6 +15,8 @@ $this->registerJs(<<<SCRIPT
 	        reader.readAsDataURL(input.files[0]); 
 	    }
 	})
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <?= Html::img($src, $options) ?>

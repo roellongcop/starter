@@ -25,10 +25,12 @@ class SettingFilter extends ActionFilter
             'params' => App::params()
         ]);
 
-        App::view()->registerJs("
+        $registerJs = <<< SCRIPT
             var app = {$options};
             console.log(app)
-        ", \yii\web\View::POS_HEAD, 'app');
+        SCRIPT;
+
+        App::view()->registerJs($registerJs, \yii\web\View::POS_HEAD, 'app');
         
         App::session()->timeout = App::setting('auto_logout_timer');
         

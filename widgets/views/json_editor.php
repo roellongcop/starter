@@ -1,5 +1,5 @@
 <?php
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
     var container = document.getElementById('{$id}')
 
     if (container) {
@@ -9,7 +9,8 @@ $this->registerJs(<<< SCRIPT
         var editor = new JSONEditor(container, options, {$data})
         editors['{$id}'] = editor;
     }
- 
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <div id="<?= $id ?>"> </div>

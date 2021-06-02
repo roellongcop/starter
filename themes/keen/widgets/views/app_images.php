@@ -5,7 +5,7 @@ use app\widgets\Anchor;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
     var removeImage = function(self) {
         var file_id = $(self).data('file_id');
         Swal.fire({
@@ -39,7 +39,9 @@ $this->registerJs(<<< SCRIPT
             }
         });
     }
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 
 ?>
 <div class="row">

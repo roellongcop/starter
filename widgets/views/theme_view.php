@@ -5,39 +5,42 @@ use app\widgets\Anchor;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-$this->registerJs(<<<SCRIPT
-$('.theme-image').on('change', function() {
 
-	var input = this;
+$registerJs = <<<SCRIPT
+	$('.theme-image').on('change', function() {
 
-    var imageInput = input.files[0]; 
-    var id = $(input).parents('div.image-input')
-    	.find('input.theme_id')
-    	.val()
+		var input = this;
+
+	    var imageInput = input.files[0]; 
+	    var id = $(input).parents('div.image-input')
+	    	.find('input.theme_id')
+	    	.val()
 
 
-    let formData = new FormData();
-    formData.append('Theme[imageInput]', imageInput);
-    formData.append('Theme[id]', id);
+	    let formData = new FormData();
+	    formData.append('Theme[imageInput]', imageInput);
+	    formData.append('Theme[id]', id);
 
-	$.ajax( {
-		url: '{$uploadUrl}',
-		type: 'POST',
-		data: formData,
-		dataType: 'text',
-		processData: false,
-		contentType: false,
-		success: function(s) {
-			$(input).parents('div.image-input')
-            	.find('img.img-thumbnail')
-            	.attr('src', s)
-		},
-		error: function(e) {
-			alert(e.responseText)
-		}
-	});
-})
-SCRIPT, \yii\web\View::POS_END)
+		$.ajax( {
+			url: '{$uploadUrl}',
+			type: 'POST',
+			data: formData,
+			dataType: 'text',
+			processData: false,
+			contentType: false,
+			success: function(s) {
+				$(input).parents('div.image-input')
+	            	.find('img.img-thumbnail')
+	            	.attr('src', s)
+			},
+			error: function(e) {
+				alert(e.responseText)
+			}
+		});
+	})
+SCRIPT;
+
+$this->registerJs($registerJs, \yii\web\View::POS_END)
 ?>
 
 <div class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">

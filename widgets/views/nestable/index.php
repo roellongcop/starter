@@ -1,102 +1,103 @@
 <?php
 
 use yii\helpers\Url;
-$this->registerJs(<<<SCRIPT
-var {$id} = 0;
+$registerJs = <<<SCRIPT
+    var {$id} = 0;
 
-$('#add-main-navigation-{$id}').on('click', function() {
-    {$id} ++;
-    var html = '';
-    html += '<li class="dd-item dd3-item" data-id="'+ ({$id}) +'-new">';
-        html += '<div class="dd-handle dd3-handle"> <i class="flaticon-squares"></i></div>';
-        html += '<div class="dd3-content">';
-            html += '<div class="row">';
-                
-                html += '<div class="col-md-3">';
-                    html += '<input data-id="label" type="text" class="form-control"  placeholder="Label" required>';
-                html += '</div>';
-                html += '<div class="col-md-3">';
-                    html += '<input list="link-list-{$id}" data-id="link" type="text" class="form-control"  placeholder="Link" required>';
-                html += '</div>';
-                html += '<div class="col-md-3">';
-                    html += '<textarea  data-id="icon" type="text" class="form-control"  placeholder="Icon" rows="1" required></textarea>';
-                html += '</div>';
-
-
-                html += '<div class="col-md-2">';
-                   html += '<div class="checkbox-list">';
-                       html += '<label class="checkbox">';
-                            html += '<input class="checkbox" data-id="new_tab" type="checkbox"value="1">';
-                                html += '<span></span>New Tab';
-                        html += '</label>';
-                        html += '<label class="checkbox">';
-                            html += '<input class="checkbox" data-id="group_menu" type="checkbox"value="1">';
-                                html += '<span></span>Group Menu';
-                        html += '</label>';
+    $('#add-main-navigation-{$id}').on('click', function() {
+        {$id} ++;
+        var html = '';
+        html += '<li class="dd-item dd3-item" data-id="'+ ({$id}) +'-new">';
+            html += '<div class="dd-handle dd3-handle"> <i class="flaticon-squares"></i></div>';
+            html += '<div class="dd3-content">';
+                html += '<div class="row">';
+                    
+                    html += '<div class="col-md-3">';
+                        html += '<input data-id="label" type="text" class="form-control"  placeholder="Label" required>';
                     html += '</div>';
+                    html += '<div class="col-md-3">';
+                        html += '<input list="link-list-{$id}" data-id="link" type="text" class="form-control"  placeholder="Link" required>';
+                    html += '</div>';
+                    html += '<div class="col-md-3">';
+                        html += '<textarea  data-id="icon" type="text" class="form-control"  placeholder="Icon" rows="1" required></textarea>';
+                    html += '</div>';
+
+
+                    html += '<div class="col-md-2">';
+                       html += '<div class="checkbox-list">';
+                           html += '<label class="checkbox">';
+                                html += '<input class="checkbox" data-id="new_tab" type="checkbox"value="1">';
+                                    html += '<span></span>New Tab';
+                            html += '</label>';
+                            html += '<label class="checkbox">';
+                                html += '<input class="checkbox" data-id="group_menu" type="checkbox"value="1">';
+                                    html += '<span></span>Group Menu';
+                            html += '</label>';
+                        html += '</div>';
+                    html += '</div>';
+
+
+                    html += '<span  style="position: absolute; right: 5px;">';
+                        html += '<a onclick="removeMainNavigation(this)" href="#!" class="btn btn-danger btn-sm btn-icon mr-2">';
+                            html += '<i class="fa fa-trash"></i>';
+                        html += '</a>';
+                    html += '</span>';
                 html += '</div>';
-
-
-                html += '<span  style="position: absolute; right: 5px;">';
-                    html += '<a onclick="removeMainNavigation(this)" href="#!" class="btn btn-danger btn-sm btn-icon mr-2">';
-                        html += '<i class="fa fa-trash"></i>';
-                    html += '</a>';
-                html += '</span>';
             html += '</div>';
-        html += '</div>';
-    html += '</li>';
+        html += '</li>';
 
-    $('#ol-dd-list-{$id}').prepend(html);
-    $('#dd-{$id}').trigger('change');
-    // initNestable();
-})
+        $('#ol-dd-list-{$id}').prepend(html);
+        $('#dd-{$id}').trigger('change');
+        // initNestable();
+    })
 
 
-var removeMainNavigation = function(self) {
-    var confirm_dialog = confirm('Are you sure?');
+    var removeMainNavigation = function(self) {
+        var confirm_dialog = confirm('Are you sure?');
 
-    if (confirm_dialog) {
-        $(self).closest('li').remove();
+        if (confirm_dialog) {
+            $(self).closest('li').remove();
+        }
     }
-}
 
 
-var collapseNavigation = function(self) {
-    var action = $(self).data('action');
+    var collapseNavigation = function(self) {
+        var action = $(self).data('action');
 
-    if (action == 'collapse-all') {
-        $(self).data('action', 'expand-all')
+        if (action == 'collapse-all') {
+            $(self).data('action', 'expand-all')
+        }
+        else {
+            $(self).data('action', 'collapse-all')
+        }
     }
-    else {
-        $(self).data('action', 'collapse-all')
+
+    var initNestable = function() {
+        if ($('#nestable-menu-{$id}').length) {
+            $('#nestable-menu-{$id}').on('click', function(e) {
+                var target = $(e.target),
+                    action = target.data('action');
+                if (action === 'expand-all') {
+                    $('#dd-{$id}').nestable('expandAll');
+                }
+                if (action === 'collapse-all') {
+                    $('#dd-{$id}').nestable('collapseAll');
+                }
+            });
+
+            $('#dd-{$id}').nestable({maxDepth: 4, default_name: '{$defaultName}'});
+            $('#dd-{$id}').nestable('createName')
+
+            $('#dd-{$id}').on('change', function() {
+                $(this).nestable('createName')
+            });
+        }
     }
-}
 
-var initNestable = function() {
-    if ($('#nestable-menu-{$id}').length) {
-        $('#nestable-menu-{$id}').on('click', function(e) {
-            var target = $(e.target),
-                action = target.data('action');
-            if (action === 'expand-all') {
-                $('#dd-{$id}').nestable('expandAll');
-            }
-            if (action === 'collapse-all') {
-                $('#dd-{$id}').nestable('collapseAll');
-            }
-        });
+    initNestable();
 
-        $('#dd-{$id}').nestable({maxDepth: 4, default_name: '{$defaultName}'});
-        $('#dd-{$id}').nestable('createName')
-
-        $('#dd-{$id}').on('change', function() {
-            $(this).nestable('createName')
-        });
-    }
-}
-
-initNestable();
-
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 
 ?>
 <div class="row">

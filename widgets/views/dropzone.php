@@ -1,5 +1,5 @@
 <?php
-$this->registerJs(<<< SCRIPT
+$registerJs = <<< SCRIPT
     $('#dropzone-{$id}').dropzone({
         url: "{$url}", // Set the url for your upload script location
         paramName: "{$paramName}", // The name that will be used to transfer the file
@@ -49,7 +49,8 @@ $this->registerJs(<<< SCRIPT
 
         }
     });
-SCRIPT, \yii\web\View::POS_END);
+SCRIPT;
+$this->registerJs($registerJs, \yii\web\View::POS_END);
 
 ?>
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">
