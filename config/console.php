@@ -28,6 +28,7 @@ $config = [
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
         'general' => ['class' => 'app\components\General'],
+        'formatter' => ['class' => 'app\components\FormatterComponent'],
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',

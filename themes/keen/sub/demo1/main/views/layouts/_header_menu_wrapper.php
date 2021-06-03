@@ -24,7 +24,11 @@ $searchAction = $searchModel->searchAction ?? ['index'];
         </div>
         
         <?php if ($searchModel): ?>
-            <?php $form = ActiveForm::begin(['action' => $searchAction, 'method' => 'get']); ?>
+            <?php $form = ActiveForm::begin([
+                'id' => 'main-search-form',
+                'action' => $searchAction, 
+                'method' => 'get'
+            ]); ?>
                 <?= Search::widget([
                     'model' => $searchModel,
                     'style' => 'margin-top: 17px;width: 30vw;margin-left: 10px;'

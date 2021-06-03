@@ -17,6 +17,7 @@ return [
         'access' => ['class' => 'app\components\AccessComponent'],
         'setting' => ['class' => 'app\components\SettingComponent'],
         'general' => ['class' => 'app\components\General'],
+        'formatter' => ['class' => 'app\components\FormatterComponent'],
         'db' => $db,
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

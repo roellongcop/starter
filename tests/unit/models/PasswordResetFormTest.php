@@ -55,4 +55,22 @@ class PasswordResetFormTest extends \Codeception\Test\Unit
 
         expect_not($this->model->process());
     }
+
+    public function testPasswordHintIsChecked()
+    {
+        $this->model = $this->getMockBuilder('app\models\form\PasswordResetForm')
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $this->model->expects($this->once())
+            ->method('validate')
+            ->willReturn(true);
+
+        $this->model->attributes = [
+            'email' => 'admin@admins.com',
+            'hint' => true
+        ];
+
+        expect($this->model->process());
+    }
 }

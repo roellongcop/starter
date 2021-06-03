@@ -101,6 +101,6 @@ return [
         'status' => 10,
         'slug' => 'inactiveroleuser',
         'is_blocked' => 0,
-        'record_status' => 0,
+        'record_status' => 1,
     ],
 ];

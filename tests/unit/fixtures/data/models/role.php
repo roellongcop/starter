@@ -30,12 +30,12 @@ return [
         'slug' => 'developer', 
         'record_status' => 1,
     ],
-    'inactive_role' => [
-        'name' => 'inactive_role', 
+    'inactiverole' => [
+        'name' => 'inactiverole', 
         'role_access' => json_encode([]),
         'module_access' => json_encode($controllerActions),
         'main_navigation' => json_encode($defaultNavigation),
-        'slug' => 'inactive_role', 
+        'slug' => 'inactiverole', 
         'record_status' => 0,
     ]
 ];
