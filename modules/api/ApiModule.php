@@ -5,7 +5,7 @@ namespace app\modules\api;
 /**
  * api module definition class
  */
-class Api extends \yii\base\Module
+class ApiModule extends \yii\base\Module
 {
     /**
      * {@inheritdoc}
@@ -24,7 +24,7 @@ class Api extends \yii\base\Module
         $this->modules = [
             'v1' => [
                 // you should consider using a shorter namespace here!
-                'class' => 'app\modules\api\v1\Version1',
+                'class' => 'app\modules\api\v1\Version1Module',
             ],
         ];
     }

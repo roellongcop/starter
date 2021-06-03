@@ -18,7 +18,7 @@ $config = [
     ],
     'modules' => [
         'api' => [
-            'class' => 'app\modules\api\Api',
+            'class' => 'app\modules\api\ApiModule',
         ],
     ],
     'components' => [
