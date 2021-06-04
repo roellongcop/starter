@@ -199,54 +199,84 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-    public function getLogUrl()
+    public function getLogUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('index', 'log')) {
-            return Url::to([
+            $url = [
                 'log/index', 
                 'model_id' => ($this->id ?? ''),
                 'model_name' => App::className($this)
-            ], true);
+            ];
+
+            return ($fullpath)? Url::to($url, true): $url;
         }
     }
-    public function getViewUrl()
+
+    public function getIndexUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('index')) {
+            $paramName = $this->paramName();
+            $url = [
+                $this->controllerID() . "/index"
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
+    }
+
+    public function getCreateUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('create')) {
+            $paramName = $this->paramName();
+            $url = [
+                $this->controllerID() . "/create", 
+                $paramName => $this->{$paramName}
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
+    }
+
+    public function getViewUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('view')) {
             $paramName = $this->paramName();
-            return Url::to([
+            $url = [
                 $this->controllerID() . "/view", 
                 $paramName => $this->{$paramName}
-            ], true);
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
         }
     }
-    public function getUpdateUrl()
+    public function getUpdateUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('update')) {
             $paramName = $this->paramName();
-            return Url::to([
+            $url = [
                 $this->controllerID() . "/update", 
                 $paramName => $this->{$paramName}
-            ], true);
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
         }
     }
-    public function getDuplicateUrl()
+    public function getDuplicateUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('duplicate')) {
             $paramName = $this->paramName();
-            return Url::to([
+            $url = [
                 $this->controllerID() . "/duplicate", 
                 $paramName => $this->{$paramName}
-            ], true);
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
         }
     }
-    public function getDeleteUrl()
+    public function getDeleteUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('delete')) {
             $paramName = $this->paramName();
-            return Url::to([
+            $url = [
                 $this->controllerID() . "/delete", 
                 $paramName => $this->{$paramName}
-            ], true);
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
         }
     }
 

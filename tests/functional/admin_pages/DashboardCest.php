@@ -17,12 +17,12 @@ class DashboardCest
     }
 
 
-    public function openDashboard(FunctionalTester $I)
+    public function openPage(FunctionalTester $I)
     {
         $I->see('Dashboard', 'h5');
     }
 
-    public function dashboardSearchWithResults(FunctionalTester $I)
+    public function searchWithResults(FunctionalTester $I)
     {
         $I->submitForm('#main-search-form', [
             'keywords' => '1'
@@ -30,7 +30,7 @@ class DashboardCest
         $I->see('Search result for');
     }
 
-    public function dashboardSearchWithNoResult(FunctionalTester $I)
+    public function searchWithNoResult(FunctionalTester $I)
     {
         $I->submitForm('#main-search-form', [
             'keywords' => 'noresults'
