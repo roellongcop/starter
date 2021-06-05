@@ -42,4 +42,15 @@ class UserMetaCest
         $I->amOnPage($this->userMeta->getUpdateUrl(false));
         $I->see('Update User Meta:', 'h5');
     }
+
+
+    public function bulkActionPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->userMeta->getIndexUrl(false));
+        $I->submitForm('form[action="/user-meta/process-checkbox"]', [
+            'process-selected' => 'active', 
+            'selection' => [1]
+        ]);
+        $I->see('Confirm Action', 'h5');
+    }
 }

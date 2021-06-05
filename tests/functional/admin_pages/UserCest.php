@@ -40,6 +40,8 @@ class UserCest
         $I->see('Update User:', 'h5');
     }
 
+ 
+
     public function duplicatePage(FunctionalTester $I)
     {
         $I->amOnPage($this->user->getDuplicateUrl(false));
@@ -51,7 +53,7 @@ class UserCest
         $I->amOnPage($this->user->getIndexUrl(false));
         $I->submitForm('form[action="/user/process-checkbox"]', [
             'process-selected' => 'active', 
-            'selection' => [1, 2, 3]
+            'selection' => [1]
         ]);
         $I->see('Confirm Action', 'h5');
     }
