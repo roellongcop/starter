@@ -5,24 +5,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 
-function menu($menus)
-{
-    foreach ($menus as $key => &$menu) {
-        if (isset($menu['group_menu']) && $menu['group_menu']) {
-            unset($menus[$key]);
-        }
-        else {
-            $menu['url'] = $menu['link'];
-            unset($menu['link']);
-            if (isset($menu['sub'])) {
-                $menu['items'] = menu($menu['sub']);
-                unset($menu['sub']);
-            }
-        }
-    }
-    return $menus;
-}
-$menus = menu($menus);
+
+$menus = Yii::$app->access->menu($menus);
 
 if (App::isGuest()) {
     $menus[] = ['label' => 'Login', 'url' => ['/site/login']];

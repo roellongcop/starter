@@ -217,7 +217,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->checkLinkAccess('index')) {
             $paramName = $this->paramName();
             $url = [
-                $this->controllerID() . "/index"
+                implode('/', [$this->controllerID(), 'index']),
             ];
             return ($fullpath)? Url::to($url, true): $url;
         }
@@ -228,19 +228,20 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->checkLinkAccess('create')) {
             $paramName = $this->paramName();
             $url = [
-                $this->controllerID() . "/create", 
+                implode('/', [$this->controllerID(), 'create']),
                 $paramName => $this->{$paramName}
             ];
             return ($fullpath)? Url::to($url, true): $url;
         }
     }
 
+
     public function getViewUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('view')) {
             $paramName = $this->paramName();
             $url = [
-                $this->controllerID() . "/view", 
+                implode('/', [$this->controllerID(), 'view']),
                 $paramName => $this->{$paramName}
             ];
             return ($fullpath)? Url::to($url, true): $url;
@@ -251,7 +252,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->checkLinkAccess('update')) {
             $paramName = $this->paramName();
             $url = [
-                $this->controllerID() . "/update", 
+                implode('/', [$this->controllerID(), 'update']),
                 $paramName => $this->{$paramName}
             ];
             return ($fullpath)? Url::to($url, true): $url;
@@ -262,7 +263,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->checkLinkAccess('duplicate')) {
             $paramName = $this->paramName();
             $url = [
-                $this->controllerID() . "/duplicate", 
+                implode('/', [$this->controllerID(), 'duplicate']),
                 $paramName => $this->{$paramName}
             ];
             return ($fullpath)? Url::to($url, true): $url;
@@ -273,7 +274,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->checkLinkAccess('delete')) {
             $paramName = $this->paramName();
             $url = [
-                $this->controllerID() . "/delete", 
+                implode('/', [$this->controllerID(), 'delete']),
                 $paramName => $this->{$paramName}
             ];
             return ($fullpath)? Url::to($url, true): $url;

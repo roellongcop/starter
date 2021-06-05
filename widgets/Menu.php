@@ -14,8 +14,8 @@ class Menu extends \yii\base\Widget
         parent::init();
 
         $this->menus = $this->menus ?: App::identity('main_navigation');
-    }
 
+    }
 
     /**
      * {@inheritdoc}

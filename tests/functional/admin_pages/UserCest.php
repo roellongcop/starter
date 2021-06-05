@@ -45,4 +45,14 @@ class UserCest
         $I->amOnPage($this->user->getDuplicateUrl(false));
         $I->see('Duplicate User:', 'h5');
     }
+
+    public function bulkActionPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->user->getIndexUrl(false));
+        $I->submitForm('form[action="/user/process-checkbox"]', [
+            'process-selected' => 'active', 
+            'selection' => [1, 2, 3]
+        ]);
+        $I->see('Confirm Action', 'h5');
+    }
 }
