@@ -39,7 +39,6 @@ class UserCest
         $I->amOnPage($this->user->getUpdateUrl(false));
         $I->see('Update User:', 'h5');
     }
-
  
 
     public function duplicatePage(FunctionalTester $I)
