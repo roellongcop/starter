@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-use app\models\query\UserMetaQuery;
 
 /**
  * This is the model class for table "{{%user_metas}}".
@@ -127,7 +126,7 @@ class UserMeta extends ActiveRecord
      */
     public static function find()
     {
-        return new UserMetaQuery(get_called_class());
+        return new \app\models\query\UserMetaQuery(get_called_class());
     }
      
    

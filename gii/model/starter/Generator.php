@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\gii\generators\model;
+namespace app\gii\model\starter;
 
 use Yii;
 use yii\base\NotSupportedException;
@@ -250,6 +250,8 @@ class Generator extends \yii\gii\Generator
                     $this->render('query.php', $params)
                 );
             }
+
+            
         }
 
         return $files;

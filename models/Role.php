@@ -8,7 +8,6 @@ use app\widgets\Anchor;
 use app\widgets\JsonEditor;
 use yii\behaviors\SluggableBehavior;
 use yii\helpers\Url;
-use app\models\query\RoleQuery;
 
 /**
  * This is the model class for table "{{%roles}}".
@@ -124,7 +123,7 @@ class Role extends ActiveRecord
      */
     public static function find()
     {
-        return new RoleQuery(get_called_class());
+        return new \app\models\query\RoleQuery(get_called_class());
     }
       
 

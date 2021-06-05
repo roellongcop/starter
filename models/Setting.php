@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
-use app\models\query\SettingQuery;
 use app\widgets\Anchor;
 use app\widgets\BootstrapSelect;
 use yii\behaviors\SluggableBehavior;
@@ -144,7 +143,7 @@ class Setting extends ActiveRecord
      */
     public static function find()
     {
-        return new SettingQuery(get_called_class());
+        return new \app\models\query\SettingQuery(get_called_class());
     }
     
 

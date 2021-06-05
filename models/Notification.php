@@ -4,7 +4,6 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
-use app\models\query\NotificationQuery;
 use app\widgets\Anchor;
 use app\widgets\Label;
 
@@ -124,7 +123,7 @@ class Notification extends ActiveRecord
      */
     public static function find()
     {
-        return new NotificationQuery(get_called_class());
+        return new \app\models\query\NotificationQuery(get_called_class());
     }
      
      

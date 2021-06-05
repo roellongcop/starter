@@ -62,7 +62,7 @@ class ProfileForm extends \yii\base\Model
         return User::findOne($this->user_id);
     }
 
-    public function save($runValidation = true, $attributeNames = NULL)
+    public function save()
     {
         $user = $this->user;
         

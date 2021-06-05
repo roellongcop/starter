@@ -28,7 +28,6 @@ namespace <?= $generator->ns ?>;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-use <?= substr($queryClassFullName, 1) ?>;
 
 
 /**
@@ -153,7 +152,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
      */
     public static function find()
     {
-        return new <?= $queryClassName ?>(get_called_class());
+        return new <?= $queryClassFullName ?>(get_called_class());
     }
 <?php endif; ?>
      

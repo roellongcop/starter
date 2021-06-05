@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-use app\models\query\QueueQuery;
 
 
 /**
@@ -128,7 +127,7 @@ class Queue extends ActiveRecord
      */
     public static function find()
     {
-        return new QueueQuery(get_called_class());
+        return new \app\models\query\QueueQuery(get_called_class());
     }
      
      

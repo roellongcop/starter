@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\helpers\Url;
-use app\models\query\BackupQuery;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
 use yii\behaviors\SluggableBehavior;
@@ -118,7 +117,7 @@ class Backup extends ActiveRecord
      */
     public static function find()
     {
-        return new BackupQuery(get_called_class());
+        return new \app\models\query\BackupQuery(get_called_class());
     }
     
   

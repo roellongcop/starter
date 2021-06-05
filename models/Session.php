@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Url;
-use app\models\query\SessionQuery;
 
 /**
  * This is the model class for table "{{%sessions}}".
@@ -124,7 +123,7 @@ class Session extends ActiveRecord
      */
     public static function find()
     {
-        return new SessionQuery(get_called_class());
+        return new \app\models\query\SessionQuery(get_called_class());
     }
      
 

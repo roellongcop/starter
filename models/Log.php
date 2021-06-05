@@ -8,7 +8,6 @@ use app\widgets\Anchor;
 use app\widgets\JsonEditor;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
-use app\models\query\LogQuery;
 
 /**
  * This is the model class for table "{{%logs}}".
@@ -146,7 +145,7 @@ class Log extends ActiveRecord
      */
     public static function find()
     {
-        return new LogQuery(get_called_class());
+        return new \app\models\query\LogQuery(get_called_class());
     }
      
 

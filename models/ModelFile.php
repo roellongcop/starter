@@ -7,7 +7,6 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
-use app\models\query\ModelFileQuery;
 
 /**
  * This is the model class for table "{{%model_files}}".
@@ -96,7 +95,7 @@ class ModelFile extends ActiveRecord
      */
     public static function find()
     {
-        return new ModelFileQuery(get_called_class());
+        return new \app\models\query\ModelFileQuery(get_called_class());
     }
      
      

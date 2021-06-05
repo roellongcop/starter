@@ -4,7 +4,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\models\form\ProfileForm;
-use app\models\query\UserQuery;
 use app\widgets\Anchor;
 use app\widgets\Label;
 use yii\behaviors\SluggableBehavior;
@@ -140,7 +139,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function find()
     {
-        return new UserQuery(get_called_class());
+        return new \app\models\query\UserQuery(get_called_class());
     }
 
 

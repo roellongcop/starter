@@ -152,7 +152,7 @@ if (YII_ENV_DEV) {
                 ]
             ],
             'model' => [
-                'class' => 'yii\gii\generators\model\Generator',
+                'class' => 'app\gii\model\starter\Generator',
                 'templates' => [ 
                     'api' => '@app/gii/model/api/default', 
                     'starter' => '@app/gii/model/starter/default', 

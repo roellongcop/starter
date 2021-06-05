@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-use app\models\query\VisitLogQuery;
 
 /**
  * This is the model class for table "{{%visit_logs}}".
@@ -112,7 +111,7 @@ class VisitLog extends ActiveRecord
      */
     public static function find()
     {
-        return new VisitLogQuery(get_called_class());
+        return new \app\models\query\VisitLogQuery(get_called_class());
     }
      
  

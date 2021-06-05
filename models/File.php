@@ -14,7 +14,6 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use app\helpers\Html;
 use yii\helpers\Url;
-use app\models\query\FileQuery;
 use app\behaviors\FileBehavior;
 
 /**
@@ -130,7 +129,7 @@ class File extends ActiveRecord
      */
     public static function find()
     {
-        return new FileQuery(get_called_class());
+        return new \app\models\query\FileQuery(get_called_class());
     }
 
     public function getDocumentPreviewPath()

@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
-use app\models\query\IpQuery;
 use app\widgets\Anchor;
 use yii\behaviors\SluggableBehavior;
 use yii\helpers\Url;
@@ -117,7 +116,7 @@ class Ip extends ActiveRecord
      */
     public static function find()
     {
-        return new IpQuery(get_called_class());
+        return new \app\models\query\IpQuery(get_called_class());
     }
      
  

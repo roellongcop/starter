@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
-use app\models\query\ThemeQuery;
 use app\widgets\Anchor;
 use app\widgets\AppImages;
 use app\widgets\Dropzone;
@@ -128,7 +127,7 @@ class Theme extends ActiveRecord
      */
     public static function find()
     {
-        return new ThemeQuery(get_called_class());
+        return new \app\models\query\ThemeQuery(get_called_class());
     }
 
     public function getActivateUrl()
