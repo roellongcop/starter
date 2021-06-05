@@ -78,7 +78,7 @@ class Grid extends \yii\base\Widget
                 'view' => function($url, $model) use($controller) {
                     if (App::modelCan($model, 'view')) {
                         return Anchor::widget([
-                            'title' => '<i class="glyphicon glyphicon-eye-open text-info"></i>'. $this->actionName('View'),
+                            'title' => implode('', [$this->render('icon/view'), $this->actionName('View')]),
                             'link' =>  $model->viewUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -90,7 +90,7 @@ class Grid extends \yii\base\Widget
                 'update' => function($url, $model) use ($controller){
                     if (App::modelCan($model, 'update')) {
                         return Anchor::widget([
-                            'title' => '<i class="glyphicon glyphicon-edit text-warning"></i>'. $this->actionName('Update'),
+                            'title' => implode('', [$this->render('icon/edit'), $this->actionName('Update')]),
                             'link' =>  $model->updateUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -102,7 +102,7 @@ class Grid extends \yii\base\Widget
                 'duplicate' => function($url, $model) use ($controller){
                     if (App::modelCan($model, 'duplicate')) {
                         return Anchor::widget([
-                            'title' => '<i class="glyphicon glyphicon-copy text-default"></i>'. $this->actionName('Duplicate'),
+                            'title' => implode('', [$this->render('icon/copy'), $this->actionName('Duplicate')]),
                             'link' =>  $model->duplicateUrl,
                             'options' => [
                                 'class' => 'navi-link',
@@ -114,7 +114,7 @@ class Grid extends \yii\base\Widget
                 'delete' => function($url, $model) use ($controller) {
                     if (App::modelCan($model, 'delete')) {
                         return Anchor::widget([
-                            'title' => '<i class="glyphicon glyphicon-trash text-danger"></i>'. $this->actionName('Delete'),
+                            'title' => implode('', [$this->render('icon/delete'), $this->actionName('Delete')]),
                             'link' =>  $model->deleteUrl,
                             'options' => [
                                 'class' => 'navi-link delete',

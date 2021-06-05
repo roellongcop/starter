@@ -1,9 +1,4 @@
 <?php
-use app\helpers\App;
-$access = App::component('access');
-$controllerActions = $access->controllerActions();
-$defaultNavigation = $access->defaultNavigation();
-
 
 return [
     'profile' => [

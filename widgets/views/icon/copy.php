@@ -1,1 +1,1 @@
-<i class="far fa-copy text-default"></i>
+<i class="glyphicon glyphicon-copy text-default"></i>

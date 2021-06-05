@@ -11,24 +11,24 @@ class ExportButton extends \yii\base\Widget
     public $actions = [
         'print' => [
             'title' => 'Print',
-            'icon' => '<i class="glyphicon glyphicon-print"></i>',
+            'icon' => 'print',
         ],
         'export-pdf' => [
             'title' => 'PDF',
-            'icon' => '<i class="glyphicon glyphicon-save-file"></i>',
+            'icon' => 'pdf',
         ],
         'export-csv' => [
             'title' => 'CSV',
-            'icon' => '<i class="glyphicon glyphicon-save-file"></i>',
+            'icon' => 'csv',
         ],
         'export-xls' => [
             'title' => 'XLS 95',
-            'icon' => '<i class="glyphicon glyphicon-save-file"></i>',
+            'icon' => 'excel',
         ],
 
         'export-xlsx' => [
             'title' => 'XLSX 2007',
-            'icon' => '<i class="glyphicon glyphicon-save-file"></i>',
+            'icon' => 'excel',
         ],
     ]; 
     
