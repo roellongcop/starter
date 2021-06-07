@@ -145,7 +145,8 @@ if (YII_ENV_DEV) {
             // generator name
             'crud' => [
                 // generator class
-                'class' => 'yii\gii\generators\crud\Generator',
+                'class' => 'app\gii\crud\starter\Generator',
+                // 'class' => 'yii\gii\generators\crud\Generator',
                 'templates' => [
                     // template name => path to template
                     'starter' => '@app/gii/crud/starter/default',

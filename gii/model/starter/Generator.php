@@ -241,6 +241,16 @@ class Generator extends \yii\gii\Generator
                 $this->render('model.php', $params)
             );
 
+            $files[] = new CodeFile(
+                Yii::getAlias('@app') . '/tests/unit/fixtures/data/' . Inflector::camel2id($modelClassName) . '.php',
+                $this->render('_fixture-data.php', $params)
+            );
+
+            $files[] = new CodeFile(
+                Yii::getAlias('@app') . '/tests/unit/fixtures/' . $modelClassName . 'Fixture.php',
+                $this->render('fixture.php', $params)
+            );
+
             // query :
             if ($queryClassName) {
                 $params['className'] = $queryClassName;

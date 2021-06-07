@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\gii\generators\crud;
+namespace app\gii\crud\starter;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -188,6 +188,21 @@ class Generator extends \yii\gii\Generator
                 $files[] = new CodeFile("$viewPath/$file", $this->render("views/$file"));
             }
         }
+
+        $exp = explode('\\', $this->controllerClass);
+        $end = end($exp);
+
+        $model = str_replace('Controller', '', $end);
+
+        $files[] = new CodeFile(
+            Yii::getAlias('@app') . '/tests/functional/admin_pages/' . $model . 'Cest.php',
+            $this->render('functional-test.php', $params)
+        );
+
+        $files[] = new CodeFile(
+            Yii::getAlias('@app') . '/tests/unit/models/' . $model . 'Test.php',
+            $this->render('unit-test.php', $params)
+        );
 
         return $files;
     }

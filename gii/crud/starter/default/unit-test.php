@@ -1,0 +1,49 @@
+<?php
+use yii\helpers\StringHelper;
+use yii\helpers\Inflector;
+
+
+/* @var $this yii\web\View */
+/* @var $generator yii\gii\generators\crud\Generator */
+
+$modelClass = StringHelper::basename($generator->modelClass);
+$ignore_attr = ['created_at', 'created_by', 'updated_at', 'updated_by', 'id'];
+?>
+<?= '<?php' ?>
+
+namespace tests\unit\models;
+
+use app\models\<?= isset($modelAlias) ? $modelAlias : $modelClass ?>;
+
+class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codeception\Test\Unit
+{
+    public function testCreate()
+    {
+        $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>([
+<?php foreach ($generator->getColumnNames() as $attribute) : ?>
+<?php if (! in_array($attribute, $ignore_attr)) : ?>
+<?php if ($attribute == 'record_status'): ?>
+            '<?= $attribute ?>' => 1,  
+<?php else: ?>
+            '<?= $attribute ?>' => 'test',  
+<?php endif ?>
+<?php endif ?>
+<?php endforeach ?>
+        ]);
+
+        expect_that($model->save());
+    }
+
+    public function testUpdate()
+    {
+        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
+        $model->record_status = 0;
+        expect_that($model->save());
+    }
+
+    public function testDelete()
+    {
+        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
+        expect_that($model->delete());
+    }
+}
