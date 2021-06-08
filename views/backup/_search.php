@@ -17,6 +17,7 @@ use app\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => $model->searchAction,
         'method' => 'get',
+        'id' => 'backup-search-form'
     ]); ?>
 
         <?= Search::widget(['model' => $model]) ?>

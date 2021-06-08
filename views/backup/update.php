@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new BackupSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="backup-update-page">
 	<?= $this->render('_form', [
         'model' => $model,
     ]) ?>

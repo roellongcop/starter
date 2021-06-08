@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new BackupSearch();
 ?>
 
-<div>
+<div class="backup-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

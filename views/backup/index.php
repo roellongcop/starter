@@ -17,7 +17,7 @@ $this->params['showExportButton'] = true;
 ?>
 
  
-<div>
+<div class="backup-index-page">
     <?= FilterColumn::widget(['searchModel' => $searchModel]) ?>
     <?= Html::beginForm(['process-checkbox'], 'post'); ?>
         <?= BulkAction::widget(['searchModel' => $searchModel]) ?>

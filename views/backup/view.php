@@ -15,7 +15,7 @@ $this->params['searchModel'] = new BackupSearch();
 $this->params['showCreateButton'] = true; 
 ?>
 
-<div>
+<div class="backup-view-page">
 	<?= Anchor::widget([
 		'title' => 'Download File',
 		'link' => ['download', 'slug' => $model->slug],

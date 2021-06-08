@@ -26,7 +26,9 @@ SCRIPT;
 
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'backup-form'
+    ]); ?>
 
     <div class="row">
         <div class="col-md-5">

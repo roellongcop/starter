@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new BackupSearch();
 ?>
 
-<div>
+<div class="backup-duplicate-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>
