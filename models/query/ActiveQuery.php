@@ -39,25 +39,22 @@ class ActiveQuery extends \yii\db\ActiveQuery
         return $field;
     }
 
-    public function visible($alias = '')
+    public function visible()
     {
         $class = Yii::createObject($this->modelClass);
 
-        if ($class && $class->hasMethod('controllerID')) {
-            $field = $this->field('record_status');
+        $field = $this->field('record_status');
+        $condition[$field] = 1;
 
-            $condition[$field] = 1;
+        if ($class && $class->hasMethod('controllerID') && App::isLogin()) {
 
-            if (App::isLogin()) {
-                if (App::identity()->can('in-active-data', $class->controllerID())) {
-                    $condition[$field] = '';
-                }
+            if (App::identity()->can('in-active-data', $class->controllerID())) {
+                $condition[$field] = '';
             }
 
-            return $this->andFilterWhere($condition);
         }
 
-        return $this;
+        return $this->andFilterWhere($condition);
     }
 
     public function active($alias='')
