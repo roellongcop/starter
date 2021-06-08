@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new FileSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="file-update-page">
 	<?= $this->render('_form', [
         'model' => $model,
     ]) ?>

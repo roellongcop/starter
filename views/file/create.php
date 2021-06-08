@@ -9,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new FileSearch();
 ?>
-
-<div>
+<div class="file-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

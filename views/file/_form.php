@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
@@ -9,10 +8,7 @@ use app\widgets\ActiveForm;
 /* @var $model app\models\File */
 /* @var $form app\widgets\ActiveForm */
 ?>
-
-
-    <?php $form = ActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'file-form']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -25,11 +21,8 @@ use app\widgets\ActiveForm;
                 'form' => $form,
             ]) ?>
         </div>
-
     </div>
     <div class="form-group">
 		<?= AnchorForm::widget() ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+<?php ActiveForm::end(); ?>

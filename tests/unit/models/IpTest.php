@@ -10,8 +10,7 @@ class IpTest extends \Codeception\Test\Unit
         $model = new Ip([
             'name' => '191.168.1.2',  
             'description' => 'test',  
-            'type' => 1,  
-            'slug' => '19116812',  
+            'type' => 1,   
             'record_status' => 1,  
         ]);
 

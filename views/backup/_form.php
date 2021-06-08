@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
@@ -23,13 +22,9 @@ $('.all-table-checkbox').on('click', function() {
     } 
 })
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
-    <?php $form = ActiveForm::begin([
-        'id' => 'backup-form'
-    ]); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'backup-form']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= $form->field($model, 'filename')->textInput(['maxlength' => true]) ?>
@@ -58,11 +53,8 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
                 }
             ]) ?>
         </div>
-
     </div>
     <div class="form-group">
         <?= AnchorForm::widget() ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+<?php ActiveForm::end(); ?>

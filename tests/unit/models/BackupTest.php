@@ -33,7 +33,6 @@ class BackupTest extends \Codeception\Test\Unit
                "{$dbPref}visit_logs" => "{$dbPref}visit_logs",
             ],
             'description' => 'Description',
-            'slug' => (string) Inflector::slug($time),
             'record_status' => 1,
             'created_by' => 1,
             'updated_by' => 1,
@@ -41,6 +40,5 @@ class BackupTest extends \Codeception\Test\Unit
         $model->validate();
 
         expect_that($model->save());
-
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use app\widgets\BulkAction;
 use app\widgets\FilterColumn;
@@ -15,19 +14,14 @@ $this->params['searchModel'] = $searchModel;
 $this->params['showCreateButton'] = true; 
 $this->params['showExportButton'] = true;
 ?>
-
- 
 <div class="backup-index-page">
     <?= FilterColumn::widget(['searchModel' => $searchModel]) ?>
     <?= Html::beginForm(['process-checkbox'], 'post'); ?>
         <?= BulkAction::widget(['searchModel' => $searchModel]) ?>
         <hr>
-                
         <?= Grid::widget([
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
-            'paramName' => 'slug'
         ]); ?>
-                                
     <?= Html::endForm(); ?> 
 </div>

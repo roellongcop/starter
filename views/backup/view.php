@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\BackupSearch;
 use app\widgets\Anchor;
 use app\widgets\Anchors;
@@ -14,14 +13,12 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new BackupSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-
 <div class="backup-view-page">
 	<?= Anchor::widget([
 		'title' => 'Download File',
 		'link' => ['download', 'slug' => $model->slug],
 		'options' => ['class' => 'btn btn-primary']
 	]) ?>
-
 	<?= Anchor::widget([
 		'title' => 'Restore',
 		'link' =>  ['restore', 'slug' => $model->slug],

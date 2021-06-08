@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\BackupSearch;
 
 /* @var $this yii\web\View */
@@ -10,7 +9,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new BackupSearch();
 ?>
-
 <div class="backup-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,

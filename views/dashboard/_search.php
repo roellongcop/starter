@@ -15,56 +15,46 @@ $model->modules = $model->modules ?: array_keys($modules);
 $modules['*checkAll'] = ['name' => 'Check All', 'tags' => 'onclick="checkAllAccessModule(this)"'];
 ksort($modules);
 ?>
-    <?php $form = ActiveForm::begin([
-        'action' => $model->searchAction,
-        'method' => 'get',
-        'options' => ['class' => 'kt-quick-search__form']
-    ]); ?>
-
-        <?= Search::widget(['model' => $model]) ?>
-
-        <?= DateRange::widget([
-            'model' => $model,
-            'start' => $model->startDate(),
-            'end' => $model->endDate(),
-            'ranges' => [
-                'Today',
-                'Yesterday',
-                'Last 7 Days',
-                'Last 30 Days',
-                'This Month',
-                'Last Month',
-                'This Year',
-                'Last Year',
-            ]
-        ]) ?>
-
-        <br>
-
-        <?= Filter::widget([
-            'data' => $modules,
-            'title' => 'Module',
-            'attribute' => 'modules',
-            'model' => $model,
-            'form' => $form,
-        ]) ?>
-
-        <?= Filter::widget([
-            'data' => App::mapParams('record_status'),
-            'title' => 'Record Status',
-            'attribute' => 'record_status',
-            'model' => $model,
-            'form' => $form,
-        ]) ?>
-
-        <?= Pagination::widget([
-            'model' => $model,
-            'form' => $form,
-            'title' => 'Limit',
-        ]) ?>
-
-        <?= SearchButton::widget() ?>
-
-
-    <?php ActiveForm::end(); ?>
- 
+<?php $form = ActiveForm::begin([
+    'action' => $model->searchAction,
+    'method' => 'get',
+    'options' => ['class' => 'kt-quick-search__form']
+]); ?>
+    <?= Search::widget(['model' => $model]) ?>
+    <?= DateRange::widget([
+        'model' => $model,
+        'start' => $model->startDate(),
+        'end' => $model->endDate(),
+        'ranges' => [
+            'Today',
+            'Yesterday',
+            'Last 7 Days',
+            'Last 30 Days',
+            'This Month',
+            'Last Month',
+            'This Year',
+            'Last Year',
+        ]
+    ]) ?>
+    <br>
+    <?= Filter::widget([
+        'data' => $modules,
+        'title' => 'Module',
+        'attribute' => 'modules',
+        'model' => $model,
+        'form' => $form,
+    ]) ?>
+    <?= Filter::widget([
+        'data' => App::mapParams('record_status'),
+        'title' => 'Record Status',
+        'attribute' => 'record_status',
+        'model' => $model,
+        'form' => $form,
+    ]) ?>
+    <?= Pagination::widget([
+        'model' => $model,
+        'form' => $form,
+        'title' => 'Limit',
+    ]) ?>
+    <?= SearchButton::widget() ?>
+<?php ActiveForm::end(); ?>

@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
@@ -18,8 +17,6 @@ use yii\helpers\StringHelper;
     'data-token' => $model->token,
     'data-created_at' => App::formatter('asFulldate', $model->created_at),
 ]) ?>
-
-
 <p>
     <?= StringHelper::truncate($model->name, 10) ?>
 </p>

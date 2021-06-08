@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\Url;
 use app\models\search\FileSearch;
 use yii\widgets\ListView;
@@ -13,27 +12,21 @@ $this->params['breadcrumbs'][] = 'Files';
 $this->params['searchModel'] = new FileSearch();
 $this->params['showCreateButton'] = true; 
 
-
 $myImageFilesUrl = Url::to(['file/my-files']);
 $deleteFileUrl = Url::to(['file/delete']);
-
 $registerJs = <<< SCRIPT
     var selectedFile = 0;
     var selectedToken = 0;
-
     var enableButton = function() {
         $('#remove-file-btn').prop('disabled', false);
     } 
     var disableButton = function() {
         $('#remove-file-btn').prop('disabled', true);
     } 
-
     $(document).on('click', '#my-files img', function() {
         var image = $(this);
-
         selectedFile = image.data('id');
         selectedToken = image.data('token');
-
         $('#my-files #td-name').text(image.data('name'));
         $('#my-files #td-extension').text(image.data('extension'));
         $('#my-files #td-size').text(image.data('size'));
@@ -42,17 +35,12 @@ $registerJs = <<< SCRIPT
         $('#my-files #td-location').text(image.data('location'));
         $('#my-files #td-token').text(image.data('token'));
         $('#my-files #td-created_at').text(image.data('created_at'));
-
         $('#my-files img').css('border', '');
         image.css('border', '2px solid #1bc5bd');
         enableButton();
     }); 
-    
- 
-
     var getMyFiles = function(url) {
         $('#my-files .my-photos').html('');
-
         let conf = {
             url: url,
             method: 'get',
@@ -63,18 +51,14 @@ $registerJs = <<< SCRIPT
             error: function(e) {
             }
         }   
-
         $.ajax(conf);
     }
-
     var searchMyImage = function(input) {
         if(event.key === 'Enter') {
-                   
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
         }
     }
-
     $('#remove-file-btn').on('click', function() {
         $.ajax({
             url: '{$deleteFileUrl}',
@@ -97,15 +81,11 @@ $registerJs = <<< SCRIPT
             },
         })
     });
-
     $(document).on("pjax:beforeSend",function(){
         $('#my-files .my-photos').html('Loading');
     });
-
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-
 $registerCSS = <<<CSS
     #my-files table tbody tr td {
         overflow-wrap: anywhere;
@@ -117,11 +97,10 @@ $registerCSS = <<<CSS
         border: 2px solid #1bc5bd;
     }
 CSS;
-
 $this->registerCSS($registerCSS);
 ?>
 
-<div class="row" id="my-files">
+<div class="row" id="my-files" class="my-files-page">
     <div class="col-md-7">
         <input type="text" class="form-control search-photo" placeholder="Search File" onkeydown="searchMyImage(this)">
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
@@ -180,5 +159,3 @@ $this->registerCSS($registerCSS);
         </table>
     </div>
 </div>
-
-

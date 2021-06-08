@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
@@ -18,7 +17,6 @@ $params = [
     'data-token' => $model->token,
     'data-created_at' => App::formatter('asFulldate', $model->created_at),
 ];
-
 if ($model->isDocument) {
     $path = $model->documentPreviewPath;
 

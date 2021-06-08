@@ -10,8 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new FileSearch();
 ?>
-
-<div>
+<div class="file-duplicate-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

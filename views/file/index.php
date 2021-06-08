@@ -15,7 +15,7 @@ $this->params['showCreateButton'] = true;
 $this->params['showExportButton'] = true;
 ?>
  
-<div>
+<div class="file-index-page">
     <?= FilterColumn::widget(['searchModel' => $searchModel]) ?>
     <?= Html::beginForm(['process-checkbox'], 'post'); ?>
 	<?= BulkAction::widget(['searchModel' => $searchModel]) ?>
@@ -25,6 +25,5 @@ $this->params['showExportButton'] = true;
         'searchModel' => $searchModel,
         'paramName' => 'token'
     ]); ?>
-                   
     <?= Html::endForm(); ?> 
 </div>

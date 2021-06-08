@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\FileSearch;
 use app\widgets\Anchor;
 use app\widgets\Anchors;
@@ -14,8 +13,7 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new FileSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-
-<div>
+<div class="file-view-page">
     <?= Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model,

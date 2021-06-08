@@ -1,8 +1,5 @@
 <?php
-
 use yii\widgets\ListView;
-
-
 if ($dataProvider->totalCount > 12) {
     $layout = "
         <div class='col-md-12'>
@@ -30,21 +27,19 @@ else {
         </div>
     ";
 }
-
 ?>
-
-
-<?= ListView::widget([
-    'dataProvider' => $dataProvider,
-    'layout' => $layout,
-    'itemView' => '_my-image-files',
-    'options' => ['class' => 'row'],
-    'beforeItem' => function ($model, $key, $index, $widget) use ($dataProvider) {
-        return "<div class='col-md-3'>";
-    },
-    'afterItem' => function ($model, $key, $index, $widget) {
-        return '</div>';
-    },
-    'pager' => ['class' => 'app\widgets\LinkPager']
-]);
-?>
+<div class="my-image-files-ajax">
+    <?= ListView::widget([
+        'dataProvider' => $dataProvider,
+        'layout' => $layout,
+        'itemView' => '_my-image-files',
+        'options' => ['class' => 'row'],
+        'beforeItem' => function ($model, $key, $index, $widget) use ($dataProvider) {
+            return "<div class='col-md-3'>";
+        },
+        'afterItem' => function ($model, $key, $index, $widget) {
+            return '</div>';
+        },
+        'pager' => ['class' => 'app\widgets\LinkPager']
+    ]); ?>
+</div>

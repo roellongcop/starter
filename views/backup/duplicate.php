@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\BackupSearch;
 
 /* @var $this yii\web\View */
@@ -11,7 +10,6 @@ $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new BackupSearch();
 ?>
-
 <div class="backup-duplicate-page">
 	<?= $this->render('_form', [
 		'model' => $model,
