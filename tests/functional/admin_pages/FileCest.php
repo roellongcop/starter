@@ -45,6 +45,12 @@ class FileCest
         $I->see('Update File:', 'h5');
     }
 
+    public function duplicatePage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getDuplicateUrl(false));
+        $I->see('Duplicate File:', 'h5');
+    }
+
 
     public function bulkActionPage(FunctionalTester $I)
     {

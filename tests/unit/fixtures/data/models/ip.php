@@ -8,5 +8,7 @@ return [
         'type' => 1,
         'slug' => Inflector::slug('191.168.1.1'),
         'record_status' => 1,
+        'created_by' => 1,
+        'updated_by' => 1,
     ],
 ];

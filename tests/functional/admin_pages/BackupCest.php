@@ -1,10 +1,10 @@
 <?php
 use app\models\User;
-use app\models\Ip;
+use app\models\Backup;
 
 // Admin page functional test cest file. Move this file to @app\tests\functional\admin_pages
 
-class IpCest
+class BackupCest
 {
     public $user;
     public $model;
@@ -12,7 +12,7 @@ class IpCest
     public function _before(FunctionalTester $I)
     {
         $this->user = User::findByUsername('developer');
-        $this->model = Ip::findOne(1);
+        $this->model = Backup::findOne(1);
         $I->amLoggedInAs($this->user);
     }
 
@@ -24,37 +24,31 @@ class IpCest
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->see('Ips', 'h5');
+        $I->see('Backups', 'h5');
     }
 
     public function createPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getCreateUrl(false));
-        $I->see('Create Ip', 'h5');
+        $I->see('Create Backup', 'h5');
     }
 
     public function viewPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getViewUrl(false));
-        $I->see('Ip:', 'h5');
-    }
-
-    public function updatePage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getUpdateUrl(false));
-        $I->see('Update Ip:', 'h5');
+        $I->see('Backup:', 'h5');
     }
 
     public function duplicatePage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getDuplicateUrl(false));
-        $I->see('Duplicate Ip:', 'h5');
+        $I->see('Duplicate Backup:', 'h5');
     }
-
+  
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/ip/process-checkbox"]', [
+        $I->submitForm('form[action="/backup/process-checkbox"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);

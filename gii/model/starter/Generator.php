@@ -242,7 +242,7 @@ class Generator extends \yii\gii\Generator
             );
 
             $files[] = new CodeFile(
-                Yii::getAlias('@app') . '/tests/unit/fixtures/data/' . Inflector::camel2id($modelClassName) . '.php',
+                Yii::getAlias('@app') . '/tests/unit/fixtures/data/models/' . Inflector::camel2id($modelClassName) . '.php',
                 $this->render('_fixture-data.php', $params)
             );
 

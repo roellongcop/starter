@@ -53,6 +53,12 @@ class <?= $modelClass ?>Cest
         $I->see('Update <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)) ?>:', 'h5');
     }
 
+    public function duplicatePage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getDuplicateUrl(false));
+        $I->see('Duplicate <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)) ?>:', 'h5');
+    }
+
 
     public function bulkActionPage(FunctionalTester $I)
     {

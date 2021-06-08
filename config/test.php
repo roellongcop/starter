@@ -16,7 +16,7 @@ return [
     'components' => [
         'access' => ['class' => 'app\components\AccessComponent'],
         'setting' => ['class' => 'app\components\SettingComponent'],
-        'general' => ['class' => 'app\components\General'],
+        'general' => ['class' => 'app\components\GeneralComponent'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
         'db' => $db,
         'mailer' => [

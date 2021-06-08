@@ -5,4 +5,5 @@ class IpFixture extends \yii\test\ActiveFixture
 {
     public $modelClass = 'app\models\Ip';
     public $dataFile = '@app/tests/unit/fixtures/data/models/ip.php';
+    public $depends = ['app\tests\unit\fixtures\UserFixture'];
 }
