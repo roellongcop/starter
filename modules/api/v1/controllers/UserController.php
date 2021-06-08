@@ -2,7 +2,7 @@
 
 namespace app\modules\api\v1\controllers;
 
-use app\modules\api\v1\models\User;
+use app\modules\api\v1\models\sub\AvailableUser;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -20,7 +20,7 @@ class UserController extends ActiveController
     {
         // $this->serializer['collectionEnvelope'] = 'availableUsers';
         return new ActiveDataProvider([
-            'query' => User::find()
+            'query' => AvailableUser::find()
                 ->alias('u')
                 ->available()
                 ->joinWith('role r')

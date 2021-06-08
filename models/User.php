@@ -156,7 +156,17 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::find()
+            ->alias('u')
+            ->joinWith('role r')
+            ->where([
+                'u.access_token' => $token,
+                'u.status' => self::STATUS_ACTIVE,
+                'u.record_status' => 1,
+                'r.record_status' => 1,
+            ])
+            ->one();
+        // throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
     /**
@@ -288,6 +298,16 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
+
+    /**
+     * Generates new access token
+     */
+    public function generateAccessToken()
+    {
+        $this->access_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+
     /**
      * Generates new token for email verification
      */
@@ -361,6 +381,7 @@ class User extends ActiveRecord implements IdentityInterface
             $this->generateAuthKey();
             $this->generatePasswordResetToken();
             $this->generateEmailVerificationToken();
+            $this->generateAccessToken();
         }
         
 

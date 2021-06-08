@@ -34,6 +34,7 @@ class m200912_033904_create_users_table extends Migration
             'password_hint' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
             'verification_token' => $this->string()->unique(),
+            'access_token' => $this->string()->unique(),
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'slug' => $this->string()->notNull()->unique(),
             'is_blocked' => $this->tinyInteger(2)->notNull()->defaultValue(0),
