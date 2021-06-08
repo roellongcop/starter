@@ -5,12 +5,12 @@ use app\models\UserMeta;
 class UserMetaCest
 {
     public $user;
-    public $userMeta;
+    public $model;
 
     public function _before(FunctionalTester $I)
     {
         $this->user = User::findByUsername('developer');
-        $this->userMeta = UserMeta::findOne(1);
+        $this->model = UserMeta::findOne(1);
         $I->amLoggedInAs($this->user);
     }
 
@@ -21,32 +21,39 @@ class UserMetaCest
 
     public function indexPage(FunctionalTester $I)
     {
-        $I->amOnPage($this->userMeta->getIndexUrl(false));
+        $I->amOnPage($this->model->getIndexUrl(false));
         $I->see('User Metas', 'h5');
     }
 
     public function createPage(FunctionalTester $I)
     {
-        $I->amOnPage($this->userMeta->getCreateUrl(false));
+        $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create User Meta', 'h5');
     }
 
     public function viewPage(FunctionalTester $I)
     {
-        $I->amOnPage($this->userMeta->getViewUrl(false));
+        $I->amOnPage($this->model->getViewUrl(false));
         $I->see('User Meta:', 'h5');
     }
 
     public function updatePage(FunctionalTester $I)
     {
-        $I->amOnPage($this->userMeta->getUpdateUrl(false));
+        $I->amOnPage($this->model->getUpdateUrl(false));
         $I->see('Update User Meta:', 'h5');
+    }
+
+
+    public function duplicatePage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getDuplicateUrl(false));
+        $I->see('Duplicate User Meta:', 'h5');
     }
 
 
     public function bulkActionPage(FunctionalTester $I)
     {
-        $I->amOnPage($this->userMeta->getIndexUrl(false));
+        $I->amOnPage($this->model->getIndexUrl(false));
         $I->submitForm('form[action="/user-meta/process-checkbox"]', [
             'process-selected' => 'active', 
             'selection' => [1]
