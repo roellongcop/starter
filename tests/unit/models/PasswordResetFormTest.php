@@ -25,7 +25,7 @@ class PasswordResetFormTest extends \Codeception\Test\Unit
             ->willReturn(true);
 
         $this->model->attributes = [
-            'email' => 'admin@admin.com',
+            'email' => 'developer@developer.com',
         ];
 
         expect_that($this->model->process());
@@ -36,7 +36,7 @@ class PasswordResetFormTest extends \Codeception\Test\Unit
         /** @var MessageInterface $emailMessage */
         $emailMessage = $this->tester->grabLastSentEmail();
         expect('valid email is sent', $emailMessage)->isInstanceOf('yii\mail\MessageInterface');
-        expect($emailMessage->getTo())->hasKey('admin@admin.com');
+        expect($emailMessage->getTo())->hasKey('developer@developer.com');
     }
 
     public function testNotExistUserDontEmailed()

@@ -23,7 +23,6 @@ use app\widgets\ActiveForm;
             <?= $form->field($model, 'controller')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'table_name')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'model_name')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'user_agent')->textarea(['rows' => 6]) ?>
             <?= $form->field($model, 'ip')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'browser')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'os')->textInput(['maxlength' => true]) ?>

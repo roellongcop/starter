@@ -43,72 +43,7 @@ class LogController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-
-    /**
-     * Creates a new Log model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Log();
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Created');
-
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Duplicates a new Log model.
-     * If duplication is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionDuplicate($id)
-    {
-        $originalModel = $this->findModel($id);
-        $model = new Log();
-        $model->attributes = $originalModel->attributes;
-
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Duplicated');
-
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('duplicate', [
-            'model' => $model,
-            'originalModel' => $originalModel,
-        ]);
-    }
-
-    /**
-     * Updates an existing Log model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Updated');
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
+ 
     /**
      * Deletes an existing Log model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

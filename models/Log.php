@@ -292,11 +292,10 @@ class Log extends ActiveRecord
         return $behaviors;
     }
 
-
     public static function record($model, $changedAttributes=[])
     {
         if (App::isLogin() && App::getModelName($model) != 'Log') {
-            $log                   = new self();
+            $log                   = new Log();
             $log->request_data     = App::getBodyParams();
             $log->method           = App::getMethod();
             $log->url              = App::absoluteUrl();

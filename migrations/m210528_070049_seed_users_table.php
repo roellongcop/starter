@@ -26,18 +26,18 @@ class m210528_070049_seed_users_table extends Migration
     public function data()
     {
         return [
-            'admin' => [
+            'developer' => [
                 'role_id' => 1,
-                'username' => 'admin', 
-                'email' => 'admin@admin.com',
+                'username' => 'developer', 
+                'email' => 'developer@developer.com',
                 'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
-                'password_hash' => Yii::$app->security->generatePasswordHash('admin@admin.com'),
+                'password_hash' => Yii::$app->security->generatePasswordHash('developer@developer.com'),
                 'password_hint' => 'Same as Email',
                 'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994601',
                 'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994601',
                 'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994601',
                 'status' => 10,
-                'slug' => 'admin',
+                'slug' => 'developer',
                 'is_blocked' => 0,
                 'record_status' => 1,
             ],
@@ -56,18 +56,19 @@ class m210528_070049_seed_users_table extends Migration
                 'is_blocked' => 0,
                 'record_status' => 1,
             ],
-            'developer' => [
+
+            'admin' => [
                 'role_id' => 3,
-                'username' => 'developer', 
-                'email' => 'developer@developer.com',
+                'username' => 'admin', 
+                'email' => 'admin@admin.com',
                 'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd33',
-                'password_hash' => Yii::$app->security->generatePasswordHash('developer@developer.com'),
+                'password_hash' => Yii::$app->security->generatePasswordHash('admin@admin.com'),
                 'password_hint' => 'Same as Email',
                 'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994603',
                 'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994603',
                 'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994603',
                 'status' => 10,
-                'slug' => 'developer',
+                'slug' => 'admin',
                 'is_blocked' => 0,
                 'record_status' => 1,
             ],

@@ -23,7 +23,7 @@ class LoginFormCest
     // demonstrates `amLoggedInAs` method
     public function internalLoginByInstance(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(\app\models\User::findByUsername('admin'));
+        $I->amLoggedInAs(\app\models\User::findByUsername('developer'));
         $I->amOnPage(['dashboard/index']);
         $I->see('Sign Out');
     }
@@ -39,7 +39,7 @@ class LoginFormCest
     public function loginWithWrongCredentials(\FunctionalTester $I)
     {
         $I->submitForm('#kt_login_signin_form', [
-            'LoginForm[username]' => 'admin',
+            'LoginForm[username]' => 'developer',
             'LoginForm[password]' => 'wrong',
         ]);
         $I->expectTo('see validations errors');
@@ -90,8 +90,8 @@ class LoginFormCest
     public function loginSuccessfully(\FunctionalTester $I)
     {
         $I->submitForm('#kt_login_signin_form', [
-            'LoginForm[username]' => 'admin@admin.com',
-            'LoginForm[password]' => 'admin@admin.com',
+            'LoginForm[username]' => 'developer@developer.com',
+            'LoginForm[password]' => 'developer@developer.com',
         ]);
         $I->see('Sign Out');
         $I->dontSeeElement('form#kt_login_signin_form');              
