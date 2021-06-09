@@ -1,5 +1,6 @@
 <?php
 namespace app\models\query;
+
 use Yii;
 use app\helpers\App;
 

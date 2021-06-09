@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -62,8 +61,6 @@ class SettingSearch extends Setting
         $query = Setting::find();
 
         // add conditions that should always apply here
-
-        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

@@ -5,13 +5,11 @@ use yii\helpers\Inflector;
 
 $modelClass = StringHelper::basename($generator->modelClass);
 ?>
-<?= '<?php' ?>
-
+<?= "<?php\n" ?>
 use app\models\User;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 
 // Admin page functional test cest file. Move this file to @app\tests\functional\admin_pages
-
 class <?= $modelClass ?>Cest
 {
     public $user;
@@ -58,7 +56,6 @@ class <?= $modelClass ?>Cest
         $I->amOnPage($this->model->getDuplicateUrl(false));
         $I->see('Duplicate <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)) ?>:', 'h5');
     }
-
 
     public function bulkActionPage(FunctionalTester $I)
     {

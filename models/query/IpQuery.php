@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\query;
 
 /**
@@ -9,7 +8,6 @@ namespace app\models\query;
  */
 class IpQuery extends ActiveQuery
 {
-
 	public function blackList()
     {
         return $this->andWhere([

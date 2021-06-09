@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\form;
 
 use Yii;
@@ -56,10 +55,8 @@ class UploadForm extends Model
     public function upload()
     {
         if ($this->fileInput) {
-
             // $this->fileToken = implode('-', [$this->fileToken, App::session('ID')]);
             return App::component('file')->upload($this, 'fileInput');
         } 
     }  
-
 }

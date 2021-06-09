@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\form;
 
 use Yii;
@@ -83,5 +82,4 @@ class MySettingForm extends \app\models\User
             return true;
         }
     }
- 
 }

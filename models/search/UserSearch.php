@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -16,7 +15,6 @@ class UserSearch extends User
     public $keywords;
     public $date_range;
     public $pagination;
-
 
     public $searchTemplate = 'user/_search';
     public $searchAction = ['user/index'];
@@ -62,8 +60,6 @@ class UserSearch extends User
             ->alias('u');
 
         // add conditions that should always apply here
-
-        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

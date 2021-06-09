@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -60,8 +59,6 @@ class IpSearch extends Ip
         $query = Ip::find();
 
         // add conditions that should always apply here
-
-        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
@@ -91,7 +88,6 @@ class IpSearch extends Ip
         
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description]);
-        
                 
         $query->andFilterWhere(['or', 
             ['like', 'name', $this->keywords],  

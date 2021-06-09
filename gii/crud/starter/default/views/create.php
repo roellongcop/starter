@@ -15,7 +15,6 @@ if ($modelClass === $searchModelClass) {
 
 echo "<?php\n";
 ?>
-
 use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;
 
 /* @var $this yii\web\View */
@@ -26,8 +25,7 @@ $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Infl
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
 ?>
-
-<div>
+<div class="<?= Inflector::camel2id($modelClass) ?>-create-page">
 	<?= '<?=' ?> $this->render('_form', [
 		'model' => $model,
 	]) ?>

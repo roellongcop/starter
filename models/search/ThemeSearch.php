@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -60,8 +59,6 @@ class ThemeSearch extends Theme
         $query = Theme::find();
 
         // add conditions that should always apply here
-
-        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

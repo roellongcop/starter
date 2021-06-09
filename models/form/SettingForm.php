@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\form;
 
 use Yii;
@@ -167,5 +166,4 @@ class SettingForm extends Model
         }
         Log::record(new Setting(['type' => 'general']), $changeAttribute);
     }
- 
 }

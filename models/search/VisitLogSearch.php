@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -17,7 +16,6 @@ class VisitLogSearch extends VisitLog
     public $date_range;
     public $pagination;
     public $username;
-
 
     public $searchTemplate = 'visit-log/_search';
     public $searchAction = ['visit-log/index'];
@@ -63,8 +61,6 @@ class VisitLogSearch extends VisitLog
             ->alias('vl');
 
         // add conditions that should always apply here
-
-        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\form;
 
 use Yii;
@@ -35,7 +34,6 @@ class ChangePasswordForm extends Model
             [['confirm_password'], 'validatePassword'],
         ];
     } 
-
 
     public function validateOldPassword($attribute, $params)
     {

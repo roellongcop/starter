@@ -19,7 +19,6 @@ use yii\web\UploadedFile;
  */
 class ThemeController extends Controller 
 {
-
     /**
      * Lists all Theme models.
      * @return mixed

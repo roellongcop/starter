@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -62,8 +61,6 @@ class LogSearch extends Log
             ->alias('l');
 
         // add conditions that should always apply here
-
-        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
@@ -73,7 +70,6 @@ class LogSearch extends Log
                 'pageSize' => $this->pagination
             ]
         ]);
-
 
         $dataProvider->sort->attributes['username'] = [
             'asc' => ['u.username' => SORT_ASC],

@@ -26,7 +26,6 @@ $actionParamComments = $generator->generateActionParamComments();
 
 echo "<?php\n";
 ?>
-
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
 use Yii;
@@ -47,7 +46,6 @@ use yii\helpers\Inflector;
  */
 class <?= $controllerClass ?> extends Controller <?= "\n" ?>
 {
-
     /**
      * Lists all <?= $modelClass ?> models.
      * @return mixed
@@ -105,7 +103,6 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
             'model' => $model,
         ]);
     }
-
 
     /**
      * Duplicates a new <?= $modelClass ?> model.
@@ -203,7 +200,6 @@ if (count($pks) === 1) {
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -225,9 +221,7 @@ if (count($pks) === 1) {
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -255,7 +249,7 @@ if (count($pks) === 1) {
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post

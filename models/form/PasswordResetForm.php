@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\form;
 
 use Yii;
@@ -31,7 +30,6 @@ class PasswordResetForm extends Model
             ['hint', 'safe'],
         ];
     } 
-
 
     public function process()
     {

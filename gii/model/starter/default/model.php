@@ -22,13 +22,11 @@ if ($queryClassName) {
 }
 echo "<?php\n";
 ?>
-
 namespace <?= $generator->ns ?>;
 
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-
 
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
@@ -47,8 +45,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
 {
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    //public $imageInput;
 
     /**
      * {@inheritdoc}
@@ -72,8 +68,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
     {
         return 'id';
     }
- 
-
 <?php if ($generator->db !== 'db'): ?>
 
     /**
@@ -90,28 +84,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
      */
     public function rules()
     {
-        return [<?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>
-    /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],
-            */
-            [['record_status'], 'required'],
+        return [<?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>    [['record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
         ];
@@ -156,8 +129,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
     }
 <?php endif; ?>
      
-     
-
     public function gridColumns()
     {
         return [

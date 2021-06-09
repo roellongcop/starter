@@ -14,7 +14,6 @@ array_pop($explodedClass);
 
 echo "<?php\n";
 ?>
-
 namespace <?= $generator->getControllerNamespace() ?>;
 
 class <?= StringHelper::basename($generator->controllerClass) ?> extends ActiveController <?= "\n" ?>

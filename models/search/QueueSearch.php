@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -60,7 +59,6 @@ class QueueSearch extends Queue
         $query = Queue::find();
 
         // add conditions that should always apply here
-
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

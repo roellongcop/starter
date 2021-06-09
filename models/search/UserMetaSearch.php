@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -17,7 +16,6 @@ class UserMetaSearch extends UserMeta
     public $date_range;
     public $pagination;
     public $username;
-
 
     public $searchTemplate = 'user-meta/_search';
     public $searchAction = ['user-meta/index'];
@@ -63,8 +61,6 @@ class UserMetaSearch extends UserMeta
             ->alias('um');
 
         // add conditions that should always apply here
-
-        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([

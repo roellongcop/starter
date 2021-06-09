@@ -18,8 +18,6 @@ class CustomEmailForm extends Model
     public $template;
     public $parameters = [];
 
-
-
     public function rules()
     {
         return [
@@ -30,14 +28,12 @@ class CustomEmailForm extends Model
         ];
     }
 
-
     public function init()
     {
         parent::init();
         $this->from = $this->from ?: App::setting('sender_email');
         $this->sender_name = $this->sender_name ?: App::setting('sender_name');
     }
-
 
     public function send($type = 'single')
     {
@@ -75,7 +71,6 @@ class CustomEmailForm extends Model
                     return $mailer->send();
                     break;
             }
- 
         }
         return false;
     }

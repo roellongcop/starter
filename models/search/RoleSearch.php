@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\search;
 
 use Yii;
@@ -61,8 +60,6 @@ class RoleSearch extends Role
         $query = Role::find();
 
         // add conditions that should always apply here
-
-        
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
@@ -103,7 +100,6 @@ class RoleSearch extends Role
 
         return $dataProvider;
     }
-
 
     public static function getAllRecord()
     {

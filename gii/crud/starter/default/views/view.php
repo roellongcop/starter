@@ -25,7 +25,6 @@ if ($generator->enableI18N) {
 $urlParams = $generator->generateUrlParams();
 echo "<?php\n";
 ?>
-
 use app\widgets\Anchors;
 use app\widgets\Detail;
 use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;
@@ -39,8 +38,7 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
 $this->params['showCreateButton'] = true; 
 ?>
-
-<div>
+<div class="<?= Inflector::camel2id($modelClass) ?>-view-page">
     <?= '<?=' ?> Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model

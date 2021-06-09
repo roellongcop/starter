@@ -11,7 +11,6 @@ $nameAttribute = $generator->getNameAttribute();
 
 echo "<?php\n";
 ?>
-
 use yii\helpers\Html;
 use app\widgets\BulkAction;
 use app\widgets\FilterColumn;
@@ -28,21 +27,18 @@ $this->params['searchModel'] = $searchModel;
 $this->params['showCreateButton'] = true; 
 $this->params['showExportButton'] = true;
 ?>
-
- 
-<div>
+<div class="<?= Inflector::camel2id($modelClass) ?>-index-page">
     <?= "<?=" ?> FilterColumn::widget(['searchModel' => $searchModel]) ?>
     <?= "<?=" ?> Html::beginForm(['confirm-action'], 'post'); ?>
         <?= "<?=" ?> BulkAction::widget(['searchModel' => $searchModel]) ?>
         <hr>
         <?= $generator->enablePjax ? "    <?php Pjax::begin(); ?>\n" : '' ?>
-        <?php if ($generator->indexWidgetType === 'grid'): ?>
-
-        <?= "<?=" ?> Grid::widget([
+<?php if ($generator->indexWidgetType === 'grid'): ?>
+<?= "<?=" ?> Grid::widget([
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
         ]); ?>
-        <?php else: ?>
+<?php else: ?>
         <?= "<?= " ?>ListView::widget([
             'dataProvider' => $dataProvider,
             'itemOptions' => ['class' => 'item'],
@@ -50,8 +46,7 @@ $this->params['showExportButton'] = true;
                 return Html::a(Html::encode($model-><?= $nameAttribute ?>), ['view', <?= $urlParams ?>]);
             },
         ]) ?>
-        <?php endif; ?>
-        <?= $generator->enablePjax ? "    <?php Pjax::end(); ?>\n" : '' ?>
-                
+<?php endif; ?>
+<?= $generator->enablePjax ? "    <?php Pjax::end(); ?>\n" : '' ?>
     <?= '<?=' ?> Html::endForm(); ?> 
 </div>

@@ -20,11 +20,10 @@ $labels = $generator->generateSearchLabels();
 $searchAttributes = $generator->getSearchAttributes();
 $searchConditions = $generator->generateSearchConditions();
 
-echo "<?php\n";
 
 $controllerID = Inflector::camel2id(isset($modelAlias) ? $modelAlias : $modelClass);
+echo "<?php\n";
 ?>
-
 namespace <?= StringHelper::dirname(ltrim($generator->searchModelClass, '\\')) ?>;
 
 use Yii;
@@ -84,7 +83,6 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         $query = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find();
 
         // add conditions that should always apply here
-
         $this->load($params);
 
         $dataProvider = new ActiveDataProvider([
