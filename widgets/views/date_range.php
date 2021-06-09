@@ -1,9 +1,7 @@
 <?php
-
 $registerJs = <<< SCRIPT
     var start = moment('{$start}');
     var end = moment('{$end}');
-
     let defaultRanges = {
         'All': [moment('{$all_start}'), moment('{$all_end}')],
        'Today': [moment(), moment()],
@@ -17,16 +15,13 @@ $registerJs = <<< SCRIPT
     }
     let ranges = {$ranges};
     let newRanges = {};
-
     for(key in ranges) {
         newRanges[ranges[key]] = defaultRanges[ranges[key]];
     }
-
     $('#{$id}').daterangepicker({
         // buttonClasses: 'btn btn-sm',
         applyClass: 'btn-primary',
         cancelClass: 'btn-secondary',
-
         startDate: start,
         endDate: end,
         ranges: newRanges
@@ -34,7 +29,6 @@ $registerJs = <<< SCRIPT
         $('#{$id} span').html( start.format('MMMM DD, YYYY') + ' - ' + end.format('MMMM DD, YYYY'));
         $('#{$id} input').val( start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
     });
-
     $('#{$id} span').html( start.format('MMMM DD, YYYY') + ' - ' + end.format('MMMM DD, YYYY'));
     $('#{$id} input').val( start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
 SCRIPT;

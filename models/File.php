@@ -1,15 +1,12 @@
 <?php
-
 namespace app\models;
 
 use Yii;
-
 use Imagine\Gd;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\BoxInterface;
 use yii\imagine\Image;
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use app\helpers\Html;
@@ -58,7 +55,6 @@ class File extends ActiveRecord
     {
         return 'token';
     }
-
 
     /**
      * {@inheritdoc}
@@ -184,7 +180,6 @@ class File extends ActiveRecord
         return $path;
     }
     
-
     public function getPreviewIcon($w=60)
     {
         $path = $this->documentPreviewPath;
@@ -218,7 +213,6 @@ class File extends ActiveRecord
         
         return App::setting('image_holder');
     }
-
 
     public function gridColumns()
     {
@@ -364,6 +358,7 @@ class File extends ActiveRecord
 
         return $path;
     }
+    
     public function getIsSql()
     {
         return in_array($this->extension, ['sql']);

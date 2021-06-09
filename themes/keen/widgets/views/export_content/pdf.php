@@ -9,10 +9,9 @@ use app\helpers\App;
     	<?= $searchModel->endDate ?>
     </p> 
 </div>
-
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => App::component('export')->getExportColumns($searchModel, 'pdf'),
     'layout' => "{items}",
     'formatter' => ['class' => '\app\components\FormatterComponent']
-]);
+]); ?>

@@ -1,10 +1,8 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\Detail;
 use yii\helpers\Html;
-
 ?>
 <div>
 	<div class="alert alert-custom alert-light-primary fade show mb-5" role="alert" style="padding: 0.5rem 2rem;">
@@ -23,14 +21,11 @@ use yii\helpers\Html;
 			</button>
 		</div>
 	</div>
-
 	<?= Html::beginForm(['process-checkbox'], 'post') ?>
 		<?= (count($models) > 10)? AnchorForm::widget() . '<hr>': '' ?>
-
 		<input type="hidden" 
 			name="process-selected" 
 			value="<?= $post['process-selected'] ?>">
-
 		<div class="accordion accordion-light accordion-light-borderless accordion-svg-toggle" 
 			id="accordionContent">
 			<?php foreach ($models as $key => $model): ?>
@@ -39,7 +34,6 @@ use yii\helpers\Html;
 						<div class="card-title collapsed" 
 							data-toggle="collapse" 
 							data-target="#collapse-action-<?= $model->id ?>">
-
 							<div class="card-label pl-4">
 								<?= number_format(($key + 1)) ?>. 
 								<button type="button">
@@ -72,4 +66,3 @@ use yii\helpers\Html;
 		<?= AnchorForm::widget() ?>
 	<?= Html::endForm() ?> 
 </div>
- 

@@ -1,5 +1,4 @@
 <?php
-
 $registerJs = <<< SCRIPT
 $('.input-switcher-{$id}').on('change', function() {
     var self = this;
@@ -31,7 +30,6 @@ $('.input-switcher-{$id}').on('change', function() {
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
-
 <span data-widget_id="<?= $id ?>">
 	<label>
 		<input data-link="<?= $data_link ?>"
@@ -42,5 +40,3 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
 			<?= ($checked) ? 'checked': '' ?>>
 	</label>
 </span>
-
- 

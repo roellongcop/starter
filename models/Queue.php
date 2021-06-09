@@ -1,11 +1,9 @@
 <?php
-
 namespace app\models;
 
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-
 
 /**
  * This is the model class for table "{{%queues}}".
@@ -55,8 +53,6 @@ class Queue extends ActiveRecord
     {
         return 'id';
     }
- 
-
 
     /**
      * {@inheritdoc}
@@ -130,8 +126,6 @@ class Queue extends ActiveRecord
         return new \app\models\query\QueueQuery(get_called_class());
     }
      
-     
-
     public function gridColumns()
     {
         return [

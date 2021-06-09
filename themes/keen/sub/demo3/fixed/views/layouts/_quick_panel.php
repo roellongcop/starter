@@ -1,14 +1,11 @@
 <?php
-
 use app\helpers\App;
+
 $searchModel = $this->params['searchModel'] ?? '';
 $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_search';
 ?>
-
-
 <?php if ($searchModel): ?>
 <div id="kt_quick_panel" class="offcanvas offcanvas-right pt-5 pb-10">
-    
     <!--begin::Content-->
     <div class="offcanvas-content px-5 offcanvas-header offcanvas-header-navs d-flex align-items-center justify-content-between mb-5">
         <div class="mb-15" style="width: 100%">

@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\Detail;
@@ -10,7 +9,6 @@ use yii\widgets\ListView;
 <p class="lead">
 	<?= Inflector::pluralize($nameModule) ?> 
 	(<?= number_format($dataProvider->totalCount) ?>)
-
 	&nbsp;
 	<?= Anchor::widget([
 		'title' => 'View in ' . Inflector::pluralize($nameModule) . ' Page',
@@ -18,7 +16,6 @@ use yii\widgets\ListView;
 		'options' => ['class' => 'btn btn-success btn-sm']
 	]) ?>
 </p>
-
 <?= ListView::widget([
     'dataProvider' => $dataProvider,
     'options' => [
@@ -31,4 +28,3 @@ use yii\widgets\ListView;
     	'module' => $module
     ]
 ]); ?>
- 

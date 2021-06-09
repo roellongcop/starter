@@ -1,9 +1,9 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
 use yii\helpers\Url;
+
 $identity = App::identity();
 $access = App::component('access');
 $searchModel = $this->params['searchModel'] ?? '';

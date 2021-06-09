@@ -1,9 +1,9 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorBack;
 use app\widgets\Search;
 use yii\widgets\ActiveForm;
+
 $searchModel = $this->params['searchModel'] ?? '';
 $searchAction = $searchModel->searchAction ?? ['index'];
 ?>
@@ -13,7 +13,6 @@ $searchAction = $searchModel->searchAction ?? ['index'];
         <img alt="Logo" src="<?= App::setting('primary_logo') ?>&w=50" />
     </a>
     <!--end::Logo-->
-
     <div style="position: absolute; left: 72px;">
         <?= AnchorBack::widget([
             'title' => '<i class="fa fa-angle-left"></i>',
@@ -33,23 +32,17 @@ $searchAction = $searchModel->searchAction ?? ['index'];
             <?php ActiveForm::end(); ?>
         <?php endif ?>
     </div>
-
     <div class="d-flex align-items-center">
-        
         <!--begin::Header Menu Mobile Toggle-->
        <!--  <button class="btn p-0 burger-icon ml-5" id="kt_header_mobile_toggle">
             <span></span>
         </button> -->
         <!--end::Header Menu Mobile Toggle-->
-
-
-
         <!--begin::Aside Mobile Toggle-->
         <button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
             <span></span>
         </button>
         <!--end::Aside Mobile Toggle-->
-
         <!--begin::Topbar Mobile Toggle-->
         <button class="btn btn-hover-text-primary p-0 ml-3" id="kt_header_mobile_topbar_toggle">
             <span class="svg-icon svg-icon-xl">

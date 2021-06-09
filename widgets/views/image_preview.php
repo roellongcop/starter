@@ -16,7 +16,6 @@ $registerJs = <<< SCRIPT
 	    }
 	})
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <?= Html::img($src, $options) ?>

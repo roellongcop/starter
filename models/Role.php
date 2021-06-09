@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -126,7 +125,6 @@ class Role extends ActiveRecord
         return new \app\models\query\RoleQuery(get_called_class());
     }
       
-
     public function getCanDelete()
     {
         $dontDelete = parent::getCanDelete();
@@ -138,7 +136,6 @@ class Role extends ActiveRecord
         return ($dontDelete)? false: true;
     }
     
-
     public function getJsonRoleAccess()
     {
         return JsonEditor::widget([
@@ -191,7 +188,6 @@ class Role extends ActiveRecord
         ];
     }
 
-
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -210,5 +206,4 @@ class Role extends ActiveRecord
 
         return $behaviors;
     }
-    
 }

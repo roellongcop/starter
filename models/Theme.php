@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -120,7 +119,6 @@ class Theme extends ActiveRecord
         ];
     }
 
-
     /**
      * {@inheritdoc}
      * @return \app\models\query\ThemeQuery the active query used by this AR class.
@@ -135,8 +133,6 @@ class Theme extends ActiveRecord
         return Url::to(['theme/activate', 'slug' => $this->slug], true);
     }
      
-     
-
     public function gridColumns()
     {
         return [

@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
@@ -8,19 +7,14 @@ use yii\widgets\ActiveForm;
 
 $registerJs = <<<SCRIPT
 	$('.theme-image').on('change', function() {
-
 		var input = this;
-
 	    var imageInput = input.files[0]; 
 	    var id = $(input).parents('div.image-input')
 	    	.find('input.theme_id')
 	    	.val()
-
-
 	    let formData = new FormData();
 	    formData.append('Theme[imageInput]', imageInput);
 	    formData.append('Theme[id]', id);
-
 		$.ajax( {
 			url: '{$uploadUrl}',
 			type: 'POST',
@@ -39,10 +33,8 @@ $registerJs = <<<SCRIPT
 		});
 	})
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END)
 ?>
-
 <div class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
 	<!--begin::Header-->
 	<div class="card-header border-0 pt-6 p11">

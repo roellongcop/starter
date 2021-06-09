@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 ?>
 <?php if ($dataProviders) : ?>
@@ -20,10 +19,8 @@ use app\helpers\App;
             <?= $searchModel->endDate() ?>
         </strong>
     </p>
-    
     <?php foreach ($dataProviders as $module => $dataProvider):
         $moduleSearch = Yii::createObject("app\\models\\search\\{$module}"); ?>
-
         <?= $this->render('_result', [
             'nameModule' => str_replace('Search', '', App::className($moduleSearch)),
             'controller' => $moduleSearch->controllerID(),
@@ -32,7 +29,6 @@ use app\helpers\App;
             'module' => $module,
         ]); ?>
     <?php endforeach ?>
-
 <?php else: ?>
     <p class="lead">No data found </p>
     <p>

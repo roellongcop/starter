@@ -10,7 +10,6 @@ $registerJs = <<< SCRIPT
         editors['{$id}'] = editor;
     }
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <div id="<?= $id ?>"> </div>

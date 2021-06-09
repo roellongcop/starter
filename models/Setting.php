@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -77,7 +76,6 @@ class Setting extends ActiveRecord
         return $this->value;
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -145,7 +143,6 @@ class Setting extends ActiveRecord
     {
         return new \app\models\query\SettingQuery(get_called_class());
     }
-    
 
     public function getHasImageInput()
     {
@@ -262,5 +259,4 @@ class Setting extends ActiveRecord
         ];
         return $behaviors;
     }
-
 }

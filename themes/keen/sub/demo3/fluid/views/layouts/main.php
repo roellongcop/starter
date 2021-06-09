@@ -1,8 +1,6 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
-
 
 use app\assets\AppAsset;
 use app\helpers\App;
@@ -14,7 +12,6 @@ use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
 use yii\helpers\Html;
 use app\themes\keen\assets\KeenAsset;
-
 
 AppAsset::register($this);
 KeenAsset::register($this);
@@ -28,7 +25,6 @@ $createController = $this->params['createController'] ?? App::controllerID();
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="<?= App::setting('favicon') ?>&w=16" type="image/x-icon" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -36,9 +32,7 @@ $createController = $this->params['createController'] ?? App::controllerID();
 </head>
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled page-loading">
 <?php $this->beginBody() ?>
-
 	<!--begin::Main-->
-
 	<!--begin::Header Mobile-->
 	<?= $this->render('_header_mobile') ?>
 	<!--end::Header Mobile-->
@@ -147,36 +141,28 @@ $createController = $this->params['createController'] ?? App::controllerID();
 		<!--end::Page-->
 	</div>
 	<!--end::Main-->
-
 	<!-- begin::User Panel-->
 	<?= $this->render('_user_panel') ?>
 	<!-- end::User Panel-->
-
 	<!--begin::Quick Panel-->
 	<?= $this->render('_quick_panel') ?>
 	<!--end::Quick Panel-->
-
 	<!--begin::Chat Panel-->
 	<?php # $this->render('_chat_panel') ?>
 	<!--end::Chat Panel-->
-
 	<!--begin::Scrolltop-->
 	<?= $this->render('_scroll_top') ?>
 	<!--end::Scrolltop-->
-
 	<!--begin::Sticky Toolbar-->
 	<?= $this->render('_sticky_toolbar') ?>
 	<!--end::Sticky Toolbar-->
-
 	<!--begin::Demo Panel-->
 	<?php # $this->render('_demo_panel') ?>
 	<!--end::Demo Panel-->
-
 	<script>var HOST_URL = "https://preview.keenthemes.com/keen/theme/tools/preview";</script>
 	<!--begin::Global Config(global config for global JS scripts)-->
 	<script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#8950FC", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#E1E9FF", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };</script>
 	<!--end::Global Config-->
-
 <?php $this->endBody() ?>
 </body>
 </html>

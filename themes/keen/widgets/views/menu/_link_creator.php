@@ -1,6 +1,7 @@
 <?php
 use app\helpers\App;
 use app\helpers\Html;
+
 $controller = $this->params['controller'] ?? App::controllerID();
 ?>
 <?php foreach ($menus as $menu): ?>

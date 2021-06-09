@@ -1,3 +1,1 @@
-<label>
-    <?= $checkbox ?>
-</label>
+<label> <?= $checkbox ?> </label>

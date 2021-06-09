@@ -1,11 +1,10 @@
 <?php
-
 use app\helpers\App;
 use app\models\UserMeta;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
-$model = new UserMeta();
 
+$model = new UserMeta();
 $registerJs = <<< SCRIPT
 $('.check-all-filter').on('change', function() {
     var is_checked = $(this).is(':checked');
@@ -20,7 +19,6 @@ $('.check-all-filter').on('change', function() {
     }
 })
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline _div_filter_columns" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;z-index: 1"> 
@@ -37,14 +35,12 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
     </a>
     <div data-widget_id="<?= $id ?>" class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0 _div_filter_columns" style="">
         <!--begin::Navigation-->
-
         <?= Html::beginForm(['user-meta/filter'], 'post',  [
             'style' => 'max-height: 56vh; overflow: auto;'
         ]); ?>
             <?= Html::activeInput('hidden', $model, 'table_name', [
                 'value' => App::tableName($searchModel, false)
             ]) ?>
-
             <ul class="navi navi-hover" style="padding: 10px;">
                 <li class="navi-item"> 
                     <div class="checkbox-list ">

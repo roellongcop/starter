@@ -1,19 +1,15 @@
 <?php
-
 use app\helpers\App;
 ?>
 <?php if (($navigation = $navigations) != null): ?>
 	<?php foreach ($navigation as $key => $nav): ?>
-
         <?php $data_id = App::generateRandomKey($data_id); ?>
-
 		<li class="dd-item dd3-item" data-id="<?= end($data_id) ?>-exist">
             <div class="dd-handle dd3-handle"> 
             	<i class="flaticon-squares"></i>
             </div>
             <div class="dd3-content">
                 <div class="row">
-                    
                     <div class="col-md-3">
                         <input data-id="label" 
                             required
@@ -30,9 +26,7 @@ use app\helpers\App;
                             placeholder="Link"
                             class="form-control">
                     </div>
-
                     <div class="col-md-3">
-                      
                         <textarea data-id="icon"  
                             required
                             type="text" 
@@ -40,7 +34,6 @@ use app\helpers\App;
                             rows="1" 
                             placeholder="Icon"><?= ($nav['icon'])? $nav['icon']: '' ?> </textarea>
                     </div>
-
                     <div class="col-md-2">
                         <div class="checkbox-list">
                            <label class="checkbox">
@@ -65,8 +58,6 @@ use app\helpers\App;
                             </label>
                         </div>
                     </div>
-                    
-
                     <span  style="position: absolute; right: 5px;">
                         <a href="#!" class="btn btn-danger btn-sm btn-icon mr-2" onclick="removeMainNavigation(this)">
                             <i class="fa fa-trash"></i>
@@ -86,4 +77,3 @@ use app\helpers\App;
         </li>
 	<?php endforeach ?>
 <?php endif ?>
-

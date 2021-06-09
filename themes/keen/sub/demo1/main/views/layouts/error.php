@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -25,10 +24,7 @@ KeenAsset::register($this);
 </head>
 <body id="kt_body" class="bg-white quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 <?php $this->beginBody() ?>
-	 
 	<?= $content ?>
-
-
 	<script>var HOST_URL = "https://preview.keenthemes.com/keen/theme/tools/preview";</script>
 		<!--begin::Global Config(global config for global JS scripts)-->
 	<script>

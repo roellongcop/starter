@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -97,8 +96,6 @@ class ModelFile extends ActiveRecord
     {
         return new \app\models\query\ModelFileQuery(get_called_class());
     }
-     
-     
 
     public function gridColumns()
     {

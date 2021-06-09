@@ -100,17 +100,12 @@ AppAsset::register($this);
 		<!-- begin::User Panel-->
 		<?= $this->render('_user_panel') ?>
 		<!-- end::User Panel-->
-
-
 		<!--begin::Quick Panel-->
 		<?= $this->render('_quick_panel_canvas') ?>
 		<!--end::Quick Panel-->
-
-
 		<!--begin::Chat Panel-->
 		<?php # $this->render('_chat_panel') ?>
 		<!--end::Chat Panel-->
-
 		<!--begin::Scrolltop-->
 		<?= $this->render('_scroll_top') ?>
 		<!--end::Scrolltop-->

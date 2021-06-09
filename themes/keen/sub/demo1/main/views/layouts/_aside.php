@@ -1,7 +1,5 @@
 <?php
-
 use app\helpers\App;
-
 ?>
 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
     <!--begin::Brand-->
@@ -28,9 +26,7 @@ use app\helpers\App;
         <!--end::Toolbar-->
     </div>
     <!--end::Brand-->
-
     <!--begin::Aside Menu-->
     <?= $this->render('_aside_menu') ?>
     <!--end::Aside Menu-->
-
 </div>

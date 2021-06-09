@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -53,8 +52,6 @@ class Notification extends ActiveRecord
     {
         return 'token';
     }
- 
-
 
     /**
      * {@inheritdoc}
@@ -126,8 +123,6 @@ class Notification extends ActiveRecord
         return new \app\models\query\NotificationQuery(get_called_class());
     }
      
-     
-
     public function gridColumns()
     {
         return [
@@ -152,7 +147,6 @@ class Notification extends ActiveRecord
             // 'token' => ['attribute' => 'token', 'format' => 'raw'],
         ];
     }
-
 
     public function detailColumns()
     {
@@ -197,10 +191,7 @@ class Notification extends ActiveRecord
             return false;
         }
         
-        
         $this->message = $this->message ?: App::setting($this->type);
-
-        
 
         return true;
     }
@@ -214,7 +205,6 @@ class Notification extends ActiveRecord
     {
         $this->status = 1;
     }
-
 
     public function getBulkActions()
     {

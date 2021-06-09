@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -126,8 +125,6 @@ class Session extends ActiveRecord
         return new \app\models\query\SessionQuery(get_called_class());
     }
      
-
-
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
@@ -139,8 +136,6 @@ class Session extends ActiveRecord
             return $model->username;
         }
     }
-
-
 
     public function gridColumns()
     {
@@ -158,9 +153,6 @@ class Session extends ActiveRecord
             ],
             'expire' => ['attribute' => 'expire', 'format' => 'raw'],
             // 'data' => ['attribute' => 'data', 'format' => 'raw'],
-
-
-
             'username' => [
                 'attribute' => 'username', 
                 'format' => 'raw',
@@ -178,8 +170,6 @@ class Session extends ActiveRecord
                     </span>";
                 }
             ],
-
-
             'ip' => ['attribute' => 'ip', 'format' => 'raw'],
             'browser' => ['attribute' => 'browser', 'format' => 'raw'],
             'os' => ['attribute' => 'os', 'format' => 'raw'],
@@ -199,5 +189,4 @@ class Session extends ActiveRecord
             'device:raw',
         ];
     }
-    
 }

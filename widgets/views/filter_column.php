@@ -1,11 +1,10 @@
 <?php
-
 use app\helpers\App;
 use app\models\UserMeta;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
-$model = new UserMeta();
 
+$model = new UserMeta();
 $registerJs = <<< SCRIPT
 $('.check-all-filter').on('change', function() {
     var is_checked = $(this).is(':checked');
@@ -21,10 +20,7 @@ $('.check-all-filter').on('change', function() {
 })
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-
 ?> 
-
-
 <div class="dropdown text-right">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         <?= $title ?>
@@ -56,7 +52,6 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
                     </li>
                 <?php endforeach ?>
             </ul>
-
             <button type="submit" class="btn btn-primary btn-block btn-sm">
                 <?= $buttonTitle ?>
             </button>

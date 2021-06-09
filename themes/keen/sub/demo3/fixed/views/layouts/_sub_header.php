@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 ?>
 <div class="subheader bg-white h-100px" id="kt_subheader">

@@ -1,8 +1,6 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
-
 
 use app\assets\AppAsset;
 use app\helpers\App;
@@ -22,7 +20,6 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="<?= App::setting('favicon') ?>&w=16" type="image/x-icon" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -34,29 +31,22 @@ AppAsset::register($this);
 	<!--begin::Header Mobile-->
 	<?= $this->render('_header_mobile') ?>
 	<!--end::Header Mobile-->
-
 	<div class="d-flex flex-column flex-root">
 	    <!--begin::Page-->
 	    <div class="d-flex flex-row flex-column-fluid page">
 	        <!--begin::Aside-->
 	        <?= $this->render('_aside') ?>
 	        <!--end::Aside-->
-
 	        <!--begin::Wrapper-->
 	        <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-
-
 	            <!--begin::Header-->
 	            <?= $this->render('_header') ?>
 	            <!--end::Header-->
- 				
  				<!--begin::Content-->
 				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-
 				    <!--begin::Subheader-->
 				    <?= $this->render('_sub_header') ?>
 				    <!--end::Subheader-->
-
 				    <!--begin::Entry-->
 				    <div class="d-flex flex-column-fluid">
 				        <!--begin::Container-->
@@ -80,9 +70,6 @@ AppAsset::register($this);
 			    	<!--end::Entry-->
 				</div>
 				<!--end::Content-->
-
-
-
         		<!--begin::Footer-->
 	            <?= $this->render('_footer') ?>
 	            <!--end::Footer-->
@@ -92,36 +79,24 @@ AppAsset::register($this);
 	    <!--end::Page-->
 	</div>
 	<!--end::Main-->
-
 	<!-- begin::User Panel-->
 	<?= $this->render('_user_panel') ?>
 	<!-- end::User Panel-->
-
-
 	<!--begin::Quick Panel-->
 	<?= $this->render('_quick_panel_canvas') ?>
 	<!--end::Quick Panel-->
-
-
 	<!--begin::Chat Panel-->
 	<?php # $this->render('_chat_panel') ?>
 	<!--end::Chat Panel-->
-
 	<!--begin::Scrolltop-->
 	<?= $this->render('_scroll_top') ?>
 	<!--end::Scrolltop-->
-
-
 	<!--begin::Sticky Toolbar-->
 	<?php # $this->render('_sticky_toolbar') ?>
 	<!--end::Sticky Toolbar-->
-
-
 	<!--begin::Demo Panel-->
 	<?php # $this->render('_demo_panel') ?>
 	<!--end::Demo Panel-->
-
-
 	<script>var HOST_URL = "https://preview.keenthemes.com/keen/theme/tools/preview";</script>
     <!--begin::Global Config(global config for global JS scripts)-->
     <script>

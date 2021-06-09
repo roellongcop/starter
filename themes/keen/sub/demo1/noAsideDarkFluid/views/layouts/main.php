@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -21,7 +20,6 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="<?= App::setting('favicon') ?>&w=16" type="image/x-icon" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -100,17 +98,12 @@ AppAsset::register($this);
 		<!-- begin::User Panel-->
 		<?= $this->render('_user_panel') ?>
 		<!-- end::User Panel-->
-
-
 		<!--begin::Quick Panel-->
 		<?= $this->render('_quick_panel_canvas') ?>
 		<!--end::Quick Panel-->
-
-
 		<!--begin::Chat Panel-->
 		<?php # $this->render('_chat_panel') ?>
 		<!--end::Chat Panel-->
-
 		<!--begin::Scrolltop-->
 		<?= $this->render('_scroll_top') ?>
 		<!--end::Scrolltop-->

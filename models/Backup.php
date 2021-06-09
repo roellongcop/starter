@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -52,7 +51,6 @@ class Backup extends ActiveRecord
     {
         return 'slug';
     }
-
 
     /**
      * {@inheritdoc}
@@ -120,13 +118,10 @@ class Backup extends ActiveRecord
         return new \app\models\query\BackupQuery(get_called_class());
     }
     
-  
     public function getCanUpdate()
     {
         return true;
     }
-
-    
 
     public function download()
     {
@@ -157,7 +152,6 @@ class Backup extends ActiveRecord
             'description' => ['attribute' => 'description', 'format' => 'raw'],
         ];
     }
-
 
     public function getJsonTables()
     {

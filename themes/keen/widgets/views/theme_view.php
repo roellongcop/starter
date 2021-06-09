@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
@@ -8,20 +7,15 @@ use app\widgets\KeenActiveForm;
 
 $registerJs = <<<SCRIPT
 	$('.theme-image').on('change', function() {
-
 		var input = this;
 		var container = $(input).data('container')
 	    var imageInput = input.files[0]; 
 	    var id = $(input).parents('div.image-input')
 	    	.find('input.theme_id')
 	    	.val()
-
-
 	    let formData = new FormData();
 	    formData.append('Theme[imageInput]', imageInput);
 	    formData.append('Theme[id]', id);
-
-
 	    KTApp.block('#' + container, {});
 		$.ajax( {
 			url: '{$uploadUrl}',
@@ -32,7 +26,6 @@ $registerJs = <<<SCRIPT
 			contentType: false,
 			success: function(s) {
 	            KTApp.unblock('#' + container);
-
 				$(input).parents('div.image-input')
 	            	.find('img.img-thumbnail')
 	            	.attr('src', s)
@@ -44,10 +37,8 @@ $registerJs = <<<SCRIPT
 		});
 	})
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END)
 ?>
-
 <div id="container-<?= $id ?>" class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
 	<!--begin::Header-->
 	<div class="card-header border-0 pt-6 p11">
@@ -91,7 +82,6 @@ $this->registerJs($registerJs, \yii\web\View::POS_END)
 			</div>
 			<!--end::Image-->
 			<p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
-
 			</p>
 			<?= Anchor::widget([
 				'title' => 'Activate',

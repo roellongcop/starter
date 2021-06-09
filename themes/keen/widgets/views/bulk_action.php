@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use yii\helpers\ArrayHelper;
 use app\helpers\Html;
@@ -11,13 +10,11 @@ $registerJs = <<<SCRIPT
         $(this).closest('form').submit();
     })
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <?php if(App::component('access')->userCan('process-checkbox')): ?>
     <?php if (isset($searchModel->bulkActions)): ?>
         <input type="hidden" name="process-selected">
-
         <div class="dropdown">
             <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
                 <?= $title ?>

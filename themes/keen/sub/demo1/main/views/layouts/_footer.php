@@ -1,7 +1,5 @@
 <?php
-
 use app\helpers\App;
-
 ?>
 <div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
     <!--begin::Container-->
@@ -16,11 +14,9 @@ use app\helpers\App;
         <!--end::Copyright-->
         <!--begin::Nav-->
         <div class="nav nav-dark">
-
             <a href="https://keenthemes.com/keen" target="_blank" class="nav-link pl-0 pr-2">
                 About
             </a>
-
             <a href="https://keenthemes.com/keen" target="_blank" class="nav-link pr-2">Team</a>
             <a href="https://keenthemes.com/keen" target="_blank" class="nav-link pr-0">Contact</a>
         </div>

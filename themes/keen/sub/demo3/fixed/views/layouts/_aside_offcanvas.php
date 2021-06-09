@@ -1,7 +1,5 @@
 <?php
-
 use app\widgets\Menu;
-
 ?>
 <div class="aside-offcanvas aside-offcanvas-left d-flex flex-column flex-row-auto" id="kt_aside_offcanvas">
 	<!--begin::Aside Offcanvas Menu-->

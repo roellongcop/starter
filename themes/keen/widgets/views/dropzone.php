@@ -20,14 +20,12 @@ $registerJs = <<< SCRIPT
                         accepted: true,
                         status: Dropzone.ADDED, 
                     };
-
                     myDropzone.emit("addedfile", files[i]);                                
                     myDropzone.emit("thumbnail", files[i], files[i].imagePath);
                     myDropzone.emit("complete", files[i]);
                     myDropzone.files.push(files[i]);
                 }
             }
-            
             this.on("sending", function(file, xhr, formData) {
                 var parameters = {$parameters};
                 for ( var key in parameters ) {
@@ -38,20 +36,16 @@ $registerJs = <<< SCRIPT
             this.on('removedfile', function (file) {
                 {$removedFile}
             });
-
             this.on('complete', function (file) {
                 {$complete}
             });
-
             this.on('success', function (file, s) {
                 {$success}
             });
-
         }
     });
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-
 ?>
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">
     <div class="dropzone-msg dz-message needsclick">

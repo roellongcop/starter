@@ -1,10 +1,8 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchors;
 use app\widgets\Detail;
 ?>
-
 <div class="card">
 	<div class="card-header">
 		<div class="card-title collapsed" 

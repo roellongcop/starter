@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -119,8 +118,6 @@ class Ip extends ActiveRecord
         return new \app\models\query\IpQuery(get_called_class());
     }
      
- 
-
     public function getIpType()
     {
         return App::params('ip_type')[$this->type] ?? [];
@@ -165,7 +162,6 @@ class Ip extends ActiveRecord
             'ipTypeLabel:raw',
         ];
     }
- 
 
     public function getBulkActions()
     {

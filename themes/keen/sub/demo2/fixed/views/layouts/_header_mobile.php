@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 ?>
 <div id="kt_header_mobile" class="header-mobile header-mobile-fixed">

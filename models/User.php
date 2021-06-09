@@ -11,7 +11,6 @@ use app\helpers\Html;
 use yii\helpers\Url;
 use yii\web\IdentityInterface;
 
-
 /**
  * User model
  *
@@ -125,7 +124,6 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
  
-
     public function attributeLabels()
     {
         return [
@@ -141,7 +139,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return new \app\models\query\UserQuery(get_called_class());
     }
-
 
     /**
      * {@inheritdoc}
@@ -181,14 +178,12 @@ class User extends ActiveRecord implements IdentityInterface
         // return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
-
-
     public static function findByEmail($email)
     {
         return static::findOne(['email' => $email]);
         // return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
-
+    
     /**
      * Finds user by password reset token
      *
@@ -298,7 +293,6 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
-
     /**
      * Generates new access token
      */
@@ -306,7 +300,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->access_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
-
 
     /**
      * Generates new token for email verification
@@ -324,25 +317,20 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-
-
     public function getUserStatus()
     {
         return App::params('user_status')[$this->status] ?? [];
     }
-
 
     public function getUserStatusLabel()
     {
         return $this->userStatus['label'] ?? '';
     }
 
-
     public function getBlockedStatus()
     {
         return App::params('is_blocked')[$this->is_blocked] ?? [];
     }
-
 
     public function getBlockedStatusLabel()
     {
@@ -360,16 +348,12 @@ class User extends ActiveRecord implements IdentityInterface
         ]);
     }
 
-
     public function getUserStatusHtml()
     { 
         return Label::widget([
             'options' => $this->userStatus
         ]);
     }
-
-
-
    
     public function beforeSave($insert)
     {
@@ -383,7 +367,6 @@ class User extends ActiveRecord implements IdentityInterface
             $this->generateEmailVerificationToken();
             $this->generateAccessToken();
         }
-        
 
         return true;
     }
@@ -439,8 +422,6 @@ class User extends ActiveRecord implements IdentityInterface
                 return $table_columns[$table_name];
             }
         }
-
-        
     }
 
     public function filterColumns($model, $default=true)
@@ -468,14 +449,12 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
-
     public function getRole_access()
     {
         if (($model = $this->role) != null) {
             return $model->role_access;
         }
     }
-
 
     public function getRoleName()
     {
@@ -484,8 +463,6 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
-
-
     public function getModuleAccess()
     {
         if (($model = $this->role) != null) {
@@ -493,14 +470,12 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
-
     public function getMainNavigation()
     {
         if (($model = $this->role) != null) {
             return $model->main_navigation;
         }
     }
-
 
     public function behaviors()
     {
@@ -516,8 +491,6 @@ class User extends ActiveRecord implements IdentityInterface
 
         return $behaviors;
     }
-
- 
 
     public function gridColumns()
     {
@@ -611,9 +584,6 @@ class User extends ActiveRecord implements IdentityInterface
             'blockedStatusHtml:raw',
         ];
     }
-
-
-
 
     public function getBulkActions()
     {

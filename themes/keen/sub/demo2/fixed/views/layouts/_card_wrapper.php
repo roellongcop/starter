@@ -3,5 +3,3 @@
 		<?= $content ?> 
 	</div>
 </div>
-
-

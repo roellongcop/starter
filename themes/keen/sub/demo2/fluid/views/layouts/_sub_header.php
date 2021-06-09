@@ -1,11 +1,9 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorBack;
 use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
-
 ?>
 <div class="subheader py-4 pt-lg-0 pb-lg-10" id="kt_subheader">
 	<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap">
@@ -41,14 +39,12 @@ use app\widgets\ExportButton;
 	            ]) ?>
 			</div>
 			<div class="d-flex flex-column mr-5">
-
 				<!--begin::Page Title-->
 				<h4 class="text-dark font-weight-bold py-1 mr-5 my-0"> 
 					<?= $this->title ?>
 					<!-- <small class="text-muted">updates and statistics</small> -->
 				</h4>
 				<!--end::Page Title-->
-
 				<!--begin::Breadcrumb-->
 				<?= Breadcrumbs::widget([
                     'homeLink' => [
@@ -65,10 +61,8 @@ use app\widgets\ExportButton;
                 ]); ?>
 				<!--end::Breadcrumb-->
 			</div>
-
 			<!--end::Page Heading-->
 		</div>
-
 		<!--end::Info-->
 		<!--begin::Toolbar-->
 		<div class="d-flex align-items-center flex-wrap py-2">
@@ -77,10 +71,7 @@ use app\widgets\ExportButton;
                 <?= ExportButton::widget() ?>
             <?php endif ?>
             <!--end::Dropdown-->
-
-
             <?php if ($this->params['showCreateButton'] ?? ''): ?>
-
                 <?= Anchors::widget([
                     'names' => 'create',
                     'controller' => $this->params['createController'] ?? App::controllerID(),
@@ -89,5 +80,4 @@ use app\widgets\ExportButton;
 		</div>
 		<!--end::Toolbar-->
 	</div>
-
 </div>

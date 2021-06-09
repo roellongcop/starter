@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
@@ -40,9 +39,7 @@ $registerJs = <<< SCRIPT
         });
     }
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-
 ?>
 <div class="row">
     <?php if(($imageFiles = $model->imageFiles) != null): ?>

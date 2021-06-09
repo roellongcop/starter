@@ -1,10 +1,10 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\Detail;
 use yii\helpers\Inflector;
 use yii\widgets\ListView;
+
 $moduleName = Inflector::pluralize($nameModule);
 ?>
 <hr>
@@ -19,7 +19,6 @@ $moduleName = Inflector::pluralize($nameModule);
 		'options' => ['class' => 'btn btn-success btn-sm']
 	]) ?>
 </p>
-
 <?= ListView::widget([
     'dataProvider' => $dataProvider,
     'options' => [

@@ -1,13 +1,10 @@
 <?php
-
 use app\helpers\App;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 
-
 $menus = Yii::$app->access->menu($menus);
-
 if (App::isGuest()) {
     $menus[] = ['label' => 'Login', 'url' => ['/site/login']];
 }
@@ -21,7 +18,6 @@ else {
         . Html::endForm()
     . '</li>';
 }
-
 NavBar::begin([
     'brandLabel' => App::appName(),
     'brandUrl' => Yii::$app->homeUrl,

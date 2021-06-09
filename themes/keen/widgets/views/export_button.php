@@ -4,10 +4,8 @@ $registerJs = <<<SCRIPT
         // Fixes dual-screen position                             Most browsers      Firefox
         const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
         const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
-
         const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
         const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
         const systemZoom = width / window.screen.availWidth;
         const left = (width - w) / 2 / systemZoom + dualScreenLeft
         const top = (height - h) / 2 / systemZoom + dualScreenTop
@@ -20,11 +18,9 @@ $registerJs = <<<SCRIPT
           left=left
           `
         )
-
         if (window.focus) newWindow.print();
     }
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
 <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="top">
@@ -53,9 +49,7 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
                    <?= $anchor ?>
                 </li>
             <?php endforeach ?>
-             
         </ul>
         <!--end::Navigation-->
     </div>
 </div>
- 

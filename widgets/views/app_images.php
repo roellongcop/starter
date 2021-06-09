@@ -1,9 +1,9 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
 use yii\helpers\Url;
+
 $registerJs = <<< SCRIPT
     var removeImage = function(self) {
         var file_id = $(self).data('file_id');

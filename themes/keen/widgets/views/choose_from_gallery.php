@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
@@ -10,20 +9,15 @@ $registerJs = <<< SCRIPT
     var disableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', true);
     }
-
     var enableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', false);
     }
-
     var selectedFile = 0;
     var selectedFilePath = '';
-
     $(document).on('click', '#my_files-{$id} img', function() {
         var image = $(this);
-
         selectedFile = image.data('id');
         selectedFilePath = image.attr('src');
-
         $('#choose-from-gallery-{$id} #{$id}-name').text(image.data('name'));
         $('#choose-from-gallery-{$id} #{$id}-extension').text(image.data('extension'));
         $('#choose-from-gallery-{$id} #{$id}-size').text(image.data('size'));
@@ -32,24 +26,18 @@ $registerJs = <<< SCRIPT
         $('#choose-from-gallery-{$id} #{$id}-location').text(image.data('location'));
         $('#choose-from-gallery-{$id} #{$id}-token').text(image.data('token'));
         $('#choose-from-gallery-{$id} #{$id}-created_at').text(image.data('created_at'));
-
         $('#my_files-{$id} img').css('border', '');
         image.css('border', '2px solid #1bc5bd');
         enableButton();
     }); 
-    
-
     $('#choose-photo-confirm-{$id}').on('click', function() {
         var s = {
             status: 'success',
             src: selectedFilePath
         };
-
         {$ajaxSuccess}
         $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(selectedFile);
     });
-
-
     var getMyFiles = function(url) {
         $('#my_files-{$id} .modal-my-photos').html('');
         KTApp.block('#my_files-{$id} .modal-my-photos', {
@@ -57,7 +45,6 @@ $registerJs = <<< SCRIPT
             message: 'Loading Images...',
             state: 'primary' // a bootstrap color
         });
-
         let conf = {
             url: url,
             method: 'get',
@@ -70,16 +57,13 @@ $registerJs = <<< SCRIPT
                 KTApp.unblock('#my_files-{$id} .modal-my-photos');
             }
         }   
-
         $.ajax(conf);
     }
-
     $('#choose-from-gallery-btn-{$id}').on('click', function() {
         let keywords = $('#my_files-{$id} input.search-photo').val();
         getMyFiles('{$myImageFilesUrl}?keywords=' + keywords);
         disableButton();
     })
-
     $(document).on("pjax:beforeSend",function(){
         KTApp.block('#my_files-{$id} .modal-my-photos', {
             overlayColor: '#000000',
@@ -87,19 +71,14 @@ $registerJs = <<< SCRIPT
             state: 'primary' // a bootstrap color
         });
     });
-
     var search{$id} = function(input) {
         if(event.key === 'Enter') {
-                   
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
         }
     }
-
-
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-
 $registerCSS = <<<CSS
     #choose-from-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
@@ -115,20 +94,14 @@ $registerCSS = <<<CSS
         border: 2px solid #1bc5bd;
     }
 CSS;
-
 $this->registerCSS($registerCSS);
 ?>
-
 <div id="choose-from-gallery-container-<?= $id ?>">
-    
     <!-- Button trigger modal-->
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#choose-from-gallery-<?= $id ?>" id="choose-from-gallery-btn-<?= $id ?>">
         <?= $buttonTitle ?>
     </button>
-
     <input name="<?= $file_id_name ?>" type="hidden" value="<?= $file_id ?>">
-        
-
     <div class="modal fade" id="choose-from-gallery-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">
@@ -251,5 +224,4 @@ $this->registerCSS($registerCSS);
             </div>
         </div>
     </div>
-
 </div>

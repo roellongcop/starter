@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -8,7 +7,6 @@ use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo1\main\assets\KeenDemo1AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
 
 KeenDemo1AppAsset::register($this);
 KeenAsset::register($this);

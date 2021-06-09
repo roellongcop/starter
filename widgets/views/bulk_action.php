@@ -1,8 +1,8 @@
 <?php
-
 use app\helpers\App;
 use yii\helpers\ArrayHelper;
 use app\helpers\Html;
+
 $registerJs = <<< SCRIPT
     $('a.bulk-action').on('click', function() {
         var data_process = $(this).data('process');

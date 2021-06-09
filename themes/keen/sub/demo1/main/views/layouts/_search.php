@@ -1,12 +1,11 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Search;
 use yii\widgets\ActiveForm;
+
 $searchModel = $this->params['searchModel'] ?? [];
 $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_search';
 ?>
-
 <?php if ($searchModel): ?>
 	<div class="row">
 		<div class="col-md-4">
@@ -20,8 +19,6 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 			</button>
 		</div>
 	</div>
-	
-	
 	<div id="advanced_saerch_modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -38,5 +35,4 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 			</div>
 		</div>
 	</div>
-    
 <?php endif ?>

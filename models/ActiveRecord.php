@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -44,7 +43,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public $_modelSqlFiles;
     public $_modelSqlFile;
-
 
     public static function activeAll($condition = '')
     {
@@ -235,7 +233,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-
     public function getViewUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('view')) {
@@ -247,6 +244,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return ($fullpath)? Url::to($url, true): $url;
         }
     }
+
     public function getUpdateUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('update')) {
@@ -258,6 +256,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return ($fullpath)? Url::to($url, true): $url;
         }
     }
+
     public function getDuplicateUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('duplicate')) {
@@ -269,6 +268,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return ($fullpath)? Url::to($url, true): $url;
         }
     }
+    
     public function getDeleteUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('delete')) {
@@ -454,7 +454,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-
     public function getRecordStatus()
     {
         return App::params('record_status')[$this->record_status] ?? [];
@@ -464,7 +463,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         return $this->recordStatus['label'] ?? '';
     }
-
 
     public function getRecordStatusHtml()
     {
@@ -526,7 +524,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         return true;
     }
-
 
     public function getCreatedBy()
     {
@@ -627,7 +624,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         ];
     }
 
-
     public static function one($value, $key='id', $array=false)
     {
         $model = static::find()
@@ -638,7 +634,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
         return ($model)? $model: '';
     }
-
 
     public static function all($value='', $key='id', $array=false)
     {

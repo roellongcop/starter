@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -29,7 +28,6 @@ KeenAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-    <!-- begin:: Page --> 
     <?= $content ?>
 <?php $this->endBody() ?>
 </body>

@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 ?>
 <div class="aside aside-left d-flex flex-column" id="kt_aside">

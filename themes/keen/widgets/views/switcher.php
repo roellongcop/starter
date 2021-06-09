@@ -1,5 +1,4 @@
 <?php
-
 $registerJs = <<< SCRIPT
     $('.input-switcher-{$id}').on('change', function() {
         var self = this;
@@ -38,7 +37,6 @@ $registerJs = <<< SCRIPT
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
-
 <span class="switch switch-outline switch-icon switch-sm switch-success <?= ($checked) ? '': 'switch-danger-custom' ?>" data-widget_id="<?= $id ?>">
 	<label>
 		<input data-link="<?= $data_link ?>"
@@ -50,5 +48,3 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
 		<span></span>
 	</label>
 </span>
-
- 

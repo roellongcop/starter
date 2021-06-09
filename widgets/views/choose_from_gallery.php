@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
@@ -9,19 +8,15 @@ $registerJs = <<< SCRIPT
     var disableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', true);
     }
-    
     var enableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', false);
     }
-
     var selectedFile = 0;
     var selectedFilePath = '';
     $(document).on('click', '#my_files-{$id} img', function() {
         var image = $(this);
-
         selectedFile = image.data('id');
         selectedFilePath = image.attr('src');
-
         $('#choose-from-gallery-{$id} #{$id}-name').text(image.data('name'));
         $('#choose-from-gallery-{$id} #{$id}-extension').text(image.data('extension'));
         $('#choose-from-gallery-{$id} #{$id}-size').text(image.data('size'));
@@ -30,7 +25,6 @@ $registerJs = <<< SCRIPT
         $('#choose-from-gallery-{$id} #{$id}-location').text(image.data('location'));
         $('#choose-from-gallery-{$id} #{$id}-token').text(image.data('token'));
         $('#choose-from-gallery-{$id} #{$id}-created_at').text(image.data('created_at'));
-
         $('#my_files-{$id} img').css('border', '');
         image.css('border', '2px solid #1bc5bd');
         enableButton();
@@ -41,21 +35,16 @@ $registerJs = <<< SCRIPT
             status: 'success',
             src: selectedFilePath
         };
-
         {$ajaxSuccess}
         $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(selectedFile);
     });
-
     $('#upload-tab-{$id} input[type="file"]').on('change', function() {
         var input = this;
-
         var fileInput = input.files[0]; 
-
         let formData = new FormData();
         formData.append('UploadForm[fileInput]', fileInput);
         formData.append('modelName', '{$modelName}');
         // formData.append('fileToken', Date.now());
-
         $.ajax( {
             url: '{$uploadUrl}',
             type: 'POST',
@@ -71,13 +60,10 @@ $registerJs = <<< SCRIPT
                     $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(s.file.id);
                     input.value = '';
                 }
-
             },
             error: {$ajaxError},
         });
     })
-
-
     var getMyFiles = function(url) {
         $('#my_files-{$id} .modal-my-photos').html('');
         let conf = {
@@ -90,33 +76,24 @@ $registerJs = <<< SCRIPT
             error: function(e) {
             }
         }   
-
         $.ajax(conf);
     }
-
-
     $('#choose-from-gallery-btn-{$id}').on('click', function() {
         let keywords = $('#my_files-{$id} input.search-photo').val()
         getMyFiles('{$myImageFilesUrl}');
         disableButton();
     })
-
     $(document).on("pjax:beforeSend",function(){
         $('#my_files-{$id} .modal-my-photos').html('Loading...');
     });
-    
-
     var search{$id} = function(input) {
         if(event.key === 'Enter') {
-                   
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
         }
     }
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-
 $registerCSS = <<<CSS
     #choose-from-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
@@ -132,21 +109,14 @@ $registerCSS = <<<CSS
         border: 2px solid #1bc5bd;
     }
 CSS;
-
 $this->registerCSS($registerCSS);
 ?>
-
-
 <div id="choose-from-gallery-container-<?= $id ?>">
-    
     <!-- Button trigger modal-->
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#choose-from-gallery-<?= $id ?>" id="choose-from-gallery-btn-<?= $id ?>">
         <?= $buttonTitle ?>
     </button>
-
     <input name="<?= $file_id_name ?>" type="hidden" value="<?= $file_id ?>">
-        
-
     <!-- Modal-->
     <div class="modal fade" id="choose-from-gallery-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
@@ -169,7 +139,6 @@ $this->registerCSS($registerCSS);
                             </li>
                             <li><a data-toggle="tab" href="#upload-tab-<?= $id ?>">Upload</a></li>
                         </ul>
-
                         <div class="tab-content">
                             <div id="my_files-<?= $id ?>" class="tab-pane fade in active">
                                 <div class="row">
@@ -227,8 +196,6 @@ $this->registerCSS($registerCSS);
                                 <?= $fileInput ?>
                             </div>
                         </div>
-
-                        
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -245,5 +212,4 @@ $this->registerCSS($registerCSS);
             </div>
         </div>
     </div>
-
 </div>

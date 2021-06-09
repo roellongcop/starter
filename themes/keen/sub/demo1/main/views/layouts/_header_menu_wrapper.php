@@ -1,11 +1,10 @@
 <?php
-
 use app\widgets\AnchorBack;
 use app\widgets\Search;
 use yii\widgets\ActiveForm;
+
 $searchModel = $this->params['searchModel'] ?? '';
 $searchAction = $searchModel->searchAction ?? ['index'];
-
 ?>
 <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
     <!--begin::Header Menu-->
@@ -22,7 +21,6 @@ $searchAction = $searchModel->searchAction ?? ['index'];
                 ]
             ]) ?>
         </div>
-        
         <?php if ($searchModel): ?>
             <?php $form = ActiveForm::begin([
                 'id' => 'main-search-form',

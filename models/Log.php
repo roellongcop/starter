@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -148,14 +147,12 @@ class Log extends ActiveRecord
         return new \app\models\query\LogQuery(get_called_class());
     }
      
-
     public function afterFind()
     {
         parent::afterFind();
         $this->table_name = App::db('tablePrefix') . $this->table_name;
     }
    
-
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
@@ -279,6 +276,7 @@ class Log extends ActiveRecord
             'device:raw',
         ];
     }
+    
     public function behaviors()
     {
         $behaviors = parent::behaviors();

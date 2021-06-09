@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -49,7 +48,6 @@ class UserMeta extends ActiveRecord
         return 'id';
     }
  
-
     /**
      * {@inheritdoc}
      */
@@ -119,7 +117,6 @@ class UserMeta extends ActiveRecord
         ];
     }
 
-
     /**
      * {@inheritdoc}
      * @return \app\models\query\UserMetaQuery the active query used by this AR class.
@@ -129,8 +126,6 @@ class UserMeta extends ActiveRecord
         return new \app\models\query\UserMetaQuery(get_called_class());
     }
      
-   
-
     public function gridColumns()
     {
         return [
@@ -169,5 +164,4 @@ class UserMeta extends ActiveRecord
             'meta_value:raw',
         ];
     }
-    
 }

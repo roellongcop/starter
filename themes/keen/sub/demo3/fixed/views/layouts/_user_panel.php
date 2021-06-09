@@ -36,7 +36,6 @@ $access = App::component('access');
                         'class' => 'font-weight-bold font-size-h5 text-dark-75 text-hover-primary'
                     ]
                 ]) ?>
-                
                 <div class="text-muted mt-1">
                     <?= Anchor::widget([
                         'title' => $identity->roleName,

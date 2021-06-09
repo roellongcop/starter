@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -113,8 +112,6 @@ class VisitLog extends ActiveRecord
     {
         return new \app\models\query\VisitLogQuery(get_called_class());
     }
-     
- 
 
     public function getUser()
     {
@@ -127,8 +124,6 @@ class VisitLog extends ActiveRecord
             return $model->username;
         }
     }
-
-   
 
     public function getVisitLogsAction()
     {
@@ -179,7 +174,6 @@ class VisitLog extends ActiveRecord
         ];
     }
 
-
     public static function log($action=0)
     {
         $visit = new self();
@@ -198,5 +192,4 @@ class VisitLog extends ActiveRecord
     {
         return self::log(1);
     }
-
 }

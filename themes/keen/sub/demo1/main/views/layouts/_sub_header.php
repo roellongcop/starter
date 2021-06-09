@@ -1,12 +1,11 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
-$createController = $this->params['createController'] ?? App::controllerID();
 
+$createController = $this->params['createController'] ?? App::controllerID();
 ?>
 <div class="subheader py-6 py-lg-8 subheader-transparent" id="kt_subheader">
     <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -41,13 +40,11 @@ $createController = $this->params['createController'] ?? App::controllerID();
         <!--end::Info-->
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
-           
             <!--begin::Dropdown-->
             <?php if ($this->params['showExportButton'] ?? ''): ?>
                 <?= ExportButton::widget() ?>
             <?php endif ?>
             <!--end::Dropdown-->
-
             <?php if ($this->params['showCreateButton'] ?? ''): ?>
                 <?= Html::a(
                     $this->params['createLabel'] ?? 'Create', 
@@ -57,9 +54,7 @@ $createController = $this->params['createController'] ?? App::controllerID();
                     ]
                 ) ?>
             <?php endif ?>
-            
         </div>
         <!--end::Toolbar-->
     </div>
 </div>
-
