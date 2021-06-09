@@ -17,6 +17,29 @@ class IpTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
+    public function testCreateNoIPName()
+    {
+        $model = new Ip([
+            'description' => 'test',  
+            'type' => 1,   
+            'record_status' => 1,  
+        ]);
+
+        expect_not($model->save());
+    }
+
+    public function testCreateInvalidIPName()
+    {
+        $model = new Ip([
+            'name' => 'not ip',  
+            'description' => 'test',  
+            'type' => 1,   
+            'record_status' => 1,  
+        ]);
+
+        expect_not($model->save());
+    }
+
     public function testUpdate()
     {
         $model = Ip::findOne(1);
