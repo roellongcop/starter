@@ -12,7 +12,7 @@ $registerJs = <<<SCRIPT
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 ?>
-<?php if(App::component('access')->userCan('process-checkbox')): ?>
+<?php if(App::component('access')->userCan('confirm-action')): ?>
     <?php if (isset($searchModel->bulkActions)): ?>
         <input type="hidden" name="process-selected">
         <div class="dropdown">

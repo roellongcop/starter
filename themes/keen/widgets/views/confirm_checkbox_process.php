@@ -21,7 +21,7 @@ use yii\helpers\Html;
 			</button>
 		</div>
 	</div>
-	<?= Html::beginForm(['process-checkbox'], 'post') ?>
+	<?= Html::beginForm(['confirm-action'], 'post') ?>
 		<?= (count($models) > 10)? AnchorForm::widget() . '<hr>': '' ?>
 		<input type="hidden" 
 			name="process-selected" 

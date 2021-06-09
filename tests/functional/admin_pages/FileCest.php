@@ -55,7 +55,7 @@ class FileCest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/file/process-checkbox"]', [
+        $I->submitForm('form[action="/file/confirm-action"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);

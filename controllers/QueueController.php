@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -151,7 +150,6 @@ class QueueController extends Controller
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -173,9 +171,7 @@ class QueueController extends Controller
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -203,7 +199,7 @@ class QueueController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post

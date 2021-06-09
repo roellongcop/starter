@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -75,7 +74,6 @@ class RoleController extends Controller
             'model' => $model,
         ]);
     }
-
 
     /**
      * Duplicates an existing Role model.
@@ -191,7 +189,6 @@ class RoleController extends Controller
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -213,9 +210,7 @@ class RoleController extends Controller
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -243,7 +238,7 @@ class RoleController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post

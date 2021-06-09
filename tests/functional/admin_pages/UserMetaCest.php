@@ -54,7 +54,7 @@ class UserMetaCest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/user-meta/process-checkbox"]', [
+        $I->submitForm('form[action="/user-meta/confirm-action"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);

@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -70,7 +69,6 @@ class UserController extends Controller
             'model' => $model,
         ]);
     }
-
 
     /**
      * Duplicates an existing User model.
@@ -162,7 +160,6 @@ class UserController extends Controller
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -184,9 +181,7 @@ class UserController extends Controller
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -220,7 +215,7 @@ class UserController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -333,7 +328,6 @@ class UserController extends Controller
             'model' => $model,
         ]);
     }
-
 
     public function actionDashboard($slug)
     {

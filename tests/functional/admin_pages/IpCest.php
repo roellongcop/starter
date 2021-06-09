@@ -54,7 +54,7 @@ class IpCest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/ip/process-checkbox"]', [
+        $I->submitForm('form[action="/ip/confirm-action"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);

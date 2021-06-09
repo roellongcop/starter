@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -37,7 +36,6 @@ abstract class Controller extends \yii\web\Controller
             ],
         ];
     } 
-
 
     public function checkFileUpload($model, $file_ids = [])
     {

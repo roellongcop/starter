@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -48,7 +47,6 @@ class SettingController extends Controller
             'model' => $this->findModel($name, 'name'),
         ]);
     }
-
 
     /**
      * Updates an existing Setting model.
@@ -112,7 +110,6 @@ class SettingController extends Controller
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -134,9 +131,7 @@ class SettingController extends Controller
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -164,7 +159,7 @@ class SettingController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -226,7 +221,6 @@ class SettingController extends Controller
             'searchModel' => new SettingSearch(),
         ]);
     }
-    
 
     public function actionMySetting()
     {
@@ -275,5 +269,4 @@ class SettingController extends Controller
     {
         # dont delete; use in condition if user has access to in-active data
     }
-
 }

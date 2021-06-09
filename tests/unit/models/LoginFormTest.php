@@ -1,5 +1,4 @@
 <?php
-
 namespace tests\unit\models;
 
 use app\models\form\LoginForm;
@@ -92,5 +91,4 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_not(\Yii::$app->user->isGuest);
         expect($this->model->errors)->hasntKey('password');
     }
-
 }

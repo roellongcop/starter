@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -16,7 +15,6 @@ use yii\web\NotFoundHttpException;
  */
 class UserMetaController extends Controller
 {
-
     /**
      * Lists all UserMeta models.
      * @return mixed
@@ -86,8 +84,6 @@ class UserMetaController extends Controller
         ]);
     }
 
-
-
     /**
      * Duplicates an existing UserMeta model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -113,7 +109,6 @@ class UserMetaController extends Controller
             'originalModel' => $originalModel,
         ]);
     }
-
 
     /**
      * Deletes an existing UserMeta model.
@@ -155,7 +150,6 @@ class UserMetaController extends Controller
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -177,9 +171,7 @@ class UserMetaController extends Controller
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -207,7 +199,7 @@ class UserMetaController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post

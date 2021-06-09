@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -16,7 +15,6 @@ use yii\web\NotFoundHttpException;
  */
 class VisitLogController extends Controller
 {
-
     /**
      * Lists all VisitLog models.
      * @return mixed
@@ -126,7 +124,6 @@ class VisitLogController extends Controller
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -148,9 +145,7 @@ class VisitLogController extends Controller
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -178,7 +173,7 @@ class VisitLogController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post

@@ -48,7 +48,7 @@ class BackupCest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/backup/process-checkbox"]', [
+        $I->submitForm('form[action="/backup/confirm-action"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);

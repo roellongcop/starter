@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -32,7 +31,6 @@ class DashboardController extends Controller
             }
            
         }
-
 
         return $this->render('index', [
             'searchModel' => $searchModel

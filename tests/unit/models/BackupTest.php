@@ -4,8 +4,6 @@ namespace tests\unit\models;
 use app\models\Backup;
 use yii\helpers\Inflector;
 
-
-
 class BackupTest extends \Codeception\Test\Unit
 {
     public function testCreate()

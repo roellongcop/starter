@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -83,7 +82,6 @@ class BackupController extends Controller
             'model' => $model,
         ]);
     }
-
 
     /**
      * Duplicates a new Backup model.
@@ -187,7 +185,6 @@ class BackupController extends Controller
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -209,9 +206,7 @@ class BackupController extends Controller
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -239,7 +234,7 @@ class BackupController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -301,7 +296,6 @@ class BackupController extends Controller
             'searchModel' => new BackupSearch(),
         ]);
     }
-
 
     public function actionRestore($slug)
     {

@@ -63,7 +63,7 @@ class <?= $modelClass ?>Cest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/<?= Inflector::slug($modelClass) ?>/process-checkbox"]', [
+        $I->submitForm('form[action="/<?= Inflector::slug($modelClass) ?>/confirm-action"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);

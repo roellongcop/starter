@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -48,7 +47,6 @@ class FileController extends Controller
         $extension = App::get('extension') ?: 'png';
 
         $file = File::findOne(['token' => $token]);
-
 
         if ($file) { 
             $path = $file->rootPath;
@@ -124,7 +122,6 @@ class FileController extends Controller
         ]);
     }
 
-
     /**
      * Duplicate a new File model.
      * If duplication is successful, the browser will be redirected to the 'view' page.
@@ -178,7 +175,6 @@ class FileController extends Controller
      */
     public function actionDelete($token = '')
     {
-
         if (App::isAjax()) {
             if (($post = App::post()) != null) {
                 if (isset($post['fileToken'])) {
@@ -239,7 +235,6 @@ class FileController extends Controller
         throw new NotFoundHttpException('Page not found.');
     }
 
-
     public function actionChangeRecordStatus()
     {
         if (($post = App::post()) != null) {
@@ -261,9 +256,7 @@ class FileController extends Controller
         }
     }
 
-
-
-    public function actionProcessCheckbox()
+    public function actionConfirmAction()
     {
         $post = App::post();
 
@@ -290,7 +283,7 @@ class FileController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm_checkbox_process', [
+                    return $this->render('confirm-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -438,8 +431,6 @@ class FileController extends Controller
         # dont delete; use in condition if user has access to in-active data
     }
 
-
-
     public function actionMyImageFiles()
     {
         $searchModel = new FileSearch([
@@ -482,7 +473,6 @@ class FileController extends Controller
         if (App::isAjax()) {
             return $this->renderPartial('my-files-ajax', $data);
         }
-
 
         return $this->render('my-files', $data); 
     }

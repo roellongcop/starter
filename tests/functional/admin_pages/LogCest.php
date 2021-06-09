@@ -38,7 +38,7 @@ class LogCest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/log/process-checkbox"]', [
+        $I->submitForm('form[action="/log/confirm-action"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);
