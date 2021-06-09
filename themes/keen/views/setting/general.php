@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Url;
 use app\models\search\DashboardSearch;
@@ -13,10 +12,8 @@ $this->title = 'General Settings';
 $this->params['breadcrumbs'][] = 'Set Up';
 $this->params['breadcrumbs'][] = $setting_modules[$tab]['label'];
 $this->params['searchModel'] = new DashboardSearch();
-
 ?>
-
-<div>
+<div class="setting-general-page">
 	<p>
 		<?= Anchor::widget([
 			'title' => 'Reset Settings',
@@ -28,7 +25,6 @@ $this->params['searchModel'] = new DashboardSearch();
 			]
 		]) ?>
 	</p>
-
 	<div class="row">
 		<div class="col-md-3">
 			<ul class="navi navi-accent navi-hover navi-bold navi-border">

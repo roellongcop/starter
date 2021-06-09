@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Html;
 use app\models\search\RoleSearch;
@@ -7,18 +6,16 @@ use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ChooseFromGallery;
 use app\widgets\ImagePreview;
-use app\widgets\KeenActiveForm;
+use app\widgets\ActiveForm;
 use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
-/* @var $form yii\widgets\KeenActiveForm */
+/* @var $form yii\widgets\ActiveForm */
 
 $imageRules = $model->getActiveValidators('imageInput')[0];
 ?>
-
-<?php $form = KeenActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'user-form-my-account']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= BootstrapSelect::widget([
@@ -29,7 +26,6 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
             ]) ?>
             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-            
             <?= BootstrapSelect::widget([
                 'attribute' => 'status',
                 'searchable' => false,
@@ -37,12 +33,10 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'form' => $form,
                 'data' => App::mapParams('user_status'),
             ]) ?>
-
             <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
-
             <?= BootstrapSelect::widget([
                 'attribute' => 'is_blocked',
                 'searchable' => false,
@@ -72,7 +66,6 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                             state: 'primary',
                             message: 'Processing...'
                         });
-
                         setTimeout(function() {
                             KTApp.unblock('#sipc');
                         }, 1000);
@@ -87,14 +80,12 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                         state: 'primary',
                         message: 'Processing...'
                     });
-
                     setTimeout(function() {
                         KTApp.unblock('#sipc');
                     }, 1000);
                     $('#sipc img').attr('src', file.dataURL);
                     $('#profile-image-desktop').attr('src', file.dataURL);
                     $('#profile-image-dropdown').attr('src', file.dataURL);
-                    
                 "
             ]) ?> 
         </div>
@@ -102,6 +93,5 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
     <div class="form-group"><hr>
 		<?= AnchorForm::widget() ?>
     </div>
-
-    <?php KeenActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 

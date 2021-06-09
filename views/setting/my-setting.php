@@ -13,8 +13,8 @@ $this->title = "My Settings";
 $this->params['breadcrumbs'][] = 'My Settings';
 $this->params['searchModel'] = new ThemeSearch();
 ?>
-<div class="my-setting-page">
-	<?php $form = ActiveForm::begin(['id' => 'my-setting-form']); ?>
+<div class="setting-my-setting-page">
+	<?php $form = ActiveForm::begin(['id' => 'setting-my-setting-form']); ?>
 		<div class="form-group">
 			<?= AnchorForm::widget() ?>
 		</div>

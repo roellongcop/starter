@@ -1,9 +1,8 @@
 <?php
-
 use app\widgets\AnchorForm;
-use app\widgets\KeenActiveForm;
+use app\widgets\ActiveForm;
 ?>
-<?php $form = KeenActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(['id' => 'setting-general-notification-form']); ?>
 	<p class="lead">Notification</p>
 	<div class="row">
 		<div class="col-md-8">
@@ -13,5 +12,4 @@ use app\widgets\KeenActiveForm;
 	<div class="form-group"> <hr>
 		<?= AnchorForm::widget() ?>
 	</div>
-
-<?php KeenActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>

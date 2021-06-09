@@ -98,7 +98,7 @@ $registerCSS = <<<CSS
 CSS;
 $this->registerCSS($registerCSS);
 ?>
-<div class="row" id="my-image-files" class="my-image-files">
+<div id="my-image-files" class="row my-image-files">
     <div class="col-md-7">
         <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="searchMyImage(this)">
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>

@@ -1,12 +1,10 @@
 <?php
-
 use app\helpers\Url;
 use app\widgets\AnchorForm;
 use app\widgets\ImagePreview;
-use app\widgets\KeenActiveForm;
-
+use app\widgets\ActiveForm;
 ?>
-<?php $form = KeenActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(['id' => 'setting-general-image-form']); ?>
 	<p class="lead">Images</p>
 	<div class="row">
 		<div class="col-md-4">
@@ -20,7 +18,6 @@ use app\widgets\KeenActiveForm;
 		</div>
 		<div class="col-md-4">
 			<?= $form->field($model, 'secondary_logo')->fileInput() ?>
-
             <?= ImagePreview::widget([
             	'model' => $model,
             	'attribute' => 'secondary_logo',
@@ -38,7 +35,6 @@ use app\widgets\KeenActiveForm;
             ]) ?>
 		</div>
 	</div>
-
 	<div class="row">
 		<div class="col-md-4">
             <?= $form->field($model, 'image_holder')->fileInput() ?>
@@ -53,5 +49,4 @@ use app\widgets\KeenActiveForm;
 	<div class="form-group"> <hr>
 		<?= AnchorForm::widget() ?>
 	</div>
-
-<?php KeenActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>

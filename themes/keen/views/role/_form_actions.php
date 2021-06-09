@@ -3,7 +3,6 @@ use app\widgets\Checkbox;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
 ?>
-
 <div class="row">
     <div class="col-md-8">
         <?= Checkbox::widget([
@@ -37,7 +36,6 @@ use yii\helpers\Url;
                                 ],
                             ]) ?>
                             <hr>
-                            
                             <div style="display: flex;">
                                 <div>
                                     <?= Checkbox::widget([
@@ -64,13 +62,10 @@ use yii\helpers\Url;
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
-
         </div>
     </div>
-
 </div>

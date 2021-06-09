@@ -1,33 +1,23 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
 use app\widgets\ChooseFromGallery;
-use app\widgets\KeenActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Setting */
-/* @var $form yii\widgets\KeenActiveForm */
+/* @var $form yii\widgets\ActiveForm */
 ?>
-
-
-    <?php $form = KeenActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'setting-form']); ?>
     <div class="row">
         <div class="col-md-5">
-            
             <?= $form->field($model, 'name')->textInput(['readonly' => true]) ?>
-
             <?= $model->getFormInput($form) ?>
-
             <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
-
-            
-
             <?php if ($model->hasImageInput): ?>
                 <?= ChooseFromGallery::widget([
                     'model' => $model,
@@ -66,13 +56,9 @@ use app\widgets\KeenActiveForm;
                         src="<?= $model->imagePath ? $model->imagePath . '&w=200': '' ?>">
                 </div>
             <?php endif ?>
-
         </div>
-
     </div>
     <div class="form-group"> <br>
 		<?= AnchorForm::widget() ?>
     </div>
-
-    <?php KeenActiveForm::end(); ?>
-
+<?php ActiveForm::end(); ?>

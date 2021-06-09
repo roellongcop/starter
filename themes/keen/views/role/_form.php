@@ -1,24 +1,19 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
-use app\widgets\KeenActiveForm;
+use app\widgets\ActiveForm;
+
 $controller_actions = App::component('access')->controllerActions();
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
-/* @var $form yii\widgets\KeenActiveForm */
+/* @var $form yii\widgets\ActiveForm */
 ?>
-
-
-<?php $form = KeenActiveForm::begin(); ?>
- 
-
+<?php $form = ActiveForm::begin(['id' => 'role-form']); ?>
     <div class="form-group">
         <?= AnchorForm::widget() ?>
     </div>
-
     <div class="card card-custom gutter-b">
         <div class="card-header card-header-tabs-line">
             <div class="card-toolbar">
@@ -64,7 +59,6 @@ $controller_actions = App::component('access')->controllerActions();
                             ]) ?>
                         </div>
                     </div>
-
                 </div>
                 <div class="tab-pane fade" id="_form_role_access" role="tabpanel" aria-labelledby="_form_role_access">
                     <?= $this->render('_form_role_access', [
@@ -83,13 +77,10 @@ $controller_actions = App::component('access')->controllerActions();
                         'model' => $model
                     ]) ?>
                 </div> 
-
             </div>
         </div>
     </div>
-
     <div class="form-group">
         <?= AnchorForm::widget() ?>
     </div>
-
-<?php KeenActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>

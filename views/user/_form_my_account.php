@@ -15,7 +15,7 @@ use app\widgets\RecordStatusInput;
 
 $imageRules = $model->getActiveValidators('imageInput')[0];
 ?>
-<?php $form = ActiveForm::begin(['user-my-account-form']); ?>
+<?php $form = ActiveForm::begin(['user-form-my-account']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= BootstrapSelect::widget([
