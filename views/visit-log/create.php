@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\VisitLogSearch;
 
 /* @var $this yii\web\View */
@@ -10,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Visit Logs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new VisitLogSearch();
 ?>
-
-<div>
+<div class="visit-log-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

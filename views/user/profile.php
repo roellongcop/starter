@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\UserSearch;
 use app\widgets\AnchorForm;
 use app\widgets\ActiveForm;
@@ -13,8 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => $user->mainAttribute, 'url' => $use
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new UserSearch();
 ?>
-
-<div>
+<div class="user-profile-page">
 	<?php $form = ActiveForm::begin(); ?>
 		<div class="row">
 			<div class="col-md-5">

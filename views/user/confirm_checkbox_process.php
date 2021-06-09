@@ -7,13 +7,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new UserSearch();
-
-
 ?>
-  
-
-<?= ConfirmCheckboxProcess::widget([
-	'models' => $models,
-	'process' => $process,
-    'post' => $post,
-]) ?>
+<div class="user-confirm-action-page">
+	<?= ConfirmCheckboxProcess::widget([
+		'models' => $models,
+		'process' => $process,
+	    'post' => $post,
+	]) ?>
+</div>

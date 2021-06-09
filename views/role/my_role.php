@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\RoleSearch;
 
 /* @var $this yii\web\View */
@@ -11,7 +10,7 @@ $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new RoleSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="role-my-role-page">
 	<?= $this->render('_form', [
         'model' => $model,
     ]) ?>

@@ -8,11 +8,7 @@ use app\widgets\ActiveForm;
 /* @var $model app\models\Log */
 /* @var $form app\widgets\ActiveForm */
 ?>
-
-
-    <?php $form = ActiveForm::begin(); ?>
-    
-
+<?php $form = ActiveForm::begin(['id' => 'log-form']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= $form->field($model, 'user_id')->textInput() ?>
@@ -32,11 +28,8 @@ use app\widgets\ActiveForm;
                 'form' => $form,
             ]) ?>
         </div>
-
     </div>
     <div class="form-group">
-		<?= AnchorForm::widget() ?>
+    	<?= AnchorForm::widget() ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+<?php ActiveForm::end(); ?>

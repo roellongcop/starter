@@ -1,11 +1,7 @@
 <?php
-
 use app\helpers\App;
 use yii\helpers\Html;
-
 ?>
-
-
  <!--begin::Example-->
 <div class="example mb-10">
     <p>Add the base class
@@ -211,7 +207,3 @@ use yii\helpers\Html;
         </div>
     </div>
 </div>
-<!--end::Example-->
-
-
-            

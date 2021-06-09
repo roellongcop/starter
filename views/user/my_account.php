@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\UserSearch;
 
 /* @var $this yii\web\View */
@@ -12,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new UserSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="user-my-account-page">
 	<?= $this->render('_form_my_account', [
         'model' => $model,
     ]) ?>

@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -9,10 +8,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 // use app\assets\MainAsset;
 
-
 AppAsset::register($this);
 // MainAsset::register($this);
-
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -31,11 +28,7 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-    <!-- begin:: Page --> 
-
-                    <?= $content ?>
- 
- 
+    <?= $content ?>
 <?php $this->endBody() ?>
 </body>
 </html>

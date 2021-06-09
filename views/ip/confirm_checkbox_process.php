@@ -7,12 +7,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new IpSearch();
-
-
 ?>
-
-<?= ConfirmCheckboxProcess::widget([
-	'models' => $models,
-	'process' => $process,
-    'post' => $post,
-]) ?>
+<div class="ip-confirm-action-page">
+	<?= ConfirmCheckboxProcess::widget([
+		'models' => $models,
+		'process' => $process,
+	    'post' => $post,
+	]) ?>
+</div>

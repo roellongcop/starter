@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\LogSearch;
 
 /* @var $this yii\web\View */
@@ -10,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Logs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new LogSearch();
 ?>
-
-<div>
+<div class="log-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\RecordStatusInput;
 use app\widgets\AnchorForm;
@@ -9,10 +8,7 @@ use app\widgets\ActiveForm;
 /* @var $model app\models\Queue */
 /* @var $form app\widgets\ActiveForm */
 ?>
-
-
-<?php $form = ActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'queue-form']); ?>
     <div class="row">
         <div class="col-md-5">
 			<?= $form->field($model, 'channel')->textInput(['maxlength' => true]) ?>
@@ -33,6 +29,4 @@ use app\widgets\ActiveForm;
     <div class="form-group">
 		<?= AnchorForm::widget() ?>
     </div>
-
 <?php ActiveForm::end(); ?>
-

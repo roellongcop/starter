@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\models\search\UserSearch;
 use app\widgets\AnchorForm;
@@ -11,11 +10,7 @@ use app\widgets\ActiveForm;
 /* @var $model app\models\VisitLog */
 /* @var $form app\widgets\ActiveForm */
 ?>
-
-
-    <?php $form = ActiveForm::begin(); ?>
- 
-
+<?php $form = ActiveForm::begin(['id' => 'visit-log-form']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= BootstrapSelect::widget([
@@ -25,9 +20,7 @@ use app\widgets\ActiveForm;
                 'form' => $form,
                 'data' => UserSearch::dropdown('id', 'email'),
             ]) ?>
-
             <?= $form->field($model, 'ip')->textInput(['maxlength' => true]) ?>
-
             <?= BootstrapSelect::widget([
                 'attribute' => 'action',
                 'label' => 'Action',
@@ -35,7 +28,6 @@ use app\widgets\ActiveForm;
                 'form' => $form,
                 'data' => App::mapParams('visit_logs_action'),
             ]) ?>
-
             <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
@@ -45,6 +37,4 @@ use app\widgets\ActiveForm;
     <div class="form-group">
 		<?= AnchorForm::widget() ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+<?php ActiveForm::end(); ?>

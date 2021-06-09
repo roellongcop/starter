@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\UserMetaSearch;
 use app\widgets\Anchors;
 use app\widgets\Detail;
@@ -13,8 +12,7 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new UserMetaSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-
-<div>
+<div class="user-meta-view-page">
     <?= Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model

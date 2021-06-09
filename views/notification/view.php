@@ -1,5 +1,4 @@
 <?php
-
 use app\widgets\Anchors;
 use app\widgets\Detail;
 use app\models\search\NotificationSearch;
@@ -13,8 +12,7 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new NotificationSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-
-<div>
+<div class="notification-view-page">
     <?= Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model

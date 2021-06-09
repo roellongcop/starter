@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\IpSearch;
 
 /* @var $this yii\web\View */
@@ -10,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new IpSearch();
 ?>
-
-<div>
+<div class="ip-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

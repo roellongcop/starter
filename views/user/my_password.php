@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\UserSearch;
 
 /* @var $this yii\web\View */
@@ -9,8 +8,7 @@ $this->title = 'My Password';
 $this->params['breadcrumbs'][] = 'Change Password';
 $this->params['searchModel'] = new UserSearch();
 ?>
-
-<div>
+<div class="user-my-password-page">
 	<?= $this->render('_change_password', [
 		'model' => $model,
 	]) ?>

@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\UserSearch;
 
 /* @var $this yii\web\View */
@@ -10,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new UserSearch();
 ?>
-
-<div>
+<div class="user-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

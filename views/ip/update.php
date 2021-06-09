@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new IpSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="ip-update-page">
 	<?= $this->render('_form', [
         'model' => $model,
     ]) ?>

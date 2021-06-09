@@ -8,8 +8,10 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new QueueSearch();
 ?>
-<?= ConfirmCheckboxProcess::widget([
-	'models' => $models,
-	'process' => $process,
-    'post' => $post,
-]) ?>
+<div class="queue-confirm-action-page">
+	<?= ConfirmCheckboxProcess::widget([
+		'models' => $models,
+		'process' => $process,
+	    'post' => $post,
+	]) ?>
+</div>

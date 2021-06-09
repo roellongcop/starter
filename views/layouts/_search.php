@@ -1,14 +1,13 @@
 <?php
-
 use app\helpers\App;
 use app\models\search\DashboardSearch;
 use app\widgets\Search;
 use app\widgets\ActiveForm;
+
 $searchModel = $this->params['searchModel'] ?? '';
 $searchTemplate = $searchModel->searchTemplate ?? "/".App::controllerID()."/_search";
 $searchAction = $searchModel->searchAction ?? ['index'];
 ?>
-
 <?php if ($searchModel): ?>
 	<div class="row">
 		<div class="col-md-4">
@@ -22,8 +21,6 @@ $searchAction = $searchModel->searchAction ?? ['index'];
 			</button>
 		</div>
 	</div>
-	
-	
 	<div id="advanced_saerch_modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -38,5 +35,4 @@ $searchAction = $searchModel->searchAction ?? ['index'];
 			</div>
 		</div>
 	</div>
-    
 <?php endif ?>

@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\RecordStatusInput;
 use app\widgets\AnchorForm;
@@ -9,10 +8,7 @@ use app\widgets\ActiveForm;
 /* @var $model app\models\Notification */
 /* @var $form app\widgets\ActiveForm */
 ?>
-
-
-<?php $form = ActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'notification-form']); ?>
     <div class="row">
         <div class="col-md-5">
 			<?= $form->field($model, 'user_id')->textInput() ?>
@@ -29,6 +25,4 @@ use app\widgets\ActiveForm;
     <div class="form-group">
 		<?= AnchorForm::widget() ?>
     </div>
-
 <?php ActiveForm::end(); ?>
-

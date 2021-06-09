@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\IpSearch;
 use app\widgets\Anchors;
 use app\widgets\Detail;
@@ -13,8 +12,7 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new IpSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-
-<div>
+<div class="ip-view-page">
     <?= Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model,

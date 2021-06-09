@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\UserSearch;
 use app\widgets\Anchor;
 use app\widgets\Anchors;
@@ -13,10 +12,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new UserSearch();
 $this->params['showCreateButton'] = true; 
-
 ?>
-
-<div>
+<div class="user-view-page">
     <?= Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model,
@@ -37,7 +34,6 @@ $this->params['showCreateButton'] = true;
     ]) ?>
     <hr>
     <?= Detail::widget(['model' => $model]) ?>
-
     <p class="lead">Profile</p>
     <?= Detail::widget(['model' => $model->profile]) ?>
 </div>

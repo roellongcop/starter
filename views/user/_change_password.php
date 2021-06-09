@@ -2,10 +2,7 @@
 use app\widgets\AnchorForm;
 use app\widgets\ActiveForm;
 ?>
-
-
-    <?php $form = ActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'user-change-password-form']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= $form->field($model, 'old_password')->textInput(['maxlength' => true]) ?>
@@ -17,6 +14,4 @@ use app\widgets\ActiveForm;
     <div class="form-group">
 		<?= AnchorForm::widget() ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+<?php ActiveForm::end(); ?>

@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -23,10 +22,7 @@ ErrorAsset::register($this);
 </head>
 <body id="kt_body" class="">
 <?php $this->beginBody() ?>
-	 
 	<?= $content ?>
-
-
 <?php $this->endBody() ?>
 </body>
 </html>

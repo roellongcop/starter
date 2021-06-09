@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\LogSearch;
 use app\widgets\Anchors;
 use app\widgets\Detail;
@@ -13,8 +12,7 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new LogSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-
-<div>
+<div class="log-view-page">
     <?= Anchors::widget([
     	'names' => ['update', 'duplicate', 'delete'], 
     	'model' => $model

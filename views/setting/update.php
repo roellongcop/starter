@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\SettingSearch;
 
 /* @var $this yii\web\View */
@@ -12,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new SettingSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="setting-update-page">
 	<?= $this->render('_form', [
         'model' => $model,
     ]) ?>

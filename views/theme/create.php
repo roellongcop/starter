@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\ThemeSearch;
 
 /* @var $this yii\web\View */
@@ -10,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Themes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new ThemeSearch();
 ?>
-
-<div>
+<div class="theme-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

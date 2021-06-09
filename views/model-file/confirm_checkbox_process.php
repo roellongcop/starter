@@ -8,8 +8,10 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new ModelFileSearch();
 ?>
-<?= ConfirmCheckboxProcess::widget([
-	'models' => $models,
-	'process' => $process,
-    'post' => $post,
-]) ?>
+<div class="model-file-confirm-action-page">
+	<?= ConfirmCheckboxProcess::widget([
+		'models' => $models,
+		'process' => $process,
+	    'post' => $post,
+	]) ?>
+</div>

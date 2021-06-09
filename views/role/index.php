@@ -1,5 +1,4 @@
 <?php
-
 use app\widgets\BulkAction;
 use app\widgets\FilterColumn;
 use app\widgets\Grid;
@@ -15,13 +14,10 @@ $this->params['searchModel'] = $searchModel;
 $this->params['showCreateButton'] = true; 
 $this->params['showExportButton'] = true;
 ?>
-
- 
-<div>
+<div class="role-index-page">
 	<?= FilterColumn::widget(['searchModel' => $searchModel]) ?>
     <?= Html::beginForm(['process-checkbox'], 'post'); ?>
 	<?= BulkAction::widget(['searchModel' => $searchModel]) ?>
-    
     <hr>
     <?= Grid::widget([
         'dataProvider' => $dataProvider,
@@ -30,4 +26,3 @@ $this->params['showExportButton'] = true;
     ]); ?>        
     <?= Html::endForm(); ?> 
 </div>
-

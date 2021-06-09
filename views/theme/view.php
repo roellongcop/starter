@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\ThemeSearch;
 use app\widgets\Anchor;
 use app\widgets\Anchors;
@@ -14,8 +13,7 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new ThemeSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-
-<div>
+<div class="theme-view-page">
     <?= Anchors::widget([
     	'names' => ['update', 'delete', 'log'], 
     	'model' => $model

@@ -1,11 +1,4 @@
-<?php
-
-use app\widgets\Nestable;
-use yii\helpers\Url;
-
-?>
-
-<?= Nestable::widget([
+<?= \app\widgets\Nestable::widget([
     'controller_actions' => $controller_actions,
     'navigations' => $model->main_navigation
 ]) ?>

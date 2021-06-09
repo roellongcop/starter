@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this yii\web\View */
 /* @var $name string */
 /* @var $message string */
@@ -10,8 +9,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 $this->title = $name;
 ?>
-
-
 <div class="d-flex flex-column flex-root">
     <!--begin::Error-->
     <div class="d-flex flex-column-fluid flex-center">

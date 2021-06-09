@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\SettingSearch;
 
 /* @var $this yii\web\View */
@@ -10,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new SettingSearch();
 ?>
-
-<div>
+<div class="setting-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\UserSearch;
 
 /* @var $this yii\web\View */
@@ -12,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new UserSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="user-duplicate-page">
 	<?= $this->render('_form', [
         'model' => $model,
     ]) ?>

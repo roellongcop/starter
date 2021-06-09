@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\models\search\DashboardSearch;
 use app\models\search\ThemeSearch;
@@ -14,12 +13,10 @@ use app\widgets\ImagePreview;
 /* @var $model app\models\Ip */
 
 $this->title = 'General Settings';
-// $this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Set Up';
 $this->params['searchModel'] = new DashboardSearch();
 ?>
-
-<div>
+<div class="setting-general-page">
 	<p>
 		<?= Anchor::widget([
 			'title' => 'Reset Settings',
@@ -31,15 +28,12 @@ $this->params['searchModel'] = new DashboardSearch();
 			]
 		]) ?>
 	</p>
-
 	<?php $form = ActiveForm::begin(); ?>
-	 
 		<p class="lead">General</p>
 		<div class="row">
 			<div class="col-md-4">
 				<?= $form->field($model, 'auto_logout_timer')->textInput(['maxlength' => true]) ?>
 			</div>
-			
 			<div class="col-md-4">
 				<?= $form->field($model, 'timezone')->textInput(['maxlength' => true]) ?>
 			</div>
@@ -51,7 +45,6 @@ $this->params['searchModel'] = new DashboardSearch();
 				) ?>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-4">
 				<?= BootstrapSelect::widget([
@@ -77,7 +70,6 @@ $this->params['searchModel'] = new DashboardSearch();
 				</div>
 			</div>
 		</div>
-
 		<hr>
 		<p class="lead">Email</p>
 		<div class="row">
@@ -91,8 +83,6 @@ $this->params['searchModel'] = new DashboardSearch();
 				<?= $form->field($model, 'sender_name')->textInput(['maxlength' => true]) ?>
 			</div>
 		</div>
-
-
 		<hr>
 		<p class="lead">Images</p>
 		<div class="row">
@@ -107,7 +97,6 @@ $this->params['searchModel'] = new DashboardSearch();
 			</div>
 			<div class="col-md-4">
 				<?= $form->field($model, 'secondary_logo')->fileInput() ?>
-
                 <?= ImagePreview::widget([
                 	'model' => $model,
                 	'attribute' => 'secondary_logo',
@@ -125,7 +114,6 @@ $this->params['searchModel'] = new DashboardSearch();
                 ]) ?>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-4">
                 <?= $form->field($model, 'image_holder')->fileInput() ?>
@@ -137,11 +125,8 @@ $this->params['searchModel'] = new DashboardSearch();
                 ]) ?>
 			</div>
 		</div>
-
-
 		<div class="form-group"> <hr>
 			<?= AnchorForm::widget() ?>
 		</div>
-
 	<?php ActiveForm::end(); ?>
 </div>

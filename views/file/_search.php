@@ -15,7 +15,6 @@ use app\widgets\ActiveForm;
 <?php $form = ActiveForm::begin([
     'action' => $model->searchAction,
     'method' => 'get',
-    'options' => ['class' => 'kt-quick-search__form'],
     'id' => 'file-search-form'
 ]); ?>
     <?= Search::widget(['model' => $model]) ?>

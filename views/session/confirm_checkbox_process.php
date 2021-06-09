@@ -7,11 +7,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Sessions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new SessionSearch();
-
-
 ?>
-<?= ConfirmCheckboxProcess::widget([
-	'models' => $models,
-	'process' => $process,
-    'post' => $post,
-]) ?>
+<div class="session-confirm-action-page">
+	<?= ConfirmCheckboxProcess::widget([
+		'models' => $models,
+		'process' => $process,
+	    'post' => $post,
+	]) ?>
+</div>

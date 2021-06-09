@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -15,11 +14,7 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
-
-
-
 $showExportButton = $this->params['showExportButton'] ?? '';
-
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -35,7 +30,6 @@ $showExportButton = $this->params['showExportButton'] ?? '';
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <div class="wrap"> 
     <?= Menu::widget() ?>
     <div class="container">
@@ -55,13 +49,8 @@ $showExportButton = $this->params['showExportButton'] ?? '';
                 <?php endif ?>
             </div>
         </div>
-        
         <?= $this->render('_search') ?>
-
         <hr>
-
-        
-        
         <?= Anchor::widget([
             'title' => 'Create New',
             'link' => ['create'],
@@ -74,14 +63,12 @@ $showExportButton = $this->params['showExportButton'] ?? '';
         <?= $content ?>
     </div>
 </div>
-
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
-
 <?php $this->endBody() ?>
 </body>
 </html>

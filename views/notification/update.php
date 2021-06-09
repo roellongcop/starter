@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\NotificationSearch;
 
 /* @var $this yii\web\View */
@@ -12,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new NotificationSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="notification-update-page">
 	<?= $this->render('_form', [
         'model' => $model,
     ]) ?>

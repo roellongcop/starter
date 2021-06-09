@@ -1,10 +1,8 @@
 <?php
-
 use app\widgets\Checkbox;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
 ?>
-
 <div class="row">
     <div class="col-md-12">
         <table class="table table-bordered">
@@ -25,7 +23,6 @@ use yii\helpers\Url;
                 </tr>
                 <?php foreach ($controller_actions as $controller => $actions) : ?>
                     <tr>
-                      
                         <td width="30%">
                             <?= Checkbox::widget([
                                 'data' => [$controller => Inflector::id2camel($controller)],
@@ -51,7 +48,6 @@ use yii\helpers\Url;
                                 },
                             ]) ?>
                         </td> 
-
                         <td>
                             <?php foreach ($actions as $action) : ?>
                                 <label style="height: 22px;">
@@ -60,11 +56,9 @@ use yii\helpers\Url;
                                 <br>
                             <?php endforeach; ?>
                         </td> 
-                        
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-
 </div>

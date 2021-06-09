@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\AnchorForm;
@@ -12,17 +11,11 @@ use app\widgets\ActiveForm;
 /* @var $model app\models\Setting */
 /* @var $form app\widgets\ActiveForm */
 ?>
-
-
-    <?php $form = ActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'setting-form']); ?>
     <div class="row">
         <div class="col-md-5">
-            
             <?= $form->field($model, 'name')->textInput(['readonly' => true]) ?>
-
             <?= $model->getFormInput($form) ?>
-
             <?php if ($model->hasImageInput): ?>
                 <div class="row">
                     <div class="col-md-6">
@@ -47,20 +40,14 @@ use app\widgets\ActiveForm;
                         ]) ?> 
                     </div>
                 </div>
-                
             <?php endif ?>
-
             <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
-
         </div>
-
     </div>
     <div class="form-group"> <br>
 		<?= AnchorForm::widget() ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+<?php ActiveForm::end(); ?>

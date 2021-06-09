@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\SessionSearch;
 use app\widgets\Anchors;
 use app\widgets\Detail;
@@ -13,8 +12,7 @@ $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new SessionSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-
-<div>
+<div class="session-view-page">
     <?= Anchors::widget([
     	'names' => ['update', 'delete', 'log'], 
     	'model' => $model

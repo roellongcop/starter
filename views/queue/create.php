@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\QueueSearch;
 
 /* @var $this yii\web\View */
@@ -10,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new QueueSearch();
 ?>
-
-<div>
+<div class="queue-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

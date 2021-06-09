@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\helpers\Html;
 use app\models\search\RoleSearch;
@@ -16,10 +15,7 @@ use app\widgets\RecordStatusInput;
 
 $imageRules = $model->getActiveValidators('imageInput')[0];
 ?>
-
-
-    <?php $form = ActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['user-my-account-form']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= BootstrapSelect::widget([
@@ -28,11 +24,8 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'form' => $form,
                 'data' => RoleSearch::dropdown(),
             ]) ?>
-           
-
             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
             <?= BootstrapSelect::widget([
                 'attribute' => 'status',
                 'searchable' => false,
@@ -40,12 +33,10 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'form' => $form,
                 'data' => App::mapParams('user_status'),
             ]) ?>
-
             <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
-
             <?= BootstrapSelect::widget([
                 'attribute' => 'is_blocked',
                 'searchable' => false,
@@ -53,7 +44,6 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                 'form' => $form,
                 'data' => App::mapParams('is_blocked'),
             ]) ?>
-            
         </div>
         <div class="col-md-7">
             <div id="sipc" style="max-width: 200px">
@@ -66,7 +56,6 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                     ]
                 ) ?>
             </div>
-
             <?= ChooseFromGallery::widget([
                 'model' => $model,
                 'fileInput' => $form->field($model, 'imageInput')
@@ -89,6 +78,4 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
     <div class="form-group">
 		<?= AnchorForm::widget() ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+<?php ActiveForm::end(); ?>

@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\ModelFileSearch;
 
 /* @var $this yii\web\View */
@@ -12,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new ModelFileSearch();
 $this->params['showCreateButton'] = true; 
 ?>
-<div>
+<div class="model-file-update-page">
 	<?= $this->render('_form', [
         'model' => $model,
     ]) ?>

@@ -1,16 +1,12 @@
 <?php
-
 use app\widgets\Checkbox;
 use app\models\search\RoleSearch;
-
 ?>
 <?= Checkbox::widget([
     'data' => ['check_all' => '<b>Check All</b>'],
     'options' => ['onclick' => 'checkAllRole(this)'],
 ]) ?>
-
 <p></p>
-
 <?= Checkbox::widget([
     'data' => RoleSearch::getAllRecord(),
     'name' => 'Role[role_access][]',

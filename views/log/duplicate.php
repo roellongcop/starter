@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\LogSearch;
 
 /* @var $this yii\web\View */
@@ -11,8 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new LogSearch();
 ?>
-
-<div>
+<div class="log-duplicate-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>

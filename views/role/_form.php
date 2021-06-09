@@ -1,31 +1,25 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
 use app\widgets\ActiveForm;
-$controller_actions = App::component('access')->controllerActions();
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
 /* @var $form app\widgets\ActiveForm */
+
+$controller_actions = App::component('access')->controllerActions();
 ?>
-
-
-<?php $form = ActiveForm::begin(); ?>
- 
-
+<?php $form = ActiveForm::begin(['id' => 'role-form']); ?>
     <div class="form-group">
         <?= AnchorForm::widget() ?>
     </div>
-
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#_main_form">Name</a></li>
-      <li><a data-toggle="tab" href="#_form_role_access">Role Access</a></li>
-      <li><a data-toggle="tab" href="#_form_navigation">Navigation</a></li>
-      <li><a data-toggle="tab" href="#_form_actions">Module Access</a></li>
+        <li class="active"><a data-toggle="tab" href="#_main_form">Name</a></li>
+        <li><a data-toggle="tab" href="#_form_role_access">Role Access</a></li>
+        <li><a data-toggle="tab" href="#_form_navigation">Navigation</a></li>
+        <li><a data-toggle="tab" href="#_form_actions">Module Access</a></li>
     </ul>
-
     <div class="tab-content">
         <div id="_main_form" class="tab-pane fade in active">
             <div class="row">
@@ -56,9 +50,7 @@ $controller_actions = App::component('access')->controllerActions();
             ]) ?>
         </div>
     </div>
-
     <div class="form-group">
         <?= AnchorForm::widget() ?>
     </div>
-
 <?php ActiveForm::end(); ?>

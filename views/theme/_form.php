@@ -1,5 +1,4 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\AnchorForm;
@@ -25,14 +24,9 @@ $registerJs = <<< SCRIPT
         $(this).unbind('submit').submit(); 
     })
 SCRIPT;
-
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-
 ?>
-
-
-<?php $form = ActiveForm::begin(); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'theme-form']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -67,8 +61,6 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
     <div class="form-group"><br>
         <?= AnchorForm::widget() ?>
     </div>
-
-
     <?php if (!$model->isNewRecord): ?>
         <br>
         <p class="lead">Upload Images</p>
@@ -82,6 +74,4 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
             )
         ]) ?>
     <?php endif ?>
-
 <?php ActiveForm::end(); ?>
-

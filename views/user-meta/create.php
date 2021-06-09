@@ -1,5 +1,4 @@
 <?php
-
 use app\models\search\UserMetaSearch;
 
 /* @var $this yii\web\View */
@@ -10,8 +9,7 @@ $this->params['breadcrumbs'][] = ['label' => 'User Metas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new UserMetaSearch();
 ?>
-
-<div>
+<div class="user-meta-create-page">
 	<?= $this->render('_form', [
 		'model' => $model,
 	]) ?>
