@@ -123,49 +123,7 @@ class BackupController extends Controller
             'originalModel' => $originalModel,
         ]);
     }
-
-    /**
-     * Updates an existing Backup model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    /*ublic function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Updated');
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }*/
-
-    /**
-     * Deletes an existing Backup model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    // ublic function actionDelete($id)
-    // {
-    //     $model = $this->findModel($id);
-
-    //     if($model->delete()) {
-    //         App::success('Successfully Deleted');
-    //     }
-    //     else {
-    //         App::danger(json_encode($model->errors));
-    //     }
-
-    //     return $this->redirect(['index']);
-    // }
-
+    
     /**
      * Finds the Backup model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
