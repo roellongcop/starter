@@ -16,7 +16,7 @@ use app\models\<?= isset($modelAlias) ? $modelAlias : $modelClass ?>;
 
 class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codeception\Test\Unit
 {
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>([
 <?php foreach ($generator->getColumnNames() as $attribute) : ?>
@@ -33,7 +33,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>([
             'record_status' => 1
@@ -41,14 +41,14 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_not($model->save());
     }
 
-    public function testUpdate()
+    public function testUpdateSuccess()
     {
         $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
         $model->record_status = 0;
         expect_that($model->save());
     }
 
-    public function testDelete()
+    public function testDeleteSuccess()
     {
         $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
         expect_that($model->delete());

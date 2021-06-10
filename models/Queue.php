@@ -44,7 +44,7 @@ class Queue extends ActiveRecord
 
     public function mainAttribute()
     {
-        return 'id';
+        return 'pushed_at';
     }
 
     public function paramName()

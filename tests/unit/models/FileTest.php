@@ -5,7 +5,7 @@ use app\models\File;
 
 class FileTest extends \Codeception\Test\Unit
 {
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $model = new File([
             'name' => 'test',  
@@ -19,7 +19,7 @@ class FileTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new File([
             'record_status' => 1,  
@@ -28,7 +28,7 @@ class FileTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidExtension()
+    public function testCreateInvalidExtensionMustFailed()
     {
         $model = new File([
             'name' => 'test',  
@@ -43,15 +43,14 @@ class FileTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('extension');
     }
 
-
-    public function testUpdate()
+    public function testUpdateSuccess()
     {
         $model = File::findOne(1);
         $model->record_status = 0;
         expect_that($model->save());
     }
 
-    public function testDelete()
+    public function testDeleteSuccess()
     {
         $model = File::findOne(1);
         expect_that($model->delete());

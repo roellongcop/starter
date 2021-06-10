@@ -6,7 +6,7 @@ use app\models\Log;
 
 class LogTest extends \Codeception\Test\Unit
 {
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $model = new Log([
             'user_id' => 1,
@@ -79,7 +79,7 @@ class LogTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new Log([
             'record_status' => 1,  
@@ -88,7 +88,7 @@ class LogTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
     
-    public function testCreateInvalid()
+    public function testCreateInvalidMustFailed()
     {
         $model = new Log([
             'user_id' => 1,
@@ -110,7 +110,7 @@ class LogTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('device');
     }
 
-    public function testCreateInvalidUserId()
+    public function testCreateInvalidUserIdMustFailed()
     {
         $model = new Log([
             'user_id' => 100,
@@ -184,8 +184,7 @@ class LogTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('user_id');
     }
 
-
-    public function testDelete()
+    public function testDeleteSuccess()
     {
         $model = Log::findOne(1);
         expect_that($model->delete());

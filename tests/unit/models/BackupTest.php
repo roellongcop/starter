@@ -6,7 +6,7 @@ use yii\helpers\Inflector;
 
 class BackupTest extends \Codeception\Test\Unit
 {
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $dbPref = \Yii::$app->db->tablePrefix;
 
@@ -39,7 +39,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new Backup([
             'record_status' => 1,  
@@ -48,7 +48,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoTables()
+    public function testCreateNoTablesSuccess()
     {
         $model = new Backup([
             'filename' => (string) time(),
@@ -62,7 +62,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoFilename()
+    public function testCreateNoFilenameMustFailed()
     {
         $time = time();
         $dbPref = \Yii::$app->db->tablePrefix;

@@ -6,7 +6,7 @@ use app\models\Notification;
 
 class NotificationTest extends \Codeception\Test\Unit
 {
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $model = new Notification([
             'user_id' => 1,
@@ -23,7 +23,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new Notification([
             'record_status' => 1
@@ -31,7 +31,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidUserId()
+    public function testCreateInvalidUserIdMustFailed()
     {
         $model = new Notification([
             'user_id' => 10001,
@@ -48,14 +48,14 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testUpdate()
+    public function testUpdateSuccess()
     {
         $model = Notification::findOne(1);
         $model->record_status = 0;
         expect_that($model->save());
     }
 
-    public function testDelete()
+    public function testDeleteSuccess()
     {
         $model = Notification::findOne(1);
         expect_that($model->delete());

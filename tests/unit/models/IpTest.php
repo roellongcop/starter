@@ -5,7 +5,7 @@ use app\models\Ip;
 
 class IpTest extends \Codeception\Test\Unit
 {
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $model = new Ip([
             'name' => '191.168.1.2',  
@@ -17,7 +17,7 @@ class IpTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new Ip([
             'record_status' => 1,  
@@ -26,7 +26,7 @@ class IpTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoIPName()
+    public function testCreateNoIPNameMustFailed()
     {
         $model = new Ip([
             'description' => 'test',  
@@ -38,7 +38,7 @@ class IpTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('name');
     }
 
-    public function testCreateInvalidIPName()
+    public function testCreateInvalidIPNameMustFailed()
     {
         $model = new Ip([
             'name' => 'not ip',  
@@ -51,14 +51,14 @@ class IpTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('name');
     }
 
-    public function testUpdate()
+    public function testUpdateSuccess()
     {
         $model = Ip::findOne(1);
         $model->record_status = 0;
         expect_that($model->save());
     }
 
-    public function testDelete()
+    public function testDeleteSuccess()
     {
         $model = Ip::findOne(1);
         expect_that($model->delete());

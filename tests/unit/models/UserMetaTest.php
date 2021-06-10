@@ -5,7 +5,7 @@ use app\models\UserMeta;
 
 class UserMetaTest extends \Codeception\Test\Unit
 {
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $model = new UserMeta([
             'user_id' => 1,  
@@ -17,7 +17,7 @@ class UserMetaTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new UserMeta([
             'record_status' => 1,  
@@ -26,7 +26,7 @@ class UserMetaTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidUserId()
+    public function testCreateInvalidUserIdMustFailed()
     {
         $model = new UserMeta([
             'user_id' => 100001,  
@@ -39,14 +39,14 @@ class UserMetaTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('user_id');
     }
 
-    public function testUpdate()
+    public function testUpdateSuccess()
     {
         $model = UserMeta::findOne(1);
         $model->record_status = 0;
         expect_that($model->save());
     }
 
-    public function testDelete()
+    public function testDeleteSuccess()
     {
         $model = UserMeta::findOne(1);
         expect_that($model->delete());

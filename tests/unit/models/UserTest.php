@@ -20,7 +20,7 @@ class UserTest extends \Codeception\Test\Unit
     //     ]);
     // }
 
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $user = new User([
             'role_id' => 1,
@@ -40,7 +40,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($user->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new User([
             'record_status' => 1,  
@@ -49,7 +49,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidRoleId()
+    public function testCreateInvalidRoleIdMustFailed()
     {
         $user = new User([
             'role_id' => 10001,
@@ -104,14 +104,14 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($user->validatePassword('not-developer@not-developer.com'));        
     }
 
-    public function testUpdate()
+    public function testUpdateSuccess()
     {
         $model = User::findOne(1);
         $model->record_status = 0;
         expect_that($model->save());
     }
 
-    public function testDelete()
+    public function testDeleteSuccess()
     {
         $model = User::findOne(1);
         expect_that($model->delete());

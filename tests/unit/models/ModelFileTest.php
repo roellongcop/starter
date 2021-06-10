@@ -5,7 +5,7 @@ use app\models\ModelFile;
 
 class ModelFileTest extends \Codeception\Test\Unit
 {
-    public function testCreate()
+    public function testCreateSuccess()
     {
         $model = new ModelFile([
             'model_id' => 1,  
@@ -18,7 +18,7 @@ class ModelFileTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoData()
+    public function testCreateNoDataMustFailed()
     {
         $model = new ModelFile([
             'record_status' => 1,  
@@ -27,7 +27,7 @@ class ModelFileTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidFileId()
+    public function testCreateInvalidFileIdMustFailed()
     {
         $model = new ModelFile([
             'model_id' => 1,  
@@ -42,7 +42,7 @@ class ModelFileTest extends \Codeception\Test\Unit
     }
 
 
-    public function testCreateInvalidModelId()
+    public function testCreateInvalidModelIdMustFailed()
     {
         $model = new ModelFile([
             'model_id' => 100001,  
@@ -56,14 +56,14 @@ class ModelFileTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('model_id');
     }
 
-    public function testUpdate()
+    public function testUpdateSuccess()
     {
         $model = ModelFile::findOne(1);
         $model->record_status = 0;
         expect_that($model->save());
     }
 
-    public function testDelete()
+    public function testDeleteSuccess()
     {
         $model = ModelFile::findOne(1);
         expect_that($model->delete());

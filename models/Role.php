@@ -25,7 +25,7 @@ use yii\helpers\Url;
  */
 class Role extends ActiveRecord
 {
-    public $relatedModels = [];
+    public $relatedModels = ['users'];
     //public $excel_ignore_attr = [];
 
     /**
@@ -102,16 +102,21 @@ class Role extends ActiveRecord
     {
         return new \app\models\query\RoleQuery(get_called_class());
     }
+
+    public function getUsers()
+    {
+        return $this->hasMany(User::ClassName(), ['role_id' => 'id']);
+    }
       
     public function getCanDelete()
     {
         $dontDelete = parent::getCanDelete();
 
         if (App::identity('role_id') == $this->id) {
-            $dontDelete = true;
+            $dontDelete = false;
         }
 
-        return ($dontDelete)? false: true;
+        return $dontDelete;
     }
     
     public function getJsonRoleAccess()
