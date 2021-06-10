@@ -12,7 +12,7 @@
 4) goto development server created: ```[http://host]/api/v1/user/available-users``` for available user
 5) Additional Command (you may configure console.php in config, eg: baseUrl)
 	
-	```'urlManager' => [
+	```urlManager => [
 	    'scriptUrl' => 'http://localhost:8080/',
 	    'baseUrl' => '/',
 	    'enablePrettyUrl' => true,
