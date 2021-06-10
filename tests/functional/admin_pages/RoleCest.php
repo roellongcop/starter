@@ -25,6 +25,12 @@ class RoleCest
         $I->see('Roles', 'h5');
     }
 
+    public function myRolePage(FunctionalTester $I)
+    {
+        $I->amOnPage(['role/my-role']);
+        $I->see('My Role:', 'h5');
+    }
+
     public function createPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getCreateUrl(false));

@@ -25,6 +25,18 @@ class SettingCest
         $I->see('Settings', 'h5');
     }
 
+    public function mySettingPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['setting/my-setting']);
+        $I->see('My Settings', 'h5');
+    }
+
+    public function generalSettingPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['setting/general']);
+        $I->see('General Settings', 'h5');
+    }
+
     public function viewPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getViewUrl(false));

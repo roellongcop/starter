@@ -25,6 +25,12 @@ class FileCest
         $I->see('Files', 'h5');
     }
 
+    public function myFilePage(FunctionalTester $I)
+    {
+        $I->amOnPage(['file/my-files']);
+        $I->see('My Files', 'h5');
+    }
+
     public function createPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getCreateUrl(false));
