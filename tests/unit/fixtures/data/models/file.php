@@ -2,10 +2,10 @@
 
 return [
     'profile' => [
-        'name' => 'image-placeholder-500x500', 
-        'extension' => 'jpg',
-        'size' => 9482,
-        'location' => 'protected/default/image-placeholder-500x500.jpg',
+        'name' => 'default-image_200', 
+        'extension' => 'png',
+        'size' => 1606,
+        'location' => 'protected/default/default-image_200.png',
         'token' => 'default-6ccb4a66-0ca3-46c7-88dd-default',
         'record_status' => 1,
         'created_by' => 1,

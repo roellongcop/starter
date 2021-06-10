@@ -11,7 +11,7 @@ class ModelFileTest extends \Codeception\Test\Unit
             'model_id' => 1,  
             'file_id' => 1,  
             'model_name' => 'User',  
-            'extension' => 'jpg',  
+            'extension' => 'png',  
             'record_status' => 1,  
         ]);
 
@@ -24,7 +24,7 @@ class ModelFileTest extends \Codeception\Test\Unit
             'model_id' => 1,  
             'file_id' => 100001,  
             'model_name' => 'User',  
-            'extension' => 'jpg',  
+            'extension' => 'png',  
             'record_status' => 1,  
         ]);
 
@@ -39,7 +39,7 @@ class ModelFileTest extends \Codeception\Test\Unit
             'model_id' => 100001,  
             'file_id' => 1,  
             'model_name' => 'User',  
-            'extension' => 'jpg',  
+            'extension' => 'png',  
             'record_status' => 1,  
         ]);
 

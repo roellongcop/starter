@@ -1,5 +1,5 @@
 <?php
-namespace tests\unit\models;
+namespace tests\unit\models\form;
 
 use app\helpers\App;
 use app\models\form\ContactForm;
