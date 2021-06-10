@@ -82,6 +82,7 @@ class Log extends ActiveRecord
             [['method', 'ip'], 'string', 'max' => 32],
             [['action', 'controller', 'table_name', 'model_name'], 'string', 'max' => 256],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
+            ['user_id', 'exist', 'targetRelation' => 'user'],
             /*[
                 ['fileInput'], 
                 'file', 
