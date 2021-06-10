@@ -25,6 +25,8 @@ class RoleTest extends \Codeception\Test\Unit
             'main_navigation' => json_encode($this->defaultNavigation),
             'slug' => 'admin', 
             'record_status' => 1,
+            'created_by' => 1,
+            'updated_by' => 1,
         ]);
 
         expect_that($model->save());

@@ -2,7 +2,7 @@
 use app\helpers\Url;
 
 return [
-	0 => [
+	1 => [
 		'user_id' => 1,
 		'message' => 'You\'ve Change your password',
 		'link' => Url::to(['user/my-password']),

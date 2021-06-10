@@ -1,6 +1,6 @@
 <?= "<?php\n" ?>
 return [
-	0 => [
+	1 => [
 <?php foreach ($labels as $name => $label): ?>
 <?php if (in_array($name, ['record_status', 'updated_by', 'created_by'])): ?>
 		<?= "'$name' => 1,\n" ?>

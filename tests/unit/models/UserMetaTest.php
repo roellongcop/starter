@@ -12,6 +12,8 @@ class UserMetaTest extends \Codeception\Test\Unit
             'meta_key' => 'address',  
             'meta_value' => 'Philippines',  
             'record_status' => 1,  
+            'created_by' => 1,
+            'updated_by' => 1,
         ]);
 
         expect_that($model->save());
@@ -32,7 +34,9 @@ class UserMetaTest extends \Codeception\Test\Unit
             'user_id' => 100001,  
             'meta_key' => 'address',  
             'meta_value' => 'Philippines',  
-            'record_status' => 1,  
+            'record_status' => 1, 
+            'created_by' => 1,
+            'updated_by' => 1, 
         ]);
 
         expect_not($model->save());

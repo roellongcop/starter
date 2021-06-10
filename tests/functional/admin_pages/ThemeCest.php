@@ -1,8 +1,8 @@
 <?php
 use app\models\User;
-use app\models\Session;
+use app\models\Theme;
 
-class SessionCest
+class ThemeCest
 {
     public $user;
     public $model;
@@ -10,7 +10,7 @@ class SessionCest
     public function _before(FunctionalTester $I)
     {
         $this->user = User::findByUsername('developer');
-        $this->model = Session::findOne('in2jfqrqoj5d6luo7qleggimid');
+        $this->model = Theme::findOne(1);
         $I->amLoggedInAs($this->user);
     }
 
@@ -22,21 +22,33 @@ class SessionCest
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->see('Sessions', 'h5');
+        $I->see('Themes', 'h5');
+    }
+
+    public function createPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->see('Create Theme', 'h5');
     }
 
     public function viewPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getViewUrl(false));
-        $I->see('Session:', 'h5');
+        $I->see('Theme:', 'h5');
+    }
+
+    public function updatePage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getUpdateUrl(false));
+        $I->see('Update Theme:', 'h5');
     }
 
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/session/confirm-action"]', [
+        $I->submitForm('form[action="/theme/confirm-action"]', [
             'process-selected' => 'active', 
-            'selection' => ['in2jfqrqoj5d6luo7qleggimid']
+            'selection' => [1]
         ]);
         $I->see('Confirm Action', 'h5');
     }

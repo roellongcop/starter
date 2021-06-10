@@ -13,11 +13,11 @@
 5) Additional Command 
 
 (you may configure console.php in config, eg: baseUrl)
-'urlManager' => [
+`'urlManager' => [
     'scriptUrl' => 'http://localhost:8080/',
     'baseUrl' => '/',
     'enablePrettyUrl' => true,
-]
+]`
         
 	```yii fixture *``` Create fixed set of data, Overwrite migration fixed data)
 
