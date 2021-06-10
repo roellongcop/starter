@@ -5,4 +5,5 @@ protected/runtime/*
 protected/data/*.db
 themes/classic/views/
 protected/*
-!protected/.gitkeep 
+!protected/.gitkeep
+!protected/default/default-image_200.png
