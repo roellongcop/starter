@@ -10,7 +10,7 @@
 	```yii serve``` (start server)
 
 4) goto development server created: ```[http://host]/api/v1/user/available-users``` for available user
-5) Additional Command 
+5) Additional Command (You may change console.php under config folder the urlManager[baseUrl])
 
 	```yii fixture *``` Create fixed set of data, Overwrite migration fixed data)
 
