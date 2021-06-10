@@ -11,13 +11,13 @@ class LogTest extends \Codeception\Test\Unit
         $model = new Log([
             'user_id' => 1,
             'model_id' => 1,
-            'request_data' => json_encode([
+            'request_data' => [
                 '_csrf' => 'QRS8RhBMyW_SC_JgnkJIV1eVxNvzXQdX9rmFpI9AOKgzX8kBWz-MA7xNwlnQESI1D_Sb6aJuTTuzgLzL6nkO0Q==',
                'LoginForm' => array(
                     'username' => 'developer@developer.com',
                     'password' => 'developer@developer.com',
                 ),
-            ]),
+            ],
             'change_attribute' => json_encode([
                 'user_id' => NULL,
                'ip' => NULL,
@@ -39,7 +39,7 @@ class LogTest extends \Codeception\Test\Unit
             'browser' => 'Chrome',
             'os' => 'Windows',
             'device' => 'Computer',
-            'server' => json_encode([
+            'server' => [
                 'DOCUMENT_ROOT' => 'C:\laragon\www\starter\web',
                 'REMOTE_ADDR' => '::1',
                 'REMOTE_PORT' => '53724',
@@ -70,7 +70,7 @@ class LogTest extends \Codeception\Test\Unit
                 'HTTP_COOKIE' => '_ga=GA1.1.407239226.1600821663; debug-bar-tab=ci-timeline; debug-bar-state=minimized; fpestid=Ff_-ZGvswuV27XqYVgDFEd0fvEqQ7pasvbVfIEO5DQpJWsJaQ1bzIX9beYi6_HEfIAqd8g; PHPSESSID=n7mqbe78d7vrjdcun8m9oqvd11; _csrf=7e359696465f5ba6fd7b8c33041c4d6d4b96d48272cbe12371c3131ea84dfb69a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22WMOrqqjCkes0q4R86NNyOyJE_ZkduEj_%22%3B%7D',
                 'REQUEST_TIME_FLOAT' => 1623125700.650181,
                 'REQUEST_TIME' => 1623125700,
-            ]),
+            ],
             'record_status' => 1,
             'updated_by' => 1,
             'created_by' => 1,
@@ -90,6 +90,15 @@ class LogTest extends \Codeception\Test\Unit
         ]);
 
         expect_not($model->save());
+        expect($model->errors)->hasKey('method');
+        expect($model->errors)->hasKey('action');
+        expect($model->errors)->hasKey('controller');
+        expect($model->errors)->hasKey('table_name');
+        expect($model->errors)->hasKey('model_name');
+        expect($model->errors)->hasKey('ip');
+        expect($model->errors)->hasKey('browser');
+        expect($model->errors)->hasKey('os');
+        expect($model->errors)->hasKey('device');
     }
 
     public function testCreateInvalidUserId()
@@ -97,13 +106,13 @@ class LogTest extends \Codeception\Test\Unit
         $model = new Log([
             'user_id' => 100,
             'model_id' => 1,
-            'request_data' => json_encode([
+            'request_data' => [
                 '_csrf' => 'QRS8RhBMyW_SC_JgnkJIV1eVxNvzXQdX9rmFpI9AOKgzX8kBWz-MA7xNwlnQESI1D_Sb6aJuTTuzgLzL6nkO0Q==',
                'LoginForm' => array(
                     'username' => 'developer@developer.com',
                     'password' => 'developer@developer.com',
                 ),
-            ]),
+            ],
             'change_attribute' => json_encode([
                 'user_id' => NULL,
                'ip' => NULL,
@@ -125,7 +134,7 @@ class LogTest extends \Codeception\Test\Unit
             'browser' => 'Chrome',
             'os' => 'Windows',
             'device' => 'Computer',
-            'server' => json_encode([
+            'server' => [
                 'DOCUMENT_ROOT' => 'C:\laragon\www\starter\web',
                 'REMOTE_ADDR' => '::1',
                 'REMOTE_PORT' => '53724',
@@ -156,13 +165,14 @@ class LogTest extends \Codeception\Test\Unit
                 'HTTP_COOKIE' => '_ga=GA1.1.407239226.1600821663; debug-bar-tab=ci-timeline; debug-bar-state=minimized; fpestid=Ff_-ZGvswuV27XqYVgDFEd0fvEqQ7pasvbVfIEO5DQpJWsJaQ1bzIX9beYi6_HEfIAqd8g; PHPSESSID=n7mqbe78d7vrjdcun8m9oqvd11; _csrf=7e359696465f5ba6fd7b8c33041c4d6d4b96d48272cbe12371c3131ea84dfb69a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22WMOrqqjCkes0q4R86NNyOyJE_ZkduEj_%22%3B%7D',
                 'REQUEST_TIME_FLOAT' => 1623125700.650181,
                 'REQUEST_TIME' => 1623125700,
-            ]),
+            ],
             'record_status' => 1,
             'updated_by' => 1,
             'created_by' => 1,
         ]);
 
         expect_not($model->save());
+        expect($model->errors)->hasKey('user_id');
     }
 
 

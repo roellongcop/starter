@@ -9,7 +9,6 @@ $modelClass = StringHelper::basename($generator->modelClass);
 use app\models\User;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 
-// Admin page functional test cest file. Move this file to @app\tests\functional\admin_pages
 class <?= $modelClass ?>Cest
 {
     public $user;

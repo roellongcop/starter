@@ -26,6 +26,7 @@ class IpTest extends \Codeception\Test\Unit
         ]);
 
         expect_not($model->save());
+        expect($model->errors)->hasKey('name');
     }
 
     public function testCreateInvalidIPName()
@@ -38,6 +39,7 @@ class IpTest extends \Codeception\Test\Unit
         ]);
 
         expect_not($model->save());
+        expect($model->errors)->hasKey('name');
     }
 
     public function testUpdate()

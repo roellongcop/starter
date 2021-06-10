@@ -2,7 +2,6 @@
 use app\models\User;
 use app\models\ModelFile;
 
-// Admin page functional test cest file. Move this file to @app\tests\functional\admin_pages
 class ModelFileCest
 {
     public $user;

@@ -2,8 +2,6 @@
 use app\models\User;
 use app\models\Backup;
 
-// Admin page functional test cest file. Move this file to @app\tests\functional\admin_pages
-
 class BackupCest
 {
     public $user;

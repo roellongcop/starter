@@ -32,6 +32,7 @@ class FileTest extends \Codeception\Test\Unit
         ]);
 
         expect_not($model->save());
+        expect($model->errors)->hasKey('extension');
     }
 
 

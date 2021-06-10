@@ -81,8 +81,7 @@ class BackupTest extends \Codeception\Test\Unit
             'created_by' => 1,
             'updated_by' => 1,
         ]);
-        $model->validate();
-
         expect_not($model->save());
+        expect($model->errors)->hasKey('filename');
     }
 }
