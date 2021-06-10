@@ -44,47 +44,6 @@ class VisitLogController extends Controller
     }
 
     /**
-     * Creates a new VisitLog model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new VisitLog();
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Created');
-
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing VisitLog model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Updated');
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
      * Deletes an existing VisitLog model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id

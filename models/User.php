@@ -96,6 +96,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['slug', 'role_id'], 'safe'],
             [['created_at', 'updated_at', 'password_hint', 'password_reset_token', 'password_hash'], 'safe'],
             ['role_id', 'exist', 'targetRelation' => 'role'],
+            ['role_id', 'validateRoleId'],
         ];
     }
  
@@ -113,6 +114,19 @@ class User extends ActiveRecord implements IdentityInterface
     public static function find()
     {
         return new \app\models\query\UserQuery(get_called_class());
+    }
+
+    public function validateRoleId($attribute, $params)
+    {
+        if (App::isGuest() && $this->role->isInactive) {
+            $this->addError($attribute, 'Cannot access inactive role');
+        }
+
+        if (App::isLogin() && $this->role->isInactive) {
+            if (! App::identity()->can('in-active-data', 'role')) {
+                $this->addError($attribute, 'User don\'t have access to role');
+            }
+        }
     }
 
     /**

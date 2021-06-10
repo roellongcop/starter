@@ -1,4 +1,6 @@
 <?php
+use app\helpers\App;
+use app\models\Role;
 use app\models\User;
 
 class UserCest
@@ -26,6 +28,31 @@ class UserCest
     {
         $I->amOnPage($this->user->getCreateUrl(false));
         $I->see('Create User', 'h5');
+    }
+
+    public function createUserInactiveRoleNoAccessMustFailed(FunctionalTester $I)
+    {
+        Yii::$app->user->logout();
+        $this->user = User::findByUsername('noinactiveroleuser');
+        $I->amLoggedInAs($this->user);
+        $I->amOnPage($this->user->getCreateUrl(false));
+        $I->see('Create User', 'h5');
+
+        $role = Role::findOne(['name' => 'developernoiactiverole']);
+
+        $I->submitForm('#user-form', [
+            'User[role_id]' => $role->id,
+            'User[username]' => 'testusername',
+            'User[email]' => 'testusername@testusername.com',
+            'User[password]' => 'testusername@testusername.com',
+            'User[password_repeat]' => 'testusername@testusername.com',
+            'User[status]' => 10,
+            'User[record_status]' => 1,
+            'User[is_blocked]' => 0,
+        ]);
+
+        $I->expectTo('See validation on user cannot select inactive role when he/she have no access');
+        $I->see('User don\'t have access to role');
     }
 
     public function viewPage(FunctionalTester $I)

@@ -1,6 +1,7 @@
 <?php
 namespace tests\unit\models;
 
+use app\models\Role;
 use app\models\User;
 use app\tests\unit\fixtures\UserFixture;
 
@@ -22,7 +23,7 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testCreateSuccess()
     {
-        $user = new User([
+        $model = new User([
             'role_id' => 1,
             'username' => 'developertest', 
             'email' => 'developertest@developertest.com',
@@ -37,7 +38,8 @@ class UserTest extends \Codeception\Test\Unit
             'is_blocked' => 0,
             'record_status' => 1,
         ]);
-        expect_that($user->save());
+        // $model->validate();
+        expect_that($model->save());
     }
 
     public function testCreateNoDataMustFailed()
@@ -63,6 +65,29 @@ class UserTest extends \Codeception\Test\Unit
             'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946012',
             'status' => 10,
             'slug' => 'invalidrole',
+            'is_blocked' => 0,
+            'record_status' => 1,
+        ]);
+        expect_not($user->save());
+    }
+
+
+    public function testCreateGuestInactiveRoleIdMustFailed()
+    {
+        $role = Role::findOne(['name' => 'inactiverole']);
+
+        $user = new User([
+            'role_id' => $role->id,
+            'username' => 'inactiveroleuserguest', 
+            'email' => 'inactiveroleuserguest@inactiveroleuserguest.com',
+            'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
+            'password_hash' => \Yii::$app->security->generatePasswordHash('inactiveroleuserguest@inactiveroleuserguest.com'),
+            'password_hint' => 'Same as Email',
+            'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_16219946013',
+            'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_16219946013',
+            'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946013',
+            'status' => 10,
+            'slug' => 'inactiveroleuserguest',
             'is_blocked' => 0,
             'record_status' => 1,
         ]);

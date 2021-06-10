@@ -58,6 +58,7 @@ class VisitLog extends ActiveRecord
             [['ip', 'action', 'record_status'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['ip'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
     }
 

@@ -443,6 +443,8 @@ class App {
 
 		$notFound = "Browser not detected";
 
+		$browser = [];
+
 		foreach ($browsers as $key => $value) { 
 			preg_match($key, self::userAgent(), $browserMatch); 
 				if($browserMatch){
@@ -473,6 +475,8 @@ class App {
 
 		$notFound = "OS not detected";
 
+		$osList = [];
+
 		foreach ($os as $key => $value) {
 			preg_match($key, self::userAgent(), $osMatch);  
 				if($osMatch){
@@ -497,6 +501,8 @@ class App {
 	        "Mobile"   => ["mobile ", "android.*mobile", "iphone", "ipod", "opera mobi", "opera mini"],
 	        "Bot"      => ["googlebot", "mediapartners-google", "adsbot-google", "duckduckbot", "msnbot", "bingbot", "ask", "facebook", "yahoo", "addthis"]
 	    ];
+
+	    $device = '';
 
 	    foreach ($devicesTypes as $key => $devices) {
 	    	foreach ($devices as $key1 => $value) {
