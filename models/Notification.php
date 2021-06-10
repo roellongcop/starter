@@ -66,6 +66,7 @@ class Notification extends ActiveRecord
             [['record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
+            [['user_id'], 'exist', 'targetRelation' => 'user'],
         ];
     }
 
@@ -99,6 +100,11 @@ class Notification extends ActiveRecord
     public static function find()
     {
         return new \app\models\query\NotificationQuery(get_called_class());
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
      
     public function gridColumns()

@@ -56,4 +56,11 @@ class UserCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+
+    public function profilePage(FunctionalTester $I)
+    {
+        $I->amOnPage(['user/profile', 'slug' => $this->user->slug]);
+        $I->see('Profile:', 'h5');
+    }
 }

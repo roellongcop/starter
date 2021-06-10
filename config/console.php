@@ -61,7 +61,6 @@ $config = [
             'scriptUrl' => 'http://localhost:8080/',
             'baseUrl' => '/',
             'enablePrettyUrl' => true,
-            
         ]
     ],
     'params' => $params,

@@ -20,6 +20,26 @@ class UserTest extends \Codeception\Test\Unit
     //     ]);
     // }
 
+    public function testCreate()
+    {
+        $user = new User([
+            'role_id' => 1,
+            'username' => 'developertest', 
+            'email' => 'developertest@developertest.com',
+            'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
+            'password_hash' => \Yii::$app->security->generatePasswordHash('developertest@developertest.com'),
+            'password_hint' => 'Same as Email',
+            'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_16219946011',
+            'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_16219946011',
+            'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946011',
+            'status' => 10,
+            'slug' => 'developertest',
+            'is_blocked' => 0,
+            'record_status' => 1,
+        ]);
+        expect_that($user->save());
+    }
+
     public function testCreateNoData()
     {
         $model = new User([
@@ -27,6 +47,26 @@ class UserTest extends \Codeception\Test\Unit
         ]);
 
         expect_not($model->save());
+    }
+
+    public function testCreateInvalidRoleId()
+    {
+        $user = new User([
+            'role_id' => 10001,
+            'username' => 'invalidrole', 
+            'email' => 'invalidrole@invalidrole.com',
+            'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
+            'password_hash' => \Yii::$app->security->generatePasswordHash('invalidrole@invalidrole.com'),
+            'password_hint' => 'Same as Email',
+            'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_16219946012',
+            'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_16219946012',
+            'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946012',
+            'status' => 10,
+            'slug' => 'invalidrole',
+            'is_blocked' => 0,
+            'record_status' => 1,
+        ]);
+        expect_not($user->save());
     }
 
     public function testFindUserById()
@@ -64,23 +104,16 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($user->validatePassword('not-developer@not-developer.com'));        
     }
 
-    public function testCreateValid()
+    public function testUpdate()
     {
-        $user = new User([
-            'role_id' => 1,
-            'username' => 'developertest', 
-            'email' => 'developertest@developertest.com',
-            'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
-            'password_hash' => \Yii::$app->security->generatePasswordHash('developertest@developertest.com'),
-            'password_hint' => 'Same as Email',
-            'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_16219946011',
-            'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_16219946011',
-            'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946011',
-            'status' => 10,
-            'slug' => 'developertest',
-            'is_blocked' => 0,
-            'record_status' => 1,
-        ]);
-        expect_that($user->save());
+        $model = User::findOne(1);
+        $model->record_status = 0;
+        expect_that($model->save());
+    }
+
+    public function testDelete()
+    {
+        $model = User::findOne(1);
+        expect_that($model->delete());
     }
 }

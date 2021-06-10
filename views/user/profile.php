@@ -6,7 +6,7 @@ use app\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
 
-$this->title = 'Profile : ' . $user->mainAttribute;
+$this->title = 'Profile: ' . $user->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $user->mainAttribute, 'url' => $user->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
