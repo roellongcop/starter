@@ -248,7 +248,7 @@ class SettingController extends Controller
     {
         $model = new SettingForm();
         if (($post = App::post()) != null) {
-            $post['SettingForm']['whitelist_ip_only'] = $post['SettingForm']['whitelist_ip_only'] ?? 0;
+            $post['SettingForm']['whitelist_ip_only'] = $post['SettingForm']['whitelist_ip_only'] ?? '0';
 
             if ($model->load($post) && $model->validate()) {
 
