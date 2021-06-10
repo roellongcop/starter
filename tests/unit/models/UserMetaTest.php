@@ -17,6 +17,15 @@ class UserMetaTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
+    public function testCreateNoData()
+    {
+        $model = new UserMeta([
+            'record_status' => 1,  
+        ]);
+
+        expect_not($model->save());
+    }
+
     public function testCreateInvalidUserId()
     {
         $model = new UserMeta([

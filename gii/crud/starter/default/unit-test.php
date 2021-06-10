@@ -33,6 +33,14 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->save());
     }
 
+    public function testCreateNoData()
+    {
+        $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>([
+            'record_status' => 1
+        ]);
+        expect_not($model->save());
+    }
+
     public function testUpdate()
     {
         $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);

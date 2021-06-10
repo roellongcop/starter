@@ -4,7 +4,7 @@ use app\widgets\Anchors;
 use app\widgets\Detail;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\User */
+/* @var $model app\models\Ip */
 
 $this->title = 'IP: ' . $model->mainAttribute;
 $this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
