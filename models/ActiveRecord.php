@@ -227,7 +227,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             $paramName = $this->paramName();
             $url = [
                 implode('/', [$this->controllerID(), 'create']),
-                $paramName => $this->{$paramName}
             ];
             return ($fullpath)? Url::to($url, true): $url;
         }

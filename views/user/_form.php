@@ -14,8 +14,6 @@ use app\widgets\RecordStatusInput;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 /* @var $form app\widgets\ActiveForm */
-
-$imageRules = $model->getActiveValidators('imageInput')[0];
 ?>
 <?php $form = ActiveForm::begin(['id' => 'user-form']); ?>
     <div class="row">

@@ -1,8 +1,5 @@
 <?php
-
-
 return [
-
     'general_settings' => [
         'whitelist_ip_only' => [
             'name' => 'whitelist_ip_only',
@@ -35,19 +32,19 @@ return [
         ],
         'primary_logo' => [
             'name' => 'primary_logo',
-            'default' => 'https://via.placeholder.com/200'
+            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
         ],
         'secondary_logo' => [
             'name' => 'secondary_logo',
-            'default' => 'https://via.placeholder.com/200'
+            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
         ],
         'image_holder' => [
             'name' => 'image_holder',
-            'default' => 'https://via.placeholder.com/200'
+            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
         ],
         'favicon' => [
             'name' => 'favicon',
-            'default' => 'https://via.placeholder.com/200'
+            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
         ],
         'auto_logout_timer' => [
             'name' => 'auto_logout_timer',
@@ -62,9 +59,6 @@ return [
             'default' => 'You\'ve Change your password'
         ],
     ],
-  
-
-    
 
     'file_extensions' => [
         'image' => ['jpeg', 'jpg', 'gif', 'bmp', 'tiff','png', 'ico',],
@@ -92,8 +86,6 @@ return [
         ],
     ],
 
-    
-
     'user_status' => [
         0 => [
             'id' => 0,
@@ -111,6 +103,7 @@ return [
             'class' => 'success'
         ],
     ],
+    
     'record_status' => [
         1 => [
             'id' => 1,
@@ -122,9 +115,7 @@ return [
             'label' => 'In-active',
             'class' => 'danger'
         ],
-        
     ],
-
 
     'is_blocked' => [
         0 => [

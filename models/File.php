@@ -110,7 +110,7 @@ class File extends ActiveRecord
 
     public function getDocumentPreviewPath()
     {
-        $path = '/protected/default/file-preview/';
+        $path = '/default/file-preview/';
 
         switch ($this->extension) {
             case 'css':
