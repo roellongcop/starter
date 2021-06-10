@@ -54,4 +54,24 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($user->validatePassword('developer@developer.com'));
         expect_not($user->validatePassword('not-developer@not-developer.com'));        
     }
+
+    public function testCreateValid()
+    {
+        $user = new User([
+            'role_id' => 1,
+            'username' => 'developertest', 
+            'email' => 'developertest@developertest.com',
+            'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
+            'password_hash' => \Yii::$app->security->generatePasswordHash('developertest@developertest.com'),
+            'password_hint' => 'Same as Email',
+            'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_16219946011',
+            'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_16219946011',
+            'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946011',
+            'status' => 10,
+            'slug' => 'developertest',
+            'is_blocked' => 0,
+            'record_status' => 1,
+        ]);
+        expect_that($user->save());
+    }
 }
