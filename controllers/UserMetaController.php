@@ -97,7 +97,6 @@ class UserMetaController extends Controller
         $model = new UserMeta();
         $model->attributes = $originalModel->attributes;
 
-
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Duplicated');
 

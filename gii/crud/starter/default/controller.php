@@ -115,7 +115,6 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
         $model = new <?= $modelClass ?>();
         $model->attributes = $originalModel->attributes;
 
-
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Duplicated');
 

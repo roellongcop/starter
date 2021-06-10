@@ -73,7 +73,6 @@ class IpController extends Controller
         $model = new Ip();
         $model->attributes = $originalModel->attributes;
 
-
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Duplicated');
 

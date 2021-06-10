@@ -15,7 +15,6 @@ use yii\helpers\Inflector;
  */
 class ModelFileController extends Controller 
 {
-
     /**
      * Lists all ModelFile models.
      * @return mixed

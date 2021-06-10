@@ -15,7 +15,6 @@ use yii\helpers\Inflector;
  */
 class QueueController extends Controller 
 {
-
     /**
      * Lists all Queue models.
      * @return mixed
@@ -75,7 +74,6 @@ class QueueController extends Controller
         $originalModel = $this->findModel($id);
         $model = new Queue();
         $model->attributes = $originalModel->attributes;
-
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Duplicated');

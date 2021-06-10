@@ -29,7 +29,6 @@ class DashboardController extends Controller
             else {
                 return $this->redirect(['index']);
             }
-           
         }
 
         return $this->render('index', [

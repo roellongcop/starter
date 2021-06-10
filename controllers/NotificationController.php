@@ -15,7 +15,6 @@ use yii\helpers\Inflector;
  */
 class NotificationController extends Controller 
 {
-
     /**
      * Lists all Notification models.
      * @return mixed
