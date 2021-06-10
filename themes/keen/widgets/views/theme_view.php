@@ -3,41 +3,7 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\widgets\KeenActiveForm;
-
-$registerJs = <<<SCRIPT
-	$('.theme-image').on('change', function() {
-		var input = this;
-		var container = $(input).data('container')
-	    var imageInput = input.files[0]; 
-	    var id = $(input).parents('div.image-input')
-	    	.find('input.theme_id')
-	    	.val()
-	    let formData = new FormData();
-	    formData.append('Theme[imageInput]', imageInput);
-	    formData.append('Theme[id]', id);
-	    KTApp.block('#' + container, {});
-		$.ajax( {
-			url: '{$uploadUrl}',
-			type: 'POST',
-			data: formData,
-			dataType: 'text',
-			processData: false,
-			contentType: false,
-			success: function(s) {
-	            KTApp.unblock('#' + container);
-				$(input).parents('div.image-input')
-	            	.find('img.img-thumbnail')
-	            	.attr('src', s)
-			},
-			error: function(e) {
-	            KTApp.unblockPage();
-				alert(e.responseText)
-			}
-		});
-	})
-SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END)
+use app\widgets\ActiveForm;
 ?>
 <div id="container-<?= $id ?>" class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
 	<!--begin::Header-->
@@ -57,28 +23,6 @@ $this->registerJs($registerJs, \yii\web\View::POS_END)
 			<!--begin::Image--> 
 			<div class="image-input">
 				<img src="<?= $theme->imagePath ?>&w=300" class="img-thumbnail theme-image">
-				<?php if (App::identity()->can('change-image', 'theme')): ?>
-					<?php $form = KeenActiveForm::begin(); ?>
-	              		<?= $form->field($theme, 'id')
-	              			->hiddenInput(['class' => 'theme_id'])
-	              			->label(false) ?>
-						<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" 
-							data-action="change" 
-							data-toggle="tooltip" 
-							title="" 
-							data-original-title="Change Image">
-							<i class="fa fa-pen icon-sm text-muted"></i>
-							<?= $form->field($theme, 'imageInput')
-								->fileInput([
-									'class' => 'theme-image',
-									'data-container' => "container-{$id}"
-								])
-								->label(false) ?>
-						</label>
-					<?php KeenActiveForm::end(); ?>
-				<?php else: ?>
-					<p></p>
-				<?php endif ?>
 			</div>
 			<!--end::Image-->
 			<p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">

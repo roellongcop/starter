@@ -27,9 +27,6 @@ class Session extends ActiveRecord
 {
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    //public $imageInput;
-    //public $fileLocation; 
 
     /**
      * {@inheritdoc}
@@ -69,26 +66,6 @@ class Session extends ActiveRecord
             [['ip'], 'string', 'max' => 32],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
             [['id'], 'unique'],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],
-            */
         ];
     }
 

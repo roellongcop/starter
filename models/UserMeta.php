@@ -22,9 +22,6 @@ class UserMeta extends ActiveRecord
 {
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    //public $imageInput;
-    //public $fileLocation; 
 
     /**
      * {@inheritdoc}
@@ -62,26 +59,6 @@ class UserMeta extends ActiveRecord
             [['created_at', 'updated_at', 'meta_value'], 'safe'],
             [['meta_key'], 'string', 'max' => 255],
             ['user_id', 'exist', 'targetRelation' => 'user', 'message' => 'User not found'],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],
-            */
         ];
     }
 

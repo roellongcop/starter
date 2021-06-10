@@ -32,9 +32,6 @@ class File extends ActiveRecord
 {
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    // public $imageInput;
-    //public $fileLocation; 
 
     /**
      * {@inheritdoc}
@@ -71,27 +68,10 @@ class File extends ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'token'], 'string', 'max' => 255],
             [['extension'], 'string', 'max' => 16],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],
-
-            */
+            ['extension', 'in', 'range' => array_merge(
+                App::params('file_extensions')['image'],
+                App::params('file_extensions')['file'],
+            )],
         ];
     }
 
@@ -130,7 +110,8 @@ class File extends ActiveRecord
 
     public function getDocumentPreviewPath()
     {
-        $path = App::publishedUrl() . '/media/svg/files/';
+        $path = '/protected/default/file-preview/';
+
         switch ($this->extension) {
             case 'css':
                 $path .= 'css.svg';

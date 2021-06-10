@@ -1,6 +1,7 @@
 <?php
 use app\helpers\App;
 use app\helpers\Html;
+use app\models\form\UploadForm;
 use app\models\search\RoleSearch;
 use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
@@ -63,7 +64,7 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
             </div>
             <?= ChooseFromGallery::widget([
                 'model' => $model,
-                'fileInput' => $form->field($model, 'imageInput')
+                'fileInput' => $form->field(new \app\models\form\UploadForm(['extensionType' => 'image']), 'fileInput')
                     ->fileInput()
                     ->label('Upload Photo'),
                 'ajaxSuccess' => "
@@ -72,14 +73,6 @@ $imageRules = $model->getActiveValidators('imageInput')[0];
                     }
                 "
             ]) ?> 
-            <div class="alert alert-info">
-                <ul>
-                    <li>Minimum Width: <?= $imageRules->minWidth ?></li>
-                    <li>Maximum Width: <?= $imageRules->maxWidth ?></li>
-                    <li>Minimum Height: <?= $imageRules->minHeight ?></li>
-                    <li>Maximum Height: <?= $imageRules->maxHeight ?></li>
-                </ul>
-            </div>
         </div>
     </div>
     <div class="form-group">

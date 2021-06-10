@@ -38,9 +38,6 @@ class Log extends ActiveRecord
     public $relatedModels = [];
     public $_username;
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    // public $imageInput;
-    //public $fileLocation; 
 
     /**
      * {@inheritdoc}
@@ -83,26 +80,6 @@ class Log extends ActiveRecord
             [['action', 'controller', 'table_name', 'model_name'], 'string', 'max' => 256],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
             ['user_id', 'exist', 'targetRelation' => 'user'],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],*/
-
         ];
     }
 

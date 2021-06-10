@@ -26,6 +26,30 @@ class UploadForm extends Model
     public $modelName;
     public $fileInput;
     public $fileToken;
+
+    public $extensionType = '*';
+    public $extensions;
+
+    public function init()
+    {
+        parent::init();
+        switch ($this->extensionType) {
+            case 'image':
+                $this->extensions = App::params('file_extensions')['image'];
+                break;
+
+            case 'file':
+                $this->extensions = App::params('file_extensions')['file'];
+                break;
+            
+            default:
+                $this->extensions = array_merge(
+                    App::params('file_extensions')['image'],
+                    App::params('file_extensions')['file']
+                );
+                break;
+        }
+    }
   
     /**
      * {@inheritdoc}
@@ -43,10 +67,7 @@ class UploadForm extends Model
                 // 'maxHeight' => 200,
                 // 'maxSize' => 1024 * 1024 * 2,
                 'skipOnEmpty' => true, 
-                'extensions' => array_merge(
-                    App::params('file_extensions')['image'],
-                    App::params('file_extensions')['file']
-                ), 
+                'extensions' => $this->extensions, 
                 'checkExtensionByMimeType' => false
             ],
         ];

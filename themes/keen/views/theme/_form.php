@@ -61,4 +61,17 @@ $this->registerJs($registerJs, \yii\web\View::POS_END);
     <div class="form-group"><br>
         <?= AnchorForm::widget() ?>
     </div>
+    <?php if (!$model->isNewRecord): ?>
+        <br>
+        <p class="lead">Upload Images</p>
+        <?= Dropzone::widget([
+            'files' => $model->imageFiles,
+            'model' => $model,
+            'acceptedFiles' => array_map(
+                function($val) { 
+                    return ".{$val}"; 
+                }, App::params('file_extensions')['image']
+            )
+        ]) ?>
+    <?php endif ?>
 <?php ActiveForm::end(); ?>

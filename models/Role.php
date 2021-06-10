@@ -27,9 +27,6 @@ class Role extends ActiveRecord
 {
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    // public $imageInput;
-    //public $fileLocation; 
 
     /**
      * {@inheritdoc}
@@ -69,25 +66,6 @@ class Role extends ActiveRecord
             [['name', 'slug'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['slug'], 'unique'],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],*/
         ];
     }
 

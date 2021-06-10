@@ -36,13 +36,10 @@ class User extends ActiveRecord implements IdentityInterface
     public $_tableColumnsMeta = false;
     public $_currentTheme;
 
-
     public $relatedModels = ['role'];
 
     public $excel_ignore_attr = ['photo'];
     // public $fileInput;
-    public $imageInput;
-    public $fileLocation; 
     public $password;
     public $password_repeat;
 
@@ -100,27 +97,6 @@ class User extends ActiveRecord implements IdentityInterface
             [['slug', 'role_id'], 'safe'],
             [['created_at', 'updated_at', 'password_hint', 'password_reset_token', 'password_hash'], 'safe'],
             ['role_id', 'exist', 'targetRelation' => 'role'],
-
-            // [
-            //     ['fileInput'], 
-            //     'file', 
-            //     'skipOnEmpty' => true, 
-            //     'extensions' => App::params('file_extensions')['file'], 
-            //     'checkExtensionByMimeType' => false
-            // ],
-
-            [
-                ['imageInput'], 
-                'image', 
-                // 'minWidth' => 100,
-                // 'maxWidth' => 200,
-                // 'minHeight' => 100,
-                // 'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],
         ];
     }
  

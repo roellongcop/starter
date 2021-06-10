@@ -241,21 +241,6 @@ class ThemeController extends Controller
         ]);
     }
 
-    public function actionChangeImage()
-    {
-        if (App::post()) {
-            $id = App::post('Theme')['id'] ?? 0;
-            if (($model = Theme::findOne($id)) != null) {
-                if ($model->load(App::post())) {
-                    $model->imageInput = UploadedFile::getInstance($model, 'imageInput');
-                    $model->upload();
-
-                    return $model->imagePath . '&w=300';
-                }
-            }
-        }
-    }
-
     public function actionActivate($slug)
     {
         $theme = $this->findModel($slug, 'slug');

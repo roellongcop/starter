@@ -24,10 +24,6 @@ class ModelFile extends ActiveRecord
 {
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    //public $imageInput;
-    //public $fileLocation; 
-
     /**
      * {@inheritdoc}
      */

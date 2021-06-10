@@ -27,8 +27,6 @@ class Notification extends ActiveRecord
 {
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    //public $imageInput;
 
     /**
      * {@inheritdoc}
@@ -65,26 +63,6 @@ class Notification extends ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 128],
             [['token'], 'string', 'max' => 255],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],
-            */
             [['record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],

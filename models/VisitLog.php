@@ -22,10 +22,6 @@ class VisitLog extends ActiveRecord
 {
     public $relatedModels = [];
     //public $excel_ignore_attr = [];
-    //public $fileInput;
-    // public $imageInput;
-    //public $fileLocation; 
-
     /**
      * {@inheritdoc}
      */
@@ -62,26 +58,6 @@ class VisitLog extends ActiveRecord
             [['ip', 'action', 'record_status'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['ip'], 'string', 'max' => 255],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],*/
-        ];
     }
 
     /**
