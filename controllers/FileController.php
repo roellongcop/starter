@@ -48,6 +48,7 @@ class FileController extends Controller
 
         $file = File::findOne(['token' => $token]);
 
+
         if ($file) { 
             $path = $file->rootPath;
 

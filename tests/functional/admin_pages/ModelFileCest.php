@@ -1,16 +1,9 @@
 <?php
-
-use yii\helpers\StringHelper;
-use yii\helpers\Inflector;
-
-$modelClass = StringHelper::basename($generator->modelClass);
-?>
-<?= "<?php\n" ?>
 use app\models\User;
-use <?= ltrim($generator->modelClass, '\\') ?>;
+use app\models\ModelFile;
 
 // Admin page functional test cest file. Move this file to @app\tests\functional\admin_pages
-class <?= $modelClass ?>Cest
+class ModelFileCest
 {
     public $user;
     public $model;
@@ -18,7 +11,7 @@ class <?= $modelClass ?>Cest
     public function _before(FunctionalTester $I)
     {
         $this->user = User::findByUsername('developer');
-        $this->model = <?= $modelClass ?>::findOne(1);
+        $this->model = ModelFile::findOne(1);
         $I->amLoggedInAs($this->user);
     }
 
@@ -30,37 +23,37 @@ class <?= $modelClass ?>Cest
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->see(<?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'h5');
+        $I->see('Model Files', 'h5');
     }
 
     public function createPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getCreateUrl(false));
-        $I->see(<?= $generator->generateString('Create '. Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, 'h5');
+        $I->see('Create Model File', 'h5');
     }
 
     public function viewPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getViewUrl(false));
-        $I->see('<?= Inflector::camel2words(StringHelper::basename($generator->modelClass)) ?>:', 'h5');
+        $I->see('Model File:', 'h5');
     }
 
     public function updatePage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getUpdateUrl(false));
-        $I->see('Update <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)) ?>:', 'h5');
+        $I->see('Update Model File:', 'h5');
     }
 
     public function duplicatePage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getDuplicateUrl(false));
-        $I->see('Duplicate <?= Inflector::camel2words(StringHelper::basename($generator->modelClass)) ?>:', 'h5');
+        $I->see('Duplicate Model File:', 'h5');
     }
 
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/<?= Inflector::camel2id($modelClass) ?>/confirm-action"]', [
+        $I->submitForm('form[action="/model-file/confirm-action"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);

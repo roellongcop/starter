@@ -65,6 +65,7 @@ class ModelFile extends ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['model_name'], 'string', 'max' => 255],
             ['file_id', 'exist', 'targetRelation' => 'file'],
+            ['model_id', 'exist', 'targetRelation' => 'modelInstance'],
         ];
     }
 
@@ -95,6 +96,13 @@ class ModelFile extends ActiveRecord
     public static function find()
     {
         return new \app\models\query\ModelFileQuery(get_called_class());
+    }
+
+    public function getModelInstance()
+    {
+        $class = Yii::createObject("\\app\\models\\{$this->model_name}");
+        
+        return $this->hasOne($class::className(), ['id' => 'model_id']);
     }
 
     public function gridColumns()

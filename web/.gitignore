@@ -6,3 +6,4 @@ protected/data/*.db
 themes/classic/views/
 protected/*
 !protected/.gitkeep 
+!protected/default/default-image_200.png

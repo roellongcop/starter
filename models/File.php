@@ -246,6 +246,7 @@ class File extends ActiveRecord
     public function detailColumns()
     {
         return [
+            'previewIcon:raw',
             'name:raw',
             'extension:raw',
             'size:raw',
