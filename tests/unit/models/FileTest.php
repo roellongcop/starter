@@ -19,6 +19,14 @@ class FileTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
+    public function testCreateNoData()
+    {
+        $model = new File([
+            'record_status' => 1,  
+        ]);
+
+        expect_not($model->save());
+    }
 
     public function testCreateInvalidExtension()
     {

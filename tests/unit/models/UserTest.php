@@ -20,6 +20,15 @@ class UserTest extends \Codeception\Test\Unit
     //     ]);
     // }
 
+    public function testCreateNoData()
+    {
+        $model = new User([
+            'record_status' => 1,  
+        ]);
+
+        expect_not($model->save());
+    }
+
     public function testFindUserById()
     {
         expect_that($user = User::findIdentity(1));

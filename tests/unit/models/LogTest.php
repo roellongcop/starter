@@ -79,6 +79,15 @@ class LogTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
+    public function testCreateNoData()
+    {
+        $model = new Log([
+            'record_status' => 1,  
+        ]);
+
+        expect_not($model->save());
+    }
+    
     public function testCreateInvalid()
     {
         $model = new Log([

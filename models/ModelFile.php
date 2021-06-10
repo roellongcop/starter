@@ -56,12 +56,12 @@ class ModelFile extends ActiveRecord
             [['record_status'], 'default', 'value' => 1],
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['model_id', 'file_id'], 'default', 'value' => 0],
-            [['model_name', 'record_status'], 'required'],
+            [['model_id', 'model_name', 'record_status'], 'required'],
             [['record_status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['model_name'], 'string', 'max' => 255],
             ['file_id', 'exist', 'targetRelation' => 'file'],
-            ['model_id', 'exist', 'targetRelation' => 'modelInstance'],
+            ['model_id', 'validateModelId',],
         ];
     }
 
@@ -85,6 +85,18 @@ class ModelFile extends ActiveRecord
         ];
     }
 
+    public function validateModelId($attribute, $params)
+    {
+        if (!$this->modelInstance) {
+            $this->addError($attribute, 'No Model name');
+        }
+        else {
+            if (($model = $this->modelInstance::findOne($this->model_id)) == null) {
+                $this->addError($attribute, 'Not Existing Model ID');
+            }
+        }
+    }
+
     /**
      * {@inheritdoc}
      * @return \app\models\query\ModelFileQuery the active query used by this AR class.
@@ -96,9 +108,11 @@ class ModelFile extends ActiveRecord
 
     public function getModelInstance()
     {
-        $class = Yii::createObject("\\app\\models\\{$this->model_name}");
-        
-        return $this->hasOne($class::className(), ['id' => 'model_id']);
+        if ($this->model_name) {
+            $class = Yii::createObject("\\app\\models\\{$this->model_name}");
+            
+            return $this->hasOne($class::className(), ['id' => 'model_id']);
+        }
     }
 
     public function gridColumns()

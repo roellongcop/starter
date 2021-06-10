@@ -39,6 +39,15 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
+    public function testCreateNoData()
+    {
+        $model = new Backup([
+            'record_status' => 1,  
+        ]);
+
+        expect_not($model->save());
+    }
+
     public function testCreateNoTables()
     {
         $model = new Backup([
