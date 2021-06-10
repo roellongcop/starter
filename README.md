@@ -16,7 +16,7 @@
 	    'scriptUrl' => 'http://localhost:8080/',
 	    'baseUrl' => '/',
 	    'enablePrettyUrl' => true,
-	]
+	]```
 
 	```yii fixture *``` Create fixed set of data, Overwrite migration fixed data)
 
