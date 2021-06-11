@@ -71,7 +71,7 @@ class ExportComponent extends \yii\base\Component
     public function processTableColumns($model)
     {
         $filterColumns = App::identity()->filterColumns($model);
-        $columns = $model->gridColumns();
+        $columns = $model->tableColumns;
 
         foreach ($columns as $key => &$column) {
             if (! isset($column['visible'])) {
@@ -88,7 +88,7 @@ class ExportComponent extends \yii\base\Component
             return $searchModel->exportColumns;
         }
         
-        $columns = array_keys($searchModel->gridColumns());
+        $columns = array_keys($searchModel->tableColumns);
         $search_model_columns = $this->processTableColumns($searchModel);
         $res = [];
         $ignore_attr = ['checkbox', 'actions'];
@@ -113,6 +113,9 @@ class ExportComponent extends \yii\base\Component
                         $res[$column]['header'] = str_replace('_', ' ', $column);
                         if (in_array($column, ['photo'])) {
                             $res[$column]['format'] = 'raw';
+                        }
+                        else if (in_array($column, ['created_at', 'updated_at'])) {
+                            $res[$column]['format'] = 'fulldate';
                         }
                         else {
                             $res[$column]['format'] = 'stripTags';
