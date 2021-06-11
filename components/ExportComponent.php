@@ -71,7 +71,7 @@ class ExportComponent extends \yii\base\Component
     public function processTableColumns($model)
     {
         $filterColumns = App::identity()->filterColumns($model);
-        $columns = $model->tableColumns;
+        $columns = $model->gridColumns();
 
         foreach ($columns as $key => &$column) {
             if (! isset($column['visible'])) {
@@ -88,7 +88,7 @@ class ExportComponent extends \yii\base\Component
             return $searchModel->exportColumns;
         }
         
-        $columns = array_keys($searchModel->tableColumns);
+        $columns = array_keys($searchModel->gridColumns());
         $search_model_columns = $this->processTableColumns($searchModel);
         $res = [];
         $ignore_attr = ['checkbox', 'actions'];
