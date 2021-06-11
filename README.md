@@ -50,6 +50,8 @@
 * Photo Uploader (dropzone)
 * Queuing System
 * Fixture Setup | for testing
+* Database Seeding
+* Notification
 
 # Modules
 * Dashboard
