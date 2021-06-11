@@ -4,28 +4,25 @@ namespace app\components;
 use PhpOffice\PhpSpreadsheet\Writer\Csv as CsvWriter;
 use PhpOffice\PhpSpreadsheet\Reader\Html as HtmlReader;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Yii;
 use app\helpers\App;
-use yii\base\Component;
 
 /**
  * 
  */
-class ExportComponent extends Component
+class ExportComponent extends \yii\base\Component
 {
     public function export_pdf($content)
     {
         $pdf = App::component('pdf');
-        $pdf->filename = App::controllerID() . '-pdf-'.time().'.pdf';;
+        $pdf->filename = implode('-', [App::controllerID(), 'pdf', time()]) . '.pdf';
         $pdf->content = $content;
         return $pdf->render();
     }
 
     public function export_csv($content) 
     {
-        $file_name = App::controllerID() . '-export-csv-'.time().'.csv';
+        $file_name = implode('-', [App::controllerID(), 'export-csv', time()]) . '.csv';
 
         $reader = new HtmlReader();
 
@@ -46,7 +43,7 @@ class ExportComponent extends Component
 
     public function export_excel($content, $ext='Xlsx')
     { 
-        $file_name =  App::controllerID() . '-export-' . $ext . '-' . time(). '.' . $ext;
+        $file_name =  implode('-', [App::controllerID(), 'export', strtolower($ext), time()]) . '.' . strtolower($ext);
 
         $reader = new HtmlReader;
         $internalErrors = libxml_use_internal_errors(true);
@@ -103,7 +100,6 @@ class ExportComponent extends Component
                 }
             }
         }
-        
 
         foreach ($columns as $column) {
             if (! in_array($column, $ignore_attr)) {
@@ -115,7 +111,12 @@ class ExportComponent extends Component
                     }
                     else {
                         $res[$column]['header'] = str_replace('_', ' ', $column);
-                        $res[$column]['format'] = 'stripTags';
+                        if (in_array($column, ['photo'])) {
+                            $res[$column]['format'] = 'raw';
+                        }
+                        else {
+                            $res[$column]['format'] = 'stripTags';
+                        }
                     }
                 }
             }

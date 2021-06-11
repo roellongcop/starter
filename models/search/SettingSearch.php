@@ -129,7 +129,7 @@ class SettingSearch extends Setting
         }
 
         if ($name == 'image_holder') {
-            return App::params('general_settings')['image_holder']['default'] ?? '';
+            return Url::to(App::params('general_settings')['image_holder']['default'], true) ?? '';
         }
 
         return self::defaultImage('image_holder');
