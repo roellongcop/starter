@@ -16,7 +16,8 @@ use yii\helpers\StringHelper;
     'data-location' => $model->location,
     'data-token' => $model->token,
     'data-created_at' => App::formatter('asFulldate', $model->created_at),
+    'title' => $model->name
 ]) ?>
 <p>
-    <?= StringHelper::truncate($model->name, 10) ?>
+    <?= StringHelper::truncate($model->name, 15) ?>
 </p>
