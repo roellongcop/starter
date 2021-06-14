@@ -8,15 +8,14 @@ use app\models\Role;
 class UserSeeder extends Seeder
 {
 	public $roles;
+	public $modelClass = [
+		'class' => 'app\commands\models\User',
+		'password_hint' => 'Same as Email',
+	];
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->modelClass = [
-			'class' => 'app\commands\models\User',
-			'password_hint' => 'Same as Email',
-		];
-
 		$this->roles = array_keys(Role::dropdown());
 	}
 

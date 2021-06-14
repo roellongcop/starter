@@ -1,17 +1,17 @@
 <?php
 namespace app\models;
 
-use Yii;
 use Imagine\Gd;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\BoxInterface;
-use yii\imagine\Image;
+use Yii;
 use app\helpers\App;
-use app\widgets\Anchor;
 use app\helpers\Html;
+use app\models\ModelFile;
+use app\widgets\Anchor;
 use yii\helpers\Url;
-use app\behaviors\FileBehavior;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "{{%files}}".
@@ -346,10 +346,11 @@ class File extends ActiveRecord
         return in_array($this->extension, ['sql']);
     }
 
-    public function behaviors()
+    public function afterDelete()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['FileBehavior'] = ['class' => FileBehavior::className()];
-        return $behaviors;
+        ModelFile::deleteAll(['file_id' => $this->id]);
+        if (file_exists($this->rootPath)) {
+            unlink($this->rootPath);
+        }
     }
 }
