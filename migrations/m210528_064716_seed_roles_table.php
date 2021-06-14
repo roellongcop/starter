@@ -28,6 +28,14 @@ class m210528_064716_seed_roles_table extends Migration
         $controllerActions = $access->controllerActions();
         $defaultNavigation = $access->defaultNavigation();
         return [
+            'developer' => [
+                'name' => 'developer', 
+                'role_access' => json_encode([]),
+                'module_access' => json_encode($controllerActions),
+                'main_navigation' => json_encode($defaultNavigation),
+                'slug' => 'developer', 
+                'record_status' => 1,
+            ],
             'admin' => [
                 'name' => 'admin', 
                 'role_access' => json_encode([]),
@@ -43,22 +51,6 @@ class m210528_064716_seed_roles_table extends Migration
                 'main_navigation' => json_encode($defaultNavigation),
                 'slug' => 'superadmin', 
                 'record_status' => 1,
-            ],
-            'developer' => [
-                'name' => 'developer', 
-                'role_access' => json_encode([]),
-                'module_access' => json_encode($controllerActions),
-                'main_navigation' => json_encode($defaultNavigation),
-                'slug' => 'developer', 
-                'record_status' => 1,
-            ],
-            'inactive_role' => [
-                'name' => 'inactive_role', 
-                'role_access' => json_encode([]),
-                'module_access' => json_encode($controllerActions),
-                'main_navigation' => json_encode($defaultNavigation),
-                'slug' => 'inactive_role', 
-                'record_status' => 0,
             ]
         ];
     }
