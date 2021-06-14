@@ -29,9 +29,24 @@ abstract class Seeder
     public $modelClass;
     public $insert;
 
+    public $showProgress = true;
+    public $totalRecords = 0;
+
     public function __construct()
     {
         $this->faker = Factory::create();
+    }
+
+    public function resetProperties()
+    {
+        $this->success = 0;
+        $this->failed = 0;
+        $this->success_attributes = [];
+        $this->error_attributes = [];
+        $this->model_errors = [];
+
+        $this->showProgress = true;
+        $this->totalRecords = 0;
     }
 
     public function recordStatus()
@@ -61,7 +76,9 @@ abstract class Seeder
 
     public function startProgress($done=0, $total, $prefix='', $width=1)
     {
-        Console::startProgress($done, $total, $prefix, $width);
+        if ($this->showProgress) {
+            Console::startProgress($done, $total, $prefix, $width);
+        }
     }
  
     public function save($model, $done=1)
@@ -77,50 +94,59 @@ abstract class Seeder
             $this->error_attributes[$done] = $model->attributes;
         }
 
-        Console::updateProgress($done, $this->rows);
+        if ($this->showProgress) {
+            Console::updateProgress($done, $this->rows);
+        }
         return $model;
     }
 
-    public function summary($total=0)
+    public function summary()
     {
-        Console::endProgress("done." . PHP_EOL);
-
-        echo Table::widget([
-            'headers' => ['Success', 'Failed', 'Total'],
-            'rows' => [
-                [
-                    number_format($this->success), 
-                    number_format($this->failed), 
-                    number_format($total)
+        if ($this->showProgress) {
+            Console::endProgress("done." . PHP_EOL);
+            echo Table::widget([
+                'headers' => ['Success', 'Failed', 'Total'],
+                'rows' => [
+                    [
+                        number_format($this->success), 
+                        number_format($this->failed), 
+                        number_format($this->totalRecords)
+                    ],
                 ],
-            ],
-        ]);
+            ]);
+        }
 
         if ($this->failed > 0) {
-            Console::output('Unsuccessfull inserts.');
 
             $rows = [];
             foreach ($this->model_errors as $row => $validation) {
                 $rows[] = [$row, json_encode($validation)];
             }
 
-            echo Table::widget([
-                'headers' => ['Row', 'validation'],
-                'rows' => $rows,
-            ]);
+            if ($this->showProgress) {
+                Console::output('Unsuccessfull inserts.');
+                echo Table::widget([
+                    'headers' => ['Row', 'validation'],
+                    'rows' => $rows,
+                ]);
+            }
         }
 
-        $this->success = 0;
-        $this->failed = 0;
+        if ($this->showProgress) {
+            echo "\n";
+        }
 
-        echo "\n";
+        $this->resetProperties();
+        
         return ExitCode::OK;
     }
 
     public function seed()
     {
         $modelClass = is_array($this->modelClass)? $this->modelClass['class']: $this->modelClass;
-        $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
+        if ($this->showProgress) {
+            $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
+        }
 
         for ($i=1; $i <= $this->rows; $i++) { 
             $model = Yii::createObject($this->modelClass);
@@ -137,12 +163,21 @@ abstract class Seeder
             }
         }
 
-        $result = $modelClass::find()
-            ->select(['COUNT("*") as total'])
-            ->createCommand()
-            ->queryOne();
+        if ($this->showProgress) {
+            if (method_exists($this, 'total')) {
+               $this->totalRecords = $this->total();
+            }
+            else {
+                $result = $modelClass::find()
+                    ->select(['COUNT("*") as total'])
+                    ->createCommand()
+                    ->queryOne();
+
+                $this->totalRecords = $result['total'];
+            }
             
-        $this->summary($result['total']);
+            $this->summary();
+        }
     }
 
     public function seeder($conf='')
