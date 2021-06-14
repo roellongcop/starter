@@ -27,7 +27,7 @@ abstract class Seeder
 
     public $rows;
     public $modelClass;
-    public $everySeed;
+    public $insert;
 
     public function __construct()
     {
@@ -132,8 +132,8 @@ abstract class Seeder
 
             $newModel = $this->save($model, $i);
 
-            if ($this->everySeed) {
-                call_user_func($this->everySeed, $newModel, $i);
+            if ($this->insert) {
+                call_user_func($this->insert, $newModel, $i);
             }
         }
 
