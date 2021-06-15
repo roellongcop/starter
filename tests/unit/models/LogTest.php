@@ -87,28 +87,6 @@ class LogTest extends \Codeception\Test\Unit
 
         expect_not($model->save());
     }
-    
-    public function testCreateInvalidMustFailed()
-    {
-        $model = new Log([
-            'user_id' => 1,
-            'model_id' => 1,
-            'record_status' => 1,
-            'updated_by' => 1,
-            'created_by' => 1,
-        ]);
-
-        expect_not($model->save());
-        expect($model->errors)->hasKey('method');
-        expect($model->errors)->hasKey('action');
-        expect($model->errors)->hasKey('controller');
-        expect($model->errors)->hasKey('table_name');
-        expect($model->errors)->hasKey('model_name');
-        expect($model->errors)->hasKey('ip');
-        expect($model->errors)->hasKey('browser');
-        expect($model->errors)->hasKey('os');
-        expect($model->errors)->hasKey('device');
-    }
 
     public function testCreateInvalidUserIdMustFailed()
     {

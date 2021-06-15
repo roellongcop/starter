@@ -42,4 +42,10 @@ class LogCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['log/print']);
+        $I->see('Log Report');
+    }
 }

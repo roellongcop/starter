@@ -60,4 +60,10 @@ class UserMetaCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['user-meta/print']);
+        $I->see('UserMeta Report');
+    }
 }

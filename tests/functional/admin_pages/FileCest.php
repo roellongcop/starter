@@ -65,4 +65,10 @@ class FileCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['file/print']);
+        $I->see('File Report');
+    }
 }

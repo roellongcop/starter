@@ -40,4 +40,10 @@ class SessionCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['session/print']);
+        $I->see('Session Report');
+    }
 }

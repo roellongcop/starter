@@ -58,4 +58,10 @@ class ModelFileCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['model-file/print']);
+        $I->see('ModelFile Report');
+    }
 }

@@ -52,4 +52,10 @@ class BackupCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['backup/print']);
+        $I->see('Backup Report');
+    }
 }

@@ -32,19 +32,19 @@ return [
         ],
         'primary_logo' => [
             'name' => 'primary_logo',
-            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
+            'default' => 'file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
         ],
         'secondary_logo' => [
             'name' => 'secondary_logo',
-            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
+            'default' => 'file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
         ],
         'image_holder' => [
             'name' => 'image_holder',
-            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
+            'default' => 'file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
         ],
         'favicon' => [
             'name' => 'favicon',
-            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
+            'default' => 'file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
         ],
         'auto_logout_timer' => [
             'name' => 'auto_logout_timer',

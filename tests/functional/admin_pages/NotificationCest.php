@@ -40,4 +40,10 @@ class NotificationCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['notification/print']);
+        $I->see('Notification Report');
+    }
 }

@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$pdf     = require __DIR__ . '/pdf.php';
 
 $config = [
     'id' => 'basic-console',
@@ -25,6 +26,7 @@ $config = [
             'ttr' => 5 * 60, // Max time for job execution
             'attempts' => 3, // Max number of attempts
         ],
+        'export' => ['class' => 'app\components\ExportComponent'],
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
         'general' => ['class' => 'app\components\General'],
@@ -57,6 +59,7 @@ $config = [
             ],
         ],
         'db' => $db,
+        'pdf' => $pdf,
         'urlManager' => [
             'scriptUrl' => 'http://localhost:8080/',
             'baseUrl' => '/',

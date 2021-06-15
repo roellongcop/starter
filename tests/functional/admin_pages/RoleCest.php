@@ -64,4 +64,10 @@ class RoleCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['role/print']);
+        $I->see('Role Report');
+    }
 }

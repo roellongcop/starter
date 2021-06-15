@@ -40,4 +40,10 @@ class VisitLogCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['visit-log/print']);
+        $I->see('VisitLog Report');
+    }
 }

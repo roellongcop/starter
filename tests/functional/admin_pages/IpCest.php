@@ -58,4 +58,10 @@ class IpCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['ip/print']);
+        $I->see('Ip Report');
+    }
 }

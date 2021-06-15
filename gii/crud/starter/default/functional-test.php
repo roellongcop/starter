@@ -65,4 +65,10 @@ class <?= $modelClass ?>Cest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>/print']);
+        $I->see('<?= Inflector::camel2words(StringHelper::basename($generator->modelClass)) ?> Report');
+    }
 }

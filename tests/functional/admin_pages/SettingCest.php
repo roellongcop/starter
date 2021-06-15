@@ -58,4 +58,10 @@ class SettingCest
         ]);
         $I->see('Confirm Action', 'h5');
     }
+
+    public function printPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['setting/print']);
+        $I->see('Setting Report');
+    }
 }
