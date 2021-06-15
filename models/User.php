@@ -36,7 +36,6 @@ class User extends ActiveRecord implements IdentityInterface
     public $_tableColumnsMeta = false;
     public $_currentTheme;
 
-    public $excelIgnoreAttributes = ['photo'];
     public $password;
     public $password_repeat;
 

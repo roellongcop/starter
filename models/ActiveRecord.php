@@ -45,7 +45,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_modelSqlFile;
 
     public $exportColumns = [];
-    public $excelIgnoreAttributes = [];
+    public $excelIgnoreAttributes = ['photo'];
     public $relatedModels = [];
 
     public static function activeAll($condition = '')
