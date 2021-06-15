@@ -24,7 +24,7 @@ use yii\helpers\Url;
 class Ip extends ActiveRecord
 {
     public $relatedModels = [];
-    //public $excel_ignore_attr = [];
+    //public $excelIgnoreAttributes = [];
     //public $fileInput;
     //public $imageInput;
     //public $fileLocation; 

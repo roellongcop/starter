@@ -91,17 +91,19 @@ class ExportComponent extends \yii\base\Component
         
         $ignoreAttributes = $this->ignoreAttributes;
  
-        if ($type == 'excel') {
-            if ($searchModel->excelIgnoreAttributes) {
-                $ignoreAttributes = array_merge($ignoreAttributes, $searchModel->excelIgnoreAttributes);
-            }
+        if ($type == 'excel' && (($excelIgnoreAttributes = $searchModel->excelIgnoreAttributes) != null) ) {
+            $ignoreAttributes = array_merge($ignoreAttributes, $excelIgnoreAttributes);
         }
 
-        $tableColumns = array_filter($searchModel->tableColumns, function($column, $key) use ($ignoreAttributes) {
-            if (!in_array($key, $ignoreAttributes)) {
-                return $column;
-            }
-        }, ARRAY_FILTER_USE_BOTH);
+        $tableColumns = array_filter(
+            $searchModel->tableColumns, 
+            function($column, $key) use ($ignoreAttributes) {
+                if (!in_array($key, $ignoreAttributes)) {
+                    return $column;
+                }
+            }, 
+            ARRAY_FILTER_USE_BOTH
+        );
 
         foreach ($tableColumns as $column => &$attribute) {
             if (in_array($column, $ignoreAttributes)) {

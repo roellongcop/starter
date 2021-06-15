@@ -23,7 +23,7 @@ use yii\helpers\Url;
 class ModelFile extends ActiveRecord
 {
     public $relatedModels = [];
-    //public $excel_ignore_attr = [];
+    //public $excelIgnoreAttributes = [];
     /**
      * {@inheritdoc}
      */

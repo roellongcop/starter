@@ -21,7 +21,7 @@ use app\widgets\Anchor;
 class VisitLog extends ActiveRecord
 {
     public $relatedModels = [];
-    //public $excel_ignore_attr = [];
+    //public $excelIgnoreAttributes = [];
     /**
      * {@inheritdoc}
      */

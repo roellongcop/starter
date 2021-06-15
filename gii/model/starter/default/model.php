@@ -44,7 +44,7 @@ use app\widgets\Anchor;
 class <?= $className ?> extends ActiveRecord<?= "\n" ?>
 {
     public $relatedModels = [];
-    //public $excel_ignore_attr = [];
+    //public $excelIgnoreAttributes = [];
 
     /**
      * {@inheritdoc}

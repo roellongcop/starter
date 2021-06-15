@@ -37,7 +37,7 @@ class Log extends ActiveRecord
 {
     public $relatedModels = [];
     public $_username;
-    //public $excel_ignore_attr = [];
+    //public $excelIgnoreAttributes = [];
 
     /**
      * {@inheritdoc}

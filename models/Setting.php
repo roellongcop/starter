@@ -26,7 +26,7 @@ class Setting extends ActiveRecord
 {
     public $relatedModels = [];
     public $options;
-    //public $excel_ignore_attr = [];
+    //public $excelIgnoreAttributes = [];
     //public $fileInput;
     public $imageInput;
     public $fileLocation; 

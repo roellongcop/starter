@@ -24,7 +24,7 @@ use yii\behaviors\SluggableBehavior;
 class Backup extends ActiveRecord
 {
     public $relatedModels = [];
-    //public $excel_ignore_attr = [];
+    //public $excelIgnoreAttributes = [];
     /**
      * {@inheritdoc}
      */
