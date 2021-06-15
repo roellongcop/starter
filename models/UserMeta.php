@@ -20,9 +20,6 @@ use app\widgets\Anchor;
  */
 class UserMeta extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
-
     /**
      * {@inheritdoc}
      */

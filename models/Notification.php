@@ -25,9 +25,6 @@ use app\widgets\Label;
  */
 class Notification extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
-
     /**
      * {@inheritdoc}
      */

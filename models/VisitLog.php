@@ -20,8 +20,6 @@ use app\widgets\Anchor;
  */
 class VisitLog extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
     /**
      * {@inheritdoc}
      */

@@ -29,9 +29,6 @@ use yii\helpers\Url;
  */
 class Theme extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
-
     /**
      * {@inheritdoc}
      */

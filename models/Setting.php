@@ -24,10 +24,7 @@ use yii\helpers\Url;
  */
 class Setting extends ActiveRecord
 {
-    public $relatedModels = [];
     public $options;
-    //public $excelIgnoreAttributes = [];
-    //public $fileInput;
     public $imageInput;
     public $fileLocation; 
     public $withImageInput = [

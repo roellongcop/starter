@@ -46,6 +46,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public $exportColumns = [];
     public $excelIgnoreAttributes = [];
+    public $relatedModels = [];
 
     public static function activeAll($condition = '')
     {
@@ -501,12 +502,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getCanDelete()
     {
         $res = [];
-        if ($this->hasProperty('relatedModels')) {
-            if (($relatedModels = $this->relatedModels) != null) {
-                foreach ($relatedModels as $model) {
-                    if ($this->{$model}) {
-                        $res[] = $model;
-                    }
+        if (($relatedModels = $this->relatedModels) != null) {
+            foreach ($relatedModels as $model) {
+                if ($this->{$model}) {
+                    $res[] = $model;
                 }
             }
         }

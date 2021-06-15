@@ -26,8 +26,6 @@ use yii\helpers\Url;
 class Role extends ActiveRecord
 {
     public $relatedModels = ['users'];
-    //public $excelIgnoreAttributes = [];
-
     /**
      * {@inheritdoc}
      */

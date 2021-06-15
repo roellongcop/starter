@@ -30,7 +30,6 @@ use yii\imagine\Image;
  */
 class File extends ActiveRecord
 {
-    public $relatedModels = [];
     public $excelIgnoreAttributes = ['icon'];
 
     /**

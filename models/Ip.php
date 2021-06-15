@@ -23,12 +23,6 @@ use yii\helpers\Url;
  */
 class Ip extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
-    //public $fileInput;
-    //public $imageInput;
-    //public $fileLocation; 
-
     /**
      * {@inheritdoc}
      */

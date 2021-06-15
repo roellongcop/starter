@@ -35,10 +35,7 @@ use yii\helpers\Url;
  */
 class Log extends ActiveRecord
 {
-    public $relatedModels = [];
     public $_username;
-    //public $excelIgnoreAttributes = [];
-
     /**
      * {@inheritdoc}
      */

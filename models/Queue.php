@@ -26,9 +26,6 @@ use app\widgets\Anchor;
  */
 class Queue extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
-
     /**
      * {@inheritdoc}
      */

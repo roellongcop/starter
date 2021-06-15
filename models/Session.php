@@ -25,9 +25,6 @@ use yii\helpers\Url;
  */
 class Session extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
-
     /**
      * {@inheritdoc}
      */

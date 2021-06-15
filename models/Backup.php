@@ -23,8 +23,6 @@ use yii\behaviors\SluggableBehavior;
  */
 class Backup extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
     /**
      * {@inheritdoc}
      */

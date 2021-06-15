@@ -22,8 +22,6 @@ use yii\helpers\Url;
  */
 class ModelFile extends ActiveRecord
 {
-    public $relatedModels = [];
-    //public $excelIgnoreAttributes = [];
     /**
      * {@inheritdoc}
      */
