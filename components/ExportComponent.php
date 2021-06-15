@@ -67,7 +67,8 @@ class ExportComponent extends \yii\base\Component
 
         $writer = IOFactory::createWriter($spreadsheet, $ext);
 
-        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Type: application/" . strtolower($ext));
+        // header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="'.$file_name.'"');
         $writer->save("php://output");
         exit;
