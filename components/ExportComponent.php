@@ -92,6 +92,8 @@ class ExportComponent extends \yii\base\Component
         $search_model_columns = $this->processTableColumns($searchModel);
         $res = [];
         $ignore_attr = ['checkbox', 'actions'];
+        $raw_format = ['photo', 'icon'];
+        $fulldate_format = ['created_at', 'updated_at'];
 
         if ($type == 'excel') {
             if (isset($searchModel->excel_ignore_attr)) {
@@ -111,14 +113,14 @@ class ExportComponent extends \yii\base\Component
                     }
                     else {
                         $res[$column]['header'] = str_replace('_', ' ', $column);
-                        if (in_array($column, ['photo'])) {
+                        $res[$column]['format'] = 'stripTags';
+
+                        if (in_array($column, $raw_format)) {
                             $res[$column]['format'] = 'raw';
                         }
-                        else if (in_array($column, ['created_at', 'updated_at'])) {
+                        
+                        if (in_array($column, $fulldate_format)) {
                             $res[$column]['format'] = 'fulldate';
-                        }
-                        else {
-                            $res[$column]['format'] = 'stripTags';
                         }
                     }
                 }
