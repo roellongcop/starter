@@ -29,16 +29,7 @@ class Grid extends \yii\base\Widget
             $this->pager['class'] = 'app\widgets\LinkPager';
         }
 
-        $filterColumns = App::identity()->filterColumns($this->searchModel);
-
-        $columns = $this->searchModel->tableColumns;
-
-        foreach ($columns as $key => &$column) {
-            if (! isset($column['visible'])) {
-                $column['visible'] = in_array($key, $filterColumns);
-            }
-        }
-        $this->columns = $columns;
+        $this->columns = $this->searchModel->tableColumns;
 
         $this->columns['actions'] = $this->columns['actions'] ?? $this->actionColumns();
         $this->layout = $this->layout ?: $this->render('grid/layout');

@@ -31,7 +31,7 @@ use yii\imagine\Image;
 class File extends ActiveRecord
 {
     public $relatedModels = [];
-    //public $excel_ignore_attr = [];
+    public $excelIgnoreAttributes = ['icon'];
 
     /**
      * {@inheritdoc}

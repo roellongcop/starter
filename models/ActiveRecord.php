@@ -44,6 +44,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_modelSqlFiles;
     public $_modelSqlFile;
 
+    public $exportColumns = [];
+    public $excelIgnoreAttributes = [];
+
     public static function activeAll($condition = '')
     {
         return self::updateAll(['record_status' => 1], $condition);
@@ -185,7 +188,18 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getTableColumns()
     {
-        return $this->getGridColumns();
+        $gridColumns = $this->getGridColumns();
+        $filterColumns = App::identity()->filterColumns($this, false);
+
+        if (App::isLogin() && $filterColumns) {
+            foreach ($gridColumns as $key => &$column) {
+                if (! isset($column['visible'])) {
+                    $column['visible'] = in_array($key, $filterColumns)? true: false;
+                }
+            }
+        }
+
+        return $gridColumns;
     }
 
     protected function checkLinkAccess($action, $controllerID='')
@@ -487,7 +501,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getCanDelete()
     {
         $res = [];
-        if (isset($this->relatedModels)) {
+        if ($this->hasProperty('relatedModels')) {
             if (($relatedModels = $this->relatedModels) != null) {
                 foreach ($relatedModels as $model) {
                     if ($this->{$model}) {

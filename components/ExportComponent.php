@@ -6,12 +6,27 @@ use PhpOffice\PhpSpreadsheet\Reader\Html as HtmlReader;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yii;
 use app\helpers\App;
-
+use yii\helpers\ArrayHelper;
 /**
  * 
  */
 class ExportComponent extends \yii\base\Component
 {
+    public $ignoreAttributes = ['checkbox', 'actions'];
+    public $formats = [
+        'raw' => [
+            'photo', 
+            'icon'
+        ],
+        'fulldate' => [
+            'created_at', 
+            'updated_at'
+        ],
+        'ago' => [
+            'last_updated'
+        ]
+    ];
+
     public function export_pdf($content)
     {
         $pdf = App::component('pdf');
@@ -68,65 +83,45 @@ class ExportComponent extends \yii\base\Component
         $this->export_excel($content, 'Xls');
     }
 
-    public function processTableColumns($model)
-    {
-        $filterColumns = App::identity()->filterColumns($model);
-        $columns = $model->tableColumns;
-
-        foreach ($columns as $key => &$column) {
-            if (! isset($column['visible'])) {
-                $column['visible'] = in_array($key, $filterColumns);
-            }
-        }
-        return $columns;
-    }
-
-
     public function getExportColumns($searchModel, $type='excel')
     {
-        if ($searchModel->hasProperty('exportColumns') && $searchModel->exportColumns) {
+        if ($searchModel->exportColumns) {
             return $searchModel->exportColumns;
         }
         
-        $columns = array_keys($searchModel->tableColumns);
-        $search_model_columns = $this->processTableColumns($searchModel);
-        $res = [];
-        $ignore_attr = ['checkbox', 'actions'];
-        $raw_format = ['photo', 'icon'];
-        $fulldate_format = ['created_at', 'updated_at'];
-
+        $ignoreAttributes = $this->ignoreAttributes;
+ 
         if ($type == 'excel') {
-            if (isset($searchModel->excel_ignore_attr)) {
-                foreach ($searchModel->excel_ignore_attr as $i) {
-                    array_push($ignore_attr, $i);
+            if ($searchModel->excelIgnoreAttributes) {
+                $ignoreAttributes = array_merge($ignoreAttributes, $searchModel->excelIgnoreAttributes);
+            }
+        }
+
+        $tableColumns = array_filter($searchModel->tableColumns, function($column, $key) use ($ignoreAttributes) {
+            if (!in_array($key, $ignoreAttributes)) {
+                return $column;
+            }
+        }, ARRAY_FILTER_USE_BOTH);
+
+        foreach ($tableColumns as $column => &$attribute) {
+            if (in_array($column, $ignoreAttributes)) {
+                continue;
+            }
+
+            if ($column == 'serial') {
+                continue;
+            }
+
+            $attribute['header'] = strtoupper(str_replace('_', ' ', $column));
+            $attribute['format'] = 'stripTags';
+
+            foreach ($this->formats as $format => $columns) {
+                if (in_array($column, $columns)) {
+                    $attribute['format'] = $format;
                 }
             }
         }
 
-        foreach ($columns as $column) {
-            if (! in_array($column, $ignore_attr)) {
-                $res[$column] = $search_model_columns[$column] ?? '';
-
-                if ($res[$column]) {
-                    if ($column == 'serial') {
-                        $res[$column]['header'] = '#';
-                    }
-                    else {
-                        $res[$column]['header'] = str_replace('_', ' ', $column);
-                        $res[$column]['format'] = 'stripTags';
-
-                        if (in_array($column, $raw_format)) {
-                            $res[$column]['format'] = 'raw';
-                        }
-                        
-                        if (in_array($column, $fulldate_format)) {
-                            $res[$column]['format'] = 'fulldate';
-                        }
-                    }
-                }
-            }
-        }
-
-        return $res;
+        return $tableColumns;
     }
 }
