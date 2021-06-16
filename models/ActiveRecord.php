@@ -7,6 +7,7 @@ use app\behaviors\LogBehavior;
 use app\behaviors\ProcessBehavior;
 use app\behaviors\TokenBehavior;
 use app\helpers\App;
+use app\helpers\Html;
 use app\models\Log;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
@@ -47,6 +48,19 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $exportColumns = [];
     public $excelIgnoreAttributes = ['photo'];
     public $relatedModels = [];
+
+    public $errorSummary;
+
+    public function save($runValidation = true, $attributeNames = null)
+    {
+        $save = parent::save($runValidation, $attributeNames);
+
+        if (!$save) {
+            $this->errorSummary = Html::errorSummary($this, ['class' => 'error-summary']);
+        }
+
+        return $save;
+    }
 
     public static function activeAll($condition = '')
     {
@@ -108,7 +122,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->record_status == self::RECORD_INACTIVE;
         }
     }
-
 
     public function getHeaderDetailColumns()
     {
