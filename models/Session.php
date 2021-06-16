@@ -53,7 +53,7 @@ class Session extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'ip', 'browser', 'os', 'device', 'record_status'], 'safe'],
+            [['id', 'ip', 'browser', 'os', 'device', 'record_status'], 'required'],
             [['record_status'], 'default', 'value' => 1],
             ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['expire', 'user_id', 'record_status', 'created_by', 'updated_by'], 'integer'],

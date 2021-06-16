@@ -441,24 +441,17 @@ class App {
 			'/duckduckgo/i' => 'Duckduck Go',
 		];
 
-		$notFound = "Browser not detected";
-
-		$browser = [];
-
-		foreach ($browsers as $key => $value) { 
-			preg_match($key, self::userAgent(), $browserMatch); 
-				if($browserMatch){
-					$browser[] = $value;
+		$arr = array_filter($browsers,
+            function($value, $key) {
+                preg_match($key, self::userAgent(), $match);  
+				if($match) {
+					return $value;
 				}
-		}
+            }, 
+            ARRAY_FILTER_USE_BOTH
+        );
 
-		if($browser != null){
-			$browserName = end($browser);
-		}else{
-			$browserName = $notFound;
-		}
- 
-		return $browserName;
+		return ($arr)? end($arr): 'Browser not detected';
 	}
 
 	public static function os()
@@ -473,24 +466,17 @@ class App {
 			'/iphone/i'  => 'iOS',
 		];
 
-		$notFound = "OS not detected";
-
-		$osList = [];
-
-		foreach ($os as $key => $value) {
-			preg_match($key, self::userAgent(), $osMatch);  
-				if($osMatch){
-					$osList[] = $value;
+	    $arr = array_filter($os,
+            function($value, $key) {
+                preg_match($key, self::userAgent(), $match);  
+				if($match) {
+					return $value;
 				}
-		}
+            }, 
+            ARRAY_FILTER_USE_BOTH
+        );
 
-		if($osList != null){
-			$osName = isset($osList[0]) ? $osList[0]: '';
-		}else{
-			$osName = $notFound;
-		}		
- 
-		return $osName;
+		return ($arr)? end($arr): 'OS not detected';
 	}
 
 	public static function device()
@@ -502,11 +488,12 @@ class App {
 	        "Bot"      => ["googlebot", "mediapartners-google", "adsbot-google", "duckduckbot", "msnbot", "bingbot", "ask", "facebook", "yahoo", "addthis"]
 	    ];
 
-	    $device = '';
+	    $device = 'Device not detected';
+	    $userAgent = self::userAgent();
 
 	    foreach ($devicesTypes as $key => $devices) {
 	    	foreach ($devices as $key1 => $value) {
-	    		if(preg_match("/".$value."/i", self::userAgent())){
+	    		if(preg_match("/".$value."/i", $userAgent)){
 	    			$device = $key;
 	    		} 
 	    	}
