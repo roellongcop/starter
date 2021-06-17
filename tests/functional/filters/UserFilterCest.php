@@ -15,5 +15,4 @@ class UserFilterCest
         $I->see('User is Blocked');
         $I->dontSee('Sign out');
     }
-
 }
