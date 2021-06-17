@@ -37,19 +37,13 @@ class Theme extends ActiveRecord
         return '{{%themes}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'theme';
-    }
- 
-    public function mainAttribute()
-    {
-        return 'name';
-    }
-
-    public function paramName()
-    {
-        return 'slug';
+        return [
+            'controllerID' => 'theme',
+            'mainAttribute' => 'name',
+            'paramName' => 'slug',
+        ];
     }
 
     /**

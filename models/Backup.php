@@ -31,24 +31,13 @@ class Backup extends ActiveRecord
         return '{{%backups}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'backup';
-    }
-
-    public function mainAttribute()
-    {
-        return 'filename';
-    }
-    
-    public function paramName()
-    {
-        return 'slug';
-    }
-
-    public function getCanInActive()
-    {
-        return false;
+        return [
+            'controllerID' => 'backup',
+            'mainAttribute' => 'filename',
+            'paramName' => 'slug',
+        ];
     }
 
     /**
@@ -56,17 +45,13 @@ class Backup extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['filename', 'record_status'], 'required'],
+        return $this->setRules([
+            [['filename'], 'required'],
             [['description'], 'string'],
-            [['record_status', 'created_by', 'updated_by'], 'integer'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
-            [['created_at', 'updated_at', 'tables'], 'safe'],
+            [['tables'], 'safe'],
             [['filename'], 'string', 'max' => 255],
             [['filename'], 'unique'],
-            [['record_status'], 'validateRecordStatus'],
-        ];
+        ]);
     }
 
     /**
@@ -74,19 +59,12 @@ class Backup extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'filename' => 'Filename',
             'tables' => 'Tables',
             'description' => 'Description',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**
@@ -128,16 +106,8 @@ class Backup extends ActiveRecord
                     ]);
                 }
             ],
-            // 'tables' => ['attribute' => 'tables', 'format' => 'raw'],
             'description' => ['attribute' => 'description', 'format' => 'raw'],
         ];
-    }
-
-    public function getJsonTables()
-    {
-        return JsonEditor::widget([
-            'data' => $this->tables,
-        ]);
     }
 
     public function detailColumns()

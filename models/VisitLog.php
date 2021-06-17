@@ -28,19 +28,12 @@ class VisitLog extends ActiveRecord
         return '{{%visit_logs}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'visit-log';
-    }
-
-    public function mainAttribute()
-    {
-        return 'actionLabel';
-    }
-
-    public function paramName()
-    {
-        return 'id';
+        return [
+            'controllerID' => 'visit-log',
+            'mainAttribute' => 'actionLabel',
+        ];
     }
 
     /**

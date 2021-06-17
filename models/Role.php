@@ -25,7 +25,6 @@ use yii\helpers\Url;
  */
 class Role extends ActiveRecord
 {
-    public $relatedModels = ['users'];
     /**
      * {@inheritdoc}
      */
@@ -34,19 +33,14 @@ class Role extends ActiveRecord
         return '{{%roles}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'role';
-    }
-
-    public function mainAttribute()
-    {
-        return 'name';
-    }
-
-    public function paramName()
-    {
-        return 'slug';
+        return [
+            'controllerID' => 'role',
+            'mainAttribute' => 'name',
+            'paramName' => 'slug',
+            'relatedModels' => ['users']
+        ];
     }
 
     /**

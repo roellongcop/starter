@@ -34,19 +34,12 @@ class Queue extends ActiveRecord
         return '{{%queues}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'queue';
-    }
-
-    public function mainAttribute()
-    {
-        return 'pushed_at';
-    }
-
-    public function paramName()
-    {
-        return 'id';
+        return [
+            'controllerID' => 'queue',
+            'mainAttribute' => 'pushed_at',
+        ];
     }
 
     /**

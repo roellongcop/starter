@@ -33,18 +33,12 @@ class Session extends ActiveRecord
         return '{{%sessions}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'session';
-    }
-
-    public function mainAttribute()
-    {
-        return 'browser';
-    }
-    public function paramName()
-    {
-        return 'id';
+        return [
+            'controllerID' => 'session',
+            'mainAttribute' => 'browser',
+        ];
     }
 
     /**

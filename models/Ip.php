@@ -31,18 +31,13 @@ class Ip extends ActiveRecord
         return '{{%ips}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'ip';
-    }
-
-    public function mainAttribute()
-    {
-        return 'name';
-    }
-    public function paramName()
-    {
-        return 'slug';
+        return [
+            'controllerID' => 'ip',
+            'mainAttribute' => 'name',
+            'paramName' => 'slug',
+        ];
     }
 
     /**

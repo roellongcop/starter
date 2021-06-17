@@ -51,20 +51,15 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
         return '<?= $generator->generateTableName($tableName) ?>';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return '<?= Inflector::camel2id($className) ?>';
+        return [
+            'controllerID' => '<?= Inflector::camel2id($className) ?>',
+            'mainAttribute' => 'id',
+            'paramName' => 'id',
+        ];
     }
 
-    public function mainAttribute()
-    {
-        return 'id';
-    }
-
-    public function paramName()
-    {
-        return 'id';
-    }
 <?php if ($generator->db !== 'db'): ?>
 
     /**
@@ -81,10 +76,7 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
      */
     public function rules()
     {
-        return [<?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>    [['record_status'], 'required'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
-        ];
+        return $this->setRules([<?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>]);
     }
 
     /**
@@ -92,13 +84,11 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
 <?php foreach ($labels as $name => $label): ?>
             <?= "'$name' => " . $generator->generateString($label) . ",\n" ?>
 <?php endforeach; ?>
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 <?php foreach ($relations as $name => $relation): ?>
 
@@ -163,11 +153,4 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
 <?php endforeach; ?>
         ];
     }
-
-    /**
-    public function getExportColumns()
-    {
-        return [];
-    }
-    */
 }

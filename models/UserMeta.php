@@ -28,20 +28,14 @@ class UserMeta extends ActiveRecord
         return '{{%user_metas}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'user-meta';
+        return [
+            'controllerID' => 'user-meta',
+            'mainAttribute' => 'meta_key',
+        ];
     }
-
-    public function mainAttribute()
-    {
-        return 'meta_key';
-    }
-    public function paramName()
-    {
-        return 'id';
-    }
- 
+    
     /**
      * {@inheritdoc}
      */

@@ -325,6 +325,9 @@ class Generator extends \yii\gii\Generator
     {
         $labels = [];
         foreach ($table->columns as $column) {
+            if (in_array($column->name, ['record_status', 'created_by', 'updated_by', 'created_at', 'updated_at'])) {
+                continue;
+            }
             if ($this->generateLabelsFromComments && !empty($column->comment)) {
                 $labels[$column->name] = $column->comment;
             } elseif (!strcasecmp($column->name, 'id')) {
@@ -383,6 +386,9 @@ class Generator extends \yii\gii\Generator
         $lengths = [];
         foreach ($table->columns as $column) {
             if ($column->autoIncrement) {
+                continue;
+            }
+            if (in_array($column->name, ['record_status', 'created_by', 'updated_by', 'created_at', 'updated_at'])) {
                 continue;
             }
             if (!$column->allowNull && $column->defaultValue === null) {

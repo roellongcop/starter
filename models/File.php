@@ -30,8 +30,6 @@ use yii\imagine\Image;
  */
 class File extends ActiveRecord
 {
-    public $excelIgnoreAttributes = ['icon'];
-
     /**
      * {@inheritdoc}
      */
@@ -39,17 +37,15 @@ class File extends ActiveRecord
     {
         return '{{%files}}';
     }
-    public function controllerID()
+
+    public function config()
     {
-        return 'file';
-    }
-    public function mainAttribute()
-    {
-        return 'name';
-    }
-    public function paramName()
-    {
-        return 'token';
+        return [
+            'controllerID' => 'file',
+            'mainAttribute' => 'name',
+            'paramName' => 'token',
+            'excelIgnoreAttributes' => ['icon']
+        ];
     }
 
     /**

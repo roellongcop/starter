@@ -30,18 +30,11 @@ class ModelFile extends ActiveRecord
         return '{{%model_files}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'model-file';
-    }
-
-    public function mainAttribute()
-    {
-        return 'id';
-    }
-    public function paramName()
-    {
-        return 'id';
+        return [
+            'controllerID' => 'model-file',
+        ];
     }
  
     /**

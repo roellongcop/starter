@@ -22,11 +22,9 @@ use yii\helpers\Url;
  
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
-    public abstract function controllerID();
-    public abstract function mainAttribute();
+    public abstract function config();
     public abstract function gridColumns();
     public abstract function detailColumns();
-    public abstract function paramName();
     
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
@@ -45,21 +43,82 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_modelSqlFiles;
     public $_modelSqlFile;
 
-    public $exportColumns = [];
-    public $excelIgnoreAttributes = ['photo'];
-    public $relatedModels = [];
-
     public $errorSummary;
+
+    public function getRelatedModels()
+    {
+        $config = $this->config();
+        
+        return $config['relatedModels'] ?? [];
+    }
+
+    public function getExcelIgnoreAttributes()
+    {
+        $config = $this->config();
+
+        return $config['excelIgnoreAttributes'] ?? ['photo'];
+    }
+
+    public function getExportColumns()
+    {
+        return [];
+    }
+
+    public function paramName()
+    {
+        $config = $this->config();
+        
+        return $config['paramName'] ?? 'id';
+    }
+
+    public function mainAttribute()
+    {
+        $config = $this->config();
+
+        return $config['mainAttribute'] ?? 'id';
+    }
+
+    public function controllerID()
+    {
+        $config = $this->config();
+
+        return $config['controllerID'] ?? App::controllerID();
+    }
+
+    public function setAttributeLabels($labels)
+    {
+        $labels['record_status'] = $labels['record_status'] ?? 'Record Status';
+        $labels['created_by'] = $labels['created_by'] ?? 'Created By';
+        $labels['updated_by'] = $labels['updated_by'] ?? 'Updated By';
+        $labels['created_at'] = $labels['created_at'] ?? 'Created At';
+        $labels['updated_at'] = $labels['updated_at'] ?? 'Updated At';
+        $labels['recordStatusHtml'] = $labels['recordStatusHtml'] ?? 'Record Status';
+        $labels['recordStatusLabel'] = $labels['recordStatusLabel'] ?? 'Record Status';
+
+        return $labels;
+    }
+
+    public function setRules($rules)
+    {
+        return array_merge($rules, [
+            'integer' => [['created_by', 'updated_by', 'record_status'], 'integer'],
+            'safe' => [['created_at', 'updated_at'], 'safe'],
+            'required' => ['record_status', 'required'],
+            'default' => ['record_status', 'default', 'value' => 1],
+            'range' => ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
+            'custom' => ['record_status', 'validateRecordStatus'],
+        ]);
+    }
 
     public function validateRecordStatus($attribute, $params)
     {
         if (! $this->isNewRecord) {
-            if ($this->{$attribute} == self::RECORD_ACTIVE && (! $this->canActive)) {
-                $this->addError($attribute, 'Cannot be activated');
+            if ($this->isActive && !$this->canActivate) {
+                $this->addError($attribute, 'Cannot be Activated');
             }
 
-            if ($this->{$attribute} == self::RECORD_INACTIVE && (! $this->canInActive)) {
-                $this->addError($attribute, 'Cannot be deactivated');
+            if ($this->isInactive && !$this->canDeactivate) {
+                $this->addError($attribute, 'Cannot be Deactivated');
             }
         }
     }
@@ -553,12 +612,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return true;
     }
 
-    public function getCanActive()
+    public function getCanActivate()
     {
         return true;
     }
 
-    public function getCanInActive()
+    public function getCanDeactivate()
     {
         return true;
     }

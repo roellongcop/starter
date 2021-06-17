@@ -44,19 +44,12 @@ class Log extends ActiveRecord
         return '{{%logs}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'log';
-    }
-
-    public function mainAttribute()
-    {
-        return 'action';
-    }
-
-    public function paramName()
-    {
-        return 'id';
+        return [
+            'controllerID' => 'log',
+            'mainAttribute' => 'action',
+        ];
     }
 
     /**

@@ -42,20 +42,15 @@ class Setting extends ActiveRecord
         return '{{%settings}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'setting';
+        return [
+            'controllerID' => 'setting',
+            'mainAttribute' => 'name',
+            'paramName' => 'name',
+        ];
     }
 
-    public function mainAttribute()
-    {
-        return 'name';
-    }
-
-    public function paramName()
-    {
-        return 'name';
-    }
 
     public function getArrayAttributes()
     {

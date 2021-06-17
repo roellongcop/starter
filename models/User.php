@@ -47,19 +47,13 @@ class User extends ActiveRecord implements IdentityInterface
         return '{{%users}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'user';
-    }
-
-    public function mainAttribute()
-    {
-        return 'username';
-    }
-
-    public function paramName()
-    {
-        return 'slug';
+        return [
+            'controllerID' => 'user',
+            'mainAttribute' => 'username',
+            'paramName' => 'slug',
+        ];
     }
 
     /**

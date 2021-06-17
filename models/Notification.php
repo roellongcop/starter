@@ -33,19 +33,13 @@ class Notification extends ActiveRecord
         return '{{%notifications}}';
     }
 
-    public function controllerID()
+    public function config()
     {
-        return 'notification';
-    }
-
-    public function mainAttribute()
-    {
-        return 'message';
-    }
-
-    public function paramName()
-    {
-        return 'token';
+        return [
+            'controllerID' => 'notification',
+            'mainAttribute' => 'message',
+            'paramName' => 'token',
+        ];
     }
 
     /**
