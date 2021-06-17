@@ -14,17 +14,19 @@ $registerJs = <<< SCRIPT
             method: 'post',
             success: (s => {
                 if (s.status == 'success') {
-                    toastr.success("Record status changed.");
+                    toastr.success("Activated");
                 }
                 else {
-                    console.log(s.errors)
+                    toastr.error(s.errors.record_status);
                     $(self).prop('checked', is_checked? false: true);
                 }
 
-                if (is_checked) {
+                if ($(self).prop('checked')) {
                     $(self).closest('span').removeClass('switch-danger-custom');
+                    $(self).closest('span').addClass('switch-success-custom');
                 }
                 else {
+                    $(self).closest('span').removeClass('switch-success-custom');
                     $(self).closest('span').addClass('switch-danger-custom');
                 }
             }),

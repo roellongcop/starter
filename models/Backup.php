@@ -46,6 +46,11 @@ class Backup extends ActiveRecord
         return 'slug';
     }
 
+    public function getCanInActive()
+    {
+        return false;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -60,6 +65,7 @@ class Backup extends ActiveRecord
             [['created_at', 'updated_at', 'tables'], 'safe'],
             [['filename'], 'string', 'max' => 255],
             [['filename'], 'unique'],
+            [['record_status'], 'validateRecordStatus'],
         ];
     }
 

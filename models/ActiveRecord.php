@@ -51,6 +51,19 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public $errorSummary;
 
+    public function validateRecordStatus($attribute, $params)
+    {
+        if (! $this->isNewRecord) {
+            if ($this->{$attribute} == self::RECORD_ACTIVE && (! $this->canActive)) {
+                $this->addError($attribute, 'Cannot be activated');
+            }
+
+            if ($this->{$attribute} == self::RECORD_INACTIVE && (! $this->canInActive)) {
+                $this->addError($attribute, 'Cannot be deactivated');
+            }
+        }
+    }
+
     public function save($runValidation = true, $attributeNames = null)
     {
         $save = parent::save($runValidation, $attributeNames);
@@ -545,7 +558,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return true;
     }
 
-    public function getCanIn_active()
+    public function getCanInActive()
     {
         return true;
     }
