@@ -23,8 +23,6 @@ use yii\helpers\Url;
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     public abstract function config();
-    public abstract function gridColumns();
-    public abstract function detailColumns();
     
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
@@ -60,6 +58,21 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     public function getExportColumns()
+    {
+        return [];
+    }
+
+    public function exportColumns()
+    {
+        return [];
+    }
+
+    public function gridColumns()
+    {
+        return [];
+    }
+
+    public function detailColumns()
     {
         return [];
     }

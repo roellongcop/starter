@@ -75,22 +75,6 @@ class Backup extends ActiveRecord
     {
         return new \app\models\query\BackupQuery(get_called_class());
     }
-    
-    public function getCanUpdate()
-    {
-        return true;
-    }
-
-    public function download()
-    {
-        $file = $this->sqlFileLocation;
-        if (file_exists($file)) {
-            App::response()->sendFile($file);
-
-            return true;
-        }
-        return false;
-    }
 
     public function gridColumns()
     {
@@ -132,5 +116,21 @@ class Backup extends ActiveRecord
             'ensureUnique' => true,
         ];
         return $behaviors;
+    }
+
+    public function getCanUpdate()
+    {
+        return true;
+    }
+
+    public function download()
+    {
+        $file = $this->sqlFileLocation;
+        if (file_exists($file)) {
+            App::response()->sendFile($file);
+
+            return true;
+        }
+        return false;
     }
 }

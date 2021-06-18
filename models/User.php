@@ -53,6 +53,7 @@ class User extends ActiveRecord implements IdentityInterface
             'controllerID' => 'user',
             'mainAttribute' => 'username',
             'paramName' => 'slug',
+            'relatedModels' => ['UserMetas', 'logs', 'visitLogs', 'notifications']
         ];
     }
 
@@ -675,5 +676,25 @@ class User extends ActiveRecord implements IdentityInterface
     public static function blockedAll($condition='')
     {
         return parent::updateAll(['is_blocked' => 1], $condition);
+    }
+
+    public function getUserMetas()
+    {
+        return $this->hasMany(UserMeta::className(), ['user_id' => 'id']);
+    }
+
+    public function getLogs()
+    {
+        return $this->hasMany(Log::className(), ['user_id' => 'id']);
+    }
+
+    public function getVisitLogs()
+    {
+        return $this->hasMany(VisitLog::className(), ['user_id' => 'id']);
+    }
+
+    public function getNotifications()
+    {
+        return $this->hasMany(Notification::className(), ['user_id' => 'id']);
     }
 }

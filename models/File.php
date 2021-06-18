@@ -53,21 +53,18 @@ class File extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['size', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
-            [['name', 'extension', 'size', 'record_status'], 'required'],
+        return $this->setRules([
+            [['size',], 'integer'],
+            [['name', 'extension', 'size',], 'required'],
             [['token'], 'unique'],
             [['location'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
             [['name', 'token'], 'string', 'max' => 255],
             [['extension'], 'string', 'max' => 16],
             ['extension', 'in', 'range' => array_merge(
                 App::params('file_extensions')['image'],
                 App::params('file_extensions')['file'],
             )],
-        ];
+        ]);
     }
 
     /**
@@ -75,7 +72,7 @@ class File extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'model_id' => 'Model ID',
             'model' => 'Model',
@@ -84,14 +81,7 @@ class File extends ActiveRecord
             'size' => 'Size',
             'location' => 'Location',
             'token' => 'Token',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**
@@ -284,11 +274,6 @@ class File extends ActiveRecord
             $image = $imagineObj->open($this->rootPath);
             $image->resize($image->getSize()->widen($w));
 
-            // $path = "{$this->pathNoExt}-w{$w}-h0-q{$quality}.{$extension}";
-            // if (! file_exists($path)) {
-            //     $image->save($path, ['quality' => $quality]);
-            // }
-
             return $image->show($extension, ['quality' => $quality]); 
         }
     }
@@ -297,11 +282,6 @@ class File extends ActiveRecord
     {
         if (file_exists($this->rootPath)) {
             $image = Image::crop($this->rootPath, $w, $h); 
-
-            // $path = "{$this->pathNoExt}-w{$w}-h{$h}-q{$quality}.{$extension}";
-            // if (! file_exists($path)) {
-            //     $image->save($path, ['quality' => $quality]);
-            // }
 
             return $image->show($extension, ['quality' => $quality]); 
         }
@@ -313,12 +293,6 @@ class File extends ActiveRecord
             $image = Image::getImagine() 
                 ->open($this->rootPath) 
                 ->resize(new Box($w, $h));
-
-
-            // $path = "{$this->pathNoExt}-w{$w}-h{$h}-q{$quality}.{$extension}";
-            // if (! file_exists($path)) {
-            //     $image->save($path, ['quality' => $quality]);
-            // }
 
             return $image->show($extension, ['quality' => $quality]);
         }
