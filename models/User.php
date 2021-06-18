@@ -53,7 +53,7 @@ class User extends ActiveRecord implements IdentityInterface
             'controllerID' => 'user',
             'mainAttribute' => 'username',
             'paramName' => 'slug',
-            'relatedModels' => ['UserMetas', 'logs', 'visitLogs', 'notifications']
+            'relatedModels' => ['userMetas', 'logs', 'visitLogs', 'notifications']
         ];
     }
 

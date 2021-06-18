@@ -274,7 +274,7 @@ class File extends ActiveRecord
             $image = $imagineObj->open($this->rootPath);
             $image->resize($image->getSize()->widen($w));
 
-            return $image->show($extension, ['quality' => $quality]); 
+            return $image->show($this->extension, ['quality' => $quality]); 
         }
     }
 
@@ -283,7 +283,7 @@ class File extends ActiveRecord
         if (file_exists($this->rootPath)) {
             $image = Image::crop($this->rootPath, $w, $h); 
 
-            return $image->show($extension, ['quality' => $quality]); 
+            return $image->show($this->extension, ['quality' => $quality]); 
         }
     }
 
@@ -294,7 +294,7 @@ class File extends ActiveRecord
                 ->open($this->rootPath) 
                 ->resize(new Box($w, $h));
 
-            return $image->show($extension, ['quality' => $quality]);
+            return $image->show($this->extension, ['quality' => $quality]);
         }
     }
 
