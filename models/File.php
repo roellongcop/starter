@@ -267,34 +267,34 @@ class File extends ActiveRecord
         ];
     }
 
-    public function getImageRatio($w, $quality=100, $extension='png')
+    public function getImageRatio($w, $quality=100, $extension='webp')
     {
         if (file_exists($this->rootPath)) {
             $imagineObj = new Imagine();
             $image = $imagineObj->open($this->rootPath);
             $image->resize($image->getSize()->widen($w));
 
-            return $image->show('png', ['quality' => $quality]); 
+            return $image->show('webp', ['quality' => $quality]); 
         }
     }
 
-    public function getImageCrop($w, $h, $quality=100, $extension='png')
+    public function getImageCrop($w, $h, $quality=100, $extension='webp')
     {
         if (file_exists($this->rootPath)) {
             $image = Image::crop($this->rootPath, $w, $h); 
 
-            return $image->show('png', ['quality' => $quality]); 
+            return $image->show('webp', ['quality' => $quality]); 
         }
     }
 
-    public function getImage($w, $h, $quality=100, $extension='png')
+    public function getImage($w, $h, $quality=100, $extension='webp')
     {
         if (file_exists($this->rootPath)) {
             $image = Image::getImagine() 
                 ->open($this->rootPath) 
                 ->resize(new Box($w, $h));
 
-            return $image->show('png', ['quality' => $quality]);
+            return $image->show('webp', ['quality' => $quality]);
         }
     }
 
