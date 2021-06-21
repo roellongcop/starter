@@ -267,7 +267,7 @@ class File extends ActiveRecord
         ];
     }
 
-    public function getImageRatio($w, $quality=100, $extension='webp')
+    public function getImageRatio($w, $quality=100, $extension='png')
     {
         if (file_exists($this->rootPath)) {
             $imagineObj = new Imagine();
@@ -278,7 +278,7 @@ class File extends ActiveRecord
         }
     }
 
-    public function getImageCrop($w, $h, $quality=100, $extension='webp')
+    public function getImageCrop($w, $h, $quality=100, $extension='png')
     {
         if (file_exists($this->rootPath)) {
             $image = Image::crop($this->rootPath, $w, $h); 
@@ -287,7 +287,7 @@ class File extends ActiveRecord
         }
     }
 
-    public function getImage($w, $h, $quality=100, $extension='webp')
+    public function getImage($w, $h, $quality=100, $extension='png')
     {
         if (file_exists($this->rootPath)) {
             $image = Image::getImagine() 
