@@ -45,37 +45,14 @@ class Ip extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['name', 'type', 'record_status'], 'required'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
+        return $this->setRules([
+            [['name', 'type',], 'required'],
             [['description'], 'string'],
-            [['type', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['type',], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['name'], 'ip'],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            [
-                ['imageInput'], 
-                'image', 
-                'minWidth' => 100,
-                'maxWidth' => 200,
-                'minHeight' => 100,
-                'maxHeight' => 200,
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],
-            */
-        ];
+        ]);
     }
 
     /**
@@ -83,19 +60,12 @@ class Ip extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'name' => 'Name',
             'description' => 'Description',
             'type' => 'Type',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**

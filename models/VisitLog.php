@@ -41,16 +41,13 @@ class VisitLog extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['user_id', 'action', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
+        return $this->setRules([
+            [['user_id', 'action',], 'integer'],
             [['user_id'], 'default', 'value' => 0],
-            [['ip', 'action', 'record_status'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['ip', 'action',], 'required'],
             [['ip'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
-        ];
+        ]);
     }
 
     /**
@@ -58,19 +55,12 @@ class VisitLog extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'user_id' => 'Username',
             'ip' => 'Ip',
             'action' => 'Action',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**

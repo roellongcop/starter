@@ -48,17 +48,13 @@ class Role extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['name', 'record_status'], 'required'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
+        return $this->setRules([
+            [['name',], 'required'],
             [['main_navigation', 'role_access', 'module_access'], 'safe'],
-            [['record_status', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
             [['name', 'slug'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['slug'], 'unique'],
-        ];
+        ]);
     }
 
     /**
@@ -66,24 +62,17 @@ class Role extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'name' => 'Name',
             'main_navigation' => 'Main Navigation',
             'role_access' => 'Role Access',
             'module_access' => 'Module Access',
             'slug' => 'Slug',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
             'jsonMainNavigation' => 'Main Navigation',
             'jsonRoleAccess' => 'Role Access',
             'jsonModuleAccess' => 'Module Access',
-        ];
+        ]);
     }
 
     /**

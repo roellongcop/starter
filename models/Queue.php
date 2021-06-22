@@ -47,16 +47,12 @@ class Queue extends ActiveRecord
      */
     public function rules()
     {
-        return [
+        return $this->setRules([
             [['channel', 'pushed_at', 'ttr'], 'required'],
             [['job'], 'string'],
-            [['pushed_at', 'ttr', 'delay', 'priority', 'reserved_at', 'attempt', 'done_at', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['pushed_at', 'ttr', 'delay', 'priority', 'reserved_at', 'attempt', 'done_at',], 'integer'],
             [['channel'], 'string', 'max' => 255],
-            [['record_status'], 'required'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
-        ];
+        ]);
     }
 
     /**
@@ -64,7 +60,7 @@ class Queue extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'channel' => 'Channel',
             'job' => 'Job',
@@ -75,14 +71,7 @@ class Queue extends ActiveRecord
             'reserved_at' => 'Reserved At',
             'attempt' => 'Attempt',
             'done_at' => 'Done At',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**

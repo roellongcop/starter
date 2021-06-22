@@ -62,15 +62,11 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function rules()
     {
-        return [
-
+        return $this->setRules([
             [['password', 'password_repeat'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
             ['password', 'string', 'min' => 6],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message'=>"Passwords don't match" ],
-
-            [['username', 'role_id', 'status', 'record_status', 'is_blocked'], 'required'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
+            [['username', 'role_id', 'status', 'is_blocked'], 'required'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             [
                 'status', 
@@ -86,17 +82,17 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique'],
             ['username', 'unique'],
             [['slug', 'role_id'], 'safe'],
-            [['created_at', 'updated_at', 'password_hint', 'password_reset_token', 'password_hash'], 'safe'],
+            [['password_hint', 'password_reset_token', 'password_hash'], 'safe'],
             ['role_id', 'exist', 'targetRelation' => 'role'],
             ['role_id', 'validateRoleId'],
-        ];
+        ]);
     }
  
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'role_id' => 'Role',
-        ];
+        ]);
     }
 
     /**

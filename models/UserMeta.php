@@ -41,16 +41,27 @@ class UserMeta extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['user_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
+        return $this->setRules([
+            [['user_id',], 'integer'],
             [['user_id'], 'default', 'value' => 0],
             [['meta_key', 'record_status'], 'required'],
-            [['created_at', 'updated_at', 'meta_value'], 'safe'],
+            [['meta_value'], 'safe'],
             [['meta_key'], 'string', 'max' => 255],
             ['user_id', 'exist', 'targetRelation' => 'user', 'message' => 'User not found'],
-        ];
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return $this->setAttributeLabels([
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'meta_key' => 'Meta Key',
+            'meta_value' => 'Meta Value',
+        ]);
     }
 
     public function getUser()
@@ -63,26 +74,6 @@ class UserMeta extends ActiveRecord
         if(($model = $this->user) != null) {
             return $model->username;
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'meta_key' => 'Meta Key',
-            'meta_value' => 'Meta Value',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
     }
 
     /**

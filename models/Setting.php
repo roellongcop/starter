@@ -73,35 +73,20 @@ class Setting extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['name', 'record_status', 'type'], 'required'],
+        return $this->setRules([
+            [['name', 'type'], 'required'],
             [['value'], 'safe'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
-            [['record_status', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at', 'type', 'options', 'sort_order'], 'safe'],
+            [['type', 'options', 'sort_order'], 'safe'],
             [['name', 'slug'], 'string', 'max' => 255],
-            /*[
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['file'], 
-                'checkExtensionByMimeType' => false
-            ],
-            */
             [
                 ['imageInput'], 
                 'image', 
-                // 'minWidth' => 100,
-                // 'maxWidth' => 200,
-                // 'minHeight' => 100,
-                // 'maxHeight' => 200,
                 'maxSize' => 1024 * 1024 * 2,
                 'skipOnEmpty' => true, 
                 'extensions' => App::params('file_extensions')['image'], 
                 'checkExtensionByMimeType' => false
             ],
-        ];
+        ]);
     }
 
     /**
@@ -109,7 +94,7 @@ class Setting extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'name' => 'Name',
             [
@@ -117,14 +102,7 @@ class Setting extends ActiveRecord
                 'format' => 'raw',
                 'value' => 'formattedValue'
             ],
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**

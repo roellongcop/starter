@@ -51,17 +51,13 @@ class Theme extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['name', 'description', 'base_path', 'base_url', 'record_status'], 'required'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
+        return $this->setRules([
+            [['name', 'description', 'base_path', 'base_url'], 'required'],
             [['base_path', 'base_url'], 'string'],
-            [['record_status', 'created_by', 'updated_by'], 'integer'],
             [['bundles', 'path_map', 'slug'], 'safe'],
-            [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
-        ];
+        ]);
     }
 
     /**
@@ -69,7 +65,7 @@ class Theme extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'name' => 'Name',
             'description' => 'Description',
@@ -77,14 +73,7 @@ class Theme extends ActiveRecord
             'base_url' => 'Base Url',
             'path_map' => 'Path Map',
             'bundles' => 'Bundles',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**

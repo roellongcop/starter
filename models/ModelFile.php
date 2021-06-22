@@ -42,18 +42,14 @@ class ModelFile extends ActiveRecord
      */
     public function rules()
     {
-        return [
+        return $this->setRules([
             [['model_id', 'file_id',], 'integer'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['model_id', 'file_id'], 'default', 'value' => 0],
-            [['model_id', 'model_name', 'record_status'], 'required'],
-            [['record_status'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['model_id', 'model_name',], 'required'],
             [['model_name'], 'string', 'max' => 255],
             ['file_id', 'exist', 'targetRelation' => 'file'],
             ['model_id', 'validateModelId',],
-        ];
+        ]);
     }
 
     /**
@@ -61,19 +57,12 @@ class ModelFile extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'model_id' => 'Model ID',
             'file_id' => 'File ID',
             'model_name' => 'Model',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     public function validateModelId($attribute, $params)

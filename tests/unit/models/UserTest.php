@@ -136,9 +136,9 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeleteSuccess()
+    public function testDeleteWithRelatedDataMustFailed()
     {
         $model = User::findOne(1);
-        expect_that($model->delete());
+        expect_not($model->delete());
     }
 }

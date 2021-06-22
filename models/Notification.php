@@ -47,18 +47,14 @@ class Notification extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['user_id', 'status', 'record_status', 'created_by', 'updated_by'], 'integer'],
+        return $this->setRules([
+            [['user_id', 'status',], 'integer'],
             [['message', 'link'], 'string'],
             [['type', 'user_id'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 128],
             [['token'], 'string', 'max' => 255],
-            [['record_status'], 'required'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
-        ];
+        ]);
     }
 
     /**
@@ -66,7 +62,7 @@ class Notification extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'user_id' => 'User ID',
             'message' => 'Message',
@@ -74,14 +70,7 @@ class Notification extends ActiveRecord
             'type' => 'Type',
             'token' => 'Token',
             'status' => 'Status',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**

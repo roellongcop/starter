@@ -57,20 +57,17 @@ class Log extends ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['user_id', 'model_id', 'record_status', 'created_by', 'updated_by'], 'integer'],
-            [['record_status'], 'default', 'value' => 1],
-            ['record_status', 'in', 'range' => [parent::RECORD_ACTIVE, parent::RECORD_INACTIVE]],
+        return $this->setRules([
+            [['user_id', 'model_id',], 'integer'],
             [['user_id', 'model_id'], 'default', 'value' => 0],
             [[ 'url'], 'string'],
             [['request_data', 'change_attribute', 'server',], 'safe'],
-            [['method', 'action', 'controller', 'table_name', 'model_name', 'record_status', 'ip', 'browser', 'os', 'device'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['method', 'action', 'controller', 'table_name', 'model_name', 'ip', 'browser', 'os', 'device'], 'required'],
             [['method', 'ip'], 'string', 'max' => 32],
             [['action', 'controller', 'table_name', 'model_name'], 'string', 'max' => 256],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
             ['user_id', 'exist', 'targetRelation' => 'user'],
-        ];
+        ]);
     }
 
     /**
@@ -78,7 +75,7 @@ class Log extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return $this->setAttributeLabels([
             'id' => 'ID',
             'user_id' => 'User ID',
             'username' => 'Username',
@@ -96,14 +93,7 @@ class Log extends ActiveRecord
             'browser' => 'Browser',
             'os' => 'Os',
             'device' => 'Device',
-            'record_status' => 'Record Status',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'recordStatusHtml' => 'Record Status',
-            'recordStatusLabel' => 'Record Status',
-        ];
+        ]);
     }
 
     /**
