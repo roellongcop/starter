@@ -16,9 +16,9 @@ use app\models\<?= isset($modelAlias) ? $modelAlias : $modelClass ?>;
 
 class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codeception\Test\Unit
 {
-    public function testCreateSuccess()
+    protected function data()
     {
-        $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>([
+        return [
 <?php foreach ($generator->getColumnNames() as $attribute) : ?>
 <?php if (! in_array($attribute, $ignore_attr)) : ?>
 <?php if ($attribute == 'record_status'): ?>
@@ -28,16 +28,27 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 <?php endif ?>
 <?php endif ?>
 <?php endforeach ?>
-        ]);
+        ];
+    };
 
+    public function testCreateSuccess()
+    {
+        $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>($this->data());
         expect_that($model->save());
     }
 
     public function testCreateNoDataMustFailed()
     {
-        $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>([
-            'record_status' => 1
-        ]);
+        $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>();
+        expect_not($model->save());
+    }
+
+    public function testCreateInvalidRecordStatusMustFailed()
+    {
+        $data = $this->data();
+        $data['record_status'] = 3;
+
+        $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>($data);
         expect_not($model->save());
     }
 
@@ -52,5 +63,23 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
     {
         $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
         expect_that($model->delete());
+    }
+
+    public function testActivateDataMustSuccess()
+    {
+        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
+        expect_that($model);
+
+        $model->activate();
+        expect_that($model->save());
+    }
+
+    public function testDeactivateDataMustSuccess()
+    {
+        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
+        expect_that($model);
+
+        $model->deactivate();
+        expect_that($model->save());
     }
 }

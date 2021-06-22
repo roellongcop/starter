@@ -58,4 +58,28 @@ class BackupCest
         $I->amOnPage(['backup/print']);
         $I->see('Backup Report');
     }
+
+    public function exportPdfPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['backup/export-pdf']);
+        $I->expectTo('See no errors');
+    }
+
+    public function exportCsvPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['backup/export-csv']);
+        $I->expectTo('See no errors');
+    }
+
+    public function exportXlsPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['backup/export-xls']);
+        $I->expectTo('See no errors');
+    }
+
+    public function exportXlsxPage(FunctionalTester $I)
+    {
+        $I->amOnPage(['backup/export-xlsx']);
+        $I->expectTo('See no errors');
+    }
 }
