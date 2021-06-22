@@ -107,7 +107,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateRoleId($attribute, $params)
     {
         if (App::isGuest() && $this->role->isInactive) {
-            $this->addError($attribute, 'Cannot access inactive role');
+            $this->addError($attribute, 'Cannot access in-active role');
         }
 
         if (App::isLogin() && $this->role->isInactive) {

@@ -5,38 +5,44 @@ use app\models\VisitLog;
 
 class VisitLogTest extends \Codeception\Test\Unit
 {
-    public function testCreateSuccess()
+    protected function data()
     {
-        $model = new VisitLog([
+        return [
             'user_id' => 1,
             'ip' => '::1',
             'action' => 0,
             'record_status' => 1,
             'created_by' => 1,
             'updated_by' => 1, 
-        ]);
+        ];
+    }
 
+    public function testCreateSuccess()
+    {
+        $model = new VisitLog($this->data());
         expect_that($model->save());
     }
 
     public function testCreateNoDataMustFailed()
     {
-        $model = new VisitLog([
-            'record_status' => 1
-        ]);
+        $model = new VisitLog();
+        expect_not($model->save());
+    }
+
+    public function testCreateInvalidRecordStatusMustFailed()
+    {
+        $data = $this->data();
+        $data['record_status'] = 3;
+
+        $model = new VisitLog($data);
         expect_not($model->save());
     }
 
     public function testCreateNotExisitngUserMustFailed()
     {
-        $model = new VisitLog([
-            'user_id' => 10001,
-            'ip' => '::1',
-            'action' => 0,
-            'record_status' => 1,
-            'created_by' => 1,
-            'updated_by' => 1, 
-        ]);
+        $data = $this->data();
+        $data['user_id'] = 10001;
+        $model = new VisitLog($data);
         expect_not($model->save());
     }
 
@@ -51,5 +57,23 @@ class VisitLogTest extends \Codeception\Test\Unit
     {
         $model = VisitLog::findOne(1);
         expect_that($model->delete());
+    }
+
+    public function testActivateDataMustSuccess()
+    {
+        $model = VisitLog::findOne(1);
+        expect_that($model);
+
+        $model->activate();
+        expect_that($model->save());
+    }
+
+    public function testDeactivateDataMustSuccess()
+    {
+        $model = VisitLog::findOne(1);
+        expect_that($model);
+
+        $model->deactivate();
+        expect_that($model->save());
     }
 }

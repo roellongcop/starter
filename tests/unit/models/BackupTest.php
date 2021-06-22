@@ -6,7 +6,7 @@ use yii\helpers\Inflector;
 
 class BackupTest extends \Codeception\Test\Unit
 {
-    protected function validData()
+    protected function data()
     {
         $dbPref = \Yii::$app->db->tablePrefix;
         return [
@@ -37,13 +37,13 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testCreateSuccess()
     {
-        $model = new Backup($this->validData());
+        $model = new Backup($this->data());
         expect_that($model->save());
     }
 
     public function testCreateInvalidRecordStatusMustFailed()
     {
-        $data = $this->validData();
+        $data = $this->data();
         $data['record_status'] = 3;
 
         $model = new Backup($data);
@@ -58,7 +58,7 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testCreateNoTablesMustSuccess()
     {
-        $data = $this->validData();
+        $data = $this->data();
         unset($data['tables']);
         $model = new Backup($data);
         expect_that($model->save());
@@ -66,7 +66,7 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testCreateNoFilenameMustFailed()
     {
-        $data = $this->validData();
+        $data = $this->data();
         unset($data['filename']);
         $model = new Backup($data);
         expect_not($model->save());
@@ -78,8 +78,16 @@ class BackupTest extends \Codeception\Test\Unit
         $model = Backup::findOne(1);
         expect_that($model);
 
-        $model->setActive();
+        $model->activate();
+        expect_that($model->save());
+    }
 
+    public function testDeactivateDataMustSuccess()
+    {
+        $model = Backup::findOne(1);
+        expect_that($model);
+
+        $model->deactivate();
         expect_that($model->save());
     }
 }

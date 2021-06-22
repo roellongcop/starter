@@ -20,10 +20,9 @@ class UserTest extends \Codeception\Test\Unit
     //         ]
     //     ]);
     // }
-
-    public function testCreateSuccess()
+    protected function data()
     {
-        $model = new User([
+        return [
             'role_id' => 1,
             'username' => 'developertest', 
             'email' => 'developertest@developertest.com',
@@ -37,60 +36,48 @@ class UserTest extends \Codeception\Test\Unit
             'slug' => 'developertest',
             'is_blocked' => 0,
             'record_status' => 1,
-        ]);
-        // $model->validate();
+        ];
+    }
+
+    public function testCreateSuccess()
+    {
+        $model = new User($this->data());
         expect_that($model->save());
     }
 
     public function testCreateNoDataMustFailed()
     {
-        $model = new User([
-            'record_status' => 1,  
-        ]);
+        $model = new User();
+        expect_not($model->save());
+    }
 
+    public function testCreateInvalidRecordStatusMustFailed()
+    {
+        $data = $this->data();
+        $data['record_status'] = 3;
+
+        $model = new User($data);
         expect_not($model->save());
     }
 
     public function testCreateInvalidRoleIdMustFailed()
     {
-        $user = new User([
-            'role_id' => 10001,
-            'username' => 'invalidrole', 
-            'email' => 'invalidrole@invalidrole.com',
-            'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
-            'password_hash' => \Yii::$app->security->generatePasswordHash('invalidrole@invalidrole.com'),
-            'password_hint' => 'Same as Email',
-            'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_16219946012',
-            'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_16219946012',
-            'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946012',
-            'status' => 10,
-            'slug' => 'invalidrole',
-            'is_blocked' => 0,
-            'record_status' => 1,
-        ]);
+        $data = $this->data();
+        $data['record_status'] = 10001;
+        $user = new User($data);
         expect_not($user->save());
     }
-
 
     public function testCreateGuestInactiveRoleIdMustFailed()
     {
         $role = Role::findOne(['name' => 'inactiverole']);
+        $data = $this->data();
+        $data['role_id'] = $role->id;
+        $data['username'] = 'inactiveroleuserguest';
+        $data['email'] = 'inactiveroleuserguest@inactiveroleuserguest.com';
+        $data['email'] = 'inactiveroleuserguest';
 
-        $user = new User([
-            'role_id' => $role->id,
-            'username' => 'inactiveroleuserguest', 
-            'email' => 'inactiveroleuserguest@inactiveroleuserguest.com',
-            'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
-            'password_hash' => \Yii::$app->security->generatePasswordHash('inactiveroleuserguest@inactiveroleuserguest.com'),
-            'password_hint' => 'Same as Email',
-            'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_16219946013',
-            'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_16219946013',
-            'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946013',
-            'status' => 10,
-            'slug' => 'inactiveroleuserguest',
-            'is_blocked' => 0,
-            'record_status' => 1,
-        ]);
+        $user = new User($data);
         expect_not($user->save());
     }
 
@@ -140,5 +127,23 @@ class UserTest extends \Codeception\Test\Unit
     {
         $model = User::findOne(1);
         expect_not($model->delete());
+    }
+
+    public function testActivateDataMustSuccess()
+    {
+        $model = User::findOne(1);
+        expect_that($model);
+
+        $model->activate();
+        expect_that($model->save());
+    }
+
+    public function testDeactivateDataMustSuccess()
+    {
+        $model = User::findOne(1);
+        expect_that($model);
+
+        $model->deactivate();
+        expect_that($model->save());
     }
 }

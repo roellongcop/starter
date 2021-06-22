@@ -16,9 +16,9 @@ class RoleTest extends \Codeception\Test\Unit
         $this->defaultNavigation = $access->defaultNavigation();
     }
 
-    public function testCreateSuccess()
+    protected function data()
     {
-        $model = new Role([
+        return [
             'name' => 'testrole', 
             'role_access' => json_encode([]),
             'module_access' => json_encode($this->controllerActions),
@@ -27,16 +27,27 @@ class RoleTest extends \Codeception\Test\Unit
             'record_status' => 1,
             'created_by' => 1,
             'updated_by' => 1,
-        ]);
+        ];
+    }
 
+    public function testCreateSuccess()
+    {
+        $model = new Role($this->data());
         expect_that($model->save());
+    }
+
+    public function testCreateInvalidRecordStatusMustFailed()
+    {
+        $data = $this->data();
+        $data['record_status'] = 3;
+
+        $model = new Role($data);
+        expect_not($model->save());
     }
 
     public function testCreateNoDataMustFailed()
     {
-        $model = new Role([
-            'record_status' => 1
-        ]);
+        $model = new Role();
         expect_not($model->save());
     }
 
@@ -57,5 +68,23 @@ class RoleTest extends \Codeception\Test\Unit
     {
         $model = Role::findOne(['name' => 'developer']);
         expect_not($model->delete());
+    }
+
+    public function testActivateDataMustSuccess()
+    {
+        $model = Role::findOne(1);
+        expect_that($model);
+
+        $model->activate();
+        expect_that($model->save());
+    }
+
+    public function testDeactivateDataMustSuccess()
+    {
+        $model = Role::findOne(1);
+        expect_that($model);
+
+        $model->deactivate();
+        expect_that($model->save());
     }
 }

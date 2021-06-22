@@ -181,6 +181,16 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $updateAll;
     }
 
+    public function activate()
+    {
+        $this->setActive();
+    }
+
+    public function deactivate()
+    {
+        $this->setInactive();
+    }
+
     public function setActive()
     {
         if ($this->hasProperty('record_status')) {

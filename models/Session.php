@@ -48,6 +48,7 @@ class Session extends ActiveRecord
     {
         return $this->setRules([
             [['id', 'ip', 'browser', 'os', 'device',], 'required'],
+            [['ip',], 'ip'],
             [['expire', 'user_id',], 'integer'],
             [['data'], 'string'],
             [['id'], 'string', 'max' => 40],
