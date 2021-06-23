@@ -631,13 +631,17 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getRecordStatusHtml()
     {
-        $controller = $this->controllerID();
 
+        if (App::isGuest()) {
+            return $this->recordStatusLabel;
+        }
+
+        $controller = $this->controllerID();
         if (in_array(App::actionID(), App::params('export_actions'))) {
             return $this->recordStatusLabel;
         }
 
-        if (App::isLogin() && App::component('access')->userCan('change-record-status', $controller)) {
+        if ($this->canActivate && $this->canDeactivate) {
             return RecordHtml::widget([
                 'model' => $this,
                 'controller' => $controller
@@ -680,12 +684,32 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCanActivate()
     {
-        return true;
+        if (App::isGuest()) {
+            return false;
+        }
+
+        if (App::identity()->can('change-record-status', $this->controllerID())) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getCanDeactivate()
     {
-        return true;
+        if (App::isGuest()) {
+            return false;
+        }
+
+        $user = App::identity();
+
+        if ($user->can('in-active-data', $this->controllerID())
+            && $user->can('change-record-status', $this->controllerID())
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getCreatedBy()

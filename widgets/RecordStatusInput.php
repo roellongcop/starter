@@ -31,12 +31,16 @@ class RecordStatusInput extends \yii\base\Widget
      */
     public function run()
     {
-        return BootstrapSelect::widget([
-            'attribute' => $this->attribute,
-            'model' => $this->model,
-            'form' => $this->form,
-            'data' => $this->data,
-            'options' => $this->options,
-        ]);
+        if (App::isLogin()) {
+            if (App::identity()->can('in-active-data', $this->model->controllerID())) {
+                return BootstrapSelect::widget([
+                    'attribute' => $this->attribute,
+                    'model' => $this->model,
+                    'form' => $this->form,
+                    'data' => $this->data,
+                    'options' => $this->options,
+                ]);
+            }
+        }
     }
 }
