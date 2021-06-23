@@ -1,4 +1,5 @@
 <?php
+
 use app\models\User;
 use app\models\Notification;
 
