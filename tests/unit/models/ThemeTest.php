@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\unit\models;
 
 use app\models\Theme;
