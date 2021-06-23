@@ -8,9 +8,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yii;
 use app\helpers\App;
 use yii\helpers\ArrayHelper;
-/**
- * 
- */
+
 class ExportComponent extends \yii\base\Component
 {
     public $ignoreAttributes = ['checkbox', 'actions'];
@@ -53,9 +51,11 @@ class ExportComponent extends \yii\base\Component
         header('Content-Type: application/csv');
         header('Content-Disposition: attachment; filename="'.$file_name.'"');
         $writer->save("php://output");
-        exit(0);
-    }
 
+        if (App::isWeb()) {
+            exit(0);
+        }
+    }
 
     public function excel($content, $ext='Xlsx')
     { 
@@ -72,7 +72,10 @@ class ExportComponent extends \yii\base\Component
         // header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="'.$file_name.'"');
         $writer->save("php://output");
-        exit(0);
+
+        if (App::isWeb()) {
+            exit(0);
+        }
     }
 
     public function xlsx($content)

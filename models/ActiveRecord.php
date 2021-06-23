@@ -356,6 +356,48 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
+    public function getPrintUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('print')) {
+            $url = [implode('/', [$this->controllerID(), 'print'])];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
+    }
+
+    public function getExportPdfUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('export-pdf')) {
+            $url = [implode('/', [$this->controllerID(), 'export-pdf'])];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
+    }
+
+    public function getExportCsvUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('export-csv')) {
+            $url = [implode('/', [$this->controllerID(), 'export-csv'])];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
+    }
+
+    public function getExportXlsUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('export-xls')) {
+            $url = [implode('/', [$this->controllerID(), 'export-xls'])];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
+    }
+
+    public function getExportXlsxUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('export-xlsx')) {
+            $url = [
+                implode('/', [$this->controllerID(), 'export-xlsx']),
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
+    }
+
     public function getViewUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('view')) {

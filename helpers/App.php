@@ -689,4 +689,19 @@ class App {
 
 		return $_SERVER;
 	}
+
+	public static function isConsole()
+	{
+		return self::app()->id == 'basic-console';
+	}
+
+	public static function isWeb()
+	{
+		return self::app()->id == 'yii2-basic-starter';
+	}
+
+	public function isTest()
+	{
+		return self::app()->id == 'basic-tests';
+	}
 }

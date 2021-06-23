@@ -69,7 +69,31 @@ class FileCest
 
     public function printPage(FunctionalTester $I)
     {
-        $I->amOnPage(['file/print']);
+        $I->amOnPage($this->model->getPrintUrl(false));
         $I->see('File Report');
+    }
+
+    public function exportPdfPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getExportPdfUrl(false)); 
+        $I->expectTo('See no errors');
+    }
+
+    public function exportCsvPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getExportCsvUrl(false));
+        $I->expectTo('See no errors');
+    }
+
+    public function exportXlsPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getExportXlsUrl(false));
+        $I->expectTo('See no errors');
+    }
+
+    public function exportXlsxPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getExportXlsxUrl(false));
+        $I->expectTo('See no errors');
     }
 }

@@ -26,29 +26,32 @@ class ExportButton extends \yii\base\Widget
             'title' => 'XLS 95',
             'icon' => 'excel',
         ],
-
         'export-xlsx' => [
             'title' => 'XLSX 2007',
             'icon' => 'excel',
         ],
     ]; 
     
-
     public $exports = [];
     public $controller;
     public $title = 'Export Data';
     public $view = 'widget';
+    public $user;
 
     public function init() 
     {
         // your logic here
         parent::init();
 
+        if (App::isLogin()) {
+            $this->user = $this->user ?: App::identity();
+        }
+
         $access = App::component('access');
         $this->controller = $this->controller ?: App::controllerID();
 
         foreach ($this->actions as $action => $data) {
-            if ($access->userCan($action, $this->controller)) {
+            if ($this->user->can($action, $this->controller)) {
                 $params = App::queryParams();
                 array_unshift($params, $action);
                 $link = Url::to($params);

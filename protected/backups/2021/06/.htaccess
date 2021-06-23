@@ -1,0 +1,8 @@
+#disable directory browsing 
+Options -Indexes
+
+#prevent folder listing
+IndexIgnore *
+
+#If you want to deny access to all files: 
+#deny from all

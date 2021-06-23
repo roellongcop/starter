@@ -44,13 +44,11 @@ class UserMetaCest
         $I->see('Update User Meta:', 'h5');
     }
 
-
     public function duplicatePage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getDuplicateUrl(false));
         $I->see('Duplicate User Meta:', 'h5');
     }
-
 
     public function bulkActionPage(FunctionalTester $I)
     {
@@ -64,7 +62,31 @@ class UserMetaCest
 
     public function printPage(FunctionalTester $I)
     {
-        $I->amOnPage(['user-meta/print']);
+        $I->amOnPage($this->model->getPrintUrl(false));
         $I->see('UserMeta Report');
+    }
+
+    public function exportPdfPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getExportPdfUrl(false)); 
+        $I->expectTo('See no errors');
+    }
+
+    public function exportCsvPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getExportCsvUrl(false));
+        $I->expectTo('See no errors');
+    }
+
+    public function exportXlsPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getExportXlsUrl(false));
+        $I->expectTo('See no errors');
+    }
+
+    public function exportXlsxPage(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getExportXlsxUrl(false));
+        $I->expectTo('See no errors');
     }
 }
