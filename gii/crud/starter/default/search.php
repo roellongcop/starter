@@ -24,6 +24,7 @@ $searchConditions = $generator->generateSearchConditions();
 $controllerID = Inflector::camel2id(isset($modelAlias) ? $modelAlias : $modelClass);
 echo "<?php\n";
 ?>
+
 namespace <?= StringHelper::dirname(ltrim($generator->searchModelClass, '\\')) ?>;
 
 use Yii;

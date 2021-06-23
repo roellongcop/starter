@@ -26,6 +26,7 @@ $actionParamComments = $generator->generateActionParamComments();
 
 echo "<?php\n";
 ?>
+
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
 use Yii;

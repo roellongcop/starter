@@ -10,6 +10,7 @@ $modelClass = StringHelper::basename($generator->modelClass);
 $ignore_attr = ['created_at', 'created_by', 'updated_at', 'updated_by', 'id'];
 ?>
 <?= "<?php\n" ?>
+
 namespace tests\unit\models;
 
 use app\models\<?= isset($modelAlias) ? $modelAlias : $modelClass ?>;

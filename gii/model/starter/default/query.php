@@ -23,6 +23,7 @@ if ($generator->ns !== $generator->queryNs) {
 
 echo "<?php\n";
 ?>
+
 namespace <?= $generator->queryNs ?>;
 
 /**

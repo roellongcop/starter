@@ -22,6 +22,7 @@ if ($queryClassName) {
 }
 echo "<?php\n";
 ?>
+
 namespace <?= $generator->ns ?>;
 
 use Yii;

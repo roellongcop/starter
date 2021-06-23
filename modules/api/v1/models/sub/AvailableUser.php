@@ -1,4 +1,5 @@
 <?php
+
 namespace app\modules\api\v1\models\sub;
 
 use Yii;

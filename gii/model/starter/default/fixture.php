@@ -2,6 +2,7 @@
 use yii\helpers\Inflector;
 ?>
 <?= "<?php\n" ?>
+
 namespace app\tests\unit\fixtures;
 
 class <?= $className ?>Fixture extends \yii\test\ActiveFixture

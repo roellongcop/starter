@@ -6,6 +6,7 @@ use yii\helpers\Inflector;
 $modelClass = StringHelper::basename($generator->modelClass);
 ?>
 <?= "<?php\n" ?>
+
 use app\models\User;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 
