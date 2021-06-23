@@ -124,12 +124,12 @@ class LogTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeactivateDataMustSuccess()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = Log::findOne(1);
         expect_that($model);
 
         $model->deactivate();
-        expect_that($model->save());
+        expect_not($model->save());
     }
 }

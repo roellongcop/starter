@@ -26,6 +26,8 @@ use app\widgets\Label;
  */
 class Notification extends ActiveRecord
 {
+    const STATUS_READ = 1;
+    const STATUS_UNREAD = 0;
     /**
      * {@inheritdoc}
      */
@@ -55,6 +57,7 @@ class Notification extends ActiveRecord
             [['type'], 'string', 'max' => 128],
             [['token'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
+            ['status', 'in', 'range' => [self::STATUS_READ, self::STATUS_UNREAD]],
         ]);
     }
 
@@ -163,12 +166,12 @@ class Notification extends ActiveRecord
 
     public function setToRead()
     {
-        $this->status = 0;
+        $this->status = self::STATUS_READ;
     }
 
-    public function setToNew()
+    public function setToUnread()
     {
-        $this->status = 1;
+        $this->status = self::STATUS_UNREAD;
     }
 
     public function getBulkActions()
@@ -200,11 +203,11 @@ class Notification extends ActiveRecord
     */
     public static function readAll($condition='')
     {
-        return parent::updateAll(['status' => 0], $condition);
+        return parent::updateAll(['status' => self::STATUS_READ], $condition);
     }
 
     public static function unreadAll($condition='')
     {
-        return parent::updateAll(['status' => 1], $condition);
+        return parent::updateAll(['status' => self::STATUS_UNREAD], $condition);
     }
 }

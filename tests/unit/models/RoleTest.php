@@ -55,7 +55,7 @@ class RoleTest extends \Codeception\Test\Unit
     public function testUpdateSuccess()
     {
         $model = Role::findOne(1);
-        $model->record_status = 0;
+        $model->name = 'updated';
         expect_that($model->save());
     }
 
@@ -80,12 +80,12 @@ class RoleTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeactivateDataMustSuccess()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = Role::findOne(1);
         expect_that($model);
 
         $model->deactivate();
-        expect_that($model->save());
+        expect_not($model->save());
     }
 }

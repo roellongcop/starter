@@ -56,7 +56,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
     public function testUpdateSuccess()
     {
         $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
-        $model->record_status = 0;
+        $model->record_status = 1;
         expect_that($model->save());
     }
 
@@ -75,12 +75,12 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->save());
     }
 
-    public function testDeactivateDataMustSuccess()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
         expect_that($model);
 
         $model->deactivate();
-        expect_that($model->save());
+        expect_not($model->save());
     }
 }

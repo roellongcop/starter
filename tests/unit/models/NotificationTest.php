@@ -55,7 +55,7 @@ class NotificationTest extends \Codeception\Test\Unit
     public function testUpdateSuccess()
     {
         $model = Notification::findOne(1);
-        $model->record_status = 0;
+        $model->message = 'updated';
         expect_that($model->save());
     }
 
@@ -74,12 +74,34 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeactivateDataMustSuccess()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = Notification::findOne(1);
         expect_that($model);
 
         $model->deactivate();
+        expect_not($model->save());
+    }
+
+    public function testReadMustSuccess()
+    {
+        $model = Notification::find()
+            ->unread()
+            ->one();
+        expect_that($model);
+
+        $model->setToRead();
+        expect_that($model->save());
+    }
+
+    public function testUnreadMustSuccess()
+    {
+        $model = Notification::find()
+            ->read()
+            ->one();
+        expect_that($model);
+
+        $model->setToUnread();
         expect_that($model->save());
     }
 }

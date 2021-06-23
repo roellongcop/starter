@@ -685,7 +685,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getCanActivate()
     {
         if (App::isGuest()) {
-            return false;
+            return true;
         }
 
         if (App::identity()->can('change-record-status', $this->controllerID())) {
@@ -697,16 +697,14 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCanDeactivate()
     {
-        if (App::isGuest()) {
-            return false;
-        }
+        if (App::isLogin()) {
+            $user = App::identity();
 
-        $user = App::identity();
-
-        if ($user->can('in-active-data', $this->controllerID())
-            && $user->can('change-record-status', $this->controllerID())
-        ) {
-            return true;
+            if ($user->can('in-active-data', $this->controllerID())
+                && $user->can('change-record-status', $this->controllerID())
+            ) {
+                return true;
+            }
         }
 
         return false;

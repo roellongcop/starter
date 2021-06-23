@@ -63,7 +63,7 @@ class ModelFileTest extends \Codeception\Test\Unit
     public function testUpdateSuccess()
     {
         $model = ModelFile::findOne(1);
-        $model->record_status = 0;
+        $model->model_id = 2;
         expect_that($model->save());
     }
 
@@ -82,12 +82,12 @@ class ModelFileTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeactivateDataMustSuccess()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = ModelFile::findOne(1);
         expect_that($model);
 
         $model->deactivate();
-        expect_that($model->save());
+        expect_not($model->save());
     }
 }

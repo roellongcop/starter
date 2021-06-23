@@ -65,12 +65,12 @@ class SessionTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeactivateDataMustSuccess()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = Session::find()->one();
         expect_that($model);
 
         $model->deactivate();
-        expect_that($model->save());
+        expect_not($model->save());
     }
 }

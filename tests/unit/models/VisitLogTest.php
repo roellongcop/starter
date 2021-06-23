@@ -47,13 +47,6 @@ class VisitLogTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testUpdateSuccess()
-    {
-        $model = VisitLog::findOne(1);
-        $model->record_status = 0;
-        expect_that($model->save());
-    }
-
     public function testDeleteSuccess()
     {
         $model = VisitLog::findOne(1);
@@ -69,12 +62,12 @@ class VisitLogTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeactivateDataMustSuccess()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = VisitLog::findOne(1);
         expect_that($model);
 
         $model->deactivate();
-        expect_that($model->save());
+        expect_not($model->save());
     }
 }

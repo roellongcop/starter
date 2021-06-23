@@ -120,7 +120,7 @@ class UserTest extends \Codeception\Test\Unit
     public function testUpdateSuccess()
     {
         $model = User::findOne(1);
-        $model->record_status = 0;
+        $model->username = 'updated';
         expect_that($model->save());
     }
 
@@ -139,12 +139,12 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeactivateDataMustSuccess()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = User::findOne(1);
         expect_that($model);
 
         $model->deactivate();
-        expect_that($model->save());
+        expect_not($model->save());
     }
 }
