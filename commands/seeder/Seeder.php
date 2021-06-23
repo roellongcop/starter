@@ -1,5 +1,7 @@
 <?php
+
 namespace app\commands\seeder;
+
 use Faker\Factory;
 use app\helpers\App;
 use yii\console\ExitCode;

@@ -1,9 +1,9 @@
 <?php
+
 namespace app\commands\seeder;
 
 use app\helpers\App;
 use app\models\Role;
-
 
 class UserSeeder extends Seeder
 {

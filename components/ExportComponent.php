@@ -1,4 +1,5 @@
 <?php
+
 namespace app\components;
 
 use PhpOffice\PhpSpreadsheet\Writer\Csv as CsvWriter;
@@ -27,7 +28,7 @@ class ExportComponent extends \yii\base\Component
         ]
     ];
 
-    public function export_pdf($content)
+    public function pdf($content)
     {
         $pdf = App::component('pdf');
         $pdf->filename = implode('-', [App::controllerID(), 'pdf', time()]) . '.pdf';
@@ -35,7 +36,7 @@ class ExportComponent extends \yii\base\Component
         return $pdf->render();
     }
 
-    public function export_csv($content) 
+    public function csv($content) 
     {
         $file_name = implode('-', [App::controllerID(), 'export-csv', time()]) . '.csv';
 
@@ -52,11 +53,11 @@ class ExportComponent extends \yii\base\Component
         header('Content-Type: application/csv');
         header('Content-Disposition: attachment; filename="'.$file_name.'"');
         $writer->save("php://output");
-        exit;
+        exit(0);
     }
 
 
-    public function export_excel($content, $ext='Xlsx')
+    public function excel($content, $ext='Xlsx')
     { 
         $file_name =  implode('-', [App::controllerID(), 'export', strtolower($ext), time()]) . '.' . strtolower($ext);
 
@@ -71,17 +72,17 @@ class ExportComponent extends \yii\base\Component
         // header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="'.$file_name.'"');
         $writer->save("php://output");
-        exit;
+        exit(0);
     }
 
-    public function export_xlsx($content)
+    public function xlsx($content)
     {
-        $this->export_excel($content, 'Xlsx');
+        $this->excel($content, 'Xlsx');
     }
 
-    public function export_xls($content)
+    public function xls($content)
     {
-        $this->export_excel($content, 'Xls');
+        $this->excel($content, 'Xls');
     }
 
     public function getExportColumns($searchModel, $type='excel')

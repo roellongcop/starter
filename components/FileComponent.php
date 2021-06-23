@@ -1,4 +1,5 @@
 <?php
+
 namespace app\components;
 
 use Yii;
@@ -9,9 +10,6 @@ use yii\base\Component;
 use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
 
-/**
- * 
- */
 class FileComponent extends Component
 {
     public function upload($model, $attribute="imageInput")
@@ -27,7 +25,6 @@ class FileComponent extends Component
             } 
         }
     }
-
 
     public function saveFile($model, $input, $location='')
     {

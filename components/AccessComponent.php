@@ -1,6 +1,6 @@
 <?php
-namespace app\components;
 
+namespace app\components;
 
 use Yii;
 use app\helpers\App;
@@ -11,9 +11,6 @@ use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
 
-/**
- * 
- */
 class AccessComponent extends Component
 {
 	public function controllerActions()

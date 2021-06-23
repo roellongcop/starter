@@ -1,5 +1,7 @@
 <?php
+
 namespace app\helpers;
+
 use Yii;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
@@ -669,6 +671,14 @@ class App {
 			return self::component('setting')->{$attr};
 		}
 		return self::component('setting');
+	}
+
+	public static function export($attr='')
+	{
+		if ($attr) {
+			return self::component('export')->{$attr};
+		}
+		return self::component('export');
 	}
 
 	public static function server($attr='')

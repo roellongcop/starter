@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers;
 
 use Yii;
@@ -160,30 +161,30 @@ class VisitLogController extends Controller
 
     public function actionExportPdf()
     {
-        $content = $this->getExportContent('pdf');
-        return App::component('export')
-            ->export_pdf($content);
+        return App::export()->pdf(
+            $this->getExportContent('pdf')
+        );
     }
 
     public function actionExportCsv()
     {
-        $content = $this->getExportContent();
-        App::component('export')
-            ->export_csv($content);
+        return App::export()->csv(
+            $this->getExportContent()
+        );
     }
 
     public function actionExportXls()
     {
-        $content = $this->getExportContent();
-        App::component('export')
-            ->export_xls($content);
+        return App::export()->xls(
+            $this->getExportContent()
+        );
     }
 
     public function actionExportXlsx()
     {
-        $content = $this->getExportContent();
-        App::component('export')
-            ->export_xlsx($content);
+        return App::export()->xlsx(
+            $this->getExportContent()
+        );
     }
 
     protected function getExportContent($file='excel')

@@ -1,4 +1,5 @@
 <?php
+
 namespace app\commands\seeder;
 
 use app\helpers\App;

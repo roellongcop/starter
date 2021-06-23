@@ -1,4 +1,5 @@
 <?php
+
 namespace app\commands\seeder;
 
 class IpSeeder extends Seeder
