@@ -53,6 +53,20 @@ class BackupCest
         ]);
         $I->see('Filename cannot be blank.');
     }
+
+    public function createDeactivatedDataNoInactiveAccessMustFailed(FunctionalTester $I)
+    {
+        $I->amLoggedInAs(User::findByUsername('no_inactive_data_access_role_user'));
+        
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#backup-form', [
+            'Backup' => [
+                'filename' => 'test-filename',
+                'record_status' => Backup::RECORD_INACTIVE
+            ]
+        ]);
+        $I->see('Dont have access to create deactivated data.');
+    }
     
     public function viewPage(FunctionalTester $I)
     {

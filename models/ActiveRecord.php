@@ -126,6 +126,16 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function validateRecordStatus($attribute, $params)
     {
+        if ($this->isNewRecord) {
+            if (App::isGuest() && $this->isInactive) {
+                $this->addError($attribute, 'Guest Cannot create deactivated data.');
+            }
+ 
+            if ($this->isInactive && !App::identity()->can('in-active-data', $this->controllerID())) {
+                $this->addError($attribute, 'Dont have access to create deactivated data.');
+            }
+        }
+
         if (! $this->isNewRecord) {
             if ($this->isActive && !$this->canActivate) {
                 $this->addError($attribute, 'Cannot be Activated');
@@ -135,6 +145,17 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 $this->addError($attribute, 'Cannot be Deactivated');
             }
         }
+    }
+
+    public function validate($attributeNames = null, $clearErrors = true)
+    {
+        $validate = parent::validate($attributeNames, $clearErrors);
+
+        if (!$validate) {
+            $this->errorSummary = Html::errorSummary($this, ['class' => 'error-summary']);
+        }
+
+        return $validate;
     }
 
     public function save($runValidation = true, $attributeNames = null)

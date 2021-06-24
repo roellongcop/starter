@@ -56,26 +56,30 @@ class BackupController extends Controller
             'filename' => time(),
         ]);
 
-        if ($model->load(App::post()) && $model->validate()) {
-            $backup = $this->backupDB($model->filename, $model->tables);
-            $model->tables = $model->tables ?: App::component('general')->getAllTables();
-            
-            if ($backup && $model->save()) {
+        if ($model->load(App::post())) {
+            if ($model->validate()) {
+                $backup = $this->backupDB($model->filename, $model->tables);
+                $model->tables = $model->tables ?: App::component('general')->getAllTables();
+                
+                if ($backup && $model->save()) {
 
-                $fileInput = new \StdClass();
-                $fileInput->baseName = $model->filename;
-                $fileInput->extension = 'sql';
-                $fileInput->size = $backup['filesize'];
+                    $fileInput = new \StdClass();
+                    $fileInput->baseName = $model->filename;
+                    $fileInput->extension = 'sql';
+                    $fileInput->size = $backup['filesize'];
 
-                $file = App::component('file')->saveFile($model, $fileInput, $backup['filepath']);
-                $this->checkFileUpload($model, $file->id);
-                App::success('Successfully Created');
+                    $file = App::component('file')->saveFile($model, $fileInput, $backup['filepath']);
+                    $this->checkFileUpload($model, $file->id);
+                    App::success('Successfully Created');
+                }
+                else {
+                    App::danger('Error in creating backup file.');
+                }
+                return $this->redirect($model->viewUrl);
             }
             else {
-                App::danger('Error in creating backup file.');
+                App::danger($model->errorSummary);
             }
-
-            return $this->redirect($model->viewUrl);
         }
 
         return $this->render('create', [
