@@ -6,14 +6,15 @@ use app\widgets\Dropzone;
 use yii\widgets\Pjax;
 
 $registerJs = <<< SCRIPT
+    var selectedFile = 0;
+    var selectedFilePath = '';
+    
     var disableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', true);
     }
     var enableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', false);
     }
-    var selectedFile = 0;
-    var selectedFilePath = '';
     $(document).on('click', '#my_files-{$id} img', function() {
         var image = $(this);
         selectedFile = image.data('id');
