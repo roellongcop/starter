@@ -118,6 +118,7 @@ class SettingController extends Controller
             $model->record_status = $post['record_status'];
 
             if ($model->save()) {
+                $model->refresh();
                 return $this->asJson([
                     'status' => 'success',
                     'attributes' => $model->attributes
