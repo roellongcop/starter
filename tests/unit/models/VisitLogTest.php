@@ -24,13 +24,13 @@ class VisitLogTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoDataFailed()
     {
         $model = new VisitLog();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatusFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -39,7 +39,7 @@ class VisitLogTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNotExisitngUserMustFailed()
+    public function testCreateNotExisitngUserFailed()
     {
         $data = $this->data();
         $data['user_id'] = 10001;
@@ -53,7 +53,7 @@ class VisitLogTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateDataSuccess()
     {
         $model = VisitLog::findOne(1);
         expect_that($model);
@@ -62,7 +62,7 @@ class VisitLogTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateDataFailed()
     {
         $model = VisitLog::findOne(1);
         expect_that($model);

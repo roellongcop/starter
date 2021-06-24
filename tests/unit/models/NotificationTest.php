@@ -28,7 +28,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatusFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -37,13 +37,13 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoDataFailed()
     {
         $model = new Notification();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidUserIdMustFailed()
+    public function testCreateInvalidUserIdFailed()
     {
         $data = $this->data();
         $data['user_id'] = 10001;
@@ -65,7 +65,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateDataSuccess()
     {
         $model = Notification::findOne(1);
         expect_that($model);
@@ -74,7 +74,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateDataFailed()
     {
         $model = Notification::findOne(1);
         expect_that($model);
@@ -83,7 +83,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testReadMustSuccess()
+    public function testReadSuccess()
     {
         $model = Notification::find()
             ->unread()
@@ -94,7 +94,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testUnreadMustSuccess()
+    public function testUnreadSuccess()
     {
         $model = Notification::find()
             ->read()

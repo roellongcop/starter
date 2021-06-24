@@ -42,7 +42,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatusFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -51,13 +51,13 @@ class BackupTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoDataFailed()
     {
         $model = new Backup();
         expect_not($model->save());
     }
 
-    public function testCreateNoTablesMustSuccess()
+    public function testCreateNoTablesSuccess()
     {
         $data = $this->data();
         unset($data['tables']);
@@ -65,7 +65,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoFilenameMustFailed()
+    public function testCreateNoFilenameFailed()
     {
         $data = $this->data();
         unset($data['filename']);
@@ -74,7 +74,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('filename');
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateDataSuccess()
     {
         $model = Backup::findOne(1);
         expect_that($model);
@@ -83,7 +83,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateDataFailed()
     {
         $model = Backup::findOne(1);
         expect_that($model);

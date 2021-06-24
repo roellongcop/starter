@@ -24,13 +24,13 @@ class UserMetaTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoDataFailed()
     {
         $model = new UserMeta();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatusFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -39,7 +39,7 @@ class UserMetaTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidUserIdMustFailed()
+    public function testCreateInvalidUserIdFailed()
     {
         $data = $this->data();
         $data['user_id'] = 100001;
@@ -62,7 +62,7 @@ class UserMetaTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateDataSuccess()
     {
         $model = UserMeta::findOne(1);
         expect_that($model);
@@ -71,7 +71,7 @@ class UserMetaTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateDataFailed()
     {
         $model = UserMeta::findOne(1);
         expect_that($model);

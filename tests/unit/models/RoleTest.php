@@ -37,7 +37,7 @@ class RoleTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatusFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -46,7 +46,7 @@ class RoleTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoDataFailed()
     {
         $model = new Role();
         expect_not($model->save());
@@ -65,13 +65,13 @@ class RoleTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testDeleteWithRelatedUserMustFailed()
+    public function testDeleteWithRelatedUserFailed()
     {
         $model = Role::findOne(['name' => 'developer']);
         expect_not($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateDataSuccess()
     {
         $model = Role::findOne(1);
         expect_that($model);
@@ -80,7 +80,7 @@ class RoleTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateDataFailed()
     {
         $model = Role::findOne(1);
         expect_that($model);

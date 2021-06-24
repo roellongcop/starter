@@ -23,7 +23,7 @@ class IpTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatusFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -32,14 +32,14 @@ class IpTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoDataFailed()
     {
         $model = new Ip();
 
         expect_not($model->save());
     }
 
-    public function testCreateNoIPNameMustFailed()
+    public function testCreateNoIPNameFailed()
     {
         $data = $this->data();
         unset($data['name']);
@@ -49,7 +49,7 @@ class IpTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('name');
     }
 
-    public function testCreateInvalidIPNameMustFailed()
+    public function testCreateInvalidIPNameFailed()
     {
         $data = $this->data();
         $data['name'] = 'invalidIP';
@@ -72,7 +72,7 @@ class IpTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateDataSuccess()
     {
         $model = Ip::findOne(1);
         expect_that($model);
@@ -81,7 +81,7 @@ class IpTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateDataFailed()
     {
         $model = Ip::findOne(1);
         expect_that($model);
