@@ -31,7 +31,15 @@ class ExportComponent extends \yii\base\Component
         $pdf = App::component('pdf');
         $pdf->filename = implode('-', [App::controllerID(), 'pdf', time()]) . '.pdf';
         $pdf->content = $content;
-        return $pdf->render();
+        $render = $pdf->render();
+
+        if (App::isWeb()) {
+            return $render;
+        }
+
+        if (App::isTest()) {
+            return 'pdf-exported';
+        }
     }
 
     public function csv($content) 
@@ -50,10 +58,13 @@ class ExportComponent extends \yii\base\Component
 
         header('Content-Type: application/csv');
         header('Content-Disposition: attachment; filename="'.$file_name.'"');
-        $writer->save("php://output");
 
         if (App::isWeb()) {
+            $writer->save("php://output");
             exit(0);
+        }
+        if (App::isTest()) {
+            echo 'csv-exported';
         }
     }
 
@@ -71,10 +82,13 @@ class ExportComponent extends \yii\base\Component
         header("Content-Type: application/" . strtolower($ext));
         // header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="'.$file_name.'"');
-        $writer->save("php://output");
 
         if (App::isWeb()) {
+            $writer->save("php://output");
             exit(0);
+        }
+        if (App::isTest()) {
+            echo strtolower($ext) . '-exported';
         }
     }
 

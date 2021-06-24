@@ -70,23 +70,27 @@ class ModelFileCest
     {
         $I->amOnPage($this->model->getExportPdfUrl(false)); 
         $I->expectTo('See no errors');
+        $I->see('pdf-exported');
     }
 
     public function exportCsvPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getExportCsvUrl(false));
         $I->expectTo('See no errors');
+        $I->see('csv-exported');
     }
 
     public function exportXlsPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getExportXlsUrl(false));
         $I->expectTo('See no errors');
+        $I->see('xls-exported');
     }
 
     public function exportXlsxPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getExportXlsxUrl(false));
         $I->expectTo('See no errors');
+        $I->see('xlsx-exported');
     }
 }
