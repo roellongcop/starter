@@ -344,10 +344,7 @@ class BackupController extends Controller
     public function actionDownload($slug)
     {
         $model = $this->findModel($slug, 'slug');
-        if ($model) {
-            $model->download();
-        }
-        else {
+        if (!$model || !$model->download()) {
             App::warning('File don\'t exist');
             return $this->redirect(['index']);
         }
