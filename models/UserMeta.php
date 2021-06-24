@@ -45,7 +45,7 @@ class UserMeta extends ActiveRecord
         return $this->setRules([
             [['user_id',], 'integer'],
             [['user_id'], 'default', 'value' => 0],
-            [['meta_key', 'record_status'], 'required'],
+            [['meta_key'], 'required'],
             [['meta_value'], 'safe'],
             [['meta_key'], 'string', 'max' => 255],
             ['user_id', 'exist', 'targetRelation' => 'user', 'message' => 'User not found'],

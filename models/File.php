@@ -319,8 +319,8 @@ class File extends ActiveRecord
     public function afterDelete()
     {
         ModelFile::deleteAll(['file_id' => $this->id]);
-        if (file_exists($this->rootPath)) {
-            unlink($this->rootPath);
-        }
+        // if (file_exists($this->rootPath)) {
+        //     unlink($this->rootPath);
+        // }
     }
 }

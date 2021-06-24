@@ -176,36 +176,30 @@ class FileController extends Controller
      */
     public function actionDelete($token = '')
     {
+        $model = $this->findModel($token, 'token');
+
         if (App::isAjax()) {
-            if (($post = App::post()) != null) {
-                if (isset($post['fileToken'])) {
-                    $file = $this->findModel($post['fileToken'], 'token');
-                    if ($file && $file->canDelete) {
-                        $_file = $file;
-                        if ($file->delete()) {
-                            return $this->asJson([
-                                'status' => 'success',
-                                'post' => $post['fileToken'],
-                                'file' => $_file,
-                                'message' => 'File Deleted'
-                            ]);
-                        }
-                        else {
-                            return $this->asJson([
-                                'status' => 'failed',
-                                'post' => $post['fileToken'],
-                                'errors' => $model->errors
-                            ]);
-                        }
-                        
-                    }
+            if ($model && $model->canDelete) {
+                $file = $model;
+                if ($model->delete()) {
+                    return $this->asJson([
+                        'status' => 'success',
+                        'file' => $file,
+                        'message' => 'File Deleted'
+                    ]);
                 }
+
+                return $this->asJson([
+                    'status' => 'failed',
+                    'errors' => $model->errors
+                ]);
             }
 
-            return ;
+            return $this->asJson([
+                'status' => 'failed',
+                'errors' => 'File not found or file cannot be deleted'
+            ]);
         }
-
-        $model = $this->findModel($token, 'token');
 
         if($model->delete()) {
             App::success('Successfully Deleted');

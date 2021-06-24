@@ -17,36 +17,45 @@ $deleteFileUrl = Url::to(['file/delete']);
 $registerJs = <<< SCRIPT
     var selectedFile = 0;
     var selectedToken = 0;
-    var enableButton = function() {
-        $('#remove-file-btn').prop('disabled', false);
-    } 
-    var disableButton = function() {
-        $('#remove-file-btn').prop('disabled', true);
-    } 
-    $(document).on('click', '#my-image-files img', function() {
-        var image = $(this);
-        selectedFile = image.data('id');
-        selectedToken = image.data('token');
-        $('#my-image-files #td-name').text(image.data('name'));
-        $('#my-image-files #td-extension').text(image.data('extension'));
-        $('#my-image-files #td-size').text(image.data('size'));
-        $('#my-image-files #td-width').text(image.data('width') + 'px');
-        $('#my-image-files #td-height').text(image.data('height') + 'px');
-        $('#my-image-files #td-location').text(image.data('location'));
-        $('#my-image-files #td-token').text(image.data('token'));
-        $('#my-image-files #td-created_at').text(image.data('created_at'));
-        $('#my-image-files img').css('border', '');
-        image.css('border', '2px solid #1bc5bd');
-        enableButton();
-    }); 
+    
+    var showActionButton = function() {
+        $('#btn-download-file').show();
+        $('#btn-remove-file').show();
+    }
+
+    var hideActionButton = function() {
+        $('#btn-remove-file').hide();
+        $('#btn-download-file').hide();
+    }
+
+    var resetState = function() {
+        selectedFile = 0;
+        selectedToken = 0;
+        hideActionButton();
+
+        $('#my-image-files #td-name').text('None');
+        $('#my-image-files #td-extension').text('None');
+        $('#my-image-files #td-size').text('None');
+        $('#my-image-files #td-width').text('None');
+        $('#my-image-files #td-height').text('None');
+        $('#my-image-files #td-location').text('None');
+        $('#my-image-files #td-token').text('None');
+        $('#my-image-files #td-created_at').text('None');
+        $('#my-image-files #td-action-btn').html('None');
+    }
+
+    var setFileContent = function(content) {
+        $('#my-image-files .my-photos').html(content);
+    }
+
     var getMyFiles = function(url) {
-        $('#my-image-files .my-photos').html('');
+        setFileContent('Loading');
         let conf = {
             url: url,
             method: 'get',
             cache: false,
             success: function(s) {
-                $('#my-image-files .my-photos').html(s);
+                setFileContent(s);
             },
             error: function(e) {
             }
@@ -59,30 +68,56 @@ $registerJs = <<< SCRIPT
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
         }
     }
-    $('#remove-file-btn').on('click', function() {
+    var removeFile = function() {
         $.ajax({
-            url: '{$deleteFileUrl}',
-            data: {
-                fileToken: selectedToken,
-            },
+            url: '{$deleteFileUrl}?token=' + selectedToken,
             method: 'post',
             dataType: 'json',
             success: function(s) {
                 if(s.status == 'success') {
+                    alert(s.message);
                     getMyFiles('{$myImageFilesUrl}');
                 }
-                selectedFile = 0;
-                selectedToken = 0;
-                disableButton();
+                resetState();
             },
             error: function(e){
-                console.log(e)    
+                alert(e.statusText)
             },
         })
-    });
+    }
+
+    $(document).on('click', '#my-image-files img', function() {
+        var image = $(this);
+        selectedFile = image.data('id');
+        selectedToken = image.data('token');
+        $('#my-image-files #td-name').text(image.data('name'));
+        $('#my-image-files #td-extension').text(image.data('extension'));
+        $('#my-image-files #td-size').text(image.data('size'));
+        $('#my-image-files #td-width').text(image.data('width') + 'px');
+        $('#my-image-files #td-height').text(image.data('height') + 'px');
+        $('#my-image-files #td-location').text(image.data('location'));
+        $('#my-image-files #td-token').text(image.data('token'));
+        $('#my-image-files #td-created_at').text(image.data('created_at'));
+
+        let actionButtons = '<a href="'+ $(this).data('download-url') +'" class="btn btn-primary btn-sm">';
+            actionButtons += 'Download';
+            actionButtons += '</a>';
+            actionButtons += '<a href="#" onclick="removeFile()" class="btn btn-danger btn-sm">';
+            actionButtons += 'Remove';
+            actionButtons += '</a>';
+
+        $('#my-files #td-action-btn').html(actionButtons);
+        
+        $('#my-image-files img').css('border', '');
+        image.css('border', '2px solid #1bc5bd');
+        showActionButton();
+    }); 
+
     $(document).on("pjax:beforeSend",function(){
-        $('#my-image-files .my-photos').html('Loading');
+        setFileContent('Loading');
     });
+
+    hideActionButton();
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
 $registerCss = <<<CSS
@@ -152,6 +187,10 @@ $this->registerCss($registerCss);
                 <tr>
                     <th width="30%">Created At</th>
                     <td id="td-created_at"> None </td>
+                </tr>
+                <tr>
+                    <th> Action </th>
+                    <td id="td-action-btn"> None</td>
                 </tr>
             </tbody>
         </table>

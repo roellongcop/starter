@@ -16,7 +16,9 @@ $params = [
     'data-location' => $model->location,
     'data-token' => $model->token,
     'data-created_at' => App::formatter('asFulldate', $model->created_at),
-    'title' => $model->name
+    'title' => $model->name,
+    'data-remove-url' => Url::to(['file/delete'], true),
+    'data-download-url' => Url::to(['file/download', 'token' => $model->token], true),
 ];
 if ($model->isDocument) {
     $path = $model->documentPreviewPath;
