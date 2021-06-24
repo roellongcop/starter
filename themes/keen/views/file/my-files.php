@@ -98,7 +98,7 @@ $registerJs = <<< SCRIPT
     });
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-$registerCSS = <<<CSS
+$registerCss = <<<CSS
     #my-files table tbody tr td {
         overflow-wrap: anywhere;
     }
@@ -109,7 +109,7 @@ $registerCSS = <<<CSS
         border: 2px solid #1bc5bd;
     }
 CSS;
-$this->registerCSS($registerCSS);
+$this->registerCss($registerCss);
 ?>
 <div class="row my-files-page" id="my-files">
     <div class="col-md-7">

@@ -79,7 +79,7 @@ $registerJs = <<< SCRIPT
     }
 SCRIPT;
 $this->registerJs($registerJs, \yii\web\View::POS_END);
-$registerCSS = <<<CSS
+$registerCss = <<<CSS
     #choose-from-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
         padding: 5px;
@@ -94,7 +94,7 @@ $registerCSS = <<<CSS
         border: 2px solid #1bc5bd;
     }
 CSS;
-$this->registerCSS($registerCSS);
+$this->registerCss($registerCss);
 ?>
 <div id="choose-from-gallery-container-<?= $id ?>">
     <!-- Button trigger modal-->
