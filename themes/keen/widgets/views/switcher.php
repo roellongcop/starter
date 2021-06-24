@@ -17,7 +17,7 @@ $registerJs = <<< SCRIPT
                     toastr.success("Record status changed.");
                 }
                 else {
-                    toastr.error(s.errors.record_status);
+                    toastr.error(s.errorSummary);
                     $(self).prop('checked', is_checked? false: true);
                 }
 

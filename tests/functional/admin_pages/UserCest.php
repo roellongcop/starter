@@ -51,7 +51,7 @@ class UserCest
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create User', 'h5');
 
-        $role = Role::findOne(['name' => 'developernoiactiverole']);
+        $role = Role::findOne(['name' => 'inactiverole']);
 
         $I->submitForm('#user-form', [
             'User[role_id]' => $role->id,

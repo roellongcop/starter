@@ -1,5 +1,6 @@
 <?php
 use app\helpers\Url;
+use app\models\Notification;
 
 return [
 	1 => [
@@ -8,8 +9,7 @@ return [
 		'link' => Url::to(['user/my-password']),
 		'type' => 'notification_change_password',
 		'token' => 'TftF853osh1623298888',
-		'status' => 0,
-		'record_status' => 1,
+		'status' => Notification::STATUS_UNREAD,
 		'created_by' => 1,
 		'updated_by' => 1,
 	],
@@ -19,8 +19,7 @@ return [
 		'link' => Url::to(['user/my-password']),
 		'type' => 'notification_change_password',
 		'token' => 'TftF853osh1623298888',
-		'status' => 1,
-		'record_status' => 1,
+		'status' => Notification::STATUS_READ,
 		'created_by' => 1,
 		'updated_by' => 1,
 	]

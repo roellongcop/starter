@@ -15,8 +15,7 @@ class NotificationTest extends \Codeception\Test\Unit
             'link' => Url::to(['/user/my-password']),
             'type' => 'notification_change_password',
             'token' => 'TftF853osh1623298888',
-            'status' => 1,
-            'record_status' => 1,
+            'status' => Notification::STATUS_UNREAD,
             'created_by' => 1,
             'updated_by' => 1, 
         ];
@@ -32,6 +31,15 @@ class NotificationTest extends \Codeception\Test\Unit
     {
         $data = $this->data();
         $data['record_status'] = 3;
+
+        $model = new Notification($data);
+        expect_not($model->save());
+    }
+
+    public function testCreateInvalidReadStatusMustFailed()
+    {
+        $data = $this->data();
+        $data['status'] = 3;
 
         $model = new Notification($data);
         expect_not($model->save());

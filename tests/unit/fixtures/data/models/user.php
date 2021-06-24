@@ -1,6 +1,7 @@
 <?php
 
 use app\helpers\App;
+use app\models\User;
 
 return [
     'developer' => [
@@ -13,10 +14,9 @@ return [
         'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994601',
         'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994601',
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994601',
-        'status' => 10,
+        'status' => User::STATUS_ACTIVE,
         'slug' => 'developer',
-        'is_blocked' => 0,
-        'record_status' => 1,
+        'is_blocked' => User::UNBLOCKED,
     ],
     'superadmin' => [
         'role_id' => 2,
@@ -28,10 +28,9 @@ return [
         'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994602',
         'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994602',
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994602',
-        'status' => 10,
+        'status' => User::STATUS_ACTIVE,
         'slug' => 'superadmin',
-        'is_blocked' => 0,
-        'record_status' => 1,
+        'is_blocked' => User::UNBLOCKED,
     ],
     'admin' => [
     	'role_id' => 3,
@@ -43,10 +42,9 @@ return [
         'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994603',
         'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994603',
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994603',
-        'status' => 10,
+        'status' => User::STATUS_ACTIVE,
         'slug' => 'admin',
-        'is_blocked' => 0,
-        'record_status' => 1,
+        'is_blocked' => User::UNBLOCKED,
     ],
     'blockeduser' => [
         'role_id' => 1,
@@ -58,10 +56,9 @@ return [
         'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994604',
         'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994604',
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994604',
-        'status' => 10,
+        'status' => User::STATUS_ACTIVE,
         'slug' => 'blockeduser',
-        'is_blocked' => 1,
-        'record_status' => 1,
+        'is_blocked' => User::BLOCKED,
     ],
     'notverifieduser' => [
         'role_id' => 1,
@@ -75,8 +72,7 @@ return [
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994605',
         'status' => 9,
         'slug' => 'notverifieduser',
-        'is_blocked' => 0,
-        'record_status' => 1,
+        'is_blocked' => User::UNBLOCKED,
     ],
 
     'inactiveuser' => [
@@ -89,10 +85,10 @@ return [
         'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994606',
         'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994606',
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994606',
-        'status' => 10,
+        'status' => User::STATUS_ACTIVE,
         'slug' => 'inactiveuser',
-        'is_blocked' => 0,
-        'record_status' => 0,
+        'is_blocked' => User::UNBLOCKED,
+        'record_status' => User::RECORD_INACTIVE,
     ],
     'inactiveroleuser' => [
         'role_id' => 4,
@@ -104,10 +100,9 @@ return [
         'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994607',
         'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994607',
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994607',
-        'status' => 10,
+        'status' => User::STATUS_ACTIVE,
         'slug' => 'inactiveroleuser',
-        'is_blocked' => 0,
-        'record_status' => 1,
+        'is_blocked' => User::UNBLOCKED,
     ],
     'noinactiveroleuser' => [
         'role_id' => 6,
@@ -119,9 +114,8 @@ return [
         'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994608',
         'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994608',
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994608',
-        'status' => 10,
+        'status' => User::STATUS_ACTIVE,
         'slug' => 'noinactiveroleuser',
-        'is_blocked' => 0,
-        'record_status' => 1,
+        'is_blocked' => User::UNBLOCKED,
     ],
 ];

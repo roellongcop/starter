@@ -1,5 +1,6 @@
 <?php
 use app\helpers\App;
+use app\models\Role;
 
 $access = App::component('access');
 $controllerActions = $access->controllerActions();
@@ -30,7 +31,6 @@ return [
         'module_access' => json_encode($controllerActions),
         'main_navigation' => json_encode($defaultNavigation),
         'slug' => 'developer', 
-        'record_status' => 1,
     ],
     'superadmin' => [
         'name' => 'superadmin', 
@@ -38,7 +38,6 @@ return [
         'module_access' => json_encode($controllerActions),
         'main_navigation' => json_encode($defaultNavigation),
         'slug' => 'superadmin', 
-        'record_status' => 1,
     ],
     'admin' => [
         'name' => 'admin', 
@@ -46,7 +45,6 @@ return [
         'module_access' => json_encode($controllerActions),
         'main_navigation' => json_encode($defaultNavigation),
         'slug' => 'admin', 
-        'record_status' => 1,
     ],
     'inactiverole' => [
         'name' => 'inactiverole', 
@@ -54,7 +52,7 @@ return [
         'module_access' => json_encode($controllerActions),
         'main_navigation' => json_encode($defaultNavigation),
         'slug' => 'inactiverole', 
-        'record_status' => 0,
+        'record_status' => Role::RECORD_INACTIVE,
     ],
     'nouser' => [
         'name' => 'nouser', 
@@ -62,7 +60,6 @@ return [
         'module_access' => json_encode($controllerActions),
         'main_navigation' => json_encode($defaultNavigation),
         'slug' => 'nouser', 
-        'record_status' => 0,
     ],
     'developernoiactiverole' => [
         'name' => 'developernoiactiverole', 
@@ -70,6 +67,5 @@ return [
         'module_access' => json_encode($noiactiverole),
         'main_navigation' => json_encode($defaultNavigation),
         'slug' => 'developernoiactiverole', 
-        'record_status' => 0,
     ],
 ];

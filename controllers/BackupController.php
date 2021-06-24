@@ -158,7 +158,8 @@ class BackupController extends Controller
             else {
                 return $this->asJson([
                     'status' => 'failed',
-                    'errors' => $model->errors
+                    'errors' => $model->errors,
+                    'errorSummary' => $model->errorSummary
                 ]);
             }
         }
@@ -259,8 +260,10 @@ class BackupController extends Controller
     {
         $model = $this->findModel($slug, 'slug');
 
-        $sql = file_get_contents($model->sqlFileLocation);
-        App::execute($sql);
+        if (!$model || !$model->restore()) {
+            App::warning('File don\'t exist or cannot be restored.');
+            return $this->redirect(['index']);
+        }
 
         App::success('Restored.');
         return $this->redirect(['index']);
@@ -344,10 +347,9 @@ class BackupController extends Controller
     {
         $model = $this->findModel($slug, 'slug');
         if (!$model || !$model->download()) {
-            App::warning('File don\'t exist');
+            App::warning('File don\'t exist or cannot be download');
             return $this->redirect(['index']);
         }
-        return 'ok';
     }
 
     public function actionInActiveData()

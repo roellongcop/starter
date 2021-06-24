@@ -17,7 +17,7 @@ $('.input-switcher-{$id}').on('change', function() {
                 alert("Record status changed.");
             }
             else {
-                console.log(s.errors)
+                console.log(s.errorSummary)
                 $(self).prop('checked', is_checked? false: true);
             }
         }),

@@ -15,7 +15,6 @@ class FileTest extends \Codeception\Test\Unit
             'size' => 1606,  
             'location' => 'default/default-image_200.png',  
             'token' => App::randomString(10) . time(),  
-            'record_status' => 1,  
         ];
     }
 

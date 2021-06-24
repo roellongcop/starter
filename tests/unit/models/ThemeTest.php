@@ -34,7 +34,6 @@ class ThemeTest extends \Codeception\Test\Unit
                     'css' => ['plugins.bundle.css']
                 ],  
             ],
-            'record_status' => 1, 
             'created_by' => 1,
             'updated_by' => 1,
         ];

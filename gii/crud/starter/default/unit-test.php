@@ -7,7 +7,7 @@ use yii\helpers\Inflector;
 /* @var $generator yii\gii\generators\crud\Generator */
 
 $modelClass = StringHelper::basename($generator->modelClass);
-$ignore_attr = ['created_at', 'created_by', 'updated_at', 'updated_by', 'id'];
+$ignore_attr = ['created_at', 'created_by', 'updated_at', 'updated_by', 'id', 'record_status'];
 ?>
 <?= "<?php\n" ?>
 
@@ -22,9 +22,6 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         return [
 <?php foreach ($generator->getColumnNames() as $attribute) : ?>
 <?php if (! in_array($attribute, $ignore_attr)) : ?>
-<?php if ($attribute == 'record_status'): ?>
-            '<?= $attribute ?>' => 1,  
-<?php else: ?>
             '<?= $attribute ?>' => 'test',  
 <?php endif ?>
 <?php endif ?>

@@ -1,4 +1,5 @@
 <?php
+use app\models\Setting;
 use yii\helpers\Inflector;
 
 return [
@@ -6,9 +7,8 @@ return [
 		'name' => 'timezone',
 		'value' => 'Asia/Manila',
 		'slug' => Inflector::slug('timezone'),
-		'type' => 'general',
+		'type' => Setting::TYPE_GENERAL,
 		'sort_order' => 0,
-		'record_status' => 1,
 		'created_by' => 1,
 		'updated_by' => 1,
 	],

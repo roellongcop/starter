@@ -24,6 +24,8 @@ use yii\helpers\Url;
  */
 class Ip extends ActiveRecord
 {
+    const TYPE_BLACKLIST = 0;
+    const TYPE_WHITELIST = 1;
     /**
      * {@inheritdoc}
      */
@@ -53,6 +55,7 @@ class Ip extends ActiveRecord
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['name'], 'ip'],
+            [['type'], 'in', 'range' => [self::TYPE_BLACKLIST, self::TYPE_WHITELIST]],
         ]);
     }
 

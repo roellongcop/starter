@@ -59,7 +59,7 @@ class Log extends ActiveRecord
     public function rules()
     {
         return $this->setRules([
-            [['user_id', 'model_id',], 'integer'],
+            [['user_id',], 'integer'],
             [['user_id', 'model_id'], 'default', 'value' => 0],
             [[ 'url'], 'string'],
             [['request_data', 'change_attribute', 'server',], 'safe'],

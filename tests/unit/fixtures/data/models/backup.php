@@ -26,7 +26,6 @@ return [
 		]),
 		'description' => 'Description',
 		'slug' => (string) Inflector::slug($time),
-		'record_status' => 1,
 		'created_by' => 1,
 	    'updated_by' => 1,
 	]

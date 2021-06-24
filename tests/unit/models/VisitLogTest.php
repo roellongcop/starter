@@ -11,8 +11,7 @@ class VisitLogTest extends \Codeception\Test\Unit
         return [
             'user_id' => 1,
             'ip' => '::1',
-            'action' => 0,
-            'record_status' => 1,
+            'action' => VisitLog::ACTION_LOGIN,
             'created_by' => 1,
             'updated_by' => 1, 
         ];
@@ -34,6 +33,15 @@ class VisitLogTest extends \Codeception\Test\Unit
     {
         $data = $this->data();
         $data['record_status'] = 3;
+
+        $model = new VisitLog($data);
+        expect_not($model->save());
+    }
+
+    public function testCreateInvalidActionMustFailed()
+    {
+        $data = $this->data();
+        $data['action'] = 3;
 
         $model = new VisitLog($data);
         expect_not($model->save());

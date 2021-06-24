@@ -12,7 +12,6 @@ class UserMetaTest extends \Codeception\Test\Unit
             'user_id' => 1,  
             'meta_key' => 'address',  
             'meta_value' => 'Philippines',  
-            'record_status' => 1,  
             'created_by' => 1,
             'updated_by' => 1,
         ];

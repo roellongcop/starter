@@ -25,6 +25,8 @@ use yii\helpers\Url;
  */
 class Setting extends ActiveRecord
 {
+    const TYPE_GENERAL = 'general';
+    
     public $options;
     public $imageInput;
     public $fileLocation; 
@@ -79,6 +81,7 @@ class Setting extends ActiveRecord
             [['value'], 'safe'],
             [['type', 'options', 'sort_order'], 'safe'],
             [['name', 'slug'], 'string', 'max' => 255],
+            [['type'], 'in', 'range' => [self::TYPE_GENERAL]],
             [
                 ['imageInput'], 
                 'image', 

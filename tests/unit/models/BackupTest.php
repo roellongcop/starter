@@ -30,7 +30,6 @@ class BackupTest extends \Codeception\Test\Unit
                "{$dbPref}visit_logs" => "{$dbPref}visit_logs",
             ],
             'description' => 'Description',
-            'record_status' => 1,
             'created_by' => 1,
             'updated_by' => 1,
         ];
@@ -90,5 +89,17 @@ class BackupTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+    }
+
+    public function testDownloadMustSuccess()
+    {
+        $model = Backup::findOne(1);
+        expect_that($model->download());
+    }
+
+    public function testRestoreMustSuccess()
+    {
+        $model = Backup::findOne(1);
+        expect_that($model->restore());
     }
 }

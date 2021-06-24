@@ -9,17 +9,15 @@ class IpTest extends \Codeception\Test\Unit
     protected function data()
     {
         return [
-            'name' => '191.168.1.2',  
+            'name' => '191.168.1.3',  
             'description' => 'test',  
-            'type' => 1,   
-            'record_status' => 1,  
+            'type' => Ip::TYPE_WHITELIST,   
         ];
     }
 
     public function testCreateSuccess()
     {
         $model = new Ip($this->data());
-
         expect_that($model->save());
     }
 
@@ -27,6 +25,15 @@ class IpTest extends \Codeception\Test\Unit
     {
         $data = $this->data();
         $data['record_status'] = 3;
+
+        $model = new Ip($data);
+        expect_not($model->save());
+    }
+
+    public function testCreateInvalidTypeMustFailed()
+    {
+        $data = $this->data();
+        $data['type'] = 10;
 
         $model = new Ip($data);
         expect_not($model->save());

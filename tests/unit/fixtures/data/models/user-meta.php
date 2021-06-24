@@ -9,7 +9,6 @@ return [
             'first_name' => 'admin_firstname',
             'last_name' => 'admin_lastname',
         ]),
-        'record_status' => 1,
         'created_by' => 1,
         'updated_by' => 1,
     ],

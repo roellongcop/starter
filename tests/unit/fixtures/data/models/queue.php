@@ -10,7 +10,6 @@ return [
 		'reserved_at' => NULL,
 		'attempt' => NULL,
 		'done_at' => NULL,
-		'record_status' => 1,
 		'created_by' => 1,
 		'updated_by' => 1,
 	]

@@ -16,7 +16,6 @@ class SessionTest extends \Codeception\Test\Unit
             'browser' => 'Chrome',
             'os' => 'Windows',
             'device' => 'Computer',
-            'record_status' => 1,
         ];
     }
 

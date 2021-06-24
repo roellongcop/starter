@@ -13,7 +13,6 @@ class ModelFileTest extends \Codeception\Test\Unit
             'file_id' => 1,  
             'model_name' => 'User',  
             'extension' => 'png',  
-            'record_status' => 1,  
         ];
     }
 

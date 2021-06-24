@@ -145,6 +145,19 @@ class Backup extends ActiveRecord
         return false;
     }
 
+    public function restore()
+    {
+        $file = $this->sqlFileLocation;
+        if (file_exists($file)) {
+            $sql = file_get_contents($file);
+            App::execute($sql);
+
+            return true;
+        }
+        
+        return false;
+    }
+
     public function getDownloadUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('download')) {

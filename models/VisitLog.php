@@ -21,6 +21,8 @@ use app\widgets\Anchor;
  */
 class VisitLog extends ActiveRecord
 {
+    const ACTION_LOGIN = 0;
+    const ACTION_LOGOUT = 1;
     /**
      * {@inheritdoc}
      */
@@ -48,6 +50,7 @@ class VisitLog extends ActiveRecord
             [['ip', 'action',], 'required'],
             [['ip'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
+            [['action'], 'in', 'range' => [self::ACTION_LOGIN, self::ACTION_LOGOUT]],
         ]);
     }
 

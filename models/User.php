@@ -32,6 +32,10 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+
+    const BLOCKED = 1;
+    const UNBLOCKED = 0;
+
     const SCENARIO_ADMIN_CREATE = 'admin_create';
 
     public $_tableColumnsMeta = false;
@@ -69,15 +73,13 @@ class User extends ActiveRecord implements IdentityInterface
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message'=>"Passwords don't match" ],
             [['username', 'role_id', 'status', 'is_blocked'], 'required'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            [
-                'status', 
-                'in', 
-                'range' => [
+            ['status', 'in', 'range' => [
                     self::STATUS_ACTIVE, 
                     self::STATUS_INACTIVE, 
                     self::STATUS_DELETED
                 ]
             ],
+            ['is_blocked', 'in', 'range' => [self::BLOCKED, self::UNBLOCKED]],
             ['email', 'email'],
             ['email', 'trim'],
             ['email', 'unique'],
@@ -470,6 +472,13 @@ class User extends ActiveRecord implements IdentityInterface
         return $behaviors;
     }
 
+    public function getRoleViewUrl()
+    {
+        if (($role = $this->role) != null) {
+            return $role->viewUrl;
+        }
+    }
+
     public function gridColumns()
     {
         return [
@@ -511,7 +520,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'value' => function($model) {
                     return Anchor::widget([
                         'title' => $model->roleName,
-                        'link' => $model->role->viewUrl,
+                        'link' => $model->roleViewUrl,
                         'text' => true
                     ]);
                 }

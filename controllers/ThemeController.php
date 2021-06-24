@@ -137,15 +137,16 @@ class ThemeController extends Controller
             $model->record_status = $post['record_status'];
 
             if ($model->save()) {
-                return json_encode([
+                return $this->asJson([
                     'status' => 'success',
                     'attributes' => $model->attributes
                 ]);
             }
             else {
-                return json_encode([
+                return $this->asJson([
                     'status' => 'failed',
-                    'errors' => $model->errors
+                    'errors' => $model->errors,
+                    'errorSummary' => $model->errorSummary
                 ]);
             }
         }

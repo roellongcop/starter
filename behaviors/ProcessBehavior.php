@@ -21,10 +21,7 @@ class ProcessBehavior extends Behavior
         $event->isValid = $this->owner->canCreate;
 
         if (! $event->isValid) {
-            $attributes = $this->owner->attributes;
-            foreach ($attributes as $attribute => $value) {
-                $this->owner->addError($attribute, 'Data cannot be Created');
-            }
+            $this->owner->addError($this->owner->mainAttribute(), 'Data cannot be created');
         }
     }
 
@@ -32,10 +29,7 @@ class ProcessBehavior extends Behavior
     {
         $event->isValid = $this->owner->canUpdate;
         if (! $event->isValid) {
-            $attributes = $this->owner->attributes;
-            foreach ($attributes as $attribute => $value) {
-                $this->owner->addError($attribute, 'Data cannot be Updated');
-            }
+            $this->owner->addError($this->owner->mainAttribute(), 'Data cannot be updated');
         }
     }
 
@@ -43,10 +37,7 @@ class ProcessBehavior extends Behavior
     {
         $event->isValid = $this->owner->canDelete;
         if (! $event->isValid) {
-            $attributes = $this->owner->attributes;
-            foreach ($attributes as $attribute => $value) {
-                $this->owner->addError($attribute, 'Data cannot be Deleted');
-            }
+            $this->owner->addError($this->owner->mainAttribute(), 'Data cannot be deleted');
         }
     }
 }

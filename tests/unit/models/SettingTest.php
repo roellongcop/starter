@@ -15,7 +15,6 @@ class SettingTest extends \Codeception\Test\Unit
             'slug' => Inflector::slug('timezone'),
             'type' => 'general',
             'sort_order' => 0,
-            'record_status' => 1,
             'created_by' => 1,
             'updated_by' => 1,
         ];
@@ -37,6 +36,15 @@ class SettingTest extends \Codeception\Test\Unit
     {
         $data = $this->data();
         $data['record_status'] = 3;
+
+        $model = new Setting($data);
+        expect_not($model->save());
+    }
+
+    public function testCreateInvalidTypeMustFailed()
+    {
+        $data = $this->data();
+        $data['type'] = 'invalid-type';
 
         $model = new Setting($data);
         expect_not($model->save());

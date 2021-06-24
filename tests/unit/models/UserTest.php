@@ -36,7 +36,6 @@ class UserTest extends \Codeception\Test\Unit
             'status' => 10,
             'slug' => 'developertest',
             'is_blocked' => 0,
-            'record_status' => 1,
         ];
     }
 
@@ -61,10 +60,28 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
+    public function testCreateInvalidIsBlockedStatusMustFailed()
+    {
+        $data = $this->data();
+        $data['is_blocked'] = 3;
+
+        $model = new User($data);
+        expect_not($model->save());
+    }
+
+    public function testCreateInvalidStatusMustFailed()
+    {
+        $data = $this->data();
+        $data['status'] = 100;
+
+        $model = new User($data);
+        expect_not($model->save());
+    }
+
     public function testCreateInvalidRoleIdMustFailed()
     {
         $data = $this->data();
-        $data['record_status'] = 10001;
+        $data['role_id'] = 10001;
         $user = new User($data);
         expect_not($user->save());
     }
