@@ -35,7 +35,7 @@ class VisitLogCest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/visit-log/confirm-action"]', [
+        $I->submitForm('form[action="'. \app\helpers\Url::to(['visit-log/confirm-action']) .'"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);
@@ -74,5 +74,31 @@ class VisitLogCest
         $I->amOnPage($this->model->getExportXlsxUrl(false));
         $I->expectTo('See no errors');
         $I->see('xlsx-exported');
+    }
+
+    public function activateData(FunctionalTester $I)
+    {
+        $I->sendAjaxPostRequest(['visit-log/change-record-status'], [
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_ACTIVE,
+        ]);
+
+        $I->seeRecord('app\models\VisitLog', array(
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_ACTIVE,
+        ));
+    }
+
+    public function deactivateData(FunctionalTester $I)
+    {
+        $I->sendAjaxPostRequest(['visit-log/change-record-status'], [
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_INACTIVE,
+        ]);
+
+        $I->seeRecord('app\models\VisitLog', array(
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_INACTIVE,
+        ));
     }
 }

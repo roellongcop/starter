@@ -193,6 +193,7 @@ class Generator extends \yii\gii\Generator
         $end = end($exp);
 
         $model = str_replace('Controller', '', $end);
+        $params['modelClass'] = \yii\helpers\StringHelper::basename($this->modelClass);
 
         $files[] = new CodeFile(
             Yii::getAlias('@app') . '/tests/functional/admin_pages/' . $model . 'Cest.php',

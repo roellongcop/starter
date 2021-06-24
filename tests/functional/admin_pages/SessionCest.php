@@ -35,7 +35,7 @@ class SessionCest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/session/confirm-action"]', [
+        $I->submitForm('form[action="'. \app\helpers\Url::to(['session/confirm-action']) .'"]', [
             'process-selected' => 'active', 
             'selection' => ['in2jfqrqoj5d6luo7qleggimid']
         ]);
@@ -74,5 +74,31 @@ class SessionCest
         $I->amOnPage($this->model->getExportXlsxUrl(false));
         $I->expectTo('See no errors');
         $I->see('xlsx-exported');
+    }
+
+    public function activateData(FunctionalTester $I)
+    {
+        $I->sendAjaxPostRequest(['session/change-record-status'], [
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_ACTIVE,
+        ]);
+
+        $I->seeRecord('app\models\Session', array(
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_ACTIVE,
+        ));
+    }
+
+    public function deactivateData(FunctionalTester $I)
+    {
+        $I->sendAjaxPostRequest(['session/change-record-status'], [
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_INACTIVE,
+        ]);
+
+        $I->seeRecord('app\models\Session', array(
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_INACTIVE,
+        ));
     }
 }

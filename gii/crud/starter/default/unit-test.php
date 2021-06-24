@@ -24,7 +24,6 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 <?php if (! in_array($attribute, $ignore_attr)) : ?>
             '<?= $attribute ?>' => 'test',  
 <?php endif ?>
-<?php endif ?>
 <?php endforeach ?>
         ];
     };

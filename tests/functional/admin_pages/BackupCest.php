@@ -47,7 +47,7 @@ class BackupCest
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
-        $I->submitForm('form[action="/backup/confirm-action"]', [
+        $I->submitForm('form[action="'. \app\helpers\Url::to(['backup/confirm-action']) .'"]', [
             'process-selected' => 'active', 
             'selection' => [1]
         ]);
@@ -106,5 +106,31 @@ class BackupCest
         $I->seeElement('.btn-restore-sql');
         $I->click(['class' => 'btn-restore-sql']);
         $I->see('Restored.');
+    }
+
+    public function activateData(FunctionalTester $I)
+    {
+        $I->sendAjaxPostRequest(['backup/change-record-status'], [
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_ACTIVE,
+        ]);
+
+        $I->seeRecord('app\models\Backup', array(
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_ACTIVE,
+        ));
+    }
+
+    public function deactivateData(FunctionalTester $I)
+    {
+        $I->sendAjaxPostRequest(['backup/change-record-status'], [
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_INACTIVE,
+        ]);
+
+        $I->seeRecord('app\models\Backup', array(
+            'id' => $this->model->id,
+            'record_status' => $this->model::RECORD_INACTIVE,
+        ));
     }
 }
