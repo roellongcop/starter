@@ -15,15 +15,15 @@ $this->params['showCreateButton'] = true;
 ?>
 <div class="backup-view-page">
 	<?= Anchor::widget([
-		'title' => 'Download File',
+		'title' => 'Download SQL',
 		'link' => ['download', 'slug' => $model->slug],
-		'options' => ['class' => 'btn btn-primary']
+		'options' => ['class' => 'btn btn-primary btn-download-sql']
 	]) ?>
 	<?= Anchor::widget([
 		'title' => 'Restore',
 		'link' =>  ['restore', 'slug' => $model->slug],
 		'options' => [
-			'class' => 'btn btn-warning',
+			'class' => 'btn btn-warning btn-restore-sql',
 			'data-method' => 'post',
         	'data-confirm' => 'ARE YOU SURE?',
 		]

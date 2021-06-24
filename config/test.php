@@ -12,6 +12,7 @@ return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@testWebroot'   => dirname(__DIR__) . '/web',
     ],
     'language' => 'en-US',
     'components' => [

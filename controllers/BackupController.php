@@ -149,15 +149,14 @@ class BackupController extends Controller
         if (($post = App::post()) != null) {
             $model = $this->findModel($post['id']);
             $model->record_status = $post['record_status'];
-
             if ($model->save()) {
-                return json_encode([
+                return $this->asJson([
                     'status' => 'success',
                     'attributes' => $model->attributes
                 ]);
             }
             else {
-                return json_encode([
+                return $this->asJson([
                     'status' => 'failed',
                     'errors' => $model->errors
                 ]);
@@ -348,6 +347,7 @@ class BackupController extends Controller
             App::warning('File don\'t exist');
             return $this->redirect(['index']);
         }
+        return 'ok';
     }
 
     public function actionInActiveData()

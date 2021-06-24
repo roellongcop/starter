@@ -121,17 +121,39 @@ class Backup extends ActiveRecord
 
     public function getCanUpdate()
     {
-        return false;
+        return true;
+    }
+
+    public function getSqlFileLocation()
+    {
+        $sqlFileLocation = parent::getSqlFileLocation();
+
+        $root = App::isTest()? Yii::getAlias('@testWebroot'): Yii::getAlias('@webroot');
+
+        return implode('/', [$root, $sqlFileLocation]);
     }
 
     public function download()
     {
         $file = $this->sqlFileLocation;
+
         if (file_exists($file)) {
             App::response()->sendFile($file);
 
             return true;
         }
         return false;
+    }
+
+    public function getDownloadUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('download')) {
+            $paramName = $this->paramName();
+            $url = [
+                implode('/', [$this->controllerID(), 'download']),
+                $paramName => $this->{$paramName}
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
     }
 }

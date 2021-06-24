@@ -14,7 +14,7 @@ $registerJs = <<< SCRIPT
             method: 'post',
             success: (s => {
                 if (s.status == 'success') {
-                    toastr.success("Activated");
+                    toastr.success("Record status changed.");
                 }
                 else {
                     toastr.error(s.errors.record_status);

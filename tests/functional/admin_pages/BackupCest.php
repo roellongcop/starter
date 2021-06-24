@@ -83,4 +83,24 @@ class BackupCest
         $I->amOnPage($this->model->getExportXlsxUrl(false));
         $I->expectTo('See no errors');
     }
+
+    public function downloadSql(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getViewUrl(false));
+
+        $I->see('Backup:', 'h5');
+        $I->seeElement('.btn-download-sql');
+        $I->click(['class' => 'btn-download-sql']);
+        $I->seeFileFound($this->model->sqlFileLocation);
+    }
+
+    public function restoreSql(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getViewUrl(false));
+
+        $I->see('Backup:', 'h5');
+        $I->seeElement('.btn-restore-sql');
+        $I->click(['class' => 'btn-restore-sql']);
+        $I->see('Restored.');
+    }
 }

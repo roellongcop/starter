@@ -641,7 +641,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->recordStatusLabel;
         }
 
-        if ($this->canActivate && $this->canDeactivate) {
+        if ($this->canActivate && $this->canDeactivate && $this->canUpdate) {
             return RecordHtml::widget([
                 'model' => $this,
                 'controller' => $controller

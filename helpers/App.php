@@ -700,7 +700,7 @@ class App {
 		return self::app()->id == 'yii2-basic-starter';
 	}
 
-	public function isTest()
+	public static function isTest()
 	{
 		return self::app()->id == 'basic-tests';
 	}
