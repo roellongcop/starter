@@ -38,13 +38,13 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->save());
     }
 
-    public function testCreateNoDataFailed()
+    public function testCreateNoDataMustFailed()
     {
         $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidRecordStatusFailed()
+    public function testCreateInvalidRecordStatusMustFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -66,7 +66,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->delete());
     }
 
-    public function testActivateDataSuccess()
+    public function testActivateDataMustSuccess()
     {
         $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
         expect_that($model);
@@ -75,7 +75,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataFailed()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
         expect_that($model);

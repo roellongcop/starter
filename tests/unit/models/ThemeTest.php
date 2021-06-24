@@ -46,7 +46,7 @@ class ThemeTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusFailed()
+    public function testCreateInvalidRecordStatusMustFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -55,7 +55,7 @@ class ThemeTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateExistingNameFailed()
+    public function testCreateExistingNameMustFailed()
     {
         $data = $this->data();
         $data['record_status'] = 'Demo1 Main';
@@ -64,7 +64,7 @@ class ThemeTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataFailed()
+    public function testCreateNoDataMustFailed()
     {
         $model = new Theme();
         expect_not($model->save());
@@ -83,7 +83,7 @@ class ThemeTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataSuccess()
+    public function testActivateDataMustSuccess()
     {
         $model = Theme::findOne(1);
         expect_that($model);
@@ -92,7 +92,7 @@ class ThemeTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataFailed()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = Theme::findOne(1);
         expect_that($model);

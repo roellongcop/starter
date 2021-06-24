@@ -26,13 +26,13 @@ class SessionTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoDataFailed()
+    public function testCreateNoDataMustFailed()
     {
         $model = new Session();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidIpFailed()
+    public function testCreateInvalidIpMustFailed()
     {
         $data = $this->data();
         $data['ip'] = 'invalidIP';
@@ -47,7 +47,7 @@ class SessionTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testCreateInvalidRecordStatusFailed()
+    public function testCreateInvalidRecordStatusMustFailed()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -56,7 +56,7 @@ class SessionTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testActivateDataSuccess()
+    public function testActivateDataMustSuccess()
     {
         $model = Session::find()->one();
         expect_that($model);
@@ -65,7 +65,7 @@ class SessionTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataFailed()
+    public function testGuestDeactivateDataMustFailed()
     {
         $model = Session::find()->one();
         expect_that($model);

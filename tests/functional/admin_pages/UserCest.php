@@ -43,7 +43,7 @@ class UserCest
         $I->see('Create User', 'h5');
     }
 
-    public function createUserInactiveRoleNoAccessFailed(FunctionalTester $I)
+    public function createUserInactiveRoleNoAccessMustFailed(FunctionalTester $I)
     {
         Yii::$app->user->logout();
         $this->model = User::findByUsername('noinactiveroleuser');
