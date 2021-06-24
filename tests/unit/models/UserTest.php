@@ -99,6 +99,22 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($user->save());
     }
 
+    public function testCreateExistingEmailMustFailed()
+    {
+        $data = $this->data();
+        $data['email'] = 'developer@developer.com';
+        $user = new User($data);
+        expect_not($user->save());
+    }
+
+    public function testCreateExistingUsernameMustFailed()
+    {
+        $data = $this->data();
+        $data['username'] = 'developer';
+        $user = new User($data);
+        expect_not($user->save());
+    }
+
     public function testFindUserById()
     {
         expect_that($user = User::findIdentity(1));
