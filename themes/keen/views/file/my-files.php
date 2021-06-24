@@ -104,6 +104,7 @@ $registerJs = <<< SCRIPT
         var image = $(this);
         selectedFile = image.data('id');
         selectedToken = image.data('token');
+
         $('#my-files #td-name').text(image.data('name'));
         $('#my-files #td-extension').text(image.data('extension'));
         $('#my-files #td-size').text(image.data('size'));
@@ -116,9 +117,12 @@ $registerJs = <<< SCRIPT
         let actionButtons = '<a href="'+ $(this).data('download-url') +'" class="btn btn-primary btn-sm">';
             actionButtons += 'Download';
             actionButtons += '</a>';
-            actionButtons += '<a href="#" onclick="removeFile()" class="btn btn-danger btn-sm">';
-            actionButtons += 'Remove';
-            actionButtons += '</a>';
+
+            if(image.data('can-delete')) {
+                actionButtons += '<a href="#" onclick="removeFile()" class="btn btn-danger btn-sm">';
+                actionButtons += 'Remove';
+                actionButtons += '</a>';
+            }
 
         $('#my-files #td-action-btn').html(actionButtons);
 

@@ -323,4 +323,13 @@ class File extends ActiveRecord
         //     unlink($this->rootPath);
         // }
     }
+
+    public function getCanDelete()
+    {
+        if ($this->extension == 'sql') {
+            return false;
+        }
+
+        return parent::getCanDelete();
+    }
 }

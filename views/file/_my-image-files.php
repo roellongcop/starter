@@ -17,7 +17,7 @@ use yii\helpers\StringHelper;
     'data-token' => $model->token,
     'data-created_at' => App::formatter('asFulldate', $model->created_at),
     'title' => $model->name,
-    'data-remove-url' => Url::to(['file/delete'], true),
+    'data-can-delete' => $model->canDelete ? 'true': 'false',
     'data-download-url' => Url::to(['file/download', 'token' => $model->token], true),
 ]) ?>
 <p>

@@ -315,7 +315,7 @@ class BackupController extends Controller
                     $data = addslashes($data);
                     $data = preg_replace("/\n/", "\\n", $data);
                     if (isset($data)) {
-                        $return.= '"' . $data . '"';
+                        $return.= "'" . $data . "'";
                     } 
                     else {
                         $return.= '""';
