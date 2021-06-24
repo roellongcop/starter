@@ -104,18 +104,18 @@ return [
         'slug' => 'inactiveroleuser',
         'is_blocked' => User::UNBLOCKED,
     ],
-    'noinactiveroleuser' => [
+    'no_inactive_data_access_role_user' => [
         'role_id' => 6,
-        'username' => 'noinactiveroleuser', 
-        'email' => 'noinactiveroleuser@noinactiveroleuser.com',
+        'username' => 'no_inactive_data_access_role_user', 
+        'email' => 'no_inactive_data_access_role_user@no_inactive_data_access_role_user.com',
         'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd37',
-        'password_hash' => Yii::$app->security->generatePasswordHash('noinactiveroleuser@noinactiveroleuser.com'),
+        'password_hash' => Yii::$app->security->generatePasswordHash('no_inactive_data_access_role_user@no_inactive_data_access_role_user.com'),
         'password_hint' => 'Same as Email',
         'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994608',
         'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994608',
         'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994608',
         'status' => User::STATUS_ACTIVE,
-        'slug' => 'noinactiveroleuser',
+        'slug' => 'no_inactive_data_access_role_user',
         'is_blocked' => User::UNBLOCKED,
     ],
 ];

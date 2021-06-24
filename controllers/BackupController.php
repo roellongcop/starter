@@ -60,8 +60,7 @@ class BackupController extends Controller
             $backup = $this->backupDB($model->filename, $model->tables);
             $model->tables = $model->tables ?: App::component('general')->getAllTables();
             
-            if ($backup) {
-                $model->save();
+            if ($backup && $model->save()) {
 
                 $fileInput = new \StdClass();
                 $fileInput->baseName = $model->filename;

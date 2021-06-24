@@ -6,7 +6,7 @@ $access = App::component('access');
 $controllerActions = $access->controllerActions();
 $defaultNavigation = $access->defaultNavigation();
 
-$noiactiverole = [];
+$no_inactive_data_access = [];
 
 foreach ($controllerActions as $controllerID => $actions) {
     foreach ($actions as $key => $action) {
@@ -14,7 +14,7 @@ foreach ($controllerActions as $controllerID => $actions) {
             continue;
         }
 
-        $noiactiverole[$controllerID][] = $action;
+        $no_inactive_data_access[$controllerID][] = $action;
     }
 }
 return [
@@ -54,11 +54,11 @@ return [
         'main_navigation' => json_encode($defaultNavigation),
         'slug' => 'nouser', 
     ],
-    'developernoiactiverole' => [
-        'name' => 'developernoiactiverole', 
+    'no_inactive_data_access' => [
+        'name' => 'no_inactive_data_access', 
         'role_access' => json_encode([]),
-        'module_access' => json_encode($noiactiverole),
+        'module_access' => json_encode($no_inactive_data_access),
         'main_navigation' => json_encode($defaultNavigation),
-        'slug' => 'developernoiactiverole', 
+        'slug' => 'no_inactive_data_access', 
     ],
 ];

@@ -31,6 +31,28 @@ class BackupCest
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create Backup', 'h5');
     }
+
+    public function createSuccess(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#backup-form', [
+            'Backup' => [
+                'filename' => 'test-filename'
+            ]
+        ]);
+        $I->see('Successfully Created');
+    }
+
+    public function createNoFilenameMustFailed(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#backup-form', [
+            'Backup' => [
+                'filename' => ''
+            ]
+        ]);
+        $I->see('Filename cannot be blank.');
+    }
     
     public function viewPage(FunctionalTester $I)
     {

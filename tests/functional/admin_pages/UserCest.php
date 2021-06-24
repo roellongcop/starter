@@ -46,7 +46,7 @@ class UserCest
     public function createUserInactiveRoleNoAccessMustFailed(FunctionalTester $I)
     {
         Yii::$app->user->logout();
-        $this->model = User::findByUsername('noinactiveroleuser');
+        $this->model = User::findByUsername('no_inactive_data_access_role_user');
         $I->amLoggedInAs($this->model);
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create User', 'h5');

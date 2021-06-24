@@ -61,7 +61,7 @@ $config = [
         'db' => $db,
         'pdf' => $pdf,
         'urlManager' => [
-            'scriptUrl' => '/',
+            'scriptUrl' => 'http://localhost:8080',
             'baseUrl' => '/',
             'enablePrettyUrl' => true,
         ]
