@@ -6,17 +6,17 @@ use app\widgets\Dropzone;
 use yii\widgets\Pjax;
 
 $registerJs = <<< SCRIPT
-    var selectedFile = 0;
-    var selectedFilePath = '';
+    let selectedFile = 0;
+    let selectedFilePath = '';
     
-    var disableButton = function() {
+    let disableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', true);
     }
-    var enableButton = function() {
+    let enableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', false);
     }
     $(document).on('click', '#my_files-{$id} img', function() {
-        var image = $(this);
+        let image = $(this);
         selectedFile = image.data('id');
         selectedFilePath = image.attr('src');
         $('#choose-from-gallery-{$id} #{$id}-name').text(image.data('name'));
@@ -32,14 +32,14 @@ $registerJs = <<< SCRIPT
         enableButton();
     }); 
     $('#choose-photo-confirm-{$id}').on('click', function() {
-        var s = {
+        let s = {
             status: 'success',
             src: selectedFilePath
         };
         {$ajaxSuccess}
         $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(selectedFile);
     });
-    var getMyFiles = function(url) {
+    let getMyFiles = function(url) {
         $('#my_files-{$id} .modal-my-photos').html('');
         KTApp.block('#my_files-{$id} .modal-my-photos', {
             overlayColor: '#000000',
@@ -72,7 +72,7 @@ $registerJs = <<< SCRIPT
             state: 'primary' // a bootstrap color
         });
     });
-    var search{$id} = function(input) {
+    let search{$id} = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );

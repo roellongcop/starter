@@ -5,16 +5,17 @@ use app\helpers\Url;
 use app\widgets\Dropzone;
 use yii\widgets\Pjax;
 $registerJs = <<< SCRIPT
-    var disableButton = function() {
+    let selectedFile = 0;
+    let selectedFilePath = '';
+
+    let disableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', true);
     }
-    var enableButton = function() {
+    let enableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', false);
     }
-    var selectedFile = 0;
-    var selectedFilePath = '';
     $(document).on('click', '#my_files-{$id} img', function() {
-        var image = $(this);
+        let image = $(this);
         selectedFile = image.data('id');
         selectedFilePath = image.attr('src');
         $('#choose-from-gallery-{$id} #{$id}-name').text(image.data('name'));
@@ -31,7 +32,7 @@ $registerJs = <<< SCRIPT
     })
 
     $('#choose-photo-confirm-{$id}').on('click', function() {
-        var s = {
+        let s = {
             status: 'success',
             src: selectedFilePath
         };
@@ -39,8 +40,8 @@ $registerJs = <<< SCRIPT
         $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(selectedFile);
     });
     $('#upload-tab-{$id} input[type="file"]').on('change', function() {
-        var input = this;
-        var fileInput = input.files[0]; 
+        let input = this;
+        let fileInput = input.files[0]; 
         let formData = new FormData();
         formData.append('UploadForm[fileInput]', fileInput);
         formData.append('modelName', '{$modelName}');
@@ -64,7 +65,7 @@ $registerJs = <<< SCRIPT
             error: {$ajaxError},
         });
     })
-    var getMyFiles = function(url) {
+    let getMyFiles = function(url) {
         $('#my_files-{$id} .modal-my-photos').html('');
         let conf = {
             url: url,
@@ -86,7 +87,7 @@ $registerJs = <<< SCRIPT
     $(document).on("pjax:beforeSend",function(){
         $('#my_files-{$id} .modal-my-photos').html('Loading...');
     });
-    var search{$id} = function(input) {
+    let search{$id} = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
