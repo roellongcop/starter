@@ -1,12 +1,11 @@
 <?php
 use yii\helpers\Inflector;
 
-$time = time();
 $dbPref = \Yii::$app->db->tablePrefix;
 
 return [
-	$time => [
-		'filename' => (string) $time,
+	'first-backup' => [
+		'filename' => 'first-backup',
 		'tables' => json_encode([
 		   "{$dbPref}backups" => "{$dbPref}backups",
 		   "{$dbPref}files" => "{$dbPref}files",
@@ -25,7 +24,7 @@ return [
 		   "{$dbPref}visit_logs" => "{$dbPref}visit_logs",
 		]),
 		'description' => 'Description',
-		'slug' => (string) Inflector::slug($time),
+		'slug' => (string) Inflector::slug('first-backup'),
 		'created_by' => 1,
 	    'updated_by' => 1,
 	]

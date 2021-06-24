@@ -64,6 +64,15 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
+    public function testCreateExistingFilenameMustFailed()
+    {
+        $data = $this->data();
+        $data['filename'] = 'first-backup';
+        $model = new Backup($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('filename');
+    }
+
     public function testCreateNoFilenameMustFailed()
     {
         $data = $this->data();

@@ -54,6 +54,17 @@ class BackupCest
         $I->see('Filename cannot be blank.');
     }
 
+    public function createExistingFilenameMustFailed(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#backup-form', [
+            'Backup' => [
+                'filename' => 'first-backup'
+            ]
+        ]);
+        $I->see('Filename "first-backup" has already been taken.');
+    }
+
     public function createDeactivatedDataNoInactiveAccessMustFailed(FunctionalTester $I)
     {
         $I->amLoggedInAs(User::findByUsername('no_inactive_data_access_role_user'));
