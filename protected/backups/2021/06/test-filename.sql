@@ -65,10 +65,11 @@ CREATE TABLE `tbl_ips` (
   UNIQUE KEY `slug` (`slug`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 INSERT INTO tbl_ips VALUES('1','191.168.1.1','testing whitelist IP','1','19116811','1','1','1','2021-06-24 06:17:21','2021-06-24 06:17:21');
 INSERT INTO tbl_ips VALUES('2','191.168.1.2','testing blacklist IP','0','19116812','1','1','1','2021-06-24 06:17:21','2021-06-24 06:17:21');
+INSERT INTO tbl_ips VALUES('4','127.0.0.1','IP Session: ','1','127001','1','0','0','2021-06-24 13:20:36','2021-06-24 13:20:36');
 
 
 
@@ -269,6 +270,7 @@ CREATE TABLE `tbl_sessions` (
   KEY `updated_by` (`updated_by`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO tbl_sessions VALUES('c3brk3s0651j2enphkhqs2vlgb','1624576906','__flash|a:0:{}','','127.0.0.1','Chrome','Windows','Computer','1','0','0','2021-06-24 13:21:46','2021-06-24 13:21:46');
 INSERT INTO tbl_sessions VALUES('in2jfqrqoj5d6luo7qleggimid','1624540642','','1','::1','Chrome','Windows','Computer','1','1','1','2021-06-24 06:17:22','2021-06-24 06:17:22');
 
 
@@ -317,7 +319,7 @@ CREATE TABLE `tbl_themes` (
   UNIQUE KEY `slug` (`slug`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 INSERT INTO tbl_themes VALUES('1','Demo1 Main','keen/sub/demo1/main','@app/themes/keen/sub/demo1/main/assets/assets','@web/themes/keen/sub/demo1/main','{\"@app\\/views\":[\"@app\\/themes\\/keen\\/sub\\/demo1\\/main\\/views\",\"@app\\/themes\\/keen\\/views\"],\"@app\\/widgets\":[\"@app\\/themes\\/keen\\/sub\\/demo1\\/main\\/widgets\",\"@app\\/themes\\/keen\\/widgets\"]}','{\"yii\\\\web\\\\JqueryAsset\":{\"jsOptions\":{\"position\":1},\"sourcePath\":\"@app\\/themes\\/keen\\/sub\\/demo1\\/main\\/assets\\/assets\\/plugins\\/global\\/\",\"js\":[\"plugins.bundle.js\"]},\"yii\\\\bootstrap\\\\BootstrapAsset\":{\"sourcePath\":\"@app\\/themes\\/keen\\/sub\\/demo1\\/main\\/assets\\/assets\\/plugins\\/global\\/\",\"css\":[\"plugins.bundle.css\"]}}','demo1-main','1','0','0','2021-06-09 12:21:21','2021-06-09 12:21:21');
 INSERT INTO tbl_themes VALUES('2','Demo1 Main Fluid','keen/sub/demo1/fluid','@app/themes/keen/sub/demo1/main/assets/assets','@web/themes/keen/sub/demo1/main','{\"@app\\/views\":[\"@app\\/themes\\/keen\\/sub\\/demo1\\/fluid\\/views\",\"@app\\/themes\\/keen\\/sub\\/demo1\\/main\\/views\",\"@app\\/themes\\/keen\\/views\"],\"@app\\/widgets\":[\"@app\\/themes\\/keen\\/sub\\/demo1\\/fluid\\/widgets\",\"@app\\/themes\\/keen\\/sub\\/demo1\\/main\\/widgets\",\"@app\\/themes\\/keen\\/widgets\"]}','{\"yii\\\\web\\\\JqueryAsset\":{\"jsOptions\":{\"position\":1},\"sourcePath\":\"@app\\/themes\\/keen\\/sub\\/demo1\\/main\\/assets\\/assets\\/plugins\\/global\\/\",\"js\":[\"plugins.bundle.js\"]},\"yii\\\\bootstrap\\\\BootstrapAsset\":{\"sourcePath\":\"@app\\/themes\\/keen\\/sub\\/demo1\\/main\\/assets\\/assets\\/plugins\\/global\\/\",\"css\":[\"plugins.bundle.css\"]}}','demo1-main-fluid','1','0','0','2021-06-09 12:21:21','2021-06-09 12:21:21');
