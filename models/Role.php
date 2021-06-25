@@ -26,6 +26,9 @@ use yii\helpers\Url;
  */
 class Role extends ActiveRecord
 {
+    const DEVELOPER = 1;
+    const SUPERADMIN = 2;
+    const ADMIN = 3;
     /**
      * {@inheritdoc}
      */
@@ -74,6 +77,21 @@ class Role extends ActiveRecord
             'jsonRoleAccess' => 'Role Access',
             'jsonModuleAccess' => 'Module Access',
         ]);
+    }
+
+    public function getIsDeveloper()
+    {
+        return $this->id == self::DEVELOPER;
+    }
+
+    public function getIsSuperadmin()
+    {
+        return $this->id == self::SUPERADMIN;
+    }
+
+    public function getIsAdmin()
+    {
+        return $this->id == self::ADMIN;
     }
 
     /**
