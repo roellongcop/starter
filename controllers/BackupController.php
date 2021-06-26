@@ -282,6 +282,10 @@ class BackupController extends Controller
             date('m'),
         ];
 
+        if (App::isTest()) {
+            array_unshift($folders, 'web');
+        }
+
         $file_path = implode('/', $folders);
         FileHelper::createDirectory($file_path);
 
