@@ -703,4 +703,25 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Notification::className(), ['user_id' => 'id']);
     }
+
+    public function getIsDeveloper()
+    {
+        if (($role = $this->role) != null) {
+            return $role->getIsDeveloper();
+        }
+    }
+
+    public function getIsSuperadmin()
+    {
+        if (($role = $this->role) != null) {
+            return $role->getIsSuperadmin();
+        }
+    }
+
+    public function getIsAdmin()
+    {
+        if (($role = $this->role) != null) {
+            return $role->getIsAdmin();
+        }
+    }
 }
