@@ -135,8 +135,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 $this->addError($attribute, 'Dont have access to create deactivated data.');
             }
         }
-
-        if (! $this->isNewRecord) {
+        else {
             if ($this->isActive && !$this->canActivate) {
                 $this->addError($attribute, 'Cannot be Activated');
             }
