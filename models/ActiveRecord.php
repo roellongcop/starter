@@ -194,7 +194,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $models = static::findAll($condition);
 
         $attributes['updated_at'] = App::timestamp();
-        $attributes['updated_by'] = App::identity('id');
+        $attributes['updated_by'] = App::identity('id') ?: 0;
 
         $updateAll = parent::updateAll($attributes, $condition, $params);
 
