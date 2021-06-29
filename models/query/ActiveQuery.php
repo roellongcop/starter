@@ -33,6 +33,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
             return $alias;
         }
     }
+    
     public function field($field)
     {
         if (($alias = $this->_getAlias()) != null) {
@@ -53,7 +54,6 @@ class ActiveQuery extends \yii\db\ActiveQuery
             if (App::identity()->can('in-active-data', $class->controllerID())) {
                 $condition[$field] = '';
             }
-
         }
 
         return $this->andFilterWhere($condition);
