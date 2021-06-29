@@ -7,7 +7,7 @@ namespace app\models\query;
  *
  * @see \app\models\User
  */
-class UserQuery extends ActiveQuery
+class UserQuery extends UserActiveQuery
 {
     public function available()
     {

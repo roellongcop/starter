@@ -5,11 +5,13 @@ namespace app\models\query;
 use Yii;
 use app\helpers\App;
 
-class ActiveQuery extends MainActiveQuery
+class UserActiveQuery extends MainActiveQuery
 {
     public function one($db = null)
     {
-        $this->visible();
+        if (App::isGuest()) {
+            $this->visible();
+        }
         return parent::one($db);
     }
 }
