@@ -11,7 +11,7 @@ use yii\helpers\Html;
 		</div>
 		<div class="alert-text">
 			You are going to "<?= $process ?>" 
-			<?=  number_format(count($models)) ?> data.
+			<?=  number_format((is_countable($models)? count($models): 0)) ?> data.
 		</div>
 		<div class="alert-close">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
