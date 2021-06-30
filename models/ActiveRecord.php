@@ -130,9 +130,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             if (App::isGuest() && $this->isInactive) {
                 $this->addError($attribute, 'Guest Cannot create deactivated data.');
             }
- 
-            if ($this->isInactive && !App::identity()->can('in-active-data', $this->controllerID())) {
-                $this->addError($attribute, 'Dont have access to create deactivated data.');
+            else {
+                if ($this->isInactive && !App::identity()->can('in-active-data', $this->controllerID())) {
+                    $this->addError($attribute, 'Dont have access to create deactivated data.');
+                }
             }
         }
         else {
