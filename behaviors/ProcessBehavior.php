@@ -7,6 +7,62 @@ use yii\db\ActiveRecord;
 
 class ProcessBehavior extends Behavior
 {
+    public function getCanDelete()
+    {
+        $res = [];
+        if (($relatedModels = $this->owner->relatedModels) != null) {
+            foreach ($relatedModels as $model) {
+                if ($this->owner->{$model}) {
+                    $res[] = $model;
+                }
+            }
+        }
+        return ($res)? false: true;
+    }
+
+    public function getCanCreate()
+    {
+        return true;
+    }
+    
+    public function getCanView()
+    {
+        return true;
+    }
+
+    public function getCanUpdate()
+    {
+        return true;
+    }
+
+    public function getCanActivate()
+    {
+        if (App::isGuest()) {
+            return true;
+        }
+
+        if (App::identity()->can('change-record-status', $this->owner->controllerID())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getCanDeactivate()
+    {
+        if (App::isLogin()) {
+            $user = App::identity();
+
+            if ($user->can('in-active-data', $this->owner->controllerID())
+                && $user->can('change-record-status', $this->owner->controllerID())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function events()
     {
         return [
