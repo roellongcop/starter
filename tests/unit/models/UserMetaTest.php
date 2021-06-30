@@ -50,20 +50,20 @@ class UserMetaTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = UserMeta::findOne(1);
+        $model = $this->tester->grabRecord('app\models\UserMeta');
         $model->user_id = 2;
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = UserMeta::findOne(1);
+        $model = $this->tester->grabRecord('app\models\UserMeta');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = UserMeta::findOne(1);
+        $model = $this->tester->grabRecord('app\models\UserMeta');
         expect_that($model);
 
         $model->activate();
@@ -72,7 +72,7 @@ class UserMetaTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = UserMeta::findOne(1);
+        $model = $this->tester->grabRecord('app\models\UserMeta');
         expect_that($model);
 
         $model->deactivate();

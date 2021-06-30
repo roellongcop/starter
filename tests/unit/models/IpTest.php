@@ -68,20 +68,20 @@ class IpTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = Ip::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Ip');
         $model->description = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = Ip::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Ip');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = Ip::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Ip');
         expect_that($model);
 
         $model->activate();
@@ -90,7 +90,7 @@ class IpTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = Ip::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Ip');
         expect_that($model);
 
         $model->deactivate();

@@ -84,7 +84,7 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testActivateDataMustSuccess()
     {
-        $model = Backup::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model);
 
         $model->activate();
@@ -93,7 +93,7 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = Backup::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model);
 
         $model->deactivate();
@@ -102,13 +102,13 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testDownloadMustSuccess()
     {
-        $model = Backup::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model->download());
     }
 
     public function testRestoreMustSuccess()
     {
-        $model = Backup::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model->restore());
     }
 }

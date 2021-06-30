@@ -13,7 +13,7 @@ $ignore_attr = ['created_at', 'created_by', 'updated_at', 'updated_by', 'id', 'r
 
 namespace tests\unit\models;
 
-use app\models\<?= isset($modelAlias) ? $modelAlias : $modelClass ?>;
+use <?= ltrim($generator->modelClass, '\\') ?>;
 
 class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codeception\Test\Unit
 {
@@ -51,20 +51,20 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 
     public function testUpdateSuccess()
     {
-        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
+        $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
         $model->record_status = 1;
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
+        $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
+        $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
         expect_that($model);
 
         $model->activate();
@@ -73,7 +73,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::findOne(1);
+        $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
         expect_that($model);
 
         $model->deactivate();

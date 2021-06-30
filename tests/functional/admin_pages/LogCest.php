@@ -1,6 +1,5 @@
 <?php
 
-use app\models\User;
 use app\models\Log;
 
 class LogCest
@@ -10,8 +9,8 @@ class LogCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = Log::findOne(1);
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\Log');
         $I->amLoggedInAs($this->user);
     }
 

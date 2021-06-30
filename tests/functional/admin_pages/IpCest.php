@@ -1,6 +1,5 @@
 <?php
 
-use app\models\User;
 use app\models\Ip;
 
 class IpCest
@@ -10,8 +9,8 @@ class IpCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = Ip::findOne(1);
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\Ip');
         $I->amLoggedInAs($this->user);
     }
 

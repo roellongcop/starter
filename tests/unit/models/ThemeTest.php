@@ -71,20 +71,20 @@ class ThemeTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = Theme::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Theme');
         $model->name = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = Theme::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Theme');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = Theme::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Theme');
         expect_that($model);
 
         $model->activate();
@@ -93,7 +93,7 @@ class ThemeTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = Theme::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Theme');
         expect_that($model);
 
         $model->deactivate();

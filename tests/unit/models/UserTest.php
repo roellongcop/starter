@@ -88,9 +88,9 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testCreateGuestInactiveRoleIdMustFailed()
     {
-        $role = Role::findOne(['name' => 'inactiverole']);
+        $model = $this->tester->grabRecord('app\models\Role', ['name' => 'inactiverole']);
         $data = $this->data();
-        $data['role_id'] = $role->id;
+        $data['role_id'] = $model->id;
         $data['username'] = 'inactiveroleuserguest';
         $data['email'] = 'inactiveroleuserguest@inactiveroleuserguest.com';
         $data['email'] = 'inactiveroleuserguest';
@@ -152,20 +152,20 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = User::findOne(1);
+        $model = $this->tester->grabRecord('app\models\User');
         $model->username = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteWithRelatedDataMustFailed()
     {
-        $model = User::findOne(1);
+        $model = $this->tester->grabRecord('app\models\User');
         expect_not($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = User::findOne(1);
+        $model = $this->tester->grabRecord('app\models\User');
         expect_that($model);
 
         $model->activate();
@@ -174,7 +174,7 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = User::findOne(1);
+        $model = $this->tester->grabRecord('app\models\User');
         expect_that($model);
 
         $model->deactivate();

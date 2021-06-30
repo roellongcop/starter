@@ -1,6 +1,5 @@
 <?php
 
-use app\models\User;
 use app\models\UserMeta;
 
 class UserMetaCest
@@ -10,8 +9,8 @@ class UserMetaCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = UserMeta::findOne(1);
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\UserMeta');
         $I->amLoggedInAs($this->user);
     }
 

@@ -1,6 +1,5 @@
 <?php
 
-use app\models\User;
 use app\models\Notification;
 
 class NotificationCest
@@ -10,8 +9,8 @@ class NotificationCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = Notification::findOne(1);
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\Notification');
         $I->amLoggedInAs($this->user);
     }
 

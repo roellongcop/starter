@@ -1,12 +1,10 @@
 <?php
 
-use app\models\User;
-
 class UserFilterCest
 {
     public function _before(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(User::findByUsername('blockeduser'));
+        $I->amLoggedInAs($I->grabRecord('app\models\User', ['username' => 'blockeduser']));
     }
 
     public function blockedUserCannotOpenDashboard(\FunctionalTester $I)

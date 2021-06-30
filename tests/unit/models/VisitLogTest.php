@@ -57,13 +57,13 @@ class VisitLogTest extends \Codeception\Test\Unit
 
     public function testDeleteSuccess()
     {
-        $model = VisitLog::findOne(1);
+        $model = $this->tester->grabRecord('app\models\VisitLog');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = VisitLog::findOne(1);
+        $model = $this->tester->grabRecord('app\models\VisitLog');
         expect_that($model);
 
         $model->activate();
@@ -72,7 +72,7 @@ class VisitLogTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = VisitLog::findOne(1);
+        $model = $this->tester->grabRecord('app\models\VisitLog');
         expect_that($model);
 
         $model->deactivate();

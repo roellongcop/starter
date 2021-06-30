@@ -62,20 +62,20 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = Notification::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Notification');
         $model->message = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = Notification::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Notification');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = Notification::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Notification');
         expect_that($model);
 
         $model->activate();
@@ -84,7 +84,7 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = Notification::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Notification');
         expect_that($model);
 
         $model->deactivate();
@@ -93,9 +93,9 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testReadMustSuccess()
     {
-        $model = Notification::find()
-            ->unread()
-            ->one();
+        $model = $this->tester->grabRecord('app\models\Notification', [
+            'status' => Notification::STATUS_UNREAD
+        ]);
         expect_that($model);
 
         $model->setToRead();
@@ -104,9 +104,9 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testUnreadMustSuccess()
     {
-        $model = Notification::find()
-            ->read()
-            ->one();
+        $model = $this->tester->grabRecord('app\models\Notification', [
+            'status' => Notification::STATUS_READ
+        ]);
         expect_that($model);
 
         $model->setToUnread();

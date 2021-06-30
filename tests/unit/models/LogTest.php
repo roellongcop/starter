@@ -110,13 +110,13 @@ class LogTest extends \Codeception\Test\Unit
 
     public function testDeleteSuccess()
     {
-        $model = Log::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Log');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = Log::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Log');
         expect_that($model);
 
         $model->activate();
@@ -125,7 +125,7 @@ class LogTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = Log::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Log');
         expect_that($model);
 
         $model->deactivate();

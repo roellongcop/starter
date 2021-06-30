@@ -1,13 +1,12 @@
 <?php
 
-use app\models\User;
-
 class DashboardCest
 {
+    public $user;
     public function _before(FunctionalTester $I)
     {
-        $user = User::findByUsername('developer');
-        $I->amLoggedInAs($user);
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $I->amLoggedInAs($this->user);
         $I->amOnPage(['dashboard/index']);
     }
 

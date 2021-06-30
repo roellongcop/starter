@@ -23,7 +23,7 @@ class LoginFormCest
     // demonstrates `amLoggedInAs` method
     public function internalLoginByInstance(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(\app\models\User::findByUsername('developer'));
+        $I->amLoggedInAs($I->grabRecord('app\models\User', ['username' => 'developer']));
         $I->amOnPage(['dashboard/index']);
         $I->see('Sign Out');
     }

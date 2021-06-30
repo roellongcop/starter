@@ -1,6 +1,5 @@
 <?php
 
-use app\models\User;
 use app\models\Role;
 
 class RoleCest
@@ -10,8 +9,8 @@ class RoleCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = Role::findOne(1);
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\Role');
         $I->amLoggedInAs($this->user);
     }
 

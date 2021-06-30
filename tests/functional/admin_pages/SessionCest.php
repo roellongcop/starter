@@ -1,6 +1,5 @@
 <?php
 
-use app\models\User;
 use app\models\Session;
 
 class SessionCest
@@ -10,8 +9,8 @@ class SessionCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = Session::findOne('in2jfqrqoj5d6luo7qleggimid');
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\Session');
         $I->amLoggedInAs($this->user);
     }
 

@@ -42,7 +42,7 @@ class SessionTest extends \Codeception\Test\Unit
 
     public function testDeleteSuccess()
     {
-        $model = Session::find()->one();
+        $model = $this->tester->grabRecord('app\models\Session');
         expect_that($model->delete());
     }
 
@@ -57,7 +57,7 @@ class SessionTest extends \Codeception\Test\Unit
 
     public function testActivateDataMustSuccess()
     {
-        $model = Session::find()->one();
+        $model = $this->tester->grabRecord('app\models\Session');
         expect_that($model);
 
         $model->activate();
@@ -66,7 +66,7 @@ class SessionTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = Session::find()->one();
+        $model = $this->tester->grabRecord('app\models\Session');
         expect_that($model);
 
         $model->deactivate();

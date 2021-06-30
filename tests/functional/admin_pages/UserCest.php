@@ -10,7 +10,7 @@ class UserCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->model = User::findByUsername('developer');
+        $this->model = $I->grabRecord('app\models\User', ['userName' => 'developer']);
         $I->amLoggedInAs($this->model);
     }
 
@@ -46,12 +46,16 @@ class UserCest
     public function createUserInactiveRoleNoAccessMustFailed(FunctionalTester $I)
     {
         Yii::$app->user->logout();
-        $this->model = User::findByUsername('no_inactive_data_access_role_user');
+        $this->model = $I->grabRecord('app\models\User', [
+            'userName' => 'no_inactive_data_access_role_user'
+        ]);
         $I->amLoggedInAs($this->model);
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create User', 'h5');
 
-        $role = Role::findOne(['name' => 'inactiverole']);
+        $role = $I->grabRecord('app\models\Role', [
+            'name' => 'inactiverole'
+        ]);
 
         $I->submitForm('#user-form', [
             'User[role_id]' => $role->id,

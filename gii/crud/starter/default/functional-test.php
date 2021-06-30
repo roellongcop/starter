@@ -7,7 +7,6 @@ $modelClass = StringHelper::basename($generator->modelClass);
 ?>
 <?= "<?php\n" ?>
 
-use app\models\User;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 
 class <?= $modelClass ?>Cest
@@ -17,8 +16,8 @@ class <?= $modelClass ?>Cest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = <?= $modelClass ?>::findOne(1);
+        $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
+        $this->model = $I->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
         $I->amLoggedInAs($this->user);
     }
 
@@ -108,7 +107,7 @@ class <?= $modelClass ?>Cest
             'record_status' => $this->model::RECORD_ACTIVE,
         ]);
 
-        $I->seeRecord('app\models\<?= $modelClass ?>', array(
+        $I->seeRecord('<?= ltrim($generator->modelClass, '\\') ?>', array(
             'id' => $this->model->id,
             'record_status' => $this->model::RECORD_ACTIVE,
         ));
@@ -121,7 +120,7 @@ class <?= $modelClass ?>Cest
             'record_status' => $this->model::RECORD_INACTIVE,
         ]);
 
-        $I->seeRecord('app\models\<?= $modelClass ?>', array(
+        $I->seeRecord('<?= ltrim($generator->modelClass, '\\') ?>', array(
             'id' => $this->model->id,
             'record_status' => $this->model::RECORD_INACTIVE,
         ));

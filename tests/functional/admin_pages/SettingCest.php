@@ -1,6 +1,5 @@
 <?php
 
-use app\models\User;
 use app\models\Setting;
 
 class SettingCest
@@ -10,8 +9,8 @@ class SettingCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = Setting::findOne(1);
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\Setting');
         $I->amLoggedInAs($this->user);
     }
 

@@ -1,6 +1,5 @@
 <?php
 
-use app\models\User;
 use app\models\File;
 
 class FileCest
@@ -10,8 +9,8 @@ class FileCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = User::findByUsername('developer');
-        $this->model = File::findOne(1);
+        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\File');
         $I->amLoggedInAs($this->user);
     }
 

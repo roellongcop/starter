@@ -51,20 +51,20 @@ class FileTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = File::findOne(1);
+        $model = $this->tester->grabRecord('app\models\File');
         $model->name = 'update';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = File::findOne(1);
+        $model = $this->tester->grabRecord('app\models\File');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = File::findOne(1);
+        $model = $this->tester->grabRecord('app\models\File');
         expect_that($model);
 
         $model->activate();
@@ -73,7 +73,7 @@ class FileTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = File::findOne(1);
+        $model = $this->tester->grabRecord('app\models\File');
         expect_that($model);
 
         $model->deactivate();

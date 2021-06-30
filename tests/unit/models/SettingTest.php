@@ -52,20 +52,20 @@ class SettingTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = Setting::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Setting');
         $model->name = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = Setting::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Setting');
         expect_that($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = Setting::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Setting');
         expect_that($model);
 
         $model->activate();
@@ -74,7 +74,7 @@ class SettingTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = Setting::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Setting');
         expect_that($model);
 
         $model->deactivate();

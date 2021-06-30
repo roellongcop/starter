@@ -53,26 +53,26 @@ class RoleTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = Role::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Role');
         $model->name = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = Role::findOne(['name' => 'nouser']);
+        $model = $this->tester->grabRecord('app\models\Role', ['name' => 'nouser']);
         expect_that($model->delete());
     }
 
     public function testDeleteWithRelatedUserMustFailed()
     {
-        $model = Role::findOne(['name' => 'developer']);
+        $model = $this->tester->grabRecord('app\models\Role', ['name' => 'developer']);
         expect_not($model->delete());
     }
 
     public function testActivateDataMustSuccess()
     {
-        $model = Role::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Role');
         expect_that($model);
 
         $model->activate();
@@ -81,7 +81,7 @@ class RoleTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateDataMustFailed()
     {
-        $model = Role::findOne(1);
+        $model = $this->tester->grabRecord('app\models\Role');
         expect_that($model);
 
         $model->deactivate();
