@@ -9,7 +9,7 @@ class BackupCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
         $this->model = $I->grabRecord('app\models\Backup');
         $I->amLoggedInAs($this->user);
     }
@@ -67,7 +67,7 @@ class BackupCest
     public function createDeactivatedDataNoInactiveAccessMustFailed(FunctionalTester $I)
     {
         $I->amLoggedInAs(
-            $I->grabRecord('app\models\User', ['userName' => 'no_inactive_data_access_role_user'])
+            $I->grabRecord('app\models\User', ['username' => 'no_inactive_data_access_role_user'])
         );
         
         $I->amOnPage($this->model->getCreateUrl(false));

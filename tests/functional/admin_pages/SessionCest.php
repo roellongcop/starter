@@ -9,7 +9,7 @@ class SessionCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
         $this->model = $I->grabRecord('app\models\Session');
         $I->amLoggedInAs($this->user);
     }

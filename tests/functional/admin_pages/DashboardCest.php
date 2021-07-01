@@ -5,7 +5,7 @@ class DashboardCest
     public $user;
     public function _before(FunctionalTester $I)
     {
-        $this->user = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
         $I->amLoggedInAs($this->user);
         $I->amOnPage(['dashboard/index']);
     }

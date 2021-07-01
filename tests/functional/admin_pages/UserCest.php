@@ -10,7 +10,7 @@ class UserCest
 
     public function _before(FunctionalTester $I)
     {
-        $this->model = $I->grabRecord('app\models\User', ['userName' => 'developer']);
+        $this->model = $I->grabRecord('app\models\User', ['username' => 'developer']);
         $I->amLoggedInAs($this->model);
     }
 
@@ -47,7 +47,7 @@ class UserCest
     {
         Yii::$app->user->logout();
         $this->model = $I->grabRecord('app\models\User', [
-            'userName' => 'no_inactive_data_access_role_user'
+            'username' => 'no_inactive_data_access_role_user'
         ]);
         $I->amLoggedInAs($this->model);
         $I->amOnPage($this->model->getCreateUrl(false));
