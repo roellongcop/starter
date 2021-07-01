@@ -117,9 +117,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return array_merge($rules, [
             'integer' => [['created_by', 'updated_by', 'record_status'], 'integer'],
             'safe' => [['created_at', 'updated_at'], 'safe'],
-            // 'required' => ['record_status', 'required'],
-            'default' => ['record_status', 'default', 'value' => 1],
-            'range' => ['record_status', 'in', 'range' => [self::RECORD_ACTIVE, self::RECORD_INACTIVE]],
+            'default' => ['record_status', 'default', 'value' => self::RECORD_ACTIVE],
+            'range' => ['record_status', 'in', 'range' => [
+                self::RECORD_ACTIVE, 
+                self::RECORD_INACTIVE
+            ]],
             'custom' => ['record_status', 'validateRecordStatus'],
         ]);
     }
