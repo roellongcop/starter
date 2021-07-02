@@ -45,13 +45,13 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoData()
     {
         $model = new User();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatus()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -60,7 +60,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidIsBlockedStatusMustFailed()
+    public function testCreateInvalidIsBlockedStatus()
     {
         $data = $this->data();
         $data['is_blocked'] = 3;
@@ -69,7 +69,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidStatusMustFailed()
+    public function testCreateInvalidStatus()
     {
         $data = $this->data();
         $data['status'] = 100;
@@ -78,7 +78,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidRoleIdMustFailed()
+    public function testCreateInvalidRoleId()
     {
         $data = $this->data();
         $data['role_id'] = 10001;
@@ -86,7 +86,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($user->save());
     }
 
-    public function testCreateGuestInactiveRoleIdMustFailed()
+    public function testCreateGuestInactiveRoleId()
     {
         $model = $this->tester->grabRecord('app\models\Role', ['name' => 'inactiverole']);
         $data = $this->data();
@@ -99,7 +99,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($user->save());
     }
 
-    public function testCreateExistingEmailMustFailed()
+    public function testCreateExistingEmail()
     {
         $data = $this->data();
         $data['email'] = 'developer@developer.com';
@@ -107,7 +107,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_not($user->save());
     }
 
-    public function testCreateExistingUsernameMustFailed()
+    public function testCreateExistingUsername()
     {
         $data = $this->data();
         $data['username'] = 'developer';
@@ -157,13 +157,13 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testDeleteWithRelatedDataMustFailed()
+    public function testDeleteWithRelatedData()
     {
         $model = $this->tester->grabRecord('app\models\User');
         expect_not($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateData()
     {
         $model = $this->tester->grabRecord('app\models\User');
         expect_that($model);
@@ -172,7 +172,7 @@ class UserTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateData()
     {
         $model = $this->tester->grabRecord('app\models\User');
         expect_that($model);

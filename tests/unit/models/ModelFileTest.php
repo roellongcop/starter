@@ -22,7 +22,7 @@ class ModelFileTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatus()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -31,13 +31,13 @@ class ModelFileTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoData()
     {
         $model = new ModelFile();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidFileIdMustFailed()
+    public function testCreateInvalidFileId()
     {
         $data = $this->data();
         $data['file_id'] = 100001;
@@ -49,7 +49,7 @@ class ModelFileTest extends \Codeception\Test\Unit
     }
 
 
-    public function testCreateInvalidModelIdMustFailed()
+    public function testCreateInvalidModelId()
     {
         $data = $this->data();
         $data['model_id'] = 100001;
@@ -72,7 +72,7 @@ class ModelFileTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateData()
     {
         $model = $this->tester->grabRecord('app\models\ModelFile');
         expect_that($model);
@@ -81,7 +81,7 @@ class ModelFileTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateData()
     {
         $model = $this->tester->grabRecord('app\models\ModelFile');
         expect_that($model);

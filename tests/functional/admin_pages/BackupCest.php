@@ -42,7 +42,7 @@ class BackupCest
         $I->see('Successfully Created');
     }
 
-    public function createNoFilenameMustFailed(FunctionalTester $I)
+    public function createNoFilename(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->submitForm('form#backup-form', [
@@ -53,7 +53,7 @@ class BackupCest
         $I->see('Filename cannot be blank.');
     }
 
-    public function createExistingFilenameMustFailed(FunctionalTester $I)
+    public function createExistingFilename(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->submitForm('form#backup-form', [
@@ -64,7 +64,7 @@ class BackupCest
         $I->see('Filename "first-backup" has already been taken.');
     }
 
-    public function createDeactivatedDataNoInactiveAccessMustFailed(FunctionalTester $I)
+    public function createDeactivatedDataNoInactiveAccess(FunctionalTester $I)
     {
         $I->amLoggedInAs(
             $I->grabRecord('app\models\User', ['username' => 'no_inactive_data_access_role_user'])

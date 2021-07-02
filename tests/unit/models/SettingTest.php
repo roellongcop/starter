@@ -26,13 +26,13 @@ class SettingTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoData()
     {
         $model = new Setting();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatus()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -41,7 +41,7 @@ class SettingTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidTypeMustFailed()
+    public function testCreateInvalidType()
     {
         $data = $this->data();
         $data['type'] = 'invalid-type';
@@ -63,7 +63,7 @@ class SettingTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateData()
     {
         $model = $this->tester->grabRecord('app\models\Setting');
         expect_that($model);
@@ -72,7 +72,7 @@ class SettingTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateData()
     {
         $model = $this->tester->grabRecord('app\models\Setting');
         expect_that($model);

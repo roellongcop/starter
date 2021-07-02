@@ -418,7 +418,7 @@ class App {
 
     public static function ip()
 	{
-		return App::request()->userIp;
+		return App::request()->userIp ?: 'Not detected';
 	}
 	
 	public static function userAgent()

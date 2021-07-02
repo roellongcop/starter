@@ -83,7 +83,7 @@ class LogTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatus()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -92,13 +92,13 @@ class LogTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoData()
     {
         $model = new Log();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidUserIdMustFailed()
+    public function testCreateInvalidUserId()
     {
         $data = $this->data();
         $data['user_id'] = 100;
@@ -114,7 +114,7 @@ class LogTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateData()
     {
         $model = $this->tester->grabRecord('app\models\Log');
         expect_that($model);
@@ -123,7 +123,7 @@ class LogTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateData()
     {
         $model = $this->tester->grabRecord('app\models\Log');
         expect_that($model);

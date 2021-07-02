@@ -62,8 +62,8 @@ class Log extends ActiveRecord
             [['user_id',], 'integer'],
             [['user_id', 'model_id'], 'default', 'value' => 0],
             [[ 'url'], 'string'],
-            [['request_data', 'change_attribute', 'server',], 'safe'],
-            [['method', 'action', 'controller', 'table_name', 'model_name', 'ip', 'browser', 'os', 'device'], 'required'],
+            [['request_data', 'change_attribute', 'server', 'ip', 'action', 'controller'], 'safe'],
+            [['method', 'table_name', 'model_name', 'browser', 'os', 'device'], 'required'],
             [['method', 'ip'], 'string', 'max' => 32],
             [['action', 'controller', 'table_name', 'model_name'], 'string', 'max' => 256],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
@@ -255,7 +255,7 @@ class Log extends ActiveRecord
             $log                   = new Log();
             $log->request_data     = App::getBodyParams();
             $log->method           = App::getMethod();
-            $log->url              = App::absoluteUrl();
+            $log->url              = App::isTest()? '': App::absoluteUrl();
             $log->user_id          = App::identity('id');
             $log->model_id         = $model->id ?: 0;
             $log->action           = App::actionID();

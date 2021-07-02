@@ -34,13 +34,13 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoData()
     {
         $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatus()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -62,7 +62,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateData()
     {
         $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
         expect_that($model);
@@ -71,7 +71,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateData()
     {
         $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
         expect_that($model);

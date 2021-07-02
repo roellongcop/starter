@@ -27,7 +27,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testCreateInvalidRecordStatus()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -36,7 +36,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateInvalidReadStatusMustFailed()
+    public function testCreateInvalidReadStatus()
     {
         $data = $this->data();
         $data['status'] = 3;
@@ -45,13 +45,13 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoData()
     {
         $model = new Notification();
         expect_not($model->save());
     }
 
-    public function testCreateInvalidUserIdMustFailed()
+    public function testCreateInvalidUserId()
     {
         $data = $this->data();
         $data['user_id'] = 10001;
@@ -73,7 +73,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->delete());
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateData()
     {
         $model = $this->tester->grabRecord('app\models\Notification');
         expect_that($model);
@@ -82,7 +82,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateData()
     {
         $model = $this->tester->grabRecord('app\models\Notification');
         expect_that($model);
@@ -91,7 +91,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testReadMustSuccess()
+    public function testRead()
     {
         $model = $this->tester->grabRecord('app\models\Notification', [
             'status' => Notification::STATUS_UNREAD
@@ -102,7 +102,7 @@ class NotificationTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testUnreadMustSuccess()
+    public function testUnread()
     {
         $model = $this->tester->grabRecord('app\models\Notification', [
             'status' => Notification::STATUS_READ

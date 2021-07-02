@@ -7,6 +7,11 @@ use yii\helpers\Inflector;
 
 class BackupTest extends \Codeception\Test\Unit
 {
+    public function _after()
+    {
+        \Yii::$app->user->logout();
+    }
+    
     protected function data()
     {
         $dbPref = \Yii::$app->db->tablePrefix;
@@ -41,7 +46,22 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateInvalidRecordStatusMustFailed()
+    public function testLoginUserNoAccessInactiveCreateData()
+    {
+        $user = $this->tester->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]);
+        \Yii::$app->user->login($user);
+
+        $data = $this->data();
+        $data['record_status'] = Backup::RECORD_INACTIVE;
+
+        $model = new Backup($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
+    }
+
+    public function testCreateInvalidRecordStatus()
     {
         $data = $this->data();
         $data['record_status'] = 3;
@@ -50,13 +70,13 @@ class BackupTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testCreateNoDataMustFailed()
+    public function testCreateNoData()
     {
         $model = new Backup();
         expect_not($model->save());
     }
 
-    public function testCreateNoTablesMustSuccess()
+    public function testCreateNoTables()
     {
         $data = $this->data();
         unset($data['tables']);
@@ -64,7 +84,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testCreateExistingFilenameMustFailed()
+    public function testCreateExistingFilename()
     {
         $data = $this->data();
         $data['filename'] = 'first-backup';
@@ -73,7 +93,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('filename');
     }
 
-    public function testCreateNoFilenameMustFailed()
+    public function testCreateNoFilename()
     {
         $data = $this->data();
         unset($data['filename']);
@@ -82,7 +102,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect($model->errors)->hasKey('filename');
     }
 
-    public function testActivateDataMustSuccess()
+    public function testActivateData()
     {
         $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model);
@@ -91,7 +111,7 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testGuestDeactivateDataMustFailed()
+    public function testGuestDeactivateData()
     {
         $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model);
@@ -100,13 +120,13 @@ class BackupTest extends \Codeception\Test\Unit
         expect_not($model->save());
     }
 
-    public function testDownloadMustSuccess()
+    public function testDownload()
     {
         $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model->download());
     }
 
-    public function testRestoreMustSuccess()
+    public function testRestore()
     {
         $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model->restore());
