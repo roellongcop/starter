@@ -64,22 +64,6 @@ class BackupCest
         $I->see('Filename "first-backup" has already been taken.');
     }
 
-    public function createDeactivatedDataNoInactiveAccess(FunctionalTester $I)
-    {
-        $I->amLoggedInAs(
-            $I->grabRecord('app\models\User', ['username' => 'no_inactive_data_access_role_user'])
-        );
-        
-        $I->amOnPage($this->model->getCreateUrl(false));
-        $I->submitForm('form#backup-form', [
-            'Backup' => [
-                'filename' => 'test-filename',
-                'record_status' => Backup::RECORD_INACTIVE
-            ]
-        ]);
-        $I->see('Dont have access to create deactivated data.');
-    }
-    
     public function viewPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getViewUrl(false));
@@ -180,5 +164,28 @@ class BackupCest
             'id' => $this->model->id,
             'record_status' => $this->model::RECORD_INACTIVE,
         ));
+    }
+
+    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#backup-form', [
+            'Backup' => [
+                'filename' => 'inactive',
+                'record_status' => Backup::RECORD_INACTIVE
+            ]
+        ]);
+        $I->see('Dont have access to create deactivated data.');
+
+        $I->dontSeeRecord('app\models\Backup', array(
+            'filename' => 'inactive',
+            'record_status' => Backup::RECORD_INACTIVE
+        ));
+
+        \Yii::$app->user->logout();
     }
 }

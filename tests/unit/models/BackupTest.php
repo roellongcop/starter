@@ -7,11 +7,6 @@ use yii\helpers\Inflector;
 
 class BackupTest extends \Codeception\Test\Unit
 {
-    public function _after()
-    {
-        \Yii::$app->user->logout();
-    }
-    
     protected function data()
     {
         $dbPref = \Yii::$app->db->tablePrefix;
@@ -46,12 +41,11 @@ class BackupTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
-    public function testLoginUserNoAccessInactiveCreateData()
+    public function testNoInactiveDataAccessRoleUserCreateInactiveData()
     {
-        $user = $this->tester->grabRecord('app\models\User', [
+        \Yii::$app->user->login($this->tester->grabRecord('app\models\User', [
             'username' => 'no_inactive_data_access_role_user'
-        ]);
-        \Yii::$app->user->login($user);
+        ]));
 
         $data = $this->data();
         $data['record_status'] = Backup::RECORD_INACTIVE;
@@ -59,6 +53,8 @@ class BackupTest extends \Codeception\Test\Unit
         $model = new Backup($data);
         expect_not($model->save());
         expect($model->errors)->hasKey('record_status');
+
+        \Yii::$app->user->logout();
     }
 
     public function testCreateInvalidRecordStatus()

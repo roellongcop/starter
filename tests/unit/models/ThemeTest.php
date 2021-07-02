@@ -45,6 +45,22 @@ class ThemeTest extends \Codeception\Test\Unit
         expect_that($model->save());
     }
 
+    public function testNoInactiveDataAccessRoleUserCreateInactiveData()
+    {
+        \Yii::$app->user->login($this->tester->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $data = $this->data();
+        $data['record_status'] = Theme::RECORD_INACTIVE;
+
+        $model = new Theme($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
+
+        \Yii::$app->user->logout();
+    }
+
     public function testCreateInvalidRecordStatus()
     {
         $data = $this->data();

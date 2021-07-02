@@ -34,6 +34,22 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         expect_that($model->save());
     }
 
+    public function testNoInactiveDataAccessRoleUserCreateInactiveData()
+    {
+        \Yii::$app->user->login($this->tester->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $data = $this->data();
+        $data['record_status'] = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::RECORD_INACTIVE;
+
+        $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
+
+        \Yii::$app->user->logout();
+    }
+
     public function testCreateNoData()
     {
         $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>();

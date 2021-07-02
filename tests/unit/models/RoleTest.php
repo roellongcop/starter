@@ -30,6 +30,22 @@ class RoleTest extends \Codeception\Test\Unit
         ];
     }
 
+    public function testNoInactiveDataAccessRoleUserCreateInactiveData()
+    {
+        \Yii::$app->user->login($this->tester->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $data = $this->data();
+        $data['record_status'] = Role::RECORD_INACTIVE;
+
+        $model = new Role($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
+
+        \Yii::$app->user->logout();
+    }
+
     public function testCreateSuccess()
     {
         $model = new Role($this->data());
