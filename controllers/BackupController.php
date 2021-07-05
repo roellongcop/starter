@@ -100,18 +100,12 @@ class BackupController extends Controller
         $model->attributes = $originalModel->attributes;
         
         if ($model->load(App::post()) && $model->validate()) {
-            $backup = $this->backupDB($model->filename, $model->tables);
             $model->tables = $model->tables ?: App::component('general')->getAllTables();
             
-            if ($backup) {
-                $model->save();
-
-                $fileInput = new \StdClass();
-                $fileInput->baseName = $model->filename;
-                $fileInput->extension = 'sql';
-                $fileInput->size = $backup['filesize'];
-
-                App::component('file')->saveFile($model, $fileInput, $backup['filepath']);
+            if ($model->save()) {
+                App::queue()->push(new BackupJob([
+                    'backupId' => $model->id,
+                ]));
 
                 App::success('Successfully Duplicated');
             }
