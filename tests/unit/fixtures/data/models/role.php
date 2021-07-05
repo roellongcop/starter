@@ -1,64 +1,38 @@
 <?php
+
+use yii\helpers\Inflector;
 use app\helpers\App;
 use app\models\Role;
 
-$access = App::component('access');
-$controllerActions = $access->controllerActions();
-$defaultNavigation = $access->defaultNavigation();
+$model = new \app\helpers\FixtureData(function($name) {
+    return [
+        'name' => $name, 
+        'role_access' => json_encode([]),
+        'module_access' => json_encode(App::component('access')->controllerActions()),
+        'main_navigation' => json_encode(App::component('access')->defaultNavigation()),
+        'slug' => Inflector::slug($name), 
+    ];
+});
 
 $no_inactive_data_access = [];
-
-foreach ($controllerActions as $controllerID => $actions) {
+foreach (App::component('access')->controllerActions() as $controllerID => $actions) {
     foreach ($actions as $key => $action) {
-        if ($action == 'in-active-data') {
-            continue;
+        if ($action != 'in-active-data') {
+            $no_inactive_data_access[$controllerID][] = $action;
         }
 
-        $no_inactive_data_access[$controllerID][] = $action;
     }
 }
-return [
-    'developer' => [
-        'name' => 'developer', 
-        'role_access' => json_encode([]),
-        'module_access' => json_encode($controllerActions),
-        'main_navigation' => json_encode($defaultNavigation),
-        'slug' => 'developer', 
-    ],
-    'superadmin' => [
-        'name' => 'superadmin', 
-        'role_access' => json_encode([]),
-        'module_access' => json_encode($controllerActions),
-        'main_navigation' => json_encode($defaultNavigation),
-        'slug' => 'superadmin', 
-    ],
-    'admin' => [
-        'name' => 'admin', 
-        'role_access' => json_encode([]),
-        'module_access' => json_encode($controllerActions),
-        'main_navigation' => json_encode($defaultNavigation),
-        'slug' => 'admin', 
-    ],
-    'inactiverole' => [
-        'name' => 'inactiverole', 
-        'role_access' => json_encode([]),
-        'module_access' => json_encode($controllerActions),
-        'main_navigation' => json_encode($defaultNavigation),
-        'slug' => 'inactiverole', 
-        'record_status' => Role::RECORD_INACTIVE,
-    ],
-    'nouser' => [
-        'name' => 'nouser', 
-        'role_access' => json_encode([]),
-        'module_access' => json_encode($controllerActions),
-        'main_navigation' => json_encode($defaultNavigation),
-        'slug' => 'nouser', 
-    ],
-    'no_inactive_data_access' => [
-        'name' => 'no_inactive_data_access', 
-        'role_access' => json_encode([]),
-        'module_access' => json_encode($no_inactive_data_access),
-        'main_navigation' => json_encode($defaultNavigation),
-        'slug' => 'no_inactive_data_access', 
-    ],
-];
+
+$model->add('developer', 'developer');
+$model->add('superadmin', 'superadmin');
+$model->add('admin', 'admin');
+$model->add('inactiverole', 'inactiverole', [
+    'record_status' => Role::RECORD_INACTIVE,
+]);
+$model->add('nouser', 'nouser');
+$model->add('no_inactive_data_access', 'no_inactive_data_access', [
+    'module_access' => json_encode($no_inactive_data_access),
+]);
+
+return $model->getData();

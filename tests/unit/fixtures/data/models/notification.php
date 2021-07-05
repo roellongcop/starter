@@ -1,26 +1,28 @@
 <?php
+
 use app\helpers\Url;
 use app\models\Notification;
 
-return [
-	1 => [
+$model = new \app\helpers\FixtureData(function($type) {
+    return [
 		'user_id' => 1,
 		'message' => 'You\'ve Change your password',
 		'link' => Url::to(['user/my-password']),
-		'type' => 'notification_change_password',
+		'type' => $type,
 		'token' => 'TftF853osh1623298888',
 		'status' => Notification::STATUS_UNREAD,
 		'created_by' => 1,
 		'updated_by' => 1,
-	],
-	2 => [
-		'user_id' => 1,
-		'message' => 'You\'ve Change your password',
-		'link' => Url::to(['user/my-password']),
-		'type' => 'notification_change_password',
-		'token' => 'TftF853osh1623298888',
-		'status' => Notification::STATUS_READ,
-		'created_by' => 1,
-		'updated_by' => 1,
-	]
-];
+	];
+});
+$model->add('unread', 'notification_change_password');
+$model->add('read', 'notification_change_password', [
+	'token' => 'readTftF853osh1623298888',
+	'status' => Notification::STATUS_READ,
+]);
+$model->add('inactive', 'notification_change_password', [
+	'token' => 'readTftF853osh1623298888',
+	'record_status' => Notification::RECORD_INACTIVE,
+]);
+
+return $model->getData();

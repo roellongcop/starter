@@ -25,6 +25,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
             '<?= $attribute ?>' => 'test',  
 <?php endif ?>
 <?php endforeach ?>
+            'record_status' => <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::RECORD_ACTIVE
         ], $replace);
     };
 

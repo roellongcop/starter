@@ -17,6 +17,7 @@ class SettingTest extends \Codeception\Test\Unit
             'sort_order' => 0,
             'created_by' => 1,
             'updated_by' => 1,
+            'record_status' => Setting::RECORD_ACTIVE
         ], $replace);
     }
 

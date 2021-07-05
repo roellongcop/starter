@@ -1,7 +1,10 @@
 <?php
-return [
-	1 => [
-		'channel' => 'default',
+
+use app\models\Queue;
+
+$model = new \app\helpers\FixtureData(function($channel) {
+    return [
+		'channel' => $channel,
 		'job' => '',
 		'pushed_at' => 1623377345,
 		'ttr' => 300,
@@ -12,5 +15,12 @@ return [
 		'done_at' => NULL,
 		'created_by' => 1,
 		'updated_by' => 1,
-	]
-];
+	];
+});
+
+$model->add('default', 'default');
+$model->add('inactive', 'default', [
+    'record_status' => Queue::RECORD_INACTIVE,
+]);
+
+return $model->getData();

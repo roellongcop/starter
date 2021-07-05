@@ -49,7 +49,7 @@ class SessionCest
         $I->amOnPage($this->model->getIndexUrl(false));
         $I->submitForm('form[action="'. \app\helpers\Url::to(['session/confirm-action']) .'"]', [
             'process-selected' => 'active', 
-            'selection' => ['in2jfqrqoj5d6luo7qleggimid']
+            'selection' => ['id1']
         ]);
         $I->see('Confirm Action', 'h5');
     }

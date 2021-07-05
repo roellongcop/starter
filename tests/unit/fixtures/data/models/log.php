@@ -1,8 +1,10 @@
 <?php
+
+use app\models\Log;
 use yii\helpers\Url;
 
-return [
-	'login' => [
+$model = new \app\helpers\FixtureData(function($name) {
+    return [
 		'user_id' => 1,
 		'model_id' => 1,
 		'request_data' => json_encode([
@@ -67,6 +69,12 @@ return [
 		]),
 		'updated_by' => 1,
 		'created_by' => 1,
-	]
-];
+	];
+});
 
+$model->add('login');
+$model->add('inactive', '', [
+    'record_status' => Log::RECORD_INACTIVE,
+]);
+
+return $model->getData();

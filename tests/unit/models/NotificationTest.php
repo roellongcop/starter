@@ -16,6 +16,7 @@ class NotificationTest extends \Codeception\Test\Unit
             'type' => 'notification_change_password',
             'token' => 'TftF853osh1623298888',
             'status' => Notification::STATUS_UNREAD,
+            'record_status' => Notification::RECORD_ACTIVE
         ], $replace);
     }
 

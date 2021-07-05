@@ -66,7 +66,6 @@ class BackupCest
         $I->submitForm('form#backup-form', [
             'Backup' => $this->data()
         ]);
-        $I->see('Successfully Created');
 
         $I->seeRecord('app\models\Backup', ['filename' => 'backupname']);
     }

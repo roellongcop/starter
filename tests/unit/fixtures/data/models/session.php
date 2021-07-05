@@ -1,7 +1,10 @@
 <?php
-return [
-	1 => [
-		'id' => 'in2jfqrqoj5d6luo7qleggimid',
+
+use app\models\Session;
+
+$model = new \app\helpers\FixtureData(function($id) {
+    return [
+		'id' => $id,
 		'expire' => time(),
 		'data' => '',
 		'user_id' => 1,
@@ -11,5 +14,13 @@ return [
 		'device' => 'Computer',
 		'created_by' => 1,
 		'updated_by' => 1,
-	]
-];
+	];
+});
+
+$model->add('1', 'id1');
+$model->add('2', 'id2');
+$model->add('inactive', 'id3', [
+    'record_status' => Session::RECORD_INACTIVE,
+]);
+
+return $model->getData();

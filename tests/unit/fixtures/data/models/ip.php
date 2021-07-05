@@ -1,22 +1,25 @@
 <?php
+
 use app\models\Ip;
 use yii\helpers\Inflector;
 
-return [
-    'whitelist' => [
-        'name' => '191.168.1.1', 
-        'description' => 'testing whitelist IP',
+$model = new \app\helpers\FixtureData(function($name) {
+    return [
+        'name' => $name, 
+        'description' => 'testing IP',
         'type' => Ip::TYPE_WHITELIST,
-        'slug' => Inflector::slug('191.168.1.1'),
+        'slug' => Inflector::slug($name),
         'created_by' => 1,
         'updated_by' => 1,
-    ],
-    'blacklist' => [
-        'name' => '191.168.1.2', 
-        'description' => 'testing blacklist IP',
-        'type' => Ip::TYPE_BLACKLIST,
-        'slug' => Inflector::slug('191.168.1.2'),
-        'created_by' => 1,
-        'updated_by' => 1,
-    ],
-];
+    ];
+});
+
+$model->add('whitelist', '191.168.1.1');
+$model->add('blacklist', '191.168.1.2', [
+    'type' => Ip::TYPE_BLACKLIST,
+]);
+$model->add('inactive', '191.168.1.9', [
+    'record_status' => Ip::RECORD_INACTIVE,
+]);
+
+return $model->getData();

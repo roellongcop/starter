@@ -1,121 +1,40 @@
 <?php
 
+use yii\helpers\Inflector;
 use app\helpers\App;
 use app\models\User;
 
-return [
-    'developer' => [
-        'role_id' => 1,
-        'username' => 'developer', 
-        'email' => 'developer@developer.com',
-        'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
-        'password_hash' => Yii::$app->security->generatePasswordHash('developer@developer.com'),
-        'password_hint' => 'Same as Email',
-        'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994601',
-        'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994601',
-        'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994601',
-        'status' => User::STATUS_ACTIVE,
-        'slug' => 'developer',
-        'is_blocked' => User::UNBLOCKED,
-    ],
-    'superadmin' => [
-        'role_id' => 2,
-        'username' => 'superadmin', 
-        'email' => 'superadmin@superadmin.com',
-        'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd32',
-        'password_hash' => Yii::$app->security->generatePasswordHash('superadmin@superadmin.com'),
-        'password_hint' => 'Same as Email',
-        'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994602',
-        'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994602',
-        'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994602',
-        'status' => User::STATUS_ACTIVE,
-        'slug' => 'superadmin',
-        'is_blocked' => User::UNBLOCKED,
-    ],
-    'admin' => [
-    	'role_id' => 3,
-        'username' => 'admin', 
-        'email' => 'admin@admin.com',
-        'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd33',
-        'password_hash' => Yii::$app->security->generatePasswordHash('admin@admin.com'),
-        'password_hint' => 'Same as Email',
-        'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994603',
-        'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994603',
-        'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994603',
-        'status' => User::STATUS_ACTIVE,
-        'slug' => 'admin',
-        'is_blocked' => User::UNBLOCKED,
-    ],
-    'blockeduser' => [
-        'role_id' => 1,
-        'username' => 'blockeduser', 
-        'email' => 'blockeduser@blockeduser.com',
-        'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd34',
-        'password_hash' => Yii::$app->security->generatePasswordHash('blockeduser@blockeduser.com'),
-        'password_hint' => 'Same as Email',
-        'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994604',
-        'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994604',
-        'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994604',
-        'status' => User::STATUS_ACTIVE,
-        'slug' => 'blockeduser',
-        'is_blocked' => User::BLOCKED,
-    ],
-    'notverifieduser' => [
-        'role_id' => 1,
-        'username' => 'notverifieduser', 
-        'email' => 'notverifieduser@notverifieduser.com',
-        'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd35',
-        'password_hash' => Yii::$app->security->generatePasswordHash('notverifieduser@notverifieduser.com'),
-        'password_hint' => 'Same as Email',
-        'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994605',
-        'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994605',
-        'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994605',
-        'status' => 9,
-        'slug' => 'notverifieduser',
-        'is_blocked' => User::UNBLOCKED,
-    ],
+$model = new \app\helpers\FixtureData(function($username) {
+    $email = implode('@', [$username, "{$username}.com"]);
 
-    'inactiveuser' => [
+    return [
         'role_id' => 1,
-        'username' => 'inactiveuser', 
-        'email' => 'inactiveuser@inactiveuser.com',
-        'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd36',
-        'password_hash' => Yii::$app->security->generatePasswordHash('inactiveuser@inactiveuser.com'),
+        'username' => $username, 
+        'email' => $email,
+        'auth_key' => App::randomString(),
+        'password_hash' => Yii::$app->security->generatePasswordHash($email),
         'password_hint' => 'Same as Email',
-        'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994606',
-        'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994606',
-        'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994606',
+        'password_reset_token' => implode('-', ['prt', App::randomString(), time()]),
+        'verification_token' => implode('-', ['vt', App::randomString(), time()]),
+        'access_token' => implode('-', ['at', App::randomString(), time()]),
         'status' => User::STATUS_ACTIVE,
-        'slug' => 'inactiveuser',
+        'slug' => Inflector::slug($username),
         'is_blocked' => User::UNBLOCKED,
-        'record_status' => User::RECORD_INACTIVE,
-    ],
-    'inactiveroleuser' => [
-        'role_id' => 4,
-        'username' => 'inactiveroleuser', 
-        'email' => 'inactiveroleuser@inactiveroleuser.com',
-        'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd37',
-        'password_hash' => Yii::$app->security->generatePasswordHash('inactiveroleuser@inactiveroleuser.com'),
-        'password_hint' => 'Same as Email',
-        'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994607',
-        'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994607',
-        'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994607',
-        'status' => User::STATUS_ACTIVE,
-        'slug' => 'inactiveroleuser',
-        'is_blocked' => User::UNBLOCKED,
-    ],
-    'no_inactive_data_access_role_user' => [
-        'role_id' => 6,
-        'username' => 'no_inactive_data_access_role_user', 
-        'email' => 'no_inactive_data_access_role_user@no_inactive_data_access_role_user.com',
-        'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd37',
-        'password_hash' => Yii::$app->security->generatePasswordHash('no_inactive_data_access_role_user@no_inactive_data_access_role_user.com'),
-        'password_hint' => 'Same as Email',
-        'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994608',
-        'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994608',
-        'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994608',
-        'status' => User::STATUS_ACTIVE,
-        'slug' => 'no_inactive_data_access_role_user',
-        'is_blocked' => User::UNBLOCKED,
-    ],
-];
+    ];
+});
+
+$model->add('developer', 'developer', [
+    'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
+    'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994601'
+]);
+$model->add('superadmin', 'superadmin', ['role_id' => 2]);
+$model->add('admin', 'admin', ['role_id' => 3]);
+$model->add('blockeduser', 'blockeduser', ['is_blocked' => User::BLOCKED]);
+$model->add('notverifieduser', 'notverifieduser', ['status' => User::STATUS_INACTIVE]);
+$model->add('inactiveuser', 'inactiveuser', ['record_status' => User::RECORD_INACTIVE]);
+$model->add('inactiveroleuser', 'inactiveroleuser', ['role_id' => 4]);
+$model->add('no_inactive_data_access_role_user', 'no_inactive_data_access_role_user', [
+    'role_id' => 6
+]);
+
+return $model->getData();

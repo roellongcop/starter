@@ -1,11 +1,11 @@
 <?php
+use app\models\Backup;
 use yii\helpers\Inflector;
 
-$dbPref = \Yii::$app->db->tablePrefix;
-
-return [
-	'first-backup' => [
-		'filename' => 'first-backup',
+$model = new \app\helpers\FixtureData(function($filename) {
+	$dbPref = \Yii::$app->db->tablePrefix;
+    return [
+		'filename' => $filename,
 		'tables' => json_encode([
 		   "{$dbPref}backups" => "{$dbPref}backups",
 		   "{$dbPref}files" => "{$dbPref}files",
@@ -24,8 +24,13 @@ return [
 		   "{$dbPref}visit_logs" => "{$dbPref}visit_logs",
 		]),
 		'description' => 'Description',
-		'slug' => (string) Inflector::slug('first-backup'),
+		'slug' => (string) Inflector::slug($filename),
 		'created_by' => 1,
 	    'updated_by' => 1,
-	]
-];
+	];
+});
+
+$model->add('first-backup', 'first-backup');
+$model->add('inactive', 'Inactive', ['record_status' => Backup::RECORD_INACTIVE]);
+
+return $model->getData();
