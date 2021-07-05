@@ -136,8 +136,7 @@ class Backup extends ActiveRecord
     public function download()
     {
         $file = $this->sqlFileLocation;
-
-        if (file_exists($file)) {
+        if (file_exists($file) && $this->generated) {
             App::response()->sendFile($file);
 
             return true;
@@ -148,7 +147,7 @@ class Backup extends ActiveRecord
     public function restore()
     {
         $file = $this->sqlFileLocation;
-        if (file_exists($file)) {
+        if (file_exists($file) && $this->generated) {
             $sql = file_get_contents($file);
             App::execute($sql);
 
@@ -156,6 +155,11 @@ class Backup extends ActiveRecord
         }
         
         return false;
+    }
+
+    public function getGenerated()
+    {
+        return $this->modelSqlFile;
     }
 
     public function getDownloadUrl($fullpath=true)

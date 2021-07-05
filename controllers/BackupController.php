@@ -41,8 +41,13 @@ class BackupController extends Controller
      */
     public function actionView($slug)
     {
+        $model = $this->findModel($slug, 'slug');
+
+        if (! $model->generated) {
+            App::info('The SQL file is currently generating...');
+        }
         return $this->render('view', [
-            'model' => $this->findModel($slug, 'slug'),
+            'model' => $model,
         ]);
     }
 
@@ -260,7 +265,7 @@ class BackupController extends Controller
         $model = $this->findModel($slug, 'slug');
 
         if (!$model || !$model->restore()) {
-            App::warning('File don\'t exist or cannot be restored.');
+            App::warning('File currently don\'t exist or cannot be restored.');
             return $this->redirect(['index']);
         }
 
@@ -272,7 +277,7 @@ class BackupController extends Controller
     {
         $model = $this->findModel($slug, 'slug');
         if (!$model || !$model->download()) {
-            App::warning('File don\'t exist or cannot be download');
+            App::warning('File currently don\'t exist');
             return $this->redirect(['index']);
         }
     }
