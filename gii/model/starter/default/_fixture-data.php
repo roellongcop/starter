@@ -1,5 +1,7 @@
 <?= "<?php\n" ?>
 
+use <?= $generator->ns ?>\<?= $className ?>;
+
 $model = new \app\helpers\FixtureData(function($params) {
     return [
 <?php foreach ($labels as $name => $label): ?>
