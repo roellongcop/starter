@@ -17,15 +17,15 @@ use <?= ltrim($generator->modelClass, '\\') ?>;
 
 class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
 <?php foreach ($generator->getColumnNames() as $attribute) : ?>
 <?php if (! in_array($attribute, $ignore_attr)) : ?>
             '<?= $attribute ?>' => 'test',  
 <?php endif ?>
 <?php endforeach ?>
-        ];
+        ], $replace);
     };
 
     public function testCreateSuccess()
@@ -40,8 +40,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::RECORD_INACTIVE]);
 
         $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>($data);
         expect_not($model->save());
@@ -58,11 +57,11 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new <?= isset($modelAlias) ? $modelAlias : $modelClass ?>($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testUpdateSuccess()
@@ -94,5 +93,6 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

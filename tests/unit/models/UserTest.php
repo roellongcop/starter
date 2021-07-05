@@ -8,22 +8,9 @@ use app\tests\unit\fixtures\UserFixture;
 
 class UserTest extends \Codeception\Test\Unit
 {
-    // protected $tester;
-
-    // protected function _before()
-    // {
-    //     // load fixtures
-    //     $this->tester->haveFixtures([
-    //         'user' => [
-    //             'class' => UserFixture::className(),
-    //             // fixture data located in tests/_data/user.php
-    //             // 'dataFile' => '@app/tests/unit/fixtures/data/models/user.php'
-    //         ]
-    //     ]);
-    // }
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'role_id' => 1,
             'username' => 'developertest', 
             'email' => 'developertest@developertest.com',
@@ -36,7 +23,8 @@ class UserTest extends \Codeception\Test\Unit
             'status' => 10,
             'slug' => 'developertest',
             'is_blocked' => 0,
-        ];
+            'record_status' => User::RECORD_ACTIVE
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -51,8 +39,7 @@ class UserTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = User::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => User::RECORD_INACTIVE]);
 
         $model = new User($data);
         expect_not($model->save());
@@ -69,66 +56,67 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new User($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateInvalidIsBlockedStatus()
     {
-        $data = $this->data();
-        $data['is_blocked'] = 3;
+        $data = $this->data(['is_blocked' => 3]);
 
         $model = new User($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('is_blocked');
     }
 
     public function testCreateInvalidStatus()
     {
-        $data = $this->data();
-        $data['status'] = 100;
+        $data = $this->data(['status' => 100]);
 
         $model = new User($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('status');
     }
 
     public function testCreateInvalidRoleId()
     {
-        $data = $this->data();
-        $data['role_id'] = 10001;
-        $user = new User($data);
-        expect_not($user->save());
+        $data = $this->data(['role_id' => 10001]);
+        $model = new User($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('role_id');
     }
 
     public function testCreateGuestInactiveRoleId()
     {
         $model = $this->tester->grabRecord('app\models\Role', ['name' => 'inactiverole']);
-        $data = $this->data();
-        $data['role_id'] = $model->id;
-        $data['username'] = 'inactiveroleuserguest';
-        $data['email'] = 'inactiveroleuserguest@inactiveroleuserguest.com';
-        $data['email'] = 'inactiveroleuserguest';
+        $data = $this->data([
+            'role_id' => $model->id,
+            'username' => 'inactiveroleuserguest',
+            'email' => 'inactiveroleuserguest@inactiveroleuserguest.com'
+        ]);
 
-        $user = new User($data);
-        expect_not($user->save());
+        $model = new User($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('role_id');
     }
 
     public function testCreateExistingEmail()
     {
-        $data = $this->data();
-        $data['email'] = 'developer@developer.com';
-        $user = new User($data);
-        expect_not($user->save());
+        $data = $this->data(['email' => 'developer@developer.com']);
+        $model = new User($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('email');
     }
 
     public function testCreateExistingUsername()
     {
-        $data = $this->data();
-        $data['username'] = 'developer';
-        $user = new User($data);
-        expect_not($user->save());
+        $data = $this->data(['username' => 'developer']);
+        $model = new User($data);
+        expect_not($model->save());
+        expect($model->errors)->hasKey('username');
     }
 
     public function testFindUserById()
@@ -195,5 +183,6 @@ class UserTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

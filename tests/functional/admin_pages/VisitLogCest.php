@@ -19,6 +19,18 @@ class VisitLogCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'user_id' => 1,
+            'ip' => '::1',
+            'action' => VisitLog::ACTION_LOGIN,
+            'created_by' => 1,
+            'updated_by' => 1, 
+            'record_status' => VisitLog::RECORD_ACTIVE
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));

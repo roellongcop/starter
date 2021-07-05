@@ -1,22 +1,41 @@
 <?php
 
+use app\helpers\App;
 use app\models\Role;
 
 class RoleCest
 {
     public $user;
     public $model;
+    public $controllerActions;
+    public $defaultNavigation;
 
     public function _before(FunctionalTester $I)
     {
         $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
         $this->model = $I->grabRecord('app\models\Role');
         $I->amLoggedInAs($this->user);
+
+        $access = App::component('access');
+        $this->controllerActions = $access->controllerActions();
+        $this->defaultNavigation = $access->defaultNavigation();
     }
 
     public function _after(FunctionalTester $I)
     {
         Yii::$app->user->logout();
+    }
+
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'name' => 'testrole', 
+            'role_access' => [],
+            'module_access' => $this->controllerActions,
+            'main_navigation' => $this->defaultNavigation,
+            'slug' => 'admin', 
+            'record_status' => Role::RECORD_ACTIVE,
+        ], $replace);
     }
 
     public function indexPage(FunctionalTester $I)
@@ -35,6 +54,53 @@ class RoleCest
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create Role', 'h5');
+    }
+
+    public function createSuccess(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->see('Create Role', 'h5');
+
+        $I->submitForm('form#role-form', [
+            'Role' => $this->data()
+        ]);
+
+        $I->seeRecord('app\models\Role', ['name' => 'testrole']);
+    }
+
+    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#role-form', [
+            'Role' => $this->data(['record_status' => Role::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\Role', $this->data(['record_status' => Role::RECORD_INACTIVE]));
+
+        \Yii::$app->user->logout();
+    }
+
+    public function noInactiveDataAccessRoleUserUpdateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getUpdateUrl(false));
+        $I->submitForm('form#role-form', [
+            'Role' => $this->data(['record_status' => Role::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\Role', [
+            'id' => $this->model->id,
+            'record_status' => Role::RECORD_INACTIVE
+        ]);
+
+        \Yii::$app->user->logout();
     }
 
     public function viewPage(FunctionalTester $I)

@@ -25,28 +25,10 @@ class QueueCest
         $I->see('Queues', 'h5');
     }
 
-    public function createPage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getCreateUrl(false));
-        $I->see('Create Queue', 'h5');
-    }
-
     public function viewPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getViewUrl(false));
         $I->see('Queue:', 'h5');
-    }
-
-    public function updatePage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getUpdateUrl(false));
-        $I->see('Update Queue:', 'h5');
-    }
-
-    public function duplicatePage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getDuplicateUrl(false));
-        $I->see('Duplicate Queue:', 'h5');
     }
 
     public function bulkActionPage(FunctionalTester $I)

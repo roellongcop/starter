@@ -205,6 +205,62 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $updateAll;
     }
 
+    public function getCanDelete()
+    {
+        $res = [];
+        if (($relatedModels = $this->relatedModels) != null) {
+            foreach ($relatedModels as $model) {
+                if ($this->{$model}) {
+                    $res[] = $model;
+                }
+            }
+        }
+        return ($res)? false: true;
+    }
+
+    public function getCanCreate()
+    {
+        return true;
+    }
+    
+    public function getCanView()
+    {
+        return true;
+    }
+
+    public function getCanUpdate()
+    {
+        return true;
+    }
+
+    public function getCanActivate()
+    {
+        if (App::isGuest()) {
+            return true;
+        }
+
+        if (App::identity()->can('change-record-status', $this->controllerID())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getCanDeactivate()
+    {
+        if (App::isLogin()) {
+            $user = App::identity();
+
+            if ($user->can('in-active-data', $this->controllerID())
+                && $user->can('change-record-status', $this->controllerID())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function activate()
     {
         $this->setActive();

@@ -19,6 +19,25 @@ class UserCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'role_id' => 1,
+            'username' => 'developertest', 
+            'email' => 'developertest@developertest.com',
+            'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
+            'password_hash' => \Yii::$app->security->generatePasswordHash('developertest@developertest.com'),
+            'password_hint' => 'Same as Email',
+            'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_16219946011',
+            'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_16219946011',
+            'access_token' => 'access-fGurkHEAh4OSAT6BuC66_16219946011',
+            'status' => 10,
+            'slug' => 'developertest',
+            'is_blocked' => 0,
+            'record_status' => User::RECORD_ACTIVE
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
@@ -43,6 +62,57 @@ class UserCest
         $I->see('Create User', 'h5');
     }
 
+    public function createSuccess(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->see('Create User', 'h5');
+
+        $I->submitForm('form#user-form', [
+            'User' => $this->data()
+        ]);
+
+        $I->seeRecord('app\models\User', ['username' => 'developertest']);
+    }
+
+    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getCreateUrl(false));
+
+        $I->submitForm('form#user-form', [
+            'User' => $this->data(['record_status' => User::RECORD_INACTIVE])
+        ]);
+
+        $data = $this->data(['record_status' => User::RECORD_INACTIVE]);
+        unset($data['password'], $data['password_repeat']);
+
+        $I->dontSeeRecord('app\models\User', $data);
+
+        \Yii::$app->user->logout();
+    }
+
+    public function noInactiveDataAccessRoleUserUpdateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getUpdateUrl(false));
+        $I->submitForm('form#user-form', [
+            'User' => $this->data(['record_status' => User::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\User', [
+            'id' => $this->model->id,
+            'record_status' => User::RECORD_INACTIVE
+        ]);
+
+        \Yii::$app->user->logout();
+    }
+
     public function createUserInactiveRoleNoAccess(FunctionalTester $I)
     {
         Yii::$app->user->logout();
@@ -58,14 +128,7 @@ class UserCest
         ]);
 
         $I->submitForm('#user-form', [
-            'User[role_id]' => $role->id,
-            'User[username]' => 'testusername',
-            'User[email]' => 'testusername@testusername.com',
-            'User[password]' => 'testusername@testusername.com',
-            'User[password_repeat]' => 'testusername@testusername.com',
-            'User[status]' => 10,
-            'User[record_status]' => 1,
-            'User[is_blocked]' => 0,
+            'User' => $this->data(['role_id' => $role->id])
         ]);
 
         $I->expectTo('See validation on user cannot select inactive role when he/she have no access');

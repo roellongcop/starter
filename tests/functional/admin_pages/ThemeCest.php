@@ -19,6 +19,40 @@ class ThemeCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'description' => 'keen/sub/demo1/main',
+            'name' => 'test-theme',
+            'base_path' => '@app/themes/keen/sub/demo1/main/assets/assets',
+            'base_url' => '@web/themes/keen/sub/demo1/main',
+            'path_map' => [
+                '@app/views' => [
+                    '@app/themes/keen/sub/demo1/main/views',
+                    '@app/themes/keen/views',
+                ],
+                '@app/widgets' => [
+                    '@app/themes/keen/sub/demo1/main/widgets',
+                    '@app/themes/keen/widgets',
+                ],
+            ],
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'jsOptions' => ['position' => \yii\web\View::POS_HEAD],
+                    'sourcePath' => '@app/themes/keen/sub/demo1/main/assets/assets/plugins/global/',
+                    'js' => ['plugins.bundle.js']
+                ],  
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => '@app/themes/keen/sub/demo1/main/assets/assets/plugins/global/',
+                    'css' => ['plugins.bundle.css']
+                ],  
+            ],
+            'created_by' => 1,
+            'updated_by' => 1,
+            'record_status' => Theme::RECORD_ACTIVE
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
@@ -29,6 +63,55 @@ class ThemeCest
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create Theme', 'h5');
+    }
+
+    public function createSuccess(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->see('Create Theme', 'h5');
+
+        $I->submitForm('form#theme-form', [
+            'Theme' => $this->data()
+        ]);
+
+        $I->seeRecord('app\models\Theme', ['name' => 'test-theme']);
+    }
+
+    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#theme-form', [
+            'Theme' => $this->data(['record_status' => Theme::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\Theme', $this->data([
+            'record_status' => Theme::RECORD_INACTIVE
+        ]));
+
+        \Yii::$app->user->logout();
+    }
+
+    public function noInactiveDataAccessRoleUserUpdateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getUpdateUrl(false));
+        $I->submitForm('form#theme-form', [
+            'Theme' => $this->data(['record_status' => Theme::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\Theme', [
+            'id' => $this->model->id,
+            'record_status' => Theme::RECORD_INACTIVE
+        ]);
+
+        \Yii::$app->user->logout();
     }
 
     public function viewPage(FunctionalTester $I)

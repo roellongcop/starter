@@ -26,6 +26,13 @@ class <?= $modelClass ?>Cest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'record_status' => Theme::RECORD_ACTIVE
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
@@ -36,6 +43,53 @@ class <?= $modelClass ?>Cest
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see(<?= $generator->generateString('Create '. Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, 'h5');
+    }
+
+    public function createSuccess(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->see('Create <?= $modelClass ?>', 'h5');
+
+        $I->submitForm('form#theme-form', [
+            '<?= $modelClass ?>' => $this->data()
+        ]);
+
+        $I->seeRecord('app\models\<?= $modelClass ?>', $this->data());
+    }
+
+    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#<?= Inflector::camel2id($modelClass) ?>-form', [
+            '<?= $modelClass ?>' => $this->data(['record_status' => <?= $modelClass ?>::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\<?= $modelClass ?>', [
+            'id' => $this->model->id,
+            'record_status' => <?= $modelClass ?>::RECORD_INACTIVE
+        ]);
+
+        \Yii::$app->user->logout();
+    }
+
+    public function noInactiveDataAccessRoleUserUpdateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getUpdateUrl(false));
+        $I->submitForm('form#ip-form', [
+            'Ip' => $this->data(['record_status' => Ip::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\Ip', $this->data(['record_status' => Ip::RECORD_INACTIVE]));
+
+        \Yii::$app->user->logout();
     }
 
     public function viewPage(FunctionalTester $I)

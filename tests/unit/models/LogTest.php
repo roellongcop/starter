@@ -7,9 +7,9 @@ use app\models\Log;
 
 class LogTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'user_id' => 1,
             'model_id' => 1,
             'request_data' => [
@@ -74,7 +74,8 @@ class LogTest extends \Codeception\Test\Unit
             ],
             'updated_by' => 1,
             'created_by' => 1,
-        ];
+            'record_status' => Log::RECORD_ACTIVE
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -89,8 +90,7 @@ class LogTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = Log::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => Log::RECORD_INACTIVE]);
 
         $model = new Log($data);
         expect_not($model->save());
@@ -101,11 +101,11 @@ class LogTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new Log($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateNoData()
@@ -116,8 +116,7 @@ class LogTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidUserId()
     {
-        $data = $this->data();
-        $data['user_id'] = 100;
+        $data = $this->data(['user_id' => 100]);
         $model = new Log($data);
 
         expect_not($model->save());
@@ -146,5 +145,6 @@ class LogTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

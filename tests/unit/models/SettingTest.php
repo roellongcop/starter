@@ -7,9 +7,9 @@ use yii\helpers\Inflector;
 
 class SettingTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'name' => 'timezone',
             'value' => 'Asia/Manila',
             'slug' => Inflector::slug('timezone'),
@@ -17,7 +17,7 @@ class SettingTest extends \Codeception\Test\Unit
             'sort_order' => 0,
             'created_by' => 1,
             'updated_by' => 1,
-        ];
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -32,8 +32,7 @@ class SettingTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = Setting::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => Setting::RECORD_INACTIVE]);
 
         $model = new Setting($data);
         expect_not($model->save());
@@ -50,20 +49,20 @@ class SettingTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new Setting($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateInvalidType()
     {
-        $data = $this->data();
-        $data['type'] = 'invalid-type';
+        $data = $this->data(['type' => 'invalid-type']);
 
         $model = new Setting($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('type');
     }
 
     public function testUpdateSuccess()
@@ -95,5 +94,6 @@ class SettingTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

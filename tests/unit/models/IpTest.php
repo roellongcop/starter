@@ -6,13 +6,14 @@ use app\models\Ip;
 
 class IpTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'name' => '191.168.1.3',  
             'description' => 'test',  
-            'type' => Ip::TYPE_WHITELIST,   
-        ];
+            'type' => Ip::TYPE_WHITELIST,
+            'record_status' => Ip::RECORD_ACTIVE
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -27,8 +28,7 @@ class IpTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = Ip::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => Ip::RECORD_INACTIVE]);
 
         $model = new Ip($data);
         expect_not($model->save());
@@ -39,20 +39,20 @@ class IpTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new Ip($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateInvalidType()
     {
-        $data = $this->data();
-        $data['type'] = 10;
+        $data = $this->data(['type' => 10]);
 
         $model = new Ip($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('type');
     }
 
     public function testCreateNoData()
@@ -111,5 +111,6 @@ class IpTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

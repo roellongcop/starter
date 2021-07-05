@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\App;
 use app\models\File;
 
 class FileCest
@@ -19,6 +20,18 @@ class FileCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'name' => 'file-name-test',
+            'extension' => 'png',
+            'size' => 1000,
+            'location' => 'default/default-image_200.png',
+            'token' => App::randomString(),
+            'record_status' => File::RECORD_ACTIVE
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
@@ -31,31 +44,12 @@ class FileCest
         $I->see('My Files', 'h5');
     }
 
-    public function createPage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getCreateUrl(false));
-        $I->see('Create File', 'h5');
-    }
-
     public function viewPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getViewUrl(false));
         $I->see('File:', 'h5');
     }
-
-    public function updatePage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getUpdateUrl(false));
-        $I->see('Update File:', 'h5');
-    }
-
-    public function duplicatePage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getDuplicateUrl(false));
-        $I->see('Duplicate File:', 'h5');
-    }
-
-
+    
     public function bulkActionPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));

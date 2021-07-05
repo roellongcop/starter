@@ -17,17 +17,16 @@ class RoleTest extends \Codeception\Test\Unit
         $this->defaultNavigation = $access->defaultNavigation();
     }
 
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'name' => 'testrole', 
-            'role_access' => json_encode([]),
-            'module_access' => json_encode($this->controllerActions),
-            'main_navigation' => json_encode($this->defaultNavigation),
+            'role_access' => [],
+            'module_access' => $this->controllerActions,
+            'main_navigation' => $this->defaultNavigation,
             'slug' => 'admin', 
-            'created_by' => 1,
-            'updated_by' => 1,
-        ];
+            'record_status' => Role::RECORD_ACTIVE,
+        ], $replace);
     }
 
     public function testNoInactiveDataAccessRoleUserCreateInactiveData()
@@ -36,8 +35,7 @@ class RoleTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = Role::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => Role::RECORD_INACTIVE]);
 
         $model = new Role($data);
         expect_not($model->save());
@@ -54,11 +52,11 @@ class RoleTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new Role($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateNoData()
@@ -102,5 +100,6 @@ class RoleTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

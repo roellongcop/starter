@@ -6,15 +6,16 @@ use app\models\VisitLog;
 
 class VisitLogTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'user_id' => 1,
             'ip' => '::1',
             'action' => VisitLog::ACTION_LOGIN,
             'created_by' => 1,
-            'updated_by' => 1, 
-        ];
+            'updated_by' => 1,
+            'record_status' => VisitLog::RECORD_ACTIVE
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -29,8 +30,7 @@ class VisitLogTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = VisitLog::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => VisitLog::RECORD_INACTIVE]);
 
         $model = new VisitLog($data);
         expect_not($model->save());
@@ -47,28 +47,28 @@ class VisitLogTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new VisitLog($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateInvalidAction()
     {
-        $data = $this->data();
-        $data['action'] = 3;
+        $data = $this->data(['action' => 3]);
 
         $model = new VisitLog($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('action');
     }
 
     public function testCreateNotExisitngUser()
     {
-        $data = $this->data();
-        $data['user_id'] = 10001;
+        $data = $this->data(['user_id' => 10001]);
         $model = new VisitLog($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('user_id');
     }
 
     public function testDeleteSuccess()
@@ -93,5 +93,6 @@ class VisitLogTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

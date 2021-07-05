@@ -6,15 +6,16 @@ use app\models\UserMeta;
 
 class UserMetaTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'user_id' => 1,  
             'meta_key' => 'address',  
             'meta_value' => 'Philippines',  
             'created_by' => 1,
             'updated_by' => 1,
-        ];
+            'record_status' => UserMeta::RECORD_ACTIVE
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -29,8 +30,7 @@ class UserMetaTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = UserMeta::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => UserMeta::RECORD_INACTIVE]);
 
         $model = new UserMeta($data);
         expect_not($model->save());
@@ -47,17 +47,16 @@ class UserMetaTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new UserMeta($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateInvalidUserId()
     {
-        $data = $this->data();
-        $data['user_id'] = 100001;
+        $data = $this->data(['user_id' => 999999]);
         $model = new UserMeta($data);
 
         expect_not($model->save());
@@ -93,5 +92,6 @@ class UserMetaTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

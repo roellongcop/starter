@@ -19,6 +19,19 @@ class SessionCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'id' => 'in2jfqrqoj5d6luo7qleggimid' . time(),
+            'expire' => time(),
+            'user_id' => 0,
+            'ip' => '::1',
+            'browser' => 'Chrome',
+            'os' => 'Windows',
+            'device' => 'Computer',
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));

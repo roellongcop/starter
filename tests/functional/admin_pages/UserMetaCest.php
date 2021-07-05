@@ -19,6 +19,18 @@ class UserMetaCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'user_id' => 1,  
+            'meta_key' => 'address',  
+            'meta_value' => 'Philippines',  
+            'created_by' => 1,
+            'updated_by' => 1,
+            'record_status' => UserMeta::RECORD_ACTIVE
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
@@ -29,6 +41,54 @@ class UserMetaCest
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create User Meta', 'h5');
+    }
+
+    public function createSuccess(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->see('Create User Meta', 'h5');
+
+        $I->submitForm('form#user-meta-form', [
+            'UserMeta' => $this->data()
+        ]);
+
+        $I->seeRecord('app\models\UserMeta', $this->data());
+    }
+
+    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getCreateUrl(false));
+
+        $I->submitForm('form#user-meta-form', [
+            'UserMeta' => $this->data(['record_status' => UserMeta::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\UserMeta', $this->data(['record_status' => UserMeta::RECORD_INACTIVE]));
+
+        \Yii::$app->user->logout();
+    }
+
+    public function noInactiveDataAccessRoleUserUpdateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getUpdateUrl(false));
+        $I->submitForm('form#user-meta-form', [
+            'UserMeta' => $this->data(['record_status' => UserMeta::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\UserMeta', [
+            'id' => $this->model->id,
+            'record_status' => UserMeta::RECORD_INACTIVE
+        ]);
+
+        \Yii::$app->user->logout();
     }
 
     public function viewPage(FunctionalTester $I)

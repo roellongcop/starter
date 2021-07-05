@@ -6,9 +6,9 @@ use app\models\Session;
 
 class SessionTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'id' => 'in2jfqrqoj5d6luo7qleggimid' . time(),
             'expire' => time(),
             'user_id' => 0,
@@ -16,7 +16,7 @@ class SessionTest extends \Codeception\Test\Unit
             'browser' => 'Chrome',
             'os' => 'Windows',
             'device' => 'Computer',
-        ];
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -31,8 +31,7 @@ class SessionTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = Session::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => Session::RECORD_INACTIVE]);
 
         $model = new Session($data);
         expect_not($model->save());
@@ -49,11 +48,11 @@ class SessionTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidIp()
     {
-        $data = $this->data();
-        $data['ip'] = 'invalidIP';
+        $data = $this->data(['ip' => 'invalidIP']);
 
         $model = new Session($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('ip');
     }
 
     public function testDeleteSuccess()
@@ -64,11 +63,11 @@ class SessionTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new Session($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testActivateData()
@@ -87,5 +86,6 @@ class SessionTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

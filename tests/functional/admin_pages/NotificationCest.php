@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\App;
 use app\models\Notification;
 
 class NotificationCest
@@ -19,16 +20,22 @@ class NotificationCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'user_id' => 1,
+            'message' => 'You\'ve Change your password',
+            'link' => Url::to(['/user/my-password']),
+            'type' => 'notification_change_password',
+            'token' => 'TftF853osh1623298888',
+            'status' => Notification::STATUS_UNREAD,
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
         $I->see('Notifications', 'h5');
-    }
-
-    public function createPage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getCreateUrl(false));
-        $I->see('Create Notification', 'h5');
     }
     
     public function bulkActionPage(FunctionalTester $I)

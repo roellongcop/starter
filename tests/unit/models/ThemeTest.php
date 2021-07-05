@@ -6,9 +6,9 @@ use app\models\Theme;
 
 class ThemeTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'description' => 'keen/sub/demo1/main',
             'name' => 'test-theme',
             'base_path' => '@app/themes/keen/sub/demo1/main/assets/assets',
@@ -36,7 +36,8 @@ class ThemeTest extends \Codeception\Test\Unit
             ],
             'created_by' => 1,
             'updated_by' => 1,
-        ];
+            'record_status' => Theme::RECORD_ACTIVE
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -51,8 +52,7 @@ class ThemeTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = Theme::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => Theme::RECORD_INACTIVE]);
 
         $model = new Theme($data);
         expect_not($model->save());
@@ -63,20 +63,20 @@ class ThemeTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new Theme($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateExistingName()
     {
-        $data = $this->data();
-        $data['record_status'] = 'Demo1 Main';
+        $data = $this->data(['name' => 'Demo1 Main']);
 
         $model = new Theme($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('name');
     }
 
     public function testCreateNoData()
@@ -114,5 +114,6 @@ class ThemeTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

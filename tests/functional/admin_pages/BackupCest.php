@@ -19,6 +19,35 @@ class BackupCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace = [])
+    {
+        $dbPref = \Yii::$app->db->tablePrefix;
+        return array_replace([
+            'filename' => 'backupname',
+            'tables' => [
+               "{$dbPref}backups" => "{$dbPref}backups",
+               "{$dbPref}files" => "{$dbPref}files",
+               "{$dbPref}ips" => "{$dbPref}ips",
+               "{$dbPref}logs" => "{$dbPref}logs",
+               "{$dbPref}migrations" => "{$dbPref}migrations",
+               "{$dbPref}model_files" => "{$dbPref}model_files",
+               "{$dbPref}notifications" => "{$dbPref}notifications",
+               "{$dbPref}queues" => "{$dbPref}queues",
+               "{$dbPref}roles" => "{$dbPref}roles",
+               "{$dbPref}sessions" => "{$dbPref}sessions",
+               "{$dbPref}settings" => "{$dbPref}settings",
+               "{$dbPref}themes" => "{$dbPref}themes",
+               "{$dbPref}user_metas" => "{$dbPref}user_metas",
+               "{$dbPref}users" => "{$dbPref}users",
+               "{$dbPref}visit_logs" => "{$dbPref}visit_logs",
+            ],
+            'description' => 'Description',
+            'created_by' => 1,
+            'updated_by' => 1,
+            'record_status' => Backup::RECORD_ACTIVE
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
@@ -35,20 +64,34 @@ class BackupCest
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->submitForm('form#backup-form', [
-            'Backup' => [
-                'filename' => 'test-filename'
-            ]
+            'Backup' => $this->data()
         ]);
         $I->see('Successfully Created');
+
+        $I->seeRecord('app\models\Backup', ['filename' => 'backupname']);
+    }
+
+    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#backup-form', [
+            'Backup' => $this->data(['record_status' => Backup::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\Backup', $this->data(['record_status' => Backup::RECORD_INACTIVE]));
+
+        \Yii::$app->user->logout();
     }
 
     public function createNoFilename(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->submitForm('form#backup-form', [
-            'Backup' => [
-                'filename' => ''
-            ]
+            'Backup' => $this->data(['filename' => ''])
         ]);
         $I->see('Filename cannot be blank.');
     }
@@ -57,9 +100,7 @@ class BackupCest
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->submitForm('form#backup-form', [
-            'Backup' => [
-                'filename' => 'first-backup'
-            ]
+            'Backup' => $this->data(['filename' => 'first-backup'])
         ]);
         $I->see('Filename "first-backup" has already been taken.');
     }
@@ -164,28 +205,5 @@ class BackupCest
             'id' => $this->model->id,
             'record_status' => $this->model::RECORD_INACTIVE,
         ));
-    }
-
-    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
-    {
-        $I->amLoggedInAs($I->grabRecord('app\models\User', [
-            'username' => 'no_inactive_data_access_role_user'
-        ]));
-
-        $I->amOnPage($this->model->getCreateUrl(false));
-        $I->submitForm('form#backup-form', [
-            'Backup' => [
-                'filename' => 'inactive',
-                'record_status' => Backup::RECORD_INACTIVE
-            ]
-        ]);
-        $I->see('Dont have access to create deactivated data.');
-
-        $I->dontSeeRecord('app\models\Backup', array(
-            'filename' => 'inactive',
-            'record_status' => Backup::RECORD_INACTIVE
-        ));
-
-        \Yii::$app->user->logout();
     }
 }

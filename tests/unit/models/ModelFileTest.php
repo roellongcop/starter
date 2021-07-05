@@ -6,14 +6,14 @@ use app\models\ModelFile;
 
 class ModelFileTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'model_id' => 1,  
             'file_id' => 1,  
             'model_name' => 'User',  
-            'extension' => 'png',  
-        ];
+            'extension' => 'png',
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -28,8 +28,7 @@ class ModelFileTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = ModelFile::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => ModelFile::RECORD_INACTIVE]);
 
         $model = new ModelFile($data);
         expect_not($model->save());
@@ -40,11 +39,11 @@ class ModelFileTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new ModelFile($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateNoData()
@@ -55,8 +54,7 @@ class ModelFileTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidFileId()
     {
-        $data = $this->data();
-        $data['file_id'] = 100001;
+        $data = $this->data(['file_id' => 999999]);
 
         $model = new ModelFile($data);
 
@@ -67,8 +65,7 @@ class ModelFileTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidModelId()
     {
-        $data = $this->data();
-        $data['model_id'] = 100001;
+        $data = $this->data(['model_id' => 999999]);
         $model = new ModelFile($data);
 
         expect_not($model->save());
@@ -104,5 +101,6 @@ class ModelFileTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

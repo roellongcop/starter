@@ -19,34 +19,26 @@ class ModelFileCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'model_id' => 1,  
+            'file_id' => 1,  
+            'model_name' => 'User',  
+            'extension' => 'png',
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
         $I->see('Model Files', 'h5');
     }
 
-    public function createPage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getCreateUrl(false));
-        $I->see('Create Model File', 'h5');
-    }
-
     public function viewPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getViewUrl(false));
         $I->see('Model File:', 'h5');
-    }
-
-    public function updatePage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getUpdateUrl(false));
-        $I->see('Update Model File:', 'h5');
-    }
-
-    public function duplicatePage(FunctionalTester $I)
-    {
-        $I->amOnPage($this->model->getDuplicateUrl(false));
-        $I->see('Duplicate Model File:', 'h5');
     }
 
     public function bulkActionPage(FunctionalTester $I)

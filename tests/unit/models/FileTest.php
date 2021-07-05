@@ -7,15 +7,16 @@ use app\models\File;
 
 class FileTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
-            'name' => 'default-image_200',  
-            'extension' => 'png',  
-            'size' => 1606,  
-            'location' => 'default/default-image_200.png',  
-            'token' => App::randomString(10) . time(),  
-        ];
+        return array_replace([
+            'name' => 'file-name-test',
+            'extension' => 'png',
+            'size' => 1000,
+            'location' => 'default/default-image_200.png',
+            'token' => App::randomString(),
+            'record_status' => File::RECORD_ACTIVE
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -30,8 +31,7 @@ class FileTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = File::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => File::RECORD_INACTIVE]);
 
         $model = new File($data);
         expect_not($model->save());
@@ -48,17 +48,16 @@ class FileTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new File($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateInvalidExtension()
     {
-        $data = $this->data();
-        $data['extension'] = 'invalid_extension';
+        $data = $this->data(['extension' => 'invalid_extension']);
 
         $model = new File($data);
         expect_not($model->save());
@@ -94,5 +93,6 @@ class FileTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 }

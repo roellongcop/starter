@@ -7,18 +7,16 @@ use app\models\Notification;
 
 class NotificationTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace=[])
     {
-        return [
+        return array_replace([
             'user_id' => 1,
             'message' => 'You\'ve Change your password',
             'link' => Url::to(['/user/my-password']),
             'type' => 'notification_change_password',
             'token' => 'TftF853osh1623298888',
             'status' => Notification::STATUS_UNREAD,
-            'created_by' => 1,
-            'updated_by' => 1, 
-        ];
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -33,8 +31,7 @@ class NotificationTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = Notification::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => Notification::RECORD_INACTIVE]);
 
         $model = new Notification($data);
         expect_not($model->save());
@@ -45,20 +42,20 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new Notification($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateInvalidReadStatus()
     {
-        $data = $this->data();
-        $data['status'] = 3;
+        $data = $this->data(['status' => 3]);
 
         $model = new Notification($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('status');
     }
 
     public function testCreateNoData()
@@ -69,11 +66,11 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidUserId()
     {
-        $data = $this->data();
-        $data['user_id'] = 10001;
+        $data = $this->data(['user_id' => 99999]);
         $model = new Notification($data);
 
         expect_not($model->save());
+        expect($model->errors)->hasKey('user_id');
     }
 
     public function testUpdateSuccess()
@@ -105,6 +102,7 @@ class NotificationTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testRead()

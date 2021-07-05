@@ -7,10 +7,10 @@ use yii\helpers\Inflector;
 
 class BackupTest extends \Codeception\Test\Unit
 {
-    protected function data()
+    protected function data($replace = [])
     {
         $dbPref = \Yii::$app->db->tablePrefix;
-        return [
+        return array_replace([
             'filename' => (string) time(),
             'tables' => [
                "{$dbPref}backups" => "{$dbPref}backups",
@@ -32,7 +32,8 @@ class BackupTest extends \Codeception\Test\Unit
             'description' => 'Description',
             'created_by' => 1,
             'updated_by' => 1,
-        ];
+            'record_status' => Backup::RECORD_ACTIVE
+        ], $replace);
     }
 
     public function testCreateSuccess()
@@ -47,8 +48,7 @@ class BackupTest extends \Codeception\Test\Unit
             'username' => 'no_inactive_data_access_role_user'
         ]));
 
-        $data = $this->data();
-        $data['record_status'] = Backup::RECORD_INACTIVE;
+        $data = $this->data(['record_status' => Backup::RECORD_INACTIVE]);
 
         $model = new Backup($data);
         expect_not($model->save());
@@ -59,11 +59,11 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testCreateInvalidRecordStatus()
     {
-        $data = $this->data();
-        $data['record_status'] = 3;
+        $data = $this->data(['record_status' => 3]);
 
         $model = new Backup($data);
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testCreateNoData()
@@ -82,8 +82,7 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testCreateExistingFilename()
     {
-        $data = $this->data();
-        $data['filename'] = 'first-backup';
+        $data = $this->data(['filename' => 'first-backup']);
         $model = new Backup($data);
         expect_not($model->save());
         expect($model->errors)->hasKey('filename');
@@ -114,6 +113,7 @@ class BackupTest extends \Codeception\Test\Unit
 
         $model->deactivate();
         expect_not($model->save());
+        expect($model->errors)->hasKey('record_status');
     }
 
     public function testDownload()

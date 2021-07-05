@@ -19,6 +19,19 @@ class SettingCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'name' => 'timezone',
+            'value' => 'Asia/Manila',
+            'slug' => Inflector::slug('timezone'),
+            'type' => 'general',
+            'sort_order' => 0,
+            'created_by' => 1,
+            'updated_by' => 1,
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));

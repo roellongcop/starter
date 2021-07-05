@@ -19,6 +19,16 @@ class IpCest
         Yii::$app->user->logout();
     }
 
+    protected function data($replace=[])
+    {
+        return array_replace([
+            'name' => '191.168.1.3',  
+            'description' => 'test',  
+            'type' => Ip::TYPE_WHITELIST,
+            'record_status' => Ip::RECORD_ACTIVE
+        ], $replace);
+    }
+
     public function indexPage(FunctionalTester $I)
     {
         $I->amOnPage($this->model->getIndexUrl(false));
@@ -29,6 +39,53 @@ class IpCest
     {
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create Ip', 'h5');
+    }
+
+    public function createSuccess(FunctionalTester $I)
+    {
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->see('Create Ip', 'h5');
+
+        $I->submitForm('form#ip-form', [
+            'Ip' => $this->data()
+        ]);
+
+        $I->seeRecord('app\models\Ip', $this->data());
+    }
+
+    public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getCreateUrl(false));
+        $I->submitForm('form#ip-form', [
+            'Ip' => $this->data(['record_status' => Ip::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\Ip', [
+            'id' => $this->model->id,
+            'record_status' => Ip::RECORD_INACTIVE
+        ]);
+
+        \Yii::$app->user->logout();
+    }
+
+    public function noInactiveDataAccessRoleUserUpdateInactiveData(FunctionalTester $I)
+    {
+        $I->amLoggedInAs($I->grabRecord('app\models\User', [
+            'username' => 'no_inactive_data_access_role_user'
+        ]));
+
+        $I->amOnPage($this->model->getUpdateUrl(false));
+        $I->submitForm('form#ip-form', [
+            'Ip' => $this->data(['record_status' => Ip::RECORD_INACTIVE])
+        ]);
+
+        $I->dontSeeRecord('app\models\Ip', $this->data(['record_status' => Ip::RECORD_INACTIVE]));
+
+        \Yii::$app->user->logout();
     }
 
     public function viewPage(FunctionalTester $I)
