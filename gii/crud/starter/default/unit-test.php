@@ -27,7 +27,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 <?php endforeach ?>
             'record_status' => <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::RECORD_ACTIVE
         ], $replace);
-    };
+    }
 
     public function testCreateSuccess()
     {

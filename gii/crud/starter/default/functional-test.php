@@ -29,7 +29,7 @@ class <?= $modelClass ?>Cest
     protected function data($replace=[])
     {
         return array_replace([
-            'record_status' => Theme::RECORD_ACTIVE
+            'record_status' => <?= $modelClass ?>::RECORD_ACTIVE
         ], $replace);
     }
 
@@ -50,11 +50,11 @@ class <?= $modelClass ?>Cest
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->see('Create <?= $modelClass ?>', 'h5');
 
-        $I->submitForm('form#theme-form', [
+        $I->submitForm('form#<?= Inflector::camel2id($modelClass) ?>-form', [
             '<?= $modelClass ?>' => $this->data()
         ]);
 
-        $I->seeRecord('app\models\<?= $modelClass ?>', $this->data());
+        $I->seeRecord('<?= ltrim($generator->modelClass, '\\') ?>', $this->data());
     }
 
     public function noInactiveDataAccessRoleUserCreateInactiveData(FunctionalTester $I)
@@ -65,13 +65,14 @@ class <?= $modelClass ?>Cest
 
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->submitForm('form#<?= Inflector::camel2id($modelClass) ?>-form', [
-            '<?= $modelClass ?>' => $this->data(['record_status' => <?= $modelClass ?>::RECORD_INACTIVE])
+            '<?= $modelClass ?>' => $this->data([
+                'record_status' => <?= $modelClass ?>::RECORD_INACTIVE
+            ])
         ]);
 
-        $I->dontSeeRecord('app\models\<?= $modelClass ?>', [
-            'id' => $this->model->id,
+        $I->dontSeeRecord('<?= ltrim($generator->modelClass, '\\') ?>', $this->data([
             'record_status' => <?= $modelClass ?>::RECORD_INACTIVE
-        ]);
+        ]));
 
         \Yii::$app->user->logout();
     }
@@ -83,11 +84,14 @@ class <?= $modelClass ?>Cest
         ]));
 
         $I->amOnPage($this->model->getUpdateUrl(false));
-        $I->submitForm('form#ip-form', [
-            'Ip' => $this->data(['record_status' => Ip::RECORD_INACTIVE])
+        $I->submitForm('form#<?= Inflector::camel2id($modelClass) ?>-form', [
+            '<?= $modelClass ?>' => $this->data(['record_status' => <?= $modelClass ?>::RECORD_INACTIVE])
         ]);
 
-        $I->dontSeeRecord('app\models\Ip', $this->data(['record_status' => Ip::RECORD_INACTIVE]));
+        $I->dontSeeRecord('app\models\<?= $modelClass ?>', [
+            'id' => $this->model->id,
+            'record_status' => <?= $modelClass ?>::RECORD_INACTIVE
+        ]);
 
         \Yii::$app->user->logout();
     }
