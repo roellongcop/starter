@@ -1,11 +1,10 @@
 <?php
 
-
-$db      = require __DIR__ . '/db.php';
-$pdf     = require __DIR__ . '/pdf.php';
-$params  = require __DIR__ . '/params.php';
+$db = require __DIR__ . '/db.php';
+$pdf = require __DIR__ . '/pdf.php';
+$params = require __DIR__ . '/params.php';
 $session = require __DIR__ . '/session.php';
-
+$queue = require __DIR__ . '/queue.php';
 
 $config = [
     'id' => 'yii2-basic-starter',
@@ -22,16 +21,7 @@ $config = [
         ],
     ],
     'components' => [
-        'queue' => [
-            'class' => \yii\queue\db\Queue::class,
-            'db' => 'db', // DB connection component or its config 
-            'tableName' => '{{%queues}}', // Table name
-            'channel' => 'default', // Queue channel key
-            'mutex' => \yii\mutex\MysqlMutex::class, // Mutex that used to sync queries
-            'as log' => \yii\queue\LogBehavior::class,
-            'ttr' => 5 * 60, // Max time for job execution
-            'attempts' => 3, // Max number of attempts
-        ],
+        'queue' => $queue,
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
         'file' => ['class' => 'app\components\FileComponent'],

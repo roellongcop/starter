@@ -2,7 +2,8 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-$pdf     = require __DIR__ . '/pdf.php';
+$pdf = require __DIR__ . '/pdf.php';
+$queue = require __DIR__ . '/queue.php';
 
 $config = [
     'id' => 'basic-console',
@@ -17,16 +18,7 @@ $config = [
         '@consoleWebroot' => dirname(__DIR__) . '/web',
     ],
     'components' => [
-        'queue' => [
-            'class' => \yii\queue\db\Queue::class,
-            'db' => 'db', // DB connection component or its config 
-            'tableName' => '{{%queues}}', // Table name
-            'channel' => 'default', // Queue channel key
-            'mutex' => \yii\mutex\MysqlMutex::class, // Mutex that used to sync queries
-            'as log' => \yii\queue\LogBehavior::class,
-            'ttr' => 5 * 60, // Max time for job execution
-            'attempts' => 3, // Max number of attempts
-        ],
+        'queue' => $queue,
         'file' => ['class' => 'app\components\FileComponent'],
         'export' => ['class' => 'app\components\ExportComponent'],
         'setting' => ['class' => 'app\components\SettingComponent'],
