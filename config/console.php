@@ -14,6 +14,7 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
         '@commands' => '@app/commands',
+        '@consoleWebroot' => dirname(__DIR__) . '/web',
     ],
     'components' => [
         'queue' => [
@@ -26,6 +27,7 @@ $config = [
             'ttr' => 5 * 60, // Max time for job execution
             'attempts' => 3, // Max number of attempts
         ],
+        'file' => ['class' => 'app\components\FileComponent'],
         'export' => ['class' => 'app\components\ExportComponent'],
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],

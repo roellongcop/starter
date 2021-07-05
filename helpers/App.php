@@ -665,6 +665,14 @@ class App {
 		return $formatter;
 	}
 
+	public static function queue($attr='')
+	{
+		if ($attr) {
+			return self::component('queue')->{$attr};
+		}
+		return self::component('queue');
+	}
+
 	public static function setting($attr='')
 	{
 		if ($attr) {

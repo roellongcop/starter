@@ -37,9 +37,7 @@ class ExportComponent extends \yii\base\Component
             return $render;
         }
 
-        if (App::isTest()) {
-            return 'pdf-exported';
-        }
+        return 'pdf-exported';
     }
 
     public function csv($content) 
@@ -63,9 +61,8 @@ class ExportComponent extends \yii\base\Component
             $writer->save("php://output");
             exit(0);
         }
-        if (App::isTest()) {
-            echo 'csv-exported';
-        }
+
+        echo 'csv-exported';
     }
 
     public function excel($content, $ext='Xlsx')
@@ -87,9 +84,8 @@ class ExportComponent extends \yii\base\Component
             $writer->save("php://output");
             exit(0);
         }
-        if (App::isTest()) {
-            echo strtolower($ext) . '-exported';
-        }
+
+        echo strtolower($ext) . '-exported';
     }
 
     public function xlsx($content)

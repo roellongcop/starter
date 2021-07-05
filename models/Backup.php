@@ -128,7 +128,7 @@ class Backup extends ActiveRecord
     {
         $sqlFileLocation = parent::getSqlFileLocation();
 
-        $root = App::isTest()? Yii::getAlias('@testWebroot'): Yii::getAlias('@webroot');
+        $root = App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot');
 
         return implode('/', [$root, $sqlFileLocation]);
     }

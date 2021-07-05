@@ -95,7 +95,7 @@ class FileComponent extends Component
 
     public function createIndexFile($folders)
     {
-        $path = Yii::getAlias('@webroot') . '/';
+        $path = (App::isWeb()? Yii::getAlias('@webroot') : Yii::getAlias('@consoleWebroot')) . '/';
 
             
         foreach ($folders as $folder) {

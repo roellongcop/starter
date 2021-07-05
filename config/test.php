@@ -11,8 +11,8 @@ return [
     'basePath' => dirname(__DIR__),
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-        '@testWebroot'   => dirname(__DIR__) . '/web',
+        '@npm' => '@vendor/npm-asset',
+        '@consoleWebroot' => dirname(__DIR__) . '/web',
     ],
     'language' => 'en-US',
     'components' => [

@@ -255,7 +255,7 @@ class Log extends ActiveRecord
             $log                   = new Log();
             $log->request_data     = App::getBodyParams();
             $log->method           = App::getMethod();
-            $log->url              = App::isTest()? '': App::absoluteUrl();
+            $log->url              = App::isWeb()? App::absoluteUrl(): '';
             $log->user_id          = App::identity('id');
             $log->model_id         = $model->id ?: 0;
             $log->action           = App::actionID();

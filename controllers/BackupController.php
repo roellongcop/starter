@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\jobs\BackupJob;
 use app\models\Backup;
 use app\models\search\BackupSearch;
 use app\widgets\ExportContent;
@@ -58,18 +59,12 @@ class BackupController extends Controller
 
         if ($model->load(App::post())) {
             if ($model->validate()) {
-                $backup = $this->backupDB($model->filename, $model->tables);
                 $model->tables = $model->tables ?: App::component('general')->getAllTables();
                 
-                if ($backup && $model->save()) {
-
-                    $fileInput = new \StdClass();
-                    $fileInput->baseName = $model->filename;
-                    $fileInput->extension = 'sql';
-                    $fileInput->size = $backup['filesize'];
-
-                    $file = App::component('file')->saveFile($model, $fileInput, $backup['filepath']);
-                    $this->checkFileUpload($model, $file->id);
+                if ($model->save()) {
+                    App::queue()->push(new BackupJob([
+                        'backupId' => $model->id,
+                    ]));
                     App::success('Successfully Created');
                 }
                 else {
@@ -271,84 +266,6 @@ class BackupController extends Controller
 
         App::success('Restored.');
         return $this->redirect(['index']);
-    }
-
-    public function uploadPath($name)
-    {
-        $folders = [
-            'protected',
-            'backups',
-            date('Y'),
-            date('m'),
-        ];
-
-        if (App::isTest()) {
-            array_unshift($folders, 'web');
-        }
-
-        $file_path = implode('/', $folders);
-        FileHelper::createDirectory($file_path);
-
-
-        App::component('file')->createIndexFile($folders);
-
-        $path = "{$file_path}/{$name}.sql";
-
-        return $path;
-    }
-
-    public function backupDB($name='', $tables='') 
-    {
-        $name = $name ?: time();
-        $tables = $tables ?: '*';
-
-        $micro_date = microtime();
-        $date_array = explode(" ",$micro_date);
-        $filepath = $this->uploadPath($name);
-
-        if ($tables == '*') {
-            $tables = array();
-            $tables = App::getTableNames();
-        } 
-        else {
-            $tables = is_array($tables) ? $tables : explode(',', $tables);
-        }
-        $return = '';
-        foreach ($tables as $table) {
-            $result = App::query("SELECT * FROM {$table}");
-            $return.= 'DROP TABLE IF EXISTS `' . $table . '`;';
-            $row2 = App::queryOne("SHOW CREATE TABLE {$table}");
-            $return.= "\n\n" . $row2['Create Table'] . ";\n\n";
-            foreach ($result as $row) {
-                $return.= 'INSERT INTO ' . $table . ' VALUES(';
-                foreach ($row as $data) {
-                    $data = addslashes($data);
-                    $data = preg_replace("/\n/", "\\n", $data);
-                    if (isset($data)) {
-                        $return.= "'" . $data . "'";
-                    } 
-                    else {
-                        $return.= '""';
-                    }
-                    $return.= ',';
-                }
-                $return = substr($return, 0, strlen($return) - 1);
-                $return.= ");\n";
-            }
-            $return.="\n\n\n";
-        }
-        $handle = fopen($filepath, 'w+');
-        fwrite($handle, $return);
-        fclose($handle);
-
-        if (file_exists($filepath)) {
-
-            return [
-                'filesize' => filesize($filepath),
-                'filepath' => $filepath,
-            ];
-        }
-        return false;
     }
 
     public function actionDownload($slug)
