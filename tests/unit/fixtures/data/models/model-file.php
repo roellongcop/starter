@@ -18,7 +18,10 @@ $model->add('backup', 'Backup', [
 	'file_id' => 2,
 	'extension' => 'sql',
 ]);
-$model->add('inactive', 'User', [
+$model->add('inactive', 'Backup', [
+	'model_id' => 2,
+	'file_id' => 2,
+	'extension' => 'sql',
     'record_status' => ModelFile::RECORD_INACTIVE,
 ]);
 

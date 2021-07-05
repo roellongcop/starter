@@ -7,6 +7,7 @@ use app\helpers\App;
 use app\helpers\Url;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
+use app\widgets\Label;
 use yii\behaviors\SluggableBehavior;
 
 /**
@@ -91,7 +92,24 @@ class Backup extends ActiveRecord
                     ]);
                 }
             ],
-            'description' => ['attribute' => 'description', 'format' => 'raw'],
+            'description' => [
+                'attribute' => 'description', 
+                'format' => 'raw'
+            ],
+            'status' => [
+                'attribute' => 'id', 
+                'format' => 'raw',
+                'label' => 'Status',
+                'value' => function($model) {
+                    $options = $model->isGenerating ? 
+                        ['class' => 'warning', 'label' => 'Generating']
+                        : ['class' => 'success', 'label' => 'Generated'];
+
+                    return Label::widget([
+                        'options' => $options,
+                    ]);
+                }
+            ],
         ];
     }
 
@@ -160,6 +178,11 @@ class Backup extends ActiveRecord
     public function getGenerated()
     {
         return $this->modelSqlFile;
+    }
+
+    public function getIsGenerating()
+    {
+        return !$this->generated;
     }
 
     public function getDownloadUrl($fullpath=true)
