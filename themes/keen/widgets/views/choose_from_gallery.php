@@ -106,7 +106,7 @@ $this->registerCss($registerCss);
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#choose-from-gallery-<?= $id ?>" id="choose-from-gallery-btn-<?= $id ?>">
         <?= $buttonTitle ?>
     </button>
-    <input name="<?= $file_id_name ?>" type="number" value="<?= $file_id ?>">
+    <input name="<?= $file_id_name ?>" type="hidden" value="<?= $file_id ?>">
     <div class="modal fade" id="choose-from-gallery-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">
