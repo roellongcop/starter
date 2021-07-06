@@ -13,7 +13,7 @@ $ignore_attr = ['created_at', 'created_by', 'updated_at', 'updated_by', 'id', 'r
 
 namespace tests\unit\models;
 
-use <?= ltrim($generator->modelClass, '\\') ?>;
+use <?= $generator->ns ?>\<?= $className ?>;
 
 class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codeception\Test\Unit
 {
