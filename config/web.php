@@ -28,6 +28,7 @@ $config = [
         'export' => ['class' => 'app\components\ExportComponent'],
         'general' => ['class' => 'app\components\GeneralComponent'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
+        'view' => ['class' => '\app\components\ViewComponent'],
 
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

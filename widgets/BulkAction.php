@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class BulkAction extends \yii\base\Widget
+class BulkAction extends AppWidget
 {
     public $title = 'Bulk Action';
     

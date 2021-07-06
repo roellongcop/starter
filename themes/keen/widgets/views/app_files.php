@@ -5,8 +5,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $registerJs = <<< SCRIPT
-    var removeImage = function(self) {
-        var file_id = $(self).data('file_id');
+    let removeImage = function(self) {
+        let file_id = $(self).data('file_id');
         Swal.fire({
             title: 'Remove Image?',
             text: "Please confirm your action.",
@@ -41,7 +41,7 @@ $registerJs = <<< SCRIPT
         });
     }
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div class="row">
     <?php if($files): ?>

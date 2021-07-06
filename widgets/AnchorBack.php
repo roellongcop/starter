@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
  
-class AnchorBack extends \yii\base\Widget
+class AnchorBack extends AppWidget
 {
     public $title = 'Back';
     public $options = ['class' => 'btn btn-default'];

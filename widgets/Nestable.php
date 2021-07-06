@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class Nestable extends \yii\base\Widget
+class Nestable extends AppWidget
 {
     public $controller_actions;
     public $navigations;

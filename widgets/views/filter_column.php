@@ -7,9 +7,9 @@ use yii\helpers\Inflector;
 $model = new UserMeta();
 $registerJs = <<< SCRIPT
 $('.check-all-filter').on('change', function() {
-    var is_checked = $(this).is(':checked');
+    let is_checked = $(this).is(':checked');
 
-    var inputs = $(this).parents('.dropdown-menu').find('input._filter_column_checkbox');
+    let inputs = $(this).parents('.dropdown-menu').find('input._filter_column_checkbox');
 
     if (is_checked) {
         inputs.prop('checked', true);
@@ -19,7 +19,7 @@ $('.check-all-filter').on('change', function() {
     }
 })
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?> 
 <div class="dropdown text-right">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">

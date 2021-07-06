@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\widgets\BootstrapSelect;
  
-class RecordStatusInput extends \yii\base\Widget
+class RecordStatusInput extends AppWidget
 {
     public $attribute = 'record_status';
     public $data;

@@ -25,6 +25,7 @@ $config = [
         'access' => ['class' => 'app\components\AccessComponent'],
         'general' => ['class' => 'app\components\General'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
+        'view' => ['class' => '\app\components\ViewComponent'],
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',

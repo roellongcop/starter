@@ -13,7 +13,7 @@ use app\widgets\RecordStatusInput;
 /* @var $model app\models\User */
 /* @var $form app\widgets\ActiveForm */
 ?>
-<?php $form = ActiveForm::begin(['user-form-my-account']); ?>
+<?php $form = ActiveForm::begin(['id' => 'user-form-my-account']); ?>
     <div class="row">
         <div class="col-md-5">
             <?= BootstrapSelect::widget([

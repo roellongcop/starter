@@ -10,11 +10,11 @@ $registerJs = <<< SCRIPT
         dictRemoveFile: '{$dictRemoveFile}',
         acceptedFiles: '{$acceptedFiles}',
         init: function() {
-            var myDropzone = this;
+            let myDropzone = this;
             let files = {$files};
             if (files) {
-                for (var i = 0; i < files.length; i++) {
-                    var mockFile = { 
+                for (let i = 0; i < files.length; i++) {
+                    let mockFile = { 
                         name: files[i].fullname, 
                         size: files[i].size, 
                         accepted: true,
@@ -27,8 +27,8 @@ $registerJs = <<< SCRIPT
                 }
             }
             this.on("sending", function(file, xhr, formData) {
-                var parameters = {$parameters};
-                for ( var key in parameters ) {
+                let parameters = {$parameters};
+                for ( let key in parameters ) {
                     formData.append(key, parameters[key]);
                 }
                 formData.append('fileToken', file.upload.uuid);
@@ -45,7 +45,7 @@ $registerJs = <<< SCRIPT
         }
     });
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">
     <div class="dropzone-msg dz-message needsclick">

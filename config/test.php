@@ -24,6 +24,7 @@ return [
         'setting' => ['class' => 'app\components\SettingComponent'],
         'general' => ['class' => 'app\components\GeneralComponent'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
+        'view' => ['class' => '\app\components\ViewComponent'],
         'db' => $db,
         'pdf' => $pdf,
         'mailer' => [

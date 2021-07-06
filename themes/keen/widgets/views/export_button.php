@@ -1,6 +1,6 @@
 <?php
 $registerJs = <<<SCRIPT
-    var popupCenter = (url, title='Print Report', w=1000, h=700) => {
+    let popupCenter = (url, title='Print Report', w=1000, h=700) => {
         // Fixes dual-screen position                             Most browsers      Firefox
         const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
         const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
@@ -21,7 +21,7 @@ $registerJs = <<<SCRIPT
         if (window.focus) newWindow.print();
     }
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="top">
     <a href="#" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm px-5 mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

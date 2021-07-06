@@ -10,7 +10,7 @@ $registerJs = <<< SCRIPT
         dictRemoveFile: '{$dictRemoveFile}',
         acceptedFiles: '{$acceptedFiles}',
         init: function() {
-            var myDropzone = this;
+            let myDropzone = this;
             let files = {$files};
             if (files) {
                 for (var i = 0; i < files.length; i++) {
@@ -45,7 +45,7 @@ $registerJs = <<< SCRIPT
         }
     });
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">
     <div class="dropzone-msg dz-message needsclick">

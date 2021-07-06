@@ -6,7 +6,7 @@ use Yii;
 use app\widgets\AnchorBack;
 use yii\helpers\Html;
  
-class AnchorForm extends \yii\base\Widget
+class AnchorForm extends AppWidget
 {
     public $glue = ' ';
     public $submitLabel = 'Save';

@@ -1,7 +1,7 @@
 <?php
 $registerJs = <<< SCRIPT
-    var start = moment('{$start}');
-    var end = moment('{$end}');
+    let start = moment('{$start}');
+    let end = moment('{$end}');
     let defaultRanges = {
         'All': [moment('{$all_start}'), moment('{$all_end}')],
        'Today': [moment(), moment()],
@@ -32,7 +32,7 @@ $registerJs = <<< SCRIPT
     $('#{$id} span').html( start.format('MMMM DD, YYYY') + ' - ' + end.format('MMMM DD, YYYY'));
     $('#{$id} input').val( start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
 SCRIPT;
-$this->registerJs($registerJs);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <br>
 <p class=""><?= $title ?></p>

@@ -1,8 +1,8 @@
 <?php
 $registerJs = <<< SCRIPT
     $('.input-switcher-{$id}').on('change', function() {
-        var self = this;
-        var is_checked = $(self).is(':checked');
+        let self = this;
+        let is_checked = $(self).is(':checked');
 
         $.ajax({
             url: $(self).data('link'),
@@ -37,7 +37,7 @@ $registerJs = <<< SCRIPT
         })
     });
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <span class="switch switch-outline switch-icon switch-sm switch-success <?= ($checked) ? '': 'switch-danger-custom' ?>" data-widget_id="<?= $id ?>">
 	<label>

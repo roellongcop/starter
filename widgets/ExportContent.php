@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class ExportContent extends \yii\base\Widget
+class ExportContent extends AppWidget
 {
     public $dataProvider;
     public $searchModel;

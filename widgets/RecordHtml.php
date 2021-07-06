@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\widgets\Switcher;
 use yii\helpers\Url;
  
-class RecordHtml extends \yii\base\Widget
+class RecordHtml extends AppWidget
 {
     public $model;
     public $labelOnly = false;

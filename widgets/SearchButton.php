@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use Yii;
  
-class SearchButton extends \yii\base\Widget
+class SearchButton extends AppWidget
 {
     public function init() 
     {

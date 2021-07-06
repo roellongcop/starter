@@ -8,7 +8,7 @@ use app\models\File;
 use app\models\form\ThemeForm;
 use yii\helpers\Url;
  
-class ThemeView extends \yii\base\Widget
+class ThemeView extends AppWidget
 {
     public $theme = [];
     public $currentTheme;

@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\widgets\Anchor;
 
  
-class Grid extends \yii\base\Widget
+class Grid extends AppWidget
 {
     public $dataProvider;
     public $columns;

@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use Yii;
  
-class Checkbox extends \yii\base\Widget
+class Checkbox extends AppWidget
 {
     public $data;
     public $name;

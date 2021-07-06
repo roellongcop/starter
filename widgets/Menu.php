@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class Menu extends \yii\base\Widget
+class Menu extends AppWidget
 {
     public $menus;
 

@@ -10,7 +10,7 @@ $registerJs = <<<SCRIPT
         $(this).closest('form').submit();
     })
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <?php if(App::component('access')->userCan('confirm-action')): ?>
     <?php if (isset($searchModel->bulkActions)): ?>

@@ -12,7 +12,7 @@ use app\widgets\ActiveForm;
 $tables = App::component('general')->getAllTables();
 $registerJs = <<< SCRIPT
 $('.all-table-checkbox').on('click', function() {
-    var is_checked = $(this).is(':checked');
+    let is_checked = $(this).is(':checked');
 
     if(is_checked) {
         $('input[name="Backup[tables][]"]').prop('checked', true);
@@ -22,7 +22,7 @@ $('.all-table-checkbox').on('click', function() {
     } 
 })
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerJs($registerJs);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'backup-form']); ?>
     <div class="row">

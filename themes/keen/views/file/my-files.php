@@ -15,20 +15,20 @@ $this->params['showCreateButton'] = true;
 $myFilesUrl = Url::to(['file/my-files']);
 $deleteFileUrl = Url::to(['file/delete']);
 $registerJs = <<< SCRIPT
-    var selectedFile = 0;
-    var selectedToken = 0;
+    let selectedFile = 0;
+    let selectedToken = 0;
 
-    var showActionButton = function() {
+    let showActionButton = function() {
         $('#btn-download-file').show();
         $('#btn-remove-file').show();
     }
 
-    var hideActionButton = function() {
+    let hideActionButton = function() {
         $('#btn-remove-file').hide();
         $('#btn-download-file').hide();
     }
 
-    var resetState = function() {
+    let resetState = function() {
         selectedFile = 0;
         selectedToken = 0;
         hideActionButton();
@@ -44,11 +44,11 @@ $registerJs = <<< SCRIPT
         $('#my-files #td-action-btn').html('None');
     }
 
-    var setFileContent = function(content) {
+    let setFileContent = function(content) {
         $('#my-files .my-photos').html(content);
     }
 
-    var getMyFiles = function(url) {
+    let getMyFiles = function(url) {
         setFileContent('Loading');
         KTApp.block('#my-files .my-photos', {
             overlayColor: '#000000',
@@ -71,16 +71,16 @@ $registerJs = <<< SCRIPT
         $.ajax(conf);
     }
     
-    var searchMyImage = function(input) {
+    let searchMyFile = function(input) {
         if(event.key === 'Enter') {
                    
             event.preventDefault();
-            getMyFiles('{$myFilesUrl}?keywords=' + input.value );
+            getMyFiles('{$myFilesUrl}?keywords=' + input.val() );
         }
     }
 
-    var removeFile = function() {
-        var isConfirm = confirm('Remove File?');
+    let removeFile = function() {
+        let isConfirm = confirm('Remove File?');
         if (isConfirm) {
             $.ajax({
                 url: '{$deleteFileUrl}?token=' + selectedToken,
@@ -101,7 +101,7 @@ $registerJs = <<< SCRIPT
     }
     
     $(document).on('click', '#my-files img', function() {
-        var image = $(this);
+        let image = $(this);
         selectedFile = image.data('id');
         selectedToken = image.data('token');
 
@@ -139,9 +139,13 @@ $registerJs = <<< SCRIPT
         });
     });
 
+    $('#my-files input.search-photo').on('keydown', function() {
+        searchMyFile($(this));
+    });
+
     hideActionButton();
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 $registerCss = <<<CSS
     #my-files table tbody tr td {
         overflow-wrap: anywhere;
@@ -157,7 +161,7 @@ $this->registerCss($registerCss);
 ?>
 <div class="row my-files-page" id="my-files">
     <div class="col-md-7">
-        <input type="text" class="form-control search-photo" placeholder="Search File" onkeydown="searchMyImage(this)">
+        <input type="text" class="form-control search-photo" placeholder="Search File">
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
             <?= $this->render('my-files-ajax', [
                 'dataProvider' => $dataProvider,

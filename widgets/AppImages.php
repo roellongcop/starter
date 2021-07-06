@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use yii\helpers\Url;
  
-class AppImages extends \yii\base\Widget
+class AppImages extends AppWidget
 {
     public $model;
     public $removeImageUrl;

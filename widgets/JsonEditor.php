@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use Yii;
  
-class JsonEditor extends \yii\base\Widget
+class JsonEditor extends AppWidget
 {
     public $data;
     public $options = [

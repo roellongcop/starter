@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class ConfirmCheckboxProcess extends \yii\base\Widget
+class ConfirmCheckboxProcess extends AppWidget
 {
     public $models;
     public $process;

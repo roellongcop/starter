@@ -65,7 +65,7 @@ $registerJs = <<< SCRIPT
     var searchMyImage = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
-            getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
+            getMyFiles('{$myImageFilesUrl}?keywords=' + input.val() );
         }
     }
     var removeFile = function() {
@@ -120,8 +120,12 @@ $registerJs = <<< SCRIPT
     });
 
     hideActionButton();
+
+    $('#my-image-files input.search-photo').on('keydown', function() {
+        searchMyImage($(this));
+    });
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerJs($registerJs);
 $registerCss = <<<CSS
     #my-image-files table tbody tr td {
         overflow-wrap: anywhere;
@@ -137,7 +141,7 @@ $this->registerCss($registerCss);
 ?>
 <div id="my-image-files" class="row my-image-files">
     <div class="col-md-7">
-        <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="searchMyImage(this)">
+        <input type="text" class="form-control search-photo" placeholder="Search Photo">
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
             <?= $this->render('my-image-files-ajax', [
                 'dataProvider' => $dataProvider,

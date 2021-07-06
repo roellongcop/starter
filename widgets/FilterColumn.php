@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
-class FilterColumn extends \yii\base\Widget
+class FilterColumn extends AppWidget
 {
     public $searchModel;
     public $title = 'Filter Columns';

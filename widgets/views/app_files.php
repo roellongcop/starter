@@ -5,9 +5,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $registerJs = <<< SCRIPT
-    var removeImage = function(self) {
-        var file_id = $(self).data('file_id');
-        var result = confirm('Remove Image?');
+    let removeImage = function(self) {
+        let file_id = $(self).data('file_id');
+        let result = confirm('Remove Image?');
         if(result) {
             $.ajax({
                 url: '{$removeImagePath}',
@@ -34,7 +34,7 @@ $registerJs = <<< SCRIPT
         } 
     }
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div class="row">
     <?php if($files): ?>

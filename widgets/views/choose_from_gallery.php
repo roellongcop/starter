@@ -79,22 +79,29 @@ $registerJs = <<< SCRIPT
         }   
         $.ajax(conf);
     }
+    
     $('#choose-from-gallery-btn-{$id}').on('click', function() {
         let keywords = $('#my_files-{$id} input.search-photo').val()
         getMyFiles('{$myImageFilesUrl}');
         disableButton();
     })
+
     $(document).on("pjax:beforeSend",function(){
         $('#my_files-{$id} .modal-my-photos').html('Loading...');
     });
-    let search{$id} = function(input) {
+
+    let search = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
-            getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
+            getMyFiles('{$myImageFilesUrl}?keywords=' + input.val() );
         }
     }
+
+    $('#choose-from-gallery-container-{$id} input.search-photo').on('keydown', function() {
+        search($(this))
+    });
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 $registerCSS = <<<CSS
     #choose-from-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
@@ -144,7 +151,7 @@ $this->registerCSS($registerCSS);
                             <div id="my_files-<?= $id ?>" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
-                                        <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
+                                        <input type="text" class="form-control search-photo" placeholder="Search Photo">
                                         <?php Pjax::begin([
                                             'options' => ['class' => 'modal-my-photos'],
                                             'enablePushState' => false,

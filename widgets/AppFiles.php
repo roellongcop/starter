@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use yii\helpers\Url;
  
-class AppFiles extends \yii\base\Widget
+class AppFiles extends AppWidget
 {
     public $model;
     public $imageOnly = false;

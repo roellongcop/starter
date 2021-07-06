@@ -1,11 +1,11 @@
 <?php
 use yii\helpers\Url;
 $registerJs = <<<SCRIPT
-    var {$id} = 0;
+    let index = 0;
     $('#add-main-navigation-{$id}').on('click', function() {
-        {$id} ++;
+        index++;
         var html = '';
-        html += '<li class="dd-item dd3-item" data-id="'+ ({$id}) +'-new">';
+        html += '<li class="dd-item dd3-item" data-id="'+ (index) +'-new">';
             html += '<div class="dd-handle dd3-handle"> <i class="flaticon-squares"></i></div>';
             html += '<div class="dd3-content">';
                 html += '<div class="row">';
@@ -79,7 +79,7 @@ $registerJs = <<<SCRIPT
     }
     initNestable();
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div class="row">
     <div class="col-md-12">

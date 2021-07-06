@@ -6,7 +6,7 @@ use Yii;
 use yii\widgets\DetailView;
 
  
-class Detail extends \yii\base\Widget
+class Detail extends AppWidget
 {
     public $model;
     public $formatter = ['class' => '\app\components\FormatterComponent'];

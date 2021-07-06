@@ -72,14 +72,18 @@ $registerJs = <<< SCRIPT
             state: 'primary' // a bootstrap color
         });
     });
-    let search{$id} = function(input) {
+    let search = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
-            getMyFiles('{$myImageFilesUrl}?keywords=' + input.value );
+            getMyFiles('{$myImageFilesUrl}?keywords=' + input.val() );
         }
     }
+    $('#choose-from-gallery-container-{$id} input.search-photo').on('keydown', function() {
+        search($(this))
+    });
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+
+$this->registerWidgetJs($widgetFunction, $registerJs);
 $registerCss = <<<CSS
     #choose-from-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
@@ -102,7 +106,7 @@ $this->registerCss($registerCss);
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#choose-from-gallery-<?= $id ?>" id="choose-from-gallery-btn-<?= $id ?>">
         <?= $buttonTitle ?>
     </button>
-    <input name="<?= $file_id_name ?>" type="hidden" value="<?= $file_id ?>">
+    <input name="<?= $file_id_name ?>" type="number" value="<?= $file_id ?>">
     <div class="modal fade" id="choose-from-gallery-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">
@@ -138,7 +142,7 @@ $this->registerCss($registerCss);
                             <div class="tab-pane fade show active" id="my_files-<?= $id ?>" role="tabpanel" aria-labelledby="my_files-<?= $id ?>">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
-                                        <input type="text" class="form-control search-photo" placeholder="Search Photo" onkeydown="search<?= $id ?>(this)">
+                                        <input type="text" class="form-control search-photo" placeholder="Search Photo">
                                         <?php Pjax::begin([
                                             'options' => ['class' => 'modal-my-photos'],
                                             'enablePushState' => false,

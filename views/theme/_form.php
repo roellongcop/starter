@@ -24,7 +24,7 @@ $registerJs = <<< SCRIPT
         $(this).unbind('submit').submit(); 
     })
 SCRIPT;
-$this->registerJs($registerJs, \yii\web\View::POS_END);
+$this->registerJs($registerJs);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'theme-form']); ?>
     <div class="row">

@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\helpers\Html;
 use yii\helpers\Url; 
  
-class ExportButton extends \yii\base\Widget
+class ExportButton extends AppWidget
 {
     public $actions = [
         'print' => [

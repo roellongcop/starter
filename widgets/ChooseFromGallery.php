@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use yii\helpers\Url;
  
-class ChooseFromGallery extends \yii\base\Widget
+class ChooseFromGallery extends AppWidget
 {
     public $file_id;
     public $modalTitle = 'Choose from Gallery';

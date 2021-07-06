@@ -86,6 +86,38 @@ use app\widgets\RecordStatusInput;
                     $('#profile-image-dropdown').attr('src', file.dataURL);
                 "
             ]) ?> 
+
+             <?= ChooseFromGallery::widget([
+                'model' => $model,
+                'ajaxSuccess' => "
+                    if(s.status == 'success') {
+                        KTApp.block('#sipc', {
+                            overlayColor: '#000000',
+                            state: 'primary',
+                            message: 'Processing...'
+                        });
+                        setTimeout(function() {
+                            KTApp.unblock('#sipc');
+                        }, 1000);
+                        $('#sipc img').attr('src', s.src + '&w=200');
+                        $('#profile-image-desktop').attr('src', s.src + '&w=200');
+                        $('#profile-image-dropdown').attr('src', s.src + '&w=200');
+                    }
+                ",
+                'dropzoneSuccess' => "
+                    KTApp.block('#sipc', {
+                        overlayColor: '#000000',
+                        state: 'primary',
+                        message: 'Processing...'
+                    });
+                    setTimeout(function() {
+                        KTApp.unblock('#sipc');
+                    }, 1000);
+                    $('#sipc img').attr('src', file.dataURL);
+                    $('#profile-image-desktop').attr('src', file.dataURL);
+                    $('#profile-image-dropdown').attr('src', file.dataURL);
+                "
+            ]) ?> 
         </div>
     </div>
     <div class="form-group"><hr>
