@@ -164,6 +164,8 @@ class Backup extends ActiveRecord
 
     public function restore()
     {
+        ini_set('max_execution_time', 0);
+        
         $file = $this->sqlFileLocation;
         if (file_exists($file) && $this->generated) {
             $sql = file_get_contents($file);
