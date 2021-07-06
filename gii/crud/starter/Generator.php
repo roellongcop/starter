@@ -200,11 +200,6 @@ class Generator extends \yii\gii\Generator
             $this->render('functional-test.php', $params)
         );
 
-        $files[] = new CodeFile(
-            Yii::getAlias('@app') . '/tests/unit/models/' . $model . 'Test.php',
-            $this->render('unit-test.php', $params)
-        );
-
         return $files;
     }
 

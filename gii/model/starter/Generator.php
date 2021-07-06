@@ -251,6 +251,11 @@ class Generator extends \yii\gii\Generator
                 $this->render('fixture.php', $params)
             );
 
+            $files[] = new CodeFile(
+                Yii::getAlias('@app') . '/tests/unit/models/' . $model . 'Test.php',
+                $this->render('unit-test.php', $params)
+            );
+
             // query :
             if ($queryClassName) {
                 $params['className'] = $queryClassName;

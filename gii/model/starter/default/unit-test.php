@@ -20,11 +20,11 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
     protected function data($replace=[])
     {
         return array_replace([
-<?php foreach ($generator->getColumnNames() as $attribute) : ?>
-<?php if (! in_array($attribute, $ignore_attr)) : ?>
-            '<?= $attribute ?>' => 'test',  
+<?php foreach ($labels as $name => $label): ?>
+<?php if ($name != 'id'): ?>
+            <?= "'$name' => " . $generator->generateString($label) . ",\n" ?>
 <?php endif ?>
-<?php endforeach ?>
+<?php endforeach; ?>
             'record_status' => <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::RECORD_ACTIVE
         ], $replace);
     }
