@@ -1,4 +1,4 @@
-<input type="text" 
+<input type="search" 
     class="form-control kt-quick-search__input" 
     placeholder="<?= $placeholder ?>" 
     value="<?= $value ?>"

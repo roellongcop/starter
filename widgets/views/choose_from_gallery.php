@@ -151,7 +151,7 @@ $this->registerCSS($registerCSS);
                             <div id="my_files-<?= $id ?>" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
-                                        <input type="text" class="form-control search-photo" placeholder="Search Photo">
+                                        <input type="search" class="form-control search-photo" placeholder="Search Photo">
                                         <?php Pjax::begin([
                                             'options' => ['class' => 'modal-my-photos'],
                                             'enablePushState' => false,

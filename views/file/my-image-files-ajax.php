@@ -40,6 +40,7 @@ else {
         'afterItem' => function ($model, $key, $index, $widget) {
             return '</div>';
         },
-        'pager' => ['class' => 'app\widgets\LinkPager']
+        'pager' => ['class' => 'app\widgets\LinkPager'],
+        'emptyTextOptions' => ['class' => 'col-md-12']
     ]); ?>
 </div>

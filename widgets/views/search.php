@@ -1,5 +1,5 @@
-<input type="text" 
-    class="form-control kt-quick-search__input" 
+<input type="search" 
+    class="form-control" 
     placeholder="<?= $placeholder ?>" 
     value="<?= $value ?>"
     style="<?= $style ?>" 

@@ -158,7 +158,7 @@ $this->registerCss($registerCss);
 ?>
 <div class="row my-image-files-page" id="my-image-files">
     <div class="col-md-7">
-        <input type="text" class="form-control search-photo" placeholder="Search Photo">
+        <input type="search" class="form-control search-photo" placeholder="Search Photo">
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
             <?= $this->render('my-image-files-ajax', [
                 'dataProvider' => $dataProvider,
