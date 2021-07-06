@@ -67,20 +67,20 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
+        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
         $model->record_status = 1;
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
+        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
+        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
         expect_that($model);
 
         $model->activate();
@@ -89,7 +89,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
+        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
         expect_that($model);
 
         $model->deactivate();
