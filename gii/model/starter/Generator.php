@@ -252,7 +252,7 @@ class Generator extends \yii\gii\Generator
             );
 
             $files[] = new CodeFile(
-                Yii::getAlias('@app') . '/tests/unit/models/' . $model . 'Test.php',
+                Yii::getAlias('@app') . '/tests/unit/models/' . $modelClassName . 'Test.php',
                 $this->render('unit-test.php', $params)
             );
 
