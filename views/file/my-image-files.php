@@ -62,29 +62,34 @@ $registerJs = <<< SCRIPT
         }   
         $.ajax(conf);
     }
+
     var searchMyImage = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.val() );
         }
     }
-    var removeFile = function() {
-        $.ajax({
-            url: '{$deleteFileUrl}?token=' + selectedToken,
-            method: 'post',
-            dataType: 'json',
-            success: function(s) {
-                if(s.status == 'success') {
-                    alert(s.message);
-                    getMyFiles('{$myImageFilesUrl}');
-                }
-                resetState();
-            },
-            error: function(e){
-                alert(e.statusText)
-            },
-        })
-    }
+
+    $(document).on('click', '#my-image-files .btn-remove-file', function() {
+        let isConfirm = confirm('Remove File?');
+        if (isConfirm) {
+            $.ajax({
+                url: '{$deleteFileUrl}?token=' + selectedToken,
+                method: 'post',
+                dataType: 'json',
+                success: function(s) {
+                    if(s.status == 'success') {
+                        alert(s.message);
+                        getMyFiles('{$myImageFilesUrl}');
+                    }
+                    resetState();
+                },
+                error: function(e){
+                    alert(e.statusText)
+                },
+            })
+        }
+    });
 
     $(document).on('click', '#my-image-files img', function() {
         var image = $(this);
@@ -103,7 +108,7 @@ $registerJs = <<< SCRIPT
             actionButtons += 'Download';
             actionButtons += '</a>';
             if(image.data('can-delete')) {
-                actionButtons += '<a href="#" onclick="removeFile()" class="btn btn-danger btn-sm">';
+                actionButtons += '<a href="#" class="btn btn-danger btn-sm btn-remove-file">';
                 actionButtons += 'Remove';
                 actionButtons += '</a>';
             }

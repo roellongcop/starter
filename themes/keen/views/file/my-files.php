@@ -79,7 +79,7 @@ $registerJs = <<< SCRIPT
         }
     }
 
-    let removeFile = function() {
+    $(document).on('click', '#my-files .btn-remove-file', function() {
         let isConfirm = confirm('Remove File?');
         if (isConfirm) {
             $.ajax({
@@ -98,8 +98,8 @@ $registerJs = <<< SCRIPT
                 },
             })
         }
-    }
-    
+    });
+        
     $(document).on('click', '#my-files img', function() {
         let image = $(this);
         selectedFile = image.data('id');
@@ -119,7 +119,7 @@ $registerJs = <<< SCRIPT
             actionButtons += '</a>';
 
             if(image.data('can-delete')) {
-                actionButtons += '<a href="#" onclick="removeFile()" class="btn btn-danger btn-sm">';
+                actionButtons += '<a href="#" class="btn btn-danger btn-sm btn-remove-file">';
                 actionButtons += 'Remove';
                 actionButtons += '</a>';
             }
@@ -145,7 +145,7 @@ $registerJs = <<< SCRIPT
 
     hideActionButton();
 SCRIPT;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerJs($registerJs);
 $registerCss = <<<CSS
     #my-files table tbody tr td {
         overflow-wrap: anywhere;
@@ -161,7 +161,7 @@ $this->registerCss($registerCss);
 ?>
 <div class="row my-files-page" id="my-files">
     <div class="col-md-7">
-        <input type="text" class="form-control search-photo" placeholder="Search File">
+        <input type="search" class="form-control search-photo" placeholder="Search File">
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
             <?= $this->render('my-files-ajax', [
                 'dataProvider' => $dataProvider,

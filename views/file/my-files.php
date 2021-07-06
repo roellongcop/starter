@@ -71,23 +71,26 @@ $registerJs = <<< SCRIPT
         }
     }
 
-    let removeFile = function() {
-        $.ajax({
-            url: '{$deleteFileUrl}?token=' + selectedToken,
-            method: 'post',
-            dataType: 'json',
-            success: function(s) {
-                if(s.status == 'success') {
-                    alert(s.message);
-                    getMyFiles('{$myFilesUrl}');
-                }
-                resetState();
-            },
-            error: function(e){
-                alert(e.statusText)
-            },
-        })
-    }
+    $(document).on('click', '#my-files .btn-remove-file', function() {
+        let isConfirm = confirm('Remove File?');
+        if (isConfirm) {
+            $.ajax({
+                url: '{$deleteFileUrl}?token=' + selectedToken,
+                method: 'post',
+                dataType: 'json',
+                success: function(s) {
+                    if(s.status == 'success') {
+                        alert(s.message);
+                        getMyFiles('{$myFilesUrl}');
+                    }
+                    resetState();
+                },
+                error: function(e){
+                    alert(e.statusText)
+                },
+            })
+        }
+    });
 
     $(document).on('click', '#my-files img', function() {
         let image = $(this);
@@ -107,7 +110,7 @@ $registerJs = <<< SCRIPT
             actionButtons += 'Download';
             actionButtons += '</a>';
             if(image.data('can-delete')) {
-                actionButtons += '<a href="#" onclick="removeFile()" class="btn btn-danger btn-sm">';
+                actionButtons += '<a href="#" class="btn btn-danger btn-sm btn-remove-file">';
                 actionButtons += 'Remove';
                 actionButtons += '</a>';
             }

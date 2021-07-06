@@ -24,7 +24,7 @@ $registerJs = <<< SCRIPT
         $(this).unbind('submit').submit(); 
     })
 SCRIPT;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerJs($registerJs);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'theme-form']); ?>
     <div class="row">
