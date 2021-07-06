@@ -56,7 +56,6 @@ class <?= $className ?> extends Migration
         ];
     }
 
-
     public function _createTable($table, $columns, $options = NULL) 
     {
         // Fetch the table schema
@@ -68,13 +67,11 @@ class <?= $className ?> extends Migration
         return FALSE;
     }
 
-
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        
 <?= $this->render('_createTable', [
     'table' => $table,
     'fields' => $fields,
@@ -92,7 +89,6 @@ class <?= $className ?> extends Migration
         foreach($this->tableIndexes() as $key => $value) {
             $this->createIndex($key, $this->tableName(), $value);
         }
-
     }
 
     /**
