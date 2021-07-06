@@ -9,6 +9,7 @@ use yii\helpers\Html;
 class AnchorForm extends \yii\base\Widget
 {
     public $glue = ' ';
+    public $submitLabel = 'Save';
 
     public function init() 
     {
@@ -23,10 +24,10 @@ class AnchorForm extends \yii\base\Widget
     {
         $anchors = [
             AnchorBack::widget(),
-            Html::submitButton('Save', [
+            Html::submitButton($this->submitLabel, [
                 'class' => 'btn btn-success',
                 'name' => 'confirm_button',
-                'value' => 'Save'
+                'value' => $this->submitLabel
             ])
         ];
 

@@ -63,6 +63,6 @@ use yii\helpers\Html;
 			<?php endforeach ?>
 		</div>
 		<hr>
-		<?= AnchorForm::widget() ?>
+		<?= AnchorForm::widget(['submitLabel' => 'Confirm']) ?>
 	<?= Html::endForm() ?> 
 </div>
