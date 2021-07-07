@@ -332,4 +332,15 @@ class File extends ActiveRecord
 
         return parent::getCanDelete();
     }
+
+    public function download()
+    {
+        $file = $this->location;
+        if (file_exists($file)) {
+            App::response()->sendFile($file, implode('.', [$this->name, $this->extension]));
+
+            return true;
+        }
+        return false;
+    }
 }

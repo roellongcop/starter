@@ -310,16 +310,7 @@ class FileController extends Controller
     public function actionDownload($token)
     {
         $model = $this->findModel($token, 'token');
-        if ($model) {
-            $file = $model->location;
-            if (file_exists($file)) {
-                App::response()->sendFile($file);
-
-                return true;
-            }
-            return false;
-        }
-        else {
+        if (!$model || !$model->download()) {
             App::warning('File don\'t exist');
             return $this->redirect(App::referrer());
         }
