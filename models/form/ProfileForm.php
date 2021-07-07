@@ -67,9 +67,9 @@ class ProfileForm extends \yii\base\Model
         $user = $this->user;
         
         if ($this->validate()) {
-            $profile = $user->meta('profile');
+            // $profile = $user->meta('profile');
            
-            $profile = $profile ?: new UserMeta();
+            // $profile = $profile ?: new UserMeta();
             $user->saveMeta(['profile' => $this->attributes]);
 
             return true;
