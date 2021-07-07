@@ -31,6 +31,7 @@ class LogSearch extends Log
             [['id', 'model_id', 'created_by', 'updated_by'], 'integer'],
             [['request_data', 'change_attribute', 'method', 'url', 'action', 'controller', 'table_name', 'model_name', 'server', 'ip', 'browser', 'os', 'device', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status', 'user_id', 'username'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

@@ -30,6 +30,7 @@ class FileSearch extends File
             [['id', 'size', 'created_by', 'updated_by'], 'integer'],
             [['name', 'extension', 'location', 'token', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

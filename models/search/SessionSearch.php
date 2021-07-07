@@ -31,6 +31,7 @@ class SessionSearch extends Session
             [['id', 'data', 'ip', 'browser', 'os', 'device', 'created_at', 'updated_at'], 'safe'],
             [['expire', 'user_id', 'created_by', 'updated_by'], 'integer'],
             [['keywords', 'pagination', 'date_range', 'record_status', 'username'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

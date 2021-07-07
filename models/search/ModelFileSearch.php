@@ -30,6 +30,7 @@ class ModelFileSearch extends ModelFile
             [['id', 'model_id', 'file_id', 'created_by', 'updated_by'], 'integer'],
             [['model_name', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

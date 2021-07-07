@@ -30,6 +30,7 @@ class ThemeSearch extends Theme
             [['id', 'created_by', 'updated_by'], 'integer'],
             [['name', 'description', 'base_path', 'base_url', 'path_map', 'bundles', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

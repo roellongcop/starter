@@ -30,6 +30,7 @@ class IpSearch extends Ip
             [['id', 'created_by', 'updated_by'], 'integer'],
             [['name', 'description', 'created_at', 'updated_at', 'type'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

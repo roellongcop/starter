@@ -30,6 +30,7 @@ class BackupSearch extends Backup
             [['id', 'created_by', 'updated_by'], 'integer'],
             [['filename', 'tables', 'description', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 
@@ -86,11 +87,6 @@ class BackupSearch extends Backup
             'updated_at' => $this->updated_at,
         ]);
         
-        $query->andFilterWhere(['like', 'filename', $this->filename])
-            ->andFilterWhere(['like', 'tables', $this->tables])
-            ->andFilterWhere(['like', 'description', $this->description]);
-        
-                
         $query->andFilterWhere(['or', 
             ['like', 'filename', $this->keywords],  
             ['like', 'tables', $this->keywords],  

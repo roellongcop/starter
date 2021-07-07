@@ -55,6 +55,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         return [
             <?= str_replace("'record_status', ", '', implode(",\n            ", $rules)) ?>,
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

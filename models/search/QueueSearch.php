@@ -30,6 +30,7 @@ class QueueSearch extends Queue
             [['id', 'pushed_at', 'ttr', 'delay', 'priority', 'reserved_at', 'attempt', 'done_at', 'created_by', 'updated_by'], 'integer'],
             [['channel', 'job', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

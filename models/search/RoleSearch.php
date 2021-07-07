@@ -31,6 +31,7 @@ class RoleSearch extends Role
             [['id', 'created_by', 'updated_by'], 'integer'],
             [['name', 'main_navigation', 'role_access', 'module_access', 'slug', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

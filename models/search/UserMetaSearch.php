@@ -31,6 +31,7 @@ class UserMetaSearch extends UserMeta
             [['id', 'user_id', 'created_by', 'updated_by'], 'integer'],
             [['meta_key', 'meta_value', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status', 'username'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

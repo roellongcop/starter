@@ -32,6 +32,7 @@ class DashboardSearch extends \yii\base\Model
     {
         return [
             [['keywords', 'modules', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

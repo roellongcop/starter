@@ -32,6 +32,7 @@ class SettingSearch extends Setting
             [['id', 'created_by', 'updated_by'], 'integer'],
             [['name', 'value', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 

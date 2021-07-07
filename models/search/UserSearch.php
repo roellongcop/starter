@@ -30,6 +30,7 @@ class UserSearch extends User
             [['id', 'created_by', 'updated_by'], 'integer'],
             [['username', 'email', 'auth_key', 'password_hash', 'password_reset_token', 'verification_token', 'slug', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status', 'role_id', 'status', 'is_blocked'], 'safe'],
+            [['keywords'], 'trim'],
         ];
     }
 
