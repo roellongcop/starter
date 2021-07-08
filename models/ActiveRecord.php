@@ -143,8 +143,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 $this->addError($attribute, 'Cannot be Activated');
             }
 
-            if ($this->isInactive && !$this->canDeactivate) {
-                $this->addError($attribute, 'Cannot be Deactivated');
+            if ($this->isInactive && !$this->canInactivate) {
+                $this->addError($attribute, 'Cannot be Inactivated');
             }
         }
     }
@@ -246,7 +246,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return false;
     }
 
-    public function getCanDeactivate()
+    public function getCanInactivate()
     {
         if (App::isLogin()) {
             $user = App::identity();
@@ -720,7 +720,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->recordStatusLabel;
         }
 
-        if ($this->canActivate && $this->canDeactivate && $this->canUpdate) {
+        if ($this->canActivate && $this->canInactivate && $this->canUpdate) {
             return RecordHtml::widget([
                 'model' => $this,
                 'controller' => $controller
