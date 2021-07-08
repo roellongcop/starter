@@ -24,9 +24,15 @@ foreach (App::component('access')->controllerActions() as $controllerID => $acti
     }
 }
 
-$model->add('developer', 'developer');
-$model->add('superadmin', 'superadmin');
-$model->add('admin', 'admin');
+$model->add('developer', 'developer', [
+    'role_access' => json_encode([1,2,3])
+]);
+$model->add('superadmin', 'superadmin', [
+    'role_access' => json_encode([2,3])
+]);
+$model->add('admin', 'admin', [
+    'role_access' => json_encode([3])
+]);
 $model->add('inactiverole', 'inactiverole', [
     'record_status' => Role::RECORD_INACTIVE,
 ]);
