@@ -269,20 +269,20 @@ class UserMetaController extends Controller
         if (($post = App::post()) != null) {
             $model = UserMeta::findOne([
                 'user_id' => App::identity('id'),
-                'meta_key' => 'table_columns',
+                'name' => 'table_columns',
             ]);
 
             $model = $model ?: new UserMeta();
 
             if ($model->isNewRecord) {
                 $model->user_id = App::identity('id');
-                $model->meta_key = 'table_columns';
+                $model->name = 'table_columns';
             }
             else {
-                $table_columns = json_decode($model->meta_value, true);
+                $table_columns = json_decode($model->value, true);
             }
             $table_columns[$post['UserMeta']['table_name']] = $post['UserMeta']['columns'] ?? [];
-            $model->meta_value = json_encode($table_columns);
+            $model->value = json_encode($table_columns);
             $model->save();
         }
         return $this->redirect(App::referrer());

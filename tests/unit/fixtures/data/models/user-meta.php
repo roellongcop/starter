@@ -2,11 +2,11 @@
 
 use app\models\UserMeta;
 
-$model = new \app\helpers\FixtureData(function($meta_key) {
+$model = new \app\helpers\FixtureData(function($name) {
     return [
         'user_id' => 1, 
-        'meta_key' => $meta_key,
-        'meta_value' => json_encode([
+        'name' => $name,
+        'value' => json_encode([
             'user_id' => 1,
             'first_name' => 'admin_firstname',
             'last_name' => 'admin_lastname',

@@ -442,8 +442,8 @@ INSERT INTO `tbl_users` (`id`, `role_id`, `username`, `email`, `auth_key`, `pass
 CREATE TABLE `tbl_user_metas` (
   `id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL DEFAULT '0',
-  `meta_key` varchar(255) NOT NULL,
-  `meta_value` text,
+  `name` varchar(255) NOT NULL,
+  `value` text,
   `record_status` tinyint(2) NOT NULL DEFAULT '1',
   `created_by` bigint(20) NOT NULL DEFAULT '0',
   `updated_by` bigint(20) NOT NULL DEFAULT '0',
@@ -455,7 +455,7 @@ CREATE TABLE `tbl_user_metas` (
 -- Dumping data for table `tbl_user_metas`
 --
 
-INSERT INTO `tbl_user_metas` (`id`, `user_id`, `meta_key`, `meta_value`, `record_status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+INSERT INTO `tbl_user_metas` (`id`, `user_id`, `name`, `value`, `record_status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 1, 'profile', '{\"user_id\":1,\"first_name\":\"admin_firstname\",\"last_name\":\"admin_lastname\"}', 1, 1, 1, '2021-06-24 07:47:13', '2021-06-24 07:47:13');
 
 -- --------------------------------------------------------

@@ -249,15 +249,15 @@ class ThemeController extends Controller
         $theme = $this->findModel($slug, 'slug');
         $model = UserMeta::findOne([
             'user_id' => App::identity('id'),
-            'meta_key' => 'theme'
+            'name' => 'theme'
         ]);
 
         $model = $model ?: new UserMeta([
             'user_id' => App::identity('id'),
-            'meta_key' => 'theme'
+            'name' => 'theme'
         ]);
 
-        $model->meta_value = $theme->id;
+        $model->value = $theme->id;
        if ( $model->save()) {
             App::success('Theme Changed.');
        }

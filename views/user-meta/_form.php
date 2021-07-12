@@ -12,8 +12,8 @@ use app\widgets\ActiveForm;
     <div class="row">
         <div class="col-md-5">
             <?= $form->field($model, 'user_id')->textInput() ?>
-            <?= $form->field($model, 'meta_key')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'meta_value')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
             <?= RecordStatusInput::widget([
                 'model' => $model,
                 'form' => $form,

@@ -354,13 +354,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function getThemeMeta()
     {
         return $this->hasOne(UserMeta::className(), ['user_id' => 'id'])
-            ->onCondition(['meta_key' => 'theme'])
+            ->onCondition(['name' => 'theme'])
             ->orderBy(['id' => SORT_DESC]);
     }
 
     public function getTheme()
     {
-        return $this->hasOne(Theme::className(), ['id' => 'meta_value'])
+        return $this->hasOne(Theme::className(), ['id' => 'value'])
             ->via('themeMeta');
     }
 
@@ -388,7 +388,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $user_meta = ($this->_tableColumnsMeta !== false) ? $this->_tableColumnsMeta: UserMeta::findOne([
             'user_id' => $this->id,
-            'meta_key' => 'table_columns'
+            'name' => 'table_columns'
         ]);
 
         $this->_tableColumnsMeta = $user_meta;
@@ -396,7 +396,7 @@ class User extends ActiveRecord implements IdentityInterface
         $table_name = App::tableName($model, false);
 
         if ($user_meta) {
-            $table_columns = json_decode($user_meta->meta_value, true);
+            $table_columns = json_decode($user_meta->value, true);
 
             if (in_array($table_name, array_keys($table_columns))) {
                 return $table_columns[$table_name];
@@ -607,23 +607,23 @@ class User extends ActiveRecord implements IdentityInterface
         return new ProfileForm(['user_id' => $this->id]);
     }
     
-    public function metas($meta_key='')
+    public function metas($name='')
     {
-        $meta_key = is_array($meta_key)? $meta_key: [$meta_key];
+        $name = is_array($name)? $name: [$name];
 
-        $meta = UserMeta::dropdown('meta_key', 'meta_value', [
+        $meta = UserMeta::dropdown('name', 'value', [
             'user_id' => $this->id,
-            'meta_key' => $meta_key
+            'name' => $name
         ]);
 
         return $meta;
     }
 
-    public function meta($meta_key='')
+    public function meta($name='')
     {
-        $meta = $this->metas($meta_key);
+        $meta = $this->metas($name);
 
-        return $meta[$meta_key] ?? '';
+        return $meta[$name] ?? '';
     }
 
     public function saveMeta($data)
@@ -631,20 +631,20 @@ class User extends ActiveRecord implements IdentityInterface
         $success = [];
         $failed = [];
 
-        foreach ($data as $meta_key => $meta_value) {
+        foreach ($data as $name => $value) {
             $condition = [
                 'user_id' => $this->id,
-                'meta_key' => $meta_key,
+                'name' => $name,
             ];
             $meta = UserMeta::findOne($condition);
 
             $meta = $meta ?: new UserMeta($condition);
-            $meta->meta_value = is_array($meta_value)? json_encode($meta_value): $meta_value;
+            $meta->value = is_array($value)? json_encode($value): $value;
             if ($meta->save()) {
-                $success[$meta_key] = $meta->attributes;
+                $success[$name] = $meta->attributes;
             }
             else {
-                $failed[$meta_key] = $meta->errors;
+                $failed[$name] = $meta->errors;
             }
         }
 

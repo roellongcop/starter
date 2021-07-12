@@ -10,8 +10,8 @@ class UserMetaTest extends \Codeception\Test\Unit
     {
         return array_replace([
             'user_id' => 1,  
-            'meta_key' => 'address',  
-            'meta_value' => 'Philippines',  
+            'name' => 'address',  
+            'value' => 'Philippines',  
             'created_by' => 1,
             'updated_by' => 1,
             'record_status' => UserMeta::RECORD_ACTIVE

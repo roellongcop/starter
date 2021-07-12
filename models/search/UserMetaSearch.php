@@ -29,7 +29,7 @@ class UserMetaSearch extends UserMeta
     {
         return [
             [['id', 'user_id', 'created_by', 'updated_by'], 'integer'],
-            [['meta_key', 'meta_value', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'value', 'created_at', 'updated_at'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status', 'username'], 'safe'],
             [['keywords'], 'trim'],
         ];
@@ -95,13 +95,13 @@ class UserMetaSearch extends UserMeta
             'um.updated_at' => $this->updated_at,
         ]);
         
-        $query->andFilterWhere(['like', 'um.meta_key', $this->meta_key])
-            ->andFilterWhere(['like', 'um.meta_value', $this->meta_value]);
+        $query->andFilterWhere(['like', 'um.name', $this->name])
+            ->andFilterWhere(['like', 'um.value', $this->value]);
         
         $query->andFilterWhere(['or', 
             ['like', 'u.username', $this->keywords],  
-            ['like', 'um.meta_key', $this->keywords],  
-            ['like', 'um.meta_value', $this->keywords],  
+            ['like', 'um.name', $this->keywords],  
+            ['like', 'um.value', $this->keywords],  
         ]);
 
         $query->daterange($this->date_range);

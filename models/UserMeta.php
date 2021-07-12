@@ -11,8 +11,8 @@ use app\widgets\Anchor;
  *
  * @property int $id
  * @property int $user_id
- * @property string $meta_key
- * @property string|null $meta_value
+ * @property string $name
+ * @property string|null $value
  * @property int $record_status
  * @property int $created_by
  * @property int $updated_by
@@ -33,7 +33,7 @@ class UserMeta extends ActiveRecord
     {
         return [
             'controllerID' => 'user-meta',
-            'mainAttribute' => 'meta_key',
+            'mainAttribute' => 'name',
         ];
     }
     
@@ -45,9 +45,9 @@ class UserMeta extends ActiveRecord
         return $this->setRules([
             [['user_id',], 'integer'],
             [['user_id'], 'default', 'value' => 0],
-            [['meta_key'], 'required'],
-            [['meta_value'], 'safe'],
-            [['meta_key'], 'string', 'max' => 255],
+            [['name'], 'required'],
+            [['value'], 'safe'],
+            [['name'], 'string', 'max' => 255],
             ['user_id', 'exist', 'targetRelation' => 'user', 'message' => 'User not found'],
         ]);
     }
@@ -60,8 +60,8 @@ class UserMeta extends ActiveRecord
         return $this->setAttributeLabels([
             'id' => 'ID',
             'user_id' => 'User ID',
-            'meta_key' => 'Meta Key',
-            'meta_value' => 'Meta Value',
+            'name' => 'Meta Key',
+            'value' => 'Meta Value',
         ]);
     }
 
@@ -101,18 +101,18 @@ class UserMeta extends ActiveRecord
                     ]);
                 }
             ],
-            'meta_key' => [
-                'attribute' => 'meta_key', 
+            'name' => [
+                'attribute' => 'name', 
                 'format' => 'raw',
                 'value' => function($model) {
                     return Anchor::widget([
-                        'title' => $model->meta_key,
+                        'title' => $model->name,
                         'link' => $model->viewUrl,
                         'text' => true
                     ]);
                 }
             ],
-            'meta_value' => ['attribute' => 'meta_value', 'format' => 'raw'],
+            'value' => ['attribute' => 'value', 'format' => 'raw'],
         ];
     }
 
@@ -120,8 +120,8 @@ class UserMeta extends ActiveRecord
     {
         return [
             'user_id:raw',
-            'meta_key:raw',
-            'meta_value:raw',
+            'name:raw',
+            'value:raw',
         ];
     }
 }

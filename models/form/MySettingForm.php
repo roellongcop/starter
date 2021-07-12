@@ -53,12 +53,12 @@ class MySettingForm extends \app\models\User
         $user_metas = UserMeta::find()
             ->where([
                 'user_id' => $this->id,
-                'meta_key' => array_keys(self::attributeLabels())
+                'name' => array_keys(self::attributeLabels())
             ])
             ->all();
         foreach ($user_metas as $user_meta) {
-            if ($this->hasProperty($user_meta->meta_key)) {
-                $this->{$user_meta->meta_key} = $user_meta->meta_value; 
+            if ($this->hasProperty($user_meta->name)) {
+                $this->{$user_meta->name} = $user_meta->value; 
             }
         }
     }
@@ -69,12 +69,12 @@ class MySettingForm extends \app\models\User
             foreach ($this->getAttributes(array_keys(self::attributeLabels())) as $attribute => $value) {
                 $user_meta = UserMeta::findOne([
                     'user_id' => $this->id,
-                    'meta_key' => $attribute
+                    'name' => $attribute
                 ]);
                 $user_meta = $user_meta ?: new UserMeta();
                 $user_meta->user_id = $this->id;
-                $user_meta->meta_key = $attribute;
-                $user_meta->meta_value = $value;
+                $user_meta->name = $attribute;
+                $user_meta->value = $value;
                 if (! $user_meta->save()) {
                     App::danger($user_meta->errors);
                 }
