@@ -641,10 +641,10 @@ class User extends ActiveRecord implements IdentityInterface
             $meta = $meta ?: new UserMeta($condition);
             $meta->meta_value = is_array($meta_value)? json_encode($meta_value): $meta_value;
             if ($meta->save()) {
-                $success[] = $meta->attributes;
+                $success[$meta_key] = $meta->attributes;
             }
             else {
-                $failed[] = $meta->errors;
+                $failed[$meta_key] = $meta->errors;
             }
         }
 
