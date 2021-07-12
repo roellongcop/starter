@@ -266,7 +266,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $this->setActive();
     }
 
-    public function deactivate()
+    public function inactivate()
     {
         $this->setInactive();
     }

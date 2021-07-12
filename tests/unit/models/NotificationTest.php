@@ -101,7 +101,7 @@ class NotificationTest extends \Codeception\Test\Unit
         $model = $this->tester->grabRecord('app\models\Notification');
         expect_that($model);
 
-        $model->deactivate();
+        $model->inactivate();
         expect_not($model->save());
         expect($model->errors)->hasKey('record_status');
     }

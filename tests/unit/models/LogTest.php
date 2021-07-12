@@ -143,7 +143,7 @@ class LogTest extends \Codeception\Test\Unit
         $model = $this->tester->grabRecord('app\models\Log');
         expect_that($model);
 
-        $model->deactivate();
+        $model->inactivate();
         expect_not($model->save());
         expect($model->errors)->hasKey('record_status');
     }

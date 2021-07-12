@@ -92,7 +92,7 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
         $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
         expect_that($model);
 
-        $model->deactivate();
+        $model->inactivate();
         expect_not($model->save());
         expect($model->errors)->hasKey('record_status');
     }

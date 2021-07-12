@@ -100,7 +100,7 @@ class ModelFileTest extends \Codeception\Test\Unit
         $model = $this->tester->grabRecord('app\models\ModelFile');
         expect_that($model);
 
-        $model->deactivate();
+        $model->inactivate();
         expect_not($model->save());
         expect($model->errors)->hasKey('record_status');
     }
