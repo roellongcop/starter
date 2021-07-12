@@ -60,7 +60,6 @@ class <?= $className ?> extends ActiveRecord<?= "\n" ?>
             'paramName' => 'id',
         ];
     }
-
 <?php if ($generator->db !== 'db'): ?>
 
     /**
