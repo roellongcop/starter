@@ -18,7 +18,6 @@ class m200913_060452_create_files_table extends Migration
         return [
             'created_by' => 'created_by',
             'updated_by' => 'updated_by',
-            'token' => 'token',
         ];
     }
 
