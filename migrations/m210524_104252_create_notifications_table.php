@@ -30,7 +30,7 @@ class m210524_104252_create_notifications_table extends Migration
             'message' => $this->text(),
             'link' => $this->text(),
             'type' => $this->string(128)->notNull(),
-            'token' => $this->string()->notNull(),
+            'token' => $this->string()->notNull()->unique(),
             'status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),

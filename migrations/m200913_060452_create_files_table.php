@@ -30,7 +30,7 @@ class m200913_060452_create_files_table extends Migration
             'extension' => $this->string(16)->notNull(),
             'size' => $this->bigInteger(20)->notNull(),
             'location' => $this->text(),
-            'token' => $this->string(255)->notNull(),
+            'token' => $this->string(255)->notNull()->unique(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
