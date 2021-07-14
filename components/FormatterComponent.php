@@ -53,7 +53,7 @@ class FormatterComponent extends \yii\i18n\Formatter
     {
         if (!$timezone) {
             if (($timezone = App::setting('timezone')) == null) {
-                $timezone = App::params('general_settings')['timezone']['default'];
+                $timezone = Setting::GENERAL['timezone']['default'];
             }
         }
 

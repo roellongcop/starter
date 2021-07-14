@@ -28,6 +28,20 @@ class Notification extends ActiveRecord
 {
     const STATUS_READ = 1;
     const STATUS_UNREAD = 0;
+
+    const STATUS = [
+        0 => [
+            'id' => 0,
+            'label' => 'Read',
+            'class' => 'success'
+        ],
+        1 => [
+            'id' => 1,
+            'label' => 'New',
+            'class' => 'danger'
+        ],
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -138,7 +152,7 @@ class Notification extends ActiveRecord
 
     public function getStatusData()
     {
-        return App::params('notification_status')[$this->status] ?? [];
+        return self::STATUS[$this->status];
     }
 
     public function getStatusHtml()
@@ -195,12 +209,6 @@ class Notification extends ActiveRecord
         ];
     }
 
-    /**
-    public function getExportColumns()
-    {
-        return [];
-    }
-    */
     public static function readAll($condition='')
     {
         return parent::updateAll(['status' => self::STATUS_READ], $condition);

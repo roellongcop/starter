@@ -1,5 +1,7 @@
 <?php
+
 use app\helpers\App;
+use app\models\ActiveRecord;
 use app\widgets\ActiveForm;
 use app\widgets\Checkbox;
 use app\widgets\DateRange;
@@ -45,7 +47,7 @@ ksort($modules);
         'form' => $form,
     ]) ?>
     <?= Filter::widget([
-        'data' => App::mapParams('record_status'),
+        'data' => ActiveRecord::mapRecords(),
         'title' => 'Record Status',
         'attribute' => 'record_status',
         'model' => $model,

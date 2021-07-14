@@ -4,6 +4,7 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
+use app\models\Theme;
 
 class ActiveForm extends \yii\widgets\ActiveForm
 {
@@ -12,10 +13,9 @@ class ActiveForm extends \yii\widgets\ActiveForm
 		parent::init();
 
 		$currentTheme = App::identity('currentTheme');
-		$keenThemes = App::params('keen_themes');
 
 		if ($currentTheme) {
-			if (in_array($currentTheme->slug, $keenThemes)) {
+			if (in_array($currentTheme->slug, Theme::KEEN)) {
 				$this->errorCssClass = 'is-invalid';
 				$this->successCssClass = 'is-valid';
 				$this->validationStateOn = 'input';

@@ -11,6 +11,14 @@ use yii\helpers\ArrayHelper;
 
 class ExportComponent extends \yii\base\Component
 {
+    public $export_actions = [
+        'print', 
+        'export-pdf', 
+        'export-csv', 
+        'export-xls', 
+        'export-xlsx'
+    ];
+    
     public $ignoreAttributes = ['checkbox', 'actions'];
     public $formats = [
         'raw' => [

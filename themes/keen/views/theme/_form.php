@@ -70,7 +70,7 @@ $this->registerJs($registerJs);
             'acceptedFiles' => array_map(
                 function($val) { 
                     return ".{$val}"; 
-                }, App::params('file_extensions')['image']
+                }, App::file('file_extensions')['image']
             )
         ]) ?>
     <?php endif ?>

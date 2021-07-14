@@ -1,10 +1,11 @@
 <?php
 use app\helpers\App;
+use app\models\VisitLog;
 use app\models\search\UserSearch;
+use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\RecordStatusInput;
-use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\VisitLog */
@@ -26,7 +27,7 @@ use app\widgets\ActiveForm;
                 'label' => 'Action',
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('visit_logs_action'),
+                'data' => ArrayHelper::map(VisitLog::ACTIONS, 'id', 'label'),
             ]) ?>
             <?= RecordStatusInput::widget([
                 'model' => $model,

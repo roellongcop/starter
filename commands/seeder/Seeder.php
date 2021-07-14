@@ -3,11 +3,12 @@
 namespace app\commands\seeder;
 
 use Faker\Factory;
+use Yii;
 use app\helpers\App;
+use app\models\ActiveRecord;
 use yii\console\ExitCode;
 use yii\console\widgets\Table;
 use yii\helpers\Console;
-use Yii;
 /**
  * This command echoes the first argument that you have entered.
  *
@@ -62,7 +63,7 @@ abstract class Seeder
 
     public function randomParamsID($key='record_status')
     {
-        return $this->faker->randomElement(App::keyMapParams($key));
+        return $this->faker->randomElement(array_keys(ActiveRecord::mapRecords()));
     }
 
     public function actionTruncate($tables=[])

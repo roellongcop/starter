@@ -1,9 +1,10 @@
 <?php
 use app\helpers\App;
+use app\models\Ip;
+use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\RecordStatusInput;
-use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
@@ -18,7 +19,7 @@ use app\widgets\ActiveForm;
 	            'attribute' => 'type',
 	            'model' => $model,
 	            'form' => $form,
-	            'data' => App::mapParams('ip_type'),
+	            'data' => App::mapParams(Ip::TYPES),
 	        ]) ?>
 	        <?= RecordStatusInput::widget([
 	            'model' => $model,

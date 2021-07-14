@@ -41,7 +41,7 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
         <?php foreach ($files as $file): ?>
             <div class="col-md-3" data-file_id="<?= $file->id ?>">
                 <div class="image-input">
-                    <?php if (in_array($file->extension, App::params('file_extensions')['image'])): ?>
+                    <?php if (in_array($file->extension, App::file('file_extensions')['image'])): ?>
                         <?php $href = Url::to(['file/display', 'token' => $file->token], true) ?>
                     <?php else: ?>
                         <?php $href = Url::to(['file/download', 'token' => $file->token], true) ?>

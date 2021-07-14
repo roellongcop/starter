@@ -1,6 +1,7 @@
 <?php
 use app\helpers\App;
 use app\helpers\Html;
+use app\models\User;
 use app\models\form\UploadForm;
 use app\models\search\RoleSearch;
 use app\widgets\ActiveForm;
@@ -35,7 +36,7 @@ use app\widgets\RecordStatusInput;
                 'searchable' => false,
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('user_status'),
+                'data' => App::mapParams(User::STATUS),
             ]) ?>
             <?= RecordStatusInput::widget([
                 'model' => $model,
@@ -46,7 +47,7 @@ use app\widgets\RecordStatusInput;
                 'searchable' => false,
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams('is_blocked'),
+                'data' => App::mapParams(User::IS_BLOCKED),
             ]) ?>
         </div>
         <div class="col-md-7">

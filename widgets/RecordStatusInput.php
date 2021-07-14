@@ -4,6 +4,7 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
+use app\models\ActiveRecord;
 use app\widgets\BootstrapSelect;
  
 class RecordStatusInput extends AppWidget
@@ -22,7 +23,7 @@ class RecordStatusInput extends AppWidget
         // your logic here
         parent::init();
 
-        $this->data = $this->data ?:  App::mapParams('record_status');
+        $this->data = $this->data ?: ActiveRecord::mapRecords();
     }
 
 

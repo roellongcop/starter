@@ -12,6 +12,12 @@ use yii\helpers\Inflector;
 
 class FileComponent extends Component
 {
+    public $file_extensions = [
+        'image' => ['jpeg', 'jpg', 'gif', 'bmp', 'tiff','png', 'ico',],
+        'file' => ['doc', 'docx', 'pdf', 'xls', 'xlxs', 'csv', 'sql'],
+    ];
+
+
     public function upload($model, $attribute="imageInput")
     {
         if (isset($model->{$attribute})) {

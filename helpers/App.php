@@ -270,20 +270,6 @@ class App {
 		return self::user()->login($user, $remember_key);
 	}
 
-    public static function mapParams($params, $key='id', $value='label')
-    {
-    	if (!empty(self::params($params))) {
-    		return ArrayHelper::map(self::params($params), $key, $value);
-    	}
-
-    	return [];
-    }
-
-    public static function keyMapParams($param, $key='id', $value='label')
-    {
-    	return array_keys(self::mapParams($param, $key, $value));
-    }
-
     public static function db($obj='')
     {
     	if ($obj == '') {
@@ -689,6 +675,14 @@ class App {
 		return self::component('export');
 	}
 
+	public static function file($attr='')
+	{
+		if ($attr) {
+			return self::component('file')->{$attr};
+		}
+		return self::component('file');
+	}
+
 	public static function server($attr='')
 	{
 		if ($attr) {
@@ -712,4 +706,9 @@ class App {
 	{
 		return self::app()->id == 'basic-tests';
 	}
+
+	public static function mapParams($params, $key='id', $value='label')
+    {
+       return ArrayHelper::map($params, $key, $value);
+    }
 }

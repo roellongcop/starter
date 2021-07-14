@@ -23,6 +23,20 @@ class VisitLog extends ActiveRecord
 {
     const ACTION_LOGIN = 0;
     const ACTION_LOGOUT = 1;
+
+    const ACTIONS = [
+        0 => [
+            'id' => 0,
+            'label' => 'Login',
+            'class' => 'success'
+        ],
+        1 => [
+            'id' => 1,
+            'label' => 'Logout',
+            'class' => 'danger'
+        ],
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -90,7 +104,7 @@ class VisitLog extends ActiveRecord
 
     public function getVisitLogsAction()
     {
-        return App::params('visit_logs_action')[$this->action];
+        return self::ACTIONS[$this->action];
     }
 
     public function gridColumns()
@@ -137,7 +151,7 @@ class VisitLog extends ActiveRecord
         ];
     }
 
-    public static function log($action=0)
+    public static function log($action=self::ACTION_LOGIN)
     {
         $visit = new self();
         $visit->user_id = App::identity('id');

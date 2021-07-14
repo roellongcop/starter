@@ -112,7 +112,7 @@ class SettingSearch extends Setting
             return $model->value;
         }
 
-        $general_settings = App::params('general_settings');
+        $general_settings = Setting::GENERAL;
 
         if (!empty($general_settings[$name])) {
             return $general_settings[$name]['default'];
@@ -131,7 +131,7 @@ class SettingSearch extends Setting
         }
 
         if ($name == 'image_holder') {
-            return Url::to(App::params('general_settings')['image_holder']['default'], true) ?? '';
+            return Url::to(Setting::GENERAL['image_holder']['default'], true) ?? '';
         }
 
         return self::defaultImage('image_holder');

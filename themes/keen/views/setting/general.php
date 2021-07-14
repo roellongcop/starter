@@ -1,12 +1,13 @@
 <?php
 use app\helpers\App;
 use app\helpers\Url;
+use app\models\Setting;
 use app\models\search\DashboardSearch;
 use app\widgets\Anchor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
-$setting_modules = App::params('setting_modules');
+$setting_modules = Setting::MODULE;
 
 $this->title = 'General Settings';
 $this->params['breadcrumbs'][] = 'Set Up';

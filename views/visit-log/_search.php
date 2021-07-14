@@ -1,11 +1,15 @@
 <?php
+
 use app\helpers\App;
+use app\models\ActiveRecord;
+use app\models\VisitLog;
+use app\widgets\ActiveForm;
 use app\widgets\DateRange;
 use app\widgets\Filter;
 use app\widgets\Pagination;
 use app\widgets\Search;
 use app\widgets\SearchButton;
-use app\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\search\VisitLogSearch */
@@ -19,14 +23,14 @@ use app\widgets\ActiveForm;
     <?= Search::widget(['model' => $model]) ?>
     <?= DateRange::widget(['model' => $model]) ?>
     <?= Filter::widget([
-        'data' => App::mapParams('visit_logs_action'),
+        'data' => ArrayHelper::map(VisitLog::ACTIONS, 'id', 'label'),
         'title' => 'Action',
         'attribute' => 'action',
         'model' => $model,
         'form' => $form,
     ]) ?>
     <?= Filter::widget([
-        'data' => App::mapParams('record_status'),
+        'data' => ActiveRecord::mapRecords(),
         'title' => 'Record Status',
         'attribute' => 'record_status',
         'model' => $model,

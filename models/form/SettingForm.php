@@ -82,7 +82,7 @@ class SettingForm extends Model
                 // 'maxHeight' => 200,
                 'maxSize' => 1024 * 1024 * 2,
                 'skipOnEmpty' => true, 
-                'extensions' => App::params('file_extensions')['image'], 
+                'extensions' => App::file('file_extensions')['image'], 
                 'checkExtensionByMimeType' => false
             ],
         ];
@@ -92,7 +92,7 @@ class SettingForm extends Model
     {
         parent::init();
 
-        $general_settings = App::params('general_settings');
+        $general_settings = Setting::GENERAL;
         foreach ($general_settings as $setting) {
             if ($this->hasProperty($setting['name'])) {
                 $this->{$setting['name']} = $setting['default']; 

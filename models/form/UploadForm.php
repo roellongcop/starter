@@ -36,17 +36,17 @@ class UploadForm extends Model
         parent::init();
         switch ($this->extensionType) {
             case 'image':
-                $this->extensions = App::params('file_extensions')['image'];
+                $this->extensions = App::file('file_extensions')['image'];
                 break;
 
             case 'file':
-                $this->extensions = App::params('file_extensions')['file'];
+                $this->extensions = App::file('file_extensions')['file'];
                 break;
             
             default:
                 $this->extensions = array_merge(
-                    App::params('file_extensions')['image'],
-                    App::params('file_extensions')['file']
+                    App::file('file_extensions')['image'],
+                    App::file('file_extensions')['file']
                 );
                 break;
         }

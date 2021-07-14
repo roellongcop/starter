@@ -41,7 +41,7 @@ class SettingComponent extends \yii\base\Component
     {
         parent::init();
 
-        $general_settings = App::params('general_settings');
+        $general_settings = Setting::GENERAL;
         foreach ($general_settings as $setting) {
             if ($this->hasProperty($setting['name'])) {
                 $this->{$setting['name']} = $setting['default']; 
@@ -85,7 +85,7 @@ class SettingComponent extends \yii\base\Component
                 'model_id' => $setting->id,
                 'model_name' => App::getModelName($setting)
             ])
-            ->andFilterWhere(['extension' => App::params('file_extensions')['image']])
+            ->andFilterWhere(['extension' => App::file('file_extensions')['image']])
             ->groupBy(['file_id'])
             ->orderBy(['MAX(id)' => SORT_DESC])
             ->one();

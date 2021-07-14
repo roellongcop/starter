@@ -36,7 +36,7 @@ use app\widgets\SearchButton;
     <?= '<?=' ?> Search::widget(['model' => $model]) ?>
     <?= '<?=' ?> DateRange::widget(['model' => $model]) ?>
     <?= '<?=' ?> Filter::widget([
-        'data' => App::mapParams('record_status'),
+        'data' => ActiveRecord::mapRecords(),
         'title' => 'Record Status',
         'attribute' => 'record_status',
         'model' => $model,

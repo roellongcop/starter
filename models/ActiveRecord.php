@@ -28,6 +28,19 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
 
+    const RECORDS = [
+        1 => [
+            'id' => 1,
+            'label' => 'Active',
+            'class' => 'success'
+        ],
+        0 => [
+            'id' => 0,
+            'label' => 'In-active',
+            'class' => 'danger'
+        ],
+    ];
+
     public $_startDate;
     public $_endDate;
     public $_createdByEmail;
@@ -39,10 +52,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_modelDocumentFiles;
     public $_modelDocumentFile;
 
-    public $_modelSqlFiles;
-    public $_modelSqlFile;
-
     public $errorSummary;
+
+    public static function mapRecords()
+    {
+        return ArrayHelper::map(self::RECORDS, 'id', 'label');
+    }
 
     public function getRelatedModels()
     {
@@ -596,7 +611,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_modelImageFiles;
         }
 
-        $this->_modelImageFiles = $this->getModelFiles(App::params('file_extensions')['image']);
+        $this->_modelImageFiles = $this->getModelFiles(App::file('file_extensions')['image']);
 
         return $this->_modelImageFiles; 
     }
@@ -607,7 +622,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_modelImageFile;
         }
 
-        $this->_modelImageFile = $this->getModelFile(App::params('file_extensions')['image']);
+        $this->_modelImageFile = $this->getModelFile(App::file('file_extensions')['image']);
 
         return $this->_modelImageFile; 
     }
@@ -646,7 +661,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_modelDocumentFiles;
         }
 
-        $this->_modelDocumentFiles = $this->getModelFiles(App::params('file_extensions')['file']);
+        $this->_modelDocumentFiles = $this->getModelFiles(App::file('file_extensions')['file']);
 
         return $this->_modelDocumentFiles; 
     }
@@ -657,31 +672,19 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_modelDocumentFile;
         }
 
-        $this->_modelDocumentFile = $this->getModelFile(App::params('file_extensions')['file']);
+        $this->_modelDocumentFile = $this->getModelFile(App::file('file_extensions')['file']);
 
         return $this->_modelDocumentFile; 
     }
 
     public function getModelSqlFiles()
     {
-        if ($this->_modelSqlFiles) {
-            return $this->_modelSqlFiles;
-        }
-
-        $this->_modelSqlFiles = $this->getModelFiles(['sql']);
-
-        return $this->_modelSqlFiles; 
+        return $this->getModelFiles(['sql']);
     }
 
     public function getModelSqlFile()
     {
-        if ($this->_modelSqlFile) {
-            return $this->_modelSqlFile;
-        }
-
-        $this->_modelSqlFile = $this->getModelFile(['sql']);
-
-        return $this->_modelSqlFile; 
+        return $this->getModelFile(['sql']);
     }
 
     public function getSqlFileLocation()
@@ -700,12 +703,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getRecordStatus()
     {
-        return App::params('record_status')[$this->record_status] ?? [];
+        return self::RECORDS[$this->record_status];
     }
 
     public function getRecordStatusLabel()
     {
-        return $this->recordStatus['label'] ?? '';
+        return $this->recordStatus['label'];
     }
 
     public function getRecordStatusHtml()
@@ -716,7 +719,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         $controller = $this->controllerID();
-        if (in_array(App::actionID(), App::params('export_actions'))) {
+        if (in_array(App::actionID(), App::export('export_actions'))) {
             return $this->recordStatusLabel;
         }
 

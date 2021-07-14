@@ -62,8 +62,8 @@ class File extends ActiveRecord
             [['name', 'token'], 'string', 'max' => 255],
             [['extension'], 'string', 'max' => 16],
             ['extension', 'in', 'range' => array_merge(
-                App::params('file_extensions')['image'],
-                App::params('file_extensions')['file'],
+                App::file('file_extensions')['image'],
+                App::file('file_extensions')['file'],
             )],
         ]);
     }
@@ -167,7 +167,7 @@ class File extends ActiveRecord
     public function getImageFiles()
     {
         return Files::find()
-            ->where(['extension' => App::params('file_extensions')['image']])
+            ->where(['extension' => App::file('file_extensions')['image']])
             ->all();
     }
 
@@ -239,12 +239,12 @@ class File extends ActiveRecord
 
     public function getIsDocument()
     {
-        return in_array($this->extension, App::params('file_extensions')['file']);
+        return in_array($this->extension, App::file('file_extensions')['file']);
     }
 
     public function getIsImage()
     {
-        return in_array($this->extension, App::params('file_extensions')['image']);
+        return in_array($this->extension, App::file('file_extensions')['image']);
     }
 
     public function getWidth()

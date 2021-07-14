@@ -72,8 +72,8 @@ class Dropzone extends AppWidget
 
         if (!$this->acceptedFiles) {
             $acceptedFiles = array_merge(
-                App::params('file_extensions')['image'],
-                App::params('file_extensions')['file']
+                App::file('file_extensions')['image'],
+                App::file('file_extensions')['file']
             );
             $this->acceptedFiles = array_map(function($val) { return ".{$val}"; }, $acceptedFiles);
         }

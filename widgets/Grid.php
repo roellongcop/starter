@@ -4,6 +4,7 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
+use app\models\Theme;
 use app\widgets\Anchor;
 
  
@@ -25,7 +26,7 @@ class Grid extends AppWidget
         // your logic here
         parent::init();
         $currentTheme = App::identity('currentTheme');
-        $keenThemes = App::params('keen_themes');
+        $keenThemes = Theme::KEEN;
         if (in_array($currentTheme->slug, $keenThemes)) {
             $this->pager['class'] = 'app\widgets\LinkPager';
         }
