@@ -27,13 +27,13 @@ class m210116_162927_create_model_files_table extends Migration
     {
         return [
             'id' => $this->bigPrimaryKey(),
-            'model_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'file_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'model_id' => $this->bigInteger(20)->notNull(),
+            'file_id' => $this->bigInteger(20)->notNull(),
             'model_name' => $this->string(255)->notNull(),
             'extension' => $this->string(16)->notNull(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'created_by' => $this->bigInteger(20)->notNull(),
+            'updated_by' => $this->bigInteger(20)->notNull(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
                 ->append('ON UPDATE CURRENT_TIMESTAMP')

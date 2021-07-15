@@ -27,8 +27,8 @@ class m200913_060425_create_logs_table extends Migration
     {
         return [
             'id' => $this->bigPrimaryKey(),
-            'user_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'model_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'user_id' => $this->bigInteger(20)->notNull(),
+            'model_id' => $this->bigInteger(20)->notNull(),
             'request_data' => $this->text(),
             'change_attribute' => $this->text(),
             'method' => $this->string(32)->notNull(),
@@ -43,8 +43,8 @@ class m200913_060425_create_logs_table extends Migration
             'device' => $this->string(128)->notNull(),
             'server' => $this->text(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'created_by' => $this->bigInteger(20)->notNull(),
+            'updated_by' => $this->bigInteger(20)->notNull(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
                 ->append('ON UPDATE CURRENT_TIMESTAMP')

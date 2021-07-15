@@ -26,7 +26,7 @@ class m200912_033904_create_users_table extends Migration
     {
         return [
             'id' => $this->bigPrimaryKey(),
-            'role_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'role_id' => $this->bigInteger(20)->notNull(),
             'username' => $this->string(64)->notNull()->unique(),
             'email' => $this->string()->notNull()->unique(),
             'auth_key' => $this->string(32)->notNull(),
@@ -39,8 +39,8 @@ class m200912_033904_create_users_table extends Migration
             'slug' => $this->string()->notNull()->unique(),
             'is_blocked' => $this->tinyInteger(2)->notNull()->defaultValue(0),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'created_by' => $this->bigInteger(20)->notNull(),
+            'updated_by' => $this->bigInteger(20)->notNull(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
                 ->append('ON UPDATE CURRENT_TIMESTAMP')

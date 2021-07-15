@@ -30,8 +30,8 @@ class m201129_112459_create_backups_table extends Migration
             'description' => $this->text(),
             'slug' => $this->string()->notNull()->unique(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'created_by' => $this->bigInteger(20)->notNull(),
+            'updated_by' => $this->bigInteger(20)->notNull(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
                 ->append('ON UPDATE CURRENT_TIMESTAMP')

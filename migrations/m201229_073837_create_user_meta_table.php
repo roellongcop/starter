@@ -26,12 +26,12 @@ class m201229_073837_create_user_meta_table extends Migration
     {
         return [
             'id' => $this->bigPrimaryKey(),
-            'user_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'user_id' => $this->bigInteger(20)->notNull(),
             'name' => $this->string(255)->notNull(),
             'value' => $this->text(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'created_by' => $this->bigInteger(20)->notNull(),
+            'updated_by' => $this->bigInteger(20)->notNull(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
                 ->append('ON UPDATE CURRENT_TIMESTAMP')

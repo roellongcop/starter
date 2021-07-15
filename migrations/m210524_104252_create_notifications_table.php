@@ -26,15 +26,15 @@ class m210524_104252_create_notifications_table extends Migration
     {
         return [
             'id' => $this->bigPrimaryKey(),
-            'user_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'user_id' => $this->bigInteger(20)->notNull(),
             'message' => $this->text(),
             'link' => $this->text(),
             'type' => $this->string(128)->notNull(),
             'token' => $this->string()->notNull()->unique(),
             'status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'created_by' => $this->bigInteger(20)->notNull(),
+            'updated_by' => $this->bigInteger(20)->notNull(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
                 ->append('ON UPDATE CURRENT_TIMESTAMP')

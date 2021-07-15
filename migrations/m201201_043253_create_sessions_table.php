@@ -28,14 +28,14 @@ class m201201_043253_create_sessions_table extends Migration
             'id' => $this->string(40)->notNull(),
             'expire' => $this->bigInteger(20),
             'data' => $this->binary(),
-            'user_id' => $this->bigInteger(20)->null()->defaultValue(0),
+            'user_id' => $this->bigInteger(20)->null(),
             'ip' => $this->string(32)->notNull(),
             'browser' => $this->string(128)->notNull(),
             'os' => $this->string(128)->notNull(),
             'device' => $this->string(128)->notNull(),
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'created_by' => $this->bigInteger(20)->notNull(),
+            'updated_by' => $this->bigInteger(20)->notNull(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
                 ->append('ON UPDATE CURRENT_TIMESTAMP')
