@@ -17,11 +17,11 @@ $model = new \app\helpers\FixtureData(function($type) {
 });
 $model->add('unread', 'notification_change_password');
 $model->add('read', 'notification_change_password', [
-	'token' => 'readTftF853osh1623298888',
+	'token' => 'readTftF853osh1623298881',
 	'status' => Notification::STATUS_READ,
 ]);
 $model->add('inactive', 'notification_change_password', [
-	'token' => 'readTftF853osh1623298888',
+	'token' => 'readTftF853osh1623298882',
 	'record_status' => Notification::RECORD_INACTIVE,
 ]);
 

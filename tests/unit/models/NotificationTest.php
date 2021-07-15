@@ -14,7 +14,7 @@ class NotificationTest extends \Codeception\Test\Unit
             'message' => 'You\'ve Change your password',
             'link' => Url::to(['/user/my-password']),
             'type' => 'notification_change_password',
-            'token' => 'TftF853osh1623298888',
+            'token' => 'TftF853osh1623298885',
             'status' => Notification::STATUS_UNREAD,
             'record_status' => Notification::RECORD_ACTIVE
         ], $replace);
