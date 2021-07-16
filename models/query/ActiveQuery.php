@@ -7,6 +7,8 @@ use app\helpers\App;
 
 class ActiveQuery extends \yii\db\ActiveQuery
 {
+    public $visible = TRUE;
+
     public function daterange($daterange='', $field='created_at')
     {
         if ($daterange) {
@@ -115,6 +117,9 @@ class ActiveQuery extends \yii\db\ActiveQuery
 
     public function one($db = null)
     {
+        if ($this->visible) {
+            $this->visible();
+        }
         return parent::one($db);
     }
 }

@@ -9,6 +9,8 @@ namespace app\models\query;
  */
 class UserQuery extends ActiveQuery
 {
+    public $visible = false;
+    
     public function available()
     {
         return $this->andWhere([

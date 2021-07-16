@@ -68,7 +68,7 @@ class AccessComponent extends Component
  		}
 		$controller = ($controller) ? $controller:  App::controllerID();
 
- 		$module_access = App::identity('module_access');
+ 		$module_access = App::identity('role')->module_access;
 
  		if (!is_array($module_access)) {
  			$module_access = json_decode($module_access, true);
