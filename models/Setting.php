@@ -161,6 +161,7 @@ class Setting extends ActiveRecord
             [['type', 'options', 'sort_order'], 'safe'],
             [['name', 'slug'], 'string', 'max' => 255],
             [['type'], 'in', 'range' => [self::TYPE_GENERAL]],
+            [['name'], 'unique'],
             [
                 ['imageInput'], 
                 'image', 

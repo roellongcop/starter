@@ -91,7 +91,12 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testCreateGuestInactiveRoleId()
     {
+        \Yii::$app->user->login($this->tester->grabRecord('app\models\User', ['username' => 'developer']));
+
         $model = $this->tester->grabRecord('app\models\Role', ['name' => 'inactiverole']);
+
+        var_dump($model);
+        die;
         $data = $this->data([
             'role_id' => $model->id,
             'username' => 'inactiveroleuserguest',

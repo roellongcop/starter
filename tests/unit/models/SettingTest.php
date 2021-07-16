@@ -10,9 +10,9 @@ class SettingTest extends \Codeception\Test\Unit
     protected function data($replace=[])
     {
         return array_replace([
-            'name' => 'timezone',
+            'name' => 'sample-setting',
             'value' => 'Asia/Manila',
-            'slug' => Inflector::slug('timezone'),
+            'slug' => Inflector::slug('sample-setting'),
             'type' => 'general',
             'sort_order' => 0,
             'created_by' => 1,
@@ -25,6 +25,15 @@ class SettingTest extends \Codeception\Test\Unit
     {
         $model = new Setting($this->data());
         expect_that($model->save());
+    }
+
+    public function testExistingName()
+    {
+        $model = new Setting($this->data([
+            'name' => 'timezone'
+        ]));
+        expect_not($model->save());
+        expect($model->errors)->hasKey('name');
     }
 
     public function testNoInactiveDataAccessRoleUserCreateInactiveData()

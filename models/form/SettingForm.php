@@ -160,7 +160,8 @@ class SettingForm extends Model
                 }
             }
             else {
-                if ($setting->value != $value) {
+                if ($setting->value != $value 
+                    && Setting::GENERAL[$attribute]['default'] != $value) {
                     $setting->value = $value;
                     if ($setting->save()) {
                     }

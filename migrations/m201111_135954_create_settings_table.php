@@ -25,7 +25,7 @@ class m201111_135954_create_settings_table extends Migration
     {
         return [
             'id' => $this->bigPrimaryKey(),
-            'name' => $this->string(255)->notNull(),
+            'name' => $this->string(255)->notNull()->unique(),
             'value' => $this->text(),
             'slug' => $this->string(255)->notNull(),
             'type' => $this->string(128)->notNull(),

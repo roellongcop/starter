@@ -17,6 +17,7 @@ $model = new \app\helpers\FixtureData(function($name) {
 
 $model->add('timezone', 'timezone');
 $model->add('inactive', 'inactive', [
+	'value' => 'inactive',
     'record_status' => Setting::RECORD_INACTIVE,
 ]);
 
