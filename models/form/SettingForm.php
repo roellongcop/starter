@@ -170,6 +170,6 @@ class SettingForm extends Model
                 }
             }
         }
-        Log::record(new Setting(['type' => 'general']), $changeAttribute);
+        Log::record(new Setting(['type' => Setting::TYPE_GENERAL]), $changeAttribute);
     }
 }

@@ -14,6 +14,15 @@ abstract class Controller extends \yii\web\Controller
 {
     public $file_id_name = '_file_id';
 
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+
     public function behaviors()
     {
         return [
