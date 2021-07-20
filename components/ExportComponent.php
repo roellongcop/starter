@@ -34,10 +34,12 @@ class ExportComponent extends \yii\base\Component
         ]
     ];
 
-    public function pdf($content)
+    public function pdf($content, $filename='')
     {
+        $filename = $filename ?: implode('-', [App::controllerID(), 'pdf', time()]) . '.pdf';
+
         $pdf = App::component('pdf');
-        $pdf->filename = implode('-', [App::controllerID(), 'pdf', time()]) . '.pdf';
+        $pdf->filename = $filename;
         $pdf->content = $content;
         $render = $pdf->render();
 
@@ -48,9 +50,9 @@ class ExportComponent extends \yii\base\Component
         return 'pdf-exported';
     }
 
-    public function csv($content) 
+    public function csv($content, $filename='') 
     {
-        $file_name = implode('-', [App::controllerID(), 'export-csv', time()]) . '.csv';
+        $filename = $filename ?: implode('-', [App::controllerID(), 'export-csv', time()]) . '.csv';
 
         $reader = new HtmlReader();
 
@@ -63,7 +65,7 @@ class ExportComponent extends \yii\base\Component
         $writer = new CsvWriter($spreadsheet);
 
         header('Content-Type: application/csv');
-        header('Content-Disposition: attachment; filename="'.$file_name.'"');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
 
         if (App::isWeb()) {
             $writer->save("php://output");
@@ -71,11 +73,12 @@ class ExportComponent extends \yii\base\Component
         }
 
         echo 'csv-exported';
+        return 'csv-exported';
     }
 
-    public function excel($content, $ext='Xlsx')
+    public function excel($content, $ext='Xlsx', $filename='')
     { 
-        $file_name =  implode('-', [App::controllerID(), 'export', strtolower($ext), time()]) . '.' . strtolower($ext);
+        $filename = $filename ?: implode('-', [App::controllerID(), 'export', strtolower($ext), time()]) . '.' . strtolower($ext);
 
         $reader = new HtmlReader;
         $internalErrors = libxml_use_internal_errors(true);
@@ -84,26 +87,26 @@ class ExportComponent extends \yii\base\Component
 
         $writer = IOFactory::createWriter($spreadsheet, $ext);
 
-        header("Content-Type: application/" . strtolower($ext));
-        // header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment; filename="'.$file_name.'"');
-
         if (App::isWeb()) {
+            header("Content-Type: application/" . strtolower($ext));
+            // header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment; filename="'.$filename.'"');
+
             $writer->save("php://output");
             exit(0);
         }
 
-        echo strtolower($ext) . '-exported';
+        return strtolower($ext) . '-exported';
     }
 
-    public function xlsx($content)
+    public function xlsx($content, $filename='')
     {
-        $this->excel($content, 'Xlsx');
+        return $this->excel($content, 'Xlsx', $filename);
     }
 
-    public function xls($content)
+    public function xls($content, $filename='')
     {
-        $this->excel($content, 'Xls');
+        return $this->excel($content, 'Xls', $filename);
     }
 
     public function getExportColumns($searchModel, $type='excel')

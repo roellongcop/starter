@@ -1,6 +1,6 @@
 <?php
 $registerJs = <<< SCRIPT
-$('.input-switcher-{$id}').on('change', function() {
+$('.input-switcher').on('change', function() {
     let self = this;
     let is_checked = $(self).is(':checked');
 
@@ -28,13 +28,13 @@ $('.input-switcher-{$id}').on('change', function() {
     })
 });
 SCRIPT;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerJs($registerJs);
 ?>
 <span data-widget_id="<?= $id ?>">
 	<label>
 		<input data-link="<?= $data_link ?>"
 			data-model_id="<?= $model->id ?>"
-            class="input-switcher-<?= $id ?>"
+            class="input-switcher"
 			type="checkbox" 
 			name="" 
 			<?= ($checked) ? 'checked': '' ?>>
