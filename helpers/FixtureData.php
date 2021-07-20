@@ -1,4 +1,5 @@
 <?php
+
 namespace app\helpers;
 
 use Yii;

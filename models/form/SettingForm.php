@@ -9,6 +9,7 @@ use app\models\Setting;
 use app\models\ModelFile;
 use yii\base\Model;
 use yii\web\UploadedFile;
+use yii\helpers\ArrayHelper;
 
 /**
  * LoginForm is the model behind the login form.
@@ -92,12 +93,7 @@ class SettingForm extends Model
     {
         parent::init();
 
-        $general_settings = Setting::GENERAL;
-        foreach ($general_settings as $setting) {
-            if ($this->hasProperty($setting['name'])) {
-                $this->{$setting['name']} = $setting['default']; 
-            }
-        }
+        $this->load(['SettingForm' => ArrayHelper::map(Setting::GENERAL, 'name', 'default')]);
 
         $settings = Setting::find()
             ->where(['name' => array_keys($this->attributes)])

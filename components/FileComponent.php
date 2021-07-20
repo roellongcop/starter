@@ -17,7 +17,6 @@ class FileComponent extends Component
         'file' => ['doc', 'docx', 'pdf', 'xls', 'xlxs', 'csv', 'sql'],
     ];
 
-
     public function upload($model, $attribute="imageInput")
     {
         if (isset($model->{$attribute})) {
@@ -46,20 +45,12 @@ class FileComponent extends Component
 
         if ($file->save()) {
 
-            // $modelFile = new ModelFile();
-            // $modelFile->file_id = $file->id;
-            // $modelFile->model_id = $model->id;
-            // $modelFile->model_name = ($model->modelName ?? App::className($model));
-            // $modelFile->save();
-
             return $file;
         }
         else {
             App::danger(json_encode($file->errors));
         }
     }
- 
- 
 
     public function uploadPath($model, $input)
     {
@@ -73,19 +64,22 @@ class FileComponent extends Component
         $slug = $model->modelName ?? App::className($model);
         $folders[] = strtolower(Inflector::slug($slug));
 
-        $file_path = implode('/', $folders);
-        FileHelper::createDirectory($file_path);
+        $this->createDirectory($folders);
+        $this->createIndexFile($folders);
 
         $time = time();
         $string = App::randomString(10);
         $path = "{$file_path}/{$input->baseName}-{$time}.{$input->extension}";
         $path = "{$file_path}/{$string}-{$time}.{$input->extension}";
 
-        $this->createIndexFile($folders);
-
         return $path;
     }
 
+    public function createDirectory($folders)
+    {
+        $file_path = implode('/', $folders);
+        FileHelper::createDirectory($file_path);
+    }
 
     public function createHtaccessFile($path)
     {
@@ -101,7 +95,7 @@ class FileComponent extends Component
 
     public function createIndexFile($folders)
     {
-        $path = (App::isWeb()? Yii::getAlias('@webroot') : Yii::getAlias('@consoleWebroot')) . '/';
+        $path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) . '/';
 
             
         foreach ($folders as $folder) {

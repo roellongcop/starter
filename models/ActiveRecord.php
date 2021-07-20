@@ -678,7 +678,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         if(($modelFile = $this->modelImageFile) != null) {
             $path = array_merge(['file/display', 'token' => $modelFile->fileToken], $params);
-            return Url::to($path, true);
+            return Url::to($path);
         }
         return App::setting('image_holder');
     }

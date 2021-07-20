@@ -68,9 +68,13 @@ class FormatterComponent extends \yii\i18n\Formatter
 
     public function asController2Menu($value)
     {
-        return ucwords(
+        $string = ucwords(
             str_replace('-', ' ', Inflector::titleize($value))
         );
+
+        $string = str_replace('Controller', '', $string);
+
+        return trim($string);
     }
 
     public function asBoolString($value)
