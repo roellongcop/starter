@@ -137,7 +137,7 @@ class IpController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = Ip::findOne([$field => $id])) != null) {
+        if (($model = Ip::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

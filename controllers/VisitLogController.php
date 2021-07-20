@@ -74,7 +74,7 @@ class VisitLogController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = VisitLog::findOne([$field => $id])) != null) {
+        if (($model = VisitLog::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

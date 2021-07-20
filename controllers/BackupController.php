@@ -131,7 +131,7 @@ class BackupController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = Backup::findOne([$field => $id])) != null) {
+        if (($model = Backup::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

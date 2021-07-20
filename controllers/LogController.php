@@ -74,7 +74,7 @@ class LogController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = Log::findOne([$field => $id])) != null) {
+        if (($model = Log::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

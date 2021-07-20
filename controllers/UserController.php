@@ -151,12 +151,7 @@ class UserController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        $model = User::find()
-            ->where([$field => $id])
-            ->visible()
-            ->one();
-            
-        if ($model) {
+        if (($model = User::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

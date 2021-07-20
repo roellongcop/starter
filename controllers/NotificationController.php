@@ -76,7 +76,7 @@ class NotificationController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = Notification::findOne([$field => $id])) != null) {
+        if (($model = Notification::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

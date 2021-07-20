@@ -196,6 +196,34 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return self::updateAll(['record_status' => 0], $condition);
     }
 
+    public static function findInactive($condition)
+    {
+        $condition = is_array($condition)? $condition: ['id' => $condition];
+        return static::find()
+            ->where($condition)
+            ->inActive()
+            ->one();
+    }
+
+    public static function findActive($condition)
+    {
+        $condition = is_array($condition)? $condition: ['id' => $condition];
+        return static::find()
+            ->where($condition)
+            ->active()
+            ->one();
+    }
+
+    public static function findVisible($condition)
+    {
+        $condition = is_array($condition)? $condition: ['id' => $condition];
+
+        return static::find()
+            ->where($condition)
+            ->visible()
+            ->one();
+    }
+
     public static function deleteAll($condition = null, $params = []) 
     {
         $models = static::findAll($condition);

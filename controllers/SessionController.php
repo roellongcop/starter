@@ -74,7 +74,7 @@ class SessionController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = Session::findOne([$field => $id])) != null) {
+        if (($model = Session::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

@@ -190,7 +190,7 @@ if (count($pks) === 1) {
     $condition = '[' . implode(', ', $condition) . ']';
 }
 ?>
-        if (($model = <?= $modelClass ?>::findOne([$field => $id])) != null) {
+        if (($model = <?= $modelClass ?>::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }

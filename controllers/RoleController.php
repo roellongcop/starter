@@ -180,7 +180,7 @@ class RoleController extends Controller
      */
     protected function findModel($id, $field='id')
     {
-        if (($model = Role::findOne([$field => $id])) != null) {
+        if (($model = Role::findVisible([$field => $id])) != null) {
             if (App::modelCan($model)) {
                 return $model;
             }
