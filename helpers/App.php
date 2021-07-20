@@ -361,11 +361,7 @@ class App {
 	public static function modelCan($model, $action='')
 	{
 		if ($model) {
-			if ($action == '') {
-				$action = self::actionID();
-			}
-			
-	        $action = Inflector::id2camel($action);
+	        $action = Inflector::id2camel(($action ?: self::actionID()));
 
 			$action = "can{$action}";
 
