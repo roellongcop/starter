@@ -17,7 +17,7 @@ class LoginFormCest
     {
         $I->amLoggedInAs(1);
         $I->amOnPage(['dashboard/index']);
-        $I->see('Sign Out');
+        $I->see('Dashboard', 'h5');
     }
 
     // demonstrates `amLoggedInAs` method

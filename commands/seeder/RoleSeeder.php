@@ -12,8 +12,8 @@ class RoleSeeder extends Seeder
 
 		$this->modelClass = [
 			'class' => 'app\commands\models\Role',
-			'module_access' => $access->controllerActions(),
-			'main_navigation' => $access->defaultNavigation(),
+			'module_access' => $access->controllerActions,
+			'main_navigation' => $access->defaultNavigation,
 		];
 	}
 

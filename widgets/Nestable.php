@@ -17,7 +17,7 @@ class Nestable extends AppWidget
         parent::init();
 
 
-       $this->controller_actions = $this->controller_actions ?: App::component('access')->controllerActions();
+       $this->controller_actions = $this->controller_actions ?: App::component('access')->controllerActions;
     }
 
 

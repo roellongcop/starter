@@ -8,14 +8,14 @@ $model = new \app\helpers\FixtureData(function($name) {
     return [
         'name' => $name, 
         'role_access' => json_encode([]),
-        'module_access' => json_encode(App::component('access')->controllerActions()),
-        'main_navigation' => json_encode(App::component('access')->defaultNavigation()),
+        'module_access' => json_encode(App::component('access')->controllerActions),
+        'main_navigation' => json_encode(App::component('access')->defaultNavigation),
         'slug' => Inflector::slug($name), 
     ];
 });
 
 $no_inactive_data_access = [];
-foreach (App::component('access')->controllerActions() as $controllerID => $actions) {
+foreach (App::component('access')->controllerActions as $controllerID => $actions) {
     foreach ($actions as $key => $action) {
         if ($action != 'in-active-data') {
             $no_inactive_data_access[$controllerID][] = $action;

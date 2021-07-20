@@ -25,8 +25,8 @@ class m210528_064716_seed_roles_table extends Migration
     public function data()
     {
         $access = App::component('access');
-        $controllerActions = $access->controllerActions();
-        $defaultNavigation = $access->defaultNavigation();
+        $controllerActions = $access->controllerActions;
+        $defaultNavigation = $access->defaultNavigation;
         return [
             'developer' => [
                 'name' => 'developer', 

@@ -17,8 +17,8 @@ class RoleCest
         $I->amLoggedInAs($this->user);
 
         $access = App::component('access');
-        $this->controllerActions = $access->controllerActions();
-        $this->defaultNavigation = $access->defaultNavigation();
+        $this->controllerActions = $access->controllerActions;
+        $this->defaultNavigation = $access->defaultNavigation;
     }
 
     public function _after(FunctionalTester $I)

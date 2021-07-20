@@ -13,8 +13,8 @@ class RoleTest extends \Codeception\Test\Unit
     protected function _before()
     {
         $access = App::component('access');
-        $this->controllerActions = $access->controllerActions();
-        $this->defaultNavigation = $access->defaultNavigation();
+        $this->controllerActions = $access->controllerActions;
+        $this->defaultNavigation = $access->defaultNavigation;
     }
 
     protected function data($replace=[])

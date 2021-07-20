@@ -8,7 +8,7 @@ use app\widgets\ActiveForm;
 /* @var $model app\models\Role */
 /* @var $form app\widgets\ActiveForm */
 
-$controller_actions = App::component('access')->controllerActions();
+$controller_actions = App::component('access')->controllerActions;
 ?>
 <?php $form = ActiveForm::begin(['id' => 'role-form']); ?>
     <div class="form-group">

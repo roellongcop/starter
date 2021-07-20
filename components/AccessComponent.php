@@ -13,7 +13,17 @@ use yii\helpers\Url;
 
 class AccessComponent extends Component
 {
-	public function controllerActions()
+	public $controllerActions;
+	public $defaultNavigation;
+
+	public function init()
+	{
+		parent::init();
+		$this->setControllerActions();
+		$this->setDefaultNavigation();
+	}
+
+	public function setControllerActions()
 	{
 		$controllers = FileHelper::findFiles(Yii::getAlias('@app/controllers'), [
 			'recursive' => true
@@ -43,38 +53,26 @@ class AccessComponent extends Component
 
 		}
  		ksort($data);
-		return $data;
-	}
+		$this->controllerActions = $data;
+	} 
 
-	 
-
-	public function actions($controller="")
+	public function actions($controllerID="")
 	{ 
-		if ($controller === "") {
-			return $this->controllerActions()[App::controllerID()];
-		} 
+		$controllerID = $controllerID ?: App::controllerID();
 
-		$actions = $this->controllerActions();
-
-		return $actions[$controller] ?? [''];
+		return $this->controllerActions[$controllerID] ?? [''];
 	}
  	
- 
 
- 	public function my_actions($controller='')
+ 	public function my_actions($controllerID='')
  	{
- 		if (App::isGuest()) {
- 			return [''];
- 		}
-		$controller = ($controller) ? $controller:  App::controllerID();
+ 		if (App::isGuest()) { return ['']; }
 
- 		$module_access = App::identity('role')->module_access;
+		$controllerID = $controllerID ?: App::controllerID();
 
- 		if (!is_array($module_access)) {
- 			$module_access = json_decode($module_access, true);
- 		}
+ 		$module_access = App::identity('module_access');
 
- 		return $module_access[$controller] ?? [''];
+ 		return $module_access[$controllerID] ?? [''];
  	}
 
  
@@ -97,14 +95,14 @@ class AccessComponent extends Component
  	}
  
  
-	public function userCan($action, $controller='', $user='')
+	public function userCan($action, $controllerID='', $user='')
  	{
-		$controller = ($controller === '') ? App::controllerID() : $controller;
+		$controllerID = $controllerID ?: App::controllerID();
 
 		$module_access = ($user)? $user->identity->module_access: App::identity('module_access');
 
-		if (isset($module_access[$controller])) {
-			return in_array($action, $module_access[$controller]) ? true: false;
+		if (isset($module_access[$controllerID])) {
+			return in_array($action, $module_access[$controllerID]) ? true: false;
 		}
 
 		return false;
@@ -113,7 +111,7 @@ class AccessComponent extends Component
 
  	public function getModuleFilter()
  	{
- 		$controller_actions = $this->controllerActions();
+ 		$controller_actions = $this->controllerActions;
 
  		$data = [];
 
@@ -130,7 +128,7 @@ class AccessComponent extends Component
  				&& !in_array($controller, $ignoreControllers)) {
  				$searchModelClass = Inflector::id2camel($controller) . 'Search';
 
-            	$path = Yii::getAlias('@app') . "/models/search/{$searchModelClass}.php";
+            	$path = Yii::getAlias("@app/models/search/{$searchModelClass}.php");
 
  				if (file_exists($path)) {
  					$data[$searchModelClass] = Inflector::camel2words(
@@ -143,9 +141,9 @@ class AccessComponent extends Component
  		return $data;
  	}
 
- 	public function defaultNavigation()
+ 	public function setDefaultNavigation()
  	{
- 		return [
+ 		$this->defaultNavigation = [
 		    '1' => [
 		        'label' => 'Dashboard', 
 		        'link' => '/dashboard', 
@@ -265,8 +263,7 @@ class AccessComponent extends Component
 		        'icon' => '<i class="fa fa-cog"></i>',
 		    ],
 		];
- 	}
-
+ 	} 
 
 	public function menu($menus)
 	{

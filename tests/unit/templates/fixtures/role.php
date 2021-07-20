@@ -1,8 +1,8 @@
 <?php
 
 use app\helpers\App;
-$controllerActions = App::component('access')->controllerActions();
-$createNavigation = App::component('access')->defaultNavigation();
+$controllerActions = App::component('access')->controllerActions;
+$createNavigation = App::component('access')->defaultNavigation;
 
 return [
     'name' => 'admin', 
