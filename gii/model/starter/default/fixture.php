@@ -3,11 +3,11 @@ use yii\helpers\Inflector;
 ?>
 <?= "<?php\n" ?>
 
-namespace app\tests\unit\fixtures;
+namespace app\tests\fixtures;
 
 class <?= $className ?>Fixture extends \yii\test\ActiveFixture
 {
     public $modelClass = '<?= $generator->ns ?>\<?= $className ?>';
-    public $dataFile = '@app/tests/unit/fixtures/data/models/<?= Inflector::camel2id($className) ?>.php';
-    public $depends = ['app\tests\unit\fixtures\UserFixture'];
+    public $dataFile = '@app/tests/fixtures/data/models/<?= Inflector::camel2id($className) ?>.php';
+    public $depends = ['app\tests\fixtures\UserFixture'];
 }

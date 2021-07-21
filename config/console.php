@@ -66,7 +66,7 @@ $config = [
         'fixture' => [ // Fixture generation command line.
             // 'class' => 'yii\faker\FixtureController',
             'class' => 'yii\console\controllers\FixtureController',
-            'namespace' => 'app\tests\unit\fixtures',
+            'namespace' => 'app\tests\fixtures',
         ],
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
