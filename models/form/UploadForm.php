@@ -59,6 +59,8 @@ class UploadForm extends Model
     {
         return [
             [['modelName', 'id', 'fileToken'], 'required'],
+            [['id'], 'integer'],
+            [['modelName', 'fileToken'], 'string'],
             [
                 ['fileInput'], 
                 'file', 

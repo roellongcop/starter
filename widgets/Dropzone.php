@@ -43,8 +43,8 @@ class Dropzone extends AppWidget
         }
         $this->parameters[App::request('csrfParam')] = App::request('csrfToken');
 
-        $this->parameters['modelName'] = App::className($this->model);
-        $this->parameters['id'] = $this->model->id ?: 0;
+        $this->parameters['UploadForm[modelName]'] = App::className($this->model);
+        $this->parameters['UploadForm[id]'] = $this->model->id ?: 0;
 
         $this->url = Url::to($this->url);
         $this->removeFileUrl = Url::to($this->removeFileUrl);

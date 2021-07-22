@@ -13,11 +13,11 @@ class FileComponentTest extends \Codeception\Test\Unit
 
     public function testCreateIndexFile()
     {
-        $folders = ['test'];
-        $this->file->createDirectory([\Yii::getAlias('@consoleWebroot'), 'test']);
+        $folders = ['protected/test'];
+        $this->file->createDirectory([\Yii::getAlias('@consoleWebroot'), 'protected', 'test']);
         $this->file->createIndexFile($folders);
 
-        $this->tester->assertFileExists(\Yii::getAlias('@consoleWebroot') . '/test/index.php');
-        $this->tester->assertFileExists(\Yii::getAlias('@consoleWebroot') . '/test/.htaccess');
+        $this->tester->assertFileExists(\Yii::getAlias('@consoleWebroot') . '/protected/test/index.php');
+        $this->tester->assertFileExists(\Yii::getAlias('@consoleWebroot') . '/protected/test/.htaccess');
     }
 }

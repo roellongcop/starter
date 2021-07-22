@@ -6,7 +6,7 @@ use app\models\search\RoleSearch;
 use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
-use app\widgets\ChooseFromGallery;
+use app\widgets\ImageGallery;
 use app\widgets\ImagePreview;
 use app\widgets\RecordStatusInput;
 
@@ -56,7 +56,8 @@ use app\widgets\RecordStatusInput;
                 ) ?>
             </div>
             <br>
-            <?= ChooseFromGallery::widget([
+
+            <?= ImageGallery::widget([
                 'model' => $model,
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
@@ -73,19 +74,6 @@ use app\widgets\RecordStatusInput;
                         $('#profile-image-dropdown').attr('src', s.src + '&w=200');
                     }
                 ",
-                'dropzoneSuccess' => "
-                    KTApp.block('#sipc', {
-                        overlayColor: '#000000',
-                        state: 'primary',
-                        message: 'Processing...'
-                    });
-                    setTimeout(function() {
-                        KTApp.unblock('#sipc');
-                    }, 1000);
-                    $('#sipc img').attr('src', file.dataURL);
-                    $('#profile-image-desktop').attr('src', file.dataURL);
-                    $('#profile-image-dropdown').attr('src', file.dataURL);
-                "
             ]) ?> 
         </div>
     </div>

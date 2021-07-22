@@ -31,7 +31,7 @@ $registerJs = <<< SCRIPT
                 for ( let key in parameters ) {
                     formData.append(key, parameters[key]);
                 }
-                formData.append('fileToken', file.upload.uuid);
+                formData.append('UploadForm[fileToken]', file.upload.uuid);
             });
             this.on('removedfile', function (file) {
                 {$removedFile}

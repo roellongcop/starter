@@ -1,0 +1,71 @@
+<?php
+
+namespace app\widgets;
+
+use Yii;
+use app\helpers\App;
+use yii\helpers\Url;
+ 
+class ImageGallery extends AppWidget
+{
+    public $file_id;
+    public $modalTitle = 'Image Gallery';
+    public $buttonTitle = 'Image Gallery';
+    public $uploadUrl = ['file/upload'];
+    public $ajaxSuccess;
+    public $model;
+    public $files;
+    public $modelName;
+    public $ajaxError = 'function(e) {alert(e.responseText)}';
+    public $fileInput;
+    public $myImageFilesUrl = ['file/my-image-files'];
+
+    public $file_id_name;
+    public $parameters;
+    public $defaultPhoto;
+
+
+    public function init() 
+    {
+        // your logic here
+        parent::init();
+        $this->file_id_name = $this->file_id_name ?: App::controller('file_id_name');
+
+        $this->uploadUrl = Url::to($this->uploadUrl);
+        $this->files = $this->files ?: App::identity('myImageFiles');
+        if ($this->model) {
+            $this->modelName = App::getModelName($this->model);
+        }
+
+        $this->parameters[App::request('csrfParam')] = App::request('csrfToken');
+
+        $this->parameters['UploadForm[modelName]'] = App::className($this->model);
+        $this->parameters['UploadForm[id]'] = $this->model->id ?: 0;
+
+        $this->defaultPhoto = App::setting('image_holder');
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function run()
+    {
+        return $this->render('image-gallery', [
+            'file_id_name' => $this->file_id_name,
+            'model' => $this->model,
+            'modelName' => $this->modelName,
+            'modalTitle' => $this->modalTitle,
+            'buttonTitle' => $this->buttonTitle,
+            'id' => $this->id,
+            'uploadUrl' => $this->uploadUrl,
+            'ajaxSuccess' => $this->ajaxSuccess,
+            'ajaxError' => $this->ajaxError,
+            'fileInput' => $this->fileInput,
+            'myImageFilesUrl' => Url::to($this->myImageFilesUrl),
+            'file_id' => $this->file_id,
+            'defaultPhoto' => $this->defaultPhoto,
+            'parameters' => json_encode($this->parameters),
+        ]);
+    }
+}

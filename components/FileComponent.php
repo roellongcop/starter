@@ -67,6 +67,7 @@ class FileComponent extends Component
         $this->createDirectory($folders);
         $this->createIndexFile($folders);
 
+        $file_path = implode('/', $folders);
         $time = time();
         $string = App::randomString(10);
         $path = "{$file_path}/{$input->baseName}-{$time}.{$input->extension}";
