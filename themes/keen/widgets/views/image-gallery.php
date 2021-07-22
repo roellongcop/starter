@@ -101,6 +101,8 @@ $registerJs = <<< SCRIPT
         image.src = '{$defaultPhoto}';
         if (cropper) {cropper.destroy();}
         cropper = new Cropper(image, options);
+
+        $('#my-photos-tab-{$id}').trigger('click');
     })
 
     $(document).on("pjax:beforeSend",function(){
@@ -274,7 +276,7 @@ $this->registerCss($registerCss);
                     <div >
                         <ul class="nav nav-tabs nav-bold nav-tabs-line">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#my_files-<?= $id ?>">
+                                <a id="my-photos-tab-<?= $id ?>" class="nav-link active" data-toggle="tab" href="#my_files-<?= $id ?>">
                                     <span class="nav-icon">
                                         <i class="flaticon2-files-and-folders"></i>
                                     </span>
