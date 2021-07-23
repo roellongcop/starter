@@ -32,7 +32,10 @@ class IpFilterCest
 
     public function whitelist(\FunctionalTester $I)
     {
+        $I->amOnPage(['dashboard/index']);
+        
         $I->haveRecord('app\models\Setting', ['name' => 'whitelist_ip_only', 'value' => 1]);
+
         $I->amOnPage(['dashboard/index']);
 
         $I->see('IP not WhiteListed.');
