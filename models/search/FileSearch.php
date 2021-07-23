@@ -98,7 +98,6 @@ class FileSearch extends File
             ['like', 'name', $this->keywords],  
             ['like', 'extension', $this->keywords],  
             ['like', 'size', $this->keywords],  
-            ['like', 'location', $this->keywords],  
             ['like', 'token', $this->keywords],  
         ]);
 

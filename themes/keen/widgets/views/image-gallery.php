@@ -6,148 +6,178 @@ use app\widgets\Dropzone;
 use yii\widgets\Pjax;
 
 $registerJs = <<< SCRIPT
-    let selectedFile = 0;
-    let selectedFilePath = '';
+    var selectedFile = 0,
+        selectedFilePath = '',
+        rotate = 0,
+        image = document.getElementById('cropper-image-{$id}'),
+        inputImage = $('input-image-{$id}'),
 
-    var rotate = 0;
-    var image = document.getElementById('image');
+        options = {
+            minContainerWidth: 400,
+            minContainerHeight: 400,
+        },
+        cropper = new Cropper(image, options),
 
-    var options = {
-        minContainerWidth: 400,
-        minContainerHeight: 400,
-    };
-    var cropper = new Cropper(image, options);
+        myPhotosContainerSelector = 'my-photos-tab-{$id} .my-photos-container',
 
-    let hideMyPhotosButton = function() {
-        $('#choose-photo-confirm-{$id}').hide();
-        $('#choose-photo-edit-{$id}').hide();
+        imageGalleryContainer = $('#image-gallery-container-{$id}'),
+        choosePhotoBtn = imageGalleryContainer.find('.choose-photo-confirm'),
+        editPhotoBtn = imageGalleryContainer.find('.edit-photo-confirm'),
+
+        imageGalleryModal = imageGalleryContainer.find('#image-gallery-{$id}'),
+
+        imageName = imageGalleryContainer.find('.td-name'),
+        imageExtension = imageGalleryContainer.find('.td-extension'),
+        imageSize = imageGalleryContainer.find('.td-size'),
+        imageWidth = imageGalleryContainer.find('.td-width'),
+        imageHeight = imageGalleryContainer.find('.td-height'),
+        imageLocation = imageGalleryContainer.find('.td-location'),
+        imageToken = imageGalleryContainer.find('.td-token'),
+        imageCreatedAt = imageGalleryContainer.find('.td-created_at'),
+
+        input = imageGalleryContainer.find('input[name="{$file_id_name}"]'),
+        imageGalleryBtn = imageGalleryContainer.find('.image-gallery-btn'),
+
+        myPhotosTab = imageGalleryContainer.find('.my-photos-tab'),
+        cropperTabContainer = '#image-gallery-container-{$id} .cropper-tab',
+        cropperTab = imageGalleryContainer.find('.cropper-tab'),
+
+        rotateLeftBtn = imageGalleryContainer.find('.rotate-left-btn'),
+        rotateRightBtn = imageGalleryContainer.find('.rotate-right-btn'),
+        resetCropperBtn = imageGalleryContainer.find('.reset-cropper-btn'),
+        selectImageBtn = imageGalleryContainer.find('.select-image-btn'),
+        uploadImageBtn = imageGalleryContainer.find('.upload-image-btn'),
+
+        images = myPhotosTab.find('img'),
+        myPhotosContainer = myPhotosTab.find('.my-photos-container'),
+        searchInput = myPhotosTab.find('input.search-photo');
+
+    var hideMyPhotosButton = function() {
+        choosePhotoBtn.hide();
+        editPhotoBtn.hide();
     }
 
-    let showMyPhotosButton = function() {
-        $('#choose-photo-confirm-{$id}').show();
-        $('#choose-photo-edit-{$id}').show();
+    var showMyPhotosButton = function() {
+        choosePhotoBtn.show();
+        editPhotoBtn.show();
     }
 
-    let resetMyPhotosTab = function() {
+    var resetMyPhotosTab = function() {
         hideMyPhotosButton();
 
         selectedFile = 0;
         selectedFilePath = '';
-        $('#my_files-{$id} img').css('border', '');
+        images.css('border', '');
 
-        $('#image-gallery-{$id} #{$id}-name').text('None');
-        $('#image-gallery-{$id} #{$id}-extension').text('None');
-        $('#image-gallery-{$id} #{$id}-size').text('None');
-        $('#image-gallery-{$id} #{$id}-width').text('None');
-        $('#image-gallery-{$id} #{$id}-height').text('None');
-        $('#image-gallery-{$id} #{$id}-location').text('None');
-        $('#image-gallery-{$id} #{$id}-token').text('None');
-        $('#image-gallery-{$id} #{$id}-created_at').text('None');
+        imageName.text('None');
+        imageExtension.text('None');
+        imageSize.text('None');
+        imageWidth.text('None');
+        imageHeight.text('None');
+        imageLocation.text('None');
+        imageToken.text('None');
+        imageCreatedAt.text('None');
     }
 
-    $(document).on('click', '#my_files-{$id} img', function() {
-        let image = $(this);
-        selectedFile = image.data('id');
-        selectedFilePath = image.attr('src');
-        $('#image-gallery-{$id} #{$id}-name').text(image.data('name'));
-        $('#image-gallery-{$id} #{$id}-extension').text(image.data('extension'));
-        $('#image-gallery-{$id} #{$id}-size').text(image.data('size'));
-        $('#image-gallery-{$id} #{$id}-width').text(image.data('width') + 'px');
-        $('#image-gallery-{$id} #{$id}-height').text(image.data('height') + 'px');
-        $('#image-gallery-{$id} #{$id}-location').text(image.data('location'));
-        $('#image-gallery-{$id} #{$id}-token').text(image.data('token'));
-        $('#image-gallery-{$id} #{$id}-created_at').text(image.data('created_at'));
-        $('#my_files-{$id} img').css('border', '');
-        image.css('border', '2px solid #1bc5bd');
-        showMyPhotosButton();
-    }); 
-
-    $('#choose-photo-confirm-{$id}').on('click', function() {
-        let s = {
-            status: 'success',
-            src: selectedFilePath
-        };
-        {$ajaxSuccess}
-        $('#image-gallery-container-{$id} input[name="{$file_id_name}"]').val(selectedFile);
-    });
-
-    let getMyFiles = function(url) {
-        $('#my_files-{$id} .modal-my-photos').html('');
-        KTApp.block('#my_files-{$id} .modal-my-photos', {
+    var showLoading = function() {
+        KTApp.block(myPhotosContainerSelector, {
             overlayColor: '#000000',
             message: 'Loading Images...',
             state: 'primary' // a bootstrap color
         });
+    }
+
+    var hideLoading = function() {
+        KTApp.unblock(myPhotosContainerSelector);
+    }
+
+    var getMyFiles = function(url) {
+        myPhotosContainer.html('');
+        showLoading();
         let conf = {
             url: url,
             method: 'get',
             cache: false,
             success: function(s) {
-                $('#my_files-{$id} .modal-my-photos').html(s);
-                KTApp.unblock('#my_files-{$id} .modal-my-photos');
+                myPhotosContainer.html(s);
+                hideLoading();
             },
             error: function(e) {
-                KTApp.unblock('#my_files-{$id} .modal-my-photos');
+                hideLoading();
             }
         }   
         $.ajax(conf);
     }
 
-    $('#image-gallery-btn-{$id}').on('click', function() {
-        let keywords = $('#my_files-{$id} input.search-photo').val();
-        getMyFiles('{$myImageFilesUrl}?keywords=' + keywords);
-        hideMyPhotosButton();
-
-        image.src = '{$defaultPhoto}';
-        if (cropper) {cropper.destroy();}
-        cropper = new Cropper(image, options);
-
-        $('#my-photos-tab-{$id}').trigger('click');
-    })
-
-    $(document).on("pjax:beforeSend",function(){
-        KTApp.block('#my_files-{$id} .modal-my-photos', {
-            overlayColor: '#000000',
-            message: 'Loading Images...',
-            state: 'primary' // a bootstrap color
-        });
-    });
-
-    let search = function(input) {
+    var search = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.val() );
         }
     }
 
-    $('#image-gallery-container-{$id} input.search-photo').on('keydown', function() {
-        search($(this))
-    }); 
+    $(document).on("pjax:beforeSend", function() { showLoading(); });
 
-    //====================================== CROP ==========================================
-    
+    searchInput.on('keydown', function() { 
+        search($(this)); 
+    });
 
-    $('.rotate-left').on('click', function() {
+    images.on('click', function() {
+        let image = $(this);
+        selectedFile = image.data('id');
+        selectedFilePath = image.attr('src');
+        imageName.text(image.data('name'));
+        imageExtension.text(image.data('extension'));
+        imageSize.text(image.data('size'));
+        imageWidth.text(image.data('width') + 'px');
+        imageHeight.text(image.data('height') + 'px');
+        imageLocation.text(image.data('location'));
+        imageToken.text(image.data('token'));
+        imageCreatedAt.text(image.data('created_at'));
+        images.css('border', '');
+        image.css('border', '2px solid #1bc5bd');
+        showMyPhotosButton();
+    });
+
+    choosePhotoBtn.on('click', function() {
+        let s = {
+            status: 'success',
+            src: selectedFilePath
+        };
+        {$ajaxSuccess}
+        input.val(selectedFile);
+    });
+
+    imageGalleryBtn.on('click', function() {
+        getMyFiles('{$myImageFilesUrl}?keywords=' + searchInput.val());
+        hideMyPhotosButton();
+
+        image.src = '{$defaultPhoto}';
+        if (cropper) {cropper.destroy();}
+        cropper = new Cropper(image, options);
+
+        myPhotosTab.trigger('click');
+    });
+
+    rotateLeftBtn.on('click', function() {
        rotate = (rotate <= 0)? (rotate-1): -1;
        cropper.rotate(rotate);
     });
 
-    $('.rotate-right').on('click', function() {
+    rotateRightBtn.on('click', function() {
        rotate = (rotate >= 0)? (rotate+1): 1;
        cropper.rotate(rotate);
     });
 
-    $('.reset-cropper').on('click', function() {
+    resetCropperBtn.on('click', function() {
        cropper.reset();
     });
 
-    $('.select-image-btn').on('click', function(){ 
-        $('#inputImage').trigger('click'); 
+    selectImageBtn.on('click', function(){ 
+        inputImage.trigger('click'); 
     });
 
-    var inputImage = document.getElementById('inputImage');
-    inputImage.onchange = function () {
-
+    inputImage.change(function() {
         var reader = new FileReader();
 
         if(this.files && this.files[0]) {
@@ -164,25 +194,25 @@ $registerJs = <<< SCRIPT
         else {
             alert('Select Image');
         }
-    };
-
-    $('#cropper-tab-{$id}').click(function() {
+    });
+ 
+    cropperTab.click(function() {
         resetMyPhotosTab();
     });
 
-    $('#choose-photo-edit-{$id}').click(function() {
+    editPhotoBtn.click(function() {
         image.src = selectedFilePath + '&w=500';
         if (cropper) {
             cropper.destroy();
         }
         cropper = new Cropper(image, options);
-        $('#cropper-tab-{$id}').trigger('click');
+        cropperTab.trigger('click');
     });
 
-    $('#upload-image-btn').click(function() {
+    uploadImageBtn.click(function() {
         cropper.getCroppedCanvas().toBlob((blob) => {
 
-            KTApp.block('#cp_dropzone-{$id}', {
+            KTApp.block(cropperTabContainer, {
                 overlayColor: '#000000',
                 state: 'primary',
                 message: 'Uploading...'
@@ -190,7 +220,7 @@ $registerJs = <<< SCRIPT
         
             const formData = new FormData();
             // Pass the image file name as the third parameter if necessary.
-            formData.append('UploadForm[fileInput]', blob, '{$modelName}.png');
+            formData.append('UploadForm[fileInput]', blob, '{$modelName}-' + new Date().getTime() + '.png');
             let parameters = {$parameters};
             for ( let key in parameters ) {
                 formData.append(key, parameters[key]);
@@ -207,8 +237,8 @@ $registerJs = <<< SCRIPT
                         if (cropper) {
                             cropper.destroy();
                         }
-                    $('#image-gallery-container-{$id} input[name="{$file_id_name}"]').val(s.file.id);
-                        $('#image-gallery-{$id}').modal('hide');
+                        input.val(s.file.id);
+                        imageGalleryModal.modal('hide');
                     }
                     else {
                         alert(s.message);
@@ -216,18 +246,19 @@ $registerJs = <<< SCRIPT
 
                     {$ajaxSuccess}
 
-                    KTApp.unblock('#cp_dropzone-{$id}');
+                    KTApp.unblock(cropperTabContainer);
                 },
                 error:function(e) {
                     alert(e.responseText);
                     KTApp.unblockPage();
                 },
             });
-        }/*, 'image/png' */);
+        });
     });
 SCRIPT;
 
 $this->registerWidgetJs($widgetFunction, $registerJs);
+
 $registerCss = <<<CSS
     #image-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
@@ -239,26 +270,24 @@ $registerCss = <<<CSS
     #image-gallery-container-{$id} .d-flex {
         display: grid !important;
     }
-    #my_files-{$id} img:hover {
+    #image-gallery-container-{$id} .my-photos-tab img:hover {
         border: 2px solid #1bc5bd;
     }
 
-    .cropper-container {
+    #image-gallery-container-{$id} .cropper-container {
         margin: 0 auto;
     }
     /* Ensure the size of the image fit the container perfectly */
-    img {
-      display: block !important;
-
-      /* This rule is very important, please don't ignore this */
-      max-width: 100% !important;
+    #image-gallery-container-{$id} img {
+        display: block !important;
+        max-width: 100% !important;
     }
 CSS;
 $this->registerCss($registerCss);
 ?>
 <div id="image-gallery-container-<?= $id ?>">
     <input name="<?= $file_id_name ?>" type="hidden" value="<?= $file_id ?>">
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#image-gallery-<?= $id ?>" id="image-gallery-btn-<?= $id ?>">
+    <button type="button" class="btn btn-primary btn-sm image-gallery-btn" data-toggle="modal" data-target="#image-gallery-<?= $id ?>">
         <?= $buttonTitle ?>
     </button>
     <div class="modal fade" id="image-gallery-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
@@ -276,7 +305,7 @@ $this->registerCss($registerCss);
                     <div >
                         <ul class="nav nav-tabs nav-bold nav-tabs-line">
                             <li class="nav-item">
-                                <a id="my-photos-tab-<?= $id ?>" class="nav-link active" data-toggle="tab" href="#my_files-<?= $id ?>">
+                                <a class="nav-link active my-photos-tab" data-toggle="tab" href="#my-photos-tab-<?= $id ?>">
                                     <span class="nav-icon">
                                         <i class="flaticon2-files-and-folders"></i>
                                     </span>
@@ -284,7 +313,7 @@ $this->registerCss($registerCss);
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a id="cropper-tab-<?= $id ?>" class="nav-link" data-toggle="tab" href="#cp_dropzone-<?= $id ?>">
+                                <a class="nav-link cropper-tab" data-toggle="tab" href="#cropper-tab-<?= $id ?>">
                                     <span class="nav-icon">
                                         <i class="flaticon-upload"></i>
                                     </span>
@@ -293,12 +322,12 @@ $this->registerCss($registerCss);
                             </li>
                         </ul>
                         <div class="tab-content pt-10">
-                            <div class="tab-pane fade show active" id="my_files-<?= $id ?>" role="tabpanel" aria-labelledby="my_files-<?= $id ?>">
+                            <div class="tab-pane fade show active my-photos-tab" id="my-photos-tab-<?= $id ?>" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
                                         <input type="search" class="form-control search-photo" placeholder="Search Photo">
                                         <?php Pjax::begin([
-                                            'options' => ['class' => 'modal-my-photos'],
+                                            'options' => ['class' => 'my-photos-container'],
                                             'enablePushState' => false,
                                             'timeout' => false
                                         ]); ?>
@@ -310,35 +339,35 @@ $this->registerCss($registerCss);
                                             <tbody>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <td id="<?= $id ?>-name"> None </td>
+                                                    <td class="td-name"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Extension</th>
-                                                    <td id="<?= $id ?>-extension"> None </td>
+                                                    <td class="td-extension"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Size</th>
-                                                    <td id="<?= $id ?>-size"> None </td>
+                                                    <td class="td-size"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Width</th>
-                                                    <td id="<?= $id ?>-width"> None </td>
+                                                    <td class="td-width"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Height</th>
-                                                    <td id="<?= $id ?>-height"> None </td>
+                                                    <td class="td-height"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Location</th>
-                                                    <td id="<?= $id ?>-location"> None </td>
+                                                    <td class="td-location"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Token</th>
-                                                    <td id="<?= $id ?>-token"> None </td>
+                                                    <td class="td-token"> None </td>
                                                 </tr>
                                                 <tr>
                                                     <th width="30%">Created At</th>
-                                                    <td id="<?= $id ?>-created_at"> None </td>
+                                                    <td class="td-created_at"> None </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -346,20 +375,20 @@ $this->registerCss($registerCss);
                                 </div>
                                 
                             </div>
-                            <div class="tab-pane fade" id="cp_dropzone-<?= $id ?>" role="tabpanel" aria-labelledby="cp_dropzone-<?= $id ?>">
+                            <div class="tab-pane fade cropper-tab" id="cropper-tab-<?= $id ?>" role="tabpanel">
                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="text-center">
-                                            <img id="image" src="<?= $defaultPhoto ?>" alt="" />
+                                            <img id="cropper-image-<?= $id ?>" src="<?= $defaultPhoto ?>" alt="" />
                                         </div>
                                         <div class="btn-options text-center pt-20">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-secondary mb-3 rotate-left" title="Rotate Left">
+                                                <button type="button" class="btn btn-secondary mb-3 rotate-left-btn" title="Rotate Left">
                                                     <span data-toggle="tooltip" title="" data-original-title="Rotate Left">
                                                         <span class="fa fa-undo-alt"></span>
                                                     </span>
                                                 </button>
-                                                <button type="button" class="btn btn-secondary mb-3 rotate-right" title="Rotate Right">
+                                                <button type="button" class="btn btn-secondary mb-3 rotate-right-btn" title="Rotate Right">
                                                     <span data-toggle="tooltip" title="" data-original-title="Rotate Right">
                                                         <span class="fa fa-redo-alt"></span>
                                                     </span>
@@ -372,7 +401,7 @@ $this->registerCss($registerCss);
                                                         <span class="fa fa-sync-alt"></span>
                                                     </span>
                                                 </button>
-                                                <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                                                <input type="file" class="sr-only" id="input-image-<?= $id ?>" name="file" accept="image/*">
                                                 <button type="button" class="btn btn-secondary btn-upload mb-3 select-image-btn" title="Upload image file">
                                                     <span class="kt-tooltip" data-toggle="tooltip" title="" data-original-title="Import image with Blob URLs">
                                                         <span class="fa fa-upload"></span>
@@ -381,7 +410,7 @@ $this->registerCss($registerCss);
                                             </div> 
 
                                             <div class="btn-group">
-                                                <button type="button" id="upload-image-btn" class="btn btn-success btn-upload mb-3" title="Save Photo">
+                                                <button type="button" class="upload-image-btn btn btn-success btn-upload mb-3" title="Save Photo">
                                                     <span class="kt-tooltip" data-toggle="tooltip" title="" data-original-title="Save Photo">
                                                         <span class="fa fa-save"></span> Save
                                                     </span>
@@ -400,15 +429,13 @@ $this->registerCss($registerCss);
 
                     <button 
                         type="button" 
-                        class="btn btn-primary font-weight-bold"
-                        id="choose-photo-edit-<?= $id ?>">
+                        class="btn btn-primary font-weight-bold choose-photo-edit">
                             Edit
                     </button>
                     <button 
                         data-dismiss="modal"
                         type="button" 
-                        class="btn btn-success font-weight-bold"
-                        id="choose-photo-confirm-<?= $id ?>">
+                        class="btn btn-success font-weight-bold choose-photo-confirm">
                             Confirm
                     </button>
                 </div>
