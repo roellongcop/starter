@@ -2,6 +2,7 @@
 
 use app\helpers\App;
 use app\models\Ip;
+use app\models\form\SettingForm;
 
 class IpFilterCest
 {
@@ -10,21 +11,31 @@ class IpFilterCest
         $I->amLoggedInAs($I->grabRecord('app\models\User', ['username' => 'developer']));
     }
 
-    // public function blockedIp(\FunctionalTester $I)
-    // {
-    //     $ip = new Ip([
-    //         'name' => 'Not Detected', 
-    //         'description' => 'testing IP',
-    //         'type' => Ip::TYPE_BLACKLIST,
-    //     ]);
-    //     $ip->logAfterSave = false;
-    //     $ip->save(false);
+    public function accessSuccess(\FunctionalTester $I)
+    {
+        $I->amOnPage(['dashboard/index']);
+        $I->see('Dashboard', 'h5');
+    }
 
-    //    var_dump($ip->errors); die;
+    public function blacklist(\FunctionalTester $I)
+    {
+        $I->amOnPage(['dashboard/index']);
 
-    //     $I->amOnPage(['dashboard/index']);
+        $model = $I->grabRecord('app\models\Ip', ['name' => '000.000.0.0']);
+        $model->type = Ip::TYPE_BLACKLIST;
+        $model->save();
 
-    //     $I->see('IP is Blocked !');
-    //     $I->dontSee('Sign out');
-    // }
+        $I->amOnPage(['dashboard/index']);
+        $I->see('IP is Blocked !');
+        $I->dontSee('Sign out');
+    }
+
+    public function whitelist(\FunctionalTester $I)
+    {
+        $I->haveRecord('app\models\Setting', ['name' => 'whitelist_ip_only', 'value' => 1]);
+        $I->amOnPage(['dashboard/index']);
+
+        $I->see('IP not WhiteListed.');
+        $I->dontSee('Sign out');
+    }
 }

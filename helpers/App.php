@@ -159,7 +159,7 @@ class App {
 
 	public static function controllerID()
 	{
-		return self::controller()->id;
+		return self::controller() ? self::controller()->id: '';
 	}
 
 	public static function controllerAction()
@@ -177,12 +177,12 @@ class App {
 
 	public static function action()
 	{
-		return self::controller()->action;
+		return self::controller() ? self::controller()->action: '';
 	}
 
 	public static function actionID()
 	{
-		return self::action()->id;
+		return self::action() ? self::action()->id: '';
 	}
 
 	public static function isAction($action='')
@@ -400,7 +400,7 @@ class App {
 
     public static function ip()
 	{
-		return App::request()->userIp ?: 'Not detected';
+		return App::request()->userIp ?: '000.000.0.0';
 	}
 	
 	public static function userAgent()
