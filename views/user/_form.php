@@ -2,19 +2,18 @@
 use app\helpers\App;
 use app\helpers\Html;
 use app\models\User;
-use app\models\form\UploadForm;
 use app\models\search\RoleSearch;
 use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ChangePhoto;
-use app\widgets\ChooseFromGallery;
+use app\widgets\ImageGallery;
 use app\widgets\ImagePreview;
 use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
-/* @var $form app\widgets\ActiveForm */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 <?php $form = ActiveForm::begin(['id' => 'user-form']); ?>
     <div class="row">
@@ -61,20 +60,28 @@ use app\widgets\RecordStatusInput;
                     ]
                 ) ?>
             </div>
-            <?= ChooseFromGallery::widget([
+            <br>
+            <?= ImageGallery::widget([
                 'model' => $model,
-                'fileInput' => $form->field(new \app\models\form\UploadForm(['extensionType' => 'image']), 'fileInput')
-                    ->fileInput()
-                    ->label('Upload Photo'),
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
+                        KTApp.block('#sipc', {
+                            overlayColor: '#000000',
+                            state: 'primary',
+                            message: 'Processing...'
+                        });
+                        setTimeout(function() {
+                            KTApp.unblock('#sipc');
+                        }, 1000);
                         $('#sipc img').attr('src', s.src + '&w=200');
+                        $('#profile-image-desktop').attr('src', s.src + '&w=200');
+                        $('#profile-image-dropdown').attr('src', s.src + '&w=200');
                     }
-                "
+                ",
             ]) ?> 
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group"><hr>
 		<?= AnchorForm::widget() ?>
     </div>
 <?php ActiveForm::end(); ?>

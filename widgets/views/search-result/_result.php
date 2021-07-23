@@ -4,17 +4,14 @@ use app\widgets\Anchor;
 use app\widgets\Detail;
 use yii\helpers\Inflector;
 use yii\widgets\ListView;
-
-$moduleName = Inflector::pluralize($nameModule);
 ?>
 <hr>
 <p class="lead">
-	<?= $moduleName ?> 
+	<?= Inflector::pluralize($nameModule) ?> 
 	(<?= number_format($dataProvider->totalCount) ?>)
-
 	&nbsp;
 	<?= Anchor::widget([
-		'title' => 'View in ' . $moduleName . ' Page',
+		'title' => 'View in ' . Inflector::pluralize($nameModule) . ' Page',
 		'link' => ["{$controller}/index", 'keywords' => $searchModel->keywords],
 		'options' => ['class' => 'btn btn-success btn-sm']
 	]) ?>
@@ -31,4 +28,3 @@ $moduleName = Inflector::pluralize($nameModule);
     	'module' => $module
     ]
 ]); ?>
- 

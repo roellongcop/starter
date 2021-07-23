@@ -14,7 +14,6 @@ class ImageGallery extends AppWidget
     public $uploadUrl = ['file/upload'];
     public $ajaxSuccess;
     public $model;
-    public $files;
     public $modelName;
     public $ajaxError = 'function(e) {alert(e.responseText)}';
     public $fileInput;
@@ -29,10 +28,9 @@ class ImageGallery extends AppWidget
     {
         // your logic here
         parent::init();
-        $this->file_id_name = $this->file_id_name ?: App::controller('file_id_name');
+        $this->file_id_name = $this->file_id_name ?: App::controller('file_id_name') . '[]';
 
         $this->uploadUrl = Url::to($this->uploadUrl);
-        $this->files = $this->files ?: App::identity('myImageFiles');
         if ($this->model) {
             $this->modelName = App::getModelName($this->model);
         }

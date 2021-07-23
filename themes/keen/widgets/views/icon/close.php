@@ -1,1 +1,0 @@
-<i class="far fa-window-close text-danger"></i>

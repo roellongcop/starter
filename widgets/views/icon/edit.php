@@ -1,1 +1,1 @@
-<i class="glyphicon glyphicon-edit text-primary"></i>
+<i class="far fa-edit text-warning"></i>

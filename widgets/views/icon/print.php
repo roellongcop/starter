@@ -1,1 +1,1 @@
-<i class="glyphicon glyphicon-print text-primary"></i>
+<i class="fas fa-print text-primary"></i>

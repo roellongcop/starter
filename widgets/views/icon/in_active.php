@@ -1,1 +1,1 @@
-<i class="glyphicon glyphicon-eye-close text-warning"></i>
+<i class="far fa-eye-slash text-warning"></i>

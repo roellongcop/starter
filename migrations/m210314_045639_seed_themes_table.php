@@ -300,17 +300,6 @@ class m210314_045639_seed_themes_table extends Migration
             ],
             11 => [
                 'id' => 11,
-                'description' => 'starter',
-                'name' => 'Starter',
-                'basePath' => '@app/assets/',
-                'baseUrl' => '@web/themes/starter',
-                'pathMap' => [
-                    '@app/views' => ['@app/views'],
-                    '@app/widgets' => ['@app/widgets'],
-                ],
-            ],
-            12 => [
-                'id' => 12,
                 'description' => 'keen/sub/demo2/fixed',
                 'name' => 'Demo2 Fixed',
                 'basePath' => '@app/themes/keen/sub/demo2/fixed/assets/assets',
@@ -327,8 +316,8 @@ class m210314_045639_seed_themes_table extends Migration
                 ],
                 'bundles' => $keenDemo2Bundles
             ],
-            13 => [
-                'id' => 13,
+            12 => [
+                'id' => 12,
                 'description' => 'keen/sub/demo2/fluid',
                 'name' => 'Demo2 Fluid',
                 'basePath' => '@app/themes/keen/sub/demo2/fixed/assets/assets',
@@ -347,8 +336,8 @@ class m210314_045639_seed_themes_table extends Migration
                 ],
                 'bundles' => $keenDemo2Bundles
             ],
-            14 => [
-                'id' => 14,
+            13 => [
+                'id' => 13,
                 'description' => 'keen/sub/demo3/fixed',
                 'name' => 'Demo3 Fixed',
                 'basePath' => '@app/themes/keen/sub/demo3/fixed/assets/assets',
@@ -365,8 +354,8 @@ class m210314_045639_seed_themes_table extends Migration
                 ],
                 'bundles' => $keenDemo3Bundles
             ],
-            15 => [
-                'id' => 15,
+            14 => [
+                'id' => 14,
                 'description' => 'keen/sub/demo3/fluid',
                 'name' => 'Demo3 Fluid',
                 'basePath' => '@app/themes/keen/sub/demo3/fixed/assets/assets',

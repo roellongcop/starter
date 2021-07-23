@@ -1,1 +1,1 @@
-<i class="glyphicon glyphicon-eye-open text-info"></i>
+<i class="far fa-dot-circle text-info"></i>

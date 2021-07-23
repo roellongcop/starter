@@ -4,14 +4,18 @@ use app\widgets\Anchors;
 use app\widgets\Detail;
 ?>
 <div class="card">
-	<div class="card-header" id="headingOne2">
+	<div class="card-header">
 		<div class="card-title collapsed" 
 			data-toggle="collapse" 
 			data-target="#<?= $module ?>-tab-<?= $model->id ?>" 
 			aria-expanded="false">
 			<?= $index + 1 ?>) 
-			<button type="button"><?= $model->mainAttribute ?></button>
-			(<?= App::formatter('asFulldate', $model->created_at) ?>)
+
+			<?= $model->mainAttribute ?>
+			&nbsp; 
+			<small>
+				(<?= App::formatter('asFulldate', $model->created_at) ?>)
+			</small>
 		</div>
 	</div>
 	<div id="<?= $module ?>-tab-<?= $model->id ?>" class="collapse" data-parent="#<?= $module ?>" style="">

@@ -1,2 +1,1 @@
-<i class="glyphicon glyphicon-remove-sign text-danger"></i>
-	
+<i class="far fa-window-close text-danger"></i>

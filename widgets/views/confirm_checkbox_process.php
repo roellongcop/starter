@@ -11,7 +11,7 @@ use yii\helpers\Html;
 		</div>
 		<div class="alert-text">
 			You are going to "<?= $process ?>" 
-			<?=  number_format(count($models)) ?> data.
+			<?=  number_format((is_countable($models)? count($models): 0)) ?> data.
 		</div>
 		<div class="alert-close">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -34,22 +34,21 @@ use yii\helpers\Html;
 						<div class="card-title collapsed" 
 							data-toggle="collapse" 
 							data-target="#collapse-action-<?= $model->id ?>">
+							<?= $this->render('icon/double_angle_left') ?>
+							<?= number_format(($key + 1)) ?>. 
 							<div class="card-label pl-4">
-								<?= number_format(($key + 1)) ?>. 
-								<button type="button">
-									<?= $model->mainAttribute ?>
-								</button>
-								<span>
-									<?php if (App::modelCan($model, $post['process-selected'])): ?>
-										<input type="hidden" 
-											name="selection[]" 
-											value="<?= $model->id ?>">
-										<span class="label label-success">Applicable</span>
-									<?php else: ?>
-										<span class="label label-danger">Not Applicable</span>
-									<?php endif ?>
-								</span>
+								<?= $model->mainAttribute ?>
 							</div>
+							<span>
+								<?php if (App::modelCan($model, $post['process-selected'])): ?>
+									<input type="hidden" 
+										name="selection[]" 
+										value="<?= $model->id ?>">
+									<span class="badge badge-success">Applicable</span>
+								<?php else: ?>
+									<span class="badge badge-danger">Not Applicable</span>
+								<?php endif ?>
+							</span>
 						</div>
 					</div>
 					<div id="collapse-action-<?= $model->id ?>" 

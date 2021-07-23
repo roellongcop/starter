@@ -4,10 +4,11 @@ use app\helpers\Html;
 use app\helpers\Url;
 use app\widgets\Dropzone;
 use yii\widgets\Pjax;
+
 $registerJs = <<< SCRIPT
     let selectedFile = 0;
     let selectedFilePath = '';
-
+    
     let disableButton = function() {
         $('#choose-photo-confirm-{$id}').prop('disabled', true);
     }
@@ -29,8 +30,7 @@ $registerJs = <<< SCRIPT
         $('#my_files-{$id} img').css('border', '');
         image.css('border', '2px solid #1bc5bd');
         enableButton();
-    })
-
+    }); 
     $('#choose-photo-confirm-{$id}').on('click', function() {
         let s = {
             status: 'success',
@@ -39,70 +39,52 @@ $registerJs = <<< SCRIPT
         {$ajaxSuccess}
         $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(selectedFile);
     });
-    $('#upload-tab-{$id} input[type="file"]').on('change', function() {
-        let input = this;
-        let fileInput = input.files[0]; 
-        let formData = new FormData();
-        formData.append('UploadForm[fileInput]', fileInput);
-        formData.append('modelName', '{$modelName}');
-        // formData.append('fileToken', Date.now());
-        $.ajax( {
-            url: '{$uploadUrl}',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            cache: false,
-            processData: false,
-            contentType: false,
-            success: function(s) {
-                {$ajaxSuccess}
-                if(s.status == 'success') {
-                    $('#choose-from-gallery-{$id}').modal('hide')
-                    $('#choose-from-gallery-container-{$id} input[name="{$file_id_name}"]').val(s.file.id);
-                    input.value = '';
-                }
-            },
-            error: {$ajaxError},
-        });
-    })
     let getMyFiles = function(url) {
         $('#my_files-{$id} .modal-my-photos').html('');
+        KTApp.block('#my_files-{$id} .modal-my-photos', {
+            overlayColor: '#000000',
+            message: 'Loading Images...',
+            state: 'primary' // a bootstrap color
+        });
         let conf = {
             url: url,
             method: 'get',
             cache: false,
             success: function(s) {
                 $('#my_files-{$id} .modal-my-photos').html(s);
+                KTApp.unblock('#my_files-{$id} .modal-my-photos');
             },
             error: function(e) {
+                KTApp.unblock('#my_files-{$id} .modal-my-photos');
             }
         }   
         $.ajax(conf);
     }
-    
     $('#choose-from-gallery-btn-{$id}').on('click', function() {
-        let keywords = $('#my_files-{$id} input.search-photo').val()
-        getMyFiles('{$myImageFilesUrl}');
+        let keywords = $('#my_files-{$id} input.search-photo').val();
+        getMyFiles('{$myImageFilesUrl}?keywords=' + keywords);
         disableButton();
     })
-
     $(document).on("pjax:beforeSend",function(){
-        $('#my_files-{$id} .modal-my-photos').html('Loading...');
+        KTApp.block('#my_files-{$id} .modal-my-photos', {
+            overlayColor: '#000000',
+            message: 'Loading Images...',
+            state: 'primary' // a bootstrap color
+        });
     });
-
     let search = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.val() );
         }
     }
-
     $('#choose-from-gallery-container-{$id} input.search-photo').on('keydown', function() {
         search($(this))
     });
 SCRIPT;
+
 $this->registerWidgetJs($widgetFunction, $registerJs);
-$registerCSS = <<<CSS
+$registerCss = <<<CSS
     #choose-from-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
         padding: 5px;
@@ -117,7 +99,7 @@ $registerCSS = <<<CSS
         border: 2px solid #1bc5bd;
     }
 CSS;
-$this->registerCSS($registerCSS);
+$this->registerCss($registerCss);
 ?>
 <div id="choose-from-gallery-container-<?= $id ?>">
     <!-- Button trigger modal-->
@@ -125,12 +107,11 @@ $this->registerCSS($registerCSS);
         <?= $buttonTitle ?>
     </button>
     <input name="<?= $file_id_name ?>" type="hidden" value="<?= $file_id ?>">
-    <!-- Modal-->
     <div class="modal fade" id="choose-from-gallery-<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">
+                    <h5 class="modal-title" id="exampleModalLabel">
                         <?= $modalTitle ?>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -138,17 +119,27 @@ $this->registerCSS($registerCSS);
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div data-scroll="true" data-height="500">
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a data-toggle="tab" href="#my_files-<?= $id ?>">
-                                    My Photos
+                    <div >
+                        <ul class="nav nav-tabs nav-bold nav-tabs-line">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#my_files-<?= $id ?>">
+                                    <span class="nav-icon">
+                                        <i class="flaticon2-files-and-folders"></i>
+                                    </span>
+                                    <span class="nav-text">My Photos</span>
                                 </a>
                             </li>
-                            <li><a data-toggle="tab" href="#upload-tab-<?= $id ?>">Upload</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#cp_dropzone-<?= $id ?>">
+                                    <span class="nav-icon">
+                                        <i class="flaticon-upload"></i>
+                                    </span>
+                                    <span class="nav-text">Upload</span>
+                                </a>
+                            </li>
                         </ul>
-                        <div class="tab-content">
-                            <div id="my_files-<?= $id ?>" class="tab-pane fade in active">
+                        <div class="tab-content pt-10">
+                            <div class="tab-pane fade show active" id="my_files-<?= $id ?>" role="tabpanel" aria-labelledby="my_files-<?= $id ?>">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
                                         <input type="search" class="form-control search-photo" placeholder="Search Photo">
@@ -199,9 +190,27 @@ $this->registerCSS($registerCSS);
                                         </table>
                                     </div>
                                 </div>
+                                
                             </div>
-                            <div id="upload-tab-<?= $id ?>" class="tab-pane fade">
-                                <?= $fileInput ?>
+                            <div class="tab-pane fade" id="cp_dropzone-<?= $id ?>" role="tabpanel" aria-labelledby="cp_dropzone-<?= $id ?>">
+                                <?= Dropzone::widget([
+                                    'hiddenInput' => false,
+                                    'model' => $model,
+                                    'maxFiles' => 1,
+                                    'removedFile' => '//',
+                                    'success' => "
+                                        {$dropzoneSuccess}
+                                        $('#choose-from-gallery-container-{$id} input[name={$file_id_name}]').val(s.file.id);
+                                        this.removeFile(file);
+
+                                        $('#choose-from-gallery-{$id}').modal('hide');
+                                    ",
+                                    'acceptedFiles' => array_map(
+                                        function($val) { 
+                                            return ".{$val}"; 
+                                        }, App::file('file_extensions')['image']
+                                    )
+                                ]) ?>
                             </div>
                         </div>
                     </div>

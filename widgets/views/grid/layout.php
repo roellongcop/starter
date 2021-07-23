@@ -1,17 +1,21 @@
-<div class="row">
-    <div class="col-md-4">
-        {summary}
+<div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+    <div class="d-flex align-items-center flex-wrap">
+        <div class="mr-2">
+            {summary}
+        </div>
     </div>
-    <div class="col-md-8 text-right">
+    <div class="">
         {pager}
     </div>
 </div>
 {items}
-<div class="row">
-    <div class="col-md-4">
-        {summary}
+<div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+    <div class="d-flex align-items-center flex-wrap">
+        <div class="mr-2">
+            {summary}
+        </div>
     </div>
-    <div class="col-md-8 text-right">
+    <div class="">
         {pager}
     </div>
 </div>

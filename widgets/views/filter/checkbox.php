@@ -1,4 +1,4 @@
-<label>
+<label class='checkbox'>
     <input 
         <?= $tags ?>
         type='checkbox' 
@@ -7,4 +7,3 @@
         <?= $checked ?>> 
     <span></span>  <?= $name ?>
 </label>
-<br>

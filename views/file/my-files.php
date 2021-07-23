@@ -26,7 +26,7 @@ $registerJs = <<< SCRIPT
     let hideActionButton = function() {
         $('#btn-remove-file').hide();
         $('#btn-download-file').hide();
-    } 
+    }
 
     let resetState = function() {
         selectedFile = 0;
@@ -50,22 +50,30 @@ $registerJs = <<< SCRIPT
 
     let getMyFiles = function(url) {
         setFileContent('Loading');
+        KTApp.block('#my-files .my-photos', {
+            overlayColor: '#000000',
+            message: 'Loading Images...',
+            state: 'primary' // a bootstrap color
+        });
         let conf = {
             url: url,
             method: 'get',
             cache: false,
             success: function(s) {
                 setFileContent(s);
+                KTApp.unblock('#my-files .my-photos');
             },
             error: function(e) {
+                KTApp.unblock('#my-files .my-photos');
                 alert(e.statusText)
             }
         }   
         $.ajax(conf);
     }
-
+    
     let searchMyFile = function(input) {
         if(event.key === 'Enter') {
+                   
             event.preventDefault();
             getMyFiles('{$myFilesUrl}?keywords=' + input.val() );
         }
@@ -80,7 +88,7 @@ $registerJs = <<< SCRIPT
                 dataType: 'json',
                 success: function(s) {
                     if(s.status == 'success') {
-                        alert(s.message);
+                        toastr.success(s.message);
                         getMyFiles('{$myFilesUrl}');
                     }
                     resetState();
@@ -91,7 +99,7 @@ $registerJs = <<< SCRIPT
             })
         }
     });
-
+        
     $(document).on('click', '#my-files img', function() {
         let image = $(this);
         selectedFile = image.data('id');
@@ -109,11 +117,13 @@ $registerJs = <<< SCRIPT
         let actionButtons = '<a href="'+ $(this).data('download-url') +'" class="btn btn-primary btn-sm">';
             actionButtons += 'Download';
             actionButtons += '</a>';
+
             if(image.data('can-delete')) {
                 actionButtons += '<a href="#" class="btn btn-danger btn-sm btn-remove-file">';
                 actionButtons += 'Remove';
                 actionButtons += '</a>';
             }
+
         $('#my-files #td-action-btn').html(actionButtons);
 
         $('#my-files img').css('border', '');
@@ -122,14 +132,18 @@ $registerJs = <<< SCRIPT
     }); 
 
     $(document).on("pjax:beforeSend",function(){
-        setFileContent('Loading');
+        KTApp.block('#my-files .my-photos', {
+            overlayColor: '#000000',
+            message: 'Loading Images...',
+            state: 'primary' // a bootstrap color
+        });
     });
-
-    hideActionButton();
 
     $('#my-files input.search-photo').on('keydown', function() {
         searchMyFile($(this));
     });
+
+    hideActionButton();
 SCRIPT;
 $this->registerJs($registerJs);
 $registerCss = <<<CSS
@@ -145,10 +159,9 @@ $registerCss = <<<CSS
 CSS;
 $this->registerCss($registerCss);
 ?>
-
-<div id="my-files" class="row my-files-page">
+<div class="row my-files-page" id="my-files">
     <div class="col-md-7">
-        <input type="text" class="form-control search-photo" placeholder="Search File">
+        <input type="search" class="form-control search-photo" placeholder="Search File">
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
             <?= $this->render('my-files-ajax', [
                 'dataProvider' => $dataProvider,
@@ -156,7 +169,7 @@ $this->registerCss($registerCss);
         <?php Pjax::end(); ?>
     </div>
     <div class="col-md-5">
-        <p class="lead text-warning">Image Properties </p>
+        <p class="lead text-warning">Image Properties</p>
         <table class="table table-bordered font-size-sm">
             <tbody>
                 <tr>

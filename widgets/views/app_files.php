@@ -7,31 +7,38 @@ use yii\helpers\Url;
 $registerJs = <<< SCRIPT
     let removeImage = function(self) {
         let file_id = $(self).data('file_id');
-        let result = confirm('Remove Image?');
-        if(result) {
-            $.ajax({
-                url: '{$removeImagePath}',
-                data: {
-                    file_id: file_id,
-                    model_id: {$model->id},
-                    model_name: '{$modelName}'
-                },
-                method: 'post',
-                dataType: 'json',
-                success: function(s) {
-                    if(s.status == 'success') {
-                        alert(s.message)
-                        $('div[data-file_id="'+file_id+'"]').remove();
-                    }
-                    else {
-                        alert(s.message)
-                    }
-                },
-                error: function(e) {
-                    alert(e.responseText)
-                }    
-            })
-        } 
+        Swal.fire({
+            title: 'Remove Image?',
+            text: "Please confirm your action.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Confirm"
+        }).then(function(result) {
+            if (result.value) {
+                $.ajax({
+                    url: '{$removeImagePath}',
+                    data: {
+                        file_id: file_id,
+                        model_id: {$model->id},
+                        model_name: '{$modelName}'
+                    },
+                    method: 'post',
+                    dataType: 'json',
+                    success: function(s) {
+                        if(s.status == 'success') {
+                            Swal.fire("Success", s.message, "success")
+                            $('div[data-file_id="'+file_id+'"]').remove();
+                        }
+                        else {
+                            Swal.fire("Error", s.message, "error")
+                        }
+                    },
+                    error: function(e) {
+                        alert(e.responseText)
+                    }    
+                })
+            }
+        });
     }
 SCRIPT;
 $this->registerWidgetJs($widgetFunction, $registerJs);

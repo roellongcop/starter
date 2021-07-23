@@ -1,1 +1,0 @@
-<i class="far fa-dot-circle text-info"></i>

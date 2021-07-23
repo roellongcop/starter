@@ -1,1 +1,1 @@
-<i class="glyphicon glyphicon-eye-open text-success"></i>
+<i class="far fa-eye text-success"></i>

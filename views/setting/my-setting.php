@@ -1,8 +1,6 @@
 <?php
-use app\helpers\App;
 use app\models\search\ThemeSearch;
 use app\widgets\AnchorForm;
-use app\widgets\BootstrapSelect;
 use app\widgets\ThemeView;
 use app\widgets\ActiveForm;
 

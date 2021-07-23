@@ -1,1 +1,0 @@
-<i class="far fa-copy text-default"></i>

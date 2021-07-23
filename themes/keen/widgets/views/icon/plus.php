@@ -1,1 +1,0 @@
-<i class="fas fa-plus text-success"></i>

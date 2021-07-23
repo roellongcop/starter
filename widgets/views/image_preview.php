@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-$registerJs = <<< SCRIPT
+$registerJs = <<<SCRIPT
 	$('#{$imageID}').on('change', function() {
 		let input = this;
 		if (input.files && input.files[0]) {

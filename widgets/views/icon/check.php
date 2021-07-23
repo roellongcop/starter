@@ -1,1 +1,1 @@
-<i class="glyphicon glyphicon-check text-success"></i>
+<i class="fa fa-check text-success"></i>

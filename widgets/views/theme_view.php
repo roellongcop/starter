@@ -3,9 +3,9 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 ?>
-<div class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
+<div id="container-<?= $id ?>" class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
 	<!--begin::Header-->
 	<div class="card-header border-0 pt-6 p11">
 		<h3 class="card-title align-items-start flex-column">
@@ -23,24 +23,9 @@ use yii\widgets\ActiveForm;
 			<!--begin::Image--> 
 			<div class="image-input">
 				<img src="<?= $theme->imagePath ?>&w=300" class="img-thumbnail theme-image">
-				<?php if (App::identity()->can('change-image', 'theme')): ?>
-					<?php $form = ActiveForm::begin(); ?>
-						<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" 
-							data-action="change" 
-							data-toggle="tooltip" 
-							title="" 
-							data-original-title="Change Image">
-							<i class="fa fa-pen icon-sm text-muted"></i>
-						
-						</label>
-					<?php ActiveForm::end(); ?>
-				<?php else: ?>
-					<p></p>
-				<?php endif ?>
 			</div>
 			<!--end::Image-->
 			<p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">
-
 			</p>
 			<?= Anchor::widget([
 				'title' => 'Activate',

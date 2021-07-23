@@ -1,1 +1,1 @@
-<i class="glyphicon glyphicon-trash text-danger"></i>
+<i class="far fa-trash-alt text-danger"></i>
