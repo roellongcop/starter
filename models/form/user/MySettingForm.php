@@ -16,26 +16,16 @@ use yii\base\Model;
 class MySettingForm extends \app\models\User
 {
     public $theme;
+    
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
-            [
-                [
-                    'theme',
-                ], 
-                'required'
-            ],
+            [['theme', ], 'required'],
 
-            [
-                [
-                    'theme',
-                ], 
-                'string'
-            ],
-
+            [['theme', ], 'string'],
         ];
     }
 
