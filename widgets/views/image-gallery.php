@@ -256,6 +256,7 @@ $registerJs = <<< SCRIPT
                 data: formData,
                 processData: false,
                 contentType: false,
+                dataType: 'json',
                 success: function(s) {
                     if(s.status == 'success') {
                         if (cropper) {

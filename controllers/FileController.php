@@ -283,7 +283,8 @@ class FileController extends Controller
     {
         if (($post = App::post()) != null) {
             $model = new UploadForm();
-            if ($model->load(['UploadForm' => $post])) {
+            if ($model->load($post)) {
+
                 $model->fileInput = UploadedFile::getInstance($model, 'fileInput');
                 $file = $model->upload();
 

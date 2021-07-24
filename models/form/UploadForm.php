@@ -23,7 +23,6 @@ use yii\base\Model;
  */
 class UploadForm extends Model
 {
-    public $id;
     public $modelName;
     public $fileInput;
     public $fileToken;
