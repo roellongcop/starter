@@ -135,6 +135,11 @@ class Theme extends ActiveRecord
         ];
     }
 
+    public function getCanDelete()
+    {
+        return false;
+    }
+    
     public function getpath_mapdata()
     {
         return JsonEditor::widget([

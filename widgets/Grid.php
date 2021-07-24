@@ -121,7 +121,7 @@ class Grid extends AppWidget
                 'activate' => function($url, $model) use ($controller) {
                     if (App::modelCan($model, 'activate')) {
                         return Anchor::widget([
-                            'title' => '<i class="glyphicon glyphicon-ok text-success"></i>'. $this->actionName('Activate'),
+                            'title' => implode('', [$this->render('icon/check'), $this->actionName('Activate')]),
                             'link' => $model->activateUrl,
                             'options' => [
                                 'class' => 'navi-link delete',
