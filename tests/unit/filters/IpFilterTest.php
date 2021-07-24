@@ -24,12 +24,9 @@ class IpFilterTest extends \Codeception\Test\Unit
 
     public function testBlacklist()
     {
-        $myIp = App::ip();
-
-        $ip = new Ip([
-            'name' => $myIp,
-            'type' => Ip::TYPE_BLACKLIST,
-        ]);
+        $condition = ['name' => App::ip()];
+        $ip = Ip::findOne($condition) ?: new Ip($condition);
+        $ip->type = Ip::TYPE_BLACKLIST;
         $ip->save();
 
         $this->tester->expectThrowable(

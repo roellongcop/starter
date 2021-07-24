@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\Anchor;
-use app\widgets\AppImages;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
 use yii\behaviors\SluggableBehavior;
@@ -159,7 +158,6 @@ class Theme extends ActiveRecord
             'base_url:raw',
             'path_mapData:raw',
             'bundlesData:raw',
-            'previewImages:raw',
         ];
     }
 
@@ -177,11 +175,6 @@ class Theme extends ActiveRecord
     public function getPreviewImage()
     {
         return Html::img($this->imagePath . '&w=100');
-    }
-
-    public function getPreviewImages()
-    {
-        return AppImages::widget(['model' => $this]);
     }
 
     public function behaviors()
