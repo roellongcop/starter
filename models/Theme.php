@@ -158,7 +158,25 @@ class Theme extends ActiveRecord
             'base_url:raw',
             'path_mapData:raw',
             'bundlesData:raw',
+            'images:raw',
         ];
+    }
+
+    public function getImages()
+    {
+        if (($imageFiles = $this->imageFiles) != NULL) {
+            $images = [];
+
+            foreach ($imageFiles as $file) {
+                $images[] = Html::image(
+                    $file->imagePath, 
+                    ['w' => 100, 'h' => 100, 'ratio' => 'false'], 
+                    ['class' => 'img-thumbnail']
+                );
+            }
+
+            return implode(' ', $images);
+        }
     }
 
     public function getUploadImages()

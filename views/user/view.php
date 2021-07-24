@@ -32,8 +32,15 @@ $this->params['showCreateButton'] = true;
             'data-confirm' => 'Your account will be logout!'
         ]
     ]) ?>
+
+    <?= Anchor::widget([
+        'title' => 'User Activities', 
+        'link' => ['log/index', 'userSlug' => $model->slug],
+        'options' => ['class' => 'btn btn-secondary']
+    ]) ?>
     <hr>
     <?= Detail::widget(['model' => $model]) ?>
     <p class="lead">Profile</p>
     <?= Detail::widget(['model' => $model->profile]) ?>
+
 </div>

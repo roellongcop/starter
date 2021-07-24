@@ -17,6 +17,7 @@ class LogSearch extends Log
     public $date_range;
     public $pagination;
     public $username;
+    public $userSlug;
 
     public $searchTemplate = 'log/_search';
     public $searchAction = ['log/index'];
@@ -30,7 +31,7 @@ class LogSearch extends Log
         return [
             [['id', 'model_id', 'created_by', 'updated_by'], 'integer'],
             [['request_data', 'change_attribute', 'method', 'url', 'action', 'controller', 'table_name', 'model_name', 'server', 'ip', 'browser', 'os', 'device', 'created_at', 'updated_at'], 'safe'],
-            [['keywords', 'pagination', 'date_range', 'record_status', 'user_id', 'username'], 'safe'],
+            [['keywords', 'pagination', 'date_range', 'record_status', 'user_id', 'username', 'userSlug'], 'safe'],
             [['keywords'], 'trim'],
         ];
     }
@@ -102,6 +103,7 @@ class LogSearch extends Log
             'l.browser' => $this->browser,
             'l.os' => $this->os,
             'l.device' => $this->device,
+            'u.slug' => $this->userSlug,
         ]);
         
         $query->andFilterWhere(['like', 'l.request_data', $this->request_data])
@@ -122,6 +124,7 @@ class LogSearch extends Log
 
         $query->joinWith('user u');
         $query->groupBy('l.id');
+
         return $dataProvider;
     }
 }
