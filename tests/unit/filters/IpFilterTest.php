@@ -45,6 +45,13 @@ class IpFilterTest extends \Codeception\Test\Unit
         $setting->whitelist_ip_only = 1;
         $setting->save();
 
+        Ip::deleteAll(['name' => App::ip()]);
+
+        $this->tester->seeRecord('app\models\Setting', [
+            'name' => 'general-setting'
+        ]);
+
+
         $this->tester->expectThrowable(
             new \yii\web\ForbiddenHttpException('IP not WhiteListed.'), 
             function() {
