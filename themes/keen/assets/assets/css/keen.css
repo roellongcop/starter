@@ -38,3 +38,7 @@ th {
 .dropzone .dz-preview .dz-remove {
 	font-size: 12px !important;
 }
+
+.mw200 {
+    max-width: 200px;
+}

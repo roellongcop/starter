@@ -37,7 +37,7 @@ class ModelFileSearch extends ModelFile
     public function init()
     {
         parent::init();
-        $this->pagination = App::setting('pagination');
+        $this->pagination = App::generalSetting('pagination');
     }
 
     /**

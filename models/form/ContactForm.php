@@ -53,8 +53,8 @@ class ContactForm extends Model
             App::component('mailer')
                 ->compose()
                 ->setTo(($email ?: $this->email))
-                ->setFrom([App::setting('admin_email') => App::setting('sender_name')])
-                ->setReplyTo([App::setting('admin_email') => App::setting('sender_name')])
+                ->setFrom([App::generalSetting('admin_email') => App::generalSetting('sender_name')])
+                ->setReplyTo([App::generalSetting('admin_email') => App::generalSetting('sender_name')])
                 ->setSubject($this->subject)
                 ->setTextBody($this->body)
                 ->send();

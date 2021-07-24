@@ -178,7 +178,7 @@ class File extends ActiveRecord
             return Url::to($path);
         }
         
-        return App::setting('image_holder');
+        return App::generalSetting('image_holder');
     }
 
     public function gridColumns()

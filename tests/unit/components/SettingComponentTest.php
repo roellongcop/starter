@@ -16,7 +16,7 @@ class SettingComponentTest extends \Codeception\Test\Unit
 
     public function testAttributes()
     {
-        expect(get_object_vars($this->setting))->equals(
+        expect(get_object_vars($this->setting->general))->equals(
             ArrayHelper::map(Setting::GENERAL, 'name', 'default')
         );
     }

@@ -125,7 +125,7 @@ $registerJs = <<< SCRIPT
         let image = this;
 
         selectedFile = $(image).data('id');
-        selectedFilePath = $(image).attr('src');
+        selectedFilePath = $(image).data('src');
 
         $(imageName).text($(image).data('name'));
         $(imageExtension).text($(image).data('extension'));
@@ -244,7 +244,7 @@ $registerJs = <<< SCRIPT
         
             const formData = new FormData();
             // Pass the image file name as the third parameter if necessary.
-            formData.append('UploadForm[fileInput]', blob, '{$modelName}-' + new Date().getTime() + '.png');
+            formData.append('UploadForm[fileInput]', blob, '{$uploadFileName}-' + new Date().getTime() + '.png');
             let parameters = {$parameters};
             for ( let key in parameters ) {
                 formData.append(key, parameters[key]);

@@ -95,6 +95,29 @@ class GeneralSettingForm extends \yii\base\Model
     {
         parent::init();
 
-        $this->load(['SettingForm' => ArrayHelper::map(Setting::GENERAL, 'name', 'default')]);
+        $data = ArrayHelper::map(Setting::GENERAL, 'name', 'default');
+
+        if (($model = Setting::findOne(['name' => 'general-setting'])) != NULL) {
+
+            $data = array_replace($data, json_decode($model->value, TRUE));
+        }
+
+        $this->load(['GeneralSettingForm' => $data]);
+    }
+
+    public function save()
+    {
+        if ($this->validate()) {
+            $condition = ['name' => 'general-setting', 'type' => Setting::TYPE_GENERAL];
+
+            $model = Setting::findOne($condition) ?: new Setting($condition);
+            $model->value = json_encode($this->attributes);
+            $model->save();
+
+            return TRUE;
+        }
+
+
+        return FALSE;
     }
 }

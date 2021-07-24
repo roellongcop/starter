@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
-use app\models\form\ProfileForm;
+use app\models\form\user\ProfileForm;
 use app\widgets\Anchor;
 use app\widgets\Label;
 use yii\behaviors\SluggableBehavior;
@@ -406,7 +406,7 @@ class User extends ActiveRecord implements IdentityInterface
             return $this->_currentTheme;
         }
 
-        $this->_currentTheme = Theme::findOne(App::setting('theme'));
+        $this->_currentTheme = Theme::findOne(App::generalSetting('theme'));
 
         return $this->_currentTheme;
     }

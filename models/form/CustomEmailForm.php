@@ -32,8 +32,8 @@ class CustomEmailForm extends Model
     public function init()
     {
         parent::init();
-        $this->from = $this->from ?: App::setting('sender_email');
-        $this->sender_name = $this->sender_name ?: App::setting('sender_name');
+        $this->from = $this->from ?: App::generalSetting('sender_email');
+        $this->sender_name = $this->sender_name ?: App::generalSetting('sender_name');
     }
 
     public function send($type = 'single')

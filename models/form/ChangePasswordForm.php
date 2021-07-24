@@ -66,13 +66,13 @@ class ChangePasswordForm extends Model
             Yii::$app->queue->push(new NotificationJob([
                 'user_id' => $user->id,
                 'type' => 'notification_change_password',
-                'message' => App::setting('notification_change_password'),
+                'message' => App::generalSetting('notification_change_password'),
                 'link' => Url::to(['user/my-password'], true),
             ]));
 
             Yii::$app->queue->push(new EmailJob([
                 'to' => $user->email,
-                'content' => App::setting('email_change_password'),
+                'content' => App::generalSetting('email_change_password'),
             ]));
 
             return $user;

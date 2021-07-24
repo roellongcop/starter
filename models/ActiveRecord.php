@@ -680,7 +680,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             $path = array_merge(['/file/display', 'token' => $modelFile->fileToken], $params);
             return Url::to($path);
         }
-        return App::setting('image_holder');
+        return App::generalSetting('image_holder');
     }
 
     public function getModelDocumentFiles()

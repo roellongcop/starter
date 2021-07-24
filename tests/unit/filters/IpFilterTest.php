@@ -7,6 +7,7 @@ use app\helpers\App;
 use app\models\Backup;
 use app\models\Ip;
 use app\models\form\SettingForm;
+use app\models\form\setting\GeneralSettingForm;
 
 class IpFilterTest extends \Codeception\Test\Unit
 {
@@ -40,11 +41,8 @@ class IpFilterTest extends \Codeception\Test\Unit
 
     public function testWhitelist()
     {
-        $setting = new \app\models\Setting([
-            'name' => 'whitelist_ip_only',
-            'value' => 1,
-            'type' => 'general',
-        ]);
+        $setting = new GeneralSettingForm();
+        $setting->whitelist_ip_only = 1;
         $setting->save();
 
         $this->tester->expectThrowable(

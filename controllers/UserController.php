@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\models\User;
 use app\models\VisitLog;
 use app\models\form\ChangePasswordForm;
-use app\models\form\ProfileForm;
+use app\models\form\user\ProfileForm;
 use app\models\search\UserSearch;
 use app\widgets\ExportContent;
 use yii\helpers\Inflector;

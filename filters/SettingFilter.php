@@ -33,7 +33,7 @@ class SettingFilter extends ActionFilter
 
         App::view()->registerJs($registerJs, \yii\web\View::POS_HEAD, 'app');
         
-        App::session()->timeout = App::setting('auto_logout_timer');
+        App::session()->timeout = App::generalSetting('auto_logout_timer');
         
         return true;
     }

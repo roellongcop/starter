@@ -45,7 +45,7 @@ use app\widgets\ActiveForm;
 			<div class="mt-10">
 				<?= Checkbox::widget([
 	                'data' => [1 => 'Whitelist IP can only access'],
-	                'name' => "SettingForm[whitelist_ip_only]",
+	                'name' => "GeneralSettingForm[whitelist_ip_only]",
 	                'checkedFunction' => function($key, $value) use ($model) {
 	                	return $key == $model->whitelist_ip_only ? 'checked': '';
 	                },

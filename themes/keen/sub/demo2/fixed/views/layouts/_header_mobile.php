@@ -4,7 +4,7 @@ use app\helpers\App;
 <div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
 	<!--begin::Logo-->
 	<a href="index.html">
-		<img alt="Logo" src="<?= App::setting('primary_logo') ?>&w=50&quality=90" class="max-h-30px" />
+		<img alt="Logo" src="<?= App::generalSetting('primary_logo') ?>&w=50&quality=90" class="max-h-30px" />
 	</a>
 	<!--end::Logo-->
 	<!--begin::Toolbar-->

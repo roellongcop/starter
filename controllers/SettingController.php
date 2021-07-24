@@ -6,8 +6,9 @@ use Yii;
 use app\helpers\App;
 use app\models\Setting;
 use app\models\Theme;
-use app\models\form\MySettingForm;
+use app\models\form\user\MySettingForm;
 use app\models\form\SettingForm;
+use app\models\form\setting\GeneralSettingForm;
 use app\models\search\SettingSearch;
 use app\widgets\ExportContent;
 use yii\helpers\Html;
@@ -249,9 +250,9 @@ class SettingController extends Controller
 
     public function actionGeneral($tab='system')
     {
-        $model = new SettingForm();
+        $model = new GeneralSettingForm();
         if (($post = App::post()) != null) {
-            $post['SettingForm']['whitelist_ip_only'] = $post['SettingForm']['whitelist_ip_only'] ?? '0';
+            $post['GeneralSettingForm']['whitelist_ip_only'] = $post['GeneralSettingForm']['whitelist_ip_only'] ?? '0';
 
             if ($model->load($post) && $model->validate()) {
 

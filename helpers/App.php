@@ -655,6 +655,14 @@ class App {
 		return self::component('queue');
 	}
 
+	public static function generalSetting($attr='')
+	{
+		if ($attr) {
+			return self::component('setting')->general($attr);
+		}
+		return self::component('setting')->general;
+	}
+
 	public static function setting($attr='')
 	{
 		if ($attr) {

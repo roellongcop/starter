@@ -19,14 +19,14 @@ class IpFilter extends ActionFilter
 
         $ip = App::ip();
 
+
         if (! App::isControllerAction('site/error')) {
             if (in_array($ip, IpSearch::blackList())) {
                 throw new ForbiddenHttpException('IP is Blocked !');
                 return false;
             }
 
-            if (App::setting('whitelist_ip_only')) {
-                    throw new ForbiddenHttpException('IP not WhiteListed.');
+            if (App::generalSetting('whitelist_ip_only')) { 
                 if (! in_array($ip, IpSearch::whiteList())) {
                     throw new ForbiddenHttpException('IP not WhiteListed.');
                     return false;

@@ -10,7 +10,7 @@ $searchAction = $searchModel->searchAction ?? ['index'];
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
     <!--begin::Logo-->
     <a href="index.html">
-        <img alt="Logo" src="<?= App::setting('primary_logo') ?>&w=50" />
+        <img alt="Logo" src="<?= App::generalSetting('primary_logo') ?>&w=50" />
     </a>
     <!--end::Logo-->
     <div style="position: absolute; left: 72px;">
