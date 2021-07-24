@@ -349,7 +349,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getFooterDetailColumns()
     {
-        return [
+        $columns = [
             'created_at' => [
                 'attribute' => 'created_at',
                 'format' => 'fulldate'
@@ -366,11 +366,16 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'attribute' => 'updatedByEmail',
                 'format' => 'raw'
             ],
-            'recordStatusHtml' => [
+        ];
+
+        if (App::isLogin() && App::identity()->can('in-active-data', $this->controllerID())) {
+            $columns['recordStatusHtml'] = [
                 'attribute' => 'recordStatusHtml',
                 'format' => 'raw'
-            ]
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
     public function getDetailColumns()
@@ -393,20 +398,25 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getFooterGridColumns()
     {
-        return [
+        $columns = [
             'created_at' => ['attribute' => 'created_at', 'format' => 'fulldate'],
             'last_updated' => [
                 'attribute' => 'updated_at',
                 'label' => 'last updated',
                 'format' => 'ago',
             ],
-            'active' => [
+        ];
+
+        if (App::isLogin() && App::identity()->can('in-active-data', $this->controllerID())) {
+            $columns['active'] = [
                 'attribute' => 'record_status',
                 'label' => 'active',
                 'format' => 'raw', 
                 'value' => 'recordStatusHtml'
-            ],
-        ];
+            ];
+        }
+        
+        return $columns;
     }
 
     public function getGridColumns()
