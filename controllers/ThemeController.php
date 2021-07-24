@@ -69,6 +69,30 @@ class ThemeController extends Controller
     }
 
     /**
+     * Duplicates a new Ip model.
+     * If duplication is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionDuplicate($slug)
+    {
+        $originalModel = $this->findModel($slug, 'slug');
+        $model = new Theme();
+        $model->attributes = $originalModel->attributes;
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Duplicated');
+
+            return $this->redirect($model->viewUrl);
+        }
+
+        return $this->render('duplicate', [
+            'model' => $model,
+            'originalModel' => $originalModel,
+        ]);
+    }
+
+
+    /**
      * Updates an existing Theme model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $slug

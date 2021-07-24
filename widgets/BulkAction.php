@@ -9,7 +9,7 @@ class BulkAction extends AppWidget
 {
     public $title = 'Bulk Action';
     
-    public $controller;
+    public $controllerID;
     public $searchModel;
 
 
@@ -18,7 +18,7 @@ class BulkAction extends AppWidget
         // your logic here
         parent::init();
 
-        $this->controller = $this->controller ?: App::controllerID();
+        $this->controllerID = $this->controllerID ?: App::controllerID();
     }
 
 
@@ -27,6 +27,9 @@ class BulkAction extends AppWidget
      */
     public function run()
     { 
+        if(! App::component('access')->userCan('confirm-action', $this->controllerID)) {
+            return ;
+        }
         return $this->render('bulk_action', [
             'id' => $this->id,
             'title' => $this->title,

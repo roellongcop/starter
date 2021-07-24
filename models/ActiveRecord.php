@@ -828,23 +828,30 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getBulkActions()
     {
-        return [
-            'active' => [
-                'label' => 'Set as Active',
-                'process' => 'active',
-                'icon' => 'active',
-            ],
-            'in_active' => [
-                'label' => 'Set as In-active',
-                'process' => 'in_active',
-                'icon' => 'in_active',
-            ],
-            'delete' => [
-                'label' => 'Delete',
-                'process' => 'delete',
-                'icon' => 'delete',
-            ]
+        $columns = [];
+
+        if (App::isLogin() && App::identity()->can('in-active-data', $this->controllerID())) {
+            $columns = [
+                'active' => [
+                    'label' => 'Set as Active',
+                    'process' => 'active',
+                    'icon' => 'active',
+                ],
+                'in_active' => [
+                    'label' => 'Set as In-active',
+                    'process' => 'in_active',
+                    'icon' => 'in_active',
+                ],
+            ];
+        }
+
+        $columns['delete'] = [
+            'label' => 'Delete',
+            'process' => 'delete',
+            'icon' => 'delete',
         ];
+        
+        return $columns;
     }
 
     public function upload()

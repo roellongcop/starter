@@ -134,11 +134,6 @@ class Theme extends ActiveRecord
             // 'bundles' => ['attribute' => 'bundles', 'format' => 'raw'],
         ];
     }
-
-    public function getCanDelete()
-    {
-        return false;
-    }
     
     public function getpath_mapdata()
     {

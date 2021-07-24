@@ -23,7 +23,7 @@ $this->params['showExportButton'] = true;
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'paramName' => 'slug',
-            'template' => ['view', 'update', 'delete', 'activate'],
+            'template' => ['view', 'update', 'duplicate', 'delete', 'activate'],
         ]); ?>
     <?= Html::endForm(); ?> 
 </div>
