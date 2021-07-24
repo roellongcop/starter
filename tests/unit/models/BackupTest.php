@@ -127,4 +127,10 @@ class BackupTest extends \Codeception\Test\Unit
         $model = $this->tester->grabRecord('app\models\Backup');
         expect_that($model->restore());
     }
+
+    public function testDelete()
+    {
+        $model = $this->tester->grabRecord('app\models\Backup');
+        expect_that($model->save());
+    }
 }
