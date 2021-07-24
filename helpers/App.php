@@ -159,7 +159,7 @@ class App {
 
 	public static function controllerID()
 	{
-		return self::controller() ? self::controller()->id: '';
+		return self::controller() ? self::controller()->id: 'console';
 	}
 
 	public static function controllerAction()
@@ -182,7 +182,7 @@ class App {
 
 	public static function actionID()
 	{
-		return self::action() ? self::action()->id: '';
+		return self::action() ? self::action()->id: 'index';
 	}
 
 	public static function isAction($action='')

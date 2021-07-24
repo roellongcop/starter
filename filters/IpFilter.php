@@ -26,6 +26,7 @@ class IpFilter extends ActionFilter
             }
 
             if (App::setting('whitelist_ip_only')) {
+                    throw new ForbiddenHttpException('IP not WhiteListed.');
                 if (! in_array($ip, IpSearch::whiteList())) {
                     throw new ForbiddenHttpException('IP not WhiteListed.');
                     return false;
@@ -38,10 +39,9 @@ class IpFilter extends ActionFilter
             $model = new Ip([
                 'record_status' => 1,
                 'name' => $ip,
-                'type' => 1,
+                'type' => Ip::TYPE_WHITELIST,
                 'description' => 'IP Session: ' . App::session('id')
             ]);
-
             $model->save();
         }
         

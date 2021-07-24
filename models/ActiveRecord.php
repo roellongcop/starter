@@ -677,7 +677,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getImagePath($params=[])
     {
         if(($modelFile = $this->modelImageFile) != null) {
-            $path = array_merge(['file/display', 'token' => $modelFile->fileToken], $params);
+            $path = array_merge(['/file/display', 'token' => $modelFile->fileToken], $params);
             return Url::to($path);
         }
         return App::setting('image_holder');
@@ -725,7 +725,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getSqlFilePath()
     {
         if(($modelFile = $this->modelSqlFile) != null) {
-            return Url::to(['file/display', 'token' => $modelFile->fileToken], true);
+            return Url::to(['/file/display', 'token' => $modelFile->fileToken]);
         }
     }
 

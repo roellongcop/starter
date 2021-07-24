@@ -92,7 +92,7 @@ class SettingComponent extends \yii\base\Component
 
 
         if ($modelFile && (($file = $modelFile->file) != null)) {
-            return Url::to(['file/display', 'token' => $file->token]);
+            return Url::to(['/file/display', 'token' => $file->token]);
         }
 
         return $this->image_holder;
