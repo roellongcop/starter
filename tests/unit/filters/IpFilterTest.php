@@ -51,7 +51,6 @@ class IpFilterTest extends \Codeception\Test\Unit
             'name' => 'general-setting'
         ]);
 
-
         $this->tester->expectThrowable(
             new \yii\web\ForbiddenHttpException('IP not WhiteListed.'), 
             function() {
