@@ -52,6 +52,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_modelDocumentFiles;
     public $_modelDocumentFile;
 
+    public $_canCreate = NULL;
+    public $_canView = NULL;
+    public $_canUpdate = NULL;
+    public $_canDelete = NULL;
+    public $_canActivate = NULL;
+    public $_canInactivate = NULL;
+
     public $errorSummary;
 
     public static function mapRecords()
@@ -164,7 +171,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-    public function validate($attributeNames = null, $clearErrors = true)
+    public function validate($attributeNames = NULL, $clearErrors = TRUE)
     {
         $validate = parent::validate($attributeNames, $clearErrors);
 
@@ -175,7 +182,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $validate;
     }
 
-    public function save($runValidation = true, $attributeNames = null)
+    public function save($runValidation = TRUE, $attributeNames = NULL)
     {
         $save = parent::save($runValidation, $attributeNames);
 
@@ -224,7 +231,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             ->one();
     }
 
-    public static function deleteAll($condition = null, $params = []) 
+    public static function deleteAll($condition = NULL, $params = []) 
     {
         $models = static::findAll($condition);
         $deleteAll = parent::deleteAll($condition);
@@ -250,58 +257,82 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCanDelete()
     {
-        $res = [];
-        if (($relatedModels = $this->relatedModels) != null) {
-            foreach ($relatedModels as $model) {
-                if ($this->{$model}) {
-                    $res[] = $model;
+        if ($this->_canDelete === NULL) {
+            $res = [];
+            if (($relatedModels = $this->relatedModels) != NULL) {
+                foreach ($relatedModels as $model) {
+                    if ($this->{$model}) {
+                        $res[] = $model;
+                    }
                 }
             }
+            $this->_canDelete = ($res)? FALSE: TRUE;
         }
-        return ($res)? false: true;
+
+        return $this->_canDelete;
     }
 
     public function getCanCreate()
     {
-        return true;
+        if ($this->_canCreate === NULL) {
+            $this->_canCreate = TRUE;
+        }
+        
+        return $this->_canCreate;
     }
     
     public function getCanView()
     {
-        return true;
+        if ($this->_canView === NULL) {
+            $this->_canView = TRUE;
+        }
+        
+        return $this->_canView;
     }
 
     public function getCanUpdate()
     {
-        return true;
+        if ($this->_canUpdate === NULL) {
+            $this->_canUpdate = TRUE;
+        }
+        
+        return $this->_canUpdate;
     }
 
     public function getCanActivate()
     {
-        if (App::isGuest()) {
-            return true;
+        if ($this->_canActivate === NULL) {
+            if (App::isGuest()) {
+                $this->_canActivate = TRUE;
+            }
+            else {
+                if (App::identity()->can('change-record-status', $this->controllerID())) {
+                    $this->_canActivate = TRUE;
+                }
+                else {
+                    $this->_canActivate = FALSE;
+                }
+            }
         }
-
-        if (App::identity()->can('change-record-status', $this->controllerID())) {
-            return true;
-        }
-
-        return false;
+        return $this->_canActivate;
     }
 
     public function getCanInactivate()
     {
-        if (App::isLogin()) {
-            $user = App::identity();
-
-            if ($user->can('in-active-data', $this->controllerID())
-                && $user->can('change-record-status', $this->controllerID())
-            ) {
-                return true;
+        if ($this->_canInactivate === NULL) {
+            if (App::isLogin()
+                && App::identity()->can('in-active-data', $this->controllerID())
+                && App::identity()->can('change-record-status', $this->controllerID()) {
+               
+                    $this->_canInactivate = TRUE;
+                }
+            }
+            else {
+                $this->_canInactivate = TRUE;
             }
         }
 
-        return false;
+        return $this->_canInactivate;
     }
 
     public function activate()
@@ -431,12 +462,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getTableColumns()
     {
         $gridColumns = $this->getGridColumns();
-        $filterColumns = App::identity()->filterColumns($this, false);
+        $filterColumns = App::identity()->filterColumns($this, FALSE);
 
         if (App::isLogin() && $filterColumns) {
             foreach ($gridColumns as $key => &$column) {
                 if (! isset($column['visible'])) {
-                    $column['visible'] = in_array($key, $filterColumns)? true: false;
+                    $column['visible'] = in_array($key, $filterColumns)? TRUE: FALSE;
                 }
             }
         }
@@ -453,7 +484,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-    public function getLogUrl($fullpath=true)
+    public function getLogUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('index', 'log')) {
             $url = [
@@ -462,75 +493,75 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'model_name' => App::className($this)
             ];
 
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getIndexUrl($fullpath=true)
+    public function getIndexUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('index')) {
             $paramName = $this->paramName();
             $url = [
                 implode('/', [$this->controllerID(), 'index']),
             ];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getCreateUrl($fullpath=true)
+    public function getCreateUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('create')) {
             $paramName = $this->paramName();
             $url = [
                 implode('/', [$this->controllerID(), 'create']),
             ];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getPrintUrl($fullpath=true)
+    public function getPrintUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('print')) {
             $url = [implode('/', [$this->controllerID(), 'print'])];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getExportPdfUrl($fullpath=true)
+    public function getExportPdfUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('export-pdf')) {
             $url = [implode('/', [$this->controllerID(), 'export-pdf'])];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getExportCsvUrl($fullpath=true)
+    public function getExportCsvUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('export-csv')) {
             $url = [implode('/', [$this->controllerID(), 'export-csv'])];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getExportXlsUrl($fullpath=true)
+    public function getExportXlsUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('export-xls')) {
             $url = [implode('/', [$this->controllerID(), 'export-xls'])];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getExportXlsxUrl($fullpath=true)
+    public function getExportXlsxUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('export-xlsx')) {
             $url = [
                 implode('/', [$this->controllerID(), 'export-xlsx']),
             ];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getViewUrl($fullpath=true)
+    public function getViewUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('view')) {
             $paramName = $this->paramName();
@@ -538,11 +569,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 implode('/', [$this->controllerID(), 'view']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getUpdateUrl($fullpath=true)
+    public function getUpdateUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('update')) {
             $paramName = $this->paramName();
@@ -550,11 +581,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 implode('/', [$this->controllerID(), 'update']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
-    public function getDuplicateUrl($fullpath=true)
+    public function getDuplicateUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('duplicate')) {
             $paramName = $this->paramName();
@@ -562,11 +593,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 implode('/', [$this->controllerID(), 'duplicate']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
     
-    public function getDeleteUrl($fullpath=true)
+    public function getDeleteUrl($fullpath=TRUE)
     {
         if ($this->checkLinkAccess('delete')) {
             $paramName = $this->paramName();
@@ -574,7 +605,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 implode('/', [$this->controllerID(), 'delete']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::to($url, TRUE): $url;
         }
     }
 
@@ -667,7 +698,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getImageFiles()
     {
-        if (($modelImageFiles = $this->modelImageFiles) != null) {
+        if (($modelImageFiles = $this->modelImageFiles) != NULL) {
             $files = [];
 
             foreach ($modelImageFiles as $modelFile) {
@@ -679,14 +710,14 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getImageFile()
     {
-        if (($modelImageFile = $this->modelImageFile) != null) {
+        if (($modelImageFile = $this->modelImageFile) != NULL) {
             return $modelImageFile->file;
         }
     }
 
     public function getImagePath($params=[])
     {
-        if(($modelFile = $this->modelImageFile) != null) {
+        if(($modelFile = $this->modelImageFile) != NULL) {
             $path = array_merge(['/file/display', 'token' => $modelFile->fileToken], $params);
             return Url::to($path);
         }
@@ -727,14 +758,14 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getSqlFileLocation()
     {
-        if(($modelFile = $this->modelSqlFile) != null) {
+        if(($modelFile = $this->modelSqlFile) != NULL) {
             return $modelFile->fileLocation;
         }
     }
 
     public function getSqlFilePath()
     {
-        if(($modelFile = $this->modelSqlFile) != null) {
+        if(($modelFile = $this->modelSqlFile) != NULL) {
             return Url::to(['/file/display', 'token' => $modelFile->fileToken]);
         }
     }
@@ -770,7 +801,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
         return RecordHtml::widget([
             'model' => $this,
-            'labelOnly' => true
+            'labelOnly' => TRUE
         ]);
     }
 
@@ -793,7 +824,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_createdByEmail;
         }
 
-        if(($model = $this->createdBy) != null) {
+        if(($model = $this->createdBy) != NULL) {
             $this->_createdByEmail = $model->email;
             return $this->_createdByEmail;
         }
@@ -809,7 +840,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->_updatedByEmail;
         }
 
-        if(($model = $this->updatedBy) != null) {
+        if(($model = $this->updatedBy) != NULL) {
             $this->_updatedByEmail = $model->email;
             return $this->_updatedByEmail;
         }
@@ -820,9 +851,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $url = $this->viewUrl;
 
         return Anchor::widget([
-            'title' => Url::to($url, true),
+            'title' => Url::to($url, TRUE),
             'link' => $url,
-            'text' => true
+            'text' => TRUE
         ]);
     }
 
@@ -880,7 +911,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function one($value, $key='id', $array=false)
+    public static function one($value, $key='id', $array=FALSE)
     {
         $model = static::find()
             ->visible()
@@ -891,7 +922,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return ($model)? $model: '';
     }
 
-    public static function all($value='', $key='id', $array=false)
+    public static function all($value='', $key='id', $array=FALSE)
     {
         $model = static::find()
             ->andFilterWhere([$key => $value]);
@@ -901,7 +932,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return ($model)? $model: '';
     }
 
-    public static function dropdown($key='id', $value='name', $condition=[], $map=true)
+    public static function dropdown($key='id', $value='name', $condition=[], $map=TRUE)
     {
         $models = static::find()
             ->andFilterWhere($condition)
@@ -926,9 +957,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $models;
     }
 
-    public function getStartDate($from_database = false)
+    public function getStartDate($from_database = FALSE)
     {
-        if ($this->date_range && $from_database == false) {
+        if ($this->date_range && $from_database == FALSE) {
             $date = App::dateRange($this->date_range, 'start');
             return date('F d, Y', strtotime($date));
         }
@@ -945,9 +976,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return App::formatter()->asDateToTimezone($date, 'F d, Y');
     }
 
-    public function getEndDate($from_database = false)
+    public function getEndDate($from_database = FALSE)
     {
-        if ($this->date_range && $from_database == false) {
+        if ($this->date_range && $from_database == FALSE) {
             $date = App::dateRange($this->date_range, 'end');
             return date('F d, Y', strtotime($date));
         }
