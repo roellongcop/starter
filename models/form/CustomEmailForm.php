@@ -23,9 +23,9 @@ class CustomEmailForm extends Model
     {
         return [
             [['to', 'subject', 'from'], 'required'],
-            [['to', 'from',], 'email'],
-            [['to', 'from',], 'trim'],
-            [['cc', 'bcc', 'content', 'sender_name', 'template', 'parameters'], 'safe'],
+            [['to', 'from', 'cc', 'bcc',], 'email'],
+            [['to', 'from', 'cc', 'bcc',], 'trim'],
+            [['content', 'sender_name', 'template', 'parameters'], 'safe'],
         ];
     }
 
