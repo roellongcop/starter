@@ -18,10 +18,13 @@ use yii\base\Model;
  */
 class ChangePasswordForm extends Model
 {
-    public $old_password; 
+    public $user_id;
+    public $old_password;
     public $new_password; 
     public $confirm_password; 
     public $password_hint; 
+
+    public $_user; 
 
     /**
      * @return array the validation rules.
@@ -30,55 +33,73 @@ class ChangePasswordForm extends Model
     {
         return [
             // username and password are both required
-            [['old_password', 'new_password', 'confirm_password', 'password_hint'], 'required'],
-            [['old_password'], 'validateOldPassword'],
-            [['confirm_password'], 'validatePassword'],
+            [['old_password', 'new_password', 'confirm_password', 'user_id', 'password_hint'], 'required'],
+            ['old_password', 'validateOldPassword'],
+            ['new_password', 'validateNewPassword'],
+            ['confirm_password', 'compare', 'compareAttribute' => 'new_password'],
+            ['user_id', 'validateUser'],
         ];
-    } 
+    }
+
+    public function getUser()
+    {
+        if ($this->_user === NULL) {
+            $this->_user = User::findOne($this->user_id);
+        }
+
+        return $this->_user;
+    }
+
+    public function validateUser($attribute, $params)
+    {
+        if (($user = $this->getUser()) == NULL) {
+            $this->addError($attribute, 'User don\'t exist');
+        }
+    }
 
     public function validateOldPassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $user = App::identity();
+            $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->old_password)) {
                 $this->addError($attribute, 'Incorrect old password.');
             }
         }
     }
 
-    public function validatePassword($attribute, $params)
+    public function validateNewPassword($attribute, $params)
     {
-        if (!$this->hasErrors()) {
-            if ($this->new_password != $this->confirm_password) {
-                $this->addError($attribute, 'password dont matched.');
-            }
+        if ($this->old_password == $this->new_password) {
+            $this->addError($attribute, 'New password cannot be the same with old password.');
         }
     }
 
     public function changePassword()
     {
-        $user = App::identity();
+        if ($this->validate()) {
+            $user = $this->getUser();
 
-        $user->setPassword($this->new_password);
-        $user->password_hint = $this->password_hint;
-        if ($user->save()) {
+            $user->setPassword($this->new_password);
+            $user->password_hint = $this->password_hint;
 
-            Yii::$app->queue->push(new NotificationJob([
-                'user_id' => $user->id,
-                'type' => 'notification_change_password',
-                'message' => App::generalSetting('notification_change_password'),
-                'link' => Url::to(['user/my-password'], true),
-            ]));
+            if ($user->save()) {
 
-            Yii::$app->queue->push(new EmailJob([
-                'to' => $user->email,
-                'content' => App::generalSetting('email_change_password'),
-            ]));
+                Yii::$app->queue->push(new NotificationJob([
+                    'user_id' => $user->id,
+                    'type' => 'notification_change_password',
+                    'message' => App::generalSetting('notification_change_password'),
+                    'link' => Url::to(['/user/my-password'], true),
+                ]));
 
-            return $user;
+                Yii::$app->queue->push(new EmailJob([
+                    'to' => $user->email,
+                    'content' => App::generalSetting('email_change_password'),
+                ]));
+
+                return $user;
+            }
         }
-        else {
-            App::danger($user->errors);
-        }
+
+        return FALSE;
     }
 }

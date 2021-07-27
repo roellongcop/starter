@@ -2,7 +2,6 @@
 namespace tests\unit\models\form;
 
 use app\helpers\App;
-use app\models\form\ContactForm;
 use yii\mail\MessageInterface;
 
 class PasswordResetFormTest extends \Codeception\Test\Unit
