@@ -65,20 +65,26 @@ class UserMetaTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\UserMeta');
+        $model = $this->tester->grabRecord('app\models\UserMeta', [
+            'record_status' => UserMeta::RECORD_ACTIVE
+        ]);
         $model->user_id = 2;
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\UserMeta');
+        $model = $this->tester->grabRecord('app\models\UserMeta', [
+            'record_status' => UserMeta::RECORD_ACTIVE
+        ]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\UserMeta');
+        $model = $this->tester->grabRecord('app\models\UserMeta', [
+            'record_status' => UserMeta::RECORD_INACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -87,7 +93,9 @@ class UserMetaTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\UserMeta');
+        $model = $this->tester->grabRecord('app\models\UserMeta', [
+            'record_status' => UserMeta::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();

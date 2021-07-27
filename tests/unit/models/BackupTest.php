@@ -99,7 +99,7 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Backup');
+        $model = $this->tester->grabRecord('app\models\Backup', ['record_status' => Backup::RECORD_INACTIVE]);
         expect_that($model);
 
         $model->activate();
@@ -108,7 +108,7 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Backup');
+        $model = $this->tester->grabRecord('app\models\Backup', ['record_status' => Backup::RECORD_ACTIVE]);
         expect_that($model);
 
         $model->inactivate();
@@ -118,19 +118,19 @@ class BackupTest extends \Codeception\Test\Unit
 
     public function testDownload()
     {
-        $model = $this->tester->grabRecord('app\models\Backup');
+        $model = $this->tester->grabRecord('app\models\Backup', ['record_status' => Backup::RECORD_ACTIVE]);
         expect_that($model->download());
     }
 
     public function testRestore()
     {
-        $model = $this->tester->grabRecord('app\models\Backup');
+        $model = $this->tester->grabRecord('app\models\Backup', ['record_status' => Backup::RECORD_ACTIVE]);
         expect_that($model->restore());
     }
 
     public function testDelete()
     {
-        $model = $this->tester->grabRecord('app\models\Backup');
+        $model = $this->tester->grabRecord('app\models\Backup', ['record_status' => Backup::RECORD_ACTIVE]);
         expect_that($model->save());
     }
 }

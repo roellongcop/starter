@@ -125,13 +125,13 @@ class LogTest extends \Codeception\Test\Unit
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Log');
+        $model = $this->tester->grabRecord('app\models\Log', ['record_status' => Log::RECORD_ACTIVE]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Log');
+        $model = $this->tester->grabRecord('app\models\Log', ['record_status' => Log::RECORD_INACTIVE]);
         expect_that($model);
 
         $model->activate();
@@ -140,7 +140,7 @@ class LogTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Log');
+        $model = $this->tester->grabRecord('app\models\Log', ['record_status' => Log::RECORD_ACTIVE]);
         expect_that($model);
 
         $model->inactivate();

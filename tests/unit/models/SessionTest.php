@@ -58,7 +58,9 @@ class SessionTest extends \Codeception\Test\Unit
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Session');
+        $model = $this->tester->grabRecord('app\models\Session', [
+            'record_status' => Session::RECORD_ACTIVE
+        ]);
         expect_that($model->delete());
     }
 
@@ -73,7 +75,9 @@ class SessionTest extends \Codeception\Test\Unit
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Session');
+        $model = $this->tester->grabRecord('app\models\Session', [
+            'record_status' => Session::RECORD_INACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -82,7 +86,9 @@ class SessionTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Session');
+        $model = $this->tester->grabRecord('app\models\Session', [
+            'record_status' => Session::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();

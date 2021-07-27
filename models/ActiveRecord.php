@@ -326,7 +326,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                     $this->_canInactivate = TRUE;
             }
             else {
-                $this->_canInactivate = TRUE;
+                $this->_canInactivate = FALSE;
             }
         }
 

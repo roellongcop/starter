@@ -84,20 +84,20 @@ class IpTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Ip');
+        $model = $this->tester->grabRecord('app\models\Ip', ['record_status' => Ip::RECORD_ACTIVE]);
         $model->description = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Ip');
+        $model = $this->tester->grabRecord('app\models\Ip', ['record_status' => Ip::RECORD_ACTIVE]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Ip');
+        $model = $this->tester->grabRecord('app\models\Ip', ['record_status' => Ip::RECORD_INACTIVE]);
         expect_that($model);
 
         $model->activate();
@@ -106,7 +106,7 @@ class IpTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Ip');
+        $model = $this->tester->grabRecord('app\models\Ip', ['record_status' => Ip::RECORD_ACTIVE]);
         expect_that($model);
 
         $model->inactivate();

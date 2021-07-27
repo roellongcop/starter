@@ -67,7 +67,9 @@ class RoleTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Role');
+        $model = $this->tester->grabRecord('app\models\Role', [
+            'record_status' => Role::RECORD_ACTIVE
+        ]);
         $model->name = 'updated';
         expect_that($model->save());
     }
@@ -86,7 +88,9 @@ class RoleTest extends \Codeception\Test\Unit
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Role');
+        $model = $this->tester->grabRecord('app\models\Role', [
+            'record_status' => Role::RECORD_INACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -95,7 +99,9 @@ class RoleTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Role');
+        $model = $this->tester->grabRecord('app\models\Role', [
+            'record_status' => Role::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();

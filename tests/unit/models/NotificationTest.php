@@ -76,20 +76,26 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Notification');
+        $model = $this->tester->grabRecord('app\models\Notification', [
+            'record_status' => Notification::RECORD_ACTIVE
+        ]);
         $model->message = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Notification');
+        $model = $this->tester->grabRecord('app\models\Notification', [
+            'record_status' => Notification::RECORD_ACTIVE
+        ]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Notification');
+        $model = $this->tester->grabRecord('app\models\Notification', [
+            'record_status' => Notification::RECORD_INACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -98,7 +104,9 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Notification');
+        $model = $this->tester->grabRecord('app\models\Notification', [
+            'record_status' => Notification::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();

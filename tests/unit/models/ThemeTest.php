@@ -87,20 +87,26 @@ class ThemeTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Theme');
+        $model = $this->tester->grabRecord('app\models\Theme', [
+            'record_status' => Theme::RECORD_ACTIVE
+        ]);
         $model->name = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Theme');
+        $model = $this->tester->grabRecord('app\models\Theme', [
+            'record_status' => Theme::RECORD_ACTIVE
+        ]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Theme');
+        $model = $this->tester->grabRecord('app\models\Theme', [
+            'record_status' => Theme::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -109,7 +115,9 @@ class ThemeTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Theme');
+        $model = $this->tester->grabRecord('app\models\Theme', [
+            'record_status' => Theme::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();

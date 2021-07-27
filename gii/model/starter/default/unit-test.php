@@ -67,20 +67,26 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
+        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>', [
+            'record_status' => <?= $className ?>::RECORD_ACTIVE
+        ]);
         $model->record_status = 1;
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
+        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>', [
+            'record_status' => <?= $className ?>::RECORD_ACTIVE
+        ]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
+        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>', [
+            'record_status' => <?= $className ?>::RECORD_INACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -89,7 +95,9 @@ class <?= isset($modelAlias) ? $modelAlias : $modelClass ?>Test extends \Codecep
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>');
+        $model = $this->tester->grabRecord('<?= $generator->ns ?>\<?= $className ?>', [
+            'record_status' => <?= $className ?>::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();

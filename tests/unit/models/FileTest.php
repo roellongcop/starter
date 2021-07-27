@@ -66,20 +66,20 @@ class FileTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\File');
+        $model = $this->tester->grabRecord('app\models\File', ['record_status' => File::RECORD_ACTIVE]);
         $model->name = 'update';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\File');
+        $model = $this->tester->grabRecord('app\models\File', ['record_status' => File::RECORD_ACTIVE]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\File');
+        $model = $this->tester->grabRecord('app\models\File', ['record_status' => File::RECORD_INACTIVE]);
         expect_that($model);
 
         $model->activate();
@@ -88,7 +88,7 @@ class FileTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\File');
+        $model = $this->tester->grabRecord('app\models\File', ['record_status' => File::RECORD_ACTIVE]);
         expect_that($model);
 
         $model->inactivate();

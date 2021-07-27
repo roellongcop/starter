@@ -156,20 +156,26 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\User');
+        $model = $this->tester->grabRecord('app\models\User', [
+            'record_status' => User::RECORD_ACTIVE
+        ]);
         $model->username = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteWithRelatedData()
     {
-        $model = $this->tester->grabRecord('app\models\User');
+        $model = $this->tester->grabRecord('app\models\User', [
+            'record_status' => User::RECORD_ACTIVE
+        ]);
         expect_not($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\User');
+        $model = $this->tester->grabRecord('app\models\User', [
+            'record_status' => User::RECORD_INACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -178,7 +184,9 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\User');
+        $model = $this->tester->grabRecord('app\models\User', [
+            'record_status' => User::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();

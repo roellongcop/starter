@@ -77,20 +77,26 @@ class SettingTest extends \Codeception\Test\Unit
 
     public function testUpdateSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Setting');
+        $model = $this->tester->grabRecord('app\models\Setting', [
+            'record_status' => Setting::RECORD_ACTIVE
+        ]);
         $model->name = 'updated';
         expect_that($model->save());
     }
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\Setting');
+        $model = $this->tester->grabRecord('app\models\Setting', [
+            'record_status' => Setting::RECORD_ACTIVE
+        ]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Setting');
+        $model = $this->tester->grabRecord('app\models\Setting', [
+            'record_status' => Setting::RECORD_INACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -99,7 +105,9 @@ class SettingTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\Setting');
+        $model = $this->tester->grabRecord('app\models\Setting', [
+            'record_status' => Setting::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();

@@ -73,13 +73,17 @@ class VisitLogTest extends \Codeception\Test\Unit
 
     public function testDeleteSuccess()
     {
-        $model = $this->tester->grabRecord('app\models\VisitLog');
+        $model = $this->tester->grabRecord('app\models\VisitLog', [
+            'record_status' => VisitLog::RECORD_ACTIVE
+        ]);
         expect_that($model->delete());
     }
 
     public function testActivateData()
     {
-        $model = $this->tester->grabRecord('app\models\VisitLog');
+        $model = $this->tester->grabRecord('app\models\VisitLog', [
+            'record_status' => VisitLog::RECORD_INACTIVE
+        ]);
         expect_that($model);
 
         $model->activate();
@@ -88,7 +92,9 @@ class VisitLogTest extends \Codeception\Test\Unit
 
     public function testGuestDeactivateData()
     {
-        $model = $this->tester->grabRecord('app\models\VisitLog');
+        $model = $this->tester->grabRecord('app\models\VisitLog', [
+            'record_status' => VisitLog::RECORD_ACTIVE
+        ]);
         expect_that($model);
 
         $model->inactivate();
