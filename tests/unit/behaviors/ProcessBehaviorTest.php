@@ -29,4 +29,38 @@ class ProcessBehaviorTest extends \Codeception\Test\Unit
         $model->_canCreate = false;
         expect_not($model->save());
     }
+
+    public function testUpdateSuccess()
+    {
+        $model = $this->tester->grabRecord('app\models\Ip', [
+            'record_status' => Ip::RECORD_ACTIVE
+        ]);
+        expect_that($model->save());
+    }
+
+    public function testUpdateForbidden()
+    {
+        $model = $this->tester->grabRecord('app\models\Ip', [
+            'record_status' => Ip::RECORD_ACTIVE
+        ]);
+        $model->_canUpdate = false;
+        expect_not($model->save());
+    }
+
+    public function testDeleteSuccess()
+    {
+        $model = $this->tester->grabRecord('app\models\Ip', [
+            'record_status' => Ip::RECORD_ACTIVE
+        ]);
+        expect_that($model->delete());
+    }
+
+    public function testDeleteForbidden()
+    {
+        $model = $this->tester->grabRecord('app\models\Ip', [
+            'record_status' => Ip::RECORD_ACTIVE
+        ]);
+        $model->_canDelete = false;
+        expect_not($model->delete());
+    }
 }
