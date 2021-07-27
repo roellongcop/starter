@@ -322,10 +322,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->_canInactivate === NULL) {
             if (App::isLogin()
                 && App::identity()->can('in-active-data', $this->controllerID())
-                && App::identity()->can('change-record-status', $this->controllerID()) {
-               
+                && App::identity()->can('change-record-status', $this->controllerID())) {
                     $this->_canInactivate = TRUE;
-                }
             }
             else {
                 $this->_canInactivate = TRUE;
