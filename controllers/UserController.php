@@ -283,9 +283,7 @@ class UserController extends Controller
 
     public function actionMyPassword($token='')
     {
-        $token = $token ?: App::identity('password_reset_token');
-
-        $user = $this->findModel($token, 'password_reset_token');
+        $user = ($token)? $this->findModel($token, 'password_reset_token'): App::identity();
 
         $model = new ChangePasswordForm([
             'user_id' => $user->id,
@@ -296,7 +294,7 @@ class UserController extends Controller
             App::success('Password Change.');
             return $this->redirect(['user/my-password']);
         }
-        
+
         return $this->render('my_password', [
             'model' => $model,
         ]);
