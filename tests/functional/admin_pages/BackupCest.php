@@ -10,7 +10,9 @@ class BackupCest
     public function _before(FunctionalTester $I)
     {
         $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
-        $this->model = $I->grabRecord('app\models\Backup');
+        $this->model = $I->grabRecord('app\models\Backup', [
+            'record_status' => Backup::RECORD_ACTIVE
+        ]);
         $I->amLoggedInAs($this->user);
     }
 
@@ -81,7 +83,10 @@ class BackupCest
             'Backup' => $this->data(['record_status' => Backup::RECORD_INACTIVE])
         ]);
 
-        $I->dontSeeRecord('app\models\Backup', $this->data(['record_status' => Backup::RECORD_INACTIVE]));
+        $I->dontSeeRecord('app\models\Backup', $this->data([
+            'filename' => 'backupname',
+            'record_status' => Backup::RECORD_INACTIVE
+        ]));
 
         \Yii::$app->user->logout();
     }

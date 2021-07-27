@@ -10,7 +10,9 @@ class ThemeCest
     public function _before(FunctionalTester $I)
     {
         $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
-        $this->model = $I->grabRecord('app\models\Theme');
+        $this->model = $I->grabRecord('app\models\Theme', [
+            'record_status' => Theme::RECORD_ACTIVE
+        ]);
         $I->amLoggedInAs($this->user);
     }
 
@@ -89,6 +91,7 @@ class ThemeCest
         ]);
 
         $I->dontSeeRecord('app\models\Theme', $this->data([
+            'name' => 'test-theme',
             'record_status' => Theme::RECORD_INACTIVE
         ]));
 

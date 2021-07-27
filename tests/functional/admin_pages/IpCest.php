@@ -10,7 +10,7 @@ class IpCest
     public function _before(FunctionalTester $I)
     {
         $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
-        $this->model = $I->grabRecord('app\models\Ip');
+        $this->model = $I->grabRecord('app\models\Ip', ['record_status' => Ip::RECORD_ACTIVE]);
         $I->amLoggedInAs($this->user);
     }
 
@@ -61,13 +61,14 @@ class IpCest
 
         $I->amOnPage($this->model->getCreateUrl(false));
         $I->submitForm('form#ip-form', [
-            'Ip' => $this->data(['record_status' => Ip::RECORD_INACTIVE])
+            'Ip' => $this->data([
+                'record_status' => Ip::RECORD_INACTIVE
+            ])
         ]);
 
-        $I->dontSeeRecord('app\models\Ip', [
-            'id' => $this->model->id,
+        $I->dontSeeRecord('app\models\Ip', $this->data([
             'record_status' => Ip::RECORD_INACTIVE
-        ]);
+        ]));
 
         \Yii::$app->user->logout();
     }
@@ -83,7 +84,10 @@ class IpCest
             'Ip' => $this->data(['record_status' => Ip::RECORD_INACTIVE])
         ]);
 
-        $I->dontSeeRecord('app\models\Ip', $this->data(['record_status' => Ip::RECORD_INACTIVE]));
+        $I->dontSeeRecord('app\models\Ip', $this->data([
+            'id' => $this->model->id,
+            'record_status' => Ip::RECORD_INACTIVE
+        ]));
 
         \Yii::$app->user->logout();
     }

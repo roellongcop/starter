@@ -10,7 +10,9 @@ class UserMetaCest
     public function _before(FunctionalTester $I)
     {
         $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
-        $this->model = $I->grabRecord('app\models\UserMeta');
+        $this->model = $I->grabRecord('app\models\UserMeta', [
+            'record_status' => UserMeta::RECORD_ACTIVE
+        ]);
         $I->amLoggedInAs($this->user);
     }
 

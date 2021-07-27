@@ -13,7 +13,9 @@ class RoleCest
     public function _before(FunctionalTester $I)
     {
         $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
-        $this->model = $I->grabRecord('app\models\Role');
+        $this->model = $I->grabRecord('app\models\Role', [
+            'record_status' => Role::RECORD_ACTIVE
+        ]);
         $I->amLoggedInAs($this->user);
 
         $access = App::component('access');
@@ -79,7 +81,10 @@ class RoleCest
             'Role' => $this->data(['record_status' => Role::RECORD_INACTIVE])
         ]);
 
-        $I->dontSeeRecord('app\models\Role', $this->data(['record_status' => Role::RECORD_INACTIVE]));
+        $I->dontSeeRecord('app\models\Role', $this->data([
+            'name' => 'testrole', 
+            'record_status' => Role::RECORD_INACTIVE
+        ]));
 
         \Yii::$app->user->logout();
     }

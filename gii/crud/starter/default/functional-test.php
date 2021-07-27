@@ -17,7 +17,9 @@ class <?= $modelClass ?>Cest
     public function _before(FunctionalTester $I)
     {
         $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
-        $this->model = $I->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>');
+        $this->model = $I->grabRecord('<?= ltrim($generator->modelClass, '\\') ?>', [
+            'record_status' => <?= $modelClass ?>::RECORD_ACTIVE
+        ]);
         $I->amLoggedInAs($this->user);
     }
 

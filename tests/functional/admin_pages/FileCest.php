@@ -11,7 +11,9 @@ class FileCest
     public function _before(FunctionalTester $I)
     {
         $this->user = $I->grabRecord('app\models\User', ['username' => 'developer']);
-        $this->model = $I->grabRecord('app\models\File');
+        $this->model = $I->grabRecord('app\models\File', [
+            'record_status' => File::RECORD_ACTIVE
+        ]);
         $I->amLoggedInAs($this->user);
     }
 
