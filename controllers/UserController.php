@@ -286,15 +286,17 @@ class UserController extends Controller
         $token = $token ?: App::identity('password_reset_token');
 
         $user = $this->findModel($token, 'password_reset_token');
+
         $model = new ChangePasswordForm([
+            'user_id' => $user->id,
             'password_hint' => $user->password_hint
         ]);
 
-        if ($model->load(App::post()) && $model->validate()) {
-            $user = $model->changePassword();
+        if ($model->load(App::post()) && $model->changePassword()) {
             App::success('Password Change.');
             return $this->redirect(['user/my-password']);
         }
+        
         return $this->render('my_password', [
             'model' => $model,
         ]);

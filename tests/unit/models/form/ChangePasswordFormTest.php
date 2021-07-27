@@ -21,6 +21,9 @@ class ChangePasswordFormTest extends \Codeception\Test\Unit
     {
         $model = new ChangePasswordForm($this->data());
         expect_that($model->changePassword());
+
+        $user = $model->_user;
+        expect_that($user->validatePassword($this->data()['new_password']));
     }
 
     public function testOldPassword()
