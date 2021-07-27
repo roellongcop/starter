@@ -31,7 +31,6 @@ class EmailJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
             'parameters' => $this->parameters,
         ]);
 
-        if ($mail->send()) {
-        }
+        return $mail->send();
     }
 }

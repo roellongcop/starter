@@ -23,6 +23,6 @@ class NotificationJob extends \yii\base\BaseObject implements \yii\queue\JobInte
     		'message' => $this->message,
     	]);
 
-    	$notification->save();
+    	return $notification->save();
     }
 }

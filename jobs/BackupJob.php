@@ -14,7 +14,7 @@ class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
     
     public function execute($queue)
     {
-        // ini_set('max_execution_time', 0);
+        ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
         
     	$model = Backup::findOne($this->backupId);
