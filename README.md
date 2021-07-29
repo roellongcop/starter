@@ -28,6 +28,17 @@
 
 ============================================================================
 
+# Notes
+* In different environment (Server), you may need to adjust some configurations
+- console environment (config/console.php)
+- testing environment (config/test.php)
+	```'urlManager' => [
+            'scriptUrl' => 'http://localhost',
+            'baseUrl' => '/starter',
+            'enablePrettyUrl' => true,
+        ]
+    ```
+
 
 # Features
 * Base on keenadmin dashboard

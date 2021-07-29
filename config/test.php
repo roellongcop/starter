@@ -40,6 +40,8 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'scriptUrl' => 'http://localhost',
+            'baseUrl' => '/starter',
         ],
         'user' => [
             'class' => 'yii\web\User',
