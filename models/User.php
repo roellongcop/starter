@@ -9,7 +9,7 @@ use app\widgets\Anchor;
 use app\widgets\Label;
 use yii\behaviors\SluggableBehavior;
 use app\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Url;
 use yii\web\IdentityInterface;
 
 /**

@@ -1,5 +1,5 @@
 <?php
-use yii\helpers\Url;
+use app\helpers\Url;
 $registerJs = <<<SCRIPT
     let index = 0;
     $('#add-main-navigation-{$id}').on('click', function() {

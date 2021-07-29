@@ -5,7 +5,7 @@
 use app\assets\AppAsset;
 use app\helpers\App;
 use yii\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Url;
 // use app\assets\MainAsset;
 
 AppAsset::register($this);

@@ -584,7 +584,7 @@ class App {
 	public static function createUrl($path, $params=[])
 	{
 		$path = "{$path}&" . http_build_query($params);
-		return \yii\helpers\Url::to($path, true);
+		return \app\helpers\Url::to($path, true);
 	}
 
 	public static function include($file='', $params=[], $layout_path="_includes")

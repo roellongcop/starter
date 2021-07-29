@@ -9,7 +9,7 @@ use app\widgets\Anchor;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
 use yii\behaviors\SluggableBehavior;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 /**
  * This is the model class for table "{{%themes}}".

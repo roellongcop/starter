@@ -2,7 +2,7 @@
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 $identity = App::identity();
 $access = App::component('access');
@@ -192,7 +192,7 @@ $access = App::component('access');
             <!--begin::Item-->
             <span class="navi-item mt-2">
                 <span class="navi-link">
-                    <?= Html::beginForm(['/site/logout'], 'post') ?>
+                    <?= Html::beginForm(['site/logout'], 'post') ?>
                         <?= Html::submitButton(
                             'Sign Out',
                             ['class' => 'btn btn-sm btn-light-danger font-weight-bolder py-3 px-6']

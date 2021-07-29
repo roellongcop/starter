@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
 use app\widgets\Switcher;
-use yii\helpers\Url;
+use app\helpers\Url;
  
 class RecordHtml extends AppWidget
 {

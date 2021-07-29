@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\Anchor;
 use yii\behaviors\SluggableBehavior;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 /**
  * This is the model class for table "{{%ips}}".

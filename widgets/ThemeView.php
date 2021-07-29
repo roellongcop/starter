@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\models\File;
 use app\models\form\ThemeForm;
-use yii\helpers\Url;
+use app\helpers\Url;
  
 class ThemeView extends AppWidget
 {

@@ -39,7 +39,7 @@ class Html extends \yii\helpers\Html
 
     public static function navController($menu)
     {
-        $request = new Request(['url' => parse_url(Url::to($menu['link'], true), PHP_URL_PATH)]);
+        $request = new Request(['url' => parse_url(\yii\helpers\Url::to($menu['link'], true), PHP_URL_PATH)]);
         $url = App::urlManager()->parseRequest($request);
         list($controller, $actionID) = App::app()->createController($url[0]);
 

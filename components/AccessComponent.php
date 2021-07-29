@@ -9,7 +9,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 class AccessComponent extends Component
 {

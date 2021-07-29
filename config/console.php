@@ -4,6 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $pdf = require __DIR__ . '/pdf.php';
 $queue = require __DIR__ . '/queue.php';
+$urlManager = require __DIR__ . '/urlManager.php';
 
 $config = [
     'id' => 'basic-console',
@@ -55,11 +56,7 @@ $config = [
         ],
         'db' => $db,
         'pdf' => $pdf,
-        'urlManager' => [
-            'scriptUrl' => 'http://localhost',
-            'baseUrl' => '/starter',
-            'enablePrettyUrl' => true,
-        ]
+        'urlManager' => $urlManager
     ],
     'params' => $params,
     'controllerMap' => [

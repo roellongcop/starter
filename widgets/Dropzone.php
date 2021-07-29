@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
-use yii\helpers\Url;
+use app\helpers\Url;
 use yii\helpers\ArrayHelper;
  
 class Dropzone extends AppWidget

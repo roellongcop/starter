@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
 use yii\helpers\Inflector;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 /**
  * This is the model class for table "{{%logs}}".

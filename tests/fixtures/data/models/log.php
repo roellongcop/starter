@@ -1,7 +1,7 @@
 <?php
 
 use app\models\Log;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 $model = new \app\helpers\FixtureData(function($name) {
     return [
@@ -26,7 +26,7 @@ $model = new \app\helpers\FixtureData(function($name) {
 		   'id' => NULL,
 		]),
 		'method' => 'POST',
-		'url' => Url::to(['/site/login'], true),
+		'url' => Url::to(['site/login'], true),
 		'action' => 'login',
 		'controller' => 'site',
 		'table_name' => 'visit_logs',

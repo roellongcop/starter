@@ -25,7 +25,7 @@ class NotificationCest
         return array_replace([
             'user_id' => 1,
             'message' => 'You\'ve Change your password',
-            'link' => Url::to(['/user/my-password']),
+            'link' => Url::to(['user/my-password']),
             'type' => 'notification_change_password',
             'token' => 'TftF853osh1623298888',
             'status' => Notification::STATUS_UNREAD,

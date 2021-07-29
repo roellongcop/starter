@@ -11,7 +11,7 @@ use app\helpers\App;
 use app\helpers\Html;
 use app\models\ModelFile;
 use app\widgets\Anchor;
-use yii\helpers\Url;
+use app\helpers\Url;
 use yii\imagine\Image;
 
 /**
@@ -171,14 +171,17 @@ class File extends ActiveRecord
             ->all();
     }
 
-    public function getImagePath($params = [])
+    public function getDisplay($params = [])
     {
         if($this->token) {
-            $path = array_merge(['/file/display', 'token' => $this->token], $params);
+            $path = array_merge(['file/display', 'token' => $this->token], $params);
             return Url::to($path);
         }
-        
-        return App::generalSetting('image_holder');
+    }
+
+    public function getImagePath($params = [])
+    {
+        return $this->getDisplay($params) ?: App::generalSetting('image_holder');
     }
 
     public function gridColumns()

@@ -2,7 +2,7 @@
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 $identity = App::identity();
 $access = App::component('access');
@@ -121,7 +121,7 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 						<!--begin::Footer-->
 						<div class="navi-separator mt-3"></div>
 						<div class="navi-footer px-8 py-5">
-							<?= Html::beginForm(['/site/logout'], 'post') ?>
+							<?= Html::beginForm(['site/logout'], 'post') ?>
 		                        <?= Html::submitButton(
 		                            'Sign Out',
 		                            ['class' => 'btn btn-light-primary font-weight-bold']

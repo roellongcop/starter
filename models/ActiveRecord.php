@@ -19,7 +19,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
-use yii\helpers\Url;
+use app\helpers\Url;
  
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
@@ -641,7 +641,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'model_id' => $this->id,
                 'model_name' => App::getModelName($this)
             ])
-            ->andFilterWhere(['extension' => $extension ])
+            ->andFilterWhere(['extension' => $extension])
             ->groupBy(['file_id'])
             ->orderBy(['MAX(id)' => SORT_DESC])
             ->all();
@@ -712,8 +712,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getImagePath($params=[])
     {
         if(($modelFile = $this->modelImageFile) != NULL) {
-            $path = array_merge(['/file/display', 'token' => $modelFile->fileToken], $params);
-            return Url::to($path);
+            if ($modelFile->file) {
+                return $modelFile->file->getDisplay($params);
+            }
         }
         return App::generalSetting('image_holder');
     }
@@ -756,7 +757,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getSqlFilePath()
     {
         if(($modelFile = $this->modelSqlFile) != NULL) {
-            return Url::to(['/file/display', 'token' => $modelFile->fileToken]);
+            if ($modelFile->file) {
+                return $modelFile->file->display;
+            }
         }
     }
 

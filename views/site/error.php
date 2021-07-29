@@ -6,7 +6,7 @@
 
 use app\helpers\App;
 use yii\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Url;
 $this->title = $name;
 $publishedUrl = App::publishedUrl('/media/error/bg1.jpg');
 ?>

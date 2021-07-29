@@ -9,7 +9,7 @@ use app\widgets\Anchor;
 use app\widgets\BootstrapSelect;
 use yii\behaviors\SluggableBehavior;
 use yii\helpers\Inflector;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 /**
  * This is the model class for table "{{%settings}}".

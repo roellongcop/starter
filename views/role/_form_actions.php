@@ -1,7 +1,7 @@
 <?php
 use app\widgets\Checkbox;
 use yii\helpers\Inflector;
-use yii\helpers\Url;
+use app\helpers\Url;
 ?>
 <div class="row">
     <div class="col-md-8">

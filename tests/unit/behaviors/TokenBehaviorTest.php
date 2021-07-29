@@ -13,7 +13,7 @@ class TokenBehaviorTest extends \Codeception\Test\Unit
         return array_replace([
             'user_id' => 1,
             'message' => 'You\'ve Change your password',
-            'link' => Url::to(['/user/my-password']),
+            'link' => Url::to(['user/my-password']),
             'type' => 'notification_change_password',
             'status' => Notification::STATUS_UNREAD,
             'record_status' => Notification::RECORD_ACTIVE

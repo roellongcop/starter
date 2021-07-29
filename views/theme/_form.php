@@ -8,7 +8,7 @@ use app\widgets\RecordStatusInput;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
 use yii\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Url;
 use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */

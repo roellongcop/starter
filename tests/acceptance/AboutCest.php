@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Url;
+use app\helpers\Url;
 
 class AboutCest
 {

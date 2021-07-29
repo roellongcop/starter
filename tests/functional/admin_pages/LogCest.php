@@ -43,7 +43,7 @@ class LogCest
                'id' => NULL,
             ],
             'method' => 'POST',
-            'url' => Url::to(['/site/login'], true),
+            'url' => Url::to(['site/login'], true),
             'action' => 'login',
             'controller' => 'site',
             'table_name' => 'visit_logs',

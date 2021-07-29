@@ -2,7 +2,7 @@
 use app\helpers\App;
 use app\widgets\Anchor;
 use yii\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Url;
 use app\widgets\ActiveForm;
 ?>
 <div id="container-<?= $id ?>" class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">

@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
-use yii\helpers\Url;
+use app\helpers\Url;
  
 class ChooseFromGallery extends AppWidget
 {

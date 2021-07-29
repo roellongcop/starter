@@ -5,7 +5,7 @@ namespace app\filters;
 use Yii;
 use app\helpers\App;
 use yii\helpers\Json;
-use yii\helpers\Url;
+use app\helpers\Url;
 use yii\base\ActionFilter;
 
 class SettingFilter extends ActionFilter

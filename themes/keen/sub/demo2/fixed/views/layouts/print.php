@@ -6,7 +6,7 @@ use app\helpers\App;
 use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo2\fixed\assets\KeenDemo2FixedAppAsset;
 use yii\helpers\Html;
-use yii\helpers\Url;
+use app\helpers\Url;
 
 KeenDemo2FixedAppAsset::register($this);
 KeenAsset::register($this);
