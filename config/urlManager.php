@@ -3,7 +3,7 @@ return [
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'scriptUrl' => 'http://localhost:8080',
-    'baseUrl' => 'http://localhost:8080',
+    'baseUrl' => '/',
     'rules' => [
         [
             'class' => 'yii\rest\UrlRule', 
