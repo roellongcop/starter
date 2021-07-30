@@ -6,6 +6,7 @@ $params = require __DIR__ . '/params.php';
 $session = require __DIR__ . '/session.php';
 $queue = require __DIR__ . '/queue.php';
 $urlManager = require __DIR__ . '/urlManager.php';
+unset($urlManager['scriptUrl'], $urlManager['baseUrl']);
 
 $config = [
     'id' => 'yii2-basic-starter',
