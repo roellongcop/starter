@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit\job;
+namespace tests\unit\jobs;
 
 use app\jobs\NotificationJob;
 
