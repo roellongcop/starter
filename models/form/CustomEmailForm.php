@@ -22,11 +22,20 @@ class CustomEmailForm extends Model
     public function rules()
     {
         return [
-            [['to', 'subject', 'from'], 'required'],
-            [['to', 'from', 'cc', 'bcc',], 'email'],
-            [['to', 'from', 'cc', 'bcc',], 'trim'],
-            [['content', 'sender_name', 'template', 'parameters'], 'safe'],
+            [['to', 'subject'], 'required'],
+            [['to', 'from',], 'email'],
+            [['to', 'from',], 'trim'],
+            ['content', 'validateContent'],
+            [['cc', 'bcc', 'parameters'], 'safe'],
+            [['content', 'sender_name', 'template'], 'string'],
         ];
+    }
+
+    public function validateContent($attribute, $params)
+    {
+        if ($this->template && !$this->content) {
+            $this->addError($attribute, 'Content is required.');
+        }
     }
 
     public function init()
