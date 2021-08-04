@@ -25,16 +25,44 @@ class CustomEmailForm extends Model
             [['to', 'subject'], 'required'],
             [['to', 'from',], 'email'],
             [['to', 'from',], 'trim'],
-            ['content', 'validateContent'],
-            [['cc', 'bcc', 'parameters'], 'safe'],
+            [['cc', 'bcc',], 'safe'],
             [['content', 'sender_name', 'template'], 'string'],
+            ['content', 'required', 'when' => function($model) {
+                return $model->template == NULL;
+            }],
+
+            ['template', 'required', 'when' => function($model) {
+                return $model->content == NULL;
+            }],
+            ['parameters', 'validateParameters'],
+            [['cc', 'bcc'], 'validateCCBCC'],
         ];
     }
 
-    public function validateContent($attribute, $params)
+    public function validateCCBCC($attribute, $params)
     {
-        if ($this->template && !$this->content) {
-            $this->addError($attribute, 'Content is required.');
+        $emails = $this->{$attribute};
+
+        if ($emails) {
+            if (is_array($emails)) {
+                foreach ($emails as $email) {
+                    if(! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $this->addError($attribute, "{$email} was not a valid {$attribute} email.");
+                    }
+                }
+            }
+            else {
+                if(! filter_var($emails, FILTER_VALIDATE_EMAIL)) {
+                    $this->addError($attribute, "{$emails} was not a valid {$attribute} email.");
+                }
+            }
+        }
+    }
+
+    public function validateParameters($attribute, $params)
+    {
+        if (!is_array($this->parameters)) {
+            $this->addError($attribute, 'Parameters is not an array.');
         }
     }
 

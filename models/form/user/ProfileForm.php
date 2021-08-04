@@ -15,9 +15,13 @@ use app\models\UserMeta;
  */
 class ProfileForm extends \yii\base\Model
 {
+    const META_NAME = 'profile';
+
     public $user_id;
     public $first_name;
     public $last_name;
+
+    private $_user;
     
     /**
      * @return array the validation rules.
@@ -25,8 +29,9 @@ class ProfileForm extends \yii\base\Model
     public function rules()
     {
         return [
-            [['first_name', 'last_name', ], 'required'],
-            [['user_id'], 'safe'],
+            [['first_name', 'last_name', 'user_id'], 'required'],
+            [['user_id'], 'integer'],
+            [['user_id'], 'validateUserId'],
             [['first_name', 'last_name', ], 'string'],
         ];
     }
@@ -44,27 +49,39 @@ class ProfileForm extends \yii\base\Model
     {
         parent::init();
 
-        $profile = $this->user->meta('profile');
+        if (($user = $this->getUser()) != NULL) {
+            if (($meta = $user->meta(self::META_NAME)) != NULL) {
+                $this->load([App::className($this) => json_decode($meta, true)]);
+            }
+        }
+    }
 
-        if ($profile) {
-            $this->load(['ProfileForm' => json_decode($profile, true)]);
+    public function validateUserId($attribute, $params)
+    {
+        if (($user = $this->getUser()) == NULL) {
+            $this->addError($attribute, 'User don\'t exist.');
         }
     }
 
     public function getUser()
     {
-        return User::findOne($this->user_id);
+        if ($this->_user === NULL) {
+            $this->_user = User::findOne($this->user_id);
+        }
+
+        return $this->_user;
     }
 
     public function save()
     {
-        $user = $this->user;
-        
         if ($this->validate()) {
-            $user->saveMeta(['profile' => $this->attributes]);
-
-            return true;
+            if (($user = $this->getUser()) != NULL) {
+                $user->saveMeta([self::META_NAME => $this->attributes]);
+                return TRUE;
+            }
         }
+
+        return FALSE;
     }
 
     public function getDetailColumns()

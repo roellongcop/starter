@@ -4,12 +4,13 @@ namespace app\models;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Html;
+use app\helpers\Url;
+use app\models\form\user\MySettingForm;
 use app\models\form\user\ProfileForm;
 use app\widgets\Anchor;
 use app\widgets\Label;
 use yii\behaviors\SluggableBehavior;
-use app\helpers\Html;
-use app\helpers\Url;
 use yii\web\IdentityInterface;
 
 /**
@@ -383,31 +384,26 @@ class User extends ActiveRecord implements IdentityInterface
         return true;
     }
 
-    public function getThemeMeta()
+    public function getMySettings()
     {
-        return $this->hasOne(UserMeta::className(), ['user_id' => 'id'])
-            ->onCondition(['name' => 'theme'])
-            ->orderBy(['id' => SORT_DESC]);
+        return new MySettingForm(['user_id' => $this->id]);
     }
 
     public function getTheme()
     {
-        return $this->hasOne(Theme::className(), ['id' => 'value'])
-            ->via('themeMeta');
+        return $this->mySettings->getTheme();
     }
 
     public function getCurrentTheme()
     {
-        if ($this->_currentTheme) {
-            return $this->_currentTheme;
+        if ($this->_currentTheme === NULL) {
+            if (($theme = $this->theme) != null) {
+                $this->_currentTheme = $theme;
+            }
+            else {
+                $this->_currentTheme = Theme::findOne(App::generalSetting('theme'));
+            }
         }
-        if (($theme = $this->theme) != null) {
-            $this->_currentTheme = $theme;
-            return $this->_currentTheme;
-        }
-
-        $this->_currentTheme = Theme::findOne(App::generalSetting('theme'));
-
         return $this->_currentTheme;
     }
 

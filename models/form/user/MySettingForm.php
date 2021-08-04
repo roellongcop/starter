@@ -4,8 +4,9 @@ namespace app\models\form\user;
 
 use Yii;
 use app\helpers\App;
+use app\models\Theme;
+use app\models\User;
 use app\models\UserMeta;
-use yii\base\Model;
 
 /**
  * LoginForm is the model behind the login form.
@@ -13,9 +14,14 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
-class MySettingForm extends \app\models\User
+class MySettingForm extends \yii\base\Model
 {
-    public $theme;
+    const META_NAME = 'my-settings';
+    private $_user;
+    private $_theme;
+
+    public $theme_id;
+    public $user_id;
     
     /**
      * @return array the validation rules.
@@ -23,16 +29,18 @@ class MySettingForm extends \app\models\User
     public function rules()
     {
         return [
-            [['theme', ], 'required'],
-
-            [['theme', ], 'string'],
+            [['theme_id', 'user_id'], 'required'],
+            [['user_id', 'theme_id'], 'integer'],
+            [['user_id'], 'validateUserId'],
+            [['theme_id'], 'validateThemeId'],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'theme' => 'Theme',
+            'theme_id' => 'Theme',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -40,37 +48,63 @@ class MySettingForm extends \app\models\User
     {
         parent::init();
 
-        $user_metas = UserMeta::find()
-            ->where([
-                'user_id' => $this->id,
-                'name' => array_keys(self::attributeLabels())
-            ])
-            ->all();
-        foreach ($user_metas as $user_meta) {
-            if ($this->hasProperty($user_meta->name)) {
-                $this->{$user_meta->name} = $user_meta->value; 
+        if (($user = $this->getUser()) != NULL) {
+
+            if (($meta = $user->meta(self::META_NAME)) != NULL) {
+                $this->load([App::className($this) => json_decode($meta, true)]);
             }
         }
     }
 
-    public function save($runValidation = true, $attributeNames = NULL)
+    public function validateThemeId($attribute, $params)
+    {
+        if (($theme = $this->getTheme()) == NULL) {
+            $this->addError($attribute, 'Theme don\'t exist.');
+        }
+    }
+
+    public function validateUserId($attribute, $params)
+    {
+        if (($user = $this->getUser()) == NULL) {
+            $this->addError($attribute, 'User don\'t exist.');
+        }
+    }
+
+    public function save()
     {
         if ($this->validate()) {
-            foreach ($this->getAttributes(array_keys(self::attributeLabels())) as $attribute => $value) {
-                $user_meta = UserMeta::findOne([
-                    'user_id' => $this->id,
-                    'name' => $attribute
-                ]);
-                $user_meta = $user_meta ?: new UserMeta();
-                $user_meta->user_id = $this->id;
-                $user_meta->name = $attribute;
-                $user_meta->value = $value;
-                if (! $user_meta->save()) {
-                    App::danger($user_meta->errors);
-                }
+            if (($user = $this->getUser()) != NULL) {
+                $user->saveMeta([self::META_NAME => $this->attributes]);
+                return TRUE;
             }
-
-            return true;
         }
+
+        return FALSE;
+    }
+
+    public function getDetailColumns()
+    {
+        return [
+            'user_id:raw',
+            'first_name:raw',
+            'last_name:raw',
+        ];
+    }
+
+    public function getUser()
+    {
+        if ($this->_user === NULL) {
+            $this->_user = User::findOne($this->user_id);
+        }
+
+        return $this->_user;
+    }
+
+    public function getTheme()
+    {
+        if ($this->_theme === NULL) {
+            $this->_theme = Theme::findOne($this->theme_id);
+        }
+        return $this->_theme;
     }
 }

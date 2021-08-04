@@ -8,6 +8,7 @@ use app\models\File;
 use app\models\Theme;
 use app\models\UserMeta;
 use app\models\form\ThemeForm;
+use app\models\form\user\MySettingForm;
 use app\models\search\ThemeSearch;
 use app\widgets\ExportContent;
 use yii\helpers\Inflector;
@@ -271,17 +272,10 @@ class ThemeController extends Controller
     public function actionActivate($slug)
     {
         $theme = $this->findModel($slug, 'slug');
-        $model = UserMeta::findOne([
-            'user_id' => App::identity('id'),
-            'name' => 'theme'
-        ]);
 
-        $model = $model ?: new UserMeta([
-            'user_id' => App::identity('id'),
-            'name' => 'theme'
-        ]);
+        $model = new MySettingForm(['user_id' => App::identity('id')]);
+        $model->theme_id = $theme->id;
 
-        $model->value = $theme->id;
        if ( $model->save()) {
             App::success('Theme Changed.');
        }

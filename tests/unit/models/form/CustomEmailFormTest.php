@@ -23,16 +23,99 @@ class CustomEmailFormTest extends \Codeception\Test\Unit
         ], $replace);
     }
 
+    public function testValidateBCC()
+    {
+        $model = new CustomEmailForm($this->data([
+            'bcc' => 'invalidEmail'
+        ]));
+
+        expect_not($model->send());
+        expect($model->errors)->hasKey('bcc');
+
+
+        $model = new CustomEmailForm($this->data([
+            'bcc' => ['bcc1@domain.com', 'invalidEmail']
+        ]));
+
+        expect_not($model->send());
+        expect($model->errors)->hasKey('bcc');
+    }
+
+    public function testValidateCC()
+    {
+        $model = new CustomEmailForm($this->data([
+            'cc' => 'invalidEmail'
+        ]));
+
+        expect_not($model->send());
+        expect($model->errors)->hasKey('cc');
+
+        $model = new CustomEmailForm($this->data([
+            'cc' => ['cc1@domain.com', 'invalidEmail']
+        ]));
+        expect_not($model->send());
+        expect($model->errors)->hasKey('cc');
+    }
+
+    public function testValidateTo()
+    {
+        $model = new CustomEmailForm($this->data([
+            'to' => 'invalidEmail'
+        ]));
+
+        expect_not($model->send());
+        expect($model->errors)->hasKey('to');
+    }
+
+    public function testValidateFrom()
+    {
+        $model = new CustomEmailForm($this->data([
+            'from' => 'invalidEmail'
+        ]));
+
+        expect_not($model->send());
+        expect($model->errors)->hasKey('from');
+    }
+
+    public function testEmptyContent()
+    {
+        $model = new CustomEmailForm($this->data([
+            'template' => NULL,
+            'content' => NULL
+        ]));
+
+        expect_not($model->send());
+        expect($model->errors)->hasKey('content');
+    }
+
+    public function testEmptyTemplate()
+    {
+        $model = new CustomEmailForm($this->data([
+            'template' => NULL,
+            'content' => NULL
+        ]));
+
+        expect_not($model->send());
+        expect($model->errors)->hasKey('template');
+    }
+
+    public function testInvalidParameters()
+    {
+        $model = new CustomEmailForm($this->data([
+            'parameters' => 'NULL',
+        ]));
+        expect_not($model->send());
+        expect($model->errors)->hasKey('parameters');
+    }
+
     public function testRequiredFields()
     {
-        $data = $this->data();
-        $data['to'] = '';
+        $data = $this->data(['to' => '']);
         $model = new CustomEmailForm($data);
         expect_not($model->send());
         expect($model->errors)->hasKey('to');
 
-        $data = $this->data();
-        $data['subject'] = '';
+        $data = $this->data(['subject' => '']);
         $model = new CustomEmailForm($data);
         expect_not($model->send());
         expect($model->errors)->hasKey('subject');
