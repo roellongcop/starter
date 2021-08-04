@@ -89,8 +89,7 @@ class AccessComponentTest extends \Codeception\Test\Unit
 
     public function testGetSearchModels()
     {
-        // expect_that(is_array($this->access->searchModels));
-        // expect_that($this->access->searchModels);
-        var_dump($this->access->searchModels); die;
+        expect_that(is_array($this->access->searchModels));
+        expect_that($this->access->searchModels);
     }
 }
