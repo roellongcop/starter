@@ -286,14 +286,19 @@ class FileController extends Controller
             if ($model->load($post)) {
 
                 $model->fileInput = UploadedFile::getInstance($model, 'fileInput');
-                $file = $model->upload();
+                if (($file = $model->upload()) != FALSE) {
+                    $file->refresh();
 
-                $file->refresh();
-
-                $result['status'] = 'success';
-                $result['message'] = 'Uploaded';
-                $result['src'] = $file->imagePath;
-                $result['file'] = $file;
+                    $result['status'] = 'success';
+                    $result['message'] = 'Uploaded';
+                    $result['src'] = $file->imagePath;
+                    $result['file'] = $file;
+                }
+                else {
+                    $result['status'] = 'error';
+                    $result['message'] = 'Upload Error';
+                    $result['errors'] = $model->errors;
+                }
             }
             else {
                 $result['status'] = 'error';

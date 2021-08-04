@@ -44,11 +44,7 @@ class FileComponent extends Component
         }
 
         if ($file->save()) {
-
             return $file;
-        }
-        else {
-            App::danger(json_encode($file->errors));
         }
     }
 
@@ -78,6 +74,9 @@ class FileComponent extends Component
 
     public function createDirectory($folders)
     {
+        if (! App::isWeb()) {
+            array_unshift($folders, Yii::getAlias('@consoleWebroot'));
+        }
         $file_path = implode('/', $folders);
         FileHelper::createDirectory($file_path);
     }

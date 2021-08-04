@@ -26,9 +26,9 @@ class UploadForm extends Model
     public $modelName;
     public $fileInput;
     public $fileToken;
+    public $extensions;
 
     public $extensionType = '*';
-    public $extensions;
 
     public function init()
     {
@@ -57,18 +57,13 @@ class UploadForm extends Model
     public function rules()
     {
         return [
-            [['modelName', 'id', 'fileToken'], 'required'],
-            [['id'], 'integer'],
+            [['modelName'], 'required'],
             [['modelName', 'fileToken'], 'string'],
+            [['extensionType'], 'safe'],
             [
                 ['fileInput'], 
                 'file', 
-                // 'minWidth' => 100,
-                // 'maxWidth' => 200,
-                // 'minHeight' => 100,
-                // 'maxHeight' => 200,
-                // 'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
+                'skipOnEmpty' => false, 
                 'extensions' => $this->extensions, 
                 'checkExtensionByMimeType' => false
             ],
@@ -77,9 +72,11 @@ class UploadForm extends Model
 
     public function upload()
     {
-        if ($this->fileInput) {
-            // $this->fileToken = implode('-', [$this->fileToken, App::session('ID')]);
-            return App::component('file')->upload($this, 'fileInput');
-        } 
+        if ($this->validate()) {
+            if ($this->fileInput) {
+                return App::component('file')->upload($this, 'fileInput');
+            } 
+        }
+        return FALSE;
     }  
 }

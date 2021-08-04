@@ -14,7 +14,7 @@ class FileComponentTest extends \Codeception\Test\Unit
     public function testCreateIndexFile()
     {
         $folders = ['protected/test'];
-        $this->file->createDirectory([\Yii::getAlias('@consoleWebroot'), 'protected', 'test']);
+        $this->file->createDirectory($folders);
         $this->file->createIndexFile($folders);
 
         $this->tester->assertFileExists(\Yii::getAlias('@consoleWebroot') . '/protected/test/index.php');

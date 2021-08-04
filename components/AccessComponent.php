@@ -13,12 +13,14 @@ use app\helpers\Url;
 
 class AccessComponent extends Component
 {
+	public $searchModels;
 	public $controllerActions;
 	public $defaultNavigation;
 
 	public function init()
 	{
 		parent::init();
+		$this->setSearhModels();
 		$this->setControllerActions();
 		$this->setDefaultNavigation();
 	}
@@ -26,7 +28,7 @@ class AccessComponent extends Component
 	public function setControllerActions()
 	{
 		$controllers = FileHelper::findFiles(Yii::getAlias('@app/controllers'), [
-			'recursive' => true
+			'recursive' => TRUE
 		]);
 
 		$data = [];
@@ -62,7 +64,6 @@ class AccessComponent extends Component
 
 		return $this->controllerActions[$controllerID] ?? [''];
 	}
- 	
 
  	public function my_actions($controllerID='')
  	{
@@ -75,7 +76,6 @@ class AccessComponent extends Component
  		return $module_access[$controllerID] ?? [''];
  	}
 
- 
  	public function userCanRoute($link='')
  	{
  		if (is_array($link)) {
@@ -94,7 +94,6 @@ class AccessComponent extends Component
         }
  	}
  
- 
 	public function userCan($action, $controllerID='', $user='')
  	{
 		$controllerID = $controllerID ?: App::controllerID();
@@ -102,10 +101,10 @@ class AccessComponent extends Component
 		$module_access = ($user)? $user->identity->module_access: App::identity('module_access');
 
 		if (isset($module_access[$controllerID])) {
-			return in_array($action, $module_access[$controllerID]) ? true: false;
+			return in_array($action, $module_access[$controllerID]) ? TRUE: FALSE;
 		}
 
-		return false;
+		return FALSE;
  	}
  
 
@@ -282,4 +281,26 @@ class AccessComponent extends Component
 	    }
 	    return $menus;
 	}
+
+	public function setSearhModels()
+	{
+		$searchModels = FileHelper::findFiles(Yii::getAlias('@app/models/search'), [
+			'recursive' => TRUE
+		]);
+
+		$ignore = [
+			'DashboardSearch',
+		];
+
+		$data = [];
+		foreach ($searchModels as $key => $searchModel) {
+			$name = str_replace('.php', '', basename($searchModel));
+
+			if (! in_array($name, $ignore)) {
+				$data[$name] = Inflector::camel2words(str_replace('Search', '', $name));
+			}
+		}
+
+		$this->searchModels = $data;
+	} 
 }

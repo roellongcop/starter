@@ -671,6 +671,14 @@ class App {
 		return self::component('setting');
 	}
 
+	public static function access($attr='')
+	{
+		if ($attr) {
+			return self::component('access')->{$attr};
+		}
+		return self::component('access');
+	}
+
 	public static function export($attr='')
 	{
 		if ($attr) {
