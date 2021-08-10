@@ -50,7 +50,7 @@ $this->registerJs($registerJs);
                 'options' => [],
                 'id' => 'path_map',
             ]); ?>
-            <hr>
+            <br>
             <?= JsonEditor::widget([
                 'data' => $model->bundles,
                 'options' => [],

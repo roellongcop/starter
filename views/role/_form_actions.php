@@ -13,7 +13,7 @@ use app\helpers\Url;
                 'onclick' => 'checkAllModule(this)'
             ],
         ]) ?>
-        <hr>
+        <br>
         <div class="accordion accordion-toggle-arrow" id="module-access-accordion">
             <?php foreach ($controller_actions as $controller => $actions) : ?>
                 <div class="card">
@@ -35,7 +35,7 @@ use app\helpers\Url;
                                     'onclick' => 'checkAllActions(this)'
                                 ],
                             ]) ?>
-                            <hr>
+                            <br>
                             <div style="display: flex;">
                                 <div>
                                     <?= Checkbox::widget([

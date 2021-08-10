@@ -44,7 +44,7 @@ $this->registerJs($registerJs);
                     TABLES
                 </label>
             </div>
-            <hr>
+            <br>
             <?= Checkbox::widget([
                 'data' => $tables,
                 'name' => 'Backup[tables][]',

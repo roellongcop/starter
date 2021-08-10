@@ -20,7 +20,7 @@ use app\widgets\ActiveForm;
 			<?= $form->field($model, 'email_change_password')->textarea(['rows' => 8]) ?>
 		</div>
 	</div>
-	<div class="form-group"> <hr>
+	<div class="form-group"> <br>
 		<?= AnchorForm::widget() ?>
 	</div>
 <?php ActiveForm::end(); ?>

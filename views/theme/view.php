@@ -27,6 +27,5 @@ $this->params['showCreateButton'] = true;
     		'data-confirm' => 'Activate?'
     	]
     ]) ?> 
-    <hr>
     <?= Detail::widget(['model' => $model]) ?>
 </div>

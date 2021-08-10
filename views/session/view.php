@@ -17,6 +17,5 @@ $this->params['showCreateButton'] = true;
     	'names' => ['update', 'delete', 'log'], 
     	'model' => $model
     ]) ?>  
-    <hr>
     <?= Detail::widget(['model' => $model]) ?>
 </div>

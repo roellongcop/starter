@@ -116,7 +116,7 @@ use app\widgets\ImageGallery;
             ]) ?> 
 		</div>
 	</div>
-	<div class="form-group"> <hr>
+	<div class="form-group"> <br>
 		<?= AnchorForm::widget() ?>
 	</div>
 <?php ActiveForm::end(); ?>

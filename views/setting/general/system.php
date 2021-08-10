@@ -53,7 +53,7 @@ use app\widgets\ActiveForm;
 			</div>
 		</div>
 	</div>
-	<div class="form-group"> <hr>
+	<div class="form-group"> <br>
 		<?= AnchorForm::widget() ?>
 	</div>
 <?php ActiveForm::end(); ?>

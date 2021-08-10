@@ -20,7 +20,7 @@ use app\widgets\SearchButton;
 ]); ?>
     <?= Search::widget(['model' => $model]) ?>
     <?= DateRange::widget(['model' => $model]) ?>
-    <hr>
+    <br>
     <?= $form->field($model, 'model_id')->textInput([
         'name' => 'model_id'
     ]) ?>

@@ -50,7 +50,7 @@ $showExportButton = $this->params['showExportButton'] ?? '';
             </div>
         </div>
         <?= $this->render('_search') ?>
-        <hr>
+        <br>
         <?= Anchor::widget([
             'title' => 'Create New',
             'link' => ['create'],

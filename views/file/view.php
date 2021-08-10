@@ -25,6 +25,5 @@ $this->params['showCreateButton'] = true;
     		'class' => 'btn btn-success'
     	]
     ]) ?> 
-    <hr>
     <?= Detail::widget(['model' => $model]) ?>
 </div>
