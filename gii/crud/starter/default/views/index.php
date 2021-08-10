@@ -32,7 +32,7 @@ $this->params['showExportButton'] = true;
     <?= "<?=" ?> FilterColumn::widget(['searchModel' => $searchModel]) ?>
     <?= "<?=" ?> Html::beginForm(['confirm-action'], 'post'); ?>
         <?= "<?=" ?> BulkAction::widget(['searchModel' => $searchModel]) ?>
-        <hr>
+        
         <?= $generator->enablePjax ? "    <?php Pjax::begin(); ?>\n" : '' ?>
 <?php if ($generator->indexWidgetType === 'grid'): ?>
 <?= "<?=" ?> Grid::widget([

@@ -18,7 +18,6 @@ $this->params['showExportButton'] = true;
 	<?= FilterColumn::widget(['searchModel' => $searchModel]) ?>
     <?= Html::beginForm(['confirm-action'], 'post'); ?>
 	<?= BulkAction::widget(['searchModel' => $searchModel]) ?>
-    <hr>
     <?= Grid::widget([
         'dataProvider' => $dataProvider,
         'searchModel' => $searchModel,
