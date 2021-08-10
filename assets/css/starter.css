@@ -231,3 +231,7 @@ div.required label.control-label:after {
 .modal-my-photos {
     /*overflow-y: scroll;height: 350px;overflow-x: hidden;*/
 }
+
+.detail-view {
+    margin-top: 1rem;
+}

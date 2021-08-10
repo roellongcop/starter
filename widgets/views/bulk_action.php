@@ -15,7 +15,7 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
 <?php if(App::component('access')->userCan('confirm-action')): ?>
     <?php if (isset($searchModel->bulkActions)): ?>
         <input type="hidden" name="process-selected">
-        <div class="dropdown">
+        <div class="dropdown mb-5">
             <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
                 <?= $title ?>
                 <span class="caret"></span>
