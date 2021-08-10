@@ -16,12 +16,19 @@ class ThemeFilter extends ActionFilter
             return false;
         }
 
+        $theme = '';
+
         if (App::isLogin()) {
-            $theme = App::identity('currentTheme');
+
+            if (($slug = App::get('preview-theme')) != NULL) {
+                $theme = Theme::findOne(['slug' => $slug]);
+            }
+            else {
+                $theme = App::identity('currentTheme');
+            }
         }
-        else {
-            $theme = Theme::findOne(App::generalSetting('theme'));
-        }
+
+        $theme = $theme ?: Theme::findOne(App::generalSetting('theme'));
 
         if ($theme) {
             if ($theme->bundles) {

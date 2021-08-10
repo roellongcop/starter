@@ -51,7 +51,7 @@ class ProfileForm extends \yii\base\Model
 
         if (($user = $this->getUser()) != NULL) {
             if (($meta = $user->meta(self::META_NAME)) != NULL) {
-                $this->load([App::className($this) => json_decode($meta, true)]);
+                $this->load(['ProfileForm' => json_decode($meta, true)]);
             }
         }
     }

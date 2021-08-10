@@ -1,6 +1,6 @@
 <?php
 use app\helpers\App;
-use app\helpers\Element;
+use app\helpers\Html;
 $controller = $this->params['controller'] ?? App::controllerID();
 ?>
 <?php foreach ($menus as $menu): ?>
@@ -24,7 +24,7 @@ $controller = $this->params['controller'] ?? App::controllerID();
             </li> 
 
         <?php else: ?>
-            <li class="menu-item <?= (Element::navController($menu) == $controller) ? 'menu-item-active': '' ?>" aria-haspopup="true">
+            <li class="menu-item <?= (Html::navController($menu) == $controller) ? 'menu-item-active': '' ?>" aria-haspopup="true">
                 <?= $this->render('_a_child', [
                     'menu' => $menu,
                     'withIcon' => $withIcon,

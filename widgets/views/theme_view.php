@@ -36,7 +36,7 @@ use app\widgets\ActiveForm;
 					'data-confirm' => 'Are you sure ?'
 				]
 			]) ?>
-			<?= Html::a('View', $theme->imagePath, [
+			<?= Html::a('Preview', Url::current(['preview-theme' => $theme->slug]), [
 				'target' => '_blank',
 				'class' => 'btn btn-sm btn-secondary font-weight-bolder py-2',
 			]) ?>
