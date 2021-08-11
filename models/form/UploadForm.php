@@ -77,6 +77,6 @@ class UploadForm extends Model
                 return App::component('file')->upload($this, 'fileInput');
             } 
         }
-        return FALSE;
+        return false;
     }  
 }

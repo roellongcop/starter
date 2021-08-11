@@ -17,10 +17,10 @@ abstract class Controller extends \yii\web\Controller
     public function beforeAction($action)
     {
         if (!parent::beforeAction($action)) {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     public function behaviors()

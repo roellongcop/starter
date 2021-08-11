@@ -15,7 +15,7 @@ class IpFilterTest extends \Codeception\Test\Unit
     {
         $model = new IpFilter();
 
-        expect_that($model->beforeAction(TRUE));
+        expect_that($model->beforeAction(true));
 
         $this->tester->seeRecord('app\models\Ip', [
             'name' => App::ip(),
@@ -34,7 +34,7 @@ class IpFilterTest extends \Codeception\Test\Unit
             new \yii\web\ForbiddenHttpException('IP is Blocked !'), 
             function() {
                 $model = new IpFilter();
-                $model->beforeAction(TRUE);
+                $model->beforeAction(true);
             }
         );
     }
@@ -55,7 +55,7 @@ class IpFilterTest extends \Codeception\Test\Unit
             new \yii\web\ForbiddenHttpException('IP not WhiteListed.'), 
             function() {
                 $model = new IpFilter();
-                $model->beforeAction(TRUE);
+                $model->beforeAction(true);
             }
         );
     }

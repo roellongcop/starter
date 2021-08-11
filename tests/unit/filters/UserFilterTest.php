@@ -11,7 +11,7 @@ class UserFilterTest extends \Codeception\Test\Unit
     {
         $model = new UserFilter();
 
-        expect_that($model->beforeAction(TRUE));
+        expect_that($model->beforeAction(true));
     }
 
     public function testBlocked()
@@ -22,7 +22,7 @@ class UserFilterTest extends \Codeception\Test\Unit
             new \yii\web\ForbiddenHttpException('User is Blocked !'), 
             function() {
                 $model = new UserFilter();
-                expect_that($model->beforeAction(TRUE));
+                expect_that($model->beforeAction(true));
             }
         );
     }

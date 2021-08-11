@@ -28,7 +28,7 @@ class AccessComponent extends Component
 	public function setControllerActions()
 	{
 		$controllers = FileHelper::findFiles(Yii::getAlias('@app/controllers'), [
-			'recursive' => TRUE
+			'recursive' => true
 		]);
 
 		$data = [];
@@ -101,10 +101,10 @@ class AccessComponent extends Component
 		$module_access = ($user)? $user->identity->module_access: App::identity('module_access');
 
 		if (isset($module_access[$controllerID])) {
-			return in_array($action, $module_access[$controllerID]) ? TRUE: FALSE;
+			return in_array($action, $module_access[$controllerID]) ? true: false;
 		}
 
-		return FALSE;
+		return false;
  	}
  
 
@@ -285,7 +285,7 @@ class AccessComponent extends Component
 	public function setSearhModels()
 	{
 		$searchModels = FileHelper::findFiles(Yii::getAlias('@app/models/search'), [
-			'recursive' => TRUE
+			'recursive' => true
 		]);
 
 		$ignore = [

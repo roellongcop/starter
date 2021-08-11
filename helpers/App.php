@@ -486,7 +486,7 @@ class App {
 	    return $device;
 	}
 
-	public static function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) 
+	public static function ip_info($ip = NULL, $purpose = "location", $deep_detect = true) 
     { 
     	if (! $ip) {
     		$ip = self::ip();
@@ -496,7 +496,7 @@ class App {
     	}
     	
         $output = NULL;
-        if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
+        if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
             $ip = $_SERVER["REMOTE_ADDR"];
             if ($deep_detect) {
                 if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))

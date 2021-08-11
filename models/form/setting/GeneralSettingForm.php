@@ -99,7 +99,7 @@ class GeneralSettingForm extends \yii\base\Model
 
         if (($model = Setting::findOne(['name' => 'general-setting'])) != NULL) {
 
-            $data = array_replace($data, json_decode($model->value, TRUE));
+            $data = array_replace($data, json_decode($model->value, true));
         }
 
         $this->load(['GeneralSettingForm' => $data]);
@@ -114,10 +114,10 @@ class GeneralSettingForm extends \yii\base\Model
             $model->value = json_encode($this->attributes);
             $model->save();
 
-            return TRUE;
+            return true;
         }
 
 
-        return FALSE;
+        return false;
     }
 }

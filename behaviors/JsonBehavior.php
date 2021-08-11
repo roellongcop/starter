@@ -36,7 +36,7 @@ class JsonBehavior extends Behavior
             foreach ($this->fields as $e) {
                 $data = $this->owner->{$e} ?: '[]';
                 if (!is_array($data)) {
-                    $this->owner->{$e} = json_decode($data, TRUE);
+                    $this->owner->{$e} = json_decode($data, true);
                 }
             }
         }

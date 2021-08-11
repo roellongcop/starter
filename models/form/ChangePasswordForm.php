@@ -100,6 +100,6 @@ class ChangePasswordForm extends Model
             }
         }
 
-        return FALSE;
+        return false;
     }
 }

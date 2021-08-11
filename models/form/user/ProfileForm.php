@@ -77,11 +77,11 @@ class ProfileForm extends \yii\base\Model
         if ($this->validate()) {
             if (($user = $this->getUser()) != NULL) {
                 $user->saveMeta([self::META_NAME => $this->attributes]);
-                return TRUE;
+                return true;
             }
         }
 
-        return FALSE;
+        return false;
     }
 
     public function getDetailColumns()
