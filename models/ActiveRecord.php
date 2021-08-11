@@ -916,12 +916,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public static function all($value='', $key='id', $array=FALSE)
     {
-        $model = static::find()
+        $models = static::find()
             ->andFilterWhere([$key => $value]);
 
-        $model = ($array) ? $model->asArray()->all(): $model->all();
+        $models = ($array) ? $models->asArray()->all(): $models->all();
 
-        return ($model)? $model: '';
+        return ($models)? $models: '';
     }
 
     public static function dropdown($key='id', $value='name', $condition=[], $map=TRUE)
