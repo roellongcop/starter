@@ -231,6 +231,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             ->one();
     }
 
+    public static function findOrCreate($condition)
+    {
+        $condition = is_array($condition)? $condition: ['id' => $condition];
+
+        return static::findOne($condition) ?: new static($condition);
+    }
+
     public static function deleteAll($condition = NULL, $params = []) 
     {
         $models = static::findAll($condition);
