@@ -1,10 +1,6 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
-$pdf = require __DIR__ . '/pdf.php';
-$queue = require __DIR__ . '/queue.php';
-$urlManager = require __DIR__ . '/urlManager.php';
 
 $config = [
     'id' => 'basic-console',
@@ -19,7 +15,11 @@ $config = [
         '@consoleWebroot' => dirname(__DIR__) . '/web',
     ],
     'components' => [
-        'queue' => $queue,
+        'db' => ['class' => 'app\components\ConnectionComponent'],
+        'queue' => [
+            'class' => 'app\components\QueueComponent',
+            'as log' => \yii\queue\LogBehavior::class,
+        ],
         'file' => ['class' => 'app\components\FileComponent'],
         'export' => ['class' => 'app\components\ExportComponent'],
         'setting' => ['class' => 'app\components\SettingComponent'],
@@ -27,25 +27,19 @@ $config = [
         'general' => ['class' => 'app\components\General'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
         'view' => ['class' => '\app\components\ViewComponent'],
+        'urlManager' => ['class' => 'app\components\UrlManagerComponent'],
+        'session' => ['class' => 'app\components\DbSessionComponent'],
+        'pdf' => ['class' => '\app\components\PdfComponent'],
+        'mailer' => ['class' => '\app\components\MailerComponent'],
         'user' => [
-            'class' => 'yii\web\User',
-            'identityClass' => 'app\models\User',
+            'class' => 'app\components\UserComponent',
             'enableSession' => false,
-            // 'enableAutoLogin' => true,
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+        'assetManager' => [
+            'class' => 'app\components\AssetManagerComponent',
+            'basePath' => __DIR__ . '/../web/assets',
         ],
-        'session' => [ // for use session in console application
-            'class' => 'yii\web\Session'
-        ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
+        'cache' => ['class' => 'yii\caching\FileCache'],
         'log' => [
             'targets' => [
                 [
@@ -54,28 +48,11 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
-        'pdf' => $pdf,
-        'urlManager' => $urlManager
     ],
     'params' => $params,
     'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            // 'class' => 'yii\faker\FixtureController',
-            'class' => 'yii\console\controllers\FixtureController',
-            'namespace' => 'app\tests\fixtures',
-        ],
-        'migrate' => [
-            'class' => 'yii\console\controllers\MigrateController',
-            'migrationTable' => '{{%migrations}}',
-            'generatorTemplateFiles' => [
-                'create_table'    => '@app/migrations/templates/createTableMigration.php',
-                'drop_table'      => '@app/migrations/templates/dropTableMigration.php',
-                'add_column'      => '@app/migrations/templates/addColumnMigration.php',
-                'drop_column'     => '@app/migrations/templates/dropColumnMigration.php',
-                'create_junction' => '@app/migrations/templates/createTableMigration.php'
-            ]
-        ],
+        'fixture' => ['class' => 'app\components\FixtureControllerComponent'],
+        'migrate' => ['class' => 'app\components\MigrateControllerComponent'],
     ],
 ];
 

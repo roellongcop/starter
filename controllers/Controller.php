@@ -38,12 +38,6 @@ abstract class Controller extends \yii\web\Controller
             'VerbFilter' => [
                 'class' => \app\filters\VerbFilter::className()
             ],
-            'ThemeFilter' => [
-                'class' => \app\filters\ThemeFilter::className()
-            ],
-            'SettingFilter' => [
-                'class' => \app\filters\SettingFilter::className()
-            ],
         ];
     } 
 

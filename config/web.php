@@ -1,12 +1,6 @@
 <?php
 
-$db = require __DIR__ . '/db.php';
-$pdf = require __DIR__ . '/pdf.php';
 $params = require __DIR__ . '/params.php';
-$session = require __DIR__ . '/session.php';
-$queue = require __DIR__ . '/queue.php';
-$urlManager = require __DIR__ . '/urlManager.php';
-unset($urlManager['scriptUrl'], $urlManager['baseUrl']);
 
 $config = [
     'id' => 'yii2-basic-starter',
@@ -23,7 +17,11 @@ $config = [
         ],
     ],
     'components' => [
-        'queue' => $queue,
+        'db' => ['class' => 'app\components\ConnectionComponent'],
+        'queue' => [
+            'class' => 'app\components\QueueComponent',
+            'as log' => \yii\queue\LogBehavior::class,
+        ],
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
         'file' => ['class' => 'app\components\FileComponent'],
@@ -31,29 +29,19 @@ $config = [
         'general' => ['class' => 'app\components\GeneralComponent'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
         'view' => ['class' => '\app\components\ViewComponent'],
-
-        'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'kACKH_pi2sZVSJRHwBQl6T-9zvnuM30L',
-            'enableCsrfValidation' => true,
+        'session' => ['class' => 'app\components\DbSessionComponent'],
+        'user' => ['class' => 'app\components\UserComponent'],
+        'urlManager' => [
+            'class' => 'app\components\UrlManagerComponent',
+            'scriptUrl' => '',
+            'baseUrl' => '',
         ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => false,
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
-        ],
+        'pdf' => ['class' => '\app\components\PdfComponent'],
+        'request' => ['class' => '\app\components\RequestComponent'],
+        'cache' => ['class' => 'yii\caching\FileCache'],
+        'mailer' => ['class' => '\app\components\MailerComponent'],
+        'assetManager' => ['class' => 'app\components\AssetManagerComponent'],
+        'errorHandler' => ['errorAction' => 'site/error'],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -63,26 +51,6 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
-        'pdf' => $pdf,
-        'session' => $session,
-        'urlManager' => $urlManager,
-        'assetManager' => [
-            // 'forceCopy' => true,
-            'linkAssets' => false,
-            'class' => 'yii\web\AssetManager',
-            'appendTimestamp' => true,
-        ],
-       // 'view' => [
-       //      'theme' => [
-       //          'basePath' => '@web/app/themes/keenDemo1/assets/assets/',
-       //          'baseUrl' => '@web/app/themes/keenDemo1',
-       //          'pathMap' => [
-       //              '@app/views' => '@app/themes/keenDemo1/views',
-       //              '@app/widgets' => '@app/themes/keenDemo1/widgets',
-       //          ],
-       //      ],
-       //  ],
     ],
     'params' => $params,
 ];

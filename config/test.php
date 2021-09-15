@@ -1,12 +1,7 @@
 <?php
+
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/test_db.php';
-$pdf = require __DIR__ . '/pdf.php';
-$queue = require __DIR__ . '/queue.php';
-$urlManager = require __DIR__ . '/urlManager.php';
-/**
- * Application configuration shared by all test types
- */
+
 return [
     'id' => 'basic-tests',
     'basePath' => dirname(__DIR__),
@@ -17,7 +12,11 @@ return [
     ],
     'language' => 'en-US',
     'components' => [
-        'queue' => $queue,
+        'db' => ['class' => 'app\components\ConnectionComponent'],
+        'queue' => [
+            'class' => 'app\components\QueueComponent',
+            'as log' => \yii\queue\LogBehavior::class,
+        ],
         'file' => ['class' => 'app\components\FileComponent'],
         'export' => ['class' => 'app\components\ExportComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
@@ -25,34 +24,21 @@ return [
         'general' => ['class' => 'app\components\GeneralComponent'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
         'view' => ['class' => '\app\components\ViewComponent'],
-        'db' => $db,
-        'pdf' => $pdf,
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
-        ],
+        'pdf' => ['class' => '\app\components\PdfComponent'],
+        'session' => ['class' => 'app\components\DbSessionComponent'],
+        'mailer' => ['class' => '\app\components\MailerComponent'],
+        'urlManager' => ['class' => 'app\components\UrlManagerComponent'],
         'assetManager' => [
+            'class' => 'app\components\AssetManagerComponent',
             'basePath' => __DIR__ . '/../web/assets',
         ],
-        'urlManager' => $urlManager,
         'user' => [
-            'class' => 'yii\web\User',
-            'identityClass' => 'app\models\User',
+            'class' => 'app\components\UserComponent',
             'enableSession' => false,
-            // 'enableAutoLogin' => true,
         ],
         'request' => [
-            'cookieValidationKey' => 'test',
+            'class' => 'app\components\RequestComponent',
             'enableCsrfValidation' => false,
-            // but if you absolutely need it set cookie domain to localhost
-            /*
-            'csrfCookie' => [
-                'domain' => 'localhost',
-            ],
-            */
         ],
     ],
     'params' => $params,
