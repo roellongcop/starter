@@ -10,8 +10,6 @@ class UrlManagerComponent extends \yii\web\UrlManager
     {
         $this->enablePrettyUrl = true;
         $this->showScriptName = false;
-        $this->scriptUrl = 'http://localhost:8080';
-        $this->baseUrl = 'http://localhost:8080';
 
         $this->rules = [
             [
