@@ -30,15 +30,6 @@ class <?= $className ?> extends \app\migrations\Migration
         return '<?= $table ?>';
     }
 
-
-    public function attributes()
-    {
-        return [
-            'name' => $this->string(255)->notNull()->unique(),
-            'description' => $this->text(),
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */
