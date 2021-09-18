@@ -18,13 +18,11 @@ if (!empty($namespace)) {
 }
 ?>
 
-use yii\db\Migration;
-
 /**
  * Handles the creation of table `<?= $table ?>` which is a junction between
  * table `<?= $field_first ?>` and table `<?= $field_second ?>`.
  */
-class <?= $className ?> extends Migration
+class <?= $className ?> extends \app\migrations\Migration
 {
     /**
      * {@inheritdoc}

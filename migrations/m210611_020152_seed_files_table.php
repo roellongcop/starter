@@ -1,12 +1,11 @@
 <?php
 
-use yii\db\Migration;
 use yii\db\Expression;
 
 /**
  * Class m210611_020152_seed_files_table
  */
-class m210611_020152_seed_files_table extends Migration
+class m210611_020152_seed_files_table extends \app\migrations\Migration
 {
     public function tableName()
     {
@@ -39,19 +38,4 @@ class m210611_020152_seed_files_table extends Migration
     {
         $this->truncateTable($this->tableName());
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m210611_020152_seed_files_table cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

@@ -1,30 +1,21 @@
 <?php
 
-use yii\db\Migration;
-
 /**
  * Handles the creation of table `{{%themes}}`.
  */
-class m210111_014007_create_themes_table extends Migration
+class m210111_014007_create_themes_table extends \app\migrations\Migration
 {
-
     public function tableName()
     {
         return '{{%themes}}';
     }
 
-    public function tableIndexes()
+    /**
+     * {@inheritdoc}
+     */
+    public function safeUp()
     {
-        return [
-            'created_by' => 'created_by',
-            'updated_by' => 'updated_by',
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'id' => $this->bigPrimaryKey(),
+        $this->createTable($this->tableName(), $this->attributes([
             'name' => $this->string(255)->notNull()->unique(),
             'description' => $this->text(),
             'base_path' => $this->text(),
@@ -32,39 +23,7 @@ class m210111_014007_create_themes_table extends Migration
             'path_map' => $this->text(),
             'bundles' => $this->text(),
             'slug' => $this->string()->notNull()->unique(),
-            'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull(),
-            'updated_by' => $this->bigInteger(20)->notNull(),
-            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
-                ->append('ON UPDATE CURRENT_TIMESTAMP')
-        ];
-    }
-
-
-    public function _createTable($table, $columns, $options = NULL) 
-    {
-        // Fetch the table schema
-        $table_to_check = Yii::$app->db->schema->getTableSchema($table);
-        if ( ! is_object($table_to_check)) {
-            $this->createTable($table, $columns, $options);
-            return TRUE;
-        }
-        return FALSE;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
-    {
-        
-        $this->_createTable($this->tableName(), $this->attributes());
-
-        foreach($this->tableIndexes() as $key => $value) {
-            $this->createIndex($key, $this->tableName(), $value);
-        }
+        ]));
     }
 
     /**

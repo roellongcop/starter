@@ -1,12 +1,9 @@
 <?php
 
-use app\helpers\App;
-use yii\db\Migration;
-
 /**
  * Class m210528_064716_seed_roles_table
  */
-class m210528_064716_seed_roles_table extends Migration
+class m210528_064716_seed_roles_table extends \app\migrations\Migration
 {
     public function tableName()
     {
@@ -24,7 +21,7 @@ class m210528_064716_seed_roles_table extends Migration
     }
     public function data()
     {
-        $access = App::component('access');
+        $access = \Yii::$app->access;
         $controllerActions = $access->controllerActions;
         $defaultNavigation = $access->defaultNavigation;
         return [
@@ -62,19 +59,4 @@ class m210528_064716_seed_roles_table extends Migration
     {
         $this->truncateTable($this->tableName());
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m210528_064716_seed_roles_table cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

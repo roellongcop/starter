@@ -7,7 +7,10 @@
 /* @var $fields array the fields */
 /* @var $foreignKeys array the foreign keys */
 
-?>        $this->_createTable($this->tableName(), $this->attributes());
+?>        $this->createTable($this->tableName(), $this->attributes([
+            'name' => $this->string(255)->notNull()->unique(),
+            'description' => $this->text(),
+        ]));
 <?= $this->render('_addForeignKeys', [
     'table' => $table,
     'foreignKeys' => $foreignKeys,

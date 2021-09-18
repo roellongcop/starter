@@ -15,15 +15,13 @@ if (!empty($namespace)) {
 }
 ?>
 
-use yii\db\Migration;
-
 /**
  * Handles adding columns to table `<?= $table ?>`.
 <?= $this->render('_foreignTables', [
      'foreignKeys' => $foreignKeys,
  ]) ?>
  */
-class <?= $className ?> extends Migration
+class <?= $className ?> extends \app\migrations\Migration
 {
     public function tableName()
     {

@@ -1,31 +1,21 @@
 <?php
 
-use yii\db\Migration;
-
 /**
  * Handles the creation of table `{{%users}}`.
  */
-class m200912_033904_create_users_table extends Migration
+class m200912_033904_create_users_table extends \app\migrations\Migration
 {
-
     public function tableName()
     {
         return '{{%users}}';
     }
 
-    public function tableIndexes()
+    /**
+     * {@inheritdoc}
+     */
+    public function safeUp()
     {
-        return [
-            'created_by' => 'created_by',
-            'updated_by' => 'updated_by',
-            'role_id' => 'role_id',
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'id' => $this->bigPrimaryKey(),
+        $this->createTable($this->tableName(), $this->attributes([
             'role_id' => $this->bigInteger(20)->notNull(),
             'username' => $this->string(64)->notNull()->unique(),
             'email' => $this->string()->notNull()->unique(),
@@ -38,42 +28,11 @@ class m200912_033904_create_users_table extends Migration
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'slug' => $this->string()->notNull()->unique(),
             'is_blocked' => $this->tinyInteger(2)->notNull()->defaultValue(0),
-            'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull(),
-            'updated_by' => $this->bigInteger(20)->notNull(),
-            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
-                ->append('ON UPDATE CURRENT_TIMESTAMP')
-        ];
+        ]));
 
-        
-    }
-
-
-    public function _createTable($table, $columns, $options = NULL) 
-    {
-        // Fetch the table schema
-        $table_to_check = Yii::$app->db->schema->getTableSchema($table);
-        if ( ! is_object($table_to_check)) {
-            $this->createTable($table, $columns, $options);
-            return TRUE;
-        }
-        return FALSE;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
-    {
-        
-        $this->_createTable($this->tableName(), $this->attributes());
-
-        foreach($this->tableIndexes() as $key => $value) {
-            $this->createIndex($key, $this->tableName(), $value);
-        }
-
+        $this->createTableIndex($this->tableName(), [
+            'role_id' => 'role_id',
+        ]);
     }
 
     /**

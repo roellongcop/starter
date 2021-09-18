@@ -17,54 +17,26 @@ if (!empty($namespace)) {
 }
 ?>
 
-use yii\db\Migration;
-
 /**
  * Handles the creation of table `<?= $table ?>`.
 <?= $this->render('_foreignTables', [
     'foreignKeys' => $foreignKeys,
 ]) ?>
  */
-class <?= $className ?> extends Migration
+class <?= $className ?> extends \app\migrations\Migration
 {
-
     public function tableName()
     {
         return '<?= $table ?>';
     }
 
-    public function tableIndexes()
-    {
-        return [
-            'created_by' => 'created_by',
-            'updated_by' => 'updated_by',
-        ];
-    }
 
     public function attributes()
     {
         return [
-            'id' => $this->bigPrimaryKey(),
             'name' => $this->string(255)->notNull()->unique(),
             'description' => $this->text(),
-            'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
-            'created_by' => $this->bigInteger(20)->notNull(),
-            'updated_by' => $this->bigInteger(20)->notNull(),
-            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
-                ->append('ON UPDATE CURRENT_TIMESTAMP')
         ];
-    }
-
-    public function _createTable($table, $columns, $options = NULL) 
-    {
-        // Fetch the table schema
-        $table_to_check = Yii::$app->db->schema->getTableSchema($table);
-        if ( ! is_object($table_to_check)) {
-            $this->createTable($table, $columns, $options);
-            return TRUE;
-        }
-        return FALSE;
     }
 
     /**
@@ -85,10 +57,6 @@ class <?= $className ?> extends Migration
     ]);
 }
 ?>
-
-        foreach($this->tableIndexes() as $key => $value) {
-            $this->createIndex($key, $this->tableName(), $value);
-        }
     }
 
     /**

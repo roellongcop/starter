@@ -1,13 +1,12 @@
 <?php
 
-use yii\db\Migration;
 use yii\helpers\Inflector;
 use yii\db\Expression;
 
 /**
  * Class m210314_045639_seed_themes_table
  */
-class m210314_045639_seed_themes_table extends Migration
+class m210314_045639_seed_themes_table extends \app\migrations\Migration
 {
     public function tableName()
     {
@@ -376,19 +375,4 @@ class m210314_045639_seed_themes_table extends Migration
             ],
         ];
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m210314_045639_seed_themes_table cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

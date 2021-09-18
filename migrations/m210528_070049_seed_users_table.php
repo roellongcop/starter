@@ -1,17 +1,15 @@
 <?php
 
-use yii\db\Migration;
-
 /**
  * Class m210528_070049_seed_users_table
  */
-class m210528_070049_seed_users_table extends Migration
+class m210528_070049_seed_users_table extends \app\migrations\Migration
 {
-
     public function tableName()
     {
         return '{{%users}}';
     }
+    
     /**
      * {@inheritdoc}
      */
@@ -21,7 +19,6 @@ class m210528_070049_seed_users_table extends Migration
             $this->insert($this->tableName(), $data);
         }
     }
-
 
     public function data()
     {
@@ -81,19 +78,4 @@ class m210528_070049_seed_users_table extends Migration
     {
         $this->truncateTable($this->tableName());
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m210528_070049_seed_users_table cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

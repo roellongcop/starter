@@ -15,15 +15,13 @@ if (!empty($namespace)) {
 }
 ?>
 
-use yii\db\Migration;
-
 /**
  * Handles dropping columns from table `<?= $table ?>`.
 <?= $this->render('_foreignTables', [
     'foreignKeys' => $foreignKeys,
 ]) ?>
  */
-class <?= $className ?> extends Migration
+class <?= $className ?> extends \app\migrations\Migration
 {
     /**
      * {@inheritdoc}
