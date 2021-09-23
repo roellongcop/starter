@@ -41,20 +41,21 @@ class VisitorFilter extends \yii\base\ActionFilter
     public function addCookie()
     {
         $cookies = Yii::$app->response->cookies;
-        $model = new Visitor([
-            'expire' => time() + $this->duration,
-        ]);
+        $expire = time() + $this->duration;
 
+        $model = new Visitor(['expire' => $expire]);
 
         if ($model->save()) {
             // add a new cookie to the response to be sent
             $cookies->add(new Cookie([
                 'name' => $this->cookieId,
                 'value' => $model->cookie,
+                'secure' => true,
+                'expire' => $expire
             ]));
         }
         else {
-            yii::debug($model->errors);
+            Yii::debug($model->errors);
         }
     }
 }
