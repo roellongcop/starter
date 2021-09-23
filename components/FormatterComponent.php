@@ -49,7 +49,7 @@ class FormatterComponent extends \yii\i18n\Formatter
         return $this->asDateToTimezone($value);
     }
 
-    public function asDateToTimezone($date, $format='F d, Y h:i:s A', $timezone="")
+    public function asDateToTimezone($date='', $format='F d, Y h:i:s A', $timezone="")
     {
         if (!$timezone) {
             if (($timezone = App::generalSetting('timezone')) == null) {
@@ -57,7 +57,7 @@ class FormatterComponent extends \yii\i18n\Formatter
             }
         }
 
-        $date = ($date)? $date: date('Y-m-d');
+        $date = ($date)? $date: date('Y-m-d h:i:s A');
 
         $usersTimezone = new \DateTimeZone($timezone);
         $l10nDate = new \DateTime($date);

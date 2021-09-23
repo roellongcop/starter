@@ -17,6 +17,7 @@ class VisitorFilter extends \yii\base\ActionFilter
         if (!parent::beforeAction($action)) {
             return false;
         }
+
         $cookies = Yii::$app->request->cookies;
 
         if ($cookies->has($this->cookieId)) {
@@ -41,7 +42,10 @@ class VisitorFilter extends \yii\base\ActionFilter
     {
         $cookies = Yii::$app->response->cookies;
         $model = new Visitor([
-            'expire' => strtotime(date('Y-m-d H:i:s') . " +{$this->duration}"),
+            'expire' => strtotime(implode(' ', [
+                App::formatter('asDateToTimezone', ''),
+                "+{$this->duration}"
+            ])),
         ]);
 
 
