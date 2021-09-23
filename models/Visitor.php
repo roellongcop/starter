@@ -158,7 +158,7 @@ class Visitor extends ActiveRecord
 
     public function isExpire()
     {
-        return strtotime(App::formatter('asDateToTimezone', '')) >= $this->expire;
+        return time() >= $this->expire;
     }
 
     public function behaviors()

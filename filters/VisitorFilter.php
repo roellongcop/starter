@@ -9,7 +9,7 @@ use yii\web\Cookie;
 
 class VisitorFilter extends \yii\base\ActionFilter
 {
-    public $duration = '1days';
+    public $duration = 60 * 60 * 24;
     public $cookieId = 'app-visitor-id';
 
     public function beforeAction($action)
@@ -42,10 +42,7 @@ class VisitorFilter extends \yii\base\ActionFilter
     {
         $cookies = Yii::$app->response->cookies;
         $model = new Visitor([
-            'expire' => strtotime(implode(' ', [
-                App::formatter('asDateToTimezone', ''),
-                "+{$this->duration}"
-            ])),
+            'expire' => time() + $this->duration,
         ]);
 
 
