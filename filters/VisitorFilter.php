@@ -24,21 +24,24 @@ class VisitorFilter extends \yii\base\ActionFilter
             return false;
         }
 
-        $cookies = Yii::$app->request->cookies;
+        if (!in_array(App::controllerAction(), $this->exempted && App::isWeb())
 
-        if ($cookies->has($this->cookieId)) {
-            
-            if (($model = Visitor::findByCookie($cookies->getValue($this->cookieId))) != NULL) {
-                if ($model->isExpire()) {
+            $cookies = Yii::$app->request->cookies;
+
+            if ($cookies->has($this->cookieId)) {
+                
+                if (($model = Visitor::findByCookie($cookies->getValue($this->cookieId))) != NULL) {
+                    if ($model->isExpire()) {
+                        $this->addCookie();
+                    }
+                }
+                else {
                     $this->addCookie();
                 }
             }
             else {
                 $this->addCookie();
             }
-        }
-        else {
-            $this->addCookie();
         }
 
         return true;
