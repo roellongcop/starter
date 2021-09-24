@@ -11,6 +11,12 @@ class VisitorFilter extends \yii\base\ActionFilter
 {
     public $duration = 60 * 60 * 24;
     public $cookieId = 'app-visitor-id';
+    public $exempted = [
+        'file/display',
+        'file/delete',
+        'file/upload',
+        'site/error',
+    ];
 
     public function beforeAction($action)
     {

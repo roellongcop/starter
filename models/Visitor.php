@@ -56,6 +56,7 @@ class Visitor extends ActiveRecord
             [['ip'], 'string', 'max' => 32],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
             [['server'], 'safe'],
+            [['cookie'], 'unique'],
         ]);
     }
 
