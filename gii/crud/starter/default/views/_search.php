@@ -18,6 +18,7 @@ use app\widgets\Filter;
 use app\helpers\App;
 use yii\widgets\ActiveForm;
 use app\widgets\SearchButton;
+use app\models\ActiveRecord;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */

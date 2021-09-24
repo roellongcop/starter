@@ -2,6 +2,7 @@
 
 namespace app\migrations;
 
+use Yii;
 /**
  * Handles the creation of table `{{%users}}`.
  */
@@ -17,7 +18,7 @@ class Migration extends \yii\db\Migration
         $table_to_check = \Yii::$app->db->schema->getTableSchema($tableName);
         if ( ! is_object($table_to_check)) {
             parent::createTable($tableName, $columns, $options);
-            $this->createTableIndex($tableName, [
+            $this->createIndexes($tableName, [
                 'created_by' => 'created_by',
                 'updated_by' => 'updated_by',
             ]);
@@ -39,9 +40,31 @@ class Migration extends \yii\db\Migration
         return array_merge($headerFields, $fields, $footerFields);
     }
 
-    public function createTableIndex($tableName, $fields)
+    public function addColumns($tableName, $columns) 
     {
-        foreach($fields as $key => $value) {
+        $table = Yii::$app->db->schema->getTableSchema($tableName);
+
+        foreach ($columns as $column => $type) {
+            if ( ! isset( $table->columns[$column] )) {
+                $this->addColumn($tableName, $column, $type);
+            }
+        }
+    }
+
+    public function dropColumns($tableName, $columns)
+    {
+        $table = Yii::$app->db->schema->getTableSchema($tableName);
+
+        foreach ($columns as $column => $type) {
+            if(isset($table->columns[$column])) {
+                $this->dropColumn($tableName, $column);
+            }
+        }
+    }
+
+    public function createIndexes($tableName, $columns)
+    {
+        foreach ($columns as $key => $value) {
             $this->createIndex($key, $tableName, $value);
         }
     }

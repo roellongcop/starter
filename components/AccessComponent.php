@@ -261,6 +261,11 @@ class AccessComponent extends Component
 		        'link' => '/notification', 
 		        'icon' => '<i class="fa fa-cog"></i>',
 		    ],
+		    '7' => [
+		        'label' => 'Visitors', 
+		        'link' => '/visitor', 
+		        'icon' => '<i class="fa fa-cog"></i>',
+		    ],
 		];
  	} 
 

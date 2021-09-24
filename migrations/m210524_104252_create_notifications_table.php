@@ -24,7 +24,7 @@ class m210524_104252_create_notifications_table extends \app\migrations\Migratio
             'status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
         ]));
 
-        $this->createTableIndex($this->tableName(), [
+        $this->createIndexes($this->tableName(), [
             'user_id' => 'user_id',
         ]);
     }

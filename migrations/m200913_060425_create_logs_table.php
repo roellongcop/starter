@@ -33,7 +33,7 @@ class m200913_060425_create_logs_table extends \app\migrations\Migration
             'server' => $this->text(),
         ]));
 
-        $this->createTableIndex($this->tableName(), [
+        $this->createIndexes($this->tableName(), [
             'user_id' => 'user_id',
             'model_id' => 'model_id',
         ]);

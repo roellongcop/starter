@@ -27,7 +27,7 @@ class m210524_085128_create_queues_table extends \app\migrations\Migration
             'done_at' => $this->integer(11),
         ]));
 
-        $this->createTableIndex($this->tableName(), [
+        $this->createIndexes($this->tableName(), [
             'channel' => 'channel',
             'priority' => 'priority',
             'reserved_at' => 'reserved_at',

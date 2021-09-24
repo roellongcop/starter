@@ -21,7 +21,7 @@ class m201229_073837_create_user_meta_table extends \app\migrations\Migration
             'value' => $this->text(),
         ]));
 
-        $this->createTableIndex($this->tableName(), [
+        $this->createIndexes($this->tableName(), [
             'user_id'    => 'user_id',
         ]);
     }

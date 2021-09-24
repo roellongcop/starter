@@ -13,23 +13,23 @@ class GeneralComponentTest extends \Codeception\Test\Unit
 
     public function testGetAllTables()
     {
-        expect($this->general->getAllTables())->equals([
-            'tbl_backups' => 'tbl_backups',
-            'tbl_files' => 'tbl_files',
-            'tbl_ips' => 'tbl_ips',
-            'tbl_logs' => 'tbl_logs',
-            'tbl_migrations' => 'tbl_migrations',
-            'tbl_model_files' => 'tbl_model_files',
-            'tbl_notifications' => 'tbl_notifications',
-            'tbl_queues' => 'tbl_queues',
-            'tbl_roles' => 'tbl_roles',
-            'tbl_sessions' => 'tbl_sessions',
-            'tbl_settings' => 'tbl_settings',
-            'tbl_themes' => 'tbl_themes',
-            'tbl_user_metas' => 'tbl_user_metas',
-            'tbl_users' => 'tbl_users',
-            'tbl_visit_logs' => 'tbl_visit_logs',
-        ]);
+        $tables = $this->general->getAllTables();
+
+        expect($tables)->hasKey('tbl_backups');
+        expect($tables)->hasKey('tbl_files');
+        expect($tables)->hasKey('tbl_ips');
+        expect($tables)->hasKey('tbl_logs');
+        expect($tables)->hasKey('tbl_migrations');
+        expect($tables)->hasKey('tbl_model_files');
+        expect($tables)->hasKey('tbl_notifications');
+        expect($tables)->hasKey('tbl_queues');
+        expect($tables)->hasKey('tbl_roles');
+        expect($tables)->hasKey('tbl_sessions');
+        expect($tables)->hasKey('tbl_settings');
+        expect($tables)->hasKey('tbl_themes');
+        expect($tables)->hasKey('tbl_user_metas');
+        expect($tables)->hasKey('tbl_users');
+        expect($tables)->hasKey('tbl_visit_logs');
     }
 
     public function testTimezoneList()

@@ -30,7 +30,7 @@ class m200912_033904_create_users_table extends \app\migrations\Migration
             'is_blocked' => $this->tinyInteger(2)->notNull()->defaultValue(0),
         ]));
 
-        $this->createTableIndex($this->tableName(), [
+        $this->createIndexes($this->tableName(), [
             'role_id' => 'role_id',
         ]);
     }

@@ -22,7 +22,7 @@ class m210116_162927_create_model_files_table extends \app\migrations\Migration
             'extension' => $this->string(16)->notNull(),
         ]));
 
-        $this->createTableIndex($this->tableName(), [
+        $this->createIndexes($this->tableName(), [
             'model_id' => 'model_id',
             'file_id' => 'file_id',
         ]);
