@@ -9,6 +9,7 @@ class VisitorTest extends \Codeception\Test\Unit
     protected function data($replace=[])
     {
         return array_replace([
+            'session_id' => '1234569',
             'expire' => time(),
             'cookie' => 'Cookie',
             'ip' => 'Ip',
@@ -78,6 +79,7 @@ class VisitorTest extends \Codeception\Test\Unit
         expect_that($model);
 
         $model->activate();
+
         expect_that($model->save());
     }
 

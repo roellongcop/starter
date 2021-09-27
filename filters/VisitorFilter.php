@@ -9,13 +9,11 @@ use yii\web\Cookie;
 
 class VisitorFilter extends \yii\base\ActionFilter
 {
-    public $duration = 60 * 60 * 24;
+    public $force = false;
+    public $duration;
     public $cookieId = 'app-visitor-id';
     public $exempted = [
         'file/display',
-        'file/delete',
-        'file/upload',
-        'site/error',
     ];
 
     public function beforeAction($action)
@@ -24,7 +22,10 @@ class VisitorFilter extends \yii\base\ActionFilter
             return false;
         }
 
-        if (!in_array(App::controllerAction(), $this->exempted && App::isWeb())
+        if ((!in_array(App::controllerAction(), $this->exempted) 
+            && App::isWeb()
+            && !App::isAjax()
+            && !$this->isBot()) || $this->force) {
 
             $cookies = Yii::$app->request->cookies;
 
@@ -47,10 +48,18 @@ class VisitorFilter extends \yii\base\ActionFilter
         return true;
     }
 
+    public function isBot() 
+    {
+        return (
+            isset($_SERVER['HTTP_USER_AGENT'])
+            && preg_match('/bot|crawl|slurp|spider|mediapartners/i', $_SERVER['HTTP_USER_AGENT'])
+        );
+    }
+
     public function addCookie()
     {
         $cookies = Yii::$app->response->cookies;
-        $expire = time() + $this->duration;
+        $expire = time() + ($this->duration ?? App::generalSetting('auto_logout_timer'));
 
         $model = new Visitor(['expire' => $expire]);
 

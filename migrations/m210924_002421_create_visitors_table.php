@@ -16,6 +16,7 @@ class m210924_002421_create_visitors_table extends \app\migrations\Migration
     public function safeUp()
     {
         $this->createTable($this->tableName(), $this->attributes([
+            'session_id' => $this->string(64)->notNull(),
             'expire' => $this->bigInteger(20),
             'cookie' => $this->string()->notNull(),
             'ip' => $this->string(32)->notNull(),

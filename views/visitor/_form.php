@@ -11,6 +11,7 @@ use app\widgets\ActiveForm;
 <?php $form = ActiveForm::begin(['id' => 'visitor-form']); ?>
     <div class="row">
         <div class="col-md-5">
+			<?= $form->field($model, 'session_id')->textInput() ?>
 			<?= $form->field($model, 'expire')->textInput() ?>
 			<?= $form->field($model, 'cookie')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'ip')->textInput(['maxlength' => true]) ?>

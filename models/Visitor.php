@@ -51,12 +51,12 @@ class Visitor extends ActiveRecord
         return $this->setRules([
             [['expire'], 'integer'],
             [['cookie', 'ip', 'browser', 'os', 'device'], 'required'],
-            [['location'], 'string'],
             [['cookie'], 'string', 'max' => 255],
             [['ip'], 'string', 'max' => 32],
+            [['session_id'], 'string', 'max' => 40],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
-            [['server'], 'safe'],
-            [['cookie'], 'unique'],
+            [['server', 'location'], 'safe'],
+            [['cookie', 'session_id'], 'unique'],
         ]);
     }
 
@@ -89,14 +89,15 @@ class Visitor extends ActiveRecord
     public function init()
     {
         parent::init();
+        $this->session_id = App::session('id');
         $this->cookie = $this->createCookieValue();
         $this->ip = App::ip();
         $this->browser = App::browser();
         $this->os = App::os();
         $this->device = App::device();
-        $this->record_status = parent::RECORD_ACTIVE;
         $this->server = App::server();
         $this->location = App::ip_info($this->ip, "Location");
+        $this->record_status = parent::RECORD_ACTIVE;
     }
      
     public function gridColumns()
@@ -108,6 +109,7 @@ class Visitor extends ActiveRecord
                 'value' => 'countryName',
                 'label' => 'Country'
             ],
+            'session_id' => ['attribute' => 'session_id', 'format' => 'raw'],
             'expire' => [
                 'attribute' => 'expire', 
                 'format' => 'raw',
@@ -131,6 +133,7 @@ class Visitor extends ActiveRecord
     {
         return [
             'expire:raw',
+            'session_id:raw',
             'cookie:raw',
             'ip:raw',
             'browser:raw',

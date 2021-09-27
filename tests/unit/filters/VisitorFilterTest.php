@@ -11,6 +11,7 @@ class VisitorFilterTest extends \Codeception\Test\Unit
     public function testCreateVisitor()
     {
         $model = new VisitorFilter();
+        $model->force = true;
 
         expect_that($model->beforeAction(true));
 
