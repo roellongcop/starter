@@ -6,6 +6,7 @@ use Yii;
 use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\widgets\Anchor;
+use app\models\form\UserAgentForm;
 
 /**
  * This is the model class for table "tbl_visitors".
@@ -89,14 +90,17 @@ class Visitor extends ActiveRecord
     public function init()
     {
         parent::init();
+        $userAgent = new UserAgentForm();
+
         $this->session_id = App::session('id');
         $this->cookie = $this->createCookieValue();
         $this->ip = App::ip();
-        $this->browser = App::browser();
-        $this->os = App::os();
-        $this->device = App::device();
+        $this->browser = $userAgent->browser;
+        $this->os = $userAgent->os;
+        $this->device = $userAgent->device;
         $this->server = App::server();
-        $this->location = App::ip_info($this->ip, "Location");
+        $this->location = $userAgent->ipInformation;
+
         $this->record_status = parent::RECORD_ACTIVE;
     }
      

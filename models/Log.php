@@ -8,7 +8,7 @@ use app\widgets\Anchor;
 use app\widgets\JsonEditor;
 use yii\helpers\Inflector;
 use app\helpers\Url;
-
+use app\models\form\UserAgentForm;
 /**
  * This is the model class for table "{{%logs}}".
  *
@@ -252,6 +252,9 @@ class Log extends ActiveRecord
     public static function record($model, $changedAttributes=[])
     {
         if (App::isLogin() && App::getModelName($model) != 'Log') {
+
+            $userAgent = new UserAgentForm();
+
             $log                   = new Log();
             $log->request_data     = App::getBodyParams();
             $log->method           = App::getMethod();
@@ -264,9 +267,9 @@ class Log extends ActiveRecord
             $log->model_name       = App::getModelName($model);
             $log->server           = App::server();
             $log->ip               = App::ip();
-            $log->browser          = App::browser();
-            $log->os               = App::os();
-            $log->device           = App::device();
+            $log->browser          = $userAgent->browser;
+            $log->os               = $userAgent->os;
+            $log->device           = $userAgent->device;
             $log->change_attribute = $changedAttributes;
 
             if ($log->save()) {

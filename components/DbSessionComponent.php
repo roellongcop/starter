@@ -6,6 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\models\Session;
 use yii\db\Expression;
+use app\models\form\UserAgentForm;
 
 class DbSessionComponent extends \yii\web\DbSession
 {
@@ -14,12 +15,13 @@ class DbSessionComponent extends \yii\web\DbSession
 		$this->timeout = App::generalSetting('auto_logout_timer');
 		$this->sessionTable = Session::tableName();
 		$this->writeCallback = function ($session) { 
+			$userAgent = new UserAgentForm();
 	        return [
 	            'user_id' => App::user('id'),
 	            'ip' => App::ip(),
-	            'browser' => App::browser(),
-	            'os' => App::os(),
-	            'device' => App::device(),
+	            'browser' => $userAgent->browser,
+	            'os' => $userAgent->os,
+	            'device' => $userAgent->device,
 	            'created_at' => new Expression('UTC_TIMESTAMP'),
 	            'updated_at' => new Expression('UTC_TIMESTAMP'),
 	       ];
