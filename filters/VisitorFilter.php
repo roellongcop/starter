@@ -6,6 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\models\Visitor;
 use yii\web\Cookie;
+use app\models\form\UserAgentForm;
 
 class VisitorFilter extends \yii\base\ActionFilter
 {
@@ -61,7 +62,18 @@ class VisitorFilter extends \yii\base\ActionFilter
         $cookies = Yii::$app->response->cookies;
         $expire = time() + ($this->duration ?? App::generalSetting('auto_logout_timer'));
 
-        $model = new Visitor(['expire' => $expire]);
+        $userAgent = new UserAgentForm();
+        $model = new Visitor([
+            'expire' => $expire,
+            'session_id' => App::session('id'),
+            'ip' => App::ip(),
+            'browser' => $userAgent->browser,
+            'os' => $userAgent->os,
+            'device' => $userAgent->device,
+            'server' => App::server(),
+            'location' => $userAgent->ipInformation,
+        ]);
+        $model->cookie = $model->createCookieValue();
 
         if ($model->save()) {
             // add a new cookie to the response to be sent
