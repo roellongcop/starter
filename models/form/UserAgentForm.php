@@ -9,13 +9,14 @@ use Yii;
 class UserAgentForm extends \yii\base\Model
 {
 	public $ip;
+	public $userAgent;
 	public $purpose = 'location';
 	public $deep_detect = true;
 	public $api = 'http://www.geoplugin.net/json.gp?ip=';
 
 	private $browser = 'Browser not detected';
 	private $os = 'OS not detected';
-	private $device = 'Not not detected';
+	private $device = 'Device not detected';
 
 	const CONTINENTS = [
 		"AF" => "Africa",
@@ -108,7 +109,7 @@ class UserAgentForm extends \yii\base\Model
     public function rules()
     {
         return [
-            [['ip', 'purpose', 'api'], 'required'],
+            [['ip', 'purpose', 'api', 'userAgent'], 'required'],
             ['deep_detect', 'safe'],
             ['ip', 'ip'],
             [['purpose', 'api'], 'string'],
@@ -119,6 +120,7 @@ class UserAgentForm extends \yii\base\Model
     {
     	parent::init();
     	$this->ip = Yii::$app->request->userIp ?: '000.000.0.0';
+    	$this->userAgent = Yii::$app->request->userAgent;
     }
 
     private function filterUserAgent($array)
@@ -162,16 +164,6 @@ class UserAgentForm extends \yii\base\Model
 	    return $device;
 	}
 
-    public function getIp()
-    {
-    	return Yii::$app->request->userIp ?: '000.000.0.0';
-    }
-
-    public function getUserAgent()
-    {
-    	return Yii::$app->request->userAgent;
-    }
-
 	public function getIpInformation($purpose='')
 	{
 		$purpose = $purpose ?: $this->purpose;
@@ -183,7 +175,7 @@ class UserAgentForm extends \yii\base\Model
 	        $output = NULL;
 	        if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
 	            $ip = $_SERVER["REMOTE_ADDR"];
-	            if ($deep_detect) {
+	            if ($this->deep_detect) {
 	                if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
 	                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 	                if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))

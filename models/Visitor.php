@@ -32,7 +32,7 @@ class Visitor extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_visitors';
+        return '{{%visitors}}';
     }
 
     public function config()
