@@ -50,7 +50,7 @@ class Visitor extends ActiveRecord
     {
         return $this->setRules([
             [['expire'], 'integer'],
-            [['cookie', 'ip', 'browser', 'os', 'device'], 'required'],
+            [['cookie', 'ip', 'browser', 'os', 'device', 'session_id'], 'required'],
             [['cookie'], 'string', 'max' => 255],
             [['ip'], 'string', 'max' => 32],
             [['session_id'], 'string', 'max' => 40],
