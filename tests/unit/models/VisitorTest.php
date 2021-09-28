@@ -11,8 +11,8 @@ class VisitorTest extends \Codeception\Test\Unit
         return array_replace([
             'session_id' => '1234569',
             'expire' => time(),
-            'cookie' => 'Cookie',
-            'ip' => 'Ip',
+            'cookie' => 'Cookiesample',
+            'ip' => '191.168.1.1',
             'browser' => 'Browser',
             'os' => 'Os',
             'device' => 'Device',

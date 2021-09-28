@@ -6,6 +6,7 @@ use Yii;
 
 class ImageSettingForm extends SettingForm
 {
+    const NAME = 'image-settings';
     /* EMAIL */
     public $primary_logo;
     public $secondary_logo;
@@ -23,29 +24,25 @@ class ImageSettingForm extends SettingForm
         ];
     }
 
-    public function config()
+    public function default()
     {
         return [
-            'className' => 'ImageSettingForm',
-            'name' => 'image-settings',
-            'defaults' => [
-                'primary_logo' => [
-                    'name' => 'primary_logo',
-                    'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
-                ],
-                'secondary_logo' => [
-                    'name' => 'secondary_logo',
-                    'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
-                ],
-                'image_holder' => [
-                    'name' => 'image_holder',
-                    'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
-                ],
-                'favicon' => [
-                    'name' => 'favicon',
-                    'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
-                ],
-            ]
+            'primary_logo' => [
+                'name' => 'primary_logo',
+                'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
+            ],
+            'secondary_logo' => [
+                'name' => 'secondary_logo',
+                'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
+            ],
+            'image_holder' => [
+                'name' => 'image_holder',
+                'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
+            ],
+            'favicon' => [
+                'name' => 'favicon',
+                'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
+            ],
         ];
     }
 }

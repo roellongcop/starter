@@ -6,6 +6,8 @@ use Yii;
 
 class SystemSettingForm extends SettingForm
 {
+    const NAME = 'system-settings';
+
     public $timezone;
     public $pagination;
     public $auto_logout_timer;
@@ -25,33 +27,29 @@ class SystemSettingForm extends SettingForm
         ];
     }
 
-    public function config()
+    public function default()
     {
         return [
-            'className' => 'SystemSettingForm',
-            'name' => 'system-settings',
-            'defaults' => [
-                'timezone' => [
-                    'name' => 'timezone',
-                    'default' => 'Asia/Manila',
-                ],
-                'pagination' => [
-                    'name' => 'pagination',
-                    'default' => 20,
-                ],
-                'auto_logout_timer' => [
-                    'name' => 'auto_logout_timer',
-                    'default' => 1440
-                ],
-                'theme' => [
-                    'name' => 'theme',
-                    'default' => 1,
-                ],
-                'whitelist_ip_only' => [
-                    'name' => 'whitelist_ip_only',
-                    'default' => 0,
-                ],
-            ]
+            'timezone' => [
+                'name' => 'timezone',
+                'default' => 'Asia/Manila',
+            ],
+            'pagination' => [
+                'name' => 'pagination',
+                'default' => 20,
+            ],
+            'auto_logout_timer' => [
+                'name' => 'auto_logout_timer',
+                'default' => 1440
+            ],
+            'theme' => [
+                'name' => 'theme',
+                'default' => 1,
+            ],
+            'whitelist_ip_only' => [
+                'name' => 'whitelist_ip_only',
+                'default' => 0,
+            ],
         ];
     }
 }

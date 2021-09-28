@@ -50,66 +50,6 @@ class Setting extends ActiveRecord
         ],
     ];
 
-    const GENERAL = [
-        'whitelist_ip_only' => [
-            'name' => 'whitelist_ip_only',
-            'default' => 0,
-        ],
-        'theme' => [
-            'name' => 'theme',
-            'default' => 1,
-        ],
-        'timezone' => [
-            'name' => 'timezone',
-            'default' => 'Asia/Manila',
-        ],
-        'pagination' => [
-            'name' => 'pagination',
-            'default' => 20,
-        ],
-      
-        'admin_email' => [
-            'name' => 'admin_email',
-            'default' => 'admin@example.com'
-        ],
-        'sender_email' => [
-            'name' => 'sender_email',
-            'default' => 'noreply@example.com'
-        ],
-        'sender_name' => [
-            'name' => 'sender_name',
-            'default' => 'Example.com mailer'
-        ],
-        'primary_logo' => [
-            'name' => 'primary_logo',
-            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
-        ],
-        'secondary_logo' => [
-            'name' => 'secondary_logo',
-            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
-        ],
-        'image_holder' => [
-            'name' => 'image_holder',
-            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
-        ],
-        'favicon' => [
-            'name' => 'favicon',
-            'default' => '/file/display?token=default-6ccb4a66-0ca3-46c7-88dd-default&w=200'
-        ],
-        'auto_logout_timer' => [
-            'name' => 'auto_logout_timer',
-            'default' => 1440
-        ],
-        'notification_change_password' => [
-            'name' => 'notification_change_password',
-            'default' => 'You\'ve Change your password'
-        ],
-        'email_change_password' => [
-            'name' => 'email_change_password',
-            'default' => 'You\'ve Change your password'
-        ],
-    ];
-    
     public $options;
     public $withImageInput = [
         'primary_logo',

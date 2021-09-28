@@ -6,8 +6,7 @@ use app\filters\IpFilter;
 use app\helpers\App;
 use app\models\Backup;
 use app\models\Ip;
-use app\models\form\SettingForm;
-use app\models\form\setting\GeneralSettingForm;
+use app\models\form\setting\SystemSettingForm;
 
 class IpFilterTest extends \Codeception\Test\Unit
 {
@@ -41,14 +40,14 @@ class IpFilterTest extends \Codeception\Test\Unit
 
     public function testWhitelist()
     {
-        $setting = new GeneralSettingForm();
+        $setting = new SystemSettingForm();
         $setting->whitelist_ip_only = 1;
         $setting->save();
 
         Ip::deleteAll(['name' => App::ip()]);
 
         $this->tester->seeRecord('app\models\Setting', [
-            'name' => 'general-setting'
+            'name' => SystemSettingForm::NAME
         ]);
 
         $this->tester->expectThrowable(

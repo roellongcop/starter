@@ -8,30 +8,25 @@ use yii\helpers\ArrayHelper;
 
 abstract class SettingForm extends \yii\base\Model
 {
-    public abstract function config();
+    public abstract function default();
     
     public function init()
     {
         parent::init();
+        $data = ArrayHelper::map($this->default(), 'name', 'default');
 
-        $config = $this->config();
-
-        $data = ArrayHelper::map($config['defaults'], 'name', 'default');
-
-        if (($model = Setting::findByName($config['name'])) != NULL) {
+        if (($model = Setting::findByName(static::NAME)) != NULL) {
             $data = array_replace($data, json_decode($model->value, true));
         }
-        
-        $this->load([$config['className'] => $data]);
+        $this->load([(new \ReflectionClass($this))->getShortName() => $data]);
     }
 
     public function save()
     {
         if ($this->validate()) {
-            $config = $this->config();
 
             $condition = [
-                'name' => $config['name'], 
+                'name' => static::NAME, 
                 'type' => Setting::TYPE_JSON
             ];
 

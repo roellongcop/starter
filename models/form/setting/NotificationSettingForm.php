@@ -6,6 +6,8 @@ use Yii;
 
 class NotificationSettingForm extends SettingForm
 {
+    const NAME = 'notification-settings';
+
     public $notification_change_password;
     /**
      * @return array the validation rules.
@@ -17,17 +19,13 @@ class NotificationSettingForm extends SettingForm
         ];
     }
 
-    public function config()
+    public function default()
     {
         return [
-            'className' => 'NotificationSettingForm',
-            'name' => 'notification-settings',
-            'defaults' => [
-                'notification_change_password' => [
-                    'name' => 'notification_change_password',
-                    'default' => 'You\'ve Change your password'
-                ],
-            ]
+            'notification_change_password' => [
+                'name' => 'notification_change_password',
+                'default' => 'You\'ve Change your password'
+            ],
         ];
     }
 }

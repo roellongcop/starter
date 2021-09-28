@@ -393,9 +393,7 @@ class App {
 
     public static function getModelName($model)
     {
-        $_class_name = explode("\\", get_class($model)); 
-
-        return end($_class_name);
+    	return self::className($model);
     }
 
     public static function ip()
@@ -423,11 +421,7 @@ class App {
 
     public static function className($model)
     {
-        $_class_name = explode("\\", get_class($model));
-
-        $class_name = end($_class_name);
-    	
-    	return $class_name;
+    	return (new \ReflectionClass($model))->getShortName();
     }
     
 	public static function createUrl($path, $params=[])

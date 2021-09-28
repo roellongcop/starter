@@ -6,6 +6,8 @@ use Yii;
 
 class EmailSettingForm extends SettingForm
 {
+    const NAME = 'email-settings';
+
     /* EMAIL */
     public $admin_email;
     public $sender_email;
@@ -26,28 +28,24 @@ class EmailSettingForm extends SettingForm
         ];
     }
 
-    public function config()
+    public function default()
     {
         return [
-            'className' => 'EmailSettingForm',
-            'name' => 'email-settings',
-            'defaults' => [
-                'admin_email' => [
-                    'name' => 'admin_email',
-                    'default' => 'admin@example.com'
-                ],
-                'sender_email' => [
-                    'name' => 'sender_email',
-                    'default' => 'noreply@example.com'
-                ],
-                'sender_name' => [
-                    'name' => 'sender_name',
-                    'default' => 'Example.com mailer'
-                ],
-                'email_change_password' => [
-                    'name' => 'email_change_password',
-                    'default' => 'You\'ve Change your password'
-                ]
+            'admin_email' => [
+                'name' => 'admin_email',
+                'default' => 'admin@example.com'
+            ],
+            'sender_email' => [
+                'name' => 'sender_email',
+                'default' => 'noreply@example.com'
+            ],
+            'sender_name' => [
+                'name' => 'sender_name',
+                'default' => 'Example.com mailer'
+            ],
+            'email_change_password' => [
+                'name' => 'email_change_password',
+                'default' => 'You\'ve Change your password'
             ]
         ];
     }

@@ -3,17 +3,19 @@
 namespace tests\unit\models;
 
 use app\models\Setting;
+use app\models\form\setting\SystemSettingForm;
 use yii\helpers\Inflector;
 
 class SettingTest extends \Codeception\Test\Unit
 {
     protected function data($replace=[])
     {
+        $model = new SystemSettingForm();
         return array_replace([
-            'name' => 'sample-setting',
-            'value' => 'Asia/Manila',
-            'slug' => Inflector::slug('sample-setting'),
-            'type' => 'general',
+            'name' => $model::NAME,
+            'value' => json_encode($model->attributes),
+            'slug' => Inflector::slug($model::NAME),
+            'type' => Setting::TYPE_JSON,
             'sort_order' => 0,
             'created_by' => 1,
             'updated_by' => 1,
