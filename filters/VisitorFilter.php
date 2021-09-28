@@ -60,7 +60,7 @@ class VisitorFilter extends \yii\base\ActionFilter
     public function addCookie()
     {
         $cookies = Yii::$app->response->cookies;
-        $expire = time() + ($this->duration ?? App::generalSetting('auto_logout_timer'));
+        $expire = time() + ($this->duration ?? App::setting('system')->auto_logout_timer);
 
         $userAgent = new UserAgentForm();
         $model = new Visitor([

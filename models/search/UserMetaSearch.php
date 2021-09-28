@@ -38,7 +38,7 @@ class UserMetaSearch extends UserMeta
     public function init()
     {
         parent::init();
-        $this->pagination = App::generalSetting('pagination');
+        $this->pagination = App::setting('system')->pagination;
     }
 
     /**

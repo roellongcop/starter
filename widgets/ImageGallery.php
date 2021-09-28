@@ -41,7 +41,7 @@ class ImageGallery extends AppWidget
 
         $this->parameters['UploadForm[modelName]'] = $this->modelName ?: App::className($this->model);
 
-        $this->defaultPhoto = App::generalSetting('image_holder');
+        $this->defaultPhoto = App::setting('image')->image_holder;
         $this->uploadFileName = $this->uploadFileName ?: $this->parameters['UploadForm[modelName]'];
     }
 

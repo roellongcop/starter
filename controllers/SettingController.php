@@ -6,9 +6,13 @@ use Yii;
 use app\helpers\App;
 use app\models\Setting;
 use app\models\Theme;
-use app\models\form\user\MySettingForm;
 use app\models\form\SettingForm;
+use app\models\form\setting\EmailSettingForm;
 use app\models\form\setting\GeneralSettingForm;
+use app\models\form\setting\ImageSettingForm;
+use app\models\form\setting\NotificationSettingForm;
+use app\models\form\setting\SystemSettingForm;
+use app\models\form\user\MySettingForm;
 use app\models\search\SettingSearch;
 use app\widgets\ExportContent;
 use yii\helpers\Html;
@@ -251,17 +255,31 @@ class SettingController extends Controller
 
     public function actionGeneral($tab='system')
     {
-        $model = new GeneralSettingForm();
-        if (($post = App::post()) != null) {
-            $post['GeneralSettingForm']['whitelist_ip_only'] = $post['GeneralSettingForm']['whitelist_ip_only'] ?? '0';
+        switch ($tab) {
+            case 'system':
+                $model = new SystemSettingForm();
+                break;
 
-            if ($model->load($post) && $model->validate()) {
+            case 'email':
+                $model = new EmailSettingForm();
+                break;
 
-                $model->save();
-                App::success('Successfully Changed');
+            case 'image':
+                $model = new ImageSettingForm();
+                break;
 
-                return $this->redirect(['general', 'tab' => $tab]);
-            }
+            case 'notification':
+                $model = new NotificationSettingForm();
+                break;
+            
+            default:
+                $model = new SystemSettingForm();
+                break;
+        }
+
+        if ($model->load(App::post()) && $model->save()) {
+            App::success('Successfully Changed');
+            return $this->redirect(['general', 'tab' => $tab]);
         }
 
         return $this->render('general', [

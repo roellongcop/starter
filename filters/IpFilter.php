@@ -26,7 +26,7 @@ class IpFilter extends ActionFilter
                 return false;
             }
 
-            if (App::generalSetting('whitelist_ip_only')) { 
+            if (App::setting('system')->whitelist_ip_only) { 
                 if (! in_array($ip, IpSearch::whiteList())) {
                     throw new ForbiddenHttpException('IP not WhiteListed.');
                     return false;

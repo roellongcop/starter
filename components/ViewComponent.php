@@ -50,7 +50,7 @@ class ViewComponent extends \yii\web\View
             }
         }
 
-        $theme = $theme ?: Theme::findOne(App::generalSetting('theme'));
+        $theme = $theme ?: Theme::findOne(App::setting('system')->theme);
         $this->bundles = $theme->bundles;
 
         $this->theme = [

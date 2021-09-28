@@ -30,7 +30,7 @@ use app\widgets\ImageGallery;
                         });
                         setTimeout(function() {KTApp.unblock('#primary_logo-container');}, 1000);
                         $('#primary_logo-container img').attr('src', s.src + '&w=200');
-                        $('#generalsettingform-primary_logo').val(s.src);
+                        $('#imagesettingform-primary_logo').val(s.src);
                     }
                 ",
             ]) ?> 
@@ -56,7 +56,7 @@ use app\widgets\ImageGallery;
                         });
                         setTimeout(function() {KTApp.unblock('#secondary_logo-container');}, 1000);
                         $('#secondary_logo-container img').attr('src', s.src + '&w=200');
-                        $('#generalsettingform-secondary_logo').val(s.src);
+                        $('#imagesettingform-secondary_logo').val(s.src);
                     }
                 ",
             ]) ?> 
@@ -82,7 +82,7 @@ use app\widgets\ImageGallery;
                         });
                         setTimeout(function() {KTApp.unblock('#favicon-container');}, 1000);
                         $('#favicon-container img').attr('src', s.src + '&w=200');
-                        $('#generalsettingform-favicon').val(s.src);
+                        $('#imagesettingform-favicon').val(s.src);
                     }
                 ",
             ]) ?> 
@@ -110,7 +110,7 @@ use app\widgets\ImageGallery;
                         });
                         setTimeout(function() {KTApp.unblock('#image_holder-container');}, 1000);
                         $('#image_holder-container img').attr('src', s.src + '&w=200');
-                        $('#generalsettingform-image_holder').val(s.src);
+                        $('#imagesettingform-image_holder').val(s.src);
                     }
                 ",
             ]) ?> 

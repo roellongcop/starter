@@ -13,7 +13,7 @@ $searchAction = $searchModel->searchAction ?? ['index'];
     <!--begin::Header Logo-->
     <div class="header-logo">
         <a href="index.html">
-            <?= Html::img(App::generalSetting('primary_logo') . '&w=90&quality=90', [
+            <?= Html::img(App::setting('image')->primary_logo . '&w=90&quality=90', [
                 'class' => 'h-30px',
                 'alt' => App::appName()
             ]) ?>

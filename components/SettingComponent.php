@@ -3,26 +3,25 @@
 namespace app\components;
 
 use Yii;
-use app\helpers\App;
-use app\helpers\Url;
-use app\models\ModelFile;
-use app\models\Setting;
-use app\models\form\setting\GeneralSettingForm;
-use app\models\search\SettingSearch;
+use app\models\form\setting\EmailSettingForm;
+use app\models\form\setting\ImageSettingForm;
+use app\models\form\setting\NotificationSettingForm;
+use app\models\form\setting\SystemSettingForm;
 
 class SettingComponent extends \yii\base\Component
 {
- 	public $general;
+    public $system;
+    public $email;
+    public $image;
+ 	public $notification;
     
 	public function init()
     {
         parent::init();
 
-        $this->general = new GeneralSettingForm();
-    }
-
-    public function general($name)
-    {
-        return $this->general->{$name};
+        $this->system = new SystemSettingForm();
+        $this->email = new EmailSettingForm();
+        $this->image = new ImageSettingForm();
+        $this->notification = new NotificationSettingForm();
     }
 }

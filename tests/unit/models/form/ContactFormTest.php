@@ -40,8 +40,8 @@ class ContactFormTest extends \Codeception\Test\Unit
         $emailMessage = $this->tester->grabLastSentEmail();
         expect('valid email is sent', $emailMessage)->isInstanceOf('yii\mail\MessageInterface');
         expect($emailMessage->getTo())->hasKey('admin@example.com');
-        expect($emailMessage->getFrom())->hasKey(App::generalSetting('admin_email'));
-        expect($emailMessage->getReplyTo())->hasKey(App::generalSetting('admin_email'));
+        expect($emailMessage->getFrom())->hasKey(App::setting('email')->admin_email);
+        expect($emailMessage->getReplyTo())->hasKey(App::setting('email')->admin_email);
         expect($emailMessage->getSubject())->equals('very important letter subject');
         expect($emailMessage->toString())->stringContainsString('body of current message');
     }

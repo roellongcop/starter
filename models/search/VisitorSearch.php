@@ -36,7 +36,7 @@ class VisitorSearch extends Visitor
 
     public function init()
     {
-        $this->pagination = App::generalSetting('pagination');
+        $this->pagination = App::setting('system')->pagination;
     }
 
     /**

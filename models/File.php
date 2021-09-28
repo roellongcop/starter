@@ -181,7 +181,7 @@ class File extends ActiveRecord
 
     public function getImagePath($params = [])
     {
-        return $this->getDisplay($params) ?: App::generalSetting('image_holder');
+        return $this->getDisplay($params) ?: App::setting('image')->image_holder;
     }
 
     public function gridColumns()

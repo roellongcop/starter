@@ -7,7 +7,7 @@ use app\helpers\App;
 		<div class="d-none d-lg-flex align-items-center flex-wrap w-250px">
 			<!--begin::Logo-->
 			<a href="index.html">
-				<img alt="Logo" src="<?= App::generalSetting('primary_logo') ?>&w=150" class="max-h-50px" />
+				<img alt="Logo" src="<?= App::setting('image')->primary_logo ?>&w=150" class="max-h-50px" />
 			</a>
 			<!--end::Logo-->
 		</div>

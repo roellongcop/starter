@@ -173,7 +173,7 @@ class Notification extends ActiveRecord
             return false;
         }
         
-        $this->message = $this->message ?: App::generalSetting($this->type);
+        $this->message = $this->message ?: App::setting('notification')->{$this->type};
 
         return true;
     }

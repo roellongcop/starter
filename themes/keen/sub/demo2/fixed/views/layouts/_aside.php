@@ -6,7 +6,7 @@ use app\helpers\App;
 	<div class="aside-brand d-none d-lg-flex flex-column align-items-center flex-column-auto pt-10 pb-5">
 		<!--begin::Logo-->
 		<a href="index.html">
-			<img alt="Logo" src="<?= App::generalSetting('primary_logo') ?>&w=50&quality=90" />
+			<img alt="Logo" src="<?= App::setting('image')->primary_logo ?>&w=50&quality=90" />
 		</a>
 		<!--end::Logo-->
 	</div>

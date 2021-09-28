@@ -61,7 +61,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
     public function init()
     {
-        $this->pagination = App::generalSetting('pagination');
+        $this->pagination = App::setting('system')->pagination;
     }
 
     /**

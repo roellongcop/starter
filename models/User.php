@@ -401,7 +401,7 @@ class User extends ActiveRecord implements IdentityInterface
                 $this->_currentTheme = $theme;
             }
             else {
-                $this->_currentTheme = Theme::findOne(App::generalSetting('theme'));
+                $this->_currentTheme = Theme::findOne(App::setting('system')->theme);
             }
         }
         return $this->_currentTheme;

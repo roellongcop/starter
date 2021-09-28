@@ -12,7 +12,7 @@ class DbSessionComponent extends \yii\web\DbSession
 {
 	public function init()
 	{
-		$this->timeout = App::generalSetting('auto_logout_timer');
+		$this->timeout = App::setting('system')->auto_logout_timer;
 		$this->sessionTable = Session::tableName();
 		$this->writeCallback = function ($session) { 
 			$userAgent = new UserAgentForm();

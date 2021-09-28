@@ -6,7 +6,7 @@ use app\helpers\App;
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
         <a href="index.html" class="brand-logo">
-            <img alt="Logo" src="<?= App::generalSetting('primary_logo') ?>&quality=90" class="h-30px" />
+            <img alt="Logo" src="<?= App::setting('image')->primary_logo ?>&quality=90" class="h-30px" />
         </a>
         <!--end::Logo-->
         <!--begin::Toggle-->

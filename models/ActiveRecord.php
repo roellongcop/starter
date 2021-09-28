@@ -723,7 +723,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 return $modelFile->file->getDisplay($params);
             }
         }
-        return App::generalSetting('image_holder');
+        return App::setting('image')->image_holder;
     }
 
     public function getModelDocumentFiles()

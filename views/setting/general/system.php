@@ -42,15 +42,17 @@ use app\widgets\ActiveForm;
 	        ]) ?>
 		</div>
 		<div class="col-md-4">
-			<div class="mt-10">
-				<?= Checkbox::widget([
-	                'data' => [1 => 'Whitelist IP can only access'],
-	                'name' => "GeneralSettingForm[whitelist_ip_only]",
-	                'checkedFunction' => function($key, $value) use ($model) {
-	                	return $key == $model->whitelist_ip_only ? 'checked': '';
-	                },
-	            ]) ?>
-			</div>
+            <?= BootstrapSelect::widget([
+	            'attribute' => 'whitelist_ip_only',
+	            'model' => $model,
+	            'form' => $form,
+	            'label' => 'Ip Access',
+	            'data' => ['All', 'Whitelist Only'],
+	            'searchable' => false,
+	            'options' => [
+			        'class' => 'kt-selectpicker form-control',
+			    ]
+	        ]) ?>
 		</div>
 	</div>
 	<div class="form-group"> <br>

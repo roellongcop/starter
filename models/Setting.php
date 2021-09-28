@@ -25,7 +25,11 @@ use app\helpers\Url;
  */
 class Setting extends ActiveRecord
 {
-    const TYPE_GENERAL = 'general';
+    const TYPE_INPUT = 'input';
+    const TYPE_TEXTAREA = 'textarea';
+    const TYPE_SELECT = 'select';
+    const TYPE_FILE = 'file';
+    const TYPE_JSON = 'json';
 
     const MODULE = [
         'system' => [
@@ -107,8 +111,6 @@ class Setting extends ActiveRecord
     ];
     
     public $options;
-    public $imageInput;
-    public $fileLocation; 
     public $withImageInput = [
         'primary_logo',
         'secondary_logo',
@@ -160,16 +162,14 @@ class Setting extends ActiveRecord
             [['value'], 'safe'],
             [['type', 'options', 'sort_order'], 'safe'],
             [['name', 'slug'], 'string', 'max' => 255],
-            [['type'], 'in', 'range' => [self::TYPE_GENERAL]],
+            [['type'], 'in', 'range' => [
+                self::TYPE_INPUT,
+                self::TYPE_TEXTAREA,
+                self::TYPE_SELECT,
+                self::TYPE_FILE,
+                self::TYPE_JSON,
+            ]],
             [['name'], 'unique'],
-            [
-                ['imageInput'], 
-                'image', 
-                'maxSize' => 1024 * 1024 * 2,
-                'skipOnEmpty' => true, 
-                'extensions' => App::file('file_extensions')['image'], 
-                'checkExtensionByMimeType' => false
-            ],
         ]);
     }
 
@@ -312,5 +312,10 @@ class Setting extends ActiveRecord
             'ensureUnique' => true,
         ];
         return $behaviors;
+    }
+
+    public static function findByName($name='')
+    {
+        return self::findOne(['name' => $name]);
     }
 }
