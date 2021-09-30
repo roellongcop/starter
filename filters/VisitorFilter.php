@@ -10,7 +10,7 @@ use app\models\form\UserAgentForm;
 
 class VisitorFilter extends \yii\base\ActionFilter
 {
-    public $force = false;
+    public $test = false;
     public $duration;
     public $cookieId = 'app-visitor-id';
     public $exempted = [
@@ -26,7 +26,7 @@ class VisitorFilter extends \yii\base\ActionFilter
         if ((!in_array(App::controllerAction(), $this->exempted) 
             && App::isWeb()
             && !App::isAjax()
-            && !$this->isBot()) || $this->force) {
+            && !$this->isBot()) || $this->test) {
 
             $cookies = Yii::$app->request->cookies;
 
@@ -65,7 +65,7 @@ class VisitorFilter extends \yii\base\ActionFilter
         $userAgent = new UserAgentForm();
         $model = new Visitor([
             'expire' => $expire,
-            'session_id' => App::session('id'),
+            'session_id' => ($this->test)? App::randomString(10): App::session('id'),
             'ip' => App::ip(),
             'browser' => $userAgent->browser,
             'os' => $userAgent->os,
@@ -74,7 +74,6 @@ class VisitorFilter extends \yii\base\ActionFilter
             'location' => $userAgent->ipInformation,
         ]);
         $model->cookie = $model->createCookieValue();
-
         if ($model->save()) {
             // add a new cookie to the response to be sent
             $cookies->add(new Cookie([

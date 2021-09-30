@@ -2,13 +2,13 @@
 
 namespace tests\unit\models\form\setting;
 
-use app\models\form\setting\SystemSettingForm;
+use app\models\form\setting\NotificationSettingForm;
 
-class SystemSettingFormTest extends \Codeception\Test\Unit
+class NotificationSettingFormTest extends \Codeception\Test\Unit
 {
     public function testValid()
     {
-        $model = new SystemSettingForm();
+        $model = new NotificationSettingForm();
 
         expect_that($model->save());
 
