@@ -16,7 +16,7 @@
 
 	```php vendor/bin/codecept run``` (Running tests)
 
-	```yii seed/init``` (Generate random data on [roles, users, ips], Overwrite migration fixed data)
+	```yii seed/init``` (Generate random data on [roles, users, ips], Overwrite migration fixed data and fixture)
 
 	```yii seed Role 10``` (Generate Additional 10 roles)
 
@@ -86,5 +86,5 @@
 	* General Setting
 	* Ip
 	* Themes
-	* Notifications
-	* Visitors
+* Notifications
+* Visitors
