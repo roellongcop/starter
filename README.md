@@ -57,7 +57,7 @@
 * Dynamic Themes
 * Rest API setup
 * General Settings
-* Photo Uploader (dropzone)
+* Photo Uploader (dropzone with Cropper)
 * Queuing System
 * Fixture Setup | for testing
 * Database Seeding
