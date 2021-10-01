@@ -39,7 +39,7 @@ class SettingSearch extends Setting
     public function init()
     {
         parent::init();
-        $this->pagination = self::default('pagination');
+        $this->pagination = App::setting('system')->pagination;
     }
 
     /**
@@ -100,40 +100,5 @@ class SettingSearch extends Setting
         $query->daterange($this->date_range);
 
         return $dataProvider;
-    }
-
-    public static function default($name)
-    {
-        $model = Setting::findOne([
-            'name' => $name,
-            'type' => 'general'
-        ]);
-        if ($model) {
-            return $model->value;
-        }
-
-        $general_settings = Setting::GENERAL;
-
-        if (!empty($general_settings[$name])) {
-            return $general_settings[$name]['default'];
-        }
-    }
-
-    public static function defaultImage($name, $params=[])
-    {
-        $model = Setting::findOne([
-            'name' => $name,
-            'type' => 'general'
-        ]);
-
-        if($model && $model->imageFile) {
-            return Url::imagePath($model->imagePath, $params);
-        }
-
-        if ($name == 'image_holder') {
-            return Url::to(Setting::GENERAL['image_holder']['default']) ?? '';
-        }
-
-        return self::defaultImage('image_holder');
     }
 }
