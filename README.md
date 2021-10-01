@@ -28,17 +28,16 @@
 
 ============================================================================
 
-# Notes
-* In different environment (Server), you may need to adjust some configurations
-- console environment (config/console.php)
-- testing environment (config/test.php)
-	```'urlManager' => [
-            'scriptUrl' => 'http://localhost',
-            'baseUrl' => '/starter',
-            'enablePrettyUrl' => true,
-        ]
-    ```
-
+# Accounts
+* Developer
+	- developer@developer.com
+	- developer@developer.com
+* Superadmin
+	- superadmin@superadmin.com
+	- superadmin@superadmin.com
+* Admin
+	- admin@admin.com
+	- admin@admin.com
 
 # Features
 * Base on keenadmin dashboard
@@ -63,6 +62,7 @@
 * Fixture Setup | for testing
 * Database Seeding
 * Notification
+* Visitors | Cookie & Session
 
 # Modules
 * Dashboard
@@ -87,3 +87,4 @@
 	* Ip
 	* Themes
 	* Notifications
+	* Visitors
