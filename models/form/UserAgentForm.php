@@ -125,7 +125,7 @@ class UserAgentForm extends \yii\base\Model
 
     private function filterUserAgent($array)
     {
-    	$arr = array_filter($array,
+    	return array_filter($array,
             function($value, $key) {
                 preg_match($key, $this->userAgent, $match);  
 				if($match) {
