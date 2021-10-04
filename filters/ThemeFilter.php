@@ -27,7 +27,7 @@ class ThemeFilter extends ActionFilter
                 $theme = App::identity('currentTheme');
             }
         }
-        $theme = $theme ?: Theme::findOne(App::generalSetting('theme'));
+        $theme = $theme ?: Theme::findOne(App::setting('system')->theme);
         $theme = $this->theme ?: $theme;
 
         if ($theme) {
