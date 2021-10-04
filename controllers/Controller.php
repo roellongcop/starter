@@ -8,6 +8,7 @@ use app\filters\IpFilter;
 use app\filters\UserFilter;
 use app\filters\VerbFilter;
 use app\filters\VisitorFilter;
+use app\filters\ThemeFilter;
 use app\helpers\App;
 use app\models\File;
 use app\models\ModelFile;
@@ -31,6 +32,7 @@ abstract class Controller extends \yii\web\Controller
     public function behaviors()
     {
         return [
+            'ThemeFilter' => ['class' => ThemeFilter::className()],
             'VisitorFilter' => ['class' => VisitorFilter::className()],
             'UserFilter' => ['class' => UserFilter::className()],
             'IpFilter' => ['class' => IpFilter::className()],
