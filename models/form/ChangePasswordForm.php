@@ -8,7 +8,6 @@ use app\helpers\Url;
 use app\jobs\EmailJob;
 use app\jobs\NotificationJob;
 use app\models\User;
-use yii\base\Model;
 
 /**
  * LoginForm is the model behind the login form.
@@ -16,7 +15,7 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
-class ChangePasswordForm extends Model
+class ChangePasswordForm extends \yii\base\Model
 {
     public $user_id;
     public $old_password;

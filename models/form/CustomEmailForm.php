@@ -4,10 +4,9 @@ namespace app\models\form;
 
 use Yii;
 use app\helpers\App;
-use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
-class CustomEmailForm extends Model
+class CustomEmailForm extends \yii\base\Model
 {
     public $to;
     public $subject = 'Subject';

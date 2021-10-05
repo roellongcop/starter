@@ -4,7 +4,6 @@ namespace app\models\form;
 
 use Yii;
 use app\helpers\App;
-use yii\base\Model;
 /**
  * This is the model class for table "{{%themes}}".
  *
@@ -21,7 +20,7 @@ use yii\base\Model;
  * @property string $created_at
  * @property string $updated_at
  */
-class UploadForm extends Model
+class UploadForm extends \yii\base\Model
 {
     public $modelName;
     public $fileInput;
