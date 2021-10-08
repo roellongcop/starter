@@ -214,7 +214,7 @@ class Theme extends ActiveRecord
         return $behaviors;
     }
 
-    public function getimageFiles()
+    public function getPhotoFiles()
     {
         return File::find()
             ->where(['id' => $this->photo_ids])
@@ -223,8 +223,8 @@ class Theme extends ActiveRecord
 
     public function getImagePath($params=[])
     {
-        if (($imageFiles = $this->imageFiles) != NULL) {
-            $file = $imageFiles[0];
+        if (($photoFiles = $this->photoFiles) != NULL) {
+            $file = $photoFiles[0];
             return $file->getImagePath($params);
         }
         return App::setting('image')->imageHolderPath;

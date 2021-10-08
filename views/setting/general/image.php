@@ -5,14 +5,13 @@ use app\helpers\Url;
 use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
 use app\widgets\ImageGallery;
-
 ?>
 <?php $form = ActiveForm::begin(['id' => 'setting-general-image-form']); ?>
 	<p class="lead">Images</p>
 	<div class="row">
 		<div class="col-md-4">
             <p class="text-warning">Primary Logo</p>
-            <?= Html::photo($model->primary_logo, ['w' => 200], [
+            <?= Html::photo($model->primaryLogoFile, ['w' => 200], [
                 'class' => 'img-thumbnail',
                 'loading' => 'lazy',
                 'id' => 'primary_logo'
@@ -29,7 +28,7 @@ use app\widgets\ImageGallery;
 		</div>
 		<div class="col-md-4">
             <p class="text-warning">Secondary Logo</p>
-            <?= Html::photo($model->secondary_logo, ['w' => 200], [
+            <?= Html::photo($model->secondaryLogoFile, ['w' => 200], [
                 'class' => 'img-thumbnail',
                 'loading' => 'lazy',
                 'id' => 'secondary_logo'
@@ -46,7 +45,7 @@ use app\widgets\ImageGallery;
 		</div>
 		<div class="col-md-4">
             <p class="text-warning">Favicon</p>
-            <?= Html::photo($model->favicon, ['w' => 200], [
+            <?= Html::photo($model->faviconFile, ['w' => 200], [
                 'class' => 'img-thumbnail',
                 'loading' => 'lazy',
                 'id' => 'favicon'
@@ -65,7 +64,7 @@ use app\widgets\ImageGallery;
 	<div class="row">
 		<div class="col-md-4">
             <p class="text-warning">Image Holder</p>
-            <?= Html::photo($model->image_holder, ['w' => 200], [
+            <?= Html::photo($model->imageHolderFile, ['w' => 200], [
                 'class' => 'img-thumbnail',
                 'loading' => 'lazy',
                 'id' => 'image_holder',

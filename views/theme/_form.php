@@ -68,7 +68,6 @@ $this->registerJs($registerJs);
         <?= Dropzone::widget([
             'files' => $model->imageFiles,
             'model' => $model,
-            'attribute' => 'photo_ids',
             'acceptedFiles' => array_map(
                 function($val) { 
                     return ".{$val}"; 

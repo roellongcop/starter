@@ -66,6 +66,7 @@ class SettingController extends Controller
         $model = $this->findModel($name, 'name');
 
         if ($model->load(App::post()) && $model->save()) {
+            $this->checkFileUpload($model);
             App::success('Successfully Updated');
             return $this->redirect($model->viewUrl);
         }
