@@ -69,6 +69,7 @@ class BackupController extends Controller
                 if ($model->save()) {
                     App::queue()->push(new BackupJob([
                         'backupId' => $model->id,
+                        'created_by' => App::identity('id')
                     ]));
                     App::success('Successfully Created');
                 }

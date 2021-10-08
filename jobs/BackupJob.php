@@ -10,6 +10,7 @@ use yii\helpers\FileHelper;
 
 class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
 {
+    public $created_by;
     public $backupId;
     
     public function execute($queue)
@@ -29,6 +30,9 @@ class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
                 $fileInput->size = $backup['filesize'];
 
                 $file = App::component('file')->saveFile($model, $fileInput, $backup['uploadPath']);
+                $file->created_by = $this->created_by;
+                $file->updated_by = $this->created_by;
+                $file->save();
 
                 $modelFile = new ModelFile([
                     'file_id' => $file->id,
