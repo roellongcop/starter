@@ -1,6 +1,5 @@
 <?php
 use app\helpers\App;
-use app\helpers\Html;
 ?>
 <div class="subheader bg-white h-100px" id="kt_subheader">
 	<div class="container-fluid flex-wrap flex-sm-nowrap">
@@ -8,9 +7,7 @@ use app\helpers\Html;
 		<div class="d-none d-lg-flex align-items-center flex-wrap w-250px">
 			<!--begin::Logo-->
 			<a href="index.html">
-				<?= Html::photo(App::setting('image')->primaryLogoFile, ['w' => 150], [
-					'class' => 'max-h-50px'
-				]) ?>
+				<img alt="Logo" src="<?= App::setting('image')->primary_logo ?>&w=150" class="max-h-50px" />
 			</a>
 			<!--end::Logo-->
 		</div>

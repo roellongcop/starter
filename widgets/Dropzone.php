@@ -5,7 +5,6 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
 use app\helpers\Url;
-use app\models\form\UploadForm;
 use yii\helpers\ArrayHelper;
  
 class Dropzone extends AppWidget
@@ -73,8 +72,8 @@ class Dropzone extends AppWidget
 
         if (!$this->acceptedFiles) {
             $acceptedFiles = array_merge(
-                UploadForm::FILE_EXTENSIONS['image'],
-                UploadForm::FILE_EXTENSIONS['file']
+                App::file('file_extensions')['image'],
+                App::file('file_extensions')['file']
             );
             $this->acceptedFiles = array_map(function($val) { return ".{$val}"; }, $acceptedFiles);
         }

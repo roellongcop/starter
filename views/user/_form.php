@@ -51,19 +51,31 @@ use app\widgets\RecordStatusInput;
         </div>
         <div class="col-md-7">
             <div id="sipc" style="max-width: 200px">
-                <?= Html::photo($model->file, ['w'=>200], [
-                    'class' => 'img-thumbnail',
-                    'loading' => 'lazy',
-                    'id' => 'user-photo'
-                ] ) ?>
+                <?= Html::image(
+                    $model->imagePath,
+                    ['w'=>200],
+                    [
+                        'class' => 'img-thumbnail',
+                        'loading' => 'lazy',
+                    ]
+                ) ?>
             </div>
             <br>
             <?= ImageGallery::widget([
                 'model' => $model,
-                'attribute' => 'photo_id',
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
-                        $('#user-photo').attr('src', s.src + '&w=200');
+                        KTApp.block('#sipc', {
+                            overlayColor: '#000000',
+                            state: 'primary',
+                            message: 'Processing...'
+                        });
+                        setTimeout(function() {
+                            KTApp.unblock('#sipc');
+                        }, 1000);
+                        $('#sipc img').attr('src', s.src + '&w=200');
+                        $('#profile-image-desktop').attr('src', s.src + '&w=200');
+                        $('#profile-image-dropdown').attr('src', s.src + '&w=200');
                     }
                 ",
             ]) ?> 

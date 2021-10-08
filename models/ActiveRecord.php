@@ -44,7 +44,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_startDate;
     public $_endDate;
     public $_createdByEmail;
-    public $_updatedByEmail; 
+    public $_updatedByEmail;
+
+    public $_modelImageFiles;
+    public $_modelImageFile;
+
+    public $_modelDocumentFiles;
+    public $_modelDocumentFile;
 
     public $_canCreate;
     public $_canView;
@@ -616,7 +622,154 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->{$mainAttribute};
         }
     }
-         
+
+    public function getFiles()
+    {
+        return $this->hasMany(File::ClassName(), ['id' => 'file_id'])
+            ->viaTable('{{%model_files}}', ['model_id' => 'id']);
+    }
+
+    public function getModelFiles($extension = [])
+    {
+        return ModelFile::find()
+            ->select([
+                'MAX(id) AS id',
+                'model_id',
+                'file_id',
+                'model_name',
+                'extension',
+                'record_status',
+                'created_by',
+                'updated_by',
+                'created_at',
+                'updated_at',
+            ])
+            ->where([
+                'model_id' => $this->id,
+                'model_name' => App::getModelName($this)
+            ])
+            ->andFilterWhere(['extension' => $extension])
+            ->groupBy(['file_id'])
+            ->orderBy(['MAX(id)' => SORT_DESC])
+            ->all();
+    }
+
+    public function getModelFile($extension = [])
+    {
+        return ModelFile::find()
+            ->select([
+                'MAX(id) AS id',
+                'model_id',
+                'file_id',
+                'model_name',
+                'extension',
+                'record_status',
+                'created_by',
+                'updated_by',
+                'created_at',
+                'updated_at',
+            ])
+            ->where([
+                'model_id' => $this->id,
+                'model_name' => App::getModelName($this)
+            ])
+            ->andFilterWhere(['extension' => $extension])
+            ->groupBy(['file_id'])
+            ->orderBy(['MAX(id)' => SORT_DESC])
+            ->one();
+    }
+
+    public function getModelImageFiles()
+    {
+        if ($this->_modelImageFiles === NULL) {
+            $this->_modelImageFiles = $this->getModelFiles(App::file('file_extensions')['image']);
+        }
+
+        return $this->_modelImageFiles; 
+    }
+
+    public function getModelImageFile()
+    {
+        if ($this->_modelImageFile === NULL) {
+            $this->_modelImageFile = $this->getModelFile(App::file('file_extensions')['image']);
+        }
+
+        return $this->_modelImageFile; 
+    }
+
+    public function getImageFiles()
+    {
+        if (($modelImageFiles = $this->modelImageFiles) != NULL) {
+            $files = [];
+
+            foreach ($modelImageFiles as $modelFile) {
+                array_push($files, $modelFile->file);
+            }
+            return $files;
+        }
+    }
+
+    public function getImageFile()
+    {
+        if (($modelImageFile = $this->modelImageFile) != NULL) {
+            return $modelImageFile->file;
+        }
+    }
+
+    public function getImagePath($params=[])
+    {
+        if(($modelFile = $this->modelImageFile) != NULL) {
+            if ($modelFile->file) {
+                return $modelFile->file->getDisplay($params);
+            }
+        }
+        return App::setting('image')->image_holder;
+    }
+
+    public function getModelDocumentFiles()
+    {
+        if ($this->_modelDocumentFiles === NULL) {
+            $this->_modelDocumentFiles = $this->getModelFiles(App::file('file_extensions')['file']);
+        }
+
+        return $this->_modelDocumentFiles; 
+    }
+
+    public function getModelDocumentFile()
+    {
+        if ($this->_modelDocumentFile === NULL) {
+            $this->_modelDocumentFile = $this->getModelFile(App::file('file_extensions')['file']);
+        }
+
+        return $this->_modelDocumentFile; 
+    }
+
+    public function getModelSqlFiles()
+    {
+        return $this->getModelFiles(['sql']);
+    }
+
+    public function getModelSqlFile()
+    {
+        return $this->getModelFile(['sql']);
+    }
+
+    public function getSqlFileLocation()
+    {
+        if(($modelFile = $this->modelSqlFile) != NULL) {
+            return $modelFile->fileLocation;
+        }
+    }
+
+    public function getSqlFilePath()
+    {
+        if(($modelFile = $this->modelSqlFile) != NULL) {
+            if ($modelFile->file) {
+                return $modelFile->file->display;
+            }
+        }
+    }
+
     public function getRecordStatus()
     {
         return self::RECORDS[$this->record_status];

@@ -30,7 +30,6 @@ class m210314_045639_seed_themes_table extends \app\migrations\Migration
                 'record_status' => 1,
                 'created_at' => new Expression('UTC_TIMESTAMP'),
                 'updated_at' => new Expression('UTC_TIMESTAMP'),
-                'photo_ids' => json_encode([1])
             ];
             $this->insert($this->tableName(), $data);
         }

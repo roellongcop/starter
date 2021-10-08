@@ -321,6 +321,8 @@ class UserController extends Controller
         $model = App::identity();
 
         if ($model->load(App::post()) && $model->save()) {
+            $this->checkFileUpload($model);
+            
             App::success('Successfully Updated');
             return $this->refresh();
         } 

@@ -24,6 +24,7 @@ $config = [
         ],
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
+        'file' => ['class' => 'app\components\FileComponent'],
         'export' => ['class' => 'app\components\ExportComponent'],
         'general' => ['class' => 'app\components\GeneralComponent'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],

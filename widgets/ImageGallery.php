@@ -25,9 +25,6 @@ class ImageGallery extends AppWidget
 
     public $uploadFileName;
 
-    public $inputName;
-    public $attribute;
-
 
     public function init() 
     {
@@ -38,18 +35,14 @@ class ImageGallery extends AppWidget
         $this->uploadUrl = Url::to($this->uploadUrl);
         if ($this->model) {
             $this->modelName = App::getModelName($this->model);
-            $this->file_id = $this->model->{$this->attribute};
         }
 
         $this->parameters[App::request('csrfParam')] = App::request('csrfToken');
 
         $this->parameters['UploadForm[modelName]'] = $this->modelName ?: App::className($this->model);
 
-        $this->defaultPhoto = App::setting('image')->imageHolderPath;
+        $this->defaultPhoto = App::setting('image')->image_holder;
         $this->uploadFileName = $this->uploadFileName ?: $this->parameters['UploadForm[modelName]'];
-
-        $inputName = "{$this->modelName}[{$this->attribute}]";
-        $this->inputName = $this->inputName ?: $inputName;
     }
 
 
@@ -74,7 +67,6 @@ class ImageGallery extends AppWidget
             'defaultPhoto' => $this->defaultPhoto,
             'uploadFileName' => $this->uploadFileName,
             'parameters' => json_encode($this->parameters),
-            'inputName' => $this->inputName,
         ]);
     }
 }

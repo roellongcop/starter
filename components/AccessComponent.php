@@ -180,6 +180,11 @@ class AccessComponent extends Component
 		                'link' => '/my-files',
 		                'icon' => '<i class="fa fa-cog"></i>',
 		            ],
+		            '3.3' => [
+		                'label' => 'Model Files',
+		                'link' => '/model-file',
+		                'icon' => '<i class="fa fa-cog"></i>',
+		            ],
 		        ],
 		    ],
 		    '4' => [

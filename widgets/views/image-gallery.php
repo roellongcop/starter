@@ -8,7 +8,6 @@ use yii\widgets\Pjax;
 $registerJs = <<< SCRIPT
     var selectedFile = 0,
         selectedFilePath = '',
-        selectedFileName = '{$uploadFileName}-' + new Date().getTime(),
         rotate = 0,
         image = document.getElementById('cropper-image-{$id}'),
         options = {
@@ -19,6 +18,7 @@ $registerJs = <<< SCRIPT
 
         container = '#image-gallery-container-{$id}',
 
+        fileIdInput          = [container, '.file-id-input'].join(' '),
         imageGalleryBtn      = [container, '.image-gallery-btn'].join(' '),
         imageGalleryModal    = [container, '.image-gallery-modal'].join(' '),
         myPhotosTabLink      = [container, '.my-photos-tab-link'].join(' '),
@@ -43,8 +43,6 @@ $registerJs = <<< SCRIPT
         selectImageInput = [container, '.select-image-input'].join(' '),
         selectImageBtn   = [container, '.select-image-btn'].join(' '),
         saveImageBtn     = [container, '.save-image-btn'].join(' '),
-
-        inputName     = [container, 'input[name="{$inputName}"]'].join(' '),
 
         editBtn    = [container, '.edit-btn'].join(' '),
         confirmBtn = [container, '.confirm-btn'].join(' '),
@@ -128,7 +126,6 @@ $registerJs = <<< SCRIPT
 
         selectedFile = $(image).data('id');
         selectedFilePath = $(image).data('src');
-        selectedFileName = $(image).data('name');
 
         $(imageName).text($(image).data('name'));
         $(imageExtension).text($(image).data('extension'));
@@ -156,28 +153,12 @@ $registerJs = <<< SCRIPT
     });
 
     $(confirmBtn).click(function() {
-
         let s = {
             status: 'success',
-            src: selectedFilePath,
-            file: {
-                id: selectedFile,
-                src: selectedFilePath,
-                name: selectedFileName
-            }
+            src: selectedFilePath
         };
-
-        KTApp.block('body', {
-            overlayColor: '#000000',
-            state: 'primary',
-            message: 'Processing...'
-        });
-        setTimeout(function() {
-            KTApp.unblock('body');
-        }, 1000);
         {$ajaxSuccess}
-
-        $(inputName).val(selectedFile);
+        $(fileIdInput).val(selectedFile);
     });
 
     $(imageGalleryBtn).click(function() {
@@ -219,8 +200,6 @@ $registerJs = <<< SCRIPT
         var reader = new FileReader();
 
         if(this.files && this.files[0]) {
-            console.log(this.files[0])
-            selectedFileName = this.files[0]['name'];
             reader.onload = function(e) {
                 image.src = e.target.result;
                 if (cropper) {
@@ -265,7 +244,7 @@ $registerJs = <<< SCRIPT
         
             const formData = new FormData();
             // Pass the image file name as the third parameter if necessary.
-            formData.append('UploadForm[fileInput]', blob, selectedFileName + '.png');
+            formData.append('UploadForm[fileInput]', blob, '{$uploadFileName}-' + new Date().getTime() + '.png');
             let parameters = {$parameters};
             for ( let key in parameters ) {
                 formData.append(key, parameters[key]);
@@ -283,7 +262,7 @@ $registerJs = <<< SCRIPT
                         if (cropper) {
                             cropper.destroy();
                         }
-                        $(inputName).val(s.file.id);
+                        $(fileIdInput).val(s.file.id);
                         $(imageGalleryModal).modal('hide');
                     }
                     else {
@@ -336,7 +315,11 @@ CSS;
 $this->registerCss($registerCss);
 ?>
 <div id="image-gallery-container-<?= $id ?>">
-    <input type="hidden" name="<?= $inputName ?>" value="<?= $file_id ?>">
+
+    <input class="file-id-input" 
+        name="<?= $file_id_name ?>" 
+        type="hidden" 
+        value="<?= $file_id ?>">
 
     <button type="button" class="btn btn-primary btn-sm image-gallery-btn">
         <?= $buttonTitle ?>
