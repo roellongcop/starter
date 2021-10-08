@@ -8,6 +8,7 @@ use yii\widgets\Pjax;
 $registerJs = <<< SCRIPT
     var selectedFile = 0,
         selectedFilePath = '',
+        selectedFileName = '{$uploadFileName}-' + new Date().getTime(),
         rotate = 0,
         image = document.getElementById('cropper-image-{$id}'),
         options = {
@@ -200,6 +201,7 @@ $registerJs = <<< SCRIPT
         var reader = new FileReader();
 
         if(this.files && this.files[0]) {
+            selectedFileName = this.files[0]['name'];
             reader.onload = function(e) {
                 image.src = e.target.result;
                 if (cropper) {
@@ -244,7 +246,7 @@ $registerJs = <<< SCRIPT
         
             const formData = new FormData();
             // Pass the image file name as the third parameter if necessary.
-            formData.append('UploadForm[fileInput]', blob, '{$uploadFileName}-' + new Date().getTime() + '.png');
+            formData.append('UploadForm[fileInput]', blob, selectedFileName + '.png');
             let parameters = {$parameters};
             for ( let key in parameters ) {
                 formData.append(key, parameters[key]);
