@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 class TokenBehavior extends Behavior
 {
     public $tokenField = 'token';
+    public $randomStringLength = 10;
 
     public function events()
     {
@@ -19,12 +20,12 @@ class TokenBehavior extends Behavior
     public function beforeSave($event)
     {
         if ($this->owner->hasProperty($this->tokenField)) {
-            $this->owner->{$this->tokenField} = $this->owner->{$this->tokenField} ?: $this->generateToken();
+            $this->owner->{$this->tokenField} = $this->owner->{$this->tokenField} ?: $this->generateToken($this->randomStringLength);
         }
     }
 
 
-    protected function generateToken($length = 10)
+    protected function generateToken($length)
     {
         $token = App::randomString($length) . time();
         $model = $this->owner::findOne([$this->tokenField => $token]);
