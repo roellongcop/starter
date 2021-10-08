@@ -117,7 +117,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique'],
             ['username', 'unique'],
             [['slug', 'role_id'], 'safe'],
-            [['password_hint', 'password_reset_token', 'password_hash'], 'safe'],
+            [['password_hint', 'password_reset_token', 'password_hash', 'photo'], 'safe'],
             ['role_id', 'exist', 'targetRelation' => 'role'],
             ['role_id', 'validateRoleId'],
         ]);

@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Role;
+
 /**
  * Class m210528_064716_seed_roles_table
  */
@@ -27,27 +29,36 @@ class m210528_064716_seed_roles_table extends \app\migrations\Migration
         return [
             'developer' => [
                 'name' => 'developer', 
-                'role_access' => json_encode([1,2,3]),
+                'role_access' => json_encode([
+                    Role::DEVELOPER,
+                    Role::SUPERADMIN,
+                    Role::ADMIN,
+                ]),
                 'module_access' => json_encode($controllerActions),
                 'main_navigation' => json_encode($defaultNavigation),
                 'slug' => 'developer', 
-                'record_status' => 1,
+                'record_status' => Role::RECORD_ACTIVE,
             ],
             'superadmin' => [
                 'name' => 'superadmin', 
-                'role_access' => json_encode([2,3]),
+                'role_access' => json_encode([
+                    Role::SUPERADMIN,
+                    Role::ADMIN,
+                ]),
                 'module_access' => json_encode($controllerActions),
                 'main_navigation' => json_encode($defaultNavigation),
                 'slug' => 'superadmin', 
-                'record_status' => 1,
+                'record_status' => Role::RECORD_ACTIVE,
             ],
             'admin' => [
                 'name' => 'admin', 
-                'role_access' => json_encode([3]),
+                'role_access' => json_encode([
+                    Role::ADMIN,
+                ]),
                 'module_access' => json_encode($controllerActions),
                 'main_navigation' => json_encode($defaultNavigation),
                 'slug' => 'admin', 
-                'record_status' => 1,
+                'record_status' => Role::RECORD_ACTIVE,
             ],
         ];
     }

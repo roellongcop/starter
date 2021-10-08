@@ -71,7 +71,7 @@ class Theme extends ActiveRecord
         return $this->setRules([
             [['name', 'description', 'base_path', 'base_url'], 'required'],
             [['base_path', 'base_url'], 'string'],
-            [['bundles', 'path_map', 'slug'], 'safe'],
+            [['bundles', 'path_map', 'slug', 'photos'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ]);
@@ -201,6 +201,7 @@ class Theme extends ActiveRecord
         $behaviors['JsonBehavior']['fields'] = [
             'path_map', 
             'bundles',
+            'photos',
         ];
 
         $behaviors['SluggableBehavior'] = [

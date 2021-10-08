@@ -28,6 +28,7 @@ class m200912_033904_create_users_table extends \app\migrations\Migration
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'slug' => $this->string()->notNull()->unique(),
             'is_blocked' => $this->tinyInteger(2)->notNull()->defaultValue(0),
+            'photo' => $this->text(),
         ]));
 
         $this->createIndexes($this->tableName(), [
