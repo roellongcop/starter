@@ -10,7 +10,6 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
-use app\models\ModelFile;
 use app\models\form\UploadForm;
 use app\widgets\Anchor;
 use yii\imagine\Image;
@@ -312,14 +311,6 @@ class File extends ActiveRecord
     public function getIsSql()
     {
         return in_array($this->extension, ['sql']);
-    }
-
-    public function afterDelete()
-    {
-        ModelFile::deleteAll(['file_id' => $this->id]);
-        // if (file_exists($this->rootPath)) {
-        //     unlink($this->rootPath);
-        // }
     }
 
     public function getCanDelete()

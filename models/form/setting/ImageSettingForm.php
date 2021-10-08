@@ -14,11 +14,6 @@ class ImageSettingForm extends SettingForm
     public $image_holder;
     public $favicon;
 
-
-    public $primary_logo_file;
-    public $secondary_logo_file;
-    public $image_holder_file;
-    public $favicon_file;
     /**
      * @return array the validation rules.
      */
@@ -35,19 +30,19 @@ class ImageSettingForm extends SettingForm
         return [
             'primary_logo' => [
                 'name' => 'primary_logo',
-                'default' => '1'
+                'default' => 1
             ],
             'secondary_logo' => [
                 'name' => 'secondary_logo',
-                'default' => '1'
+                'default' => 1
             ],
             'image_holder' => [
                 'name' => 'image_holder',
-                'default' => '1'
+                'default' => 1
             ],
             'favicon' => [
                 'name' => 'favicon',
-                'default' => '1'
+                'default' => 1
             ],
         ];
     }
@@ -93,7 +88,7 @@ class ImageSettingForm extends SettingForm
 
     public function getImageHolderPath($params=[])
     {
-        if (($file = $this->faviconFile) != NULL) {
+        if (($file = $this->imageHolderFile) != NULL) {
             return $file->getImagePath($params);
         }
     }

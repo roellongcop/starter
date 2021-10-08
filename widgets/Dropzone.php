@@ -30,14 +30,20 @@ class Dropzone extends AppWidget
 
     public $hiddenInput = true;
     public $files = [];
-    public $file_id_name;
+    public $inputName;
+    public $attribute;
 
 
     public function init() 
     {
         // your logic here
         parent::init();
-        $this->file_id_name = $this->file_id_name ?: App::controller('file_id_name');
+        $inputName = App::getModelName($this->model) . "[{$this->attribute}]";
+
+        if ($this->maxFiles > 1) {
+            $inputName .= "[]";
+        }
+        $this->inputName = $this->inputName ?: $inputName;
 
         if (!$this->description) {
             $this->description = "Upload up to {$this->maxFiles} file(s)";
@@ -52,23 +58,26 @@ class Dropzone extends AppWidget
 
 
         if (!$this->removedFile) {
-            $this->removedFile = "$.ajax({
-                url: '{$this->removeFileUrl}',
-                data: {fileToken: file.upload.uuid},
-                method: 'post',
-                dataType: 'json',
-                cache: false,
-                success: function(s) {
-                    let inp = $('input[data-uuid=\"'+ file.upload.uuid +'\"]');
+            $this->removedFile = "
+                console.log(file)
+                $.ajax({
+                    url: '{$this->removeFileUrl}',
+                    data: {fileToken: file.upload.uuid},
+                    method: 'post',
+                    dataType: 'json',
+                    cache: false,
+                    success: function(s) {
+                        let inp = $('input[data-uuid=\"'+ file.upload.uuid +'\"]');
 
-                    if(inp.length) {
-                        inp.remove();
+                        if(inp.length) {
+                            inp.remove();
+                        }
+                    },
+                    error: function(e) {
+                        console.log(e)
                     }
-                },
-                error: function(e) {
-                    console.log(e)
-                }
-            })";
+                })
+            ";
         }
 
         if (!$this->acceptedFiles) {
@@ -85,7 +94,7 @@ class Dropzone extends AppWidget
 
         if ($this->hiddenInput) {
             $this->success .= "
-                $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->file_id_name}[]' data-uuid='\"+ file.upload.uuid +\"' type='hidden' value='\"+ s.file.id +\"'> \");
+                $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->inputName}' data-uuid='\"+ file.upload.uuid +\"' type='text' value='\"+ s.file.id +\"'> \");
             ";
         }
 
@@ -126,7 +135,8 @@ class Dropzone extends AppWidget
     public function run()
     {
         return $this->render('dropzone', [
-            'files' => json_encode($this->files),
+            'files' => $this->files,
+            'encodedFiles' => json_encode($this->files),
             'id' => $this->id,
             'parameters' => json_encode($this->parameters),
             'paramName' => $this->paramName,
@@ -143,7 +153,8 @@ class Dropzone extends AppWidget
             'removedFile' => $this->removedFile,
             'acceptedFiles' => $this->acceptedFiles,
             'success' => $this->success,
-            'hiddenInput' => $this->hiddenInput
+            'hiddenInput' => $this->hiddenInput,
+            'inputName' => $this->inputName
         ]);
     }
 }

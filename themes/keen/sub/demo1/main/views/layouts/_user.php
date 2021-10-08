@@ -1,9 +1,12 @@
 <?php
 use app\helpers\App;
+use app\helpers\Html;
 ?>
 <div class="topbar-item ml-4">
     <div class="btn btn-icon btn-light-primary h-40px w-40px p-0" id="kt_quick_user_toggle">
-        <img src="<?= App::identity('imagePath') ?>&w=40" class="h-30px align-self-end" alt="" />
+        <?= Html::photo(App::identity('photo_id'), ['w' => 40], [
+            'class' => 'h-30px align-self-end'
+        ]) ?>
     </div>
     <!--
         <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">

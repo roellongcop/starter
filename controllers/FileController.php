@@ -6,7 +6,6 @@ use Yii;
 use app\filters\AccessControl;
 use app\helpers\App;
 use app\models\File;
-use app\models\ModelFile;
 use app\models\form\UploadForm;
 use app\models\search\FileSearch;
 use app\widgets\ExportContent;
@@ -112,9 +111,10 @@ class FileController extends Controller
      */
     public function actionDelete($token = '')
     {
-        $model = $this->findModel($token, 'token');
-
         if (App::isAjax()) {
+            $token = App::post($token);
+            $model = $this->findModel($token, 'token');
+
             if ($model && $model->canDelete) {
                 $file = $model;
                 if ($model->delete()) {
@@ -137,6 +137,7 @@ class FileController extends Controller
             ]);
         }
 
+        $model = $this->findModel($token, 'token');
         if($model->delete()) {
             App::success('Successfully Deleted');
         }
@@ -320,40 +321,6 @@ class FileController extends Controller
             App::warning('File don\'t exist');
             return $this->redirect(App::referrer());
         }
-    }
-
-    public function actionChangePhoto()
-    {
-        if (App::isAjax() && (($post = App::post()) != null)) {
-            $file = $this->findModel($post['file_id']);
-
-            if ($file) {
-                $modelFile = new ModelFile();
-                $modelFile->model_name = $post['modelName'];
-                $modelFile->model_id = $post['model_id'];
-                $modelFile->file_id = $file->id;
-                if ($modelFile->save()) {
-                    $result['status'] = 'success';
-                    $result['message'] = 'File added';
-                    $result['src'] = $file->imagePath;
-                    $result['model_file_id'] = $modelFile->id;
-                }
-                else {
-                    $result['status'] = 'error';
-                    $result['message'] = json_encode($modelFile->errors);
-                }
-            }
-            else {
-                $result['status'] = 'error';
-                $result['message'] = 'No file selected';
-            }
-        }
-        else {
-            $result['status'] = 'error';
-            $result['message'] = 'Request value not found.';
-        }
-
-        return $this->asJson($result);
     }
 
     public function actionInActiveData()

@@ -1,4 +1,6 @@
 <?php
+
+use app\helpers\Html;
 $registerJs = <<< SCRIPT
     $('#dropzone-{$id}').dropzone({
         url: "{$url}", // Set the url for your upload script location
@@ -11,7 +13,7 @@ $registerJs = <<< SCRIPT
         acceptedFiles: '{$acceptedFiles}',
         init: function() {
             let myDropzone = this;
-            let files = {$files};
+            let files = {$encodedFiles};
             if (files) {
                 for (let i = 0; i < files.length; i++) {
                     let mockFile = { 
@@ -47,6 +49,9 @@ $registerJs = <<< SCRIPT
 SCRIPT;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
+<?php foreach ($files as $file): ?>
+    <?= Html::input('text', $inputName, $file['id'], ['data-uuid' => $file['upload']['uuid']]) ?>
+<?php endforeach ?>
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">
     <div class="dropzone-msg dz-message needsclick">
         <h3 class="dropzone-msg-title">

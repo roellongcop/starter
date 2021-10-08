@@ -5,7 +5,6 @@ namespace app\jobs;
 use Yii;
 use app\helpers\App;
 use app\models\Backup;
-use app\models\ModelFile;
 use yii\helpers\FileHelper;
 
 class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
@@ -28,15 +27,12 @@ class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
                 $fileInput->extension = 'sql';
                 $fileInput->size = $backup['filesize'];
 
-                $file = App::component('file')->saveFile($model, $fileInput, $backup['uploadPath']);
-
-                $modelFile = new ModelFile([
-                    'file_id' => $file->id,
-                    'model_id' => $model->id,
-                    'extension' => $file->extension,
-                    'model_name' => App::getModelName($model),
+                $model = new UploadForm([
+                    'fileInput' => $fileInput,
+                    'modelName' => 'Backup',
                 ]);
-                $modelFile->save();
+
+                $model->upload();
             }
         }
     }

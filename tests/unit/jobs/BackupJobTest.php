@@ -30,12 +30,5 @@ class BackupJobTest extends \Codeception\Test\Unit
         ]);
 
         expect_that($file);
-
-        $this->tester->seeRecord('app\models\ModelFile', [
-            'file_id' => $file->id,
-            'model_id' => 1,
-            'extension' => 'sql',
-            'model_name' => 'Backup',
-        ]);
     }
 }

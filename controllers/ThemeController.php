@@ -105,7 +105,6 @@ class ThemeController extends Controller
         $model = $this->findModel($slug, 'slug');
 
         if ($model->load(App::post()) && $model->save()) {
-            $this->checkFileUpload($model);
             App::success('Successfully Updated');
             return $this->redirect($model->viewUrl);
         }
