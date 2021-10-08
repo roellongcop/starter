@@ -71,7 +71,7 @@ class Theme extends ActiveRecord
         return $this->setRules([
             [['name', 'description', 'base_path', 'base_url'], 'required'],
             [['base_path', 'base_url'], 'string'],
-            [['bundles', 'path_map', 'slug'], 'safe'],
+            [['bundles', 'path_map', 'slug', 'photo_ids'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ]);
@@ -168,8 +168,8 @@ class Theme extends ActiveRecord
             $images = [];
 
             foreach ($imageFiles as $file) {
-                $images[] = Html::image(
-                    $file->imagePath, 
+                $images[] = Html::photo(
+                    $file, 
                     ['w' => 100, 'h' => 100, 'ratio' => 'false'], 
                     ['class' => 'img-thumbnail']
                 );
@@ -201,6 +201,7 @@ class Theme extends ActiveRecord
         $behaviors['JsonBehavior']['fields'] = [
             'path_map', 
             'bundles',
+            'photo_ids',
         ];
 
         $behaviors['SluggableBehavior'] = [
@@ -211,5 +212,21 @@ class Theme extends ActiveRecord
             'ensureUnique' => true,
         ];
         return $behaviors;
+    }
+
+    public function getPhotoFiles()
+    {
+        return File::find()
+            ->where(['id' => $this->photo_ids])
+            ->all();
+    }
+
+    public function getImagePath($params=[])
+    {
+        if (($photoFiles = $this->photoFiles) != NULL) {
+            $file = $photoFiles[0];
+            return $file->getImagePath($params);
+        }
+        return App::setting('image')->imageHolderPath;
     }
 }

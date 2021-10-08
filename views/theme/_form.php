@@ -1,15 +1,16 @@
 <?php
 use app\helpers\App;
+use app\helpers\Url;
+use app\models\form\UploadForm;
+use app\widgets\ActiveForm;
 use app\widgets\Anchor;
 use app\widgets\AnchorForm;
 use app\widgets\AppFiles;
 use app\widgets\AppImages;
-use app\widgets\RecordStatusInput;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
+use app\widgets\RecordStatusInput;
 use yii\helpers\Html;
-use app\helpers\Url;
-use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
@@ -70,7 +71,7 @@ $this->registerJs($registerJs);
             'acceptedFiles' => array_map(
                 function($val) { 
                     return ".{$val}"; 
-                }, App::file('file_extensions')['image']
+                }, UploadForm::FILE_EXTENSIONS['image']
             )
         ]) ?>
     <?php endif ?>

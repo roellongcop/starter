@@ -6,6 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
+use app\models\form\UploadForm;
 use app\models\form\user\MySettingForm;
 use app\models\form\user\ProfileForm;
 use app\widgets\Anchor;
@@ -117,7 +118,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique'],
             ['username', 'unique'],
             [['slug', 'role_id'], 'safe'],
-            [['password_hint', 'password_reset_token', 'password_hash'], 'safe'],
+            [['password_hint', 'password_reset_token', 'password_hash', 'photo_id'], 'safe'],
             ['role_id', 'exist', 'targetRelation' => 'role'],
             ['role_id', 'validateRoleId'],
         ]);
@@ -515,7 +516,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'label' => 'Photo',
                 'format' => 'raw',
                 'value' => function($model) {
-                    return Html::image($model->imagePath, 
+                    return Html::photo($model->file, 
                         [
                             'w' => 50,
                             'h' => 50,
@@ -576,13 +577,11 @@ class User extends ActiveRecord implements IdentityInterface
                 'label' => 'Photo',
                 'format' => 'raw',
                 'value' => function($model) {
-                    if ($model->imagePath) {
-                        return Html::image(
-                            $model->imagePath,
-                            ['w'=>40, 'h'=>40, 'ratio'=>'false', 'quality'=>90],
-                            ['style' => 'border-radius: 50%;']
-                        );
-                    }
+                    return Html::photo(
+                        $model->file,
+                        ['w'=>40, 'h'=>40, 'ratio'=>'false', 'quality'=>90],
+                        ['style' => 'border-radius: 50%;']
+                    );
                 }
             ],
 
@@ -625,7 +624,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function getMyImageFiles()
     {
         return $this->hasMany(File::className(), ['created_by' => 'id'])
-            ->onCondition(['extension' => App::file('file_extensions')['image']])
+            ->onCondition(['extension' => UploadForm::FILE_EXTENSIONS['image']])
             ->groupBy(['name', 'size', 'extension'])
             ->orderBy(['id' => SORT_DESC]);
     }
@@ -751,5 +750,18 @@ class User extends ActiveRecord implements IdentityInterface
         if (($role = $this->role) != null) {
             return $role->getIsAdmin();
         }
+    }
+
+    public function getFile()
+    {
+        return $this->hasOne(File::className(), ['id' => 'photo_id']);
+    }
+
+    public function getImagePath($params=[])
+    {
+        if (($file = $this->file) != NULL) {
+            return $file->getImagePath($params);
+        }
+        return App::setting('image')->imageHolderPath;
     }
 }

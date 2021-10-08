@@ -1,10 +1,13 @@
 <?php
 use app\helpers\App;
+use app\helpers\Html;
 ?>
 <div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
 	<!--begin::Logo-->
 	<a href="index.html">
-		<img alt="Logo" src="<?= App::setting('image')->primary_logo ?>&w=50&quality=90" class="max-h-30px" />
+		<?= Html::photo(App::setting('image')->primaryLogoFile, ['w' => 50, 'quality' => 90], [
+			'class' => 'max-h-30px'
+		]) ?>
 	</a>
 	<!--end::Logo-->
 	<!--begin::Toolbar-->

@@ -4,7 +4,7 @@ use app\helpers\Html;
 use app\helpers\Url;
 use yii\helpers\StringHelper;
 
-$params = [
+$options = [
     'class' => "img-thumbnail pointer",
     'loading' => 'lazy',
     'data-id' => $model->id,
@@ -21,14 +21,12 @@ $params = [
     'data-download-url' => Url::to(['file/download', 'token' => $model->token], true),
 ];
 if ($model->isDocument) {
-    $path = $model->documentPreviewPath;
+    $options['style'] = "width:200px;height:auto";
 
-    $params['style'] = "width:200px;height:auto";
-
-    echo Html::image($path, '', $params);
+    echo Html::photo($model, [], $options);
 }
 else {
-    echo Html::img(['file/display', 'token' => $model->token, 'w' => 150,], $params);
+    echo Html::photo($model, ['w' => 150,], $options);
 }
 ?>
 <p>

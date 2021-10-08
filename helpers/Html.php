@@ -5,6 +5,7 @@ namespace app\helpers;
 use Yii;
 use app\helpers\App;
 use app\helpers\Url;
+use app\models\File;
 use app\widgets\Anchor;
 use yii\web\Request;
 
@@ -77,5 +78,26 @@ class Html extends \yii\helpers\Html
             // not HTML
             return false;
         }
+    }
+
+    public static function photo($file, $params=[], $options=[])
+    {
+        $file = is_object($file)? $file: File::findOne($file);
+        
+        if ($file) {
+            $path = $file->getDocumentPreviewPath($params);
+            $options['alt'] = $options['alt'] ?? $file->name;
+
+            if ($file->isImage) {
+                return parent::img($path, $options);
+            }
+
+            $options['style'] = "width:{$w}px;height:auto";
+            $options['class'] = "img-thumbnail";
+
+            return parent::img($path, $options);
+        }
+
+        return parent::img(App::setting('image')->imageHolderPath, $options);
     }
 }

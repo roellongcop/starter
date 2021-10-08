@@ -73,7 +73,6 @@
 * Files
 	* List
 	* My Files
-	* Model Files
 * System
 	* Roles
 	* Backups

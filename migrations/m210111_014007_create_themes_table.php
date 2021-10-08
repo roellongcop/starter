@@ -23,6 +23,7 @@ class m210111_014007_create_themes_table extends \app\migrations\Migration
             'path_map' => $this->text(),
             'bundles' => $this->text(),
             'slug' => $this->string()->notNull()->unique(),
+            'photo_ids' => $this->text(),
         ]));
     }
 

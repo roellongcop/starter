@@ -103,4 +103,16 @@ class UploadFormTest extends \Codeception\Test\Unit
         $path = implode('/', $htaccess);
         $this->tester->assertFileExists($path);
     }
+
+    public function testCreateIndexFile()
+    {
+        $model = new UploadForm();
+        
+        $folders = ['protected/test'];
+        $model->createDirectory($folders);
+        $model->createIndexFile($folders);
+
+        $this->tester->assertFileExists(\Yii::getAlias('@consoleWebroot') . '/protected/test/index.php');
+        $this->tester->assertFileExists(\Yii::getAlias('@consoleWebroot') . '/protected/test/.htaccess');
+    }
 }

@@ -522,14 +522,6 @@ class App {
 		return self::component('export');
 	}
 
-	public static function file($attr='')
-	{
-		if ($attr) {
-			return self::component('file')->{$attr};
-		}
-		return self::component('file');
-	}
-
 	public static function server($attr='')
 	{
 		if ($attr) {

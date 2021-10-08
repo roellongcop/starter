@@ -20,6 +20,7 @@ $model = new \app\helpers\FixtureData(function($username) {
         'status' => User::STATUS_ACTIVE,
         'slug' => Inflector::slug($username),
         'is_blocked' => User::UNBLOCKED,
+        'photo_id' => 1
     ];
 });
 

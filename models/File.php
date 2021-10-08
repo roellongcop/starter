@@ -9,9 +9,10 @@ use Imagine\Image\BoxInterface;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
-use app\models\ModelFile;
-use app\widgets\Anchor;
 use app\helpers\Url;
+use app\models\ModelFile;
+use app\models\form\UploadForm;
+use app\widgets\Anchor;
 use yii\imagine\Image;
 
 /**
@@ -62,8 +63,8 @@ class File extends ActiveRecord
             [['name', 'token'], 'string', 'max' => 255],
             [['extension'], 'string', 'max' => 16],
             ['extension', 'in', 'range' => array_merge(
-                App::file('file_extensions')['image'],
-                App::file('file_extensions')['file'],
+                UploadForm::FILE_EXTENSIONS['image'],
+                UploadForm::FILE_EXTENSIONS['file'],
             )],
         ]);
     }
@@ -94,7 +95,7 @@ class File extends ActiveRecord
         return new \app\models\query\FileQuery(get_called_class());
     }
 
-    public function getDocumentPreviewPath()
+    public function getDocumentPreviewPath($params=[])
     {
         $path = '@web/default/file-preview/';
 
@@ -140,7 +141,7 @@ class File extends ActiveRecord
                 break;
             
             default:
-                $path = $this->imagePath;
+                $path = $this->getImagePath($params);
                 break;
         }
 
@@ -149,25 +150,19 @@ class File extends ActiveRecord
     
     public function getPreviewIcon($w=60)
     {
-        $path = $this->documentPreviewPath;
+        $options = ['w' => $w];
+        $params = [
+            'w' => $w, 
+            'quality' => 50
+        ];
 
-        if ($this->isImage) {
-            return Html::image($path, ['w' => $w, 'quality' => 50], [
-                'class' => 'img-thumbnail'
-            ]);
-
-        }
-
-        return Html::image($path, '', [
-            'style' => "width:{$w}px;height:auto",
-            'class' => 'img-thumbnail'
-        ]);
+        return Html::photo($this, $params, $options);
     }
 
     public function getImageFiles()
     {
         return Files::find()
-            ->where(['extension' => App::file('file_extensions')['image']])
+            ->where(['extension' => UploadForm::FILE_EXTENSIONS['image']])
             ->all();
     }
 
@@ -181,7 +176,7 @@ class File extends ActiveRecord
 
     public function getImagePath($params = [])
     {
-        return $this->getDisplay($params) ?: App::setting('image')->image_holder;
+        return $this->getDisplay($params) ?: App::setting('image')->imageHolderPath;
     }
 
     public function gridColumns()
@@ -242,12 +237,12 @@ class File extends ActiveRecord
 
     public function getIsDocument()
     {
-        return in_array($this->extension, App::file('file_extensions')['file']);
+        return in_array($this->extension, UploadForm::FILE_EXTENSIONS['file']);
     }
 
     public function getIsImage()
     {
-        return in_array($this->extension, App::file('file_extensions')['image']);
+        return in_array($this->extension, UploadForm::FILE_EXTENSIONS['image']);
     }
 
     public function getWidth()

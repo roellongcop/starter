@@ -2,6 +2,7 @@
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
+use app\models\form\UploadForm;
 use app\widgets\Dropzone;
 use yii\widgets\Pjax;
 
@@ -208,7 +209,7 @@ $this->registerCss($registerCss);
                                     'acceptedFiles' => array_map(
                                         function($val) { 
                                             return ".{$val}"; 
-                                        }, App::file('file_extensions')['image']
+                                        }, UploadForm::FILE_EXTENSIONS['image']
                                     )
                                 ]) ?>
                             </div>
