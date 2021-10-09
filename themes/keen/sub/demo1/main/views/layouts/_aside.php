@@ -1,12 +1,17 @@
 <?php
+
 use app\helpers\App;
+use app\helpers\Html;
 ?>
 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
     <!--begin::Brand-->
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
-        <a href="index.html" class="brand-logo">
-            <img alt="Logo" src="<?= App::setting('image')->primary_logo ?>&quality=90" class="h-30px" />
+        <a href="/" class="brand-logo">
+            <?= Html::image(App::setting('image')->primary_logo, ['w' => 50, 'quality' => 90], [
+                'class' => 'h-30px',
+                'alt' => 'Primary Logo',
+            ]) ?>
         </a>
         <!--end::Logo-->
         <!--begin::Toggle-->

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\File;
 use yii\db\Expression;
 
 /**

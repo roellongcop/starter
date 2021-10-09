@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Inflector;
+use app\models\Theme;
 use yii\db\Expression;
+use yii\helpers\Inflector;
 
 /**
  * Class m210314_045639_seed_themes_table

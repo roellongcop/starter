@@ -31,6 +31,12 @@ use yii\imagine\Image;
  */
 class File extends ActiveRecord
 {
+    const EXTENSIONS = [
+        'image' => ['jpeg', 'jpg', 'gif', 'bmp', 'tiff','png', 'ico',],
+        'file' => ['doc', 'docx', 'pdf', 'xls', 'xlxs', 'csv', 'sql'],
+    ];
+    const IMAGE_HOLDER = 'https://via.placeholder.com/100';
+
     /**
      * {@inheritdoc}
      */
@@ -62,8 +68,8 @@ class File extends ActiveRecord
             [['name', 'token'], 'string', 'max' => 255],
             [['extension'], 'string', 'max' => 16],
             ['extension', 'in', 'range' => array_merge(
-                App::file('file_extensions')['image'],
-                App::file('file_extensions')['file'],
+                self::EXTENSIONS['image'],
+                self::EXTENSIONS['file'],
             )],
         ]);
     }
@@ -92,9 +98,16 @@ class File extends ActiveRecord
     public static function find()
     {
         return new \app\models\query\FileQuery(get_called_class());
+    } 
+
+    public function getImageFiles()
+    {
+        return Files::find()
+            ->where(['extension' => self::EXTENSIONS['image']])
+            ->all();
     }
 
-    public function getDocumentPreviewPath()
+    public function getDisplay($params = [], $fullpath=false)
     {
         $path = '@web/default/file-preview/';
 
@@ -140,48 +153,12 @@ class File extends ActiveRecord
                 break;
             
             default:
-                $path = $this->imagePath;
+                $path = array_merge(['file/display', 'token' => $this->token], $params);
+                $path = Url::to($path, $fullpath);
                 break;
         }
 
         return $path;
-    }
-    
-    public function getPreviewIcon($w=60)
-    {
-        $path = $this->documentPreviewPath;
-
-        if ($this->isImage) {
-            return Html::image($path, ['w' => $w, 'quality' => 50], [
-                'class' => 'img-thumbnail'
-            ]);
-
-        }
-
-        return Html::image($path, '', [
-            'style' => "width:{$w}px;height:auto",
-            'class' => 'img-thumbnail'
-        ]);
-    }
-
-    public function getImageFiles()
-    {
-        return Files::find()
-            ->where(['extension' => App::file('file_extensions')['image']])
-            ->all();
-    }
-
-    public function getDisplay($params = [])
-    {
-        if($this->token) {
-            $path = array_merge(['file/display', 'token' => $this->token], $params);
-            return Url::to($path);
-        }
-    }
-
-    public function getImagePath($params = [])
-    {
-        return $this->getDisplay($params) ?: App::setting('image')->image_holder;
     }
 
     public function gridColumns()
@@ -191,7 +168,7 @@ class File extends ActiveRecord
                 'attribute' => 'name', 
                 'label' => 'Preview', 
                 'format' => 'raw',
-                'value' => 'previewIcon',
+                'value' => 'name',
             ],
 
             'name' => [
@@ -242,12 +219,12 @@ class File extends ActiveRecord
 
     public function getIsDocument()
     {
-        return in_array($this->extension, App::file('file_extensions')['file']);
+        return in_array($this->extension, self::EXTENSIONS['file']);
     }
 
     public function getIsImage()
     {
-        return in_array($this->extension, App::file('file_extensions')['image']);
+        return in_array($this->extension, self::EXTENSIONS['image']);
     }
 
     public function getWidth()
@@ -310,21 +287,12 @@ class File extends ActiveRecord
         array_pop($explodedPath);
         $path = implode('', $explodedPath);
 
-
         return $path;
     }
     
     public function getIsSql()
     {
         return in_array($this->extension, ['sql']);
-    }
-
-    public function afterDelete()
-    {
-        ModelFile::deleteAll(['file_id' => $this->id]);
-        // if (file_exists($this->rootPath)) {
-        //     unlink($this->rootPath);
-        // }
     }
 
     public function getCanDelete()

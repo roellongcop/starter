@@ -28,43 +28,20 @@ class Html extends \yii\helpers\Html
         return $space;
     }
 
-    public static function activateMenu($url)
+    public static function navController($link)
     {
-        $explode = explode("/", $url);
-        $controller =  $explode[2] ?? '';
-        if (App::isController($controller)) {
-            return 'kt-menu__item--active';
-        }
-    }
-
-    public static function navController($menu)
-    {
-        $request = new Request(['url' => parse_url(\yii\helpers\Url::to($menu['link'], true), PHP_URL_PATH)]);
+        $request = new Request([
+            'url' => parse_url(\yii\helpers\Url::to($link, true), PHP_URL_PATH)
+        ]);
         $url = App::urlManager()->parseRequest($request);
         list($controller, $actionID) = App::app()->createController($url[0]);
 
         return $controller ? $controller->id: '';
-
-        // $request = new Request(['url' => parse_url(Url::to($menu['link'], true), PHP_URL_PATH)]);
-        // $current = App::urlManager()->parseRequest($request)[0] ?? '';
-
-        // if ($current && is_array($current)) {
-        //     list($controller, $action) = explode('/', $current);
-
-        //     return $controller;
-        // }
-
-        
-        // $controller = explode('/', $menu['link'])[3] ?? ''; 
-        // if (! $controller) {
-        //     $controller = explode('/', $menu['link'])[1] ?? ''; 
-        // }
-        // return $controller;
     }
 
-    public static function image($path, $params=[], $options=[])
+    public static function image($token, $params=[], $options=[])
     {
-        return parent::img(Url::imagePath($path, $params), $options);
+        return parent::img(Url::image($token, $params), $options);
     }
 
     public static function isHtml($string)

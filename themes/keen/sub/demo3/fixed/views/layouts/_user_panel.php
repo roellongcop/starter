@@ -23,7 +23,7 @@ $access = App::component('access');
         <div class="d-flex align-items-center mt-5">
             <div class="symbol symbol-100 mr-5">
                 <div id="profile-image-dropdown" class="symbol-label" 
-                    style="background-image:url('<?= $identity->imagePath ?>&w=200')">
+                    style="background-image:url('<?= Url::image($identity->photo, ['w' => 200]) ?>')">
                 </div>
                 <!-- <i class="symbol-badge bg-success"></i> -->
             </div>

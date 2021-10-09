@@ -17,7 +17,6 @@ return [
             'class' => 'app\components\QueueComponent',
             'as log' => \yii\queue\LogBehavior::class,
         ],
-        'file' => ['class' => 'app\components\FileComponent'],
         'export' => ['class' => 'app\components\ExportComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
         'setting' => ['class' => 'app\components\SettingComponent'],

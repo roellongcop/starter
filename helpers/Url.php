@@ -4,19 +4,19 @@ namespace app\helpers;
 
 use Yii;
 use app\helpers\App;
+use app\models\File;
 
 class Url extends \yii\helpers\Url
 {
-    public static function imagePath($path, $params = [])
+    public static function image($token='', $params = [], $scheme=false)
     {
-        if ($params) {
-            return implode('&', [
-                $path,
-                http_build_query($params)
-            ]);
+        $file = File::findByToken($token) ?: File::findByToken(App::setting('image')->image_holder);
+
+        if ($file) {
+            return $file->getDisplay($params, $scheme);
         }
 
-        return $path;
+        return $token ?: File::IMAGE_HOLDER;
     }
 
     public static function to($url = '', $scheme = false)

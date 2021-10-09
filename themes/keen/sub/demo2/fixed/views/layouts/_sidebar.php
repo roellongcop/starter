@@ -1,8 +1,9 @@
 <?php
+
 use app\helpers\App;
-use app\widgets\Anchor;
-use yii\helpers\Html;
+use app\helpers\Html;
 use app\helpers\Url;
+use app\widgets\Anchor;
 
 $identity = App::identity();
 $access = App::component('access');
@@ -18,7 +19,11 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 			<div class="dropdown dropdown-inline">
 				<a href="#" class="d-flex align-items-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<div class="symbol symbol-40 mr-4 bg-gray-100">
-						<img id="profile-image-desktop" alt="Logo" src="<?= $identity->imagePath ?>&w=50&quality=90" class="h-75 align-self-end" />
+						<?= Html::image($identity->photo, ['w' => 50, 'quality' => 90], [
+				            'alt' => 'Profile Image',
+				            'class' => 'h-75 align-self-end',
+				            'id' => 'profile-image-desktop'
+				        ]) ?>
 						<!-- <div class="symbol-label">
 							
 						</div>
