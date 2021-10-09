@@ -44,6 +44,11 @@ class Html extends \yii\helpers\Html
         return parent::img(Url::image($token, $params), $options);
     }
 
+    public static function download($token, $params=[], $options=[])
+    {
+        return parent::img(Url::download($token, $params), $options);
+    }
+
     public static function isHtml($string)
     {
         if($string != strip_tags($string)) {

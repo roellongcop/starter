@@ -13,6 +13,11 @@ class Url extends \yii\helpers\Url
         return self::to(array_merge(['file/display', 'token' => $token], $params), $scheme);
     }
 
+    public static function download($token='', $params = [], $scheme=false)
+    {
+        return self::to(array_merge(['file/download', 'token' => $token], $params), $scheme);
+    }
+
     public static function to($url = '', $scheme = false)
     {
         if (! App::isWeb()) {
