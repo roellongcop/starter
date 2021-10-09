@@ -22,7 +22,9 @@ use app\widgets\ActiveForm;
 		<div class="pt-1">
 			<!--begin::Image--> 
 			<div class="image-input">
-				<img src="<?= $theme->imagePath ?>&w=300" class="img-thumbnail theme-image">
+				<?= $theme->getPreviewImage(['w' => 300], [
+					'class' => 'img-thumbnail theme-image'
+				]) ?>
 			</div>
 			<!--end::Image-->
 			<p class="text-dark-75 font-size-lg font-weight-normal pt-3 mb-4">

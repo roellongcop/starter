@@ -1,9 +1,10 @@
 <?php
 use app\helpers\App;
-use app\widgets\AnchorForm;
-use app\widgets\RecordStatusInput;
-use app\widgets\ChooseFromGallery;
+use app\helpers\Html;
 use app\widgets\ActiveForm;
+use app\widgets\AnchorForm;
+use app\widgets\ChooseFromGallery;
+use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Setting */
@@ -50,10 +51,11 @@ use app\widgets\ActiveForm;
                 ]) ?> 
                 <br>
                 <div id="sipc" style="max-width: 200px">
-                    <img id="setting-imageinput-preview" 
-                        class="img-thumbnail"
-                        loading="lazy"
-                        src="<?= $model->imagePath ? $model->imagePath . '&w=200': '' ?>">
+                    <?= Html::image($model->value, ['w' => 200], [
+                        'id' => 'setting-imageinput-preview',
+                        'class' => 'img-thumbnail',
+                        'loading' => 'lazy'
+                    ]) ?>
                 </div>
             <?php endif ?>
         </div>

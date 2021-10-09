@@ -162,17 +162,30 @@ class Theme extends ActiveRecord
         ];
     }
 
+    public function getImageFiles()
+    {
+        if (($photos = $this->photos) != NULL) {
+            $files = [];
+
+            foreach ($photos as $token) {
+                if (($file = self::findByToken($token)) != NULL) {
+                    $files[] = $file;
+                }
+            }
+
+            return $files;
+        }
+    }
+
     public function getImages()
     {
         if (($imageFiles = $this->imageFiles) != NULL) {
             $images = [];
 
             foreach ($imageFiles as $file) {
-                $images[] = Html::image(
-                    $file->imagePath, 
-                    ['w' => 100, 'h' => 100, 'ratio' => 'false'], 
-                    ['class' => 'img-thumbnail']
-                );
+                $images[] = Html::img($file->display . '&w=100&ratio=false', [
+                    'class' => 'img-thumbnail'
+                ]);
             }
 
             return implode(' ', $images);
@@ -190,9 +203,14 @@ class Theme extends ActiveRecord
         ]);
     }
 
-    public function getPreviewImage()
+    public function getPreviewImage($params = ['w' => 100], $options = [])
     {
-        return Html::img($this->imagePath . '&w=100');
+        $token = '';
+        if (($photos = $this->photos) != NULL) {
+            $token = $photos[0];
+        }
+
+        return Html::image($token, $params, $options);
     }
 
     public function behaviors()

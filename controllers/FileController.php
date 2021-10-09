@@ -291,7 +291,7 @@ class FileController extends Controller
 
                     $result['status'] = 'success';
                     $result['message'] = 'Uploaded';
-                    $result['src'] = $file->imagePath;
+                    $result['src'] = $file->display;
                     $result['file'] = $file;
                 }
                 else {
@@ -335,7 +335,7 @@ class FileController extends Controller
                 if ($modelFile->save()) {
                     $result['status'] = 'success';
                     $result['message'] = 'File added';
-                    $result['src'] = $file->imagePath;
+                    $result['src'] = $file->display;
                     $result['model_file_id'] = $modelFile->id;
                 }
                 else {

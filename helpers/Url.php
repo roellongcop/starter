@@ -10,13 +10,7 @@ class Url extends \yii\helpers\Url
 {
     public static function image($token='', $params = [], $scheme=false)
     {
-        $file = File::findByToken($token) ?: File::findByToken(App::setting('image')->image_holder);
-
-        if ($file) {
-            return $file->getDisplay($params, $scheme);
-        }
-
-        return $token ?: File::IMAGE_HOLDER;
+        return self::to(array_merge(['file/display', 'token' => $token], $params), $scheme);
     }
 
     public static function to($url = '', $scheme = false)

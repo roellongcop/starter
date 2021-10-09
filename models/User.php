@@ -515,7 +515,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'label' => 'Photo',
                 'format' => 'raw',
                 'value' => function($model) {
-                    return Html::image($model->imagePath, 
+                    return Html::image($model->photo, 
                         [
                             'w' => 50,
                             'h' => 50,
@@ -576,13 +576,11 @@ class User extends ActiveRecord implements IdentityInterface
                 'label' => 'Photo',
                 'format' => 'raw',
                 'value' => function($model) {
-                    if ($model->imagePath) {
-                        return Html::image(
-                            $model->imagePath,
-                            ['w'=>40, 'h'=>40, 'ratio'=>'false', 'quality'=>90],
-                            ['style' => 'border-radius: 50%;']
-                        );
-                    }
+                    return Html::image(
+                        $model->photo,
+                        ['w'=>40, 'h'=>40, 'ratio'=>'false', 'quality'=>90],
+                        ['style' => 'border-radius: 50%;']
+                    );
                 }
             ],
 

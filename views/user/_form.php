@@ -51,14 +51,10 @@ use app\widgets\RecordStatusInput;
         </div>
         <div class="col-md-7">
             <div id="sipc" style="max-width: 200px">
-                <?= Html::image(
-                    $model->imagePath,
-                    ['w'=>200],
-                    [
-                        'class' => 'img-thumbnail',
-                        'loading' => 'lazy',
-                    ]
-                ) ?>
+                <?= Html::image($model->photo, ['w'=>200], [
+                    'class' => 'img-thumbnail',
+                    'loading' => 'lazy',
+                ] ) ?>
             </div>
             <br>
             <?= ImageGallery::widget([

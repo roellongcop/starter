@@ -176,7 +176,7 @@ class Setting extends ActiveRecord
         if (in_array($this->name, $this->withImageInput)) {
             $columns[] = [
                 'label' => 'Image',
-                'value' => Html::img($this->imagePath . '&w=200'),
+                'value' => Html::image($this->name, ['w' => 200]),
                 'format' => 'raw'
             ];
         }

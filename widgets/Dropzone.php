@@ -106,7 +106,7 @@ class Dropzone extends AppWidget
                         return implode('.', [$model->name, $model->extension]);
                     },
                     'imagePath' => function($model) {
-                        return $model->getImagePath([
+                        return $model->display([
                             'w' => 120, 
                             'quality' => 90,
                             // 'h' => 120, 
