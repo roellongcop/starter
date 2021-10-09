@@ -36,8 +36,6 @@ class Dropzone extends AppWidget
     {
         // your logic here
         parent::init();
-        $this->inputName = $this->inputName ?: App::controller('inputName');
-
         if (!$this->description) {
             $this->description = "Upload up to {$this->maxFiles} file(s)";
         }

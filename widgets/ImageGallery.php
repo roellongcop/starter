@@ -30,7 +30,6 @@ class ImageGallery extends AppWidget
     {
         // your logic here
         parent::init();
-        $this->inputName = $this->inputName ?: App::controller('inputName') . '[]';
 
         $this->uploadUrl = Url::to($this->uploadUrl);
         if ($this->model) {
