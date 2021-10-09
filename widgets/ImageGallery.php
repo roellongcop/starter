@@ -19,7 +19,7 @@ class ImageGallery extends AppWidget
     public $fileInput;
     public $myImageFilesUrl = ['file/my-image-files'];
 
-    public $file_id_name;
+    public $inputName;
     public $parameters;
     public $defaultPhoto;
 
@@ -30,7 +30,7 @@ class ImageGallery extends AppWidget
     {
         // your logic here
         parent::init();
-        $this->file_id_name = $this->file_id_name ?: App::controller('file_id_name') . '[]';
+        $this->inputName = $this->inputName ?: App::controller('inputName') . '[]';
 
         $this->uploadUrl = Url::to($this->uploadUrl);
         if ($this->model) {
@@ -52,7 +52,7 @@ class ImageGallery extends AppWidget
     public function run()
     {
         return $this->render('image-gallery', [
-            'file_id_name' => $this->file_id_name,
+            'inputName' => $this->inputName,
             'model' => $this->model,
             'modelName' => $this->modelName,
             'modalTitle' => $this->modalTitle,

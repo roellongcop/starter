@@ -319,7 +319,7 @@ $this->registerCss($registerCss);
 <div id="image-gallery-container-<?= $id ?>">
 
     <input class="file-id-input" 
-        name="<?= $file_id_name ?>" 
+        name="<?= $inputName ?>" 
         type="hidden" 
         value="<?= $file_id ?>">
 

@@ -47,7 +47,7 @@ class FileController extends Controller
         $quality = App::get('quality') ?: 100;
         $extension = App::get('extension') ?: 'png';
 
-        $file = File::findOne(['token' => $token]);
+        $file = File::findByToken($token) ?: File::findByToken(App::setting('image')->image_holder);
 
         if ($file) { 
             $path = $file->rootPath;
@@ -73,6 +73,8 @@ class FileController extends Controller
                 }
             }
         }
+
+        return File::IMAGE_HOLDER;
     }
 
     /**

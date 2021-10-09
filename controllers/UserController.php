@@ -60,7 +60,6 @@ class UserController extends Controller
         if ($model->load(App::post()) && $model->validate()) {
             $model->setPassword($model->password);
             if ($model->save()) {
-                $this->checkFileUpload($model);
                 App::success('Successfully Created');
                 return $this->redirect($model->viewUrl);
             }
@@ -87,7 +86,6 @@ class UserController extends Controller
         if ($model->load(App::post()) && $model->validate()) {
             $model->setPassword($model->password);
             if ($model->save()) {
-                $this->checkFileUpload($model);
                 App::success('Successfully Duplicated');
                 return $this->redirect($model->viewUrl);
             }
@@ -111,7 +109,6 @@ class UserController extends Controller
         $model = $this->findModel($slug, 'slug'); 
 
         if ($model->load(App::post()) && $model->save()) {
-            $this->checkFileUpload($model);
             App::success('Successfully Updated');
             return $this->redirect($model->viewUrl);
         }
@@ -321,8 +318,6 @@ class UserController extends Controller
         $model = App::identity();
 
         if ($model->load(App::post()) && $model->save()) {
-            $this->checkFileUpload($model);
-            
             App::success('Successfully Updated');
             return $this->refresh();
         } 

@@ -29,14 +29,14 @@ class Dropzone extends AppWidget
 
     public $hiddenInput = true;
     public $files = [];
-    public $file_id_name;
+    public $inputName;
 
 
     public function init() 
     {
         // your logic here
         parent::init();
-        $this->file_id_name = $this->file_id_name ?: App::controller('file_id_name');
+        $this->inputName = $this->inputName ?: App::controller('inputName');
 
         if (!$this->description) {
             $this->description = "Upload up to {$this->maxFiles} file(s)";
@@ -84,7 +84,7 @@ class Dropzone extends AppWidget
 
         if ($this->hiddenInput) {
             $this->success .= "
-                $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->file_id_name}[]' data-uuid='\"+ file.upload.uuid +\"' type='hidden' value='\"+ s.file.id +\"'> \");
+                $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->inputName}[]' data-uuid='\"+ file.upload.uuid +\"' type='hidden' value='\"+ s.file.id +\"'> \");
             ";
         }
 
