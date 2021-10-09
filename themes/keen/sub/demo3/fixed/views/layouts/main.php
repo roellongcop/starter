@@ -4,14 +4,15 @@
 
 use app\assets\AppAsset;
 use app\helpers\App;
+use app\helpers\Html;
+use app\helpers\Url;
+use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedAppAsset;
 use app\widgets\Alert;
 use app\widgets\AnchorBack;
 use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
-use app\helpers\Html;
-use app\themes\keen\assets\KeenAsset;
 
 AppAsset::register($this);
 KeenAsset::register($this);
@@ -24,7 +25,7 @@ $createController = $this->params['createController'] ?? App::controllerID();
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="<?= App::setting('image')->favicon ?>&w=16" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?= Url::image(App::setting('image')->favicon, ['w' => 16]) ?>" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>

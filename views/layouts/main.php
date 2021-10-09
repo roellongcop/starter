@@ -4,13 +4,14 @@
 
 use app\assets\AppAsset;
 use app\helpers\App;
+use app\helpers\Url;
 use app\widgets\Alert;
 use app\widgets\Anchor;
 use app\widgets\ExportButton;
 use app\widgets\Menu;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
@@ -22,7 +23,7 @@ $showExportButton = $this->params['showExportButton'] ?? '';
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="<?= App::setting('image')->favicon ?>&w=16" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?= Url::image(App::setting('image')->favicon, ['w' => 16]) ?>" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>

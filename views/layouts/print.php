@@ -4,7 +4,7 @@
 
 use app\assets\AppAsset;
 use app\helpers\App;
-use yii\helpers\Html;
+use app\helpers\Html;
 use app\helpers\Url;
 // use app\assets\MainAsset;
 
@@ -17,7 +17,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="<?= App::setting('image')->favicon ?>&w=16" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?= Url::image(App::setting('image')->favicon, ['w' => 16]) ?>" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
