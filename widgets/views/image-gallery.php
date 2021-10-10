@@ -1,11 +1,11 @@
 <?php
+
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
-use app\widgets\Dropzone;
 use yii\widgets\Pjax;
 
-$registerJs = <<< SCRIPT
+$js = <<< SCRIPT
     var selectedFile = 0,
         selectedFilePath = '',
         selectedFileName = '{$uploadFileName}-' + new Date().getTime(),
@@ -284,13 +284,17 @@ $registerJs = <<< SCRIPT
     });
 SCRIPT;
 
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 
-$registerCss = <<<CSS
+$css = <<<CSS
     #image-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
         padding: 5px;
     }
+    #image-gallery-container-{$id} .br-dashed {
+        border-right: 1px dashed #ccc
+    }
+
     #image-gallery-container-{$id} table tbody tr th {
         padding: 5px;
     }
@@ -314,18 +318,14 @@ $registerCss = <<<CSS
         margin: 0 auto;
     }
 CSS;
-$this->registerCss($registerCss);
+$this->registerCss($css);
 ?>
 <div id="image-gallery-container-<?= $id ?>">
 
-    <input class="file-id-input" 
-        name="<?= $inputName ?>" 
-        type="hidden" 
-        value="<?= $file_id ?>">
+    <!-- type, model, model attribute name, options -->
+    <?= Html::activeInput('text', $model, $attribute, ['class' => 'file-id-input']) ?>
 
-    <button type="button" class="btn btn-primary btn-sm image-gallery-btn">
-        <?= $buttonTitle ?>
-    </button>
+    <?= Html::button($buttonTitle, $buttonOptions) ?>
 
     <div class="modal fade image-gallery-modal" 
         tabindex="-1" 
@@ -365,10 +365,16 @@ $this->registerCss($registerCss);
                             </li>
                         </ul>
                         <div class="tab-content pt-10">
-                            <div class="tab-pane fade show active my-photos-tab-container" id="my-photos-tab-<?= $id ?>" role="tabpanel">
+                            <div class="tab-pane fade show active my-photos-tab-container" 
+                                id="my-photos-tab-<?= $id ?>" 
+                                role="tabpanel">
                                 <div class="row">
-                                    <div class="col-md-7 col-sm-6" style="border-right: 1px dashed #ccc">
-                                        <input type="search" class="form-control search-input" placeholder="Search Photo">
+                                    <div class="col-md-7 col-sm-6 br-dashed">
+                                        <!-- type, input name, input value, options -->
+                                        <?= Html::input('search', 'search', '', [
+                                            'class' => 'form-control search-input',
+                                            'placeholder' => 'Search Photo'
+                                        ]) ?>
                                         <?php Pjax::begin([
                                             'options' => ['class' => 'my-photos-container'],
                                             'enablePushState' => false,
@@ -422,7 +428,9 @@ $this->registerCss($registerCss);
                                 <div class="row">
                                     <div class="col-md-3"></div>
                                     <div class="col-md-6">
-                                        <img id="cropper-image-<?= $id ?>" src="<?= $defaultPhoto ?>" alt="" />
+                                        <?= Html::img($defaultPhoto, [
+                                            'id' => 'cropper-image-' . $id
+                                        ]) ?>
                                     </div>
                                 </div>
                             </div>
@@ -431,6 +439,7 @@ $this->registerCss($registerCss);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+
                     <div class="btn-group btn-options">
                         <button type="button" class="btn btn-light-info rotate-left-btn" title="Rotate Left">
                             <span data-toggle="tooltip" title="" data-original-title="Rotate Left">
@@ -466,17 +475,14 @@ $this->registerCss($registerCss);
                         </button>
                     </div> 
 
-                    <button 
-                        type="button" 
-                        class="btn btn-primary font-weight-bold edit-btn">
-                            Edit
-                    </button>
-                    <button 
-                        data-dismiss="modal"
-                        type="button" 
-                        class="btn btn-success font-weight-bold confirm-btn">
-                            Confirm
-                    </button>
+                    <?= Html::button('Edit', [
+                        'class' => 'btn btn-primary font-weight-bold edit-btn'
+                    ]) ?>
+
+                    <?= Html::button('Confirm', [
+                        'class' => 'btn btn-success font-weight-bold confirm-btn',
+                        'data-dismiss' => 'modal'
+                    ]) ?>
                 </div>
             </div>
         </div>

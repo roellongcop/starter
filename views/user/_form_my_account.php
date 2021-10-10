@@ -55,6 +55,7 @@ use app\widgets\RecordStatusInput;
 
             <?= ImageGallery::widget([
                 'model' => $model,
+                'attribute' => 'photo',
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
                         KTApp.block('#sipc', {
