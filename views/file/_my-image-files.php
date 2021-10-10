@@ -1,10 +1,11 @@
 <?php
+
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
 use yii\helpers\StringHelper;
 ?>
-<?= Html::img(['file/display', 'token' => $model->token, 'w' => 120], [
+<?= Html::image($model->token, ['w' => 120], [
     'class' => "img-thumbnail pointer",
     'loading' => 'lazy',
     'data-src' => Url::to(['file/display', 'token' => $model->token]),
@@ -19,7 +20,7 @@ use yii\helpers\StringHelper;
     'data-created_at' => App::formatter('asFulldate', $model->created_at),
     'title' => $model->name,
     'data-can-delete' => $model->canDelete ? 'true': 'false',
-    'data-download-url' => Url::to(['file/download', 'token' => $model->token], true),
+    'data-download-url' => Url::download($model->token, true),
 ]) ?>
 <p>
     <?= StringHelper::truncate($model->name, 15) ?>

@@ -366,7 +366,7 @@ class FileController extends Controller
     public function actionMyImageFiles()
     {
         $searchModel = new FileSearch([
-            'extension' => App::file('file_extensions')['image'],
+            'extension' => File::EXTENSIONS['image'],
             'created_by' => App::identity('id')
         ]);
 
