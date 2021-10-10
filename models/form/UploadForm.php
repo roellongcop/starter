@@ -4,6 +4,9 @@ namespace app\models\form;
 
 use Yii;
 use app\helpers\App;
+use app\models\File;
+use yii\helpers\Inflector;
+use yii\helpers\FileHelper;
 /**
  * This is the model class for table "{{%themes}}".
  *
@@ -34,17 +37,17 @@ class UploadForm extends \yii\base\Model
         parent::init();
         switch ($this->extensionType) {
             case 'image':
-                $this->extensions = App::file('file_extensions')['image'];
+                $this->extensions = File::EXTENSIONS['image'];
                 break;
 
             case 'file':
-                $this->extensions = App::file('file_extensions')['file'];
+                $this->extensions = File::EXTENSIONS['file'];
                 break;
             
             default:
                 $this->extensions = array_merge(
-                    App::file('file_extensions')['image'],
-                    App::file('file_extensions')['file']
+                    File::EXTENSIONS['image'],
+                    File::EXTENSIONS['file']
                 );
                 break;
         }
@@ -93,7 +96,7 @@ class UploadForm extends \yii\base\Model
             'location' => $location,
             'extension' => $input->extension,
             'size' => $input->size,
-           'token' => $this->fileToken ?: '';
+           'token' => $this->fileToken ?: ''
         ]);
 
         if ($file->save()) {

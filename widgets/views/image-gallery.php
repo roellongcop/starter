@@ -8,6 +8,7 @@ use yii\widgets\Pjax;
 $js = <<< SCRIPT
     var selectedFile = 0,
         selectedFilePath = '',
+        selectedFileToken = '',
         selectedFileName = '{$uploadFileName}-' + new Date().getTime(),
         rotate = 0,
         image = document.getElementById('cropper-image-{$id}'),
@@ -127,6 +128,9 @@ $js = <<< SCRIPT
 
         selectedFile = $(image).data('id');
         selectedFilePath = $(image).data('src');
+        selectedFileToken = $(image).data('token');
+        selectedFileName = $(image).data('name');
+
 
         $(imageName).text($(image).data('name'));
         $(imageExtension).text($(image).data('extension'));
@@ -159,7 +163,7 @@ $js = <<< SCRIPT
             src: selectedFilePath
         };
         {$ajaxSuccess}
-        $(fileIdInput).val(selectedFile);
+        $(fileIdInput).val(selectedFileToken);
     });
 
     $(imageGalleryBtn).click(function() {
@@ -264,7 +268,7 @@ $js = <<< SCRIPT
                         if (cropper) {
                             cropper.destroy();
                         }
-                        $(fileIdInput).val(s.file.id);
+                        $(fileIdInput).val(s.file.token);
                         $(imageGalleryModal).modal('hide');
                     }
                     else {
@@ -323,7 +327,7 @@ $this->registerCss($css);
 <div id="image-gallery-container-<?= $id ?>">
 
     <!-- type, model, model attribute name, options -->
-    <?= Html::activeInput('text', $model, $attribute, ['class' => 'file-id-input']) ?>
+    <?= Html::activeInput('hidden', $model, $attribute, ['class' => 'file-id-input']) ?>
 
     <?= Html::button($buttonTitle, $buttonOptions) ?>
 
