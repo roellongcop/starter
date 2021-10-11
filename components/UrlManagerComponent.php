@@ -33,7 +33,7 @@ class UrlManagerComponent extends \yii\web\UrlManager
 
             
             '<controller>' => '<controller>/index',
-            '<controller:(file|notification)>/<action>/<token>' => '<controller>/<action>',
+            '<controller:(notification)>/<action>/<token>' => '<controller>/<action>',
             '<controller:(ip|user|theme|backup|role)>/<action>/<slug>' => '<controller>/<action>',
 
             '<controller>/<id:\d+>' => '<controller>/view',
