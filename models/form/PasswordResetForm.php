@@ -18,6 +18,8 @@ class PasswordResetForm extends \yii\base\Model
     public $email; 
     public $hint = false; 
 
+    public $_user; 
+
     /**
      * @return array the validation rules.
      */
@@ -25,47 +27,61 @@ class PasswordResetForm extends \yii\base\Model
     {
         return [
             // username and password are both required
-            [['email'], 'required'],
-            [['email'], 'email'],
+            ['email', 'required'],
+            ['email', 'trim'],
+            ['email', 'email'],
+            ['email', 'exist', 'targetClass' => 'app\models\User', 'targetAttribute' => 'email'],
+            ['email', 'validateEmail'],
             ['hint', 'safe'],
         ];
-    } 
+    }
+
+    public function validateEmail($attribute, $params)
+    {
+        if (($user = $this->getUser()) != NULL) {
+            if ($user->is_blocked == User::BLOCKED) {
+                $this->addError($attribute, 'User is blocked.');
+            }
+
+            if ($user->status == User::STATUS_DELETED) {
+                $this->addError($attribute, 'User is deleted.');
+            }
+
+            if ($user->status == User::STATUS_INACTIVE) {
+                $this->addError($attribute, 'User is inactive.');
+            }
+
+            if ($user->record_status == User::RECORD_INACTIVE) {
+                $this->addError($attribute, 'User record is inactive.');
+            }
+        }
+    }
+
+    public function getUser()
+    {
+        if ($this->_user == NULL) {
+            $this->_user = User::findByEmail($this->email);
+        }
+
+        return $this->_user;
+    }
 
     public function process()
     {
         if ($this->validate()) {
-            $user = User::find()
-                ->where([
-                    'email' => $this->email,
-                    'is_blocked' => 0,
-                    'status' => 10, //active
-                ])
-                ->one();
+            $user = $this->getUser();
+            if ($this->hint) {
+                return $user;
+            }
 
-            if ($user) {
-                if ($this->hint) {
-                    App::success("Your password hint is: '{$user->password_hint}'.");
-                    return true;
-                }
-                else {
-                    $mail = new CustomEmailForm();
-                    $mail->content = 'test';
-                    $mail->to = $user->email;
-                    if ($mail->send()) {
-                        App::success("Email sent.");
-                        return true;
-                    }
-                    else {
-                        App::danger("Email not sent.");
-                    }
-                }
+            $mail = new CustomEmailForm([
+                'template' => 'password_reset',
+                'parameters' => ['user' => $user],
+                'to' => $this->email
+            ]);
+            if ($mail->send()) {
+                return $user;
             }
-            else {
-                App::warning("User not exist or Blocked.");
-            }
-        }
-        else {
-            App::danger($this->errors);
         }
 
         return false;

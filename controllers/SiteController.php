@@ -6,6 +6,7 @@ use Yii;
 use app\filters\AccessControl;
 use app\filters\VerbFilter;
 use app\helpers\App;
+use app\helpers\Html;
 use app\models\VisitLog;
 use app\models\form\ContactForm;
 use app\models\form\LoginForm;
@@ -68,7 +69,17 @@ class SiteController extends Controller
     {
         $model = new PasswordResetForm();
         if ($model->load(App::post())) {
-            $model->process();
+            if (($user = $model->process()) != NULL) {
+                if ($model->hint) {
+                    App::success("Your password hint is: '{$user->password_hint}'.");
+                }
+                else {
+                    App::success("Email sent.");
+                }
+            }
+            else {
+                App::danger($model->errors);
+            }
         }
 
         return $this->redirect(['login']);
