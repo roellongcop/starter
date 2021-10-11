@@ -45,7 +45,10 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 						<div class="d-flex align-items-center">
 							<!--begin::Symbol-->
 							<div class="symbol symbol-md bg-light-primary mr-3 flex-shrink-0">
-								<img src="<?= $identity->imagePath ?>&w=50&quality=90" alt="" id="profile-image-dropdown"/>
+								<?= Html::image($identity->photo, ['w' => 50, 'quality' => 90], [
+									'alt' => 'Profile Photo',
+									'id' => 'profile-image-dropdown'
+								]) ?>
 							</div>
 							<!--end::Symbol-->
 							<!--begin::Text-->
