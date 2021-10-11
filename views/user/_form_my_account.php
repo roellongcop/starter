@@ -45,12 +45,10 @@ use app\widgets\RecordStatusInput;
             ]) ?>
         </div>
         <div class="col-md-5">
-            <div id="sipc" style="max-width: 200px">
-                <?= Html::image($model->photo, ['w' => 200], [
-                    'class' => 'img-thumbnail',
-                    'loading' => 'lazy',
-                ] ) ?>
-            </div>
+            <?= Html::image($model->photo, ['w' => 200], [
+                'class' => 'img-thumbnail user-photo',
+                'loading' => 'lazy',
+            ] ) ?>
             <br>
 
             <?= ImageGallery::widget([
@@ -58,7 +56,7 @@ use app\widgets\RecordStatusInput;
                 'attribute' => 'photo',
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
-                        $('#sipc img').attr('src', s.src + '&w=200');
+                        $('.user-photo').attr('src', s.src + '&w=200');
                     }
                 ",
             ]) ?> 
