@@ -140,6 +140,19 @@ class File extends ActiveRecord
         return $path;
     }
 
+    public function getPreviewImage()
+    {
+        return Html::image($this->token, [
+            'w' => 50, 
+            'h' => 50,
+            'ratio' => 'false',
+            'quality' => 90
+        ], [
+            'class' => 'img-thumbnail',
+            'loading' => 'lazy'
+        ]);
+    }
+
     public function gridColumns()
     {
         return [
@@ -147,17 +160,7 @@ class File extends ActiveRecord
                 'attribute' => 'name', 
                 'label' => 'Preview', 
                 'format' => 'raw',
-                'value' => function($model) {
-                    return Html::image($model->token, [
-                        'w' => 50, 
-                        'h' => 50,
-                        'ratio' => 'false',
-                        'quality' => 90
-                    ], [
-                        'class' => 'img-thumbnail',
-                        'loading' => 'lazy'
-                    ]);
-                },
+                'value' => 'previewImage',
             ],
 
             'name' => [
@@ -182,7 +185,7 @@ class File extends ActiveRecord
     public function detailColumns()
     {
         return [
-            'previewIcon:raw',
+            'previewImage:raw',
             'name:raw',
             'extension:raw',
             'size:raw',
