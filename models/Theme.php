@@ -168,7 +168,7 @@ class Theme extends ActiveRecord
             $files = [];
 
             foreach ($photos as $token) {
-                if (($file = self::findByToken($token)) != NULL) {
+                if (($file = File::findByToken($token)) != NULL) {
                     $files[] = $file;
                 }
             }
@@ -179,28 +179,17 @@ class Theme extends ActiveRecord
 
     public function getImages()
     {
-        if (($imageFiles = $this->imageFiles) != NULL) {
+        if (($photos = $this->photos) != NULL) {
             $images = [];
 
-            foreach ($imageFiles as $file) {
-                $images[] = Html::img($file->display . '&w=100&ratio=false', [
+            foreach ($photos as $photo) {
+                $images[] = Html::image($photo, ['w' => 100, 'h' => 100, 'ratio' => 'false'], [
                     'class' => 'img-thumbnail'
                 ]);
             }
 
             return implode(' ', $images);
         }
-    }
-
-    public function getUploadImages()
-    {
-        return Dropzone::widget([
-            'url' => Url::to(['theme/upload-image']),
-            'paramName' => 'Theme[imageInput]',
-            'parameters' => [
-                'Theme[id]' => $this->id
-            ]
-        ]);
     }
 
     public function getPreviewImage($params = ['w' => 100], $options = [])

@@ -1,5 +1,8 @@
 <?php
+
+use app\helpers\Html;
 $registerJs = <<< SCRIPT
+console.log('{$extensions}')
     $('#dropzone-{$id}').dropzone({
         url: "{$url}", // Set the url for your upload script location
         paramName: "{$paramName}", // The name that will be used to transfer the file
@@ -11,7 +14,7 @@ $registerJs = <<< SCRIPT
         acceptedFiles: '{$acceptedFiles}',
         init: function() {
             let myDropzone = this;
-            let files = {$files};
+            let files = {$encodedFiles};
             if (files) {
                 for (let i = 0; i < files.length; i++) {
                     let mockFile = { 
@@ -31,7 +34,7 @@ $registerJs = <<< SCRIPT
                 for ( let key in parameters ) {
                     formData.append(key, parameters[key]);
                 }
-                formData.append('UploadForm[fileToken]', file.upload.uuid);
+                formData.append('UploadForm[token]', file.upload.uuid);
             });
             this.on('removedfile', function (file) {
                 {$removedFile}
@@ -47,6 +50,7 @@ $registerJs = <<< SCRIPT
 SCRIPT;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
+
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">
     <div class="dropzone-msg dz-message needsclick">
         <h3 class="dropzone-msg-title">
@@ -56,4 +60,7 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
         	<?= $description ?>
         </span>
     </div>
+    <?php foreach ($files as $key => $file): ?>
+        <?= Html::input('hidden', $inputName, $file['token'], ['data-uuid' => $file['token']]) ?>
+    <?php endforeach ?>
 </div>

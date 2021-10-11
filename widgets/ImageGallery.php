@@ -5,6 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
 use app\helpers\Url;
+use app\models\File;
  
 class ImageGallery extends AppWidget
 {
@@ -25,6 +26,8 @@ class ImageGallery extends AppWidget
     public $model;
     public $modelName;
     public $attribute;
+    public $extensions;
+
 
     public function init() 
     {
@@ -39,6 +42,11 @@ class ImageGallery extends AppWidget
 
         $this->defaultPhoto = Url::image(App::setting('image')->image_holder);
         $this->uploadFileName = $this->uploadFileName ?: $this->parameters['UploadForm[modelName]'];
+
+        $this->extensions = $this->extensions ?: File::EXTENSIONS['image'];
+        foreach ($this->extensions as $key => $extension) {
+            $this->parameters["UploadForm[extensions][{$key}]"] = $extension;
+        }
     } 
     
     /**
@@ -61,6 +69,7 @@ class ImageGallery extends AppWidget
             'uploadFileName' => $this->uploadFileName,
             'parameters' => json_encode($this->parameters),
             'buttonOptions' => $this->buttonOptions,
+            'extensions' => $this->extensions,
         ]);
     }
 }

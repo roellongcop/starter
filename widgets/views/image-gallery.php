@@ -6,10 +6,12 @@ use app\helpers\Url;
 use yii\widgets\Pjax;
 
 $js = <<< SCRIPT
-    var selectedFile = 0,
-        selectedFilePath = '',
-        selectedFileToken = '',
-        selectedFileName = '{$uploadFileName}-' + new Date().getTime(),
+    var selectedImage = {
+            id: 0,
+            path: '',
+            token: '',
+            name: '{$uploadFileName}-' + new Date().getTime(),
+        },
         rotate = 0,
         image = document.getElementById('cropper-image-{$id}'),
         options = {
@@ -74,9 +76,6 @@ $js = <<< SCRIPT
     var resetMyPhotosTab = function() {
         hideMyPhotosButton();
 
-        selectedFile = 0;
-        selectedFilePath = '';
-
         $(images).css('border', '');
 
         $(imageName).text('None');
@@ -126,10 +125,10 @@ $js = <<< SCRIPT
     $(document).on('click', images, function() {
         let image = this;
 
-        selectedFile = $(image).data('id');
-        selectedFilePath = $(image).data('src');
-        selectedFileToken = $(image).data('token');
-        selectedFileName = $(image).data('name');
+        selectedImage.id = $(image).data('id');
+        selectedImage.path = $(image).data('src');
+        selectedImage.token = $(image).data('token');
+        selectedImage.name = $(image).data('name');
 
 
         $(imageName).text($(image).data('name'));
@@ -160,10 +159,16 @@ $js = <<< SCRIPT
     $(confirmBtn).click(function() {
         let s = {
             status: 'success',
-            src: selectedFilePath
+            src: selectedImage.path
         };
+        KTApp.block('body', {
+            overlayColor: '#000000',
+            state: 'primary',
+            message: 'Processing...'
+        });
         {$ajaxSuccess}
-        $(fileIdInput).val(selectedFileToken);
+        setTimeout(() => {KTApp.unblock('body');}, 500);
+        $(fileIdInput).val(selectedImage.token);
     });
 
     $(imageGalleryBtn).click(function() {
@@ -205,7 +210,7 @@ $js = <<< SCRIPT
         var reader = new FileReader();
 
         if(this.files && this.files[0]) {
-            selectedFileName = this.files[0]['name'];
+            selectedImage.name = this.files[0]['name'];
             reader.onload = function(e) {
                 image.src = e.target.result;
                 if (cropper) {
@@ -231,7 +236,7 @@ $js = <<< SCRIPT
     });
 
     $(editBtn).click(function() {
-        image.src = selectedFilePath + '&w=500';
+        image.src = selectedImage.path + '&w=500';
         if (cropper) {
             cropper.destroy();
         }
@@ -250,7 +255,7 @@ $js = <<< SCRIPT
         
             const formData = new FormData();
             // Pass the image file name as the third parameter if necessary.
-            formData.append('UploadForm[fileInput]', blob, selectedFileName + '.png');
+            formData.append('UploadForm[fileInput]', blob, selectedImage.name + '.png');
             let parameters = {$parameters};
             for ( let key in parameters ) {
                 formData.append(key, parameters[key]);

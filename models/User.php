@@ -623,7 +623,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function getMyImageFiles()
     {
         return $this->hasMany(File::className(), ['created_by' => 'id'])
-            ->onCondition(['extension' => App::file('file_extensions')['image']])
+            ->onCondition(['extension' => File::EXTENSIONS['image']])
             ->groupBy(['name', 'size', 'extension'])
             ->orderBy(['id' => SORT_DESC]);
     }

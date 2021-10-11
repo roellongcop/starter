@@ -27,30 +27,16 @@ class UploadForm extends \yii\base\Model
 {
     public $modelName;
     public $fileInput;
-    public $fileToken;
+    public $token;
     public $extensions;
-
-    public $extensionType = '*';
 
     public function init()
     {
         parent::init();
-        switch ($this->extensionType) {
-            case 'image':
-                $this->extensions = File::EXTENSIONS['image'];
-                break;
-
-            case 'file':
-                $this->extensions = File::EXTENSIONS['file'];
-                break;
-            
-            default:
-                $this->extensions = array_merge(
-                    File::EXTENSIONS['image'],
-                    File::EXTENSIONS['file']
-                );
-                break;
-        }
+        $this->extensions = $this->extensions ?: array_merge(
+            File::EXTENSIONS['image'],
+            File::EXTENSIONS['file']
+        );
     }
   
     /**
@@ -60,8 +46,8 @@ class UploadForm extends \yii\base\Model
     {
         return [
             [['modelName'], 'required'],
-            [['modelName', 'fileToken'], 'string'],
-            [['extensionType'], 'safe'],
+            [['modelName', 'token'], 'string'],
+            [['extensions'], 'validateExtensions'],
             [
                 ['fileInput'], 
                 'file', 
@@ -72,31 +58,39 @@ class UploadForm extends \yii\base\Model
         ];
     } 
 
+    public function validateExtensions($attribute, $params)
+    {
+        if (($fileInput = $this->fileInput) != NULL) {
+            if (!in_array($fileInput->extension, $this->extensions)) {
+                $this->addError($attribute, 'File Extension Invalid');
+            }
+        }
+    }
+
     public function upload()
     {
         if ($this->validate()) {
             if ($this->fileInput) {
-                if ($this->fileInput) {
-                    $path = $this->uploadPath($this, $this->fileInput);
-                    
-                    $this->fileInput->saveAs($path);
+                $path = $this->uploadPath($this, $this->fileInput);
+                
+                $this->fileInput->saveAs($path);
 
-                    return $this->saveFile($this->fileInput, $path);
-                } 
+                return $this->saveFile($path);
             } 
         }
         return false;
     }  
-
   
-    public function saveFile($input, $location='')
+    public function saveFile($location='')
     {
+        $input = $this->fileInput;
+
         $file = new File([
             'name' => $input->baseName,
             'location' => $location,
             'extension' => $input->extension,
             'size' => $input->size,
-           'token' => $this->fileToken ?: ''
+           'token' => $this->token ?: ''
         ]);
 
         if ($file->save()) {
@@ -127,7 +121,6 @@ class UploadForm extends \yii\base\Model
             $path = "{$file_path}/{$string}-{$time}.{$input->extension}";
         } while (file_exists($path));
         
-
         return $path;
     }
 
@@ -156,7 +149,6 @@ class UploadForm extends \yii\base\Model
     {
         $path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) . '/';
 
-            
         foreach ($folders as $folder) {
             $path .=  "{$folder}/";
 

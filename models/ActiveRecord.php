@@ -204,14 +204,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             ->where($condition)
             ->inActive()
             ->one();
-    }
-
-    public static function findByToken($token)
-    {
-        return static::find()
-            ->where(['token' => $token])
-            ->one();
-    }
+    } 
 
     public static function findActive($condition)
     {

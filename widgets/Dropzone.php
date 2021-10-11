@@ -27,51 +27,55 @@ class Dropzone extends AppWidget
     public $removedFile;
     public $acceptedFiles;
 
-    public $hiddenInput = true;
     public $files = [];
     public $inputName;
+    public $attribute;
+    public $extensions;
 
 
     public function init() 
     {
         // your logic here
         parent::init();
+        $className = App::className($this->model);
         if (!$this->description) {
             $this->description = "Upload up to {$this->maxFiles} file(s)";
         }
         $this->parameters[App::request('csrfParam')] = App::request('csrfToken');
-
-        $this->parameters['UploadForm[modelName]'] = App::className($this->model);
-        $this->parameters['UploadForm[id]'] = $this->model->id ?: 0;
-
+        $this->parameters['UploadForm[modelName]'] = $className;
         $this->url = Url::to($this->url);
         $this->removeFileUrl = Url::to($this->removeFileUrl);
-
-
         if (!$this->removedFile) {
-            $this->removedFile = "$.ajax({
-                url: '{$this->removeFileUrl}',
-                data: {fileToken: file.upload.uuid},
-                method: 'post',
-                dataType: 'json',
-                cache: false,
-                success: function(s) {
-                    let inp = $('input[data-uuid=\"'+ file.upload.uuid +'\"]');
+            // $this->removedFile = "$.ajax({
+            //     url: '{$this->removeFileUrl}/?token=' + file.upload.uuid,
+            //     method: 'post',
+            //     dataType: 'json',
+            //     cache: false,
+            //     success: function(s) {
+            //         let inp = $('input[data-uuid=\"'+ file.upload.uuid +'\"]');
 
-                    if(inp.length) {
-                        inp.remove();
-                    }
-                },
-                error: function(e) {
-                    console.log(e)
+            //         if(inp.length) {
+            //             inp.remove();
+            //         }
+            //     },
+            //     error: function(e) {
+            //         console.log(e)
+            //     }
+            // })";
+
+            $this->removedFile = "
+                let inp = $('input[data-uuid=\"'+ file.upload.uuid +'\"]');
+
+                if(inp.length) {
+                    inp.remove();
                 }
-            })";
+            ";
         }
 
         if (!$this->acceptedFiles) {
             $acceptedFiles = array_merge(
-                App::file('file_extensions')['image'],
-                App::file('file_extensions')['file']
+                File::EXTENSIONS['image'],
+                File::EXTENSIONS['file']
             );
             $this->acceptedFiles = array_map(function($val) { return ".{$val}"; }, $acceptedFiles);
         }
@@ -80,11 +84,20 @@ class Dropzone extends AppWidget
             $this->acceptedFiles = implode(',', $this->acceptedFiles);
         }
 
-        if ($this->hiddenInput) {
-            $this->success .= "
-                $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->inputName}[]' data-uuid='\"+ file.upload.uuid +\"' type='hidden' value='\"+ s.file.id +\"'> \");
-            ";
+        $this->extensions = explode(',', str_replace('.', '', $this->acceptedFiles));
+        foreach ($this->extensions as $key => $extension) {
+            $this->parameters["UploadForm[extensions][{$key}]"] = $extension;
         }
+
+        $this->inputName = implode('', [
+            $className, 
+            '[', $this->attribute, ']',
+            ((is_array($this->model->{$this->attribute}))? '[]': '')
+        ]);
+
+        $this->success = "
+            $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->inputName}' data-uuid='\"+ file.upload.uuid +\"' type='hidden' value='\"+ s.file.token +\"'> \");
+        ";
 
         if ($this->files) {
             $this->files = ArrayHelper::toArray($this->files, [
@@ -104,12 +117,9 @@ class Dropzone extends AppWidget
                         return implode('.', [$model->name, $model->extension]);
                     },
                     'imagePath' => function($model) {
-                        return $model->display([
+                        return Url::image($model->token, [
                             'w' => 120, 
                             'quality' => 90,
-                            // 'h' => 120, 
-                            // 'crop' => 'true',
-                            // 'ratio' => 'false',
                         ]);
                     }
                 ]
@@ -123,7 +133,8 @@ class Dropzone extends AppWidget
     public function run()
     {
         return $this->render('dropzone', [
-            'files' => json_encode($this->files),
+            'files' => $this->files,
+            'encodedFiles' => json_encode($this->files),
             'id' => $this->id,
             'parameters' => json_encode($this->parameters),
             'paramName' => $this->paramName,
@@ -139,8 +150,11 @@ class Dropzone extends AppWidget
             'complete' => $this->complete,
             'removedFile' => $this->removedFile,
             'acceptedFiles' => $this->acceptedFiles,
-            'success' => $this->success,
-            'hiddenInput' => $this->hiddenInput
+            'success' => $this->success, 
+            'inputName' => $this->inputName,
+            'attribute' => $this->attribute,
+            'model' => $this->model,
+            'extensions' => json_encode($this->extensions)
         ]);
     }
 }

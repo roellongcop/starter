@@ -33,7 +33,6 @@ class m210314_045639_seed_themes_table extends \app\migrations\Migration
                 'updated_at' => new Expression('UTC_TIMESTAMP'),
                 'photos' => json_encode([
                     'default-6ccb4a66-0ca3-46c7-88dd-default',
-                    'default-6ccb4a66-0ca3-46c7-88dd-default'
                 ])
             ];
             $this->insert($this->tableName(), $data);

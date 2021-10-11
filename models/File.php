@@ -314,4 +314,11 @@ class File extends ActiveRecord
         }
         return false;
     }
+
+    public static function findByToken($token)
+    {
+        return static::find()
+            ->where(['token' => $token])
+            ->one();
+    }
 }

@@ -1,15 +1,16 @@
 <?php
 use app\helpers\App;
+use app\helpers\Url;
+use app\models\File;
+use app\widgets\ActiveForm;
 use app\widgets\Anchor;
 use app\widgets\AnchorForm;
 use app\widgets\AppFiles;
 use app\widgets\AppImages;
-use app\widgets\RecordStatusInput;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
+use app\widgets\RecordStatusInput;
 use yii\helpers\Html;
-use app\helpers\Url;
-use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
@@ -58,20 +59,20 @@ $this->registerJs($registerJs);
             ]); ?>
         </div>
     </div>
+    
+    <p class="lead">Upload Images</p>
+    <?= Dropzone::widget([
+        'files' => $model->imageFiles,
+        'model' => $model,
+        'attribute' => 'photos',
+        'acceptedFiles' => array_map(
+            function($val) { 
+                return ".{$val}"; 
+            }, File::EXTENSIONS['image']
+        )
+    ]) ?>
+
     <div class="form-group"><br>
         <?= AnchorForm::widget() ?>
     </div>
-    <?php if (!$model->isNewRecord): ?>
-        <br>
-        <p class="lead">Upload Images</p>
-        <?= Dropzone::widget([
-            'files' => $model->imageFiles,
-            'model' => $model,
-            'acceptedFiles' => array_map(
-                function($val) { 
-                    return ".{$val}"; 
-                }, App::file('file_extensions')['image']
-            )
-        ]) ?>
-    <?php endif ?>
 <?php ActiveForm::end(); ?>
