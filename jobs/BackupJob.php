@@ -6,6 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\models\Backup;
 use app\models\ModelFile;
+use app\models\form\UploadForm;
 use yii\helpers\FileHelper;
 
 class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
@@ -29,18 +30,18 @@ class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
                 $fileInput->extension = 'sql';
                 $fileInput->size = $backup['filesize'];
 
-                $file = App::component('file')->saveFile($model, $fileInput, $backup['uploadPath']);
+                $uploadForm = new UploadForm([
+                    'modelName' => 'Backup',
+                    'fileInput' => $fileInput
+                ]);
+
+                $file = $uploadForm->saveFile($backup['uploadPath']);
                 $file->created_by = $this->created_by;
                 $file->updated_by = $this->created_by;
                 $file->save();
 
-                $modelFile = new ModelFile([
-                    'file_id' => $file->id,
-                    'model_id' => $model->id,
-                    'extension' => $file->extension,
-                    'model_name' => App::getModelName($model),
-                ]);
-                $modelFile->save();
+                $model->sql = $file->token;
+                $model->save();
             }
         }
     }
@@ -113,7 +114,8 @@ class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
         $file_path = implode('/', $folders);
         FileHelper::createDirectory(implode('/', [Yii::getAlias('@consoleWebroot'), $file_path]));
 
-        App::component('file')->createIndexFile($folders);
+        $model = new UploadForm();
+        $model->createIndexFile($folders);
 
         $path = "{$file_path}/{$name}.sql";
 

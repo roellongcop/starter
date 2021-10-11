@@ -45,7 +45,7 @@ CREATE TABLE `tbl_backups` (
 --
 
 INSERT INTO `tbl_backups` (`id`, `filename`, `tables`, `description`, `slug`, `record_status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, '1624520833', '{\"tbl_backups\":\"tbl_backups\",\"tbl_files\":\"tbl_files\",\"tbl_ips\":\"tbl_ips\",\"tbl_logs\":\"tbl_logs\",\"tbl_migrations\":\"tbl_migrations\",\"tbl_model_files\":\"tbl_model_files\",\"tbl_notifications\":\"tbl_notifications\",\"tbl_queues\":\"tbl_queues\",\"tbl_roles\":\"tbl_roles\",\"tbl_sessions\":\"tbl_sessions\",\"tbl_settings\":\"tbl_settings\",\"tbl_themes\":\"tbl_themes\",\"tbl_user_metas\":\"tbl_user_metas\",\"tbl_users\":\"tbl_users\",\"tbl_visit_logs\":\"tbl_visit_logs\"}', 'Description', '1624520833', 1, 1, 1, '2021-06-24 07:47:13', '2021-06-24 07:47:13');
+(1, '1624520833', '{\"tbl_backups\":\"tbl_backups\",\"tbl_files\":\"tbl_files\",\"tbl_ips\":\"tbl_ips\",\"tbl_logs\":\"tbl_logs\",\"tbl_migrations\":\"tbl_migrations\",\"tbl_notifications\":\"tbl_notifications\",\"tbl_queues\":\"tbl_queues\",\"tbl_roles\":\"tbl_roles\",\"tbl_sessions\":\"tbl_sessions\",\"tbl_settings\":\"tbl_settings\",\"tbl_themes\":\"tbl_themes\",\"tbl_user_metas\":\"tbl_user_metas\",\"tbl_users\":\"tbl_users\",\"tbl_visit_logs\":\"tbl_visit_logs\"}', 'Description', '1624520833', 1, 1, 1, '2021-06-24 07:47:13', '2021-06-24 07:47:13');
 
 -- --------------------------------------------------------
 
@@ -166,40 +166,12 @@ INSERT INTO `tbl_migrations` (`version`, `apply_time`) VALUES
 ('m201201_043253_create_sessions_table', 1623744841),
 ('m201229_073837_create_user_meta_table', 1623744842),
 ('m210111_014007_create_themes_table', 1623744843),
-('m210116_162927_create_model_files_table', 1623744844),
 ('m210314_045639_seed_themes_table', 1623744844),
 ('m210524_085128_create_queues_table', 1623744845),
 ('m210524_104252_create_notifications_table', 1623744846),
 ('m210528_064716_seed_roles_table', 1623744846),
 ('m210528_070049_seed_users_table', 1623744848),
 ('m210611_020152_seed_files_table', 1623744848);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_model_files`
---
-
-CREATE TABLE `tbl_model_files` (
-  `id` bigint(20) NOT NULL,
-  `model_id` bigint(20) NOT NULL DEFAULT '0',
-  `file_id` bigint(20) NOT NULL DEFAULT '0',
-  `model_name` varchar(255) NOT NULL,
-  `extension` varchar(16) NOT NULL,
-  `record_status` tinyint(2) NOT NULL DEFAULT '1',
-  `created_by` bigint(20) NOT NULL DEFAULT '0',
-  `updated_by` bigint(20) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_model_files`
---
-
-INSERT INTO `tbl_model_files` (`id`, `model_id`, `file_id`, `model_name`, `extension`, `record_status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'User', 'jpg', 1, 1, 1, '2021-06-24 07:47:13', '2021-06-24 07:47:13'),
-(2, 1, 2, 'Backup', 'sql', 1, 1, 1, '2021-06-24 07:47:13', '2021-06-24 07:47:13');
 
 -- --------------------------------------------------------
 
@@ -532,15 +504,6 @@ ALTER TABLE `tbl_logs`
 ALTER TABLE `tbl_migrations`
   ADD PRIMARY KEY (`version`);
 
---
--- Indexes for table `tbl_model_files`
---
-ALTER TABLE `tbl_model_files`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `created_by` (`created_by`),
-  ADD KEY `updated_by` (`updated_by`),
-  ADD KEY `model_id` (`model_id`),
-  ADD KEY `file_id` (`file_id`);
 
 --
 -- Indexes for table `tbl_notifications`
@@ -660,11 +623,6 @@ ALTER TABLE `tbl_ips`
 ALTER TABLE `tbl_logs`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT for table `tbl_model_files`
---
-ALTER TABLE `tbl_model_files`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_notifications`

@@ -20,6 +20,7 @@ class m201129_112459_create_backups_table extends \app\migrations\Migration
             'tables' => $this->text(),
             'description' => $this->text(),
             'slug' => $this->string()->notNull()->unique(),
+            'sql' => $this->text(),
         ]));
     }
 

@@ -20,7 +20,6 @@ class GeneralComponentTest extends \Codeception\Test\Unit
         expect($tables)->hasKey('tbl_ips');
         expect($tables)->hasKey('tbl_logs');
         expect($tables)->hasKey('tbl_migrations');
-        expect($tables)->hasKey('tbl_model_files');
         expect($tables)->hasKey('tbl_notifications');
         expect($tables)->hasKey('tbl_queues');
         expect($tables)->hasKey('tbl_roles');

@@ -12,7 +12,6 @@ $model = new \app\helpers\FixtureData(function($filename) {
 		   "{$dbPref}ips" => "{$dbPref}ips",
 		   "{$dbPref}logs" => "{$dbPref}logs",
 		   "{$dbPref}migrations" => "{$dbPref}migrations",
-		   "{$dbPref}model_files" => "{$dbPref}model_files",
 		   "{$dbPref}notifications" => "{$dbPref}notifications",
 		   "{$dbPref}queues" => "{$dbPref}queues",
 		   "{$dbPref}roles" => "{$dbPref}roles",
@@ -27,6 +26,7 @@ $model = new \app\helpers\FixtureData(function($filename) {
 		'slug' => (string) Inflector::slug($filename),
 		'created_by' => 1,
 	    'updated_by' => 1,
+	    'sql' => 'default-OxFBeC2Dzw1624513904-default'
 	];
 });
 

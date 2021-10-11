@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\helpers\Url;
+use app\models\File;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
 use app\widgets\Label;
@@ -50,7 +51,7 @@ class Backup extends ActiveRecord
         return $this->setRules([
             [['filename'], 'required'],
             [['description'], 'string'],
-            [['tables'], 'safe'],
+            [['tables', 'sql'], 'safe'],
             [['filename'], 'string', 'max' => 255],
             [['filename'], 'unique'],
         ]);
@@ -142,24 +143,23 @@ class Backup extends ActiveRecord
         return true;
     }
 
+    public function getFile()
+    {
+        return $this->hasOne(File::className(), ['token' => 'sql']);
+    }
+
     public function getSqlFileLocation()
     {
-        $sqlFileLocation = parent::getSqlFileLocation();
-
-        $root = App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot');
-
-        return implode('/', [$root, $sqlFileLocation]);
+        if (($file = $this->file) != NULL) {
+            return $file->rootPath;
+        }
     }
 
     public function download()
     {
-        $file = $this->sqlFileLocation;
-        if (file_exists($file) && $this->generated) {
-            App::response()->sendFile($file);
-
-            return true;
+        if (($file = $this->file) != NULL) {
+            return $file->download();
         }
-        return false;
     }
 
     public function restore()
@@ -180,7 +180,9 @@ class Backup extends ActiveRecord
 
     public function getGenerated()
     {
-        return $this->modelSqlFile;
+        if (($file = $this->file) != NULL) {
+            return $file;
+        }
     }
 
     public function getIsGenerating()

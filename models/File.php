@@ -210,7 +210,7 @@ class File extends ActiveRecord
     public function getRootPath($value='')
     {
         $paths = [
-            Yii::getAlias('@webroot'),
+            (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')),
             $this->location
         ];
 
@@ -306,7 +306,7 @@ class File extends ActiveRecord
 
     public function download()
     {
-        $file = $this->location;
+        $file = $this->rootPath;
         if (file_exists($file)) {
             App::response()->sendFile($file, implode('.', [$this->name, $this->extension]));
 

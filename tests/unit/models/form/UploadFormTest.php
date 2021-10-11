@@ -2,6 +2,7 @@
 
 namespace tests\unit\models\form;
 
+use app\models\File;
 use app\models\form\UploadForm;
 
 class UploadFormTest extends \Codeception\Test\Unit
@@ -49,7 +50,7 @@ class UploadFormTest extends \Codeception\Test\Unit
     {
         $model = new UploadForm([
             'modelName' => 'User',
-            'extensionType' => 'file'
+            'extensions' => File::EXTENSIONS['file']
         ]);
 
         $model->fileInput = new \yii\web\UploadedFile([
