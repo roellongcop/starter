@@ -53,23 +53,18 @@ class FileController extends Controller
             $path = $file->rootPath;
 
             if (file_exists($path)) {
-                if ($file->isDocument) {
-                    return App::response()->sendFile($path);
-                }
-                elseif ($file->isImage) {
                     
-                    $w = ($w)? (int)$w: $file->width;
-                    $h = ($h)? (int)$h: $file->height;
+                $w = ($w)? (int)$w: $file->width;
+                $h = ($h)? (int)$h: $file->height;
 
-                    if ($ratio == 'true') {
-                        return $file->getImageRatio($w, $quality, $extension);
-                    }
-                    elseif ($crop == 'true') {
-                        return $file->getImageCrop($w, $h, $quality, $extension);
-                    }
-                    else {
-                        return $file->getImage($w, $h, $quality, $extension);
-                    }
+                if ($ratio == 'true') {
+                    return $file->getImageRatio($w, $quality, $extension);
+                }
+                elseif ($crop == 'true') {
+                    return $file->getImageCrop($w, $h, $quality, $extension);
+                }
+                else {
+                    return $file->getImage($w, $h, $quality, $extension);
                 }
             }
         }
@@ -318,7 +313,10 @@ class FileController extends Controller
     public function actionDownload($token)
     {
         $model = $this->findModel($token, 'token');
-        if (!$model || !$model->download()) {
+        if ($model->download()) {
+            
+        }
+        else {
             App::warning('File don\'t exist');
             return $this->redirect(App::referrer());
         }

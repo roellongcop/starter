@@ -21,11 +21,9 @@ $params = [
     'data-download-url' => Url::to(['file/download', 'token' => $model->token], true),
 ];
 if ($model->isDocument) {
-    $path = $model->documentPreviewPath;
-
     $params['style'] = "width:200px;height:auto";
 
-    echo Html::image($path, '', $params);
+    echo Html::img($model->display, $params);
 }
 else {
     echo Html::img(['file/display', 'token' => $model->token, 'w' => 150,], $params);
@@ -34,3 +32,4 @@ else {
 <p>
     <?= StringHelper::truncate($model->name, 15) ?>
 </p>
+
