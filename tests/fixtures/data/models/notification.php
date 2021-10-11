@@ -7,7 +7,7 @@ $model = new \app\helpers\FixtureData(function($type) {
     return [
 		'user_id' => 1,
 		'message' => 'You\'ve Change your password',
-		'link' => Url::to(['user/my-password']),
+		'link' => '/my-password',
 		'type' => $type,
 		'token' => 'TftF853osh1623298888',
 		'status' => Notification::STATUS_UNREAD,

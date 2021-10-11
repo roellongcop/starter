@@ -50,9 +50,8 @@ class FileController extends Controller
         $file = File::findByToken($token) ?: File::findByToken(App::setting('image')->image_holder);
 
         if ($file) { 
-            $path = $file->rootPath;
 
-            if (file_exists($path)) {
+            if (file_exists($file->displayRootPath)) {
                     
                 $w = ($w)? (int)$w: $file->width;
                 $h = ($h)? (int)$h: $file->height;

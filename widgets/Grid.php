@@ -131,7 +131,17 @@ class Grid extends AppWidget
                         ]) ;
                     }
                 }, 
-
+                'download' => function($url, $model) use ($controller) {
+                    if (App::modelCan($model, 'download')) {
+                        return Anchor::widget([
+                            'title' => implode('', [$this->render('icon/download'), $this->actionName('Download')]),
+                            'link' => $model->downloadUrl,
+                            'options' => [
+                                'class' => 'navi-link',
+                            ]
+                        ]) ;
+                    }
+                }, 
             ]
         ];
     }

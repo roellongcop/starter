@@ -107,51 +107,30 @@ class File extends ActiveRecord
             ->all();
     }
 
-    public function getDisplay($params = [], $fullpath=false)
+    public function getDisplayRootPath()
     {
-        $path = '@web/default/file-preview/';
+        $doc_path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) 
+            . '/default/file-preview/';
 
+        return ($this->isImage)? $this->rootPath: $this->getDisplay([], false, $doc_path);
+    }
+
+    public function getDisplay($params = [], $fullpath=false, $path='@web/default/file-preview/')
+    {
         switch ($this->extension) {
-            case 'css':
-                $path .= 'css.svg';
-                break;
-            case 'zip':
-                $path .= 'zip.svg';
-                break;
-            case 'sql':
-                $path .= 'sql.png';
-                break;
-
-            case 'csv':
-                $path .= 'csv.svg';
-                break;
-
+            case 'css': $path .= 'css.svg'; break;
+            case 'zip': $path .= 'zip.svg'; break;
+            case 'sql': $path .= 'sql.png'; break;
+            case 'csv': $path .= 'csv.svg'; break;
             case 'docx':
             case 'doc':
-            case 'txt':
-                $path .= 'doc.svg';
-                break;
-
-            case 'html':
-                $path .= 'html.svg';
-                break;
-
-            case 'javacript':
-                $path .= 'javacript.svg';
-                break;
-
-            case 'mp4':
-                $path .= 'mp4.svg';
-                break;
-
-            case 'pdf':
-                $path .= 'pdf.svg';
-                break;
-
-            case 'xml':
-                $path .= 'xml.svg';
-                break;
-            
+            case 'txt': 
+                $path .= 'doc.svg'; break;
+            case 'html': $path .= 'html.svg'; break;
+            case 'javacript': $path .= 'javacript.svg'; break;
+            case 'mp4': $path .= 'mp4.svg'; break;
+            case 'pdf': $path .= 'pdf.svg'; break;
+            case 'xml': $path .= 'xml.svg'; break;
             default:
                 $path = array_merge(['file/display', 'token' => $this->token], $params);
                 $path = Url::to($path, $fullpath);
@@ -168,7 +147,17 @@ class File extends ActiveRecord
                 'attribute' => 'name', 
                 'label' => 'Preview', 
                 'format' => 'raw',
-                'value' => 'name',
+                'value' => function($model) {
+                    return Html::image($model->token, [
+                        'w' => 50, 
+                        'h' => 50,
+                        'ratio' => 'false',
+                        'quality' => 90
+                    ], [
+                        'class' => 'img-thumbnail',
+                        'loading' => 'lazy'
+                    ]);
+                },
             ],
 
             'name' => [
@@ -207,7 +196,7 @@ class File extends ActiveRecord
         return App::formatter('asFileSize', $this->size);
     }
 
-    public function getRootPath($value='')
+    public function getRootPath()
     {
         $paths = [
             (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')),
@@ -237,22 +226,25 @@ class File extends ActiveRecord
         return $this->dimension['height'];
     }
 
-    public function getDimension($value='')
+    public function getDimension()
     {
-        if (file_exists($this->rootPath)) {
-            list($width, $height) = getimagesize($this->rootPath);
+        $width = 0;
+        $height = 0;
+
+        if (file_exists($this->displayRootPath)) {
+            list($width, $height) = getimagesize($this->displayRootPath);
         }
         return [
-            'width' => $width ?? 0,
-            'height' => $height ?? 0,
+            'width' => ($this->isImage)? $width: 0,
+            'height' => ($this->isImage)? $height: 0,
         ];
     }
 
     public function getImageRatio($w, $quality=100, $extension='png')
     {
-        if (file_exists($this->rootPath)) {
+        if (file_exists($this->displayRootPath)) {
             $imagineObj = new Imagine();
-            $image = $imagineObj->open($this->rootPath);
+            $image = $imagineObj->open($this->displayRootPath);
             $image->resize($image->getSize()->widen($w));
 
             return $image->show($extension, ['quality' => $quality]); 
@@ -261,8 +253,8 @@ class File extends ActiveRecord
 
     public function getImageCrop($w, $h, $quality=100, $extension='png')
     {
-        if (file_exists($this->rootPath)) {
-            $image = Image::crop($this->rootPath, $w, $h); 
+        if (file_exists($this->displayRootPath)) {
+            $image = Image::crop($this->displayRootPath, $w, $h); 
 
             return $image->show($extension, ['quality' => $quality]); 
         }
@@ -270,24 +262,13 @@ class File extends ActiveRecord
 
     public function getImage($w, $h, $quality=100, $extension='png')
     {
-        if (file_exists($this->rootPath)) {
+        if (file_exists($this->displayRootPath)) {
             $image = Image::getImagine() 
-                ->open($this->rootPath) 
+                ->open($this->displayRootPath) 
                 ->resize(new Box($w, $h));
 
             return $image->show($extension, ['quality' => $quality]);
         }
-    }
-
-    public function getPathNoExt($path='')
-    {
-        $path = $path ?: $this->rootPath;
-
-        $explodedPath = explode('.', $path);
-        array_pop($explodedPath);
-        $path = implode('', $explodedPath);
-
-        return $path;
     }
     
     public function getIsSql()
@@ -302,6 +283,11 @@ class File extends ActiveRecord
         }
 
         return parent::getCanDelete();
+    }
+
+    public function getDownloadUrl($scheme = false)
+    {
+        return Url::to(['file/download', 'token' => $this->token], $scheme);
     }
 
     public function download()
