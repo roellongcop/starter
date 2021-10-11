@@ -453,11 +453,13 @@ $this->registerCss($css);
                         <button type="button" class="btn btn-light-info rotate-left-btn" title="Rotate Left">
                             <span data-toggle="tooltip" title="" data-original-title="Rotate Left">
                                 <span class="fa fa-undo-alt"></span>
+                                Rotate Left
                             </span>
                         </button>
                         <button type="button" class="btn btn-light-info rotate-right-btn" title="Rotate Right">
                             <span data-toggle="tooltip" title="" data-original-title="Rotate Right">
                                 <span class="fa fa-redo-alt"></span>
+                                Rotate Right
                             </span>
                         </button>
                     </div>
@@ -466,12 +468,14 @@ $this->registerCss($css);
                         <button type="button" class="btn btn-light-info reset-cropper-btn" title="Reset">
                             <span data-toggle="tooltip" title="" data-original-title="Reset">
                                 <span class="fa fa-sync-alt"></span>
+                                Reset
                             </span>
                         </button>
                         <input type="file" class="sr-only select-image-input" name="file" accept="image/*">
                         <button type="button" class="btn btn-light-info btn-upload select-image-btn" title="Upload image file">
                             <span class="kt-tooltip" data-toggle="tooltip" title="" data-original-title="Import image">
                                 <span class="fa fa-upload"></span>
+                                Import
                             </span>
                         </button>
                     </div> 
