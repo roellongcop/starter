@@ -2,31 +2,18 @@
 namespace tests\unit\models\form;
 
 use app\helpers\App;
+use app\models\form\PasswordResetForm;
 use yii\mail\MessageInterface;
 
 class PasswordResetFormTest extends \Codeception\Test\Unit
 {
-    private $model;
-    /**
-     * @var \UnitTester
-     */
-    public $tester;
-
     public function testEmailIsSentOnContact()
     {
-        $this->model = $this->getMockBuilder('app\models\form\PasswordResetForm')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $this->model->expects($this->once())
-            ->method('validate')
-            ->willReturn(true);
-
-        $this->model->attributes = [
+        $model = new PasswordResetForm([
             'email' => 'developer@developer.com',
-        ];
+        ]);
 
-        expect_that($this->model->process());
+        expect_that($model->process());
 
         // using Yii2 module actions to check email was sent
         $this->tester->seeEmailIsSent();
@@ -39,36 +26,20 @@ class PasswordResetFormTest extends \Codeception\Test\Unit
 
     public function testNotExistUserDontEmailed()
     {
-        $this->model = $this->getMockBuilder('app\models\form\PasswordResetForm')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $this->model->expects($this->once())
-            ->method('validate')
-            ->willReturn(true);
-
-        $this->model->attributes = [
+        $model = new PasswordResetForm([
             'email' => 'admin@admins.com',
-        ];
+        ]);
 
-        expect_not($this->model->process());
+        expect_not($model->process());
     }
 
     public function testPasswordHintIsChecked()
     {
-        $this->model = $this->getMockBuilder('app\models\form\PasswordResetForm')
-            ->setMethods(['validate'])
-            ->getMock();
-
-        $this->model->expects($this->once())
-            ->method('validate')
-            ->willReturn(true);
-
-        $this->model->attributes = [
+        $model = new PasswordResetForm([
             'email' => 'admin@admins.com',
             'hint' => true
-        ];
+        ]);
 
-        expect($this->model->process());
+        expect($model->process());
     }
 }
