@@ -13,7 +13,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
 use yii\grid\Column;
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\helpers\Json;
 
 /**
@@ -67,7 +67,7 @@ class CheckboxColumn extends Column implements ViewContextInterface
      * }
      * ```
      *
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @see \app\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $checkboxOptions = [];
     /**

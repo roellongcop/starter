@@ -11,7 +11,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+use app\helpers\Html;
 
 /**
  * Breadcrumbs displays a list of links indicating the position of the current page in the whole site hierarchy.
@@ -61,7 +61,7 @@ class Breadcrumbs extends Widget
     public $tag = 'ul';
     /**
      * @var array the HTML attributes for the breadcrumb container tag.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @see \app\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $options = ['class' => 'breadcrumb'];
     /**

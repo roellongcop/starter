@@ -12,7 +12,7 @@ use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+use app\helpers\Html;
 
 /**
  * LinkPager displays a list of hyperlinks that lead to different pages of target.
@@ -38,7 +38,7 @@ class LinkPager extends Widget
     public $pagination;
     /**
      * @var array HTML attributes for the pager container tag.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @see \app\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $options = ['class' => 'd-flex flex-wrap py-2 mr-3'];
     /**
@@ -48,7 +48,7 @@ class LinkPager extends Widget
     public $linkContainerOptions = [];
     /**
      * @var array HTML attributes for the link in a pager container tag.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @see \app\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $linkOptions = ['class' => 'btn btn-icon btn-sm border-0 btn-light mr-2 my-1'];
     /**

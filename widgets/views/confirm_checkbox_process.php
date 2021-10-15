@@ -2,7 +2,7 @@
 use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\Detail;
-use yii\helpers\Html;
+use app\helpers\Html;
 ?>
 <div>
 	<div class="alert alert-custom alert-light-primary fade show mb-5" role="alert" style="padding: 0.5rem 2rem;">

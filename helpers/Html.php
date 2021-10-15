@@ -31,7 +31,7 @@ class Html extends \yii\helpers\Html
     public static function navController($link)
     {
         $request = new Request([
-            'url' => parse_url(\yii\helpers\Url::to($link, true), PHP_URL_PATH)
+            'url' => parse_url(Url::to($link, true), PHP_URL_PATH)
         ]);
         $url = App::urlManager()->parseRequest($request);
         list($controller, $actionID) = App::app()->createController($url[0]);
@@ -58,6 +58,13 @@ class Html extends \yii\helpers\Html
         else {
             // not HTML
             return false;
+        }
+    }
+
+    public static function content($content='', $condition = true)
+    {
+        if ($condition) {
+            return $content;
         }
     }
 }

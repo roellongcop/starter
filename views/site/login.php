@@ -4,7 +4,7 @@
 use app\helpers\App;
 use app\widgets\Alert;
 use app\widgets\ActiveForm;
-use yii\helpers\Html;
+use app\helpers\Html;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 

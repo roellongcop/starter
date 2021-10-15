@@ -6,7 +6,7 @@ use app\widgets\ActiveForm;
 use app\widgets\Alert;
 use app\widgets\KeenActiveForm;
 use yii\captcha\Captcha;
-use yii\helpers\Html;
+use app\helpers\Html;
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 

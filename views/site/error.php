@@ -5,7 +5,7 @@
 /* @var $exception Exception */
 
 use app\helpers\App;
-use yii\helpers\Html;
+use app\helpers\Html;
 use app\helpers\Url;
 $this->title = $name;
 $publishedUrl = App::publishedUrl('/media/error/bg1.jpg');
