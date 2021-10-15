@@ -3,19 +3,12 @@
 namespace app\models;
 
 use Yii;
-use app\behaviors\JsonBehavior;
-use app\behaviors\LogBehavior;
-use app\behaviors\ProcessBehavior;
-use app\behaviors\TokenBehavior;
 use app\helpers\App;
 use app\helpers\Html;
 use app\models\Log;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\RecordHtml;
-use yii\behaviors\AttributeTypecastBehavior;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
@@ -735,18 +728,28 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         return [
             'TimestampBehavior' => [
-                'class' => TimestampBehavior::className(),
+                'class' => 'yii\behaviors\TimestampBehavior',
                 'value' => new Expression('UTC_TIMESTAMP'),
             ],
             'BlameableBehavior' => [
-                'class' => BlameableBehavior::className(),
+                'class' => 'yii\behaviors\BlameableBehavior',
                 'defaultValue' => 0
             ],
-            'AttributeTypecastBehavior' => ['class' => AttributeTypecastBehavior::className()],
-            'LogBehavior' => ['class' => LogBehavior::className()],
-            'ProcessBehavior' => ['class' => ProcessBehavior::className()],
-            'TokenBehavior' => ['class' => TokenBehavior::className()],
-            'JsonBehavior' => ['class' => JsonBehavior::className()],
+            'AttributeTypecastBehavior' => [
+                'class' => 'yii\behaviors\AttributeTypecastBehavior'
+            ],
+            'LogBehavior' => [
+                'class' => 'app\behaviors\LogBehavior'
+            ],
+            'ProcessBehavior' => [
+                'class' => 'app\behaviors\ProcessBehavior'
+            ],
+            'TokenBehavior' => [
+                'class' => 'app\behaviors\TokenBehavior'
+            ],
+            'JsonBehavior' => [
+                'class' => 'app\behaviors\JsonBehavior'
+            ],
         ];
     }
 

@@ -3,8 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use app\filters\AccessControl;
-use app\filters\VerbFilter;
 use app\helpers\App;
 use app\helpers\Html;
 use app\models\VisitLog;
@@ -19,11 +17,11 @@ class SiteController extends Controller
     {
         $behaviors = parent::behaviors();
         $behaviors['AccessControl'] = [
-            'class' => AccessControl::className(),
+            'class' => 'app\filters\AccessControl',
             'publicActions' => ['login', 'logout', 'reset-password', 'contact']
         ];
         $behaviors['VerbFilter'] = [
-            'class' => VerbFilter::className(),
+            'class' => 'app\filters\VerbFilter',
             'verbActions' => [
                 'logout' => ['post'],
             ]

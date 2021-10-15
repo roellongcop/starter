@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use app\filters\AccessControl;
 use app\helpers\App;
 use app\models\File;
 use app\models\ModelFile;
@@ -23,7 +22,7 @@ class FileController extends Controller
     {
         $behaviors = parent::behaviors();
         $behaviors['AccessControl'] = [
-            'class' => AccessControl::className(),
+            'class' => 'app\filters\AccessControl',
             'publicActions' => ['display', 'upload', 'download']
         ];
 

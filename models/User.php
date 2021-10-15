@@ -10,7 +10,6 @@ use app\models\form\user\MySettingForm;
 use app\models\form\user\ProfileForm;
 use app\widgets\Anchor;
 use app\widgets\Label;
-use yii\behaviors\SluggableBehavior;
 use yii\web\IdentityInterface;
 
 /**
@@ -490,7 +489,7 @@ class User extends ActiveRecord implements IdentityInterface
         $behaviors = parent::behaviors();
   
         $behaviors['SluggableBehavior'] = [
-            'class' => SluggableBehavior::className(),
+            'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'username',
             'slugAttribute' => 'slug',
             'immutable' => false,

@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use app\behaviors\JsonBehavior;
 use app\helpers\App;
 use app\widgets\Anchor;
 
@@ -38,8 +37,8 @@ class Visitor extends ActiveRecord
     {
         return [
             'controllerID' => 'visitor',
-            'mainAttribute' => 'id',
-            'paramName' => 'id',
+            'mainAttribute' => 'cookie',
+            'paramName' => 'cookie',
         ];
     }
 
@@ -162,7 +161,7 @@ class Visitor extends ActiveRecord
         $behaviors = parent::behaviors();
         
         $behaviors['JsonBehavior'] = [
-            'class' => JsonBehavior::className(),
+            'class' => 'app\behaviors\JsonBehavior',
             'fields' => ['location', 'server']
         ];
         return $behaviors;

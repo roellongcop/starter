@@ -8,7 +8,6 @@ use app\helpers\Html;
 use app\widgets\Anchor;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
-use yii\behaviors\SluggableBehavior;
 use app\helpers\Url;
 
 /**
@@ -212,7 +211,7 @@ class Theme extends ActiveRecord
         ];
 
         $behaviors['SluggableBehavior'] = [
-            'class' => SluggableBehavior::className(),
+            'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'name',
             'slugAttribute' => 'slug',
             'immutable' => false,

@@ -7,7 +7,6 @@ use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\Anchor;
 use app\widgets\BootstrapSelect;
-use yii\behaviors\SluggableBehavior;
 use yii\helpers\Inflector;
 use app\helpers\Url;
 
@@ -245,7 +244,7 @@ class Setting extends ActiveRecord
         $behaviors = parent::behaviors();
         
         $behaviors['SluggableBehavior'] = [
-            'class' => SluggableBehavior::className(),
+            'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'name',
             'slugAttribute' => 'slug',
             'immutable' => false,

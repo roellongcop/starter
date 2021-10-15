@@ -33,14 +33,14 @@ class VisitorController extends Controller
 
     /**
      * Displays a single Visitor model.
-     * @param integer $id
+     * @param string $cookie
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($cookie)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($cookie, 'cookie'),
         ]);
     }
 
@@ -69,9 +69,9 @@ class VisitorController extends Controller
      * If duplication is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionDuplicate($id)
+    public function actionDuplicate($cookie)
     {
-        $originalModel = $this->findModel($id);
+        $originalModel = $this->findModel($cookie, 'cookie');
         $model = new Visitor();
         $model->attributes = $originalModel->attributes;
 
@@ -90,13 +90,13 @@ class VisitorController extends Controller
     /**
      * Updates an existing Visitor model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $cookie
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($cookie)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($cookie, 'cookie');
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
@@ -111,13 +111,13 @@ class VisitorController extends Controller
     /**
      * Deletes an existing Visitor model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $cookie
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($cookie)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($cookie, 'cookie');
 
         if($model->delete()) {
             App::success('Successfully Deleted');

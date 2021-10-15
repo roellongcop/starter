@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
-use yii\behaviors\SluggableBehavior;
 use app\helpers\Url;
 
 /**
@@ -180,7 +179,7 @@ class Role extends ActiveRecord
             'module_access',
         ];
         $behaviors['SluggableBehavior'] = [
-            'class' => SluggableBehavior::className(),
+            'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'name',
             'slugAttribute' => 'slug',
             'immutable' => false,

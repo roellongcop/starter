@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\Anchor;
-use yii\behaviors\SluggableBehavior;
 use app\helpers\Url;
 
 /**
@@ -161,7 +160,7 @@ class Ip extends ActiveRecord
     {
         $behaviors = parent::behaviors();
         $behaviors['SluggableBehavior'] = [
-            'class' => SluggableBehavior::className(),
+            'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'name',
             'ensureUnique' => true,
         ];

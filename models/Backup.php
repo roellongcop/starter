@@ -9,7 +9,6 @@ use app\models\File;
 use app\widgets\Anchor;
 use app\widgets\JsonEditor;
 use app\widgets\Label;
-use yii\behaviors\SluggableBehavior;
 
 /**
  * This is the model class for table "{{%backup}}".
@@ -131,7 +130,7 @@ class Backup extends ActiveRecord
         ];
 
         $behaviors['SluggableBehavior'] = [
-            'class' => SluggableBehavior::className(),
+            'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'filename',
             'ensureUnique' => true,
         ];
