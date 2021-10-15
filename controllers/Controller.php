@@ -3,6 +3,10 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\form\export\ExportCsvForm;
+use app\models\form\export\ExportExcelForm;
+use app\models\form\export\ExportPdfForm;
+use app\widgets\ExportContent;
 
 /**
  * RoleController implements the CRUD actions for Role model.
@@ -13,6 +17,16 @@ abstract class Controller extends \yii\web\Controller
     {
         if (!parent::beforeAction($action)) {
             return false;
+        }
+
+        switch ($action->id) {
+            case 'print':
+                $this->layout = 'print';
+                break;
+            
+            default:
+                // code...
+                break;
         }
 
         return true;
@@ -40,5 +54,61 @@ abstract class Controller extends \yii\web\Controller
                 'class' => 'app\filters\VerbFilter'
             ],
         ];
-    } 
+    }
+
+    public function exportPrint($searchModel)
+    {
+        return $this->render('_print', [
+            'content' => ExportContent::widget([
+                'file' => 'pdf',
+                'searchModel' => $searchModel,
+            ])
+        ]);
+    }
+
+    public function exportPdf($searchModel)
+    {
+        $model = new ExportPdfForm([
+            'content' => ExportContent::widget([
+                'file' => 'pdf',
+                'searchModel' => $searchModel,
+            ])
+        ]);
+        return $model->export();
+    }
+
+    public function exportCsv($searchModel)
+    {
+        $model = new ExportCsvForm([
+            'content' => ExportContent::widget([
+                'file' => 'excel',
+                'searchModel' => $searchModel
+            ]),
+        ]);
+        return $model->export();
+    }
+
+    public function exportXlsx($searchModel)
+    {
+        $model = new ExportExcelForm([
+            'content' => ExportContent::widget([
+                'file' => 'excel',
+                'searchModel' => $searchModel
+            ]), 
+            'type' => 'xlsx'
+        ]);
+        return $model->export();
+    }
+
+    public function exportXls($searchModel)
+    {
+        $model = new ExportExcelForm([
+            'content' => ExportContent::widget([
+                'file' => 'excel',
+                'searchModel' => $searchModel
+            ]), 
+            'type' => 'xls'
+        ]);
+        return $model->export();
+    }
 }

@@ -4,17 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
-use app\models\File;
 use app\models\Theme;
-use app\models\UserMeta;
-use app\models\form\ThemeForm;
 use app\models\form\user\MySettingForm;
 use app\models\search\ThemeSearch;
-use app\widgets\ExportContent;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
 
 /**
  * ThemeController implements the CRUD actions for Theme model.
@@ -225,47 +220,27 @@ class ThemeController extends Controller
 
     public function actionPrint()
     {
-        $this->layout = 'print';
-        return $this->render('_print', [
-            'content' => $this->getExportContent('pdf')
-        ]);
+        return $this->exportPrint(new ThemeSearch());
     }
 
     public function actionExportPdf()
     {
-        return App::export()->pdf(
-            $this->getExportContent('pdf')
-        );
+        return $this->exportPdf(new ThemeSearch());
     }
 
     public function actionExportCsv()
     {
-        return App::export()->csv(
-            $this->getExportContent()
-        );
+        return $this->exportCsv(new ThemeSearch());
     }
 
     public function actionExportXls()
     {
-        return App::export()->xls(
-            $this->getExportContent()
-        );
+        return $this->exportXls(new ThemeSearch());
     }
 
     public function actionExportXlsx()
     {
-        return App::export()->xlsx(
-            $this->getExportContent()
-        );
-    }
-
-    protected function getExportContent($file='excel')
-    {
-        return ExportContent::widget([
-            'params'      => App::get(),
-            'file'        => $file,
-            'searchModel' => new ThemeSearch(),
-        ]);
+        return $this->exportXlsx(new ThemeSearch());
     }
 
     public function actionActivate($slug)

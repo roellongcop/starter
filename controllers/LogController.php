@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Log;
 use app\models\search\LogSearch;
-use app\widgets\ExportContent;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -155,47 +154,27 @@ class LogController extends Controller
 
     public function actionPrint()
     {
-        $this->layout = 'print';
-        return $this->render('_print', [
-            'content' => $this->getExportContent('pdf')
-        ]);
+        return $this->exportPrint(new LogSearch());
     }
 
     public function actionExportPdf()
     {
-        return App::export()->pdf(
-            $this->getExportContent('pdf')
-        );
+        return $this->exportPdf(new LogSearch());
     }
 
     public function actionExportCsv()
     {
-        return App::export()->csv(
-            $this->getExportContent()
-        );
+        return $this->exportCsv(new LogSearch());
     }
 
     public function actionExportXls()
     {
-        return App::export()->xls(
-            $this->getExportContent()
-        );
+        return $this->exportXls(new LogSearch());
     }
 
     public function actionExportXlsx()
     {
-        return App::export()->xlsx(
-            $this->getExportContent()
-        );
-    }
-
-    protected function getExportContent($file='excel')
-    {
-        return ExportContent::widget([
-            'params' => App::get(),
-            'file' => $file,
-            'searchModel' => new LogSearch(),
-        ]);
+        return $this->exportXlsx(new LogSearch());
     }
 
     public function actionInActiveData()

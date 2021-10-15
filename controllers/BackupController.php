@@ -7,8 +7,6 @@ use app\helpers\App;
 use app\jobs\BackupJob;
 use app\models\Backup;
 use app\models\search\BackupSearch;
-use app\widgets\ExportContent;
-use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -212,47 +210,27 @@ class BackupController extends Controller
 
     public function actionPrint()
     {
-        $this->layout = 'print';
-        return $this->render('_print', [
-            'content' => $this->getExportContent('pdf')
-        ]);
+        return $this->exportPrint(new BackupSearch());
     }
 
     public function actionExportPdf()
     {
-        return App::export()->pdf(
-            $this->getExportContent('pdf')
-        );
+        return $this->exportPdf(new BackupSearch());
     }
 
     public function actionExportCsv()
     {
-        return App::export()->csv(
-            $this->getExportContent()
-        );
+        return $this->exportCsv(new BackupSearch());
     }
 
     public function actionExportXls()
     {
-        return App::export()->xls(
-            $this->getExportContent()
-        );
+        return $this->exportXls(new BackupSearch());
     }
 
     public function actionExportXlsx()
     {
-        return App::export()->xlsx(
-            $this->getExportContent()
-        );
-    }
-
-    protected function getExportContent($file='excel')
-    {
-        return ExportContent::widget([
-            'params' => App::get(),
-            'file' => $file,
-            'searchModel' => new BackupSearch(),
-        ]);
+        return $this->exportXlsx(new BackupSearch());
     }
 
     public function actionRestore($slug)

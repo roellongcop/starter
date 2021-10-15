@@ -3,12 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use app\widgets\ExportContent;
+use app\helpers\App;
 use app\models\Notification;
 use app\models\search\NotificationSearch;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use app\helpers\App;
 use yii\helpers\Inflector;
 
 /**
@@ -163,47 +162,27 @@ class NotificationController extends Controller
 
     public function actionPrint()
     {
-        $this->layout = 'print';
-        return $this->render('_print', [
-            'content' => $this->getExportContent('pdf')
-        ]);
+        return $this->exportPrint(new NotificationSearch());
     }
 
     public function actionExportPdf()
     {
-        return App::export()->pdf(
-            $this->getExportContent('pdf')
-        );
+        return $this->exportPdf(new NotificationSearch());
     }
 
     public function actionExportCsv()
     {
-        return App::export()->csv(
-            $this->getExportContent()
-        );
+        return $this->exportCsv(new NotificationSearch());
     }
 
     public function actionExportXls()
     {
-        return App::export()->xls(
-            $this->getExportContent()
-        );
+        return $this->exportXls(new NotificationSearch());
     }
 
     public function actionExportXlsx()
     {
-        return App::export()->xlsx(
-            $this->getExportContent()
-        );
-    }
-
-    protected function getExportContent($file='excel')
-    {
-        return ExportContent::widget([
-            'params'      => App::get(),
-            'file'        => $file,
-            'searchModel' => new NotificationSearch(),
-        ]);
+        return $this->exportXlsx(new NotificationSearch());
     }
 
     public function actionInActiveData()

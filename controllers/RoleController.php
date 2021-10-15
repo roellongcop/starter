@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Role;
 use app\models\search\RoleSearch;
-use app\widgets\ExportContent;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -261,47 +260,27 @@ class RoleController extends Controller
 
     public function actionPrint()
     {
-        $this->layout = 'print';
-        return $this->render('_print', [
-            'content' => $this->getExportContent('pdf')
-        ]);
+        return $this->exportPrint(new RoleSearch());
     }
 
     public function actionExportPdf()
     {
-        return App::export()->pdf(
-            $this->getExportContent('pdf')
-        );
+        return $this->exportPdf(new RoleSearch());
     }
 
     public function actionExportCsv()
     {
-        return App::export()->csv(
-            $this->getExportContent()
-        );
+        return $this->exportCsv(new RoleSearch());
     }
 
     public function actionExportXls()
     {
-        return App::export()->xls(
-            $this->getExportContent()
-        );
+        return $this->exportXls(new RoleSearch());
     }
 
     public function actionExportXlsx()
     {
-        return App::export()->xlsx(
-            $this->getExportContent()
-        );
-    }
-
-    protected function getExportContent($file='excel')
-    {
-        return ExportContent::widget([
-            'params' => App::get(),
-            'file' => $file,
-            'searchModel' => new RoleSearch(),
-        ]);
+        return $this->exportXlsx(new RoleSearch());
     }
 
     public function actionMyRole()

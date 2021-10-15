@@ -5,10 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\helpers\App;
 use app\models\File;
-use app\models\ModelFile;
 use app\models\form\UploadForm;
 use app\models\search\FileSearch;
-use app\widgets\ExportContent;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -231,47 +229,27 @@ class FileController extends Controller
 
     public function actionPrint()
     {
-        $this->layout = 'print';
-        return $this->render('_print', [
-            'content' => $this->getExportContent('pdf')
-        ]);
+        return $this->exportPrint(new FileSearch());
     }
 
     public function actionExportPdf()
     {
-        return App::export()->pdf(
-            $this->getExportContent('pdf')
-        );
+        return $this->exportPdf(new FileSearch());
     }
 
     public function actionExportCsv()
     {
-        return App::export()->csv(
-            $this->getExportContent()
-        );
+        return $this->exportCsv(new FileSearch());
     }
 
     public function actionExportXls()
     {
-        return App::export()->xls(
-            $this->getExportContent()
-        );
+        return $this->exportXls(new FileSearch());
     }
 
     public function actionExportXlsx()
     {
-        return App::export()->xlsx(
-            $this->getExportContent()
-        );
-    }
-
-    protected function getExportContent($file='excel')
-    {
-        return ExportContent::widget([
-            'params' => App::get(),
-            'file' => $file,
-            'searchModel' => new FileSearch(),
-        ]);
+        return $this->exportXlsx(new FileSearch());
     }
 
     public function actionUpload()
@@ -319,41 +297,7 @@ class FileController extends Controller
             return $this->redirect(App::referrer());
         }
     }
-
-    public function actionChangePhoto()
-    {
-        if (App::isAjax() && (($post = App::post()) != null)) {
-            $file = $this->findModel($post['file_id']);
-
-            if ($file) {
-                $modelFile = new ModelFile();
-                $modelFile->model_name = $post['modelName'];
-                $modelFile->model_id = $post['model_id'];
-                $modelFile->file_id = $file->id;
-                if ($modelFile->save()) {
-                    $result['status'] = 'success';
-                    $result['message'] = 'File added';
-                    $result['src'] = $file->display;
-                    $result['model_file_id'] = $modelFile->id;
-                }
-                else {
-                    $result['status'] = 'error';
-                    $result['message'] = json_encode($modelFile->errors);
-                }
-            }
-            else {
-                $result['status'] = 'error';
-                $result['message'] = 'No file selected';
-            }
-        }
-        else {
-            $result['status'] = 'error';
-            $result['message'] = 'Request value not found.';
-        }
-
-        return $this->asJson($result);
-    }
-
+ 
     public function actionInActiveData()
     {
         # dont delete; use in condition if user has access to in-active data

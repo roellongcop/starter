@@ -14,12 +14,9 @@ use app\models\form\setting\NotificationSettingForm;
 use app\models\form\setting\SystemSettingForm;
 use app\models\form\user\MySettingForm;
 use app\models\search\SettingSearch;
-use app\widgets\ExportContent;
-use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
 
 /**
  * SettingController implements the CRUD actions for Setting model.
@@ -186,47 +183,27 @@ class SettingController extends Controller
 
     public function actionPrint()
     {
-        $this->layout = 'print';
-        return $this->render('_print', [
-            'content' => $this->getExportContent('pdf')
-        ]);
+        return $this->exportPrint(new SettingSearch());
     }
 
     public function actionExportPdf()
     {
-        return App::export()->pdf(
-            $this->getExportContent('pdf')
-        );
+        return $this->exportPdf(new SettingSearch());
     }
 
     public function actionExportCsv()
     {
-        return App::export()->csv(
-            $this->getExportContent()
-        );
+        return $this->exportCsv(new SettingSearch());
     }
 
     public function actionExportXls()
     {
-        return App::export()->xls(
-            $this->getExportContent()
-        );
+        return $this->exportXls(new SettingSearch());
     }
 
     public function actionExportXlsx()
     {
-        return App::export()->xlsx(
-            $this->getExportContent()
-        );
-    }
-
-    protected function getExportContent($file='excel')
-    {
-        return ExportContent::widget([
-            'params' => App::get(),
-            'file' => $file,
-            'searchModel' => new SettingSearch(),
-        ]);
+        return $this->exportXlsx(new SettingSearch());
     }
 
     public function actionMySetting()

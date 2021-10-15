@@ -18,12 +18,12 @@ class ExportContent extends AppWidget
         // your logic here
         parent::init();
 
-        $params = $this->params;
+        $params = $this->params ?: App::queryParams();
         if (! is_array($params)) {
             $params = json_decode($params);
         }
 
-        $modelName = App::getModelName($this->searchModel);
+        $modelName = App::className($this->searchModel);
 
         $this->params[$modelName] = $params;
  

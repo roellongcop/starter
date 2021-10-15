@@ -30,7 +30,7 @@ echo "<?php\n";
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
 use Yii;
-use app\widgets\ExportContent;
+use app\helpers\App;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 <?php if (!empty($generator->searchModelClass)): ?>
 use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;
@@ -39,7 +39,6 @@ use yii\data\ActiveDataProvider;
 <?php endif; ?>
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use app\helpers\App;
 use yii\helpers\Inflector;
 
 /**
@@ -271,47 +270,27 @@ if (count($pks) === 1) {
 
     public function actionPrint()
     {
-        $this->layout = 'print';
-        return $this->render('_print', [
-            'content' => $this->getExportContent('pdf')
-        ]);
+        return $this->exportPrint(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
     }
 
     public function actionExportPdf()
     {
-        return App::export()->pdf(
-            $this->getExportContent('pdf')
-        );
+        return $this->exportPdf(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
     }
 
     public function actionExportCsv()
     {
-        return App::export()->csv(
-            $this->getExportContent()
-        );
+        return $this->exportCsv(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
     }
 
     public function actionExportXls()
     {
-        return App::export()->xls(
-            $this->getExportContent()
-        );
+        return $this->exportXls(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
     }
 
     public function actionExportXlsx()
     {
-        return App::export()->xlsx(
-            $this->getExportContent()
-        );
-    }
-
-    protected function getExportContent($file='excel')
-    {
-        return ExportContent::widget([
-            'params'      => App::get(),
-            'file'        => $file,
-            'searchModel' => new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>(),
-        ]);
+        return $this->exportXlsx(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
     }
 
     public function actionInActiveData()

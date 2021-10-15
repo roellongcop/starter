@@ -1,6 +1,8 @@
 <?php
-use \yii\grid\GridView;
+
 use app\helpers\App;
+use app\models\form\export\ExportForm;
+use yii\grid\GridView;
 ?>
 <div>
 	<?= $reportName ?> Report
@@ -12,7 +14,7 @@ use app\helpers\App;
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
-    'columns' => App::component('export')->getExportColumns($searchModel, 'pdf'),
+    'columns' => (new ExportForm())->getExportColumns($searchModel, 'pdf'),
     'layout' => "{items}",
     'formatter' => ['class' => '\app\components\FormatterComponent']
 ]); ?>
