@@ -7,22 +7,8 @@ use app\helpers\App;
 use app\models\File;
 use yii\helpers\Inflector;
 use yii\helpers\FileHelper;
-/**
- * This is the model class for table "{{%themes}}".
- *
- * @property int $id
- * @property string $name
- * @property string $folder
- * @property string|null $basePath
- * @property string|null $baseUrl
- * @property string|null $pathMap
- * @property string|null $bundles
- * @property int $record_status
- * @property int $created_by
- * @property int $updated_by
- * @property string $created_at
- * @property string $updated_at
- */
+
+
 class UploadForm extends \yii\base\Model
 {
     public $modelName;
