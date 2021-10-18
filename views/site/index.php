@@ -1,6 +1,6 @@
 <?php
 use app\helpers\App;
-use app\helpers\Html;
+use yii\helpers\Html;
 ?>
  <!--begin::Example-->
 <div class="example mb-10">

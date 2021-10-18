@@ -1,7 +1,7 @@
 <?php
 use app\helpers\App;
 use app\models\UserMeta;
-use app\helpers\Html;
+use yii\helpers\Html;
 use yii\helpers\Inflector;
 
 $model = new UserMeta();

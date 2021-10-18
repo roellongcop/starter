@@ -12,7 +12,7 @@ $modelClass = StringHelper::basename($generator->modelClass);
 
 echo "<?php\n";
 ?>
-use app\helpers\Html;
+use yii\helpers\Html;
 use app\widgets\BulkAction;
 use app\widgets\FilterColumn;
 use <?= $generator->indexWidgetType === 'grid' ? "app\\widgets\\Grid" : "yii\\widgets\\ListView" ?>;

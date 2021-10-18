@@ -1,5 +1,5 @@
 <?php
-use app\helpers\Html;
+use yii\helpers\Html;
 use app\widgets\BulkAction;
 use app\widgets\FilterColumn;
 use app\widgets\Grid;

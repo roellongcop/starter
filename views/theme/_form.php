@@ -10,7 +10,7 @@ use app\widgets\AppImages;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
 use app\widgets\RecordStatusInput;
-use app\helpers\Html;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */

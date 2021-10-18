@@ -1,7 +1,7 @@
 <?php
 use app\helpers\App;
 use app\widgets\Anchor;
-use app\helpers\Html;
+use yii\helpers\Html;
 use app\helpers\Url;
 use app\widgets\ActiveForm;
 ?>

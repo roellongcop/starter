@@ -1,6 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-use app\helpers\Html;
+use yii\helpers\Html;
 
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;

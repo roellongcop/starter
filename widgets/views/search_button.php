@@ -1,6 +1,6 @@
 <?php
 use app\widgets\Anchor;
-use app\helpers\Html;
+use yii\helpers\Html;
 ?>
 <div class="text-center">
     <div class="btn btn-group btn-block">

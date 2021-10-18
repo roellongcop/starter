@@ -1,5 +1,5 @@
 <?php
-use app\helpers\Html;
+use yii\helpers\Html;
 
 $registerJs = <<<SCRIPT
 	$('#{$imageID}').on('change', function() {

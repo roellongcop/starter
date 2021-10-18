@@ -4,10 +4,9 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
-use app\helpers\Html;
-use app\helpers\Url;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\Request;
-
 class Anchor extends AppWidget
 {
     public $title = 'title';

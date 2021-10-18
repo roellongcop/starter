@@ -1,10 +1,9 @@
 <?php
-
 use app\helpers\App;
 use app\widgets\AnchorBack;
 use app\widgets\Menu;
 use app\widgets\Search;
-use app\helpers\Html;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $searchModel = $this->params['searchModel'] ?? '';

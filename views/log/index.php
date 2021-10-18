@@ -2,7 +2,7 @@
 use app\widgets\BulkAction;
 use app\widgets\FilterColumn;
 use app\widgets\Grid;
-use app\helpers\Html;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\LogSearch */

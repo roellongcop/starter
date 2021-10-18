@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use Yii;
 use app\widgets\AnchorBack;
-use app\helpers\Html;
+use yii\helpers\Html;
  
 class AnchorForm extends AppWidget
 {
