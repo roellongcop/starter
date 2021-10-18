@@ -1,4 +1,5 @@
 <?php
+
 use app\helpers\App;
 use app\helpers\Url;
 use app\models\File;
@@ -10,7 +11,7 @@ use app\widgets\AppImages;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
 use app\widgets\RecordStatusInput;
-use yii\helpers\Html;
+use app\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */

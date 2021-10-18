@@ -2,8 +2,9 @@
 
 namespace app\commands\seeder;
 
+use app\commands\models\Role;
+use app\commands\models\User;
 use app\helpers\App;
-use app\models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -29,9 +30,16 @@ class UserSeeder extends Seeder
             'username' => $this->faker->firstName,
             'email' => $email,
             'password_hash' => App::hash($email),
-            'status' => $this->randomParamsID('user_status'),
-            'record_status' => $this->randomParamsID('record_status'),
-            'is_blocked' => $this->randomParamsID('is_blocked'),
+            'status' => $this->faker->randomElement([
+	            User::STATUS_DELETED,
+	            User::STATUS_INACTIVE,
+	            User::STATUS_ACTIVE,
+	        ]),
+            'record_status' => $this->recordStatus(),
+            'is_blocked' => $this->faker->randomElement([
+	            User::BLOCKED,
+	            User::UNBLOCKED,
+	        ]),
             'created_at' => $created_at,
             'updated_at' => $created_at,
 		];

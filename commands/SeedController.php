@@ -10,6 +10,7 @@ namespace app\commands;
 use Yii;
 use app\helpers\App;
 use yii\helpers\Console;
+use yii\helpers\Inflector;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -37,6 +38,7 @@ class SeedController extends Controller
 
     public function actionIndex($class, $rows=1)
     {
+        $class = Inflector::id2camel($class);
         $model = Yii::createObject([
             'class' => "\\app\\commands\\seeder\\{$class}Seeder",
             'rows' => $rows

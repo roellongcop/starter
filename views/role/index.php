@@ -1,8 +1,9 @@
 <?php
+
 use app\widgets\BulkAction;
 use app\widgets\FilterColumn;
 use app\widgets\Grid;
-use yii\helpers\Html;
+use app\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\RoleSearch */

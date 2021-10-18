@@ -3,6 +3,7 @@
 namespace app\commands\seeder;
 
 use app\helpers\App;
+
 class RoleSeeder extends Seeder
 {
 	public function __construct()

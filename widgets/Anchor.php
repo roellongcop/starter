@@ -7,6 +7,7 @@ use app\helpers\App;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Request;
+
 class Anchor extends AppWidget
 {
     public $title = 'title';

@@ -5,14 +5,15 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
+use app\helpers\Url;
 use app\models\Log;
+use app\models\form\export\ExportForm;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\RecordHtml;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
-use app\helpers\Url;
  
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
@@ -628,7 +629,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         $controller = $this->controllerID();
-        if (in_array(App::actionID(), App::export('export_actions'))) {
+        if (in_array(App::actionID(), ExportForm::EXPORT_ACTIONS)) {
             return $this->recordStatusLabel;
         }
 

@@ -514,14 +514,6 @@ class App {
 		return self::component('access');
 	}
 
-	public static function export($attr='')
-	{
-		if ($attr) {
-			return self::component('export')->{$attr};
-		}
-		return self::component('export');
-	}
-
 	public static function server($attr='')
 	{
 		if ($attr) {

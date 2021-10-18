@@ -2,8 +2,8 @@
 
 namespace app\commands\seeder;
 
-use Faker\Factory;
 use Yii;
+use Faker\Factory;
 use app\helpers\App;
 use app\models\ActiveRecord;
 use yii\console\ExitCode;
@@ -27,6 +27,7 @@ abstract class Seeder
     public $error_attributes = [];
     public $model_errors = [];
     public $faker;
+    public $validation = true;
 
     public $rows;
     public $modelClass;
@@ -54,16 +55,15 @@ abstract class Seeder
 
     public function recordStatus()
     {
-        return $this->randomParamsID('record_status');
+        return $this->faker->randomElement([
+            ActiveRecord::RECORD_ACTIVE,
+            ActiveRecord::RECORD_INACTIVE,
+        ]);
     }
+
     public function created_at()
     {
         return implode(' ', [$this->faker->date, $this->faker->time]);
-    }
-
-    public function randomParamsID($key='record_status')
-    {
-        return $this->faker->randomElement(array_keys(ActiveRecord::mapRecords()));
     }
 
     public function actionTruncate($tables=[])
@@ -86,7 +86,7 @@ abstract class Seeder
  
     public function save($model, $done=1)
     {
-        if ($model->save()) {
+        if ($model->save($this->validation)) {
             $this->success++;
 
             $this->success_attributes[$done] = $model->attributes;

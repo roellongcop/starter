@@ -13,7 +13,7 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\ViewContextInterface;
 use yii\grid\Column;
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\helpers\Json;
 
 /**

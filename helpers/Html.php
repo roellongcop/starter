@@ -60,4 +60,11 @@ class Html extends \yii\helpers\Html
             return false;
         }
     }
+
+    public static function content($content='', $condition = true)
+    {
+        if ($condition) {
+            return $content;
+        }
+    }
 }

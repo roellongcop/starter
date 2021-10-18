@@ -6,6 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
+use app\models\form\export\ExportForm;
 use app\models\form\user\MySettingForm;
 use app\models\form\user\ProfileForm;
 use app\widgets\Anchor;
@@ -351,7 +352,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getBlockedStatusHtml()
     {
-        if (in_array(App::actionID(), App::export('export_actions'))) {
+        if (in_array(App::actionID(), ExportForm::EXPORT_ACTIONS)) {
             return $this->blockedStatus['label'];
         } 
         
