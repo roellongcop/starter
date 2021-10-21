@@ -37,6 +37,9 @@ class <?= $className ?> extends \app\migrations\Migration
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')->append('ON UPDATE CURRENT_TIMESTAMP'),
         ];
+
+        // FOR SETTING utf
+        // ->append('CHARACTER SET utf8 COLLATE utf8_general_ci')
     }
 
     /**
