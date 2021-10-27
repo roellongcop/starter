@@ -38,9 +38,9 @@ abstract class Controller extends \yii\web\Controller
             'ThemeFilter' => [
                 'class' => 'app\filters\ThemeFilter'
             ],
-            'VisitorFilter' => [
-                'class' => 'app\filters\VisitorFilter'
-            ],
+            // 'VisitorFilter' => [
+            //     'class' => 'app\filters\VisitorFilter'
+            // ],
             'UserFilter' => [
                 'class' => 'app\filters\UserFilter'
             ],
