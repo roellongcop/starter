@@ -3,8 +3,6 @@
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\AnchorBack;
-use app\widgets\Search;
-use yii\widgets\ActiveForm;
 
 $searchModel = $this->params['searchModel'] ?? '';
 $searchAction = $searchModel->searchAction ?? ['index'];
@@ -30,11 +28,10 @@ $searchAction = $searchModel->searchAction ?? ['index'];
     </div>
     <!--begin::Toolbar-->
     <div style="position: absolute; width: 50%; left: 111px;">
-        <?php if ($searchModel): ?>
-            <?php $form = ActiveForm::begin(['action' => $searchAction, 'method' => 'get']); ?>
-                <?= Search::widget(['model' => $searchModel]) ?>
-            <?php ActiveForm::end(); ?>
-        <?php endif ?>
+        <?= Html::if($searchModel, $this->render('_header_mobile-content', [
+            'searchAction' => $searchAction,
+            'searchModel' => $searchModel,
+        ])) ?>
     </div>
     <div class="d-flex align-items-center">
         <!--begin::Header Menu Mobile Toggle-->

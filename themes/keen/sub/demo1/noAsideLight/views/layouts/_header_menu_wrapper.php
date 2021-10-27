@@ -26,14 +26,10 @@ $searchAction = $searchModel->searchAction ?? ['index'];
         <!--begin::Header Nav-->
         <?= Menu::widget() ?>
         <!--end::Header Nav-->
-        <?php if ($searchModel): ?>
-            <?php $form = ActiveForm::begin(['action' => $searchAction, 'method' => 'get']); ?>
-                <?= Search::widget([
-                    'model' => $searchModel,
-                    'style' => 'margin-top: 17px;width: 30vw;margin-left: 10px;'
-                ]) ?>
-            <?php ActiveForm::end(); ?>
-        <?php endif ?>
+        <?= Html::if($searchModel, $this->render('_header_menu_wrapper-content', [
+            'searchModel' => $searchModel,
+            'searchAction' => $searchAction,
+        ])) ?>
     </div>
     <!--end::Header Menu-->
 </div>

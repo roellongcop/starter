@@ -1,9 +1,14 @@
-<?php if ($menus): ?>
+<?php
+
+use app\helpers\Html;
+?>
+
+<?= Html::if($menus, '
     <ul class="menu-nav">
-        <?= $this->render('_link_creator', [
-        	'menus' => $menus,
-        	'withIcon' => false,
-        	'subMenuClass' => ''
-        ]) ?>
+        '. $this->render('_link_creator', [
+            'menus' => $menus,
+            'withIcon' => false,
+            'subMenuClass' => ''
+        ]) .'
     </ul>
-<?php endif ?>
+') ?>

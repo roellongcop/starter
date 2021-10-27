@@ -41,19 +41,15 @@ $createController = $this->params['createController'] ?? App::controllerID();
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
             <!--begin::Dropdown-->
-            <?php if ($this->params['showExportButton'] ?? ''): ?>
-                <?= ExportButton::widget() ?>
-            <?php endif ?>
+            <?= Html::if($this->params['showExportButton'] ?? '', ExportButton::widget()) ?>
             <!--end::Dropdown-->
-            <?php if ($this->params['showCreateButton'] ?? ''): ?>
-                <?= Html::a(
-                    $this->params['createLabel'] ?? 'Create', 
-                    ["{$createController}/create"],
-                    [
+            <?= Html::if($this->params['showCreateButton'] ?? '', 
+                Html::a($this->params['createLabel'] ?? 'Create', 
+                    ["{$createController}/create"], [
                         'class' => 'btn btn-success'
                     ]
-                ) ?>
-            <?php endif ?>
+                )
+            ) ?>
         </div>
         <!--end::Toolbar-->
     </div>

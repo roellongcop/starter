@@ -1,7 +1,10 @@
 <?php
+
+use app\helpers\Html;
 use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
+
 $createController = $this->params['createController'] ?? '';
 ?>
 <div class="subheader py-6 py-lg-8 subheader-transparent" id="kt_subheader">
@@ -37,16 +40,12 @@ $createController = $this->params['createController'] ?? '';
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
             <!--begin::Dropdown-->
-            <?php if ($this->params['showExportButton'] ?? ''): ?>
-                <?= ExportButton::widget() ?>
-            <?php endif ?>
+            <?= Html::if($this->params['showExportButton'] ?? '', ExportButton::widget()) ?>
             <!--end::Dropdown-->
-            <?php if ($this->params['showCreateButton'] ?? ''): ?>
-                <?= Anchors::widget([
-                    'names' => 'create',
-                    'controller' => $createController,
-                ]); ?>
-            <?php endif ?>
+            <?= Html::if($this->params['showCreateButton'] ?? '', Anchors::widget([
+                'names' => 'create',
+                'controller' => $createController,
+            ])) ?>
         </div>
         <!--end::Toolbar-->
     </div>

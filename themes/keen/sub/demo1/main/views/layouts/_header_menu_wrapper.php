@@ -1,7 +1,7 @@
 <?php
+
+use app\helpers\Html;
 use app\widgets\AnchorBack;
-use app\widgets\Search;
-use yii\widgets\ActiveForm;
 
 $searchModel = $this->params['searchModel'] ?? '';
 $searchAction = $searchModel->searchAction ?? ['index'];
@@ -21,18 +21,10 @@ $searchAction = $searchModel->searchAction ?? ['index'];
                 ]
             ]) ?>
         </div>
-        <?php if ($searchModel): ?>
-            <?php $form = ActiveForm::begin([
-                'id' => 'main-search-form',
-                'action' => $searchAction, 
-                'method' => 'get'
-            ]); ?>
-                <?= Search::widget([
-                    'model' => $searchModel,
-                    'style' => 'margin-top: 17px;width: 30vw;margin-left: 10px;'
-                ]) ?>
-            <?php ActiveForm::end(); ?>
-        <?php endif ?>
+        <?= Html::if($searchModel, $this->render('_header_menu_wrapper-content', [
+            'searchAction' => $searchAction,
+            'searchModel' => $searchModel,
+        ])) ?>
         <!--end::Header Nav-->
     </div>
     <!--end::Header Menu-->
