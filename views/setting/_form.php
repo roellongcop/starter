@@ -1,10 +1,8 @@
 <?php
 
-use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
-use app\widgets\ChooseFromGallery;
 use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */

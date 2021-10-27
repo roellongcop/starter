@@ -3,7 +3,6 @@
 use app\helpers\App;
 use app\models\ActiveRecord;
 use app\widgets\ActiveForm;
-use app\widgets\Checkbox;
 use app\widgets\DateRange;
 use app\widgets\Filter;
 use app\widgets\Pagination;

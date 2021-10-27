@@ -9,7 +9,6 @@ use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ChangePhoto;
 use app\widgets\ImageGallery;
-use app\widgets\ImagePreview;
 use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */

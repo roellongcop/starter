@@ -1,6 +1,5 @@
 <?php
 
-use app\helpers\App;
 use app\models\VisitLog;
 use app\models\search\UserSearch;
 use app\widgets\ActiveForm;

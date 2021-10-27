@@ -1,9 +1,9 @@
 <?php
+
 use app\helpers\App;
 use app\models\search\ThemeSearch;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
-use app\widgets\Checkbox;
 use app\widgets\ActiveForm;
 ?>
 <?php $form = ActiveForm::begin(['id' => 'setting-general-notification-form']); ?>

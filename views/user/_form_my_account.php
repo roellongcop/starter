@@ -8,7 +8,6 @@ use app\widgets\ActiveForm;
 use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ImageGallery;
-use app\widgets\ImagePreview;
 use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */

@@ -1,6 +1,5 @@
 <?php
 
-use app\helpers\App;
 use app\models\ActiveRecord;
 use app\models\search\SessionSearch;
 use app\widgets\ActiveForm;

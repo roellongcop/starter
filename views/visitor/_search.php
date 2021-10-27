@@ -4,7 +4,6 @@ use app\widgets\Pagination;
 use app\widgets\Search;
 use app\widgets\DateRange;
 use app\widgets\Filter;
-use app\helpers\App;
 use yii\widgets\ActiveForm;
 use app\widgets\SearchButton;
 use app\models\ActiveRecord;

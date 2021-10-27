@@ -2,7 +2,6 @@
 
 use app\helpers\Url;
 use app\models\search\FileSearch;
-use yii\widgets\ListView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */

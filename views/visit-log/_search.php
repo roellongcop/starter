@@ -1,6 +1,5 @@
 <?php
 
-use app\helpers\App;
 use app\models\ActiveRecord;
 use app\models\VisitLog;
 use app\widgets\ActiveForm;

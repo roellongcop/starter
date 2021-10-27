@@ -1,6 +1,5 @@
 <?php
 
-use app\helpers\App;
 use app\widgets\AnchorForm;
 use app\widgets\RecordStatusInput;
 use app\widgets\ActiveForm;
