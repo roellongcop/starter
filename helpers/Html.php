@@ -63,8 +63,31 @@ class Html extends \yii\helpers\Html
 
     public static function content($content='', $condition = true)
     {
+        return self::if($condition, $content);
+    }
+
+    public static function if($condition = true, $content='')
+    {
         if ($condition) {
             return $content;
         }
+    }
+
+    public static function ifELse($condition = true, $trueContent='', $falseContent='')
+    {
+        if ($condition) {
+            return $trueContent;
+        }
+        return $falseContent;
+    }
+
+    public static function foreach($array=[], $function)
+    {
+        $content = [];
+        foreach ($array as $key => $value) {
+            $content[] = call_user_func($function, $key, $value);
+        }
+
+        return implode(' ', $content);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\QueueSearch;
 
 /* @var $this yii\web\View */

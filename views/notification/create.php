@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\NotificationSearch;
 
 /* @var $this yii\web\View */

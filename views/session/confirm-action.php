@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\SessionSearch;
 use app\widgets\ConfirmCheckboxProcess;
 

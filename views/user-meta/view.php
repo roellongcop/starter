@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\UserMetaSearch;
 use app\widgets\Anchors;
 use app\widgets\Detail;

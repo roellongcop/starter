@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\FileSearch;
 use app\widgets\Anchor;
 use app\widgets\Anchors;
@@ -18,12 +19,8 @@ $this->params['showCreateButton'] = true;
     	'names' => ['update', 'duplicate', 'delete', 'log'], 
     	'model' => $model,
     ]) ?> 
-    <?= Anchor::widget([
-    	'title' => 'Download', 
-    	'link' => ['file/download', 'token' => $model->token],
-    	'options' => [
-    		'class' => 'btn btn-success'
-    	]
-    ]) ?> 
+    <?= Html::a('Download', ['file/download', 'token' => $model->token], [
+        'class' => 'btn btn-success'
+    ]) ?>
     <?= Detail::widget(['model' => $model]) ?>
 </div>

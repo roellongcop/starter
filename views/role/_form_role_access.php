@@ -1,4 +1,5 @@
 <?php
+
 use app\widgets\Checkbox;
 use app\models\search\RoleSearch;
 ?>

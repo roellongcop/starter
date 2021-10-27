@@ -1,4 +1,6 @@
 <?php
+
+use app\helpers\Html;
 use app\models\search\BackupSearch;
 use app\widgets\Anchor;
 use app\widgets\Anchors;
@@ -14,13 +16,13 @@ $this->params['searchModel'] = new BackupSearch();
 $this->params['showCreateButton'] = true; 
 ?>
 <div class="backup-view-page">
-	<?php if ($model->generated): ?>
-		<?= Anchor::widget([
+	<?= Html::content(implode(' ', [
+		Anchor::widget([
 			'title' => 'Download SQL',
 			'link' => ['download', 'slug' => $model->slug],
 			'options' => ['class' => 'btn btn-primary btn-download-sql']
-		]) ?>
-		<?= Anchor::widget([
+		]),
+		Anchor::widget([
 			'title' => 'Restore',
 			'link' =>  ['restore', 'slug' => $model->slug],
 			'options' => [
@@ -28,8 +30,8 @@ $this->params['showCreateButton'] = true;
 				'data-method' => 'post',
 	        	'data-confirm' => 'ARE YOU SURE?',
 			]
-		]) ?>
-	<?php endif ?>
+		])
+	]), $model->generated) ?>
 	<?= Anchors::widget([
 		'names' => ['duplicate', 'delete', 'log'],
 		'model' => $model,

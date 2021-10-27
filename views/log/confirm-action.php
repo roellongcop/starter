@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\LogSearch;
 use app\widgets\ConfirmCheckboxProcess;
 

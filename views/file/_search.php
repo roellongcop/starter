@@ -1,4 +1,5 @@
 <?php
+
 use app\helpers\App;
 use app\models\ActiveRecord;
 use app\models\search\FileSearch;

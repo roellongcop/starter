@@ -15,6 +15,7 @@ if (empty($safeAttributes)) {
 $ignore_attr = ['status', 'record_status', 'created_by', 'updated_by', 'created_at', 'updated_at'];
 echo "<?php\n";
 ?>
+
 use app\helpers\App;
 use app\widgets\RecordStatusInput;
 use app\widgets\AnchorForm;

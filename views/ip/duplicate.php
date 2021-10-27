@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\IpSearch;
 
 /* @var $this yii\web\View */

@@ -25,6 +25,7 @@ if ($generator->enableI18N) {
 $urlParams = $generator->generateUrlParams();
 echo "<?php\n";
 ?>
+
 use app\widgets\Anchors;
 use app\widgets\Detail;
 use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;

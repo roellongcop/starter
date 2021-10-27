@@ -37,17 +37,15 @@ $showExportButton = $this->params['showExportButton'] ?? '';
         <br> <br> <br> <br>
         <div class="row">
             <div class="col-md-6">
-                <?php if (($referrer = App::referrer()) != null): ?>
-                    <a href="<?= $referrer ?>" class="btn btn-secondary" title="Go Back">
+                <?= Html::if(App::referrer(), '
+                    <a href="'. App::referrer() .'" class="btn btn-secondary" title="Go Back">
                         <i class="fa fa-arrow-left"></i>
                         Back
                     </a>
-                <?php endif ?>
+                ') ?>
             </div>
             <div class="col-md-6 text-right">
-                <?php if ($showExportButton): ?>
-                    <?= ExportButton::widget() ?>
-                <?php endif ?>
+                <?= Html::if($showExportButton, ExportButton::widget()) ?>
             </div>
         </div>
         <?= $this->render('_search') ?>

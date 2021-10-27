@@ -1,4 +1,5 @@
 <?php
+
 use app\helpers\App;
 use app\models\Ip;
 use app\widgets\ActiveForm;

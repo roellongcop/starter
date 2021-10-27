@@ -11,6 +11,7 @@ $modelClass = StringHelper::basename($generator->modelClass);
  
 echo "<?php\n";
 ?>
+
 use app\widgets\Pagination;
 use app\widgets\Search;
 use app\widgets\DateRange;

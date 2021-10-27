@@ -1,4 +1,5 @@
 <?php
+
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
@@ -20,15 +21,9 @@ $params = [
     'data-can-delete' => $model->canDelete ? 'true': 'false',
     'data-download-url' => Url::to(['file/download', 'token' => $model->token], true),
 ];
-if ($model->isDocument) {
-    $params['style'] = "width:200px;height:auto";
-
-    echo Html::img($model->display, $params);
-}
-else {
-    echo Html::img(['file/display', 'token' => $model->token, 'w' => 150,], $params);
-}
 ?>
+
+<?= $model->show($params) ?>
 <p>
     <?= StringHelper::truncate($model->name, 15) ?>
 </p>

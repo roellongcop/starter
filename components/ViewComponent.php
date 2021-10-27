@@ -46,6 +46,6 @@ class ViewComponent extends \yii\web\View
             }
         }(); {$widgetFunction}.init();";
 
-        parent::registerjs($js, parent::POS_READY, $key);
+        parent::registerjs($js, $position, $key);
     }
 }

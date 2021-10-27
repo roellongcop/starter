@@ -8,7 +8,7 @@ if ($modelClass === $searchModelClass) {
     $searchModelAlias = $searchModelClass . 'Search';
 }
 ?>
-<?= '<?php' ?>
+<?= "<?php\n" ?>
 
 use app\widgets\ConfirmCheckboxProcess;
 use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;

@@ -1,4 +1,5 @@
 <?php
+
 use app\widgets\Anchors;
 use app\widgets\Detail;
 use app\models\search\QueueSearch;

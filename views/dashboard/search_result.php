@@ -1,4 +1,5 @@
 <?php
+
 use app\widgets\SearchResult;
 
 $this->title = 'Dashboard';

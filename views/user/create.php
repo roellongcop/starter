@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\UserSearch;
 
 /* @var $this yii\web\View */

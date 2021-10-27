@@ -140,6 +140,18 @@ class File extends ActiveRecord
         return $path;
     }
 
+    public function show($params=[], $w=150)
+    {
+        if ($this->isDocument) {
+            $params['style'] = "width:200px;height:auto";
+
+            return Html::img($this->display, $params);
+        }
+        else {
+            return Html::img(['file/display', 'token' => $this->token, 'w' => $w,], $params);
+        }
+    }
+
     public function getPreviewImage()
     {
         return Html::image($this->token, [

@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\SettingSearch;
 use app\widgets\Anchors;
 use app\widgets\Detail;

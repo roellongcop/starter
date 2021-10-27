@@ -24,6 +24,7 @@ if ($generator->enableI18N) {
 
 echo "<?php\n";
 ?>
+
 use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;
 
 /* @var $this yii\web\View */

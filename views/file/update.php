@@ -1,4 +1,5 @@
 <?php
+
 use app\models\search\FileSearch;
 
 /* @var $this yii\web\View */
