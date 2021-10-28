@@ -11,7 +11,7 @@ use app\helpers\Html;
 		        	value="'. $key .'" 
 		        	name="'. $name .'" 
 		        	class="'. $inputClass .'" 
-		        	'. ($checkedFunction)? call_user_func($checkedFunction, $key, $value): '' .'
+		        	'. (($checkedFunction)? call_user_func($checkedFunction, $key, $value): '') .'
 		        	type="checkbox">
 		        <span></span>
 		        '. $value .'

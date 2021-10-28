@@ -1,13 +1,14 @@
 <?php
 
 use app\helpers\App;
-use app\widgets\Detail;
 use app\helpers\Html;
+use app\widgets\AppIcon;
+use app\widgets\Detail;
 ?>
 <div class="card">
 	<div class="card-header" id="heading<?= $model->id ?>">
 		<div class="card-title collapsed" data-toggle="collapse" data-target="#collapse-action-<?= $model->id ?>">
-			<?= $this->render('icon/double_angle_left') ?>
+			<?= AppIcon::widget(['icon' => 'double_angle_left']) ?>
 			<?= number_format(($key + 1)) ?>. 
 			<div class="card-label pl-4">
 				<?= $model->mainAttribute ?>

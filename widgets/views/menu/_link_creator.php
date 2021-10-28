@@ -25,7 +25,7 @@ $controller = $this->params['controller'] ?? App::controllerID();
                     </ul>
                 </div>
             </li>',
-            '<li class="menu-item '. (Html::navController($menu['link']) == $controller) ? 'menu-item-active': '' .'" aria-haspopup="true">
+            '<li class="menu-item '. ((Html::navController($menu['link']) == $controller) ? 'menu-item-active': '') .'" aria-haspopup="true">
                 '. $this->render('_a_child', ['menu' => $menu]) .'
             </li>'
         )

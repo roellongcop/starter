@@ -1,13 +1,14 @@
 <?php
 
 use app\helpers\Html;
+use app\widgets\AppIcon;
 ?>
 <li class="navi-item">
     <a href="#" class="navi-link bulk-action" data-process="<?= $bulkAction['process'] ?>">
         <?= Html::ifElse(
             Html::isHtml($bulkAction['icon']),
             $bulkAction['icon'],
-            $this->render('icon/'. $bulkAction['icon'])
+            AppIcon::widget(['icon' => $bulkAction['icon']])
         ) ?>
         &nbsp;
         <span class="navi-text">

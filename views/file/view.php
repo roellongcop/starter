@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\Html;
 use app\models\search\FileSearch;
 use app\widgets\Anchors;
 use app\widgets\Detail;

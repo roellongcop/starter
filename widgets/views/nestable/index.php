@@ -1,5 +1,8 @@
 <?php
+
+use app\helpers\Html;
 use app\helpers\Url;
+
 $registerJs = <<< JS
     let index = 0;
     $('#add-main-navigation-{$id}').on('click', function() {

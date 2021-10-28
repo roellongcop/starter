@@ -1,10 +1,11 @@
 <?php
 
 use app\helpers\Html;
-use app\widgets\ChooseFromGallery;
+use app\widgets\ImageGallery;
 ?>
-<?= ChooseFromGallery::widget([
+<?= ImageGallery::widget([
     'model' => $model,
+    'attribute' => 'value',
     'ajaxSuccess' => "
         if(s.status == 'success') {
             KTApp.block('#sipc', {
@@ -19,18 +20,6 @@ use app\widgets\ChooseFromGallery;
             $('#sipc img').attr('src', s.src + '&w=200')
         }
     ",
-    'dropzoneSuccess' => "
-        KTApp.block('#sipc', {
-            overlayColor: '#000000',
-            state: 'primary',
-            message: 'Processing...'
-        });
-
-        setTimeout(function() {
-            KTApp.unblock('#sipc');
-        }, 1000);
-        $('#sipc img').attr('src', file.dataURL)
-    "
 ]) ?> 
 <br>
 <div id="sipc" style="max-width: 200px">
