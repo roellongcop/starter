@@ -68,16 +68,20 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 					<!--end::Header-->
 					<!--begin::Nav-->
 					<div class="navi navi-spacer-x-0 pt-5">
-						<?= Html::a('<div class="navi-link">
-							<div class="navi-icon mr-2">
-								<i class="flaticon2-calendar-3 text-success"></i>
-							</div>
-							<div class="navi-text">
-								<div class="font-weight-bold">My Profile</div>
-								<div class="text-muted">Account settings and more
-								<span class="label label-light-danger label-inline font-weight-bold">update</span></div>
-							</div>
-						</div>', ['user/my-account'], ['class' => 'navi-item px-8']) ?>
+						<?= Html::a(
+							'<div class="navi-link">
+								<div class="navi-icon mr-2">
+									<i class="flaticon2-calendar-3 text-success"></i>
+								</div>
+								<div class="navi-text">
+									<div class="font-weight-bold">My Profile</div>
+									<div class="text-muted">Account settings and more
+									<span class="label label-light-danger label-inline font-weight-bold">update</span></div>
+								</div>
+							</div>', 
+							['user/my-account'], 
+							['class' => 'navi-item px-8']
+						) ?>
 
 						<?= Html::a('<div class="navi-link">
 							<div class="navi-icon mr-2">
@@ -87,7 +91,7 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 								<div class="font-weight-bold">My Password</div>
 								<div class="text-muted">Change Password</div>
 							</div>
-						</div>', ['user/change-password', 'token' => $identity->password_reset_token], ['class' => 'navi-item px-8']) ?>
+						</div>', ['user/my-password'], ['class' => 'navi-item px-8']) ?>
 
 						<?= Html::a('<div class="navi-link">
 							<div class="navi-icon mr-2">
