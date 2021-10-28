@@ -64,7 +64,7 @@ abstract class Controller extends \yii\web\Controller
 
     public function exportPrint($searchModel)
     {
-        return $this->render('_print', [
+        return $this->render('/layouts/_print', [
             'content' => ExportContent::widget([
                 'file' => 'pdf',
                 'searchModel' => $searchModel,

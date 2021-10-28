@@ -3,7 +3,7 @@
 use app\helpers\Html;
 ?>
 <input type="hidden" name="process-selected">
-<div class="dropdown mb-5">
+<div class="dropdown mb-5" style="width: fit-content;">
     <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
         <?= $title ?>
         <span class="caret"></span>
