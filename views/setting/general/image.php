@@ -46,7 +46,6 @@ use app\widgets\ImageGallery;
                 'class' => 'img-thumbnail favicon',
                 'loading' => 'lazy',
             ]) ?>
-			<?= $form->field($model, 'favicon')->hiddenInput()->label(false) ?>
             <?= ImageGallery::widget([
                 'model' => $model,
                 'attribute' => 'favicon',
@@ -65,7 +64,6 @@ use app\widgets\ImageGallery;
                 'class' => 'img-thumbnail image_holder',
                 'loading' => 'lazy',
             ]) ?>
-			<?= $form->field($model, 'image_holder')->hiddenInput()->label(false) ?>
             <?= ImageGallery::widget([
                 'model' => $model,
                 'attribute' => 'image_holder',
