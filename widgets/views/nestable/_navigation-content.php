@@ -57,7 +57,7 @@ use app\helpers\Html;
                 </div>
             </div>
             <span  style="position: absolute; right: 5px;">
-                <a href="#!" class="btn btn-danger btn-sm btn-icon mr-2" onclick="removeMainNavigation(this)">
+                <a href="#!" class="btn btn-danger btn-sm btn-icon mr-2 btn-remove-menu">
                     <i class="fa fa-trash"></i>
                 </a>
             </span>

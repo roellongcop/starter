@@ -22,7 +22,7 @@ $('.check-all-filter').on('change', function() {
 JS;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
-<div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline _div_filter_columns" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;z-index: 1"> 
+<div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline _div_filter_columns" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;"> 
     <a href="#!" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm  mr-3 btn-sm _filter_columns"  aria-haspopup="true" aria-expanded="false" style="border: 1px solid #ccc;">
         <span class="svg-icon svg-icon-md">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

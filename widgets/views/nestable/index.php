@@ -5,6 +5,13 @@ use app\helpers\Url;
 
 $registerJs = <<< JS
     let index = 0;
+    $(document).on('click', '.btn-remove-menu', function() {
+        var confirm_dialog = confirm('Are you sure?');
+        if (confirm_dialog) {
+            $(this).closest('li').remove();
+        }
+    })
+
     $('#add-main-navigation-{$id}').on('click', function() {
         index++;
         var html = '';
@@ -34,7 +41,7 @@ $registerJs = <<< JS
                         html += '</div>';
                     html += '</div>';
                     html += '<span  style="position: absolute; right: 5px;">';
-                        html += '<a onclick="removeMainNavigation(this)" href="#!" class="btn btn-danger btn-sm btn-icon mr-2">';
+                        html += '<a href="#!" class="btn btn-danger btn-sm btn-icon mr-2 btn-remove-menu">';
                             html += '<i class="fa fa-trash"></i>';
                         html += '</a>';
                     html += '</span>';
@@ -45,12 +52,7 @@ $registerJs = <<< JS
         $('#dd-{$id}').trigger('change');
         // initNestable();
     })
-    var removeMainNavigation = function(self) {
-        var confirm_dialog = confirm('Are you sure?');
-        if (confirm_dialog) {
-            $(self).closest('li').remove();
-        }
-    }
+
     var collapseNavigation = function(self) {
         var action = $(self).data('action');
         if (action == 'collapse-all') {
