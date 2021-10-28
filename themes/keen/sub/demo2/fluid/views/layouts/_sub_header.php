@@ -3,7 +3,6 @@
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\AnchorBack;
-use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
 

@@ -1,4 +1,5 @@
 <?php
+
 use app\helpers\App;
 ?>
 <div class="footer py-2 py-lg-0 my-5 my-lg-0 d-flex flex-lg-column" id="kt_footer">

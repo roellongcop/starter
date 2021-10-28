@@ -2,8 +2,6 @@
 
 use app\helpers\App;
 use app\helpers\Html;
-use app\helpers\Url;
-use app\widgets\Anchor;
 
 $identity = App::identity();
 $access = App::component('access');
