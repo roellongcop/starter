@@ -84,12 +84,11 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
 <div class="row">
     <div class="col-md-12">
         <datalist id="link-list-<?= $id ?>">
-            <?php foreach ($controller_actions as $controller => $actions) : ?>
-                <?php foreach ($actions as $action) : ?>
-                    <option value="<?= Url::to(["{$controller}/{$action}"]) ?>">
-                    </option>
-                <?php endforeach; ?>
-            <?php endforeach; ?>
+            <?= Html::foreach($controller_actions, function($controller, $actions) {
+                return Html::foreach($actions, function($key, $action) use ($controller) {
+                    return '<option value="'. Url::to(["{$controller}/{$action}"]) .'"> </option>';
+                });
+            }) ?>
         </datalist>
         <a href="#!" class="btn btn-secondary" id="add-main-navigation-<?= $id ?>">
             Add Menu

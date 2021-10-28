@@ -1,3 +1,7 @@
+<?php
+
+use app\helpers\Html;
+?>
 <div class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="left">
     <a href="#" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm  mr-3 btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: 1px solid #ccc;">
     <span class="svg-icon svg-icon-md">
@@ -13,13 +17,9 @@
     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0">
         <!--begin::Navigation-->
         <ul class="navi navi-hover">
-            <?php foreach ($template as $t): ?>
-				<?php if ($t): ?>
-		            <li class="navi-item"> 
-		            	<?= $t ?>
-	            	</li>
-				<?php endif ?>
-			<?php endforeach ?>
+            <?= Html::foreach($template, function($key, $t) {
+                return Html::if($t, '<li class="navi-item">'. $t .'</li>');
+            }) ?>
         </ul>
         <!--end::Navigation-->
     </div>

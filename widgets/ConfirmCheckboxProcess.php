@@ -25,7 +25,7 @@ class ConfirmCheckboxProcess extends AppWidget
      */
     public function run()
     {
-        return $this->render('confirm_checkbox_process', [
+        return $this->render('confirm-checkbox-process/index', [
             'models' => $this->models,
             'process' => $this->process,
             'post' => $this->post,

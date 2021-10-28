@@ -1,8 +1,8 @@
 <?php
 
 use app\helpers\Html;
+
 $registerJs = <<< JS
-console.log('{$extensions}')
     $('#dropzone-{$id}').dropzone({
         url: "{$url}", // Set the url for your upload script location
         paramName: "{$paramName}", // The name that will be used to transfer the file
@@ -60,7 +60,7 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
         	<?= $description ?>
         </span>
     </div>
-    <?php foreach ($files as $key => $file): ?>
-        <?= Html::input('hidden', $inputName, $file['token'], ['data-uuid' => $file['token']]) ?>
-    <?php endforeach ?>
+    <?= Html::foreach($files, function($key, $file) use ($inputName) {
+        return Html::input('hidden', $inputName, $file['token'], ['data-uuid' => $file['token']]);
+    }) ?>
 </div>

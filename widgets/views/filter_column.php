@@ -55,17 +55,17 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
                 </li>
                 <li class="navi-item">
                     <div class="checkbox-list">
-                        <?php foreach ($searchModel->tableColumns as $key => $value): ?>
-                            <label class="checkbox ">
-                                <?= Html::activeInput('checkbox', $model, 'columns[]', [
+                        <?= Html::foreach($searchModel->tableColumns, function($key, $value) use ($model, $filterColumns) {
+                            return '<label class="checkbox ">
+                                '. Html::activeInput('checkbox', $model, 'columns[]', [
                                     'value' => $key,
                                     'class' => '_filter_column_checkbox',
                                     'checked' => in_array($key,  $filterColumns)
-                                ]) ?>
+                                ]) .'
                                 <span></span>
-                                <?= Inflector::humanize(strtoupper($key)) ?>
-                            </label>
-                        <?php endforeach ?>
+                                '. Inflector::humanize(strtoupper($key)) .'
+                            </label>';
+                        }) ?>
                     </div>
                 </li>
                 <li class="navi-item"> <hr>

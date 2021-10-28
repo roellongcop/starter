@@ -1,4 +1,7 @@
 <?php
+
+use app\helpers\Html;
+
 $registerJs = <<< JS
     let popupCenter = (url, title='Print Report', w=1000, h=700) => {
         // Fixes dual-screen position                             Most browsers      Firefox
@@ -44,11 +47,9 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
                     Choose
                 </span>
             </li>
-            <?php foreach ($exports as $anchor): ?>
-                <li class="navi-item">
-                   <?= $anchor ?>
-                </li>
-            <?php endforeach ?>
+            <?= Html::foreach($exports, function($key, $anchor) {
+                return '<li class="navi-item">' . $anchor . '</li>';
+            }) ?>
         </ul>
         <!--end::Navigation-->
     </div>

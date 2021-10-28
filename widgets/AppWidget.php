@@ -14,11 +14,15 @@ class AppWidget extends \yii\base\Widget
     {
         // your logic here
         parent::init();
-        $this->widgetFunction = Inflector::id2camel($this->getId());
+        $this->widgetFunction = $this->getWidgetFunction();
     }
 
     public function getWidgetFunction()
     {
+        if ($this->widgetFunction == NULL) {
+            $this->widgetFunction = Inflector::id2camel($this->getId());
+        }
+        
         return $this->widgetFunction;
     }
 
