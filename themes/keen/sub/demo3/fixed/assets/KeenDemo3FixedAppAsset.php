@@ -18,6 +18,7 @@ class KeenDemo3FixedAppAsset extends AssetBundle
     public $sourcePath = '@app/themes/keen/sub/demo3/fixed/assets/assets';
     public $css = [
         'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700',
+        'plugins/custom/cropper/cropper.bundle.css',
         'plugins/custom/prismjs/prismjs.bundle.css',
         'css/style.bundle.css',
         'css/demo3.css',
@@ -25,6 +26,7 @@ class KeenDemo3FixedAppAsset extends AssetBundle
     public $js = [
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
+        'plugins/custom/cropper/cropper.bundle.js',
         'js/demo3.js',
     ];
     public $depends = [
