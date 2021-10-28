@@ -55,13 +55,12 @@ AppAsset::register($this);
 							<!--begin::Dashboard-->
 							<!--begin::Table Widget 6-->
 							<?= Alert::widget() ?>
-		                    <?php if ($this->params['wrapCard'] ?? true): ?>
-			                    <?php $this->beginContent('@app/views/layouts/_card_wrapper.php'); ?>
-									<?= $content ?>
-								<?php $this->endContent(); ?>
-							<?php else: ?>
-								<?= $content ?>
-		                    <?php endif ?>
+		                    <?= Html::ifElse($this->params['wrapCard'] ?? true, 
+								$this->render('_card_wrapper-content', [
+									'content' => $content
+								]),
+								$content
+							) ?>
 							<!--end::Table Widget 6-->
 							<!--end::Dashboard-->
 						</div>

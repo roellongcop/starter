@@ -1,7 +1,6 @@
 <?php
 
 use app\helpers\Html;
-
 ?>
 <div id="kt_quick_panel" class="offcanvas offcanvas-right pt-5 pb-10">
     <!--begin::Content-->

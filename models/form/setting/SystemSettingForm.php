@@ -8,11 +8,15 @@ class SystemSettingForm extends SettingForm
 {
     const NAME = 'system-settings';
 
+    const OFF = 0;
+    const ON = 1;
+
     public $timezone;
     public $pagination;
     public $auto_logout_timer;
     public $theme;
     public $whitelist_ip_only;
+    public $enable_visitor;
 
     /**
      * @return array the validation rules.
@@ -22,8 +26,8 @@ class SystemSettingForm extends SettingForm
         return [
             [['timezone', 'pagination', 'theme', 'auto_logout_timer',], 'required'],
 	        [['timezone',], 'string'],
-	        [['whitelist_ip_only',], 'safe'],
-	        [['pagination', 'auto_logout_timer', 'theme', 'whitelist_ip_only'], 'integer'],
+	        [['whitelist_ip_only', 'enable_visitor'], 'safe'],
+	        [['pagination', 'auto_logout_timer', 'theme', 'whitelist_ip_only', 'enable_visitor'], 'integer'],
         ];
     }
 
@@ -48,7 +52,11 @@ class SystemSettingForm extends SettingForm
             ],
             'whitelist_ip_only' => [
                 'name' => 'whitelist_ip_only',
-                'default' => 0,
+                'default' => self::OFF,
+            ],
+            'enable_visitor' => [
+                'name' => 'enable_visitor',
+                'default' => self::OFF,
             ],
         ];
     }

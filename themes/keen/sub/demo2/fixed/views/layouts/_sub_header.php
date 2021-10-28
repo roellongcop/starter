@@ -74,21 +74,16 @@ $createController = $this->params['createController'] ?? App::controllerID();
 		<!--begin::Toolbar-->
 		<div class="d-flex align-items-center flex-wrap py-2">
 			<!--begin::Dropdown-->
-            <?php if ($this->params['showExportButton'] ?? ''): ?>
-                <?= ExportButton::widget() ?>
-            <?php endif ?>
+            <?= Html::if($this->params['showExportButton'] ?? '', ExportButton::widget()) ?>
             <!--end::Dropdown-->
 
-
-            <?php if ($this->params['showCreateButton'] ?? ''): ?>
-            	<?= Html::a(
-                    $this->params['createLabel'] ?? 'Create', 
-                    ["{$createController}/create"],
-                    [
-                        'class' => 'btn btn-success'
-                    ]
-                ) ?>
-            <?php endif ?>
+            <?= Html::if($this->params['showCreateButton'] ?? '', Html::a(
+                $this->params['createLabel'] ?? 'Create', 
+                ["{$createController}/create"],
+                [
+                    'class' => 'btn btn-success'
+                ]
+            )) ?>
 		</div>
 		<!--end::Toolbar-->
 	</div>

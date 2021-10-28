@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\helpers\App;
 use app\models\form\export\ExportCsvForm;
 use app\models\form\export\ExportExcelForm;
 use app\models\form\export\ExportPdfForm;
@@ -34,13 +35,10 @@ abstract class Controller extends \yii\web\Controller
 
     public function behaviors()
     {
-        return [
+        $behaviors = [
             'ThemeFilter' => [
                 'class' => 'app\filters\ThemeFilter'
             ],
-            // 'VisitorFilter' => [
-            //     'class' => 'app\filters\VisitorFilter'
-            // ],
             'UserFilter' => [
                 'class' => 'app\filters\UserFilter'
             ],
@@ -54,6 +52,14 @@ abstract class Controller extends \yii\web\Controller
                 'class' => 'app\filters\VerbFilter'
             ],
         ];
+
+        if (App::setting('system')->enable_visitor) {
+            $behaviors['VisitorFilter'] = [
+                'class' => 'app\filters\VisitorFilter'
+            ];
+        }
+
+        return $behaviors;
     }
 
     public function exportPrint($searchModel)

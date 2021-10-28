@@ -70,62 +70,47 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 					<!--end::Header-->
 					<!--begin::Nav-->
 					<div class="navi navi-spacer-x-0 pt-5">
-						<?php if ($access->userCan('my-account', 'user')): ?>
-							<a href="<?= Url::to(['user/my-account']) ?>" class="navi-item px-8">
-								<div class="navi-link">
-									<div class="navi-icon mr-2">
-										<i class="flaticon2-calendar-3 text-success"></i>
-									</div>
-									<div class="navi-text">
-										<div class="font-weight-bold">My Profile</div>
-										<div class="text-muted">Account settings and more
-										<span class="label label-light-danger label-inline font-weight-bold">update</span></div>
-									</div>
-								</div>
-							</a>
-						<?php endif ?>
+						<?= Html::a('<div class="navi-link">
+							<div class="navi-icon mr-2">
+								<i class="flaticon2-calendar-3 text-success"></i>
+							</div>
+							<div class="navi-text">
+								<div class="font-weight-bold">My Profile</div>
+								<div class="text-muted">Account settings and more
+								<span class="label label-light-danger label-inline font-weight-bold">update</span></div>
+							</div>
+						</div>', ['user/my-account'], ['class' => 'navi-item px-8']) ?>
 
-						<?php if ($access->userCan('change-password', 'user')): ?>
-							<a href="<?= Url::to(['user/change-password', 'token' => $identity->password_reset_token]) ?>" class="navi-item px-8">
-								<div class="navi-link">
-									<div class="navi-icon mr-2">
-										<i class="flaticon2-mail text-warning"></i>
-									</div>
-									<div class="navi-text">
-										<div class="font-weight-bold">My Password</div>
-										<div class="text-muted">Change Password</div>
-									</div>
-								</div>
-							</a>
-						<?php endif ?>
-            			<?php if ($access->userCan('my-setting', 'setting')): ?>
-							<a href="<?= Url::to(['setting/my-setting']) ?>" class="navi-item px-8">
-								<div class="navi-link">
-									<div class="navi-icon mr-2">
-										<i class="flaticon2-rocket-1 text-danger"></i>
-									</div>
-									<div class="navi-text">
-										<div class="font-weight-bold">My Settings</div>
-                            			<div class="text-muted">General & Themes</div>
-									</div>
-								</div>
-							</a>
-						<?php endif ?>
-						<!--begin::Item-->
-            			<?php if ($access->userCan('my-role', 'role')): ?>
-							<a href="<?= Url::to(['role/my-role']) ?>" class="navi-item px-8">
-								<div class="navi-link">
-									<div class="navi-icon mr-2">
-										<i class="flaticon2-hourglass text-primary"></i>
-									</div>
-									<div class="navi-text">
-                            			<div class="font-weight-bold">My Role</div>
-                            			<div class="text-muted">Access and Navigations</div>
-									</div>
-								</div>
-							</a>
-						<?php endif ?>
-						<!--end::Item-->
+						<?= Html::a('<div class="navi-link">
+							<div class="navi-icon mr-2">
+								<i class="flaticon2-mail text-warning"></i>
+							</div>
+							<div class="navi-text">
+								<div class="font-weight-bold">My Password</div>
+								<div class="text-muted">Change Password</div>
+							</div>
+						</div>', ['user/change-password', 'token' => $identity->password_reset_token], ['class' => 'navi-item px-8']) ?>
+
+						<?= Html::a('<div class="navi-link">
+							<div class="navi-icon mr-2">
+								<i class="flaticon2-rocket-1 text-danger"></i>
+							</div>
+							<div class="navi-text">
+								<div class="font-weight-bold">My Settings</div>
+                    			<div class="text-muted">General & Themes</div>
+							</div>
+						</div>', ['setting/my-setting'], ['class' => 'navi-item px-8']) ?>
+
+						<?= Html::a('<div class="navi-link">
+							<div class="navi-icon mr-2">
+								<i class="flaticon2-hourglass text-primary"></i>
+							</div>
+							<div class="navi-text">
+                    			<div class="font-weight-bold">My Role</div>
+                    			<div class="text-muted">Access and Navigations</div>
+							</div>
+						</div>', ['role/my-role'], ['class' => 'navi-item px-8']) ?>
+ 
 						<!--begin::Footer-->
 						<div class="navi-separator mt-3"></div>
 						<div class="navi-footer px-8 py-5">
@@ -155,11 +140,9 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 	        <div class="mb-15" style="width: 100%">
 	            <h5 class="font-weight-bold mb-5">Advanced Filter</h5>
 	            <!--begin::Timeline-->
-	            <?php if ($searchModel): ?>
-	                <?= $this->render("/{$searchTemplate}", [
-	                    'model' => $searchModel
-	                ]) ?>
-	            <?php endif ?>
+	            <?= Html::if($searchModel, $this->render("/{$searchTemplate}", [
+                    'model' => $searchModel
+                ])) ?>
 	            <!--end::Timeline-->
 	        </div>
 	        

@@ -54,6 +54,19 @@ use app\widgets\ActiveForm;
 			    ]
 	        ]) ?>
 		</div>
+		<div class="col-md-4">
+            <?= BootstrapSelect::widget([
+	            'attribute' => 'enable_visitor',
+	            'model' => $model,
+	            'form' => $form,
+	            'label' => 'Enable Visitor',
+	            'data' => ['Disable', 'Enable (require internet connection)'],
+	            'searchable' => false,
+	            'options' => [
+			        'class' => 'kt-selectpicker form-control',
+			    ]
+	        ]) ?>
+		</div>
 	</div>
 	<div class="form-group"> <br>
 		<?= AnchorForm::widget() ?>

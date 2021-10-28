@@ -1,6 +1,4 @@
-<?php
-use app\helpers\App;
-?>
+
 <div class="topbar">
     <!--begin::Search-->
     <?php # $this->render('_search_layout') ?>

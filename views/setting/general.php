@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\Html;
 use app\models\Setting;
 use app\models\search\DashboardSearch;
 use app\widgets\Anchor;
@@ -33,7 +34,7 @@ $this->params['searchModel'] = new DashboardSearch();
 						'tab' => $tab,
 						'keyTab' => $keyTab,
 						'menu' => $menu,
-					])
+					]);
 				}) ?>
 			</ul>
 		</div>
