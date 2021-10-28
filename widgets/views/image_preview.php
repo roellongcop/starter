@@ -2,7 +2,7 @@
 
 use app\helpers\Html;
 
-$registerJs = <<<SCRIPT
+$registerJs = <<< JS
 	$('#{$imageID}').on('change', function() {
 		let input = this;
 		if (input.files && input.files[0]) {
@@ -16,7 +16,7 @@ $registerJs = <<<SCRIPT
 	        reader.readAsDataURL(input.files[0]); 
 	    }
 	})
-SCRIPT;
+JS;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <?= Html::img($src, $options) ?>

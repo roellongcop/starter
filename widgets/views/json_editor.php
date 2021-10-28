@@ -1,5 +1,5 @@
 <?php
-$registerJs = <<< SCRIPT
+$registerJs = <<< JS
     let container = document.getElementById('{$id}')
 
     if (container) {
@@ -9,7 +9,7 @@ $registerJs = <<< SCRIPT
         let editor = new JSONEditor(container, options, {$data})
         editors['{$id}'] = editor;
     }
-SCRIPT;
+JS;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div id="<?= $id ?>"> </div>

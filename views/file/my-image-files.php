@@ -14,7 +14,7 @@ $this->params['showCreateButton'] = true;
 
 $myImageFilesUrl = Url::to(['file/my-image-files']);
 $deleteFileUrl = Url::to(['file/delete']);
-$registerJs = <<< SCRIPT
+$registerJs = <<< JS
     let selectedFile = 0;
     let selectedToken = 0;
 
@@ -141,9 +141,9 @@ $registerJs = <<< SCRIPT
     $('#my-image-files input.search-photo').on('keydown', function() {
         searchMyImage($(this));
     });
-SCRIPT;
+JS;
 $this->registerJs($registerJs);
-$registerCss = <<<CSS
+$registerCss = <<< CSS
     #my-image-files table tbody tr td {
         overflow-wrap: anywhere;
     }

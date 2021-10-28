@@ -26,10 +26,12 @@ use app\widgets\RecordStatusInput;
             ]) ?>
             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-            <?php if ($model->isNewRecord): ?>
-                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true]) ?>
-            <?php endif ?>
+            
+            <?= Html::if($model->isNewRecord, implode(' ', [
+                $form->field($model, 'password')->passwordInput(['maxlength' => true]),
+                $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true])
+            ])) ?>
+
             <?= BootstrapSelect::widget([
                 'attribute' => 'status',
                 'searchable' => false,

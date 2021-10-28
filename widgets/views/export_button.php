@@ -1,5 +1,5 @@
 <?php
-$registerJs = <<<SCRIPT
+$registerJs = <<< JS
     let popupCenter = (url, title='Print Report', w=1000, h=700) => {
         // Fixes dual-screen position                             Most browsers      Firefox
         const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
@@ -20,7 +20,7 @@ $registerJs = <<<SCRIPT
         )
         if (window.focus) newWindow.print();
     }
-SCRIPT;
+JS;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="top">

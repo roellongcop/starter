@@ -11,18 +11,18 @@ use app\widgets\ActiveForm;
 /* @var $form app\widgets\ActiveForm */
 
 $tables = App::component('general')->getAllTables();
-$registerJs = <<< SCRIPT
-$('.all-table-checkbox').on('click', function() {
-    let is_checked = $(this).is(':checked');
+$registerJs = <<< JS
+    $('.all-table-checkbox').on('click', function() {
+        let is_checked = $(this).is(':checked');
 
-    if(is_checked) {
-        $('input[name="Backup[tables][]"]').prop('checked', true);
-    }
-    else {
-        $('input[name="Backup[tables][]"]').prop('checked', false);
-    } 
-})
-SCRIPT;
+        if(is_checked) {
+            $('input[name="Backup[tables][]"]').prop('checked', true);
+        }
+        else {
+            $('input[name="Backup[tables][]"]').prop('checked', false);
+        } 
+    });
+JS;
 $this->registerJs($registerJs);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'backup-form']); ?>

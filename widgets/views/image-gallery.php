@@ -5,7 +5,7 @@ use app\helpers\Html;
 use app\helpers\Url;
 use yii\widgets\Pjax;
 
-$js = <<< SCRIPT
+$js = <<< JS
     var selectedImage = {
             id: 0,
             path: '',
@@ -291,11 +291,11 @@ $js = <<< SCRIPT
             });
         });
     });
-SCRIPT;
+JS;
 
 $this->registerWidgetJs($widgetFunction, $js);
 
-$css = <<<CSS
+$css = <<< CSS
     #image-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
         padding: 5px;

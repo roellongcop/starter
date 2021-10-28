@@ -14,7 +14,7 @@ $this->params['showCreateButton'] = true;
 
 $myFilesUrl = Url::to(['file/my-files']);
 $deleteFileUrl = Url::to(['file/delete']);
-$registerJs = <<< SCRIPT
+$registerJs = <<< JS
     let selectedFile = 0;
     let selectedToken = 0;
 
@@ -144,9 +144,9 @@ $registerJs = <<< SCRIPT
     });
 
     hideActionButton();
-SCRIPT;
+JS;
 $this->registerJs($registerJs);
-$registerCss = <<<CSS
+$registerCss = <<< CSS
     #my-files table tbody tr td {
         overflow-wrap: anywhere;
     }

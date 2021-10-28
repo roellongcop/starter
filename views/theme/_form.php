@@ -13,7 +13,7 @@ use app\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
 /* @var $form yii\widgets\ActiveForm */
-$registerJs = <<< SCRIPT
+$registerJs = <<< JS
     $('form.form').on('beforeSubmit', function(event) {
         event.preventDefault();
         $('#theme-path_map').val(JSON.stringify(editors['path_map'].get()))
@@ -22,7 +22,7 @@ $registerJs = <<< SCRIPT
         // continue the submit unbind preventDefault
         $(this).unbind('submit').submit(); 
     })
-SCRIPT;
+JS;
 $this->registerJs($registerJs);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'theme-form']); ?>

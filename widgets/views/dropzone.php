@@ -1,7 +1,7 @@
 <?php
 
 use app\helpers\Html;
-$registerJs = <<< SCRIPT
+$registerJs = <<< JS
 console.log('{$extensions}')
     $('#dropzone-{$id}').dropzone({
         url: "{$url}", // Set the url for your upload script location
@@ -47,7 +47,7 @@ console.log('{$extensions}')
             });
         }
     });
-SCRIPT;
+JS;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 

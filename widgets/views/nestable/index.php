@@ -1,6 +1,6 @@
 <?php
 use app\helpers\Url;
-$registerJs = <<<SCRIPT
+$registerJs = <<< JS
     let index = 0;
     $('#add-main-navigation-{$id}').on('click', function() {
         index++;
@@ -78,7 +78,7 @@ $registerJs = <<<SCRIPT
         }
     }
     initNestable();
-SCRIPT;
+JS;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <div class="row">

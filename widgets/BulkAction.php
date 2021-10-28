@@ -30,10 +30,12 @@ class BulkAction extends AppWidget
         if(! App::component('access')->userCan('confirm-action', $this->controllerID)) {
             return ;
         }
-        return $this->render('bulk_action', [
+
+        return $this->render('bulk-action/index', [
             'id' => $this->id,
             'title' => $this->title,
             'searchModel' => $this->searchModel,
+            'bulkActions' => $this->searchModel->bulkActions ?? ''
         ]);
     }
 }
