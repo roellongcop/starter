@@ -1,19 +1,16 @@
 <?php
-use app\widgets\Search;
-use yii\widgets\ActiveForm;
+
+use app\helpers\Html;
 
 $searchModel = $this->params['searchModel'] ?? '';
 $searchAction = $searchModel->searchAction ?? ['index'];
 ?>
 <div class="topbar">
-    <?php if ($searchModel): ?>
-            <?php $form = ActiveForm::begin(['action' => $searchAction, 'method' => 'get']); ?>
-                <?= Search::widget([
-                    'model' => $searchModel,
-                    'style' => 'margin-top: 20px;'
-                ]) ?>
-            <?php ActiveForm::end(); ?>
-        <?php endif ?>
+    <?= Html::if($searchModel, $this->render('_topbar-search-form', [
+        'searchAction' => $searchAction,
+        'searchModel' => $searchModel,
+    ])) ?>
+    
     <!--begin::Search-->
     <?php # $this->render('toolbar/_search') ?>
     <!--end::Search-->

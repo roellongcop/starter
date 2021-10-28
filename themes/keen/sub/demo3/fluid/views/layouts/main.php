@@ -95,22 +95,17 @@ $createController = $this->params['createController'] ?? App::controllerID();
 							<!--begin::Toolbar-->
 							<div class="d-flex align-items-center">
 								<!--begin::Dropdown-->
-					            <?php if ($this->params['showExportButton'] ?? ''): ?>
-					                <?= ExportButton::widget() ?>
-					            <?php endif ?>
+					            <?= Html::if($this->params['showExportButton'] ?? '', ExportButton::widget()) ?>
 					            <!--end::Dropdown-->
 					            &nbsp;
-					            <?php if ($this->params['showCreateButton'] ?? ''): ?>
-					                <?= Anchors::widget([
-					                    'names' => 'create',
-					                    'controller' => $createController,
-					                    'options' => [
-					                    	'create' => [
-					                    		'class' => 'btn btn-primary font-weight-bolder'
-					                    	]
-					                    ]
-					                ]); ?>
-					            <?php endif ?>
+					            <?= Html::if(
+				            		$this->params['showCreateButton'] ?? '', 
+				            		Html::a(
+					                    $this->params['createLabel'] ?? 'Create', 
+					                    ["{$createController}/create"],
+					                    ['class' => 'btn btn-primary font-weight-bolder']
+					                )
+					            ) ?>
 							</div>
 							<!--end::Toolbar-->
 						</div>
@@ -120,13 +115,11 @@ $createController = $this->params['createController'] ?? App::controllerID();
 						<!--begin::Container-->
 						<div class="container-fluid">
 							<?= Alert::widget() ?>
-		                    <?php if ($this->params['wrapCard'] ?? true): ?>
-			                    <?php $this->beginContent('@app/views/layouts/_card_wrapper.php'); ?>
-									<?= $content ?>
-								<?php $this->endContent(); ?>
-							<?php else: ?>
-								<?= $content ?>
-		                    <?php endif ?>
+		                    <?= Html::ifElse(
+								$this->params['wrapCard'] ?? true,
+								$this->render('_card_wrapper-content', ['content' => $content]),
+								$content
+							) ?>
 						</div>
 						<!--end::Container-->
 					</div>

@@ -1,8 +1,8 @@
 <?php
-use app\helpers\App;
+
+use app\helpers\Html;
 use app\models\search\ThemeSearch;
 use app\widgets\AnchorForm;
-use app\widgets\BootstrapSelect;
 use app\widgets\ThemeView;
 use yii\widgets\ActiveForm;
 
@@ -20,12 +20,10 @@ $this->params['searchModel'] = new ThemeSearch();
 		</div>
 	<?php ActiveForm::end(); ?>
 	<div class="row">
-		<?php foreach ($themes as $theme): ?>
-			<div class="col-md-2">
-            	<?= ThemeView::widget([
-            		'theme' => $theme
-            	]) ?>
-            </div>
-        <?php endforeach ?>
+		<?= Html::foreach($themes, function($key, $theme) {
+			return '<div class="col-md-2">
+            	'. ThemeView::widget(['theme' => $theme]) .'
+            </div>';
+		}) ?>
 	</div>
 </div>
