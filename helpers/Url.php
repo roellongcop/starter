@@ -10,7 +10,6 @@ class Url extends \yii\helpers\Url
 {
     public static function image($token='', $params = [], $scheme=false)
     {
-        $token = $token ?: App::setting('image')->image_holder;
         return self::to(array_merge(['file/display', 'token' => $token], $params), $scheme);
     }
 
