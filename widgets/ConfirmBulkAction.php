@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class ConfirmCheckboxProcess extends BaseWidget
+class ConfirmBulkAction extends BaseWidget
 {
     public $models;
     public $process;
@@ -25,7 +25,7 @@ class ConfirmCheckboxProcess extends BaseWidget
      */
     public function run()
     {
-        return $this->render('confirm-checkbox-process/index', [
+        return $this->render('confirm-bulk-action/index', [
             'models' => $this->models,
             'process' => $this->process,
             'post' => $this->post,

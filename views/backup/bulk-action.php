@@ -1,16 +1,16 @@
 <?php
 
 use app\models\search\BackupSearch;
-use app\widgets\ConfirmCheckboxProcess;
+use app\widgets\ConfirmBulkAction;
 
-$this->title = 'Confirm Action';
+$this->title = 'Confirm Bulk Action';
 $this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new BackupSearch();
 ?>
-<div class="backup-confirm-action-page">
-	<?= ConfirmCheckboxProcess::widget([
+<div class="backup-bulk-action-page">
+	<?= ConfirmBulkAction::widget([
 		'models' => $models,
 		'process' => $process,
 	    'post' => $post,

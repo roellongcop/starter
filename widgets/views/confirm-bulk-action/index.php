@@ -20,7 +20,7 @@ use app\helpers\Html;
 			</button>
 		</div>
 	</div>
-	<?= Html::beginForm(['confirm-action'], 'post') ?>
+	<?= Html::beginForm(['bulk-action'], 'post') ?>
 		<?= (count($models) > 10)? AnchorForm::widget() . '<hr>': '' ?>
 		<input type="hidden" name="process-selected" value="<?= $post['process-selected'] ?>">
 		<div class="accordion accordion-light accordion-light-borderless accordion-svg-toggle" 

@@ -31,7 +31,7 @@ $this->params['showExportButton'] = true;
 ?>
 <div class="<?= Inflector::camel2id($modelClass) ?>-index-page">
     <?= "<?=" ?> FilterColumn::widget(['searchModel' => $searchModel]) ?>
-    <?= "<?=" ?> Html::beginForm(['confirm-action'], 'post'); ?>
+    <?= "<?=" ?> Html::beginForm(['bulk-action'], 'post'); ?>
         <?= "<?=" ?> BulkAction::widget(['searchModel' => $searchModel]) ?>
         
         <?= $generator->enablePjax ? "    <?php Pjax::begin(); ?>\n" : '' ?>

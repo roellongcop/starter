@@ -10,17 +10,17 @@ if ($modelClass === $searchModelClass) {
 ?>
 <?= "<?php\n" ?>
 
-use app\widgets\ConfirmCheckboxProcess;
+use app\widgets\ConfirmBulkAction;
 use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;
 
-$this->title = 'Confirm Action';
+$this->title = 'Confirm Bulk Action';
 $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
 ?>
-<div class="<?= Inflector::camel2id($modelClass) ?>-confirm-action-page">
-	<?= "<?=" ?> ConfirmCheckboxProcess::widget([
+<div class="<?= Inflector::camel2id($modelClass) ?>-bulk-action-page">
+	<?= "<?=" ?> ConfirmBulkAction::widget([
 		'models' => $models,
 		'process' => $process,
 	    'post' => $post,

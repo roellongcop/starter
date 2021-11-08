@@ -1,16 +1,16 @@
 <?php
 
 use app\models\search\IpSearch;
-use app\widgets\ConfirmCheckboxProcess;
+use app\widgets\ConfirmBulkAction;
 
-$this->title = 'Confirm Action';
+$this->title = 'Confirm Bulk Action';
 $this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new IpSearch();
 ?>
-<div class="ip-confirm-action-page">
-	<?= ConfirmCheckboxProcess::widget([
+<div class="ip-bulk-action-page">
+	<?= ConfirmBulkAction::widget([
 		'models' => $models,
 		'process' => $process,
 	    'post' => $post,

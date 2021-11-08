@@ -14,7 +14,7 @@ JS;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
 <?= Html::if(
-    App::component('access')->userCan('confirm-action') && $bulkActions,
+    App::component('access')->userCan('bulk-action') && $bulkActions,
     $this->render('_container', [
         'title' => $title,
         'bulkActions' => $bulkActions,

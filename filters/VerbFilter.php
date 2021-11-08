@@ -18,7 +18,7 @@ class VerbFilter extends \yii\filters\VerbFilter
         'update' => ['get', 'put', 'post'],
         'delete' => ['post', 'delete'],
         'change-record-status' => ['post'],
-        'confirm-action' => ['post'],
+        'bulk-action' => ['post'],
     ];
 
     public function init()

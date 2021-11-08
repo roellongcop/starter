@@ -27,7 +27,7 @@ class BulkAction extends BaseWidget
      */
     public function run()
     { 
-        if(! App::component('access')->userCan('confirm-action', $this->controllerID)) {
+        if(! App::component('access')->userCan('bulk-action', $this->controllerID)) {
             return ;
         }
 

@@ -1,16 +1,16 @@
 <?php
 
 use app\models\search\SessionSearch;
-use app\widgets\ConfirmCheckboxProcess;
+use app\widgets\ConfirmBulkAction;
 
-$this->title = 'Confirm Action';
+$this->title = 'Confirm Bulk Action';
 $this->params['breadcrumbs'][] = ['label' => 'Sessions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new SessionSearch();
 ?>
-<div class="session-confirm-action-page">
-	<?= ConfirmCheckboxProcess::widget([
+<div class="session-bulk-action-page">
+	<?= ConfirmBulkAction::widget([
 		'models' => $models,
 		'process' => $process,
 	    'post' => $post,

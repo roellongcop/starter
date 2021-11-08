@@ -1,16 +1,16 @@
 <?php
 
 use app\models\search\UserSearch;
-use app\widgets\ConfirmCheckboxProcess;
+use app\widgets\ConfirmBulkAction;
 
-$this->title = 'Confirm Action';
+$this->title = 'Confirm Bulk Action';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new UserSearch();
 ?>
-<div class="user-confirm-action-page">
-	<?= ConfirmCheckboxProcess::widget([
+<div class="user-bulk-action-page">
+	<?= ConfirmBulkAction::widget([
 		'models' => $models,
 		'process' => $process,
 	    'post' => $post,

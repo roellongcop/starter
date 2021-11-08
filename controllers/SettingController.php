@@ -135,7 +135,7 @@ class SettingController extends Controller
         }
     }
 
-    public function actionConfirmAction()
+    public function actionBulkAction()
     {
         $post = App::post();
 
@@ -163,7 +163,7 @@ class SettingController extends Controller
                     App::success("Data set to '{$process}'");  
                 }
                 else {
-                    return $this->render('confirm-action', [
+                    return $this->render('bulk-action', [
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
