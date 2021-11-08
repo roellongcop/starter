@@ -450,13 +450,6 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
-    public function getModule_access()
-    {
-        if (($model = $this->role) != null) {
-            return $model->module_access;
-        }
-    }
-
     public function getRole_access()
     {
         if (($model = $this->role) != null) {

@@ -71,7 +71,7 @@ class AccessComponent extends Component
 
 		$controllerID = $controllerID ?: App::controllerID();
 
- 		$module_access = App::identity('module_access');
+ 		$module_access = App::identity('moduleAccess');
 
  		return $module_access[$controllerID] ?? [''];
  	}
@@ -98,7 +98,7 @@ class AccessComponent extends Component
  	{
 		$controllerID = $controllerID ?: App::controllerID();
 
-		$module_access = ($user)? $user->identity->module_access: App::identity('module_access');
+		$module_access = ($user)? $user->identity->moduleAccess: App::identity('moduleAccess');
 
 		if (isset($module_access[$controllerID])) {
 			return in_array($action, $module_access[$controllerID]) ? true: false;
