@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url; 
  
-class ExportButton extends AppWidget
+class ExportButton extends BaseWidget
 {
     public $actions = [
         'print' => [

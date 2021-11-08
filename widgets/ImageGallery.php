@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\helpers\Url;
 use app\models\File;
  
-class ImageGallery extends AppWidget
+class ImageGallery extends BaseWidget
 {
     public $modalTitle = 'Image Gallery';
     public $buttonTitle = 'Image Gallery';

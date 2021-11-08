@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class BootstrapSelect extends AppWidget
+class BootstrapSelect extends BaseWidget
 {
 
     public $attribute = '';

@@ -8,7 +8,7 @@ use app\models\Theme;
 use app\widgets\Anchor;
 
  
-class Grid extends AppWidget
+class Grid extends BaseWidget
 {
     public $dataProvider;
     public $columns;

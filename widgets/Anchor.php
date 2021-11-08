@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Request;
 
-class Anchor extends AppWidget
+class Anchor extends BaseWidget
 {
     public $title = 'title';
     public $link = [];

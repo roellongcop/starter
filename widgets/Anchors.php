@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class Anchors extends AppWidget
+class Anchors extends BaseWidget
 {
     public $controller;
     public $names;

@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use Yii;
  
-class AppIcon extends AppWidget
+class AppIcon extends BaseWidget
 {
     public $icon;
 

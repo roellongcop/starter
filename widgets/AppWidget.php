@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use yii\helpers\Inflector;
  
-class AppWidget extends \yii\base\Widget
+class BaseWidget extends \yii\base\Widget
 {
     public $widgetFunction;
 

@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\helpers\Url;
 use yii\helpers\ArrayHelper;
  
-class Dropzone extends AppWidget
+class Dropzone extends BaseWidget
 {
     public $parameters = [];
     public $paramName = 'UploadForm[fileInput]';

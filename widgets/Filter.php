@@ -8,7 +8,7 @@ use app\widgets\BootstrapSelect;
 use app\widgets\Multiselect;
 use yii\widgets\ActiveForm;
  
-class Filter extends AppWidget
+class Filter extends BaseWidget
 {
     public $attribute;
     public $data = [];
