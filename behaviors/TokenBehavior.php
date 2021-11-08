@@ -27,7 +27,10 @@ class TokenBehavior extends Behavior
 
     protected function generateToken($length = 10)
     {
-        $token = App::randomString($length) . time();
+        $token = implode('-', [
+            App::randomString($length),
+            time()
+        ]);
         $model = $this->owner::findOne([$this->tokenField => $token]);
 
         if ($model) {
