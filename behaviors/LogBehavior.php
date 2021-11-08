@@ -12,7 +12,6 @@ class LogBehavior extends Behavior
     public $logAfterSave = true;
     public $logAfterDelete = true;
 
-
     public function events()
     {
         return [

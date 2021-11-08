@@ -24,7 +24,6 @@ class TokenBehavior extends Behavior
         }
     }
 
-
     protected function generateToken($length = 10)
     {
         $token = implode('-', [
