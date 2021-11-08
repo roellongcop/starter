@@ -88,7 +88,7 @@ class ExportButton extends BaseWidget
      */
     public function run()
     { 
-        return $this->render('export_button', [
+        return $this->render('export-button', [
             'exports' => $this->exports,
             'title' => $this->title,
         ]); 

@@ -29,7 +29,7 @@ class JsonEditor extends BaseWidget
      */
     public function run()
     {
-        return $this->render('json_editor', [
+        return $this->render('json-editor', [
             'data' => $this->data,
             'id' => $this->id,
             'options' => $this->options,

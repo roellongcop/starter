@@ -30,7 +30,7 @@ class ThemeView extends BaseWidget
      */
     public function run()
     {
-        return $this->render('theme_view', [
+        return $this->render('theme-view', [
             'theme' => $this->theme,
             'currentTheme' => $this->currentTheme,
             'uploadUrl' => $this->uploadUrl,

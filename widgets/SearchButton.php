@@ -18,6 +18,6 @@ class SearchButton extends BaseWidget
      */
     public function run()
     {
-        return $this->render('search_button');
+        return $this->render('search-button');
     }
 }

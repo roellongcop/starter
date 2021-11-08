@@ -41,7 +41,7 @@ class ImagePreview extends BaseWidget
      */
     public function run()
     {
-        return $this->render('image_preview', [
+        return $this->render('image-preview', [
             'src' => $this->src,
             'options' => $this->options,
             'imageID' => $this->imageID,

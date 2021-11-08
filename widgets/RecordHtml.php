@@ -27,7 +27,7 @@ class RecordHtml extends BaseWidget
     public function run()
     {
         if ($this->labelOnly) {
-            return $this->render('record_html', [
+            return $this->render('record-html', [
                 'model' => $this->model
             ]);
         }

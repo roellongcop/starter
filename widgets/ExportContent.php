@@ -37,7 +37,7 @@ class ExportContent extends BaseWidget
      */
     public function run()
     {
-        return $this->render("export_content/{$this->file}", [
+        return $this->render("export-content/{$this->file}", [
             'dataProvider' => $this->dataProvider,
             'searchModel' => $this->searchModel,
             'reportName' => $this->reportName,

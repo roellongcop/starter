@@ -112,7 +112,7 @@ class CheckboxColumn extends Column implements ViewContextInterface
             return parent::renderHeaderCellContent();
         }
 
-        return $this->render('checkbox_column/header_template', [
+        return $this->render('checkbox-column/header-template', [
             'checkbox' => Html::checkbox($this->getHeaderCheckBoxName(), false, ['class' => 'select-on-check-all'])
         ]);
     }
@@ -140,7 +140,7 @@ class CheckboxColumn extends Column implements ViewContextInterface
             Html::addCssClass($options, $this->cssClass);
         }
  
-        return $this->render('checkbox_column/content_template', [
+        return $this->render('checkbox-column/content-template', [
             'checkbox' => Html::checkbox($this->name, !empty($options['checked']), $options)
         ]);
     }

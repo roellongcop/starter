@@ -26,7 +26,7 @@ class FilterColumn extends BaseWidget
      */
     public function run()
     {
-        return $this->render('filter_column', [
+        return $this->render('filter-column', [
             'searchModel' => $this->searchModel,
             'title' => $this->title,
             'buttonTitle' => $this->buttonTitle,
