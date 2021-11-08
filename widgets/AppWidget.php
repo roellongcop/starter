@@ -3,7 +3,6 @@
 namespace app\widgets;
 
 use Yii;
-use app\helpers\App;
 use yii\helpers\Inflector;
  
 class AppWidget extends \yii\base\Widget
