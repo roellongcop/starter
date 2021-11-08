@@ -8,7 +8,7 @@ use app\models\File;
 use app\models\form\ThemeForm;
 use app\helpers\Url;
  
-class ThemeView extends AppWidget
+class ThemeView extends BaseWidget
 {
     public $theme = [];
     public $currentTheme;

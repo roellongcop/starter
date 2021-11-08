@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\widgets\Switcher;
 use app\helpers\Url;
  
-class RecordHtml extends AppWidget
+class RecordHtml extends BaseWidget
 {
     public $model;
     public $labelOnly = false;

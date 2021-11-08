@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\models\ActiveRecord;
 use app\widgets\BootstrapSelect;
  
-class RecordStatusInput extends AppWidget
+class RecordStatusInput extends BaseWidget
 {
     public $attribute = 'record_status';
     public $data;

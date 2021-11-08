@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Url;
  
-class Switcher extends AppWidget
+class Switcher extends BaseWidget
 {
     public $model;
     public $checked;

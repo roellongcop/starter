@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class SearchResult extends AppWidget
+class SearchResult extends BaseWidget
 {
     public $dataProviders;
     public $searchModel;

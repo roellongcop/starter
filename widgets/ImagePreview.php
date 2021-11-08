@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use yii\helpers\Inflector;
  
-class ImagePreview extends AppWidget
+class ImagePreview extends BaseWidget
 {
 
     public $model;

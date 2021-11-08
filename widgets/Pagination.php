@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class Pagination extends AppWidget
+class Pagination extends BaseWidget
 {
     public $model;
     public $form;

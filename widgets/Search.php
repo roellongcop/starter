@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use yii\helpers\Inflector;
  
-class Search extends AppWidget
+class Search extends BaseWidget
 {
     public $placeholder = '';
     public $model;

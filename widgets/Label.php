@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
  
-class Label extends AppWidget
+class Label extends BaseWidget
 {
     public $options;
 
