@@ -457,22 +457,19 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $gridColumns = $this->getGridColumns();
         $filterColumns = App::identity()->filterColumns($this, false);
 
-        if (App::isLogin() && $filterColumns) {
+        if (App::isLogin()) {
             foreach ($gridColumns as $key => &$column) {
-                if (! isset($column['visible'])) {
-                    // $column['visible'] = in_array($key, $filterColumns)? true: true;
 
-                    if (! in_array($key, $filterColumns)) {
-                        $column['headerOptions']['style'] = 'display:none';
-                        $column['contentOptions']['style'] = 'display:none';
-                    }
+                if ($filterColumns && ! in_array($key, $filterColumns)) {
+                    $column['headerOptions']['style'] = 'display:none';
+                    $column['contentOptions']['style'] = 'display:none';
+                } 
 
-                    $column['headerOptions']['data-key'] = $key;
-                    $column['contentOptions']['data-key'] = $key;
+                $column['headerOptions']['data-key'] = $key;
+                $column['contentOptions']['data-key'] = $key;
 
-                    $column['headerOptions']['class'] = 'table-th';
-                    $column['contentOptions']['class'] = 'table-td';
-                }
+                $column['headerOptions']['class'] = 'table-th';
+                $column['contentOptions']['class'] = 'table-td';
             }
         }
 
