@@ -1,4 +1,5 @@
 <?php
+
 namespace app\behaviors;
 
 use app\helpers\App;

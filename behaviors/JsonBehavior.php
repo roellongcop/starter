@@ -1,4 +1,5 @@
 <?php
+
 namespace app\behaviors;
 
 use yii\base\Behavior;

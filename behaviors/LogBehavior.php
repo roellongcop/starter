@@ -1,5 +1,7 @@
 <?php
+
 namespace app\behaviors;
+
 use app\helpers\App;
 use app\models\Log;
 use yii\base\Behavior;
