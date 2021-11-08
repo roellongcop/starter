@@ -7,10 +7,29 @@ use yii\helpers\Inflector;
 
 $model = new UserMeta();
 $registerJs = <<< JS
-$('.check-all-filter').on('change', function() {
-    let is_checked = $(this).is(':checked');
 
-    let inputs = $(this).parents('.dropdown-menu').find('input._filter_column_checkbox');
+let filter = function(form, success) {
+    KTApp.blockPage();
+    $.ajax({
+        url: form.attr('action'),
+        method: form.attr('method'),
+        data: form.serialize(),
+        dataType: 'json',
+        success: success,
+        error: function(e) {
+            toastr.error(e.responseText);
+            KTApp.unblockPage();
+        }
+    });
+}
+
+$('.check-all-filter').on('change', function() {
+    let input = $(this),
+        is_checked = input.is(':checked'),
+        inputs = input.parents('.dropdown-menu').find('input._filter_column_checkbox'),
+        form = input.closest('form'),
+        th = $('th.table-th'),
+        td = $('td.table-td');
 
     if (is_checked) {
         inputs.prop('checked', true);
@@ -18,7 +37,53 @@ $('.check-all-filter').on('change', function() {
     else {
         inputs.prop('checked', false);
     }
-})
+
+    filter(form, function(s) {
+        if(s.status == 'success') {
+            if(is_checked) {
+                th.show();
+                td.show();
+            }
+            else {
+                th.hide();
+                td.hide();
+            }
+        }
+        else {
+            toastr.error(s.error);
+        }
+        KTApp.unblockPage();
+    });
+    
+});
+
+$('._filter_column_checkbox').on('change', function() {
+
+    let input = $(this),
+        key = input.data('key'),
+        th = $('th[data-key="'+ key +'"]'),
+        td = $('td[data-key="'+ key +'"]'),
+        is_checked = input.is(':checked'),
+        form = input.closest('form');
+
+    filter(form, function(s) {
+        if(s.status == 'success') {
+            if(is_checked) {
+                th.show();
+                td.show();
+            }
+            else {
+                th.hide();
+                td.hide();
+            }
+        }
+        else {
+            toastr.error(s.error);
+        }
+        KTApp.unblockPage();
+    });
+    
+});
 JS;
 $this->registerWidgetJs($widgetFunction, $registerJs);
 ?>
@@ -37,7 +102,7 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
     <div data-widget_id="<?= $id ?>" class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0 _div_filter_columns" style="">
         <!--begin::Navigation-->
         <?= Html::beginForm(['user-meta/filter'], 'post',  [
-            'style' => 'max-height: 56vh; overflow: auto;'
+            'style' => 'max-height: 56vh; overflow: auto;',
         ]); ?>
             <?= Html::activeInput('hidden', $model, 'table_name', [
                 'value' => App::tableName($searchModel, false)
@@ -56,10 +121,11 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
                 <li class="navi-item">
                     <div class="checkbox-list">
                         <?= Html::foreach($searchModel->tableColumns, function($key, $value) use ($model, $filterColumns) {
-                            return '<label class="checkbox ">
+                            return '<label class="checkbox">
                                 '. Html::activeInput('checkbox', $model, 'columns[]', [
                                     'value' => $key,
                                     'class' => '_filter_column_checkbox',
+                                    'data-key' => $key,
                                     'checked' => in_array($key,  $filterColumns)
                                 ]) .'
                                 <span></span>
@@ -67,11 +133,6 @@ $this->registerWidgetJs($widgetFunction, $registerJs);
                             </label>';
                         }) ?>
                     </div>
-                </li>
-                <li class="navi-item"> <hr>
-                    <button type="submit" class="btn btn-primary btn-block btn-sm">
-                        <?= $buttonTitle ?>
-                    </button>
                 </li>
             </ul>
         <?= Html::endForm(); ?> 

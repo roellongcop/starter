@@ -4,13 +4,14 @@ namespace app\widgets;
 
 use Yii;
 use app\helpers\App;
+use app\helpers\Url;
+
 class FilterColumn extends BaseWidget
 {
     public $searchModel;
     public $title = 'Filter Columns';
     public $buttonTitle = 'Filter';
     public $filterColumns;
-    
 
     public function init() 
     {
@@ -31,7 +32,7 @@ class FilterColumn extends BaseWidget
             'title' => $this->title,
             'buttonTitle' => $this->buttonTitle,
             'id' => $this->id,
-            'filterColumns' => $this->filterColumns
+            'filterColumns' => $this->filterColumns,
         ]);
     }
 }

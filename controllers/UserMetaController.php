@@ -245,6 +245,8 @@ class UserMetaController extends Controller
 
     public function actionFilter()
     {
+        $response = [];
+
         if (($post = App::post()) != null) {
             $model = UserMeta::findOne([
                 'user_id' => App::identity('id'),
@@ -262,9 +264,20 @@ class UserMetaController extends Controller
             }
             $table_columns[$post['UserMeta']['table_name']] = $post['UserMeta']['columns'] ?? [];
             $model->value = json_encode($table_columns);
-            $model->save();
+            if ($model->save()) {
+                $response['status'] = 'success';
+                $response['message'] = 'Filtered Column';
+            }
+            else {
+                $response['status'] = 'failed';
+                $response['error'] = $model->errorSummary;
+            }
         }
-        return $this->redirect(App::referrer());
+        else {
+            $response['status'] = 'failed';
+            $response['error'] = 'No post data';
+        }
+        return $this->asJson($response);
     }
 
     public function actionInActiveData()

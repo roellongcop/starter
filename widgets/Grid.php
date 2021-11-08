@@ -60,6 +60,7 @@ class Grid extends BaseWidget
                 $template[] = '{'.$action.'}';
             }
         }
+ 
         return [
             'class' => 'yii\grid\ActionColumn',
             'header' => '<span style="color:#3699FF">Actions</span>',
