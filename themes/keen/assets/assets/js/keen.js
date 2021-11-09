@@ -43,20 +43,8 @@ $(document).ready(function() {
     });
     $('li.menu-item-active').parents('li').addClass('menu-item-here menu-item-open');
 
- 
     $('.kt-selectpicker').selectpicker();
 
-    $('a._filter_columns').on('click', function (event) {
-        $('._div_filter_columns').toggleClass('show');
-    });
-    $('body').on('click', function (e) {
-        if (!$('._div_filter_columns').is(e.target) 
-            && $('._div_filter_columns').has(e.target).length === 0 
-            && $('.show').has(e.target).length === 0
-        ) {
-            $('._div_filter_columns').removeClass('show');
-        }
-    });
     $('input[maxlength]').maxlength({
         warningClass: "label label-info label-rounded label-inline",
         limitReachedClass: "label label-success label-rounded label-inline"
