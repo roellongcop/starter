@@ -48,6 +48,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $_canInactivate;
 
     public $errorSummary;
+    public $date_range;
 
     public static function mapRecords()
     {
@@ -820,7 +821,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getStartDate($from_database = false)
     {
         if ($this->date_range && $from_database == false) {
-            $date = App::dateRange($this->date_range, 'start');
+            $date = App::formatter()->asDaterangeToSingle($this->date_range, 'start');
             return date('F d, Y', strtotime($date));
         }
         else {
@@ -838,7 +839,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getEndDate($from_database = false)
     {
         if ($this->date_range && $from_database == false) {
-            $date = App::dateRange($this->date_range, 'end');
+            $date = App::formatter()->asDaterangeToSingle($this->date_range, 'end');
             return date('F d, Y', strtotime($date));
         }
         else {

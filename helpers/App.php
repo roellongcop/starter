@@ -376,21 +376,6 @@ class App {
 		return false;
 	}
 
-	public static function dateRange($date_range, $return='start')
-    {
-        $dates = explode( ' - ', $date_range);
-        $start = date("Y-m-d", strtotime($dates[0]) ); 
-        $end = date("Y-m-d", strtotime($dates[1]) ); 
-
-        if ($return == 'start') {
-            return $start;
-        }
-
-        if ($return == 'end') {
-            return $end;
-        }
-    }
-
     public static function getModelName($model)
     {
     	return self::className($model);

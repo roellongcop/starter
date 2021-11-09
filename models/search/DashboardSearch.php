@@ -86,7 +86,9 @@ class DashboardSearch extends \yii\base\Model
     public function startDate()
     {
         if ($this->date_range) {
-            return date('F d, Y', strtotime(App::dateRange($this->date_range, 'start')));
+            return date('F d, Y', strtotime(
+                App::formatter()->asDaterangeToSingle($this->date_range, 'start')
+            ));
         }
 
         return date('F d, Y', strtotime($this->startDate));
@@ -95,7 +97,9 @@ class DashboardSearch extends \yii\base\Model
     public function endDate()
     {
         if ($this->date_range) {
-            return date('F d, Y', strtotime(App::dateRange($this->date_range, 'end')));
+            return date('F d, Y', strtotime(
+                App::formatter()->asDaterangeToSingle($this->date_range, 'end')
+            ));
         }
 
         return date('F d, Y', strtotime($this->endDate));

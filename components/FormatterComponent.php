@@ -134,4 +134,13 @@ class FormatterComponent extends \yii\i18n\Formatter
 
         return $bytes;
     }
+
+    public function asDaterangeToSingle($date_range, $return='start')
+    {
+        $dates = explode(' - ', $date_range);
+        $start = date("Y-m-d", strtotime($dates[0])); 
+        $end = date("Y-m-d", strtotime($dates[1])); 
+
+        return ($return == 'start')? $start: $end;
+    }
 }

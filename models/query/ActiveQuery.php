@@ -17,8 +17,8 @@ class ActiveQuery extends \yii\db\ActiveQuery
             return $this->andFilterWhere([
                 "between", 
                 "date(DATE_ADD({$field},INTERVAL '{$hours}' HOUR_MINUTE))", 
-                App::dateRange($daterange, 'start'), 
-                App::dateRange($daterange, 'end'), 
+                App::formatter()->asDaterangeToSingle($daterange, 'start'), 
+                App::formatter()->asDaterangeToSingle($daterange, 'end'), 
             ]);
         }
 
