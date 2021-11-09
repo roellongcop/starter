@@ -2,8 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
-
 class KeenActiveForm extends \yii\widgets\ActiveForm
 {
 	public function init()

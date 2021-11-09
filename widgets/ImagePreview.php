@@ -2,9 +2,7 @@
 
 namespace app\widgets;
 
-use Yii;
 use app\helpers\App;
-use yii\helpers\Inflector;
  
 class ImagePreview extends BaseWidget
 {

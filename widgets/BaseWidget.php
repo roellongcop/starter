@@ -2,7 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
 use yii\helpers\Inflector;
  
 class BaseWidget extends \yii\base\Widget

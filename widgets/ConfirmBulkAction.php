@@ -2,7 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
 use app\helpers\App;
  
 class ConfirmBulkAction extends BaseWidget

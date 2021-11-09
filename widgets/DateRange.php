@@ -2,9 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
-use app\helpers\App;
- 
 class DateRange extends BaseWidget
 {
     public $model;

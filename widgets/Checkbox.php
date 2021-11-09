@@ -2,8 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
- 
 class Checkbox extends BaseWidget
 {
     public $data;

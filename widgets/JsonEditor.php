@@ -2,8 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
- 
 class JsonEditor extends BaseWidget
 {
     public $data;

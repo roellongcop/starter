@@ -2,7 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
 use app\widgets\AnchorBack;
 use app\helpers\Html;
  

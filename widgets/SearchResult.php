@@ -2,19 +2,10 @@
 
 namespace app\widgets;
 
-use Yii;
-use app\helpers\App;
- 
 class SearchResult extends BaseWidget
 {
     public $dataProviders;
     public $searchModel;
-
-    public function init() 
-    {
-        // your logic here
-        parent::init();
-    }
 
     /**
      * {@inheritdoc}

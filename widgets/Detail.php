@@ -2,9 +2,7 @@
 
 namespace app\widgets;
 
-use Yii;
 use yii\widgets\DetailView;
-
  
 class Detail extends BaseWidget
 {

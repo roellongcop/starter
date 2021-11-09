@@ -2,7 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
 use app\helpers\App;
 use app\helpers\Url;
 use app\models\File;

@@ -2,9 +2,7 @@
 
 namespace app\widgets;
 
-use Yii;
 use app\helpers\App;
-use app\helpers\Url;
 
 class FilterColumn extends BaseWidget
 {

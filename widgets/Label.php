@@ -2,21 +2,10 @@
 
 namespace app\widgets;
 
-use Yii;
-use app\helpers\App;
- 
 class Label extends BaseWidget
 {
     public $options;
 
-    public function init() 
-    {
-        // your logic here
-        parent::init();
-    }
-
-
- 
     /**
      * {@inheritdoc}
      */
