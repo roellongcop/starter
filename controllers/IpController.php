@@ -178,7 +178,6 @@ class IpController extends Controller
             if (isset($post['selection'])) {
 
                 $models = Ip::all($post['selection']);
-                $user = App::identity();
 
                 if (isset($post['confirm_button'])) {
                     switch ($post['process-selected']) {
