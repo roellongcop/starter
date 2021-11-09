@@ -183,12 +183,32 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public static function activeAll($condition = '')
     {
-        return self::updateAll(['record_status' => 1], $condition);
+        $models = static::findAll($condition);
+        $result = self::updateAll(['record_status' => 1], $condition);
+
+        Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
+
+        return $result;
     }
 
     public static function inactiveAll($condition = '')
     {
-        return self::updateAll(['record_status' => 0], $condition);
+        $models = static::findAll($condition);
+        $result = self::updateAll(['record_status' => 0], $condition);
+
+        Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
+        
+        return $result;
+    }
+
+    public static function deleteAll($condition = NULL, $params = []) 
+    {
+        $models = static::findAll($condition);
+        $result = parent::deleteAll($condition);
+
+        Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
+
+        return $result;
     }
 
     public static function findInactive($condition)
@@ -224,16 +244,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $condition = is_array($condition)? $condition: ['id' => $condition];
 
         return static::findOne($condition) ?: new static($condition);
-    }
-
-    public static function deleteAll($condition = NULL, $params = []) 
-    {
-        $models = static::findAll($condition);
-        $deleteAll = parent::deleteAll($condition);
-
-        Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
-
-        return $deleteAll;
     }
 
     public static function updateAll($attributes, $condition = '', $params = [])
@@ -410,7 +420,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             $this->getFooterDetailColumns(),
         );
     }
-
 
     public function getHeaderGridColumns()
     {
