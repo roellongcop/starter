@@ -31,6 +31,5 @@ class ConfirmBulkAction extends BaseWidget
             'post' => $this->post,
             'controllerID' => $this->controllerID,
         ]);
-       
     }
 }
