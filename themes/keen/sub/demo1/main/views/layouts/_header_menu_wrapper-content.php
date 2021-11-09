@@ -10,6 +10,8 @@ use app\widgets\Search;
 ]); ?>
     <?= Search::widget([
         'model' => $searchModel,
-        'style' => 'margin-top: 17px;width: 30vw;margin-left: 10px;'
+        'options' => [
+            'style' => 'margin-top: 17px;width: 30vw;margin-left: 10px;'
+        ]
     ]) ?>
 <?php ActiveForm::end(); ?>

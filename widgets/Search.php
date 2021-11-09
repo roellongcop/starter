@@ -2,26 +2,46 @@
 
 namespace app\widgets;
 
+use app\helpers\Html;
+
 class Search extends BaseWidget
 {
-    public $placeholder = '';
+    const PLACEHOLDER = 'Search';
+    const DEFAULT_CLASS = 'form-control';
+
     public $model;
-    public $name;
-    public $value;
     public $attribute = 'keywords';
-    public $style = '';
+    public $options;
 
     public function init() 
     {
         // your logic here
         parent::init();
-        if (! $this->name) {
-            $this->name = $this->attribute;
-        }
-        
-        $this->value = $this->model->{$this->attribute};
 
-        $this->placeholder = $this->placeholder ?: 'Search ' . $this->model->searchLabel ?? '';
+        $this->options['placeholder'] = $this->getPlaceholder();
+
+        $this->options['class'] = $this->getClass();
+    }
+
+    public function getClass()
+    {
+        if (isset($this->options['class'])) {
+            return $this->options['class'];
+        }
+        return self::DEFAULT_CLASS;
+    }
+
+    public function getPlaceholder()
+    {
+        if (isset($this->options['placeholder'])) {
+            return $this->options['placeholder'];
+        }
+
+        if (isset($this->model->searchLabel)) {
+            return implode(' ', [self::PLACEHOLDER, $this->model->searchLabel]);
+        }
+
+        return PLACEHOLDER;
     }
 
     /**
@@ -29,11 +49,6 @@ class Search extends BaseWidget
      */
     public function run()
     {
-        return $this->render('search', [
-            'placeholder' => $this->placeholder,
-            'name' => $this->name,
-            'value' => $this->value,
-            'style' => $this->style,
-        ]);
+        return Html::activeInput('search', $this->model, $this->attribute, $this->options);
     }
 }
