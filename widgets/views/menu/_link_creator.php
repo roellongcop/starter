@@ -21,7 +21,7 @@ $controller = $this->params['controller'] ?? App::controllerID();
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>
                     <ul class="menu-subnav">
-                        '. $this->render('_link_creator', ['menus' => $menu['sub']]) .'
+                        '. $this->render('_link_creator', ['menus' => $menu['sub'] ?? []]) .'
                     </ul>
                 </div>
             </li>',

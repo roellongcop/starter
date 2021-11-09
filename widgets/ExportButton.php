@@ -16,18 +16,22 @@ class ExportButton extends BaseWidget
         'export-pdf' => [
             'title' => 'PDF',
             'icon' => 'pdf',
+            'ext' => '.pdf'
         ],
         'export-csv' => [
             'title' => 'CSV',
             'icon' => 'csv',
+            'ext' => '.csv'
         ],
         'export-xls' => [
             'title' => 'XLS 95',
             'icon' => 'excel',
+            'ext' => '.xls'
         ],
         'export-xlsx' => [
             'title' => 'XLSX 2007',
             'icon' => 'excel',
+            'ext' => '.xlsx'
         ],
     ]; 
     
@@ -73,8 +77,13 @@ class ExportButton extends BaseWidget
                 else {
                     $this->exports[] = Anchor::widget([
                         'title' => $title,
-                        'link' => $link,
-                        'options' => ['class' => 'navi-link']
+                        'link' => '#',
+                        // 'link' => $link,
+                        'options' => [
+                            'class' => 'navi-link export-link',
+                            'data-link' => $link,
+                            'data-name' => $action . $data['ext'],
+                        ]
                     ]);
                 }
             }
