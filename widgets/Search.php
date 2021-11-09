@@ -21,6 +21,15 @@ class Search extends BaseWidget
         $this->options['placeholder'] = $this->getPlaceholder();
 
         $this->options['class'] = $this->getClass();
+        $this->options['name'] = $this->getInputName();
+    }
+
+    public function getInputName()
+    {
+        if (isset($this->options['name'])) {
+            return $this->options['name'];
+        }
+        return $this->attribute;
     }
 
     public function getClass()
