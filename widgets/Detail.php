@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 class Detail extends BaseWidget
 {
     public $model;
-    public $formatter = ['class' => '\app\components\FormatterComponent'];
+    public $formatter = ['class' => 'app\components\FormatterComponent'];
     
 
     public function init() 
