@@ -45,7 +45,7 @@ class Anchor extends BaseWidget
             }
         }
         $this->user = $this->user ?: App::user();
-        $this->options['title'] = $this->tooltip;
+        $this->options['title'] = $this->options['title'] ?? $this->tooltip;
     }
 
 
