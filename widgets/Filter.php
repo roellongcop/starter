@@ -5,7 +5,6 @@ namespace app\widgets;
 use Yii;
 use app\helpers\App;
 use app\widgets\BootstrapSelect;
-use app\widgets\Multiselect;
 use yii\widgets\ActiveForm;
  
 class Filter extends BaseWidget
