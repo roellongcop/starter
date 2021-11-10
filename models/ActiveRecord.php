@@ -641,7 +641,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getRecordStatusHtml()
     {
-
         if (App::isGuest()) {
             return $this->recordStatusLabel;
         }
