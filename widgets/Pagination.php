@@ -11,7 +11,6 @@ class Pagination extends BaseWidget
     public $title = 'Pagination';
     public $attribute = 'pagination';
     public $paginations = [];
-    public $select2Class;
     public $name;
     public $label = false;
 
@@ -27,10 +26,6 @@ class Pagination extends BaseWidget
         if (! $this->paginations) {
             $this->paginations = App::params('pagination');
         }
-
-        if (! $this->select2Class) {
-            $this->select2Class = App::randomString();
-        }
     }
 
     /**
@@ -45,7 +40,6 @@ class Pagination extends BaseWidget
             'name' => $this->name,
             'attribute' => $this->attribute,
             'paginations' => $this->paginations,
-            'select2Class' => $this->select2Class,
             'label' => $this->label,
         ]);
     }
