@@ -19,7 +19,16 @@ class Switcher extends BaseWidget
         // your logic here
         parent::init();
         $this->controller = $this->controller ?: App::controllerID();
-        $this->data_link = Url::to([$this->controller . '/' . $this->action]);
+        $this->data_link = $this->getDataLink();
+    }
+
+    public function getDataLink()
+    {
+        if (isset($this->model->changeRecordStatusUrl)) {
+            return $this->model->changeRecordStatusUrl;
+        }
+
+        return Url::to([$this->controller . '/' . $this->action]);
     }
 
     /**

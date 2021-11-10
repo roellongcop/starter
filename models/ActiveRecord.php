@@ -572,6 +572,16 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
+    public function getChangeRecordStatusUrl($fullpath=true)
+    {
+        if ($this->checkLinkAccess('change-record-status')) {
+            $url = [
+                implode('/', [$this->controllerID(), 'change-record-status']),
+            ];
+            return ($fullpath)? Url::to($url, true): $url;
+        }
+    }
+
     public function getViewUrl($fullpath=true)
     {
         if ($this->checkLinkAccess('view')) {
