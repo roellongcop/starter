@@ -25,7 +25,9 @@ use app\helpers\Url;
         {pager}
     </div>
 </div>
-{items}
+<div class="my-2">
+    {items}
+</div>
 <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
     <div class="d-flex align-items-center flex-wrap">
         <div class="mr-2">
