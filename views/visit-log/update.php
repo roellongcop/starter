@@ -6,7 +6,7 @@ use app\models\search\VisitLogSearch;
 /* @var $model app\models\VisitLog */
 
 $this->title = 'Update Visit Log: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Visit Logs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Visit Logs', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new VisitLogSearch();

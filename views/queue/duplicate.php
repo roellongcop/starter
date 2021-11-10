@@ -6,7 +6,7 @@ use app\models\search\QueueSearch;
 /* @var $model app\models\Queue */
 
 $this->title = 'Duplicate Queue: ' . $originalModel->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url' => $originalModel->viewUrl];
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new QueueSearch();

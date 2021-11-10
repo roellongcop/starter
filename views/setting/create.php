@@ -6,7 +6,7 @@ use app\models\search\SettingSearch;
 /* @var $model app\models\Setting */
 
 $this->title = 'Create Setting';
-$this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new SettingSearch();
 ?>

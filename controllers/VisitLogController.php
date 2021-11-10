@@ -61,7 +61,7 @@ class VisitLogController extends Controller
             App::danger(json_encode($model->errors));
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     /**
@@ -90,6 +90,7 @@ class VisitLogController extends Controller
 
     public function actionBulkAction()
     {
+        $model = new VisitLog();
         $post = App::post();
 
         if (isset($post['process-selected'])) {
@@ -117,6 +118,7 @@ class VisitLogController extends Controller
                 }
                 else {
                     return $this->render('bulk-action', [
+                        'model' => $model,
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -131,7 +133,7 @@ class VisitLogController extends Controller
             App::warning('No Process Selected');
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     public function actionPrint()

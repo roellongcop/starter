@@ -6,7 +6,7 @@ use app\models\search\UserSearch;
 /* @var $model app\models\User */
 
 $this->title = 'Update Account';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => ['view', 'slug' => $model->slug]];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new UserSearch();

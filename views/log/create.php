@@ -6,7 +6,7 @@ use app\models\search\LogSearch;
 /* @var $model app\models\Log */
 
 $this->title = 'Create Log';
-$this->params['breadcrumbs'][] = ['label' => 'Logs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Logs', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new LogSearch();
 ?>

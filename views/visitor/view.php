@@ -8,7 +8,7 @@ use app\models\search\VisitorSearch;
 /* @var $model app\models\Visitor */
 
 $this->title = 'Visitor: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Visitors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Visitors', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new VisitorSearch();
 $this->params['showCreateButton'] = true; 

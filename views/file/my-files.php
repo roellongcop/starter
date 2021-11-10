@@ -14,7 +14,7 @@ $this->params['showCreateButton'] = true;
 
 $myFilesUrl = Url::to(['file/my-files']);
 $deleteFileUrl = Url::to(['file/delete']);
-$registerJs = <<< JS
+$js = <<< JS
     let selectedFile = 0;
     let selectedToken = 0;
 
@@ -145,8 +145,8 @@ $registerJs = <<< JS
 
     hideActionButton();
 JS;
-$this->registerJs($registerJs);
-$registerCss = <<< CSS
+$this->registerJs($js);
+$css = <<< CSS
     #my-files table tbody tr td {
         overflow-wrap: anywhere;
     }
@@ -157,7 +157,7 @@ $registerCss = <<< CSS
         border: 2px solid #1bc5bd;
     }
 CSS;
-$this->registerCss($registerCss);
+$this->registerCss($css);
 ?>
 <div class="row my-files-page" id="my-files">
     <div class="col-md-7">

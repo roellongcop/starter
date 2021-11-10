@@ -10,7 +10,7 @@ use app\widgets\Detail;
 /* @var $model app\models\Backup */
 
 $this->title = 'Backup: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new BackupSearch();
 $this->params['showCreateButton'] = true; 

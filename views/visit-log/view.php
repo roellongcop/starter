@@ -8,7 +8,7 @@ use app\widgets\Detail;
 /* @var $model app\models\VisitLog */
 
 $this->title = 'Visit Log: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Visit Logs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Visit Logs', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new VisitLogSearch();
 $this->params['showCreateButton'] = true; 

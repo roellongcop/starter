@@ -9,7 +9,7 @@ use app\widgets\Detail;
 /* @var $model app\models\User */
 
 $this->title = 'User: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new UserSearch();
 $this->params['showCreateButton'] = true; 

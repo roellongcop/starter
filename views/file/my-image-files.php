@@ -14,7 +14,7 @@ $this->params['showCreateButton'] = true;
 
 $myImageFilesUrl = Url::to(['file/my-image-files']);
 $deleteFileUrl = Url::to(['file/delete']);
-$registerJs = <<< JS
+$js = <<< JS
     let selectedFile = 0;
     let selectedToken = 0;
 
@@ -142,8 +142,8 @@ $registerJs = <<< JS
         searchMyImage($(this));
     });
 JS;
-$this->registerJs($registerJs);
-$registerCss = <<< CSS
+$this->registerJs($js);
+$css = <<< CSS
     #my-image-files table tbody tr td {
         overflow-wrap: anywhere;
     }
@@ -154,7 +154,7 @@ $registerCss = <<< CSS
         border: 2px solid #1bc5bd;
     }
 CSS;
-$this->registerCss($registerCss);
+$this->registerCss($css);
 ?>
 <div class="row my-image-files-page" id="my-image-files">
     <div class="col-md-7">

@@ -6,7 +6,7 @@ use app\models\search\VisitorSearch;
 /* @var $model app\models\Visitor */
 
 $this->title = 'Duplicate Visitor: ' . $originalModel->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Visitors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Visitors', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url' => $originalModel->viewUrl];
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new VisitorSearch();

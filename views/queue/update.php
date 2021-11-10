@@ -6,7 +6,7 @@ use app\models\search\QueueSearch;
 /* @var $model app\models\Queue */
 
 $this->title = 'Update Queue: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new QueueSearch();

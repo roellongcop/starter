@@ -6,7 +6,7 @@ use app\models\search\QueueSearch;
 /* @var $model app\models\Queue */
 
 $this->title = 'Create Queue';
-$this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new QueueSearch();
 ?>

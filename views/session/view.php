@@ -8,7 +8,7 @@ use app\widgets\Detail;
 /* @var $model app\models\Session */
 
 $this->title = 'Session: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Sessions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Sessions', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new SessionSearch();
 $this->params['showCreateButton'] = true; 

@@ -6,7 +6,7 @@ use app\models\search\UserSearch;
 /* @var $model app\models\User */
 
 $this->title = 'Create User';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new UserSearch();
 ?>

@@ -6,7 +6,7 @@ use app\models\search\UserMetaSearch;
 /* @var $model app\models\UserMeta */
 
 $this->title = 'Update User Meta: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'User Metas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'User Metas', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new UserMetaSearch();

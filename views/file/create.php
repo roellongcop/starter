@@ -6,7 +6,7 @@ use app\models\search\FileSearch;
 /* @var $model app\models\File */
 
 $this->title = 'Create File';
-$this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new FileSearch();
 ?>

@@ -147,6 +147,7 @@ class BackupController extends Controller
 
     public function actionBulkAction()
     {
+        $model = new Backup();
         $post = App::post();
 
         if (isset($post['process-selected'])) {
@@ -174,6 +175,7 @@ class BackupController extends Controller
                 }
                 else {
                     return $this->render('bulk-action', [
+                        'model' => $model,
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -188,7 +190,7 @@ class BackupController extends Controller
             App::warning('No Process Selected');
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     public function actionPrint()
@@ -222,11 +224,11 @@ class BackupController extends Controller
 
         if (!$model || !$model->restore()) {
             App::warning('File currently don\'t exist or cannot be restored.');
-            return $this->redirect(['index']);
+            return $this->redirect($model->indexUrl);
         }
 
         App::success('Restored.');
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     public function actionDownload($slug)
@@ -234,7 +236,7 @@ class BackupController extends Controller
         $model = $this->findModel($slug, 'slug');
         if (!$model || !$model->download()) {
             App::warning('File currently don\'t exist');
-            return $this->redirect(['index']);
+            return $this->redirect($model->indexUrl);
         }
     }
 

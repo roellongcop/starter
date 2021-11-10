@@ -32,7 +32,7 @@ class NotificationController extends Controller
 
     /**
      * Displays a single Notification model.
-     * @param integer $id
+     * @param integer $token
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
@@ -48,13 +48,13 @@ class NotificationController extends Controller
     /**
      * Deletes an existing Notification model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $token
      * @return mixed
      * @throws ForbiddenHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($token)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($token, 'token');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -63,7 +63,7 @@ class NotificationController extends Controller
             App::danger(json_encode($model->errors));
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     /**
@@ -92,6 +92,7 @@ class NotificationController extends Controller
 
     public function actionBulkAction()
     {
+        $model = new Notification();
         $post = App::post();
 
         if (isset($post['process-selected'])) {
@@ -125,6 +126,7 @@ class NotificationController extends Controller
                 }
                 else {
                     return $this->render('bulk-action', [
+                        'model' => $model,
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -139,7 +141,7 @@ class NotificationController extends Controller
             App::warning('No Process Selected');
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     public function actionPrint()

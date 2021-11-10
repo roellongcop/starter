@@ -6,7 +6,7 @@ use app\models\search\IpSearch;
 /* @var $model app\models\Ip */
 
 $this->title = 'Create Ip';
-$this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new IpSearch();
 ?>

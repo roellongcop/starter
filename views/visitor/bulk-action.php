@@ -1,10 +1,10 @@
 <?php
 
-use app\widgets\ConfirmBulkAction;
 use app\models\search\VisitorSearch;
+use app\widgets\ConfirmBulkAction;
 
 $this->title = 'Confirm Bulk Action';
-$this->params['breadcrumbs'][] = ['label' => 'Visitors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Visitors', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['showCreateButton'] = true;
 $this->params['searchModel'] = new VisitorSearch();

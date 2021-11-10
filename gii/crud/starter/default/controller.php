@@ -166,7 +166,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
             App::danger(json_encode($model->errors));
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     /**
@@ -206,6 +206,7 @@ if (count($pks) === 1) {
 
     public function actionBulkAction()
     {
+        $model = new <?= $modelClass ?>();
         $post = App::post();
 
         if (isset($post['process-selected'])) {
@@ -233,6 +234,7 @@ if (count($pks) === 1) {
                 }
                 else {
                     return $this->render('bulk-action', [
+                        'model' => $model,
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -247,7 +249,7 @@ if (count($pks) === 1) {
             App::warning('No Process Selected');
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     public function actionPrint()

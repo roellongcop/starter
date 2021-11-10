@@ -6,7 +6,7 @@ use app\models\search\VisitLogSearch;
 /* @var $model app\models\VisitLog */
 
 $this->title = 'Create Visit Log';
-$this->params['breadcrumbs'][] = ['label' => 'Visit Logs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Visit Logs', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new VisitLogSearch();
 ?>

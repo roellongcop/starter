@@ -6,7 +6,7 @@ use app\models\search\UserMetaSearch;
 /* @var $model app\models\UserMeta */
 
 $this->title = 'Duplicate User Meta: ' . $originalModel->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'UserMetas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'UserMetas', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url' => $originalModel->viewUrl];
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new UserMetaSearch();

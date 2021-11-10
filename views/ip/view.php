@@ -8,7 +8,7 @@ use app\widgets\Detail;
 /* @var $model app\models\Ip */
 
 $this->title = 'IP: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new IpSearch();
 $this->params['showCreateButton'] = true; 

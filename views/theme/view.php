@@ -9,7 +9,7 @@ use app\widgets\Detail;
 /* @var $model app\models\Theme */
 
 $this->title = 'Theme: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Themes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Themes', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new ThemeSearch();
 $this->params['showCreateButton'] = true; 

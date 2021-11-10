@@ -137,7 +137,7 @@ class FileController extends Controller
             App::danger(json_encode($model->errors));
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     /**
@@ -166,6 +166,7 @@ class FileController extends Controller
 
     public function actionBulkAction()
     {
+        $model = new File();
         $post = App::post();
 
         if (isset($post['process-selected'])) {
@@ -192,6 +193,7 @@ class FileController extends Controller
                 }
                 else {
                     return $this->render('bulk-action', [
+                        'model' => $model,
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -206,7 +208,7 @@ class FileController extends Controller
             App::warning('No Process Selected');
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     public function actionPrint()

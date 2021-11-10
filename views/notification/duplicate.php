@@ -6,7 +6,7 @@ use app\models\search\NotificationSearch;
 /* @var $model app\models\Notification */
 
 $this->title = 'Duplicate Notification: ' . $originalModel->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Notifications', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Notifications', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url' => $originalModel->viewUrl];
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new NotificationSearch();

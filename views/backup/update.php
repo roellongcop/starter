@@ -6,7 +6,7 @@ use app\models\search\BackupSearch;
 /* @var $model app\models\Backup */
 
 $this->title = 'Update Backup: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $model->mainAttribute, 'url' => $model->viewUrl];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['searchModel'] = new BackupSearch();

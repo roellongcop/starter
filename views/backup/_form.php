@@ -11,7 +11,7 @@ use app\widgets\ActiveForm;
 /* @var $form app\widgets\ActiveForm */
 
 $tables = App::component('general')->getAllTables();
-$registerJs = <<< JS
+$js = <<< JS
     $('.all-table-checkbox').on('click', function() {
         let is_checked = $(this).is(':checked');
 
@@ -23,7 +23,7 @@ $registerJs = <<< JS
         } 
     });
 JS;
-$this->registerJs($registerJs);
+$this->registerJs($js);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'backup-form']); ?>
     <div class="row">

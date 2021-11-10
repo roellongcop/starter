@@ -42,71 +42,7 @@ class VisitorController extends Controller
             'model' => $this->findModel($cookie, 'cookie'),
         ]);
     }
-
-    /**
-     * Creates a new Visitor model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Visitor();
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Created');
-
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Duplicates a new Visitor model.
-     * If duplication is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionDuplicate($cookie)
-    {
-        $originalModel = $this->findModel($cookie, 'cookie');
-        $model = new Visitor();
-        $model->attributes = $originalModel->attributes;
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Duplicated');
-
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('duplicate', [
-            'model' => $model,
-            'originalModel' => $originalModel,
-        ]);
-    }
-
-    /**
-     * Updates an existing Visitor model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $cookie
-     * @return mixed
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    public function actionUpdate($cookie)
-    {
-        $model = $this->findModel($cookie, 'cookie');
-
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Updated');
-            return $this->redirect($model->viewUrl);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
+ 
     /**
      * Deletes an existing Visitor model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -125,7 +61,7 @@ class VisitorController extends Controller
             App::danger(json_encode($model->errors));
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     /**
@@ -154,6 +90,7 @@ class VisitorController extends Controller
 
     public function actionBulkAction()
     {
+        $model = new Visitor();
         $post = App::post();
 
         if (isset($post['process-selected'])) {
@@ -181,6 +118,7 @@ class VisitorController extends Controller
                 }
                 else {
                     return $this->render('bulk-action', [
+                        'model' => $model,
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -195,7 +133,7 @@ class VisitorController extends Controller
             App::warning('No Process Selected');
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     public function actionPrint()

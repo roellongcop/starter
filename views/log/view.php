@@ -8,7 +8,7 @@ use app\widgets\Detail;
 /* @var $model app\models\Log */
 
 $this->title = 'Log: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Logs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Logs', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new LogSearch();
 $this->params['showCreateButton'] = true; 

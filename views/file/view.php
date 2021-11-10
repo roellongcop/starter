@@ -9,7 +9,7 @@ use app\widgets\Detail;
 /* @var $model app\models\File */
 
 $this->title = 'File: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new FileSearch();
 $this->params['showCreateButton'] = true; 

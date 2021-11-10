@@ -6,7 +6,7 @@ use app\models\search\IpSearch;
 /* @var $model app\models\Ip */
 
 $this->title = 'Duplicate Ip: ' . $originalModel->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Ips', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url' => $originalModel->viewUrl];
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new IpSearch();

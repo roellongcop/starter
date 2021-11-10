@@ -8,7 +8,7 @@ use app\models\search\NotificationSearch;
 /* @var $model app\models\Notification */
 
 $this->title = 'Notification: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Notifications', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Notifications', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new NotificationSearch();
 $this->params['showCreateButton'] = true; 

@@ -8,7 +8,7 @@ use app\widgets\Detail;
 /* @var $model app\models\Role */
 
 $this->title = 'Role: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new RoleSearch();
 $this->params['showCreateButton'] = true; 

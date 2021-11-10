@@ -8,7 +8,7 @@ use app\widgets\Detail;
 /* @var $model app\models\Setting */
 
 $this->title = 'Setting: ' . $model->mainAttribute;
-$this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Settings', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = $model->mainAttribute;
 $this->params['searchModel'] = new SettingSearch();
 $this->params['showCreateButton'] = true; 

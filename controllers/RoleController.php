@@ -167,7 +167,7 @@ class RoleController extends Controller
             App::danger(json_encode($model->errors));
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     /**
@@ -196,6 +196,7 @@ class RoleController extends Controller
 
     public function actionBulkAction()
     {
+        $model = new Role();
         $post = App::post();
 
         if (isset($post['process-selected'])) {
@@ -223,6 +224,7 @@ class RoleController extends Controller
                 }
                 else {
                     return $this->render('bulk-action', [
+                        'model' => $model,
                         'models' => $models,
                         'process' => $process,
                         'post' => $post
@@ -237,7 +239,7 @@ class RoleController extends Controller
             App::warning('No Process Selected');
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect($model->indexUrl);
     }
 
     public function actionPrint()

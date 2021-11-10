@@ -6,7 +6,7 @@ use app\models\search\ThemeSearch;
 /* @var $model app\models\Theme */
 
 $this->title = 'Create Theme';
-$this->params['breadcrumbs'][] = ['label' => 'Themes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Themes', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new ThemeSearch();
 ?>

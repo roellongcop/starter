@@ -6,7 +6,7 @@ use app\models\search\VisitorSearch;
 /* @var $model app\models\Visitor */
 
 $this->title = 'Create Visitor';
-$this->params['breadcrumbs'][] = ['label' => 'Visitors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Visitors', 'url' => $model->indexUrl];
 $this->params['breadcrumbs'][] = 'Create';
 $this->params['searchModel'] = new VisitorSearch();
 ?>
