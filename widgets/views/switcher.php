@@ -38,7 +38,7 @@ $js = <<< JS
         })
     });
 JS;
-$this->registerWidgetJs($widgetFunction, $js);
+$this->registerJs($js);
 ?>
 <span class="switch switch-outline switch-icon switch-sm switch-success <?= ($checked) ? '': 'switch-danger-custom' ?>" data-widget_id="<?= $id ?>">
 	<label>

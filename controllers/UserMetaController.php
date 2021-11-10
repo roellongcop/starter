@@ -151,25 +151,7 @@ class UserMetaController extends Controller
 
     public function actionChangeRecordStatus()
     {
-        if (($post = App::post()) != null) {
-            $model = $this->findModel($post['id']);
-            $model->record_status = $post['record_status'];
-
-            if ($model->save()) {
-                $model->refresh();
-                return $this->asJson([
-                    'status' => 'success',
-                    'attributes' => $model->attributes
-                ]);
-            }
-            else {
-                return $this->asJson([
-                    'status' => 'failed',
-                    'errors' => $model->errors,
-                    'errorSummary' => $model->errorSummary
-                ]);
-            }
-        }
+        return $this->changeRecordStatus();
     }
 
     public function actionBulkAction()
