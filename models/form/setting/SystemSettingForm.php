@@ -40,7 +40,7 @@ class SystemSettingForm extends SettingForm
             ],
             'pagination' => [
                 'name' => 'pagination',
-                'default' => 20,
+                'default' => 25,
             ],
             'auto_logout_timer' => [
                 'name' => 'auto_logout_timer',

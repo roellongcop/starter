@@ -35,6 +35,7 @@ class Grid extends BaseWidget
         $this->columns['actions'] = $this->columns['actions'] ?? $this->actionColumns();
         $this->layout = $this->layout ?: $this->render('grid/layout', [
             'searchModel' => $this->searchModel,
+            'dataProvider' => $this->dataProvider,
             'paginations' => App::params('pagination')
         ]);
     }
