@@ -10,6 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'UserMetas', 'url' => $model->index
 $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url' => $originalModel->viewUrl];
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new UserMetaSearch();
+$this->params['showCreateButton'] = true;
 ?>
 <div class="user-meta-duplicate-page">
 	<?= $this->render('_form', [

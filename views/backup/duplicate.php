@@ -10,6 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Backups', 'url' => $model->indexUr
 $this->params['breadcrumbs'][] = ['label' => $originalModel->mainAttribute, 'url' => $originalModel->viewUrl];
 $this->params['breadcrumbs'][] = 'Duplicate';
 $this->params['searchModel'] = new BackupSearch();
+$this->params['showCreateButton'] = true;
 ?>
 <div class="backup-duplicate-page">
 	<?= $this->render('_form', [
