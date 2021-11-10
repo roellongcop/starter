@@ -33,7 +33,10 @@ class Grid extends BaseWidget
         $this->columns = $this->searchModel->tableColumns;
 
         $this->columns['actions'] = $this->columns['actions'] ?? $this->actionColumns();
-        $this->layout = $this->layout ?: $this->render('grid/layout');
+        $this->layout = $this->layout ?: $this->render('grid/layout', [
+            'searchModel' => $this->searchModel,
+            'paginations' => App::params('pagination')
+        ]);
     }
 
     public function actionName($name)
