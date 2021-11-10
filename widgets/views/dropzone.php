@@ -49,6 +49,17 @@ $js = <<< JS
     });
 JS;
 $this->registerWidgetJs($widgetFunction, $js);
+
+
+$css = <<< CSS
+    .dropzone.dropzone-default .dz-remove {
+        font-size: 12px !important;
+    }
+    .dropzone .dz-preview .dz-remove {
+        font-size: 12px !important;
+    }
+CSS;
+$this->registerCss($css);
 ?>
 
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">

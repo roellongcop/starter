@@ -39,6 +39,17 @@ $js = <<< JS
     });
 JS;
 $this->registerJs($js);
+
+$css = <<< CSS
+    .switch.switch-outline.switch-danger-custom input:empty ~ span:before {
+        border: 2px solid #f64e60;
+    }
+
+    .switch.switch-outline.switch-danger-custom input:empty ~ span:after {
+        background-color: #f64e60;
+    }
+CSS;
+$this->registerCss($css);
 ?>
 <span class="switch switch-outline switch-icon switch-sm switch-success <?= ($checked) ? '': 'switch-danger-custom' ?>" data-widget_id="<?= $id ?>">
 	<label>
