@@ -81,6 +81,17 @@ class Html extends \yii\helpers\Html
         return $falseContent;
     }
 
+    public static function ifElseIf($params=[])
+    {
+        if ($params) {
+            foreach ($params as $key => $data) {
+                if ($data['condition']) {
+                    return $data['content'];
+                }
+            }
+        }
+    }
+
     public static function foreach($array=[], $function)
     {
         $content = [];
