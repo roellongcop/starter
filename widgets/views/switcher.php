@@ -1,5 +1,6 @@
 <?php
-$registerJs = <<< JS
+
+$js = <<< JS
     $('.input-switcher').on('change', function() {
         let self = this;
         let is_checked = $(self).is(':checked');
@@ -37,7 +38,7 @@ $registerJs = <<< JS
         })
     });
 JS;
-$this->registerJs($registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 ?>
 <span class="switch switch-outline switch-icon switch-sm switch-success <?= ($checked) ? '': 'switch-danger-custom' ?>" data-widget_id="<?= $id ?>">
 	<label>

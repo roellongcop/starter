@@ -3,6 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\App;
+use app\helpers\Html;
 use app\widgets\Switcher;
  
 class RecordHtml extends BaseWidget
@@ -25,8 +26,8 @@ class RecordHtml extends BaseWidget
     public function run()
     {
         if ($this->labelOnly) {
-            return $this->render('record-html', [
-                'model' => $this->model
+            return Html::tag('span', $this->model->recordStatus['label'], [
+                'class' => 'badge badge-' . $this->model->recordStatus['class']
             ]);
         }
 

@@ -22,7 +22,6 @@ class Switcher extends BaseWidget
         $this->data_link = Url::to([$this->controller . '/' . $this->action]);
     }
 
-
     /**
      * {@inheritdoc}
      */

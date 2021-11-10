@@ -2,7 +2,7 @@
 
 use app\helpers\Html;
 
-$registerJs = <<< JS
+$js = <<< JS
     let popupCenter = (url, title='Print Report', w=1000, h=700) => {
         // Fixes dual-screen position                             Most browsers      Firefox
         const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
@@ -55,7 +55,7 @@ $registerJs = <<< JS
             });
     });
 JS;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 ?>
 <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="top">
     <a href="#" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm px-5 mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

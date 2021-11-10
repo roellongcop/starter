@@ -1,5 +1,6 @@
 <?php
-$registerJs = <<< JS
+
+$js = <<< JS
     let container = document.getElementById('{$id}')
 
     if (container) {
@@ -10,6 +11,6 @@ $registerJs = <<< JS
         editors['{$id}'] = editor;
     }
 JS;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 ?>
 <div id="<?= $id ?>"> </div>

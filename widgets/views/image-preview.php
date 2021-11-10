@@ -2,7 +2,7 @@
 
 use app\helpers\Html;
 
-$registerJs = <<< JS
+$js = <<< JS
 	$('#{$imageID}').on('change', function() {
 		let input = this;
 		if (input.files && input.files[0]) {
@@ -17,6 +17,6 @@ $registerJs = <<< JS
 	    }
 	})
 JS;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 ?>
 <?= Html::img($src, $options) ?>

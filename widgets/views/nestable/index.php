@@ -3,7 +3,7 @@
 use app\helpers\Html;
 use app\helpers\Url;
 
-$registerJs = <<< JS
+$js = <<< JS
     let index = 0;
     $(document).on('click', '.btn-remove-menu', function() {
         var confirm_dialog = confirm('Are you sure?');
@@ -84,7 +84,7 @@ $registerJs = <<< JS
     }
     initNestable();
 JS;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 ?>
 <div class="row">
     <div class="col-md-12">

@@ -4,14 +4,14 @@ use app\helpers\App;
 use yii\helpers\ArrayHelper;
 use app\helpers\Html;
 
-$registerJs = <<< JS
+$js = <<< JS
     $('a.bulk-action').on('click', function() {
         var data_process = $(this).data('process');
         $('input[name="process-selected"]').val(data_process);
         $(this).closest('form').submit();
     });
 JS;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 ?>
 <?= Html::if(
     App::component('access')->userCan('bulk-action') && $bulkActions,

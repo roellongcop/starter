@@ -2,7 +2,7 @@
 
 use app\helpers\Html;
 
-$registerJs = <<< JS
+$js = <<< JS
     $('#dropzone-{$id}').dropzone({
         url: "{$url}", // Set the url for your upload script location
         paramName: "{$paramName}", // The name that will be used to transfer the file
@@ -48,7 +48,7 @@ $registerJs = <<< JS
         }
     });
 JS;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 ?>
 
 <div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">

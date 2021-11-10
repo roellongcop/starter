@@ -1,5 +1,6 @@
 <?php
-$registerJs = <<< JS
+
+$js = <<< JS
     let start = moment('{$start}');
     let end = moment('{$end}');
     let defaultRanges = {
@@ -32,7 +33,7 @@ $registerJs = <<< JS
     $('#{$id} span').html( start.format('MMMM DD, YYYY') + ' - ' + end.format('MMMM DD, YYYY'));
     $('#{$id} input').val( start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
 JS;
-$this->registerWidgetJs($widgetFunction, $registerJs);
+$this->registerWidgetJs($widgetFunction, $js);
 ?>
 <br>
 <p class=""><?= $title ?></p>
