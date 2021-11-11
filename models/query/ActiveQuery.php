@@ -117,4 +117,43 @@ class ActiveQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+
+    public function sum($q, $db = null) 
+    {
+        $this->visible();
+        return parent::sum($q, $db);
+    }
+
+    public function average($q, $db = null) 
+    {
+        $this->visible();
+        return parent::average($q, $db);
+    }
+
+    public function min($q, $db = null) 
+    {
+        $this->visible();
+        return parent::min($q, $db);
+    }
+
+    public function max($q, $db = null) 
+    {
+        $this->visible();
+        return parent::max($q, $db);
+    }
+
+    public function scalar($db = null) 
+    {
+        return parent::scalar($db);
+    }
+
+    public function column($db = null) 
+    {
+        return parent::column($db);
+    }
+
+    public function exists($db = null) 
+    {
+        return parent::exists($db);
+    }
 }
