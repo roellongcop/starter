@@ -22,6 +22,7 @@ $js = <<< JS
                         size: files[i].size, 
                         accepted: true,
                         status: Dropzone.ADDED, 
+                        upload: files[i].upload
                     };
                     myDropzone.emit("addedfile", mockFile);                                
                     myDropzone.emit("thumbnail", mockFile, files[i].imagePath);
@@ -72,6 +73,6 @@ $this->registerCss($css);
         </span>
     </div>
     <?= Html::foreach($files, function($key, $file) use ($inputName) {
-        return Html::input('hidden', $inputName, $file['token'], ['data-uuid' => $file['token']]);
+        return Html::input('text', $inputName, $file['token'], ['data-uuid' => $file['token']]);
     }) ?>
 </div>
