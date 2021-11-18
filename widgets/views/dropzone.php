@@ -73,6 +73,6 @@ $this->registerCss($css);
         </span>
     </div>
     <?= Html::foreach($files, function($key, $file) use ($inputName) {
-        return Html::input('text', $inputName, $file['token'], ['data-uuid' => $file['token']]);
+        return Html::input('hidden', $inputName, $file['token'], ['data-uuid' => $file['token']]);
     }) ?>
 </div>
