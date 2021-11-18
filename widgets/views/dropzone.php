@@ -23,10 +23,10 @@ $js = <<< JS
                         accepted: true,
                         status: Dropzone.ADDED, 
                     };
-                    myDropzone.emit("addedfile", files[i]);                                
-                    myDropzone.emit("thumbnail", files[i], files[i].imagePath);
-                    myDropzone.emit("complete", files[i]);
-                    myDropzone.files.push(files[i]);
+                    myDropzone.emit("addedfile", mockFile);                                
+                    myDropzone.emit("thumbnail", mockFile, files[i].imagePath);
+                    myDropzone.emit("complete", mockFile);
+                    myDropzone.files.push(mockFile);
                 }
             }
             this.on("sending", function(file, xhr, formData) {
