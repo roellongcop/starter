@@ -4,8 +4,8 @@ use app\helpers\Html;
 ?>
 <input type="hidden" name="process-selected">
 <div class="dropdown mb-5" style="width: fit-content;">
-    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-        <?= $title ?>
+    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="bulk-action-label"><?= $title ?></span>
         <span class="caret"></span>
     </button>
     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0">
