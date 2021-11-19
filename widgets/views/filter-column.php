@@ -83,11 +83,13 @@ $js = <<< JS
         });
         
     });
+
+
 JS;
 $this->registerWidgetJs($widgetFunction, $js);
 ?>
-<div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline _div_filter_columns" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;"> 
-    <a href="#!" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm  mr-3 btn-sm _filter_columns"  aria-haspopup="true" aria-expanded="false" style="border: 1px solid #ccc;">
+<div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;"> 
+    <a href="#!" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm  mr-3 btn-sm _filter_columns"  aria-haspopup="true" aria-expanded="false" style="border: 1px solid #ccc;" data-toggle="dropdown">
         <span class="svg-icon svg-icon-md">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -98,10 +100,11 @@ $this->registerWidgetJs($widgetFunction, $js);
         </span>
         <?= $title ?>
     </a>
-    <div data-widget_id="<?= $id ?>" class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0 _div_filter_columns" style="">
+    <div data-widget_id="<?= $id ?>" class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0" style="">
         <!--begin::Navigation-->
         <?= Html::beginForm(['user-meta/filter'], 'post',  [
             'style' => 'max-height: 56vh; overflow: auto;',
+            'class' => "app-scroll"
         ]); ?>
             <?= Html::activeInput('hidden', $model, 'table_name', [
                 'value' => App::tableName($searchModel, false)

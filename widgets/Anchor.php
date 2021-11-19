@@ -70,8 +70,14 @@ class Anchor extends BaseWidget
      */
     public function run()
     {
-        if ($this->link && !is_array($this->link) && $this->isExternal($this->link)) {
-            return Html::a($this->title, $this->link, $this->options);
+        if ($this->link) {
+            if ($this->link == '#') {
+                return Html::a($this->title, $this->link, $this->options);
+            }
+
+            if (!is_array($this->link) && $this->isExternal($this->link)) {
+                return Html::a($this->title, $this->link, $this->options);
+            }
         }
 
         if (App::component('access')->userCan($this->action, $this->controller, $this->user)) {
