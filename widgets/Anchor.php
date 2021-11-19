@@ -47,18 +47,34 @@ class Anchor extends BaseWidget
         $this->options['title'] = $this->options['title'] ?? $this->tooltip;
     }
 
+    public function isExternal($url) 
+    {
+        $hostName = App::request('hostName');
+
+        $components = parse_url($url);
+        if ( empty($components['host']) ) {
+            // we will treat url like '/relative.php' as relative
+            return false;  
+        }
+        if ( strcasecmp($components['host'], $hostName) === 0 ) {
+            // url host looks exactly like the local host
+            return false; 
+        } 
+        // check if the url host is a subdomain
+        return strrpos(strtolower($components['host']), ".{$hostName}") !== strlen($components['host']) - strlen(".{$hostName}"); 
+    }
+
 
     /**
      * {@inheritdoc}
      */
     public function run()
     {
-        if ($this->link && !is_array($this->link)) {
+        if ($this->link && !is_array($this->link) && $this->isExternal($this->link)) {
             return Html::a($this->title, $this->link, $this->options);
         }
 
         if (App::component('access')->userCan($this->action, $this->controller, $this->user)) {
-
             return Html::a($this->title, $this->link, $this->options);
         }
 
