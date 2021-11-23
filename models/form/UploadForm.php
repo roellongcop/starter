@@ -76,7 +76,7 @@ class UploadForm extends \yii\base\Model
             'location' => $location,
             'extension' => $input->extension,
             'size' => $input->size,
-           'token' => $this->token ?: ''
+           // 'token' => $this->token ?: ''
         ]);
 
         if ($file->save()) {
