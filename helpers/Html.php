@@ -92,13 +92,13 @@ class Html extends \yii\helpers\Html
         }
     }
 
-    public static function foreach($array=[], $function)
+    public static function foreach($array=[], $function, $glue=' ')
     {
         $content = [];
         foreach ($array as $key => $value) {
             $content[] = call_user_func($function, $key, $value);
         }
 
-        return implode(' ', $content);
+        return implode($glue, $content);
     }
 }
