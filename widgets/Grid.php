@@ -164,6 +164,5 @@ class Grid extends BaseWidget
             'pager' => $this->pager,
             'formatter' => $this->formatter,
         ]);
-       
     }
 }

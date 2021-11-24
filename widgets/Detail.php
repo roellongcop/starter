@@ -27,6 +27,5 @@ class Detail extends BaseWidget
             'attributes' => $this->model->detailColumns ?? ['id'],
             'formatter' => $this->formatter,
         ]);
-       
     }
 }

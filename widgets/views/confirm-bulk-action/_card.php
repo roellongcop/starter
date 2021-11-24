@@ -25,7 +25,7 @@ use app\widgets\Detail;
 	</div>
 	<div id="collapse-action-<?= $model->id ?>" class="collapse" data-parent="#accordionContent-<?= $widgetId ?>">
 		<div class="card-body pl-12">
-			<?= Detail::widget(['model' => $model]) ?>
+			<?= $model->detailView ?>
 		</div>
 	</div>
 </div>

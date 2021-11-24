@@ -10,6 +10,7 @@ use app\models\Log;
 use app\models\form\export\ExportForm;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
+use app\widgets\Detail;
 use app\widgets\RecordHtml;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
@@ -411,6 +412,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         return $columns;
+    }
+
+    public function getDetailView()
+    {
+        return Detail::widget(['model' => $this]);
     }
 
     public function getDetailColumns()
