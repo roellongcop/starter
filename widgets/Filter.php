@@ -2,6 +2,7 @@
 
 namespace app\widgets;
 
+use app\helpers\Html;
 use app\widgets\BootstrapSelect;
  
 class Filter extends BaseWidget
@@ -52,15 +53,19 @@ class Filter extends BaseWidget
      */
     public function run()
     {
+        if (count($this->data) == 1) {
+            return ;
+        }
+
         if (count($this->data) > 20) {
-            return '<br>' .  BootstrapSelect::widget([
+            return Html::tag('div', BootstrapSelect::widget([
                 'attribute' => $this->attribute,
                 'model' => $this->model,
                 'form' => $this->form,
                 'data' => $this->data,
                 'name' => $this->name,
                 'multiple' => true
-            ]);
+            ]), ['class' => 'mt-5']);
         }
 
         if ($this->data) {
@@ -69,6 +74,5 @@ class Filter extends BaseWidget
                 'inputs' => $this->inputs,
             ]);
         }
-       
     }
 }
