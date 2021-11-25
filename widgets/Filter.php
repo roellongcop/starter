@@ -53,7 +53,7 @@ class Filter extends BaseWidget
      */
     public function run()
     {
-        if (count($this->data) == 1) {
+        if (count($this->data) <= 1) {
             return ;
         }
 
