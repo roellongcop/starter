@@ -32,9 +32,12 @@ abstract class SettingForm extends \yii\base\Model
 
             $model = Setting::findOne($condition) ?: new Setting($condition);
             $model->value = json_encode($this->attributes);
-            $model->save();
-
-            return true;
+            if ($model->save()) {
+                return $model;
+            }
+            else {
+                $this->addError('setting', $model->errors);
+            }
         }
 
         return false;

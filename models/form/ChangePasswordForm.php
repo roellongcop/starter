@@ -97,6 +97,9 @@ class ChangePasswordForm extends \yii\base\Model
 
                 return $user;
             }
+            else {
+                $this->addError('user', $user->errors);
+            }
         }
 
         return false;
