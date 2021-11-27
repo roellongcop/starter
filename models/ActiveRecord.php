@@ -262,6 +262,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $updateAll;
     }
 
+    public function getCanDuplicate()
+    {
+        return true;
+    }
+
     public function getCanDelete()
     {
         if ($this->_canDelete === NULL) {
