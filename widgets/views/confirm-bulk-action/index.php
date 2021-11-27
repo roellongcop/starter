@@ -25,7 +25,7 @@ use app\helpers\Html;
 		<input type="hidden" name="process-selected" value="<?= $post['process-selected'] ?>">
 		<div class="accordion accordion-light accordion-light-borderless accordion-svg-toggle" 
 			id="accordionContent-<?= $widgetId ?>">
-			<?= Html::foreach($models, function($key, $model) use ($widgetId) {
+			<?= Html::foreach($models, function($key, $model) use ($widgetId, $post) {
 				return $this->render('_card', [
 					'key' => $key,
 					'model' => $model,
