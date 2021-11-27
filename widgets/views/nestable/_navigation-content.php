@@ -67,7 +67,7 @@ use app\helpers\Html;
         '<ol class="dd-list">
             '. $this->render('_navigation', [
                 'data_id' => $data_id,
-                'navigations' => $nav['sub'],
+                'navigations' => $nav['sub'] ?? [],
                 'id' => $id,
             ]) .'
         </ol>'
