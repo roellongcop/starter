@@ -55,7 +55,6 @@ class ThemeController extends Controller
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Created');
-
             return $this->redirect($model->viewUrl);
         }
 
@@ -75,10 +74,13 @@ class ThemeController extends Controller
         $model = new Theme();
         $model->attributes = $originalModel->attributes;
 
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Duplicated');
+        if (($post = App::post()) != NULL) {
+            $post['Theme']['photos'] = $post['Theme']['photos'] ?? NULL;
 
-            return $this->redirect($model->viewUrl);
+            if ($model->load($post) && $model->save()) {
+                App::success('Successfully Duplicated');
+                return $this->redirect($model->viewUrl);
+            }
         }
 
         return $this->render('duplicate', [
@@ -99,9 +101,13 @@ class ThemeController extends Controller
     {
         $model = $this->findModel($slug, 'slug');
 
-        if ($model->load(App::post()) && $model->save()) {
-            App::success('Successfully Updated');
-            return $this->redirect($model->viewUrl);
+        if (($post = App::post()) != NULL) {
+            $post['Theme']['photos'] = $post['Theme']['photos'] ?? NULL;
+
+            if ($model->load($post) && $model->save()) {
+                App::success('Successfully Updated');
+                return $this->redirect($model->viewUrl);
+            }
         }
 
         return $this->render('update', [

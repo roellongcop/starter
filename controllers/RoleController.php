@@ -52,18 +52,7 @@ class RoleController extends Controller
     {
         $model = new Role();
 
-        if ($model->load(App::post()) && $model->validate()) {
-
-            $post = App::post();
-            if (empty($post['Role']['main_navigation'])) {
-                $model->main_navigation = NULL;
-            }
-            if (empty($post['Role']['role_access'])) {
-                $model->role_access = NULL;
-            }
-            if (empty($post['Role']['module_access'])) {
-                $model->module_access = NULL;
-            }
+        if ($model->load(App::post()) && $model->save()) {
             if ($model->save()) {
                 App::success('Successfully Created');
                 return $this->redirect($model->viewUrl);
@@ -88,20 +77,12 @@ class RoleController extends Controller
         $model = new Role();
         $model->attributes = $originalModel->attributes;
 
-        if ($model->load(App::post()) && $model->validate()) {
+        if (($post = App::post()) != NULL) {
+            $post['Role']['main_navigation'] = $post['Role']['main_navigation'] ?? NULL;
+            $post['Role']['role_access'] = $post['Role']['role_access'] ?? NULL;
+            $post['Role']['module_access'] = $post['Role']['module_access'] ?? NULL;
 
-            $post = App::post();
-            $model->load($post);
-            if (empty($post['Role']['main_navigation'])) {
-                $model->main_navigation = NULL;
-            }
-            if (empty($post['Role']['role_access'])) {
-                $model->role_access = NULL;
-            }
-            if (empty($post['Role']['module_access'])) {
-                $model->module_access = NULL;
-            }
-            if ($model->save()) {
+            if ($model->load($post) && $model->save()) {
                 App::success('Successfully Duplicated');
                 return $this->redirect($model->viewUrl);
             }
@@ -124,25 +105,16 @@ class RoleController extends Controller
     {
         $model = $this->findModel($slug, 'slug');
 
-        if ($model->load(App::post()) && $model->validate()) {
+        if (($post = App::post()) != NULL) {
+            $post['Role']['main_navigation'] = $post['Role']['main_navigation'] ?? NULL;
+            $post['Role']['role_access'] = $post['Role']['role_access'] ?? NULL;
+            $post['Role']['module_access'] = $post['Role']['module_access'] ?? NULL;
 
-            $post = App::post();
-            $model->load($post);
-            if (empty($post['Role']['main_navigation'])) {
-                $model->main_navigation = NULL;
-            }
-            if (empty($post['Role']['role_access'])) {
-                $model->role_access = NULL;
-            }
-            if (empty($post['Role']['module_access'])) {
-                $model->module_access = NULL;
-            }
-            if ($model->save()) {
+            if ($model->load($post) && $model->save()) {
                 App::success('Successfully Updated');
                 return $this->redirect($model->viewUrl);
             }
         }
-
 
         return $this->render('update', [
             'model' => $model,
