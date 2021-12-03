@@ -122,7 +122,7 @@ $this->registerWidgetJs($widgetFunction, $js);
                 </li>
                 <li class="navi-item">
                     <div class="checkbox-list">
-                        <?= Html::foreach($searchModel->tableColumns, function($key, $value) use ($model, $filterColumns) {
+                        <?= Html::foreach($searchModel->tableColumns, function($value, $key) use ($model, $filterColumns) {
                             return '<label class="checkbox">
                                 '. Html::activeInput('checkbox', $model, 'columns[]', [
                                     'value' => $key,

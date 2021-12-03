@@ -17,7 +17,7 @@ use app\helpers\Html;
     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0">
         <!--begin::Navigation-->
         <ul class="navi navi-hover">
-            <?= Html::foreach($template, function($key, $t) {
+            <?= Html::foreach($template, function($t) {
                 return Html::if($t, '<li class="navi-item">'. $t .'</li>');
             }) ?>
         </ul>

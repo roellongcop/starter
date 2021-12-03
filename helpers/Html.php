@@ -96,7 +96,7 @@ class Html extends \yii\helpers\Html
     {
         $content = [];
         foreach ($array as $key => $value) {
-            $content[] = call_user_func($function, $key, $value);
+            $content[] = call_user_func($function, $value, $key);
         }
 
         return implode($glue, $content);

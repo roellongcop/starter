@@ -29,7 +29,7 @@ $this->params['searchModel'] = new DashboardSearch();
 	<div class="row">
 		<div class="col-md-3">
 			<ul class="navi navi-accent navi-hover navi-bold navi-border">
-				<?= Html::foreach($setting_modules, function($keyTab, $menu) use ($tab) {
+				<?= Html::foreach($setting_modules, function($menu, $keyTab) use ($tab) {
 					return $this->render('_general-navigation', [
 						'tab' => $tab,
 						'keyTab' => $keyTab,

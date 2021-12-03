@@ -15,7 +15,7 @@ use app\widgets\Checkbox;
         ]) ?>
         <br>
         <div class="accordion accordion-toggle-arrow" id="module-access-accordion">
-            <?= Html::foreach($controller_actions, function($controller, $actions) use ($model) {
+            <?= Html::foreach($controller_actions, function($actions, $controller) use ($model) {
                 return $this->render('_form_actions-content', [
                     'controller' => $controller,
                     'actions' => $actions,

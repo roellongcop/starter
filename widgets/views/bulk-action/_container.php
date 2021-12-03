@@ -15,7 +15,7 @@ use app\helpers\Html;
                     PROCESS:
                 </span>
             </li>
-            <?= Html::foreach($bulkActions, function($key, $bulkAction) {
+            <?= Html::foreach($bulkActions, function($bulkAction) {
                 return $this->render('_list', [
                     'bulkAction' => $bulkAction
                 ]);

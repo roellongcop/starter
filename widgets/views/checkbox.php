@@ -4,7 +4,7 @@ use app\helpers\Html;
 ?>
 <?= Html::if($label, "<label>{$label}</label>") ?>
 <div class="<?= $wrapperClass ?>">
-	<?= Html::foreach($data, function($key, $value) use ($options, $name, $inputClass, $checkedFunction) {
+	<?= Html::foreach($data, function($value, $key) use ($options, $name, $inputClass, $checkedFunction) {
 		return '
 			<label class="checkbox">
 		        <input '. $options .' 

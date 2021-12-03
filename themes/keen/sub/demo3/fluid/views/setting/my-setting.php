@@ -20,7 +20,7 @@ $this->params['searchModel'] = new ThemeSearch();
 		</div>
 	<?php ActiveForm::end(); ?>
 	<div class="row">
-		<?= Html::foreach($themes, function($key, $theme) {
+		<?= Html::foreach($themes, function($theme) {
 			return '<div class="col-md-2">
             	'. ThemeView::widget(['theme' => $theme]) .'
             </div>';

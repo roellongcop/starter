@@ -2,7 +2,7 @@
 
 use app\helpers\Html;
 ?>
-<?= Html::foreach(Yii::$app->session->getAllFlashes(), function($key, $message) {
+<?= Html::foreach(Yii::$app->session->getAllFlashes(), function($message, $key) {
 	return '<div class="alert alert-custom alert-light-'. $key .' fade show mb-5" role="alert">
 	    <div class="alert-text">
 	    	'. $message .'

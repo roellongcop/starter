@@ -78,7 +78,7 @@ $this->registerWidgetJs($widgetFunction, $js);
                     Choose
                 </span>
             </li>
-            <?= Html::foreach($exports, function($key, $anchor) {
+            <?= Html::foreach($exports, function($anchor) {
                 return '<li class="navi-item">' . $anchor . '</li>';
             }) ?>
         </ul>

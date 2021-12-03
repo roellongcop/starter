@@ -33,14 +33,14 @@ use yii\helpers\Inflector;
                         'name' => "Role[module_access][{$controller}][]",
                         'inputClass' => 'module_access checkbox',
                         'options' => ['data-belongs_to' => $controller],
-                        'checkedFunction' => function($key, $value) use ($model, $controller) {
+                        'checkedFunction' => function($value) use ($model, $controller) {
                             return Html::if(isset($model->module_access[$controller]) && in_array($value, $model->module_access[$controller]), 'checked');
                         },
                     ]) ?>
                 </div>
                 <div class="ml-10">
                     <div class="checkbox-list">
-                        <?= Html::foreach($actions, function($key, $action) use ($controller) {
+                        <?= Html::foreach($actions, function($action) use ($controller) {
                             return '<label class="checkbox">'
                                 . Url::to(["{$controller}/{$action}"], true) .
                                 '</label>';

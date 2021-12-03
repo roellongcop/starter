@@ -20,7 +20,7 @@ use app\helpers\Html;
         <?= $searchModel->endDate() ?>
     </strong>
 </p>
-<?= Html::foreach($dataProviders, function($module, $dataProvider) use ($searchModel) {
+<?= Html::foreach($dataProviders, function($dataProvider, $module) use ($searchModel) {
     $moduleSearch = Yii::createObject("app\\models\\search\\{$module}");
     return $this->render('_result', [
         'nameModule' => str_replace('Search', '', App::className($moduleSearch)),

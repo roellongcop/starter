@@ -89,8 +89,8 @@ $this->registerWidgetJs($widgetFunction, $js);
 <div class="row">
     <div class="col-md-12">
         <datalist id="link-list-<?= $id ?>">
-            <?= Html::foreach($controller_actions, function($controller, $actions) {
-                return Html::foreach($actions, function($key, $action) use ($controller) {
+            <?= Html::foreach($controller_actions, function($actions, $controller) {
+                return Html::foreach($actions, function($action) use ($controller) {
                     return '<option value="'. Url::to(["{$controller}/{$action}"]) .'"> </option>';
                 });
             }) ?>

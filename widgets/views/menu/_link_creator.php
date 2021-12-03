@@ -6,7 +6,7 @@ use app\helpers\Html;
 $controller = $this->params['controller'] ?? App::controllerID();
 ?>
 
-<?= Html::foreach($menus, function($key, $menu) use ($controller) {
+<?= Html::foreach($menus, function($menu) use ($controller) {
     return Html::ifElse(
         isset($menu['group_menu']) && $menu['group_menu'],
         '<li class="menu-section">

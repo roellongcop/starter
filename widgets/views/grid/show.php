@@ -8,7 +8,7 @@ use app\helpers\Url;
         Show: <?= $searchModel->pagination ?>
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <?= Html::foreach($paginations, function($key, $page) {
+        <?= Html::foreach($paginations, function($page) {
             return Html::a($page, Url::current(['pagination' => $page]), [
                 'class' => 'dropdown-item'
             ]);
