@@ -11,7 +11,7 @@ $js = <<< JS
         $(this).closest('form').submit();
     });
 JS;
-$this->registerWidgetJs($widgetFunction, $js);
+$this->registerJs($js);
 ?>
 <?= Html::if(
     App::component('access')->userCan('bulk-action') && $bulkActions,
