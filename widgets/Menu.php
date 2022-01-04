@@ -14,7 +14,6 @@ class Menu extends BaseWidget
         parent::init();
 
         $this->menus = $this->menus ?: App::identity('main_navigation');
-
     }
 
     /**
