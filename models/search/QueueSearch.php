@@ -3,7 +3,6 @@
 namespace app\models\search;
 
 use Yii;
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Queue;
 use app\helpers\App;
@@ -46,7 +45,7 @@ class QueueSearch extends Queue
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return \yii\base\Model::scenarios();
     }
 
     /**

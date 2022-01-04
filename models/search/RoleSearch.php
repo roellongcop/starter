@@ -5,7 +5,6 @@ namespace app\models\search;
 use Yii;
 use app\helpers\App;
 use app\models\Role;
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 
@@ -47,7 +46,7 @@ class RoleSearch extends Role
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return \yii\base\Model::scenarios();
     }
 
     /**

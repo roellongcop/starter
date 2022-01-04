@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Url;
 use app\models\Setting;
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -48,7 +47,7 @@ class SettingSearch extends Setting
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return \yii\base\Model::scenarios();
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace app\models\search;
 
 use Yii;
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Backup;
 use app\helpers\App;
@@ -46,7 +45,7 @@ class BackupSearch extends Backup
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return \yii\base\Model::scenarios();
     }
 
     /**

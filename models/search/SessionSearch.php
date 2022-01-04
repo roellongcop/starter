@@ -3,7 +3,6 @@
 namespace app\models\search;
 
 use Yii;
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Session;
 use app\helpers\App;
@@ -47,7 +46,7 @@ class SessionSearch extends Session
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return \yii\base\Model::scenarios();
     }
 
     /**

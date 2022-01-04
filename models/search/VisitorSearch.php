@@ -3,7 +3,6 @@
 namespace app\models\search;
 
 use Yii;
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Visitor;
 use app\helpers\App;
@@ -45,7 +44,7 @@ class VisitorSearch extends Visitor
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return \yii\base\Model::scenarios();
     }
 
     /**
