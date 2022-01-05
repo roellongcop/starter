@@ -35,23 +35,13 @@ abstract class Controller extends \yii\web\Controller
 
     public function behaviors()
     {
-        $behaviors = [
-            'ThemeFilter' => [
-                'class' => 'app\filters\ThemeFilter'
-            ],
-            'UserFilter' => [
-                'class' => 'app\filters\UserFilter'
-            ],
-            'IpFilter' => [
-                'class' => 'app\filters\IpFilter'
-            ],
-            'AccessControl' => [
-                'class' => 'app\filters\AccessControl'
-            ],
-            'VerbFilter' => [
-                'class' => 'app\filters\VerbFilter'
-            ],
-        ];
+        $behaviors = parent::behaviors();
+
+        $behaviors['ThemeFilter'] = ['class' => 'app\filters\ThemeFilter'];
+        $behaviors['UserFilter'] = ['class' => 'app\filters\UserFilter'];
+        $behaviors['IpFilter'] = ['class' => 'app\filters\IpFilter'];
+        $behaviors['AccessControl'] = ['class' => 'app\filters\AccessControl'];
+        $behaviors['VerbFilter'] = ['class' => 'app\filters\VerbFilter'];
 
         if (App::setting('system')->enable_visitor) {
             $behaviors['VisitorFilter'] = [
