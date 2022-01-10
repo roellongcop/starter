@@ -14,6 +14,8 @@ $this->params['showCreateButton'] = true;
 
 $myImageFilesUrl = Url::to(['file/my-image-files']);
 $deleteFileUrl = Url::to(['file/delete']);
+$myFilesUrl =  $myFilesUrl ?? Url::to(['file/my-files']);
+
 $js = <<< JS
     let selectedFile = 0;
     let selectedToken = 0;
