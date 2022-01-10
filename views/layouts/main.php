@@ -7,13 +7,12 @@ use app\helpers\App;
 use app\helpers\Url;
 use app\widgets\Alert;
 use app\widgets\Anchor;
-use app\widgets\ExportButton;
+use app\widgets\AnchorBack;
 use app\widgets\Menu;
 use app\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
-$showExportButton = $this->params['showExportButton'] ?? '';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -35,24 +34,22 @@ $showExportButton = $this->params['showExportButton'] ?? '';
         <br> <br> <br> <br>
         <div class="row">
             <div class="col-md-6">
-                <?= Html::if(App::referrer(), '
-                    <a href="'. App::referrer() .'" class="btn btn-secondary" title="Go Back">
-                        <i class="fa fa-arrow-left"></i>
-                        Back
-                    </a>
-                ') ?>
+                <?= AnchorBack::widget([
+                    'title' => '<i class="fa fa-arrow-left"></i> Back',
+                    'options' => [
+                        'class' => 'btn btn-secondary',
+                        'data-original-title' => 'Go back',
+                        'data-toggle' => "tooltip",
+                    ]
+                ]) ?>
             </div>
             <div class="col-md-6 text-right">
-                <?= Html::if($showExportButton, ExportButton::widget()) ?>
+                <?= Html::exportButton($this->params) ?>
             </div>
         </div>
         <?= $this->render('_search') ?>
         <br>
-        <?= Anchor::widget([
-            'title' => 'Create New',
-            'link' => ['create'],
-            'options' => ['class' => 'btn btn-success pull-right']
-        ]) ?>
+        <?= Html::createButton($this->params) ?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

@@ -18,7 +18,7 @@ use app\helpers\Html;
         <!--begin::Navigation-->
         <ul class="navi navi-hover">
             <?= Html::foreach($template, function($t) {
-                return Html::if($t, '<li class="navi-item">'. $t .'</li>');
+                return Html::if($t, Html::tag('li', $t, ['class' => 'navi-item']));
             }) ?>
         </ul>
         <!--end::Navigation-->

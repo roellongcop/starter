@@ -5,25 +5,29 @@ use yii\widgets\ListView;
 
 $layout = Html::ifElse(
     $dataProvider->totalCount > 12, 
-    "<div class='col-md-12'>
-        <p>{summary}</p>
-    </div>
-    <div class='col-md-2 text-center' style='border-right: 1px dashed #ccc;'>
-        {pager}
-    </div>
-    <div class='col-md-10'>
-        <div class='row'>
-            {items}
+    <<< HTML
+        <div class='col-md-12'>
+            <p>{summary}</p>
         </div>
-    </div>", 
-    "<div class='col-md-12'>
-        <p>{summary}</p>
-    </div>
-    <div class='col-md-12'>
-        <div class='row'>
-            {items}
+        <div class='col-md-2 text-center' style='border-right: 1px dashed #ccc;'>
+            {pager}
         </div>
-    </div>"
+        <div class='col-md-10'>
+            <div class='row'>
+                {items}
+            </div>
+        </div>
+    HTML,
+    <<< HTML
+        <div class='col-md-12'>
+            <p>{summary}</p>
+        </div>
+        <div class='col-md-12'>
+            <div class='row'>
+                {items}
+            </div>
+        </div>
+    HTML
 );
 
 ?>

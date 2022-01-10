@@ -63,13 +63,14 @@ use app\helpers\Html;
             </span>
         </div>
     </div>
-    <?= Html::if(isset($nav['sub']), 
-        '<ol class="dd-list">
-            '. $this->render('_navigation', [
+    <?= Html::if(isset($nav['sub']), function() use($data_id, $nav, $id) {
+        return Html::tag('ol', 
+            $this->render('_navigation', [
                 'data_id' => $data_id,
                 'navigations' => $nav['sub'] ?? [],
                 'id' => $id,
-            ]) .'
-        </ol>'
-    ) ?>
+            ]),
+            ['class' => 'dd-list']
+        );
+    }) ?>
 </li>

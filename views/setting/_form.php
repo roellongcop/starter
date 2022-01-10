@@ -18,9 +18,11 @@ use app\widgets\RecordStatusInput;
                 'model' => $model,
                 'form' => $form,
             ]) ?>
-            <?= Html::if($model->hasImageInput, $this->render('_form-has-image-input', [
-                'model' => $model
-            ])) ?>
+            <?= Html::if($model->hasImageInput, function() use($model) {
+                return $this->render('_form-has-image-input', [
+                    'model' => $model
+                ]);
+            }) ?>
         </div>
     </div>
     <div class="form-group"> <br>

@@ -7,6 +7,8 @@ use app\helpers\App;
 use app\helpers\Url;
 use app\widgets\Anchor;
 use yii\web\Request;
+use app\widgets\ExportButton;
+use app\widgets\Anchors;
 
 class Html extends \yii\helpers\Html
 {
@@ -61,14 +63,12 @@ class Html extends \yii\helpers\Html
         }
     }
 
-    public static function content($content='', $condition = true)
-    {
-        return self::if($condition, $content);
-    }
-
     public static function if($condition = true, $content='')
     {
         if ($condition) {
+            if (is_callable($content)) {
+                return call_user_func($content);
+            }
             return $content;
         }
     }
@@ -76,7 +76,15 @@ class Html extends \yii\helpers\Html
     public static function ifELse($condition = true, $trueContent='', $falseContent='')
     {
         if ($condition) {
+            if (is_callable($trueContent)) {
+                return call_user_func($trueContent);
+            }
+
             return $trueContent;
+        }
+
+        if (is_callable($falseContent)) {
+            return call_user_func($falseContent);
         }
         return $falseContent;
     }
@@ -86,6 +94,9 @@ class Html extends \yii\helpers\Html
         if ($params) {
             foreach ($params as $key => $data) {
                 if ($data['condition']) {
+                    if (is_callable($data['content'])) {
+                        return call_user_func($data['content']);
+                    }
                     return $data['content'];
                 }
             }
@@ -100,5 +111,48 @@ class Html extends \yii\helpers\Html
         }
 
         return implode($glue, $content);
+    }
+
+
+    public static function content($content, $params)
+    {
+        if ($params['wrapCard'] ?? true) {
+            return App::view()->render('_card_wrapper-container', [
+                'content' => $content
+            ]);
+        }
+
+        return $content;
+    }
+
+    public static function exportButton($params)
+    {
+        if ($params['showExportButton'] ?? '') {
+            return ExportButton::widget();
+        }
+    }
+
+    public static function createButton($params)
+    {
+        if ($params['showCreateButton'] ?? '') {
+            return Anchors::widget([
+                'names' => 'create',
+                'controller' => $params['createController'] ?? App::controllerID(),
+            ]);
+        }
+    }
+
+    public static function advancedFilter($searchModel)
+    {
+        if ($searchModel) {
+            $searchTemplate = $searchModel->searchTemplate ?? implode('/', [
+                App::controllerID(),
+                '_search'
+            ]);
+
+            return App::view()->render("/{$searchTemplate}", [
+                'model' => $searchModel,
+            ]);
+        }
     }
 }

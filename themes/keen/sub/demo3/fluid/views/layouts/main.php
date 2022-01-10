@@ -17,7 +17,6 @@ use app\helpers\Html;
 AppAsset::register($this);
 KeenAsset::register($this);
 KeenDemo3FixedAppAsset::register($this);
-$createController = $this->params['createController'] ?? App::controllerID();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -95,17 +94,8 @@ $createController = $this->params['createController'] ?? App::controllerID();
 							<!--begin::Toolbar-->
 							<div class="d-flex align-items-center">
 								<!--begin::Dropdown-->
-					            <?= Html::if($this->params['showExportButton'] ?? '', ExportButton::widget()) ?>
-					            <!--end::Dropdown-->
-					            &nbsp;
-					            <?= Html::if(
-				            		$this->params['showCreateButton'] ?? '', 
-				            		Html::a(
-					                    $this->params['createLabel'] ?? 'Create', 
-					                    ["{$createController}/create"],
-					                    ['class' => 'btn btn-primary font-weight-bolder']
-					                )
-					            ) ?>
+					            <?= Html::exportButton($this->params) ?>
+            					<?= Html::createButton($this->params) ?>
 							</div>
 							<!--end::Toolbar-->
 						</div>
@@ -115,11 +105,7 @@ $createController = $this->params['createController'] ?? App::controllerID();
 						<!--begin::Container-->
 						<div class="container-fluid">
 							<?= Alert::widget() ?>
-		                    <?= Html::ifElse(
-								$this->params['wrapCard'] ?? true,
-								$this->render('_card_wrapper-content', ['content' => $content]),
-								$content
-							) ?>
+							<?= Html::content($content, $this->params) ?>
 						</div>
 						<!--end::Container-->
 					</div>

@@ -5,8 +5,6 @@ use app\helpers\Html;
 
 $identity = App::identity();
 $access = App::component('access');
-$searchModel = $this->params['searchModel'] ?? '';
-$searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_search';
 ?>
 <div class="sidebar sidebar-right d-flex flex-row-auto flex-column bg-white" id="kt_sidebar">
 	<!--begin::Sidebar Header-->
@@ -142,9 +140,7 @@ $searchTemplate = $searchModel->searchTemplate ?? App::controllerID() . '/_searc
 	        <div class="mb-15" style="width: 100%">
 	            <h5 class="font-weight-bold mb-5">Advanced Filter</h5>
 	            <!--begin::Timeline-->
-	            <?= Html::if($searchModel, $this->render("/{$searchTemplate}", [
-                    'model' => $searchModel
-                ])) ?>
+	            <?= Html::advancedFilter($this->params['searchModel'] ?? '') ?>
 	            <!--end::Timeline-->
 	        </div>
 	        

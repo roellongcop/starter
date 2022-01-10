@@ -16,22 +16,24 @@ $this->params['searchModel'] = new BackupSearch();
 $this->params['showCreateButton'] = true; 
 ?>
 <div class="backup-view-page">
-	<?= Html::content(implode(' ', [
-		Anchor::widget([
-			'title' => 'Download SQL',
-			'link' => ['download', 'slug' => $model->slug],
-			'options' => ['class' => 'btn btn-primary btn-download-sql']
-		]),
-		Anchor::widget([
-			'title' => 'Restore',
-			'link' =>  ['restore', 'slug' => $model->slug],
-			'options' => [
-				'class' => 'btn btn-warning btn-restore-sql',
-				'data-method' => 'post',
-	        	'data-confirm' => 'ARE YOU SURE?',
-			]
-		])
-	]), $model->generated) ?>
+	<?= Html::if($model->generated, function() use($model) {
+		return implode(' ', [
+			Anchor::widget([
+				'title' => 'Download SQL',
+				'link' => ['download', 'slug' => $model->slug],
+				'options' => ['class' => 'btn btn-primary btn-download-sql']
+			]),
+			Anchor::widget([
+				'title' => 'Restore',
+				'link' =>  ['restore', 'slug' => $model->slug],
+				'options' => [
+					'class' => 'btn btn-warning btn-restore-sql',
+					'data-method' => 'post',
+		        	'data-confirm' => 'ARE YOU SURE?',
+				]
+			])
+		]);
+	}) ?>
 	<?= Anchors::widget([
 		'names' => ['duplicate', 'delete', 'log'],
 		'model' => $model,

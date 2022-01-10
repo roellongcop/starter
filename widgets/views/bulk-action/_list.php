@@ -8,7 +8,9 @@ use app\widgets\AppIcon;
         <?= Html::ifElse(
             Html::isHtml($bulkAction['icon']),
             $bulkAction['icon'],
-            AppIcon::widget(['icon' => $bulkAction['icon']])
+            function() use($bulkAction) {
+                return AppIcon::widget(['icon' => $bulkAction['icon']]);
+            }
         ) ?>
         &nbsp;
         <span class="navi-text">

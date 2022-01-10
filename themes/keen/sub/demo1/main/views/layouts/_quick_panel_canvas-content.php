@@ -8,9 +8,7 @@ use app\helpers\Html;
         <div class="mb-15" style="width: 100%">
             <h5 class="font-weight-bold mb-5">Advanced Filter</h5>
             <!--begin::Timeline-->
-            <?= Html::if($searchModel, $this->render("/{$searchTemplate}", [
-                'model' => $searchModel,
-            ])) ?>
+            <?= Html::advancedFilter($searchModel) ?>
             <!--end::Timeline-->
         </div>
         <div class="offcanvas-close mt-n1 pr-5">

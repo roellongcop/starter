@@ -2,13 +2,14 @@
 
 use app\helpers\Html;
 ?>
-
-<?= Html::if($menus, '
-    <ul class="menu-nav">
-        '. $this->render('_link_creator', [
+<?= Html::if($menus, function() use($menus) {
+    return Html::tag('ul', 
+        $this->render('_link_creator', [
             'menus' => $menus,
             'withIcon' => false,
             'subMenuClass' => ''
-        ]) .'
-    </ul>
-') ?>
+        ]), 
+        ['class' => 'menu-nav']
+    );
+}) ?>
+

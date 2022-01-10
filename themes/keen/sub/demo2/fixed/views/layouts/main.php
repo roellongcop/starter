@@ -55,12 +55,7 @@ AppAsset::register($this);
 							<!--begin::Dashboard-->
 							<!--begin::Table Widget 6-->
 							<?= Alert::widget() ?>
-							<?= Html::ifElse($this->params['wrapCard'] ?? true, 
-								$this->render('_card_wrapper-content', [
-									'content' => $content
-								]),
-								$content
-							) ?>
+							<?= Html::content($content, $this->params) ?>
 							<!--end::Table Widget 6-->
 							<!--end::Dashboard-->
 						</div>

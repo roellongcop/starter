@@ -15,9 +15,11 @@ $this->registerJs($js);
 ?>
 <?= Html::if(
     App::component('access')->userCan('bulk-action') && $bulkActions,
-    $this->render('_container', [
-        'title' => $title,
-        'bulkActions' => $bulkActions,
-    ])
+    function() use($title, $bulkActions) {
+        return $this->render('_container', [
+            'title' => $title,
+            'bulkActions' => $bulkActions,
+        ]);
+    }
 ) ?>
  

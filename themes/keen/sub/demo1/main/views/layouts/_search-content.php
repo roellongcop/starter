@@ -26,9 +26,7 @@ use yii\widgets\ActiveForm;
 				<h4 class="modal-title">Advanced Search</h4>
 			</div>
 			<div class="modal-body">
-				<?= Html::if($searchModel, $this->render("/{$searchTemplate}", [
-	                'model' => $searchModel,
-	            ])) ?>
+				<?= Html::advancedFilter($searchModel) ?>
 			</div>
 		</div>
 	</div>

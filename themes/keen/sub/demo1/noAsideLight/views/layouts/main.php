@@ -56,13 +56,7 @@ AppAsset::register($this);
 					            <div class="row">
 					                <div class="col-xl-12">
 					                    <?= Alert::widget() ?>
-					                    <?= Html::ifELse(
-					                    	$this->params['wrapCard'] ?? true, 
-					                    	$this->render('_card_wrapper-container', [
-					                    		'content' => $content
-					                    	]),
-					                    	$content
-					                    ) ?>
+					                    <?= Html::content($content, $this->params) ?>
 				                	</div>
 				            	</div>
 							</div>

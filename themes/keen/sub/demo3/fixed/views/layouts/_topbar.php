@@ -1,15 +1,16 @@
 <?php
 
 use app\helpers\Html;
-
-$searchModel = $this->params['searchModel'] ?? '';
-$searchAction = $searchModel->searchAction ?? ['index'];
 ?>
 <div class="topbar">
-    <?= Html::if($searchModel, $this->render('_topbar-search-form', [
-        'searchAction' => $searchAction,
-        'searchModel' => $searchModel,
-    ])) ?>
+    <?= Html::if(($searchModel = $this->params['searchModel'] ?? '') != NULL, 
+        function() use($searchModel) {
+            return $this->render('_topbar-search-form', [
+                'searchModel' => $searchModel,
+                'searchAction' => $searchModel->searchAction ?? ['index'],
+            ]);
+        }
+    ) ?>
     
     <!--begin::Search-->
     <?php # $this->render('toolbar/_search') ?>

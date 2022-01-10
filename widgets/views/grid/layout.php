@@ -7,10 +7,14 @@ use app\helpers\Html;
         <div class="mr-2">
             {summary}
         </div>
-        <?= Html::if($dataProvider->totalCount > $searchModel->pagination, $this->render('show', [
-            'paginations' => $paginations,
-            'searchModel' => $searchModel,
-        ])) ?>
+        <?= Html::if($dataProvider->totalCount > $searchModel->pagination,
+            function() use($searchModel, $paginations) {
+                return $this->render('show', [
+                    'paginations' => $paginations,
+                    'searchModel' => $searchModel,
+                ]);
+            }
+        ) ?>
     </div>
     <div class="">
         {pager}
