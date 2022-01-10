@@ -11,7 +11,7 @@ use yii\helpers\FileHelper;
 
 class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
 {
-    public $created_by;
+    public $created_by = 0;
     public $backupId;
     
     public function execute($queue)
