@@ -63,28 +63,28 @@ class Html extends \yii\helpers\Html
         }
     }
 
-    public static function if($condition = true, $content='')
+    public static function if($condition = true, $content='', $params=[])
     {
         if ($condition) {
             if (is_callable($content)) {
-                return call_user_func($content);
+                return call_user_func($content, $params);
             }
             return $content;
         }
     }
 
-    public static function ifELse($condition = true, $trueContent='', $falseContent='')
+    public static function ifELse($condition = true, $trueContent='', $falseContent='', $params=[])
     {
         if ($condition) {
             if (is_callable($trueContent)) {
-                return call_user_func($trueContent);
+                return call_user_func($trueContent, $params);
             }
 
             return $trueContent;
         }
 
         if (is_callable($falseContent)) {
-            return call_user_func($falseContent);
+            return call_user_func($falseContent, $params);
         }
         return $falseContent;
     }
@@ -95,7 +95,7 @@ class Html extends \yii\helpers\Html
             foreach ($params as $key => $data) {
                 if ($data['condition']) {
                     if (is_callable($data['content'])) {
-                        return call_user_func($data['content']);
+                        return call_user_func($data['content'], $params);
                     }
                     return $data['content'];
                 }
