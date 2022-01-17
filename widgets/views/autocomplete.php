@@ -58,17 +58,15 @@ $this->registerJs(<<< JS
 				data: {keywords: val},
 				dataType: 'json',
 				success: function(s) {
-					var arr = s;
-					for (i = 0; i < arr.length; i++) {
-						/*check if the item starts with the same letters as the text field value:*/
-						if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-							/*create a DIV element for each matching element:*/
+					for (i = 0; i < s.length; i++) {
+
+						if (s[i].toLowerCase().includes(val.toLowerCase())) {
+							const myArray = s[i].split(val);
 							b = document.createElement("DIV");
 							/*make the matching letters bold:*/
-							b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-							b.innerHTML += arr[i].substr(val.length);
+							b.innerHTML = myArray.join("<strong>" + val + "</strong>");
 							/*insert a input field that will hold the current array item's value:*/
-							b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+							b.innerHTML += "<input type='hidden' value='" + s[i] + "'>";
 							/*execute a function when someone clicks on the item value (DIV element):*/
 							b.addEventListener("click", function(e) {
 								/*insert the value for the autocomplete text field:*/
