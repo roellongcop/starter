@@ -89,10 +89,10 @@ class Html extends \yii\helpers\Html
         return $falseContent;
     }
 
-    public static function ifElseIf($params=[])
+    public static function ifElseIf($arr=[], $params=[])
     {
-        if ($params) {
-            foreach ($params as $key => $data) {
+        if ($arr) {
+            foreach ($arr as $key => $data) {
                 if ($data['condition']) {
                     if (is_callable($data['content'])) {
                         return call_user_func($data['content'], $params);
