@@ -33,7 +33,7 @@ $this->registerCss(<<< CSS
 	}
 CSS, [], 'autocomplete');
 
-$this->registerJs(<<< JS
+$this->registerWidgetJs($widgetFunction, <<< JS
 	function autocomplete(inp) {
 		/*the autocomplete function takes two arguments,
 		the text field element and an array of possible autocompleted values:*/
@@ -142,7 +142,7 @@ $this->registerJs(<<< JS
 	}
 	/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 	autocomplete(document.getElementById("{$inputId}"));
-JS, \yii\web\View::POS_READY, 'autocomplete')
+JS);
 
 ?>
 
