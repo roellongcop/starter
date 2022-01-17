@@ -55,7 +55,7 @@ $this->registerJs(<<< JS
 			$.ajax({
 				url: '{$url}',
 				method: 'get',
-				data: {keywords: val},
+				data: {keyword: val},
 				dataType: 'json',
 				success: function(s) {
 					for (i = 0; i < s.length; i++) {
