@@ -332,4 +332,25 @@ class FileController extends Controller
 
         return $this->render('my-files', $data); 
     }
+
+    public function actionFindByKeyword($keyword='')
+    {
+        $data = File::filter('name',['LIKE', 'name', $keyword]);
+
+        $data = array_values($data);
+
+        return $this->asJson($data);
+    }
+
+    public function actionFindByKeywordImage($keyword='')
+    {
+        $data = File::filter('name',['and',
+            ['LIKE', 'name', $keyword],
+            ['extension' => File::EXTENSIONS['image']],
+        ]);
+
+        $data = array_values($data);
+
+        return $this->asJson($data);
+    }
 }

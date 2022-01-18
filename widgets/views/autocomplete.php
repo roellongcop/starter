@@ -4,7 +4,7 @@ $this->registerCss(<<< CSS
 	/*the container must be positioned relative:*/
 	.autocomplete {
 		position: relative;
-		display: inline-block;
+		display: block;
 	}
 	.autocomplete-items {
 		position: absolute;

@@ -4,6 +4,7 @@ use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
 use yii\widgets\Pjax;
+use app\widgets\Autocomplete;
 
 $js = <<< JS
     var selectedImage = {
@@ -380,9 +381,15 @@ $this->registerCss($css);
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6 br-dashed">
                                         <!-- type, input name, input value, options -->
-                                        <?= Html::input('search', 'search', '', [
-                                            'class' => 'form-control search-input',
-                                            'placeholder' => 'Search Photo'
+                                        <?= Autocomplete::widget([
+                                            'input' => Html::input('search', 'search', '', [
+                                                'id' => 'search-file-input',
+                                                'class' => 'form-control search-input',
+                                                'placeholder' => 'Search Photo',
+                                                'autocomplete' => 'off'
+                                            ]),
+                                            'inputId' => 'search-file-input',
+                                            'url' => Url::to(['file/find-by-keyword-image'])
                                         ]) ?>
                                         <?php Pjax::begin([
                                             'options' => ['class' => 'my-photos-container'],

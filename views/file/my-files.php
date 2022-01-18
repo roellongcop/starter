@@ -1,8 +1,10 @@
 <?php
 
+use app\helpers\Html;
 use app\helpers\Url;
 use app\models\search\FileSearch;
 use yii\widgets\Pjax;
+use app\widgets\Autocomplete;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\File */
@@ -161,7 +163,16 @@ $this->registerCss($css);
 ?>
 <div class="row my-files-page" id="my-files">
     <div class="col-md-7">
-        <input type="search" class="form-control search-photo" placeholder="Search File">
+        <?= Autocomplete::widget([
+            'input' => Html::input('search', 'name', '', [
+                'id' => 'search-file-input',
+                'class' => 'form-control search-photo',
+                'placeholder' => 'Search File',
+                'autocomplete' => 'off'
+            ]),
+            'inputId' => 'search-file-input',
+            'url' => Url::to(['file/find-by-keyword'])
+        ]) ?>
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
             <?= $this->render('my-files-ajax', [
                 'dataProvider' => $dataProvider,
