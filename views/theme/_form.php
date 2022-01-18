@@ -13,17 +13,15 @@ use app\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
 /* @var $form yii\widgets\ActiveForm */
-$registerJs = <<< JS
+$this->registerJs(<<< JS
     $('form.form').on('beforeSubmit', function(event) {
         event.preventDefault();
         $('#theme-path_map').val(JSON.stringify(editors['path_map'].get()))
         $('#theme-bundles').val(JSON.stringify(editors['bundles'].get()))
-
         // continue the submit unbind preventDefault
         $(this).unbind('submit').submit(); 
     })
-JS;
-$this->registerJs($registerJs);
+JS);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'theme-form']); ?>
     <div class="row">

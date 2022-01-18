@@ -59,32 +59,35 @@ class VisitorFilter extends \yii\base\ActionFilter
 
     public function addCookie()
     {
+        $session_id = ($this->test)? App::randomString(10): App::session('id');
         $cookies = Yii::$app->response->cookies;
         $expire = time() + ($this->duration ?? App::setting('system')->auto_logout_timer);
 
-        $userAgent = new UserAgentForm();
-        $model = new Visitor([
-            'expire' => $expire,
-            'session_id' => ($this->test)? App::randomString(10): App::session('id'),
-            'ip' => App::ip(),
-            'browser' => $userAgent->browser,
-            'os' => $userAgent->os,
-            'device' => $userAgent->device,
-            'server' => App::server(),
-            'location' => $userAgent->ipInformation,
-        ]);
-        $model->cookie = $model->createCookieValue();
-        if ($model->save()) {
-            // add a new cookie to the response to be sent
-            $cookies->add(new Cookie([
-                'name' => $this->cookieId,
-                'value' => $model->cookie,
-                'secure' => true,
-                'expire' => $expire
-            ]));
-        }
-        else {
-            Yii::debug($model->errors);
+        if (($model = Visitor::findOne(['session_id' => $session_id])) == NULL) {
+            $userAgent = new UserAgentForm();
+            $model = new Visitor([
+                'expire' => $expire,
+                'session_id' => $session_id,
+                'ip' => App::ip(),
+                'browser' => $userAgent->browser,
+                'os' => $userAgent->os,
+                'device' => $userAgent->device,
+                'server' => App::server(),
+                'location' => $userAgent->ipInformation,
+            ]);
+            $model->cookie = $model->createCookieValue();
+            if ($model->save()) {
+                // add a new cookie to the response to be sent
+                $cookies->add(new Cookie([
+                    'name' => $this->cookieId,
+                    'value' => $model->cookie,
+                    'secure' => true,
+                    'expire' => $expire
+                ]));
+            }
+            else {
+                Yii::debug($model->errors);
+            }
         }
     }
 }

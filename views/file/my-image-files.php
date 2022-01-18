@@ -16,25 +16,22 @@ $myImageFilesUrl = Url::to(['file/my-image-files']);
 $deleteFileUrl = Url::to(['file/delete']);
 $myFilesUrl =  $myFilesUrl ?? Url::to(['file/my-files']);
 
-$js = <<< JS
+
+$this->registerJs(<<< JS
     let selectedFile = 0;
     let selectedToken = 0;
-
     let showActionButton = function() {
         $('#btn-download-file').show();
         $('#btn-remove-file').show();
     }
-
     let hideActionButton = function() {
         $('#btn-remove-file').hide();
         $('#btn-download-file').hide();
     }
-
     let resetState = function() {
         selectedFile = 0;
         selectedToken = 0;
         hideActionButton();
-
         $('#my-files #td-name').text('None');
         $('#my-files #td-extension').text('None');
         $('#my-files #td-size').text('None');
@@ -45,11 +42,9 @@ $js = <<< JS
         $('#my-files #td-created_at').text('None');
         $('#my-files #td-action-btn').html('None');
     }
-
     let setFileContent = function(content) {
         $('#my-image-files .my-photos').html(content);
     }
-    
     let getMyFiles = function(url) {
         setFileContent('Loading');
         KTApp.block('#my-image-files .my-photos', {
@@ -72,14 +67,12 @@ $js = <<< JS
         }   
         $.ajax(conf);
     }
-
     let searchMyImage = function(input) {
         if(event.key === 'Enter') {
             event.preventDefault();
             getMyFiles('{$myImageFilesUrl}?keywords=' + input.val() );
         }
     }
-
     $(document).on('click', '#my-image-files .btn-remove-file', function() {
         let isConfirm = confirm('Remove File?');
         if (isConfirm) {
@@ -100,7 +93,6 @@ $js = <<< JS
             })
         }
     });
-
     $(document).on('click', '#my-image-files img', function() {
         let image = $(this);
         selectedFile = image.data('id');
@@ -113,24 +105,19 @@ $js = <<< JS
         $('#my-image-files #td-location').text(image.data('location'));
         $('#my-image-files #td-token').text(image.data('token'));
         $('#my-image-files #td-created_at').text(image.data('created_at'));
-
         let actionButtons = '<a href="'+ $(this).data('download-url') +'" class="btn btn-primary btn-sm">';
             actionButtons += 'Download';
             actionButtons += '</a>';
-
             if(image.data('can-delete')) {
                 actionButtons += '<a href="#" class="btn btn-danger btn-sm btn-remove-file">';
                 actionButtons += 'Remove';
                 actionButtons += '</a>';
             }
-
         $('#my-files #td-action-btn').html(actionButtons);
-
         $('#my-image-files img').css('border', '');
         image.css('border', '2px solid #1bc5bd');
         showActionButton();
     }); 
-
     $(document).on("pjax:beforeSend",function(){
         KTApp.block('#my-image-files .my-photos', {
             overlayColor: '#000000',
@@ -139,13 +126,11 @@ $js = <<< JS
         });
     });
     hideActionButton();
-
     $('#my-image-files input.search-photo').on('keydown', function() {
         searchMyImage($(this));
     });
-JS;
-$this->registerJs($js);
-$css = <<< CSS
+JS);
+$this->registerCss(<<< CSS
     #my-image-files table tbody tr td {
         overflow-wrap: anywhere;
     }
@@ -155,8 +140,7 @@ $css = <<< CSS
     #my-image-files img:hover {
         border: 2px solid #1bc5bd;
     }
-CSS;
-$this->registerCss($css);
+CSS);
 ?>
 <div class="row my-image-files-page" id="my-image-files">
     <div class="col-md-7">

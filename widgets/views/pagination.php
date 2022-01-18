@@ -1,9 +1,8 @@
 <?php
 
-$js = <<< JS
+$this->registerJs(<<< JS
     $('.kt-selectpicker-{$widgetId}').selectpicker();
-JS;
-$this->registerJs($js);
+JS);
 ?>
 <hr>
 <p class=""><?= $title ?></p>

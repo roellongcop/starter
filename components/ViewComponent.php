@@ -21,29 +21,30 @@ class ViewComponent extends \yii\web\View
             'params' => App::params()
         ]);
 
-        $registerJs = <<< SCRIPT
+        $js = <<< JS
             var app = {$options};
             console.log(app)
-        SCRIPT;
+        JS;
 
-        $this->registerJs($registerJs, \yii\web\View::POS_HEAD, 'app');
+        $this->registerJs($js, \yii\web\View::POS_HEAD, 'app');
 
         parent::init();
     }
 
 	public function registerWidgetJs($widgetFunction, $js, $position = parent::POS_READY, $key = null)
     {
-        $js = "var {$widgetFunction} = function() {
-            var load = function() {
-                {$js}
-            }
-
-            return {
-                init: function() {
-                    load();
+        $js = <<< JS
+            var {$widgetFunction} = function() {
+                var load = function() {
+                    {$js}
                 }
-            }
-        }(); {$widgetFunction}.init();";
+                return {
+                    init: function() {
+                        load();
+                    }
+                }
+            }(); {$widgetFunction}.init();
+        JS;
 
         parent::registerjs($js, $position, $key);
     }

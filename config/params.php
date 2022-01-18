@@ -7,5 +7,4 @@ return [
         100 => 100,
     ], 
     'user.passwordResetTokenExpire' => 3600,
-    'user.passwordMinLength' => 8,
 ];

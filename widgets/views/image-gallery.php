@@ -296,7 +296,7 @@ JS;
 
 $this->registerWidgetJs($widgetFunction, $js);
 
-$css = <<< CSS
+$this->registerCss(<<< CSS
     #image-gallery-container-{$id} table tbody tr td {
         overflow-wrap: anywhere;
         padding: 5px;
@@ -327,8 +327,7 @@ $css = <<< CSS
     #image-gallery-container-{$id} .cropper-container {
         margin: 0 auto;
     }
-CSS;
-$this->registerCss($css);
+CSS);
 ?>
 <div id="image-gallery-container-<?= $id ?>">
 
@@ -495,7 +494,7 @@ $this->registerCss($css);
                         </button>
                     </div> 
 
-                    <?= Html::button('Edit', [
+                    <?= Html::button('Crop', [
                         'class' => 'btn btn-primary font-weight-bold edit-btn'
                     ]) ?>
 
