@@ -7,7 +7,6 @@ use app\helpers\Url;
  
 class Autocomplete extends BaseWidget
 {
-    public $inputId;
     public $input;
     public $url;
 
@@ -24,7 +23,6 @@ class Autocomplete extends BaseWidget
     public function run()
     {
         return $this->render('autocomplete', [
-            'inputId' => $this->inputId,
             'input' => $this->input,
             'url' => $this->url,
         ]);

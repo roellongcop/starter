@@ -385,9 +385,7 @@ CSS);
                                                 'id' => 'search-file-input',
                                                 'class' => 'form-control search-input',
                                                 'placeholder' => 'Search Photo',
-                                                'autocomplete' => 'off'
                                             ]),
-                                            'inputId' => 'search-file-input',
                                             'url' => Url::to(['file/find-by-keyword-image'])
                                         ]) ?>
                                         <?php Pjax::begin([

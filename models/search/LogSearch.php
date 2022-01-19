@@ -119,10 +119,9 @@ class LogSearch extends Log
             ['like', 'l.model_name', $this->keywords],  
         ]);
 
-        $query->daterange($this->date_range);
-
-        $query->joinWith('user u');
-        $query->groupBy('l.id');
+        $query->daterange($this->date_range)
+            ->joinWith('user u')
+            ->groupBy('l.id');
 
         return $dataProvider;
     }

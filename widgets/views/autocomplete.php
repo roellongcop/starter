@@ -80,7 +80,7 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 					}
 				},
 				error: function(e) {
-					alert(e.responseText);
+					console.log(e);
 				}
 			})
 		});
@@ -140,12 +140,15 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 			closeAllLists(e.target);
 		});
 	}
+	var selector = ".autocomplete-{$widgetId} input";
+	$(selector).attr('autocomplete', 'off');
+
 	/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-	autocomplete(document.getElementById("{$inputId}"));
+	autocomplete(document.querySelector(selector));
 JS);
 
 ?>
 
-<div class="autocomplete">
+<div class="autocomplete autocomplete-<?= $widgetId ?>">
 	<?= $input ?>
 </div>

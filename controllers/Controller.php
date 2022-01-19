@@ -40,8 +40,11 @@ abstract class Controller extends \yii\web\Controller
         $behaviors['ThemeFilter'] = ['class' => 'app\filters\ThemeFilter'];
         $behaviors['UserFilter'] = ['class' => 'app\filters\UserFilter'];
         $behaviors['IpFilter'] = ['class' => 'app\filters\IpFilter'];
-        $behaviors['AccessControl'] = ['class' => 'app\filters\AccessControl'];
         $behaviors['VerbFilter'] = ['class' => 'app\filters\VerbFilter'];
+        $behaviors['AccessControl'] = [
+            'class' => 'app\filters\AccessControl',
+            'publicActions' => ['find-by-keyword']
+        ];
 
         if (App::setting('system')->enable_visitor) {
             $behaviors['VisitorFilter'] = [
@@ -129,5 +132,12 @@ abstract class Controller extends \yii\web\Controller
                 ]);
             }
         }
+    }
+
+    public function actionFindByKeyword($keyword='')
+    {
+        $data = [];
+
+        return $this->asJson($data);
     }
 }

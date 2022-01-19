@@ -813,11 +813,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return ($models)? $models: '';
     }
 
-    public static function dropdown($key='id', $value='name', $condition=[], $map=true)
+    public static function dropdown($key='id', $value='name', $condition=[], $map=true, $limit=false)
     {
         $models = static::find()
             ->andFilterWhere($condition)
             ->orderBy([$value => SORT_ASC])
+            ->limit($limit)
             ->all();
 
         $models = ($map)? ArrayHelper::map($models, $key, $value): $models;
@@ -825,11 +826,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $models;
     }
 
-    public static function filter($key='id', $condition=[])
+    public static function filter($key='id', $condition=[], $limit=false)
     {
         $models = static::find()
             ->andFilterWhere($condition)
             ->orderBy([$key => SORT_ASC])
+            ->limit($limit)
             ->groupBy($key)
             ->all();
 

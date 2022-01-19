@@ -3,6 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\Html;
+use app\widgets\Autocomplete;
 
 class Search extends BaseWidget
 {
@@ -58,6 +59,8 @@ class Search extends BaseWidget
      */
     public function run()
     {
-        return Html::activeInput('search', $this->model, $this->attribute, $this->options);
+        return Autocomplete::widget([
+            'input' => Html::activeInput('search', $this->model, $this->attribute, $this->options)
+        ]);
     }
 }

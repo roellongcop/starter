@@ -106,10 +106,9 @@ class Log extends ActiveRecord
         return new \app\models\query\LogQuery(get_called_class());
     }
      
-    public function afterFind()
+    public function getTableFullname()
     {
-        parent::afterFind();
-        $this->table_name = App::db('tablePrefix') . $this->table_name;
+        return App::db('tablePrefix') . $this->table_name;
     }
    
     public function getUser()
