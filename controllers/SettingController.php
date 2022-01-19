@@ -23,6 +23,13 @@ use yii\web\NotFoundHttpException;
  */
 class SettingController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    { 
+        return $this->asJson(
+            Setting::findByKeyword($keyword, ['name', 'value'])
+        );
+    }
+
     /**
      * Lists all Setting models.
      * @return mixed

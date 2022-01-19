@@ -15,6 +15,13 @@ use yii\web\NotFoundHttpException;
  */
 class UserMetaController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    { 
+        return $this->asJson(
+            UserMeta::findByKeyword($keyword, ['name', 'value'])
+        );
+    }
+
     /**
      * Lists all UserMeta models.
      * @return mixed

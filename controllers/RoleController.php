@@ -15,6 +15,13 @@ use yii\web\NotFoundHttpException;
  */
 class RoleController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    {
+        return $this->asJson(
+            Role::findByKeyword($keyword, ['name'])
+        );
+    }
+    
     /**
      * Lists all Role models.
      * @return mixed

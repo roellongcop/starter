@@ -15,6 +15,21 @@ use yii\helpers\Inflector;
  */
 class VisitorController extends Controller 
 {
+    public function actionFindByKeyword($keyword='')
+    { 
+        return $this->asJson(
+            Visitor::findByKeyword($keyword, [
+                'expire',
+                'cookie',
+                'ip',
+                'browser',
+                'os',
+                'device',
+                'location',
+            ])
+        );
+    }
+
     /**
      * Lists all Visitor models.
      * @return mixed

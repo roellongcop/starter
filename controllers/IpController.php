@@ -15,6 +15,12 @@ use yii\web\NotFoundHttpException;
  */
 class IpController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    {
+        return $this->asJson(
+            Ip::findByKeyword($keyword, ['name', 'description'])
+        );
+    }
     /**
      * Lists all Ip models.
      * @return mixed

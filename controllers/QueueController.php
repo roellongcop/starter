@@ -15,6 +15,13 @@ use yii\helpers\Inflector;
  */
 class QueueController extends Controller 
 {
+    public function actionFindByKeyword($keyword='')
+    {
+        return $this->asJson(
+            Queue::findByKeyword($keyword, ['channel', 'job', 'pushed_at'])
+        );
+    }
+    
     /**
      * Lists all Queue models.
      * @return mixed

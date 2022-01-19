@@ -17,6 +17,12 @@ use yii\web\NotFoundHttpException;
  */
 class UserController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    { 
+        return $this->asJson(
+            User::findByKeyword($keyword, ['username', 'email'])
+        );
+    }
     /**
      * Lists all User models.
      * @return mixed

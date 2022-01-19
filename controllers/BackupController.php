@@ -16,6 +16,12 @@ use yii\web\NotFoundHttpException;
  */
 class BackupController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    {
+        return $this->asJson(
+            Backup::findByKeyword($keyword, ['filename', 'tables', 'description'])
+        );
+    }
     /**
      * Lists all Backup models.
      * @return mixed

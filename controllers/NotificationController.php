@@ -15,6 +15,13 @@ use yii\helpers\Inflector;
  */
 class NotificationController extends Controller 
 {
+    public function actionFindByKeyword($keyword='')
+    {
+        return $this->asJson(
+            Notification::findByKeyword($keyword, ['message'])
+        );
+    }
+
     /**
      * Lists all Notification models.
      * @return mixed

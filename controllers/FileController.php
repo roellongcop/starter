@@ -16,6 +16,29 @@ use yii\web\UploadedFile;
  */
 class FileController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    {
+        return $this->asJson(
+            File::findByKeyword($keyword, ['name', 'extension', 'token'])
+        );
+    }
+
+    public function actionFindByKeywordImage($keyword='')
+    {
+        $attributes = [
+            'name',
+            'extension',
+            'token',
+        ];
+
+        return parent::findByKeyword($attributes, function($attribute) use($keyword) {
+            return File::filter($attribute, ['and',
+                ['LIKE', $attribute, $keyword],
+                ['extension' => File::EXTENSIONS['image']],
+            ], 3);
+        });
+    }
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -331,26 +354,5 @@ class FileController extends Controller
         }
 
         return $this->render('my-files', $data); 
-    }
-
-    public function actionFindByKeyword($keyword='')
-    {
-        $data = File::filter('name',['LIKE', 'name', $keyword]);
-
-        $data = array_values($data);
-
-        return $this->asJson($data);
-    }
-
-    public function actionFindByKeywordImage($keyword='')
-    {
-        $data = File::filter('name',['and',
-            ['LIKE', 'name', $keyword],
-            ['extension' => File::EXTENSIONS['image']],
-        ]);
-
-        $data = array_values($data);
-
-        return $this->asJson($data);
     }
 }

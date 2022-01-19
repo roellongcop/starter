@@ -15,6 +15,13 @@ use yii\web\NotFoundHttpException;
  */
 class VisitLogController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    { 
+        return $this->asJson(
+            VisitLog::findByKeyword($keyword, ['ip'])
+        );
+    }
+
     /**
      * Lists all VisitLog models.
      * @return mixed

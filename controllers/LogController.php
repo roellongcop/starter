@@ -15,6 +15,19 @@ use yii\web\NotFoundHttpException;
  */
 class LogController extends Controller
 {
+    public function actionFindByKeyword($keyword='')
+    {
+        return $this->asJson(
+            Log::findByKeyword($keyword, [
+                'method', 
+                'action', 
+                'controller',
+                'table_name',
+                'model_name',
+            ])
+        );
+    }
+    
     /**
      * Lists all Log models.
      * @return mixed
@@ -164,26 +177,5 @@ class LogController extends Controller
     public function actionInActiveData()
     {
         # dont delete; use in condition if user has access to in-active data
-    }
-
-    public function actionFindByKeyword($keyword='')
-    {
-        $attributes = [
-            'method',
-            'action',
-            'controller',
-            'table_name',
-            'model_name',
-        ];
-
-        $data = [];
-
-        foreach ($attributes as $attribute) {
-            $data = array_merge($data, array_values(
-                Log::filter($attribute, ['LIKE', $attribute, $keyword], 3)
-            ));
-        }
-
-        return $this->asJson($data);
     }
 }

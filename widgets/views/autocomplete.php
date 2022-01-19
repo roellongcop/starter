@@ -23,6 +23,7 @@ $this->registerCss(<<< CSS
 		background-color: #fff; 
 		border-bottom: 1px solid #d4d4d4; 
 		color: #3F4254;
+		word-break: break-all;
 	}
 	/*when hovering an item:*/
 	.autocomplete-items div:hover {background-color: #e9e9e9;}

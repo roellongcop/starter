@@ -100,12 +100,6 @@ class QueueSearch extends Queue
             ['like', 'channel', $this->keywords],  
             ['like', 'job', $this->keywords],  
             ['like', 'pushed_at', $this->keywords],  
-            ['like', 'ttr', $this->keywords],  
-            ['like', 'delay', $this->keywords],  
-            ['like', 'priority', $this->keywords],  
-            ['like', 'reserved_at', $this->keywords],  
-            ['like', 'attempt', $this->keywords],  
-            ['like', 'done_at', $this->keywords],  
         ]);
 
         $query->daterange($this->date_range);
