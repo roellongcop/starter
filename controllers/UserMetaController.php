@@ -4,8 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\User;
 use app\models\UserMeta;
 use app\models\search\UserMetaSearch;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -17,9 +19,10 @@ class UserMetaController extends Controller
 {
     public function actionFindByKeyword($keyword='')
     { 
-        return $this->asJson(
-            UserMeta::findByKeyword($keyword, ['name', 'value'])
-        );
+        return $this->asJson(array_merge(
+            UserMeta::findByKeyword($keyword, ['name', 'value']), 
+            UserMeta::users()
+        ));
     }
 
     /**

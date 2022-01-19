@@ -93,7 +93,6 @@ class IpSearch extends Ip
         $query->andFilterWhere(['or', 
             ['like', 'name', $this->keywords],  
             ['like', 'description', $this->keywords],  
-            ['like', 'type', $this->keywords],  
         ]);
 
         $query->daterange($this->date_range);

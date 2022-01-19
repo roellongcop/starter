@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%user_metas}}".
@@ -123,5 +124,16 @@ class UserMeta extends ActiveRecord
             'name:raw',
             'value:raw',
         ];
+    }
+
+    public static function users()
+    {
+        $data = User::find()
+            ->innerJoinWith('userMetas')
+            ->all();
+
+        $data = array_values(ArrayHelper::map($data, 'id', 'username'));
+
+        return $data;
     }
 }

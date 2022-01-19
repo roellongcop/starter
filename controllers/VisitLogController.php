@@ -4,11 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\User;
 use app\models\VisitLog;
 use app\models\search\VisitLogSearch;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use yii\helpers\ArrayHelper;
 
 /**
  * VisitLogController implements the CRUD actions for VisitLog model.
@@ -17,9 +19,10 @@ class VisitLogController extends Controller
 {
     public function actionFindByKeyword($keyword='')
     { 
-        return $this->asJson(
-            VisitLog::findByKeyword($keyword, ['ip'])
-        );
+        return $this->asJson(array_merge(
+            VisitLog::findByKeyword($keyword, ['ip']), 
+            VisitLog::users()
+        ));
     }
 
     /**

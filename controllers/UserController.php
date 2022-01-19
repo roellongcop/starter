@@ -4,10 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\App;
+use app\models\Role;
 use app\models\User;
 use app\models\VisitLog;
 use app\models\form\ChangePasswordForm;
 use app\models\search\UserSearch;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -19,9 +21,10 @@ class UserController extends Controller
 {
     public function actionFindByKeyword($keyword='')
     { 
-        return $this->asJson(
-            User::findByKeyword($keyword, ['username', 'email'])
-        );
+        return $this->asJson(array_merge(
+            User::findByKeyword($keyword, ['username', 'email']), 
+            User::roles()
+        ));
     }
     /**
      * Lists all User models.

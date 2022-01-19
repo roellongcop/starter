@@ -6,12 +6,14 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
+use app\models\Role;
 use app\models\form\export\ExportForm;
 use app\models\form\user\MySettingForm;
 use app\models\form\user\ProfileForm;
 use app\widgets\Anchor;
 use app\widgets\Label;
 use yii\web\IdentityInterface;
+use yii\helpers\ArrayHelper;
 
 /**
  * User model
@@ -742,5 +744,16 @@ class User extends ActiveRecord implements IdentityInterface
         if (($role = $this->role) != null) {
             return $role->getIsAdmin();
         }
+    }
+
+    public static function roles()
+    { 
+        $data = Role::find()
+            ->innerJoinWith('users')
+            ->all();
+
+        $data = array_values(ArrayHelper::map($data, 'id', 'name'));
+
+        return $data;
     }
 }

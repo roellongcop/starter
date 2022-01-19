@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%visit_logs}}".
@@ -167,6 +168,17 @@ class VisitLog extends ActiveRecord
 
     public static function logout()
     {
-        return self::log(1);
+        return self::log(self::ACTION_LOGOUT);
+    }
+
+    public static function users()
+    {
+        $data = User::find()
+            ->innerJoinWith('visitLogs')
+            ->all();
+
+        $data = array_values(ArrayHelper::map($data, 'id', 'username'));
+
+        return $data;
     }
 }
