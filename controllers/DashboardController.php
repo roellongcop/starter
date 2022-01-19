@@ -38,11 +38,8 @@ class DashboardController extends Controller
             Setting::findByKeyword($keyword, ['name', 'value']),
             Theme::findByKeyword($keyword, ['name', 'description']),
             User::findByKeyword($keyword, ['username', 'email']), 
-            User::roles(),
             UserMeta::findByKeyword($keyword, ['name', 'value']), 
-            UserMeta::users(),
             VisitLog::findByKeyword($keyword, ['ip']), 
-            VisitLog::users(),
             Visitor::findByKeyword($keyword, ['expire', 'cookie', 'ip', 'browser', 'os', 'device', 'location'])
         );
 
