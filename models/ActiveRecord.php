@@ -877,12 +877,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return App::formatter()->asDateToTimezone($date, 'F d, Y');
     }
 
-    public static function findByKeyword($keyword='', $attributes, $limit=3)
+    public static function findByKeyword($keyword='', $attributes, $limit=10)
     {
         $data = [];
         foreach ($attributes as $attribute) {
             $data = array_merge($data, array_values(
-                static::filter($attribute, ['LIKE', $attribute, $keyword], 3)
+                static::filter($attribute, ['LIKE', $attribute, $keyword], $limit)
             ));
         }
 
