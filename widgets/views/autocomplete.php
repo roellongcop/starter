@@ -16,6 +16,20 @@ $this->registerCss(<<< CSS
 		top: 100%;
 		left: 0;
 		right: 0;
+		overflow: auto;
+	    max-height: 500px;
+	}
+	.autocomplete-items::-webkit-scrollbar {
+	    width: 5px;
+	}
+	.autocomplete-items::-webkit-scrollbar-track {
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
+	    border-radius: 10px;
+	}
+
+	.autocomplete-items::-webkit-scrollbar-thumb {
+	    border-radius: 10px;
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,24%); 
 	}
 	.autocomplete-items div {
 		padding: 10px;

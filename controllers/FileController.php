@@ -25,20 +25,11 @@ class FileController extends Controller
 
     public function actionFindByKeywordImage($keyword='')
     {
-        $attributes = [
-            'name',
-            'extension',
-            'token',
-        ];
-
-        return parent::findByKeyword($attributes, function($attribute) use($keyword) {
-            return File::filter($attribute, ['and',
-                ['LIKE', $attribute, $keyword],
-                ['extension' => File::EXTENSIONS['image']],
-            ], 3);
-        });
+        return $this->asJson(
+            File::findByKeywordImage($keyword, ['name', 'extension', 'token'])
+        );
     }
-
+     
     public function behaviors()
     {
         $behaviors = parent::behaviors();

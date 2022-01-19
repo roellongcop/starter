@@ -322,4 +322,24 @@ class File extends ActiveRecord
             ->where(['token' => $token])
             ->one();
     }
+
+    public static function findByKeywordImage($keyword='', $attributes, $limit=3)
+    {
+        $data = [];
+        foreach ($attributes as $attribute) {
+            $data = array_merge($data, array_values(
+                self::filter($attribute, ['and',
+                    ['LIKE', $attribute, $keyword],
+                    ['extension' => self::EXTENSIONS['image']],
+                ], 3)
+            ));
+        }
+
+        $data = array_unique($data);
+        $data = array_values($data);
+        
+        sort($data);
+
+        return $data;
+    }
 }

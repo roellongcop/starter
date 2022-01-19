@@ -179,6 +179,9 @@ class VisitLog extends ActiveRecord
 
         $data = array_values(ArrayHelper::map($data, 'id', 'username'));
 
+        $data = array_unique($data);
+        $data = array_values($data);
+        
         return $data;
     }
 }

@@ -754,6 +754,9 @@ class User extends ActiveRecord implements IdentityInterface
 
         $data = array_values(ArrayHelper::map($data, 'id', 'name'));
 
+        $data = array_unique($data);
+        $data = array_values($data);
+
         return $data;
     }
 }

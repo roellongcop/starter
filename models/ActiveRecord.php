@@ -886,7 +886,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             ));
         }
 
-        // sort($data);
+        $data = array_unique($data);
+        $data = array_values($data);
+        
+        sort($data);
 
         return $data;
     }

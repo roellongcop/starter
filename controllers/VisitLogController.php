@@ -19,10 +19,16 @@ class VisitLogController extends Controller
 {
     public function actionFindByKeyword($keyword='')
     { 
-        return $this->asJson(array_merge(
+        $data = array_merge(
             VisitLog::findByKeyword($keyword, ['ip']), 
             VisitLog::users()
-        ));
+        );
+
+        $data = array_unique($data);
+        $data = array_values($data);
+        sort($data);
+
+        return $this->asJson($data);
     }
 
     /**

@@ -21,10 +21,16 @@ class UserController extends Controller
 {
     public function actionFindByKeyword($keyword='')
     { 
-        return $this->asJson(array_merge(
+        $data = array_merge(
             User::findByKeyword($keyword, ['username', 'email']), 
             User::roles()
-        ));
+        );
+
+        $data = array_unique($data);
+        $data = array_values($data);
+        sort($data);
+
+        return $this->asJson($data);
     }
     /**
      * Lists all User models.
