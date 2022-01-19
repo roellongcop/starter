@@ -41,10 +41,7 @@ abstract class Controller extends \yii\web\Controller
         $behaviors['UserFilter'] = ['class' => 'app\filters\UserFilter'];
         $behaviors['IpFilter'] = ['class' => 'app\filters\IpFilter'];
         $behaviors['VerbFilter'] = ['class' => 'app\filters\VerbFilter'];
-        $behaviors['AccessControl'] = [
-            'class' => 'app\filters\AccessControl',
-            'publicActions' => ['find-by-keyword']
-        ];
+        $behaviors['AccessControl'] = ['class' => 'app\filters\AccessControl'];
 
         if (App::setting('system')->enable_visitor) {
             $behaviors['VisitorFilter'] = [
