@@ -9,12 +9,19 @@ class Autocomplete extends BaseWidget
 {
     public $input;
     public $url;
+    public $data = [];
 
     public function init() 
     {
         // your logic here
         parent::init();
         $this->url = $this->url ?: Url::to(['find-by-keyword']);
+        $this->data = json_encode($this->data);
+    }
+
+    public function ajax()
+    {
+        return Url::userCanRoute($this->url) ? 'true': 'false';
     }
 
     /**
@@ -25,6 +32,8 @@ class Autocomplete extends BaseWidget
         return $this->render('autocomplete', [
             'input' => $this->input,
             'url' => $this->url,
+            'data' => $this->data,
+            'ajax' => $this->ajax()
         ]);
     }
 }

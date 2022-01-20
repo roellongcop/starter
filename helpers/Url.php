@@ -5,6 +5,7 @@ namespace app\helpers;
 use Yii;
 use app\helpers\App;
 use app\models\File;
+use app\widgets\Anchor;
 
 class Url extends \yii\helpers\Url
 {
@@ -30,5 +31,12 @@ class Url extends \yii\helpers\Url
         }
 
         return parent::to($url, $scheme);
+    }
+
+    public static function userCanRoute($link)
+    {
+        $anchor = Anchor::widget(['link' => $link]);
+
+        return $anchor ? true: false;
     }
 }
