@@ -12,14 +12,8 @@ class PdfComponent extends \kartik\mpdf\Pdf
     // public $destination = Pdf::DEST_BROWSER;
     public $destination = Pdf::DEST_DOWNLOAD;
     public $cssInline = '
-        table, span, span.btn-font-sm {
-            font-size:10px !important;
-        },
-        th {
-            text-transform: uppercase !important;
-        } 
-        .mx40 {
-            max-width: 40px;
-        } 
+        table, span, span.btn-font-sm {font-size:10px !important;}
+        th {text-transform: uppercase !important;}
+        .mx40 {max-width: 40px;}
     ';
 }
