@@ -46,6 +46,13 @@ use yii\helpers\Inflector;
  */
 class <?= $controllerClass ?> extends Controller <?= "\n" ?>
 {
+    public function actionFindByKeyword($keyword='')
+    {
+        return $this->asJson(
+            <?= $modelClass ?>::findByKeyword($keyword, ['id'])
+        );
+    }
+
     /**
      * Lists all <?= $modelClass ?> models.
      * @return mixed
