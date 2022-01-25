@@ -103,7 +103,7 @@ class UploadForm extends \yii\base\Model
 
         do {
             $time = time();
-            $string = App::randomString(5);
+            $string = App::randomString(10);
             $path = "{$file_path}/{$input->baseName}-{$string}-{$time}.{$input->extension}";
         } while (file_exists($path));
         
