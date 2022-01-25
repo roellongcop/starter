@@ -342,4 +342,13 @@ class File extends ActiveRecord
 
         return $data;
     }
+
+    public function getMimeType()
+    {
+        if ($this->isDocument) {
+            return implode('/', ['file', $this->extension]);
+        }
+
+        return implode('/', ['image', $this->extension]);
+    }
 }

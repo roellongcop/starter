@@ -15,6 +15,7 @@ $params = [
     'data-height' => $model->height,
     'data-location' => $model->location,
     'data-token' => $model->token,
+    'data-mimetype' => $model->mimeType,
     'data-created_at' => App::formatter('asFulldate', $model->created_at),
     'title' => $model->name,
     'data-can-delete' => $model->canDelete ? 'true': 'false',

@@ -11,6 +11,8 @@ $js = <<< JS
             id: 0,
             path: '',
             token: '',
+            extension: '',
+            mimetype: '',
             name: '{$uploadFileName}-' + new Date().getTime(),
         },
         rotate = 0,
@@ -130,7 +132,8 @@ $js = <<< JS
         selectedImage.path = $(image).data('src');
         selectedImage.token = $(image).data('token');
         selectedImage.name = $(image).data('name');
-
+        selectedImage.mimetype = $(image).data('mimetype');
+        selectedImage.extension = $(image).data('extension');
 
         $(imageName).text($(image).data('name'));
         $(imageExtension).text($(image).data('extension'));
@@ -211,7 +214,12 @@ $js = <<< JS
         var reader = new FileReader();
 
         if(this.files && this.files[0]) {
+            selectedImage.mimetype = this.files[0]['type'];
             selectedImage.name = this.files[0]['name'];
+
+            var type = selectedImage.mimetype.split("/");
+            selectedImage.extension = type[1];
+
             reader.onload = function(e) {
                 image.src = e.target.result;
                 if (cropper) {
@@ -247,7 +255,6 @@ $js = <<< JS
 
     $(saveImageBtn).click(function() {
         cropper.getCroppedCanvas().toBlob((blob) => {
-
             KTApp.block(cropperTabContainer, {
                 overlayColor: '#000000',
                 state: 'primary',
@@ -256,7 +263,7 @@ $js = <<< JS
         
             const formData = new FormData();
             // Pass the image file name as the third parameter if necessary.
-            formData.append('UploadForm[fileInput]', blob, selectedImage.name + '.png');
+            formData.append('UploadForm[fileInput]', blob, selectedImage.name + '.' + selectedImage.extension);
             let parameters = {$parameters};
             for ( let key in parameters ) {
                 formData.append(key, parameters[key]);
@@ -290,7 +297,7 @@ $js = <<< JS
                     KTApp.unblockPage();
                 },
             });
-        });
+        }, selectedImage.mimetype);
     });
 JS;
 
