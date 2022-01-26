@@ -49,7 +49,7 @@ class AccessComponentTest extends \Codeception\Test\Unit
         expect_that(is_array($this->access->my_actions('user')));
         expect_that($this->access->my_actions('user'));
         expect($this->access->my_actions('user'))->hasKey(1);
-        expect(sizeof($this->access->my_actions('user')))->equals(18);
+        expect(sizeof($this->access->my_actions('user')))->equals(19);
     }
 
     public function testUserCanRoute()
