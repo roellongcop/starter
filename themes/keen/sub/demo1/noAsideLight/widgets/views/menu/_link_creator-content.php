@@ -17,7 +17,6 @@ $controller = $this->params['controller'] ?? App::controllerID();
         return <<< HTML
             <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover" aria-haspopup="true">
                 {$parent}
-
                 <div class="menu-submenu menu-submenu-classic {$subMenuClass}">
                     <ul class="menu-subnav"> {$sub} </ul>
                 </div>

@@ -12,7 +12,7 @@ use app\helpers\Html;
             'searchTemplate' => $searchModel->searchTemplate ?? implode('/', [
                 App::controllerID(),
                 '_search'
-            ]);
+            ])
         ]);
     }
 ) ?>
