@@ -157,7 +157,9 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 						/*close the list of autocompleted values,
 						(or any other open lists of autocompleted values:*/
 						// closeAllLists();
-						$(this).closest('form').submit();
+						if({$submitOnclick}) {
+							$(this).closest('form').submit();
+						}
 					});
 					a.appendChild(b);
 				}

@@ -10,6 +10,7 @@ class Autocomplete extends BaseWidget
     public $input;
     public $url;
     public $data = [];
+    public $submitOnclick = true;
 
     public function init() 
     {
@@ -33,6 +34,7 @@ class Autocomplete extends BaseWidget
             'input' => $this->input,
             'url' => $this->url,
             'data' => $this->data,
+            'submitOnclick' => $this->submitOnclick ? 'true': 'false',
             'ajax' => $this->ajax()
         ]);
     }

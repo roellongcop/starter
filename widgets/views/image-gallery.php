@@ -7,6 +7,7 @@ use yii\widgets\Pjax;
 use app\widgets\Autocomplete;
 
 $js = <<< JS
+    
     var selectedImage = {
             id: 0,
             path: '',
@@ -24,6 +25,8 @@ $js = <<< JS
         cropper = new Cropper(image, options),
 
         container = '#image-gallery-container-{$id}',
+
+        autoCompleteItems          = [container, '.autocomplete-items div'].join(' '),
 
         fileIdInput          = [container, '.file-id-input'].join(' '),
         imageGalleryBtn      = [container, '.image-gallery-btn'].join(' '),
@@ -120,6 +123,10 @@ $js = <<< JS
         }   
         $.ajax(conf);
     }
+
+    $(document).on('click', autoCompleteItems, function() {
+        getMyFiles('{$myImageFilesUrl}?keywords=' + $(searchInput).val() );
+    });
 
     $(document).on("pjax:beforeSend", function() { 
         showLoading(); 
@@ -393,7 +400,8 @@ CSS);
                                                 'class' => 'form-control search-input',
                                                 'placeholder' => 'Search Photo',
                                             ]),
-                                            'url' => Url::to(['file/find-by-keyword-image'])
+                                            'url' => Url::to(['file/find-by-keyword-image']),
+                                            'submitOnclick' => false
                                         ]) ?>
                                         <?php Pjax::begin([
                                             'options' => ['class' => 'my-photos-container'],
