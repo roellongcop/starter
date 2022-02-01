@@ -49,7 +49,6 @@ $this->registerCss(<<< CSS
 CSS, [], 'autocomplete');
 
 $this->registerWidgetJs($widgetFunction, <<< JS
-	
 	function autocomplete(inp) {
 		/*the autocomplete function takes two arguments,
 		the text field element and an array of possible autocompleted values:*/
@@ -157,7 +156,8 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 						inp.value = this.getElementsByTagName("input")[0].value;
 						/*close the list of autocompleted values,
 						(or any other open lists of autocompleted values:*/
-						closeAllLists();
+						// closeAllLists();
+						$(this).closest('form').submit();
 					});
 					a.appendChild(b);
 				}
