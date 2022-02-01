@@ -7,7 +7,6 @@ use yii\widgets\Pjax;
 use app\widgets\Autocomplete;
 
 $js = <<< JS
-    
     var selectedImage = {
             id: 0,
             path: '',
@@ -133,27 +132,26 @@ $js = <<< JS
     });
 
     $(document).on('click', images, function() {
-        let image = this;
 
-        selectedImage.id = $(image).data('id');
-        selectedImage.path = $(image).data('src');
-        selectedImage.token = $(image).data('token');
-        selectedImage.name = $(image).data('name');
-        selectedImage.mimetype = $(image).data('mimetype');
-        selectedImage.extension = $(image).data('extension');
+        selectedImage.id = $(this).data('id');
+        selectedImage.path = $(this).data('src');
+        selectedImage.token = $(this).data('token');
+        selectedImage.name = $(this).data('name');
+        selectedImage.mimetype = $(this).data('mimetype');
+        selectedImage.extension = $(this).data('extension');
 
-        $(imageName).text($(image).data('name'));
-        $(imageExtension).text($(image).data('extension'));
-        $(imageSize).text($(image).data('size'));
-        $(imageWidth).text($(image).data('width') + 'px');
-        $(imageHeight).text($(image).data('height') + 'px');
-        $(imageLocation).text($(image).data('location'));
-        $(imageToken).text($(image).data('token'));
-        $(imageCreatedAt).text($(image).data('created_at'));
+        $(imageName).text($(this).data('name'));
+        $(imageExtension).text($(this).data('extension'));
+        $(imageSize).text($(this).data('size'));
+        $(imageWidth).text($(this).data('width') + 'px');
+        $(imageHeight).text($(this).data('height') + 'px');
+        $(imageLocation).text($(this).data('location'));
+        $(imageToken).text($(this).data('token'));
+        $(imageCreatedAt).text($(this).data('created_at'));
 
         $(images).css('border', '');
 
-        $(image).css('border', '2px solid #1bc5bd');
+        $(this).css('border', '2px solid #1bc5bd');
 
         showMyPhotosButton();
     });
