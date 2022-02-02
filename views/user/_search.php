@@ -1,13 +1,13 @@
 <?php
 
 use app\helpers\App;
-use app\models\ActiveRecord;
 use app\models\User;
 use app\models\search\RoleSearch;
 use app\widgets\ActiveForm;
 use app\widgets\DateRange;
 use app\widgets\Filter;
 use app\widgets\Pagination;
+use app\widgets\RecordStatusFilter;
 use app\widgets\Search;
 use app\widgets\SearchButton;
 
@@ -36,10 +36,7 @@ use app\widgets\SearchButton;
         'model' => $model,
         'form' => $form,
     ]) ?>
-    <?= Filter::widget([
-        'data' => ActiveRecord::mapRecords(),
-        'title' => 'Record Status',
-        'attribute' => 'record_status',
+    <?= RecordStatusFilter::widget([
         'model' => $model,
         'form' => $form,
     ]) ?>

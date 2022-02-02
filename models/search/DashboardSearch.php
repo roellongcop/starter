@@ -103,4 +103,9 @@ class DashboardSearch extends \yii\base\Model
 
         return date('F d, Y', strtotime($this->endDate));
     }
+
+    public function controllerID()
+    {
+        return 'dashboard';
+    }
 }

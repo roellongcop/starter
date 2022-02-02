@@ -19,7 +19,7 @@ use app\widgets\Filter;
 use app\helpers\App;
 use yii\widgets\ActiveForm;
 use app\widgets\SearchButton;
-use app\models\ActiveRecord;
+use app\widgets\RecordStatusFilter;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
@@ -37,10 +37,7 @@ use app\models\ActiveRecord;
 ]); ?>
     <?= '<?=' ?> Search::widget(['model' => $model]) ?>
     <?= '<?=' ?> DateRange::widget(['model' => $model]) ?>
-    <?= '<?=' ?> Filter::widget([
-        'data' => ActiveRecord::mapRecords(),
-        'title' => 'Record Status',
-        'attribute' => 'record_status',
+    <?= '<?=' ?> RecordStatusFilter::widget([
         'model' => $model,
         'form' => $form,
     ]) ?>

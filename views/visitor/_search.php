@@ -1,12 +1,12 @@
 <?php
 
-use app\widgets\Pagination;
-use app\widgets\Search;
 use app\widgets\DateRange;
 use app\widgets\Filter;
-use yii\widgets\ActiveForm;
+use app\widgets\Pagination;
+use app\widgets\RecordStatusFilter;
+use app\widgets\Search;
 use app\widgets\SearchButton;
-use app\models\ActiveRecord;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\search\VisitorSearch */
@@ -19,10 +19,7 @@ use app\models\ActiveRecord;
 ]); ?>
     <?= Search::widget(['model' => $model]) ?>
     <?= DateRange::widget(['model' => $model]) ?>
-    <?= Filter::widget([
-        'data' => ActiveRecord::mapRecords(),
-        'title' => 'Record Status',
-        'attribute' => 'record_status',
+    <?= RecordStatusFilter::widget([
         'model' => $model,
         'form' => $form,
     ]) ?>
