@@ -18,7 +18,6 @@ class RecordStatusFilter extends BaseWidget
         parent::init();
     }
 
-
     /**
      * {@inheritdoc}
      */
