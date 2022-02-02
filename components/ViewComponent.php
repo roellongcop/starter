@@ -11,6 +11,8 @@ class ViewComponent extends \yii\web\View
 {
     public function init()
     {
+        parent::init();
+
         $options = Json::htmlEncode([
             'appName' => App::appName(),
             'baseUrl' => Url::base(true) . '/',
@@ -27,8 +29,6 @@ class ViewComponent extends \yii\web\View
         JS;
 
         $this->registerJs($js, \yii\web\View::POS_HEAD, 'app');
-
-        parent::init();
     }
 
 	public function registerWidgetJs($widgetFunction, $js, $position = parent::POS_READY, $key = null)
