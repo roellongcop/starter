@@ -749,12 +749,14 @@ class User extends ActiveRecord implements IdentityInterface
     public static function roles()
     { 
         $data = Role::find()
-            ->innerJoinWith('users')
+            ->select('r.*')
+            ->alias('r')
+            ->innerJoinWith('users u')
+            ->groupBy('r.name')
             ->all();
 
         $data = array_values(ArrayHelper::map($data, 'id', 'name'));
 
-        $data = array_unique($data);
         $data = array_values($data);
 
         return $data;

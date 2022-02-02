@@ -129,12 +129,14 @@ class UserMeta extends ActiveRecord
     public static function users()
     {
         $data = User::find()
-            ->innerJoinWith('userMetas')
+            ->select('u.*')
+            ->alias('u')
+            ->innerJoinWith('userMetas um')
+            ->groupBy('u.username')
             ->all();
 
         $data = array_values(ArrayHelper::map($data, 'id', 'username'));
 
-        $data = array_unique($data);
         $data = array_values($data);
         
         return $data;

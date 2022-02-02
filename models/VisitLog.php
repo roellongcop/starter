@@ -174,12 +174,14 @@ class VisitLog extends ActiveRecord
     public static function users()
     {
         $data = User::find()
-            ->innerJoinWith('visitLogs')
+            ->select('u.*')
+            ->alias('u')
+            ->innerJoinWith('visitLogs vl')
+            ->groupBy('u.username')
             ->all();
 
         $data = array_values(ArrayHelper::map($data, 'id', 'username'));
 
-        $data = array_unique($data);
         $data = array_values($data);
         
         return $data;
