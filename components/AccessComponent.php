@@ -107,7 +107,6 @@ class AccessComponent extends Component
 		return false;
  	}
  
-
  	public function getModuleFilter()
  	{
  		$controller_actions = $this->controllerActions;
