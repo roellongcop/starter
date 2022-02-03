@@ -165,6 +165,12 @@ $js = <<< JS
         }
     });
 
+    $(searchInput).on('input', function(e) { 
+        if($(this).val() == '') {
+            getMyFiles('{$myImageFilesUrl}?keywords=' + $(this).val());
+        }
+    });
+
     $(confirmBtn).click(function() {
         let s = {
             status: 'success',
