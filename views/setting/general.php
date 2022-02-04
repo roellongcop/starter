@@ -2,7 +2,7 @@
 
 use app\helpers\Html;
 use app\models\Setting;
-use app\models\search\DashboardSearch;
+use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 
 /* @var $this yii\web\View */
@@ -12,7 +12,7 @@ $setting_modules = Setting::MODULE;
 $this->title = 'General Settings';
 $this->params['breadcrumbs'][] = 'Set Up';
 $this->params['breadcrumbs'][] = $setting_modules[$tab]['label'];
-$this->params['searchModel'] = new DashboardSearch();
+$this->params['searchModel'] = new SettingSearch();
 ?>
 <div class="setting-general-page">
 	<p>
