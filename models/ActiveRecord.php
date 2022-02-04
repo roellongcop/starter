@@ -754,11 +754,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             ];
         }
 
-        $columns['delete'] = [
-            'label' => 'Delete',
-            'process' => 'delete',
-            'icon' => 'delete',
-        ];
+        if (App::isLogin() && App::identity()->can('delete', $this->controllerID())) {
+            $columns['delete'] = [
+                'label' => 'Delete',
+                'process' => 'delete',
+                'icon' => 'delete',
+            ];
+        }
         
         return $columns;
     }
