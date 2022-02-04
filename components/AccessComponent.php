@@ -224,26 +224,16 @@ class AccessComponent extends Component
 		        'icon' => '<i class="fa fa-cog"></i>',
 		        'sub' => [
 		            '5.1' => [
-		                'label' => 'List',
-		                'link' => '/setting',
-		                'icon' => '<i class="fa fa-cog"></i>',
-		            ],
-		            '5.2' => [
-		                'label' => 'My Settings',
-		                'link' => '/my-setting',
-		                'icon' => '<i class="fa fa-cog"></i>',
-		            ],
-		            '5.3' => [
 		                'label' => 'General Setting',
 		                'link' => '/setting/general',
 		                'icon' => '<i class="fa fa-cog"></i>',
 		            ],
-		            '5.4' => [
+		            '5.2' => [
 		                'label' => 'Ip',
 		                'link' => '/ip',
 		                'icon' => '<i class="fa fa-cog"></i>',
 		            ],
-		            '5.5' => [
+		            '5.3' => [
 		                'label' => 'Themes',
 		                'link' => '/theme',
 		                'icon' => '<i class="fa fa-cog"></i>',
