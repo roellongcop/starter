@@ -11,15 +11,24 @@ class BulkAction extends BaseWidget
     public $controllerID;
     public $searchModel;
 
-
     public function init() 
     {
         // your logic here
         parent::init();
 
-        $this->controllerID = $this->controllerID ?: App::controllerID();
+        $this->setControllerId();
     }
 
+    public function setControllerId()
+    {
+        if ($this->controllerID == NULL) {
+            if ($this->searchModel && $this->searchModel->hasProperty('controllerID')) {
+                $this->controllerID = $this->searchModel->controllerID();
+            }
+        }
+
+        $this->controllerID = $this->controllerID ?: App::controllerID();
+    }
 
     /**
      * {@inheritdoc}
