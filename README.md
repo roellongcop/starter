@@ -82,6 +82,7 @@
 	* Visit Logs
 	* Queues
 * Settings
+	* List
 	* General Setting
 	* Ip
 	* Themes
