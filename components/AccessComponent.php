@@ -223,6 +223,11 @@ class AccessComponent extends Component
 		        'link' => '#',
 		        'icon' => '<i class="fa fa-cog"></i>',
 		        'sub' => [
+		        	'5.0' => [
+		                'label' => 'Setting List',
+		                'link' => '/setting/index',
+		                'icon' => '<i class="fa fa-cog"></i>',
+		            ],
 		            '5.1' => [
 		                'label' => 'General Setting',
 		                'link' => '/setting/general',
