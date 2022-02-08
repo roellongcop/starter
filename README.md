@@ -2,8 +2,13 @@
 1) create database "db_starter"
 2) you may need to adjust the "app/config/db.php" for credentials
 3) open cmd, goto root folder then run:
+	
+		composer install    
+	or
 
-	```composer install or composer update``` - (install dependency)
+		composer update    
+
+    - (install dependency)
 	
 	```yii migrate``` (create database structure and create fixed set of data)
 	
@@ -87,14 +92,3 @@
 	* Themes
 * Notifications
 * Visitors
-
-
-add 4 spaces infront of the text 
-and github shows a copy button to copy that block
-
-Ex: in a README.md :
-
-    sudo apt update
-    sudo apt install snapd
-
-Now The above code has the copy button over it in Github
