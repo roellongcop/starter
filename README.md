@@ -1,45 +1,30 @@
 # yii2 keen admin dashboard
 1) create database "db_starter"
 2) you may need to adjust the "app/config/db.php" for credentials
-3) open cmd, goto root folder:
-	- To install dependency:
-		
-            composer install    
-		
-    - To create database structure and create fixed set of data:
-	           
-            yii migrate
+3) open cmd, goto root folder then run:
+
+	```composer install or composer update``` - (install dependency)
 	
-    - To start server:
-	        
-            yii serve
+	```yii migrate``` (create database structure and create fixed set of data)
+	
+	```yii serve``` (start server)
 
-
-4) goto development server created for available user: 
-        
-        [http://host]/api/v1/user/available-users
+4) goto development server created: ```[http://host]/api/v1/user/available-users``` for available user
 5) Additional Command
-    - To create fixed set of data, Overwrite migration fixed data:
-	        
-	        yii fixture *
-    - To run tests:
-    
-            php vendor/bin/codecept run
-    - To generate random data on [roles, users, ips], Overwrite migration fixed data and fixture:
-    
-    	    yii seed/init
-    - To generate Additional 10 roles:
-	
-	        yii seed Role 10
-    - To generate Additional 10 users:
-    
-            yii seed Users 10
-    - To generate Additional 10 ips:
-            
-            yii seed Ip 10
-    - To run queue jobs, must set to cron job on live-production:
-        
-            yii queue/run
+
+	```yii fixture *``` Create fixed set of data, Overwrite migration fixed data)
+
+	```php vendor/bin/codecept run``` (Running tests)
+
+	```yii seed/init``` (Generate random data on [roles, users, ips], Overwrite migration fixed data and fixture)
+
+	```yii seed Role 10``` (Generate Additional 10 roles)
+
+	```yii seed Users 10``` (Generate Additional 10 users)
+
+	```yii seed Ip 10``` (Generate Additional 10 ips)
+
+	```yii queue/run``` (Running queue jobs, must set to cron job on live-production)
 
 ============================================================================
 
