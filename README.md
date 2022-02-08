@@ -2,20 +2,16 @@
 1) create database "db_starter"
 2) you may need to adjust the "app/config/db.php" for credentials
 3) open cmd, goto root folder then run:
-	- To install dependency:
-
+	
 		composer install    
-	or     
-
-		composer update    
+		    or     
+		composer update
+		
+	to install dependency
 	
-	- To create database structure and create fixed set of data
-
-		yii migrate  
-
-	- To Start server
+	```yii migrate``` (create database structure and create fixed set of data)
 	
-		yii serve  
+	```yii serve``` (start server)
 
 4) goto development server created: ```[http://host]/api/v1/user/available-users``` for available user
 5) Additional Command
