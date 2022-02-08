@@ -4,7 +4,9 @@
 3) open cmd, goto root folder then run:
 	
 		composer install    
-		    or     
+		    
+	or     
+		
 		composer update
 		
 	to install dependency
