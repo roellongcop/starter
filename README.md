@@ -1,19 +1,21 @@
 # yii2 keen admin dashboard
 1) create database "db_starter"
 2) you may need to adjust the "app/config/db.php" for credentials
-3) open cmd, goto root folder then run:
-	
-		composer install    
-		    
-	or     
+3) open cmd, goto root folder:
+	- To install dependency:
 		
-		composer update
+            composer install    
+		 or     
 		
-	to install dependency
+		    composer update
+		
+    - To create database structure and create fixed set of data:
+	           
+            yii migrate
 	
-	```yii migrate``` (create database structure and create fixed set of data)
-	
-	```yii serve``` (start server)
+    - To start server:
+	        
+            yii serve
 
 4) goto development server created: ```[http://host]/api/v1/user/available-users``` for available user
 5) Additional Command
