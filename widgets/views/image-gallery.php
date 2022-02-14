@@ -149,9 +149,9 @@ $js = <<< JS
         $(imageToken).text($(this).data('token'));
         $(imageCreatedAt).text($(this).data('created_at'));
 
-        $(images).css('border', '');
+        $(images).css('outline', '');
 
-        $(this).css('border', '2px solid #1bc5bd');
+        $(this).css('outline', '2px solid #1bc5bd');
 
         showMyPhotosButton();
     });
@@ -330,7 +330,7 @@ $this->registerCss(<<< CSS
         display: grid !important;
     }
     #image-gallery-container-{$id} .my-photos-tab-container img:hover {
-        border: 2px solid #1bc5bd;
+        outline: 2px solid #1bc5bd;
     }
 
     #image-gallery-container-{$id} .cropper-tab-container {

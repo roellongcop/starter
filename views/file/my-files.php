@@ -148,8 +148,8 @@ $this->registerJs(<<< JS
                 actionButtons += '</a>';
             }
         imgActionBtn.html(actionButtons);
-        $(imageContainer).css('border', '');
-        $(this).css('border', '2px solid #1bc5bd');
+        $(imageContainer).css('outline', '');
+        $(this).css('outline', '2px solid #1bc5bd');
         showActionButton();
     }); 
 
@@ -180,7 +180,7 @@ $this->registerCss(<<< CSS
         display: grid !important;
     }
     #my-files img:hover {
-        border: 2px solid #1bc5bd;
+        outline: 2px solid #1bc5bd;
     }
 CSS);
 ?>
