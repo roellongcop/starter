@@ -1,11 +1,11 @@
 <?php
 
-namespace tests\unit\models;
+namespace tests\unit\models\search;
 
 use app\models\User;
 use app\models\search\DashboardSearch;
 
-class DashboardTest extends \Codeception\Test\Unit
+class DashboardSearchTest extends \Codeception\Test\Unit
 {
     public function testSearchWithResult()
     {
