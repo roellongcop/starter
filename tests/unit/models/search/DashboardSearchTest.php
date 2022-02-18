@@ -9,8 +9,8 @@ class DashboardSearchTest extends \Codeception\Test\Unit
 {
     public function testSearchWithResult()
     {
-        $dashboardSearch = new DashboardSearch();
-        $dataProviders = $dashboardSearch->search([
+        $searchModel = new DashboardSearch();
+        $dataProviders = $searchModel->search([
             'DashboardSearch' => ['keywords' => 'developer', 'modules' => ['UserSearch']]
         ]);
 
@@ -19,8 +19,8 @@ class DashboardSearchTest extends \Codeception\Test\Unit
 
     public function testSearchWithNoResult()
     {
-        $dashboardSearch = new DashboardSearch();
-        $dataProviders = $dashboardSearch->search([
+        $searchModel = new DashboardSearch();
+        $dataProviders = $searchModel->search([
             'DashboardSearch' => ['keywords' => 'noresultsearch', 'modules' => ['UserSearch']]
         ]);
 
