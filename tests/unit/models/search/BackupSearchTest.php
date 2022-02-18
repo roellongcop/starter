@@ -2,7 +2,6 @@
 
 namespace tests\unit\models\search;
 
-use app\models\User;
 use app\models\search\BackupSearch;
 
 class BackupSearchTest extends \Codeception\Test\Unit

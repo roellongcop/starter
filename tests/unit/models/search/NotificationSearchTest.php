@@ -2,7 +2,6 @@
 
 namespace tests\unit\models\search;
 
-use app\models\User;
 use app\models\search\NotificationSearch;
 
 class NotificationSearchTest extends \Codeception\Test\Unit

@@ -2,7 +2,6 @@
 
 namespace tests\unit\models\search;
 
-use app\models\User;
 use app\models\search\DashboardSearch;
 
 class DashboardSearchTest extends \Codeception\Test\Unit

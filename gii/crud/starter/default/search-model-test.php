@@ -1,10 +1,10 @@
-<?php
+<?= "<?php\n" ?>
 
 namespace tests\unit\models\search;
 
-use app\models\search\FileSearch;
+use app\models\search\<?= $modelClass ?>Search;
 
-class FileSearchTest extends \Codeception\Test\Unit
+class <?= $modelClass ?>SearchTest extends \Codeception\Test\Unit
 {
     public function _before()
     {
@@ -15,17 +15,17 @@ class FileSearchTest extends \Codeception\Test\Unit
 
     public function testSearchWithResult()
     {
-        $searchModel = new FileSearch();
-        $dataProviders = $searchModel->search(['FileSearch' => ['keywords' => '']]);
+        $searchModel = new <?= $modelClass ?>Search();
+        $dataProviders = $searchModel->search(['<?= $modelClass ?>Search' => ['keywords' => '']]);
         expect_that($dataProviders);
-        expect($dataProviders->totalCount)->equals(3);
+        expect($dataProviders->totalCount)->equals(2);
     }
 
     public function testSearchWithNoResult()
     {
-        $searchModel = new FileSearch();
+        $searchModel = new <?= $modelClass ?>Search();
         $dataProviders = $searchModel->search([
-            'FileSearch' => ['keywords' => 'qwertyuiopasdfghjkl234567890']
+            '<?= $modelClass ?>Search' => ['keywords' => 'qwertyuiopasdfghjkl234567890']
         ]);
 
         expect_that($dataProviders);

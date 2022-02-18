@@ -189,16 +189,17 @@ class Generator extends \yii\gii\Generator
             }
         }
 
-        /*$exp = explode('\\', $this->controllerClass);
+        /*ADDED FOR UNIT TESTING SEARCH MODEL*/
+        $exp = explode('\\', $this->controllerClass);
         $end = end($exp);
 
         $model = str_replace('Controller', '', $end);
         $params['modelClass'] = \yii\helpers\StringHelper::basename($this->modelClass);
 
         $files[] = new CodeFile(
-            Yii::getAlias('@app') . '/tests/functional/admin_pages/' . $model . 'Cest.php',
-            $this->render('functional-test.php', $params)
-        );*/
+            Yii::getAlias('@app') . '/tests/unit/models/search/' . $model . 'SearchTest.php',
+            $this->render('search-model-test.php', $params)
+        );
 
         return $files;
     }

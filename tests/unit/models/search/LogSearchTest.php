@@ -2,7 +2,6 @@
 
 namespace tests\unit\models\search;
 
-use app\models\User;
 use app\models\search\LogSearch;
 
 class LogSearchTest extends \Codeception\Test\Unit
