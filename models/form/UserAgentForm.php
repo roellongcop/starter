@@ -39,28 +39,28 @@ class UserAgentForm extends \yii\base\Model
 	];
 
 	const BROWSERS = [
-		'/firefox/i' 	=> 'Firefox',
-		'/safari/i'  	=> 'Safari',
-		'/chrome/i'  	=> 'Chrome',
-		'/opr/i'     	=> 'Opera',
-		'/opera/i'   	=> 'Opera',
-		'/edge/i'    	=> 'Edge',
-		'/ie/i'      	=> 'Internet Explorer',
-		'/trident/i' 	=> 'Internet Explorer',
-		'/net/i'     	=> 'Internet Explorer',
-		'/ucbrowser/i'  => 'UC Browser',
-		'/brave/i' 	    => 'Brave',
-		'/duckduckgo/i' => 'Duckduck Go',
+		"/firefox/i" 	=> "Firefox",
+		"/safari/i"  	=> "Safari",
+		"/chrome/i"  	=> "Chrome",
+		"/opr/i"     	=> "Opera",
+		"/opera/i"   	=> "Opera",
+		"/edge/i"    	=> "Edge",
+		"/ie/i"      	=> "Internet Explorer",
+		"/trident/i" 	=> "Internet Explorer",
+		"/net/i"     	=> "Internet Explorer",
+		"/ucbrowser/i"  => "UC Browser",
+		"/brave/i" 	    => "Brave",
+		"/duckduckgo/i" => "Duckduck Go",
 	];
 
 	const OS = [
-		'/mac os/i'  => 'MacOS',
-		'/android/i' => 'Android',
-		'/linux/i'   => 'Linux',
-		'/ubuntu/i'  => 'MacOS',
-		'/windows/i' => 'Windows',
-		'/win/i'     => 'Windows',
-		'/iphone/i'  => 'iOS',
+		"/mac os/i"  => "MacOS",
+		"/android/i" => "Android",
+		"/linux/i"   => "Linux",
+		"/ubuntu/i"  => "MacOS",
+		"/windows/i" => "Windows",
+		"/win/i"     => "Windows",
+		"/iphone/i"  => "iOS",
 	];
 
 	const DEVICES = [
