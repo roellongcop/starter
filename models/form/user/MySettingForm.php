@@ -14,26 +14,24 @@ use app\models\UserMeta;
  * @property User|null $user This property is read-only.
  *
  */
-class MySettingForm extends \yii\base\Model
+class MySettingForm extends UserForm
 {
     const META_NAME = 'my-settings';
-    private $_user;
+    
+    public $theme_id;
+
     private $_theme;
 
-    public $theme_id;
-    public $user_id;
-    
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
-        return [
-            [['theme_id', 'user_id'], 'required'],
-            [['user_id', 'theme_id'], 'integer'],
-            [['user_id'], 'validateUserId'],
+        return $this->setRules([
+            [['theme_id'], 'required'],
+            [['theme_id'], 'integer'],
             [['theme_id'], 'validateThemeId'],
-        ];
+        ]);
     }
 
     public function attributeLabels()
@@ -44,42 +42,11 @@ class MySettingForm extends \yii\base\Model
         ];
     }
 
-    public function init()
-    {
-        parent::init();
-
-        if (($user = $this->getUser()) != NULL) {
-
-            if (($meta = $user->meta(self::META_NAME)) != NULL) {
-                $this->load(['MySettingForm' => json_decode($meta, true)]);
-            }
-        }
-    }
-
     public function validateThemeId($attribute, $params)
     {
         if (($theme = $this->getTheme()) == NULL) {
             $this->addError($attribute, 'Theme don\'t exist.');
         }
-    }
-
-    public function validateUserId($attribute, $params)
-    {
-        if (($user = $this->getUser()) == NULL) {
-            $this->addError($attribute, 'User don\'t exist.');
-        }
-    }
-
-    public function save()
-    {
-        if ($this->validate()) {
-            if (($user = $this->getUser()) != NULL) {
-                $user->saveMeta([self::META_NAME => $this->attributes]);
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public function getDetailColumns()
@@ -89,15 +56,6 @@ class MySettingForm extends \yii\base\Model
             'first_name:raw',
             'last_name:raw',
         ];
-    }
-
-    public function getUser()
-    {
-        if ($this->_user === NULL) {
-            $this->_user = User::findOne($this->user_id);
-        }
-
-        return $this->_user;
     }
 
     public function getTheme()
