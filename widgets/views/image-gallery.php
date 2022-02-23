@@ -11,7 +11,7 @@ $js = <<< JS
             id: 0,
             path: '',
             token: '',
-            extension: '',
+            extension: '.png',
             mimetype: '',
             name: '{$uploadFileName}-' + new Date().getTime(),
         },
@@ -36,6 +36,7 @@ $js = <<< JS
         cropperTabContainer  = [container, '.cropper-tab-container'].join(' '),
         searchInput          = [container, '.search-input'].join(' '),
         myPhotosContainer    = [container, '.my-photos-container'].join(' '),
+        imageNameInput    = [container, '.image-name'].join(' '),
 
         imageName      = [container, '.td-name'].join(' '),
         imageExtension = [container, '.td-extension'].join(' '),
@@ -45,6 +46,15 @@ $js = <<< JS
         imageLocation  = [container, '.td-location'].join(' '),
         imageToken     = [container, '.td-token'].join(' '),
         imageCreatedAt = [container, '.td-created_at'].join(' '),
+
+        cropImageName      = [container, '.crop-td-name'].join(' '),
+        cropImageExtension = [container, '.crop-td-extension'].join(' '),
+        cropImageSize      = [container, '.crop-td-size'].join(' '),
+        cropImageWidth     = [container, '.crop-td-width'].join(' '),
+        cropImageHeight    = [container, '.crop-td-height'].join(' '),
+        cropImageLocation  = [container, '.crop-td-location'].join(' '),
+        cropImageToken     = [container, '.crop-td-token'].join(' '),
+        cropImageCreatedAt = [container, '.crop-td-created_at'].join(' '),
 
         rotateLeftBtn    = [container, '.rotate-left-btn'].join(' '),
         rotateRightBtn   = [container, '.rotate-right-btn'].join(' '),
@@ -59,6 +69,8 @@ $js = <<< JS
         cropperBtnOptions = [container, '.btn-options'].join(' '),
 
         images = [myPhotosContainer, 'img'].join(' ');
+
+    $(imageNameInput).val(selectedImage.name);
 
     var hideCropperBtnOptions = function() {
         $(cropperBtnOptions).hide();
@@ -123,6 +135,15 @@ $js = <<< JS
         $.ajax(conf);
     }
 
+    $(imageNameInput).on('keydown', function(e) {
+        if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+
+            $(saveImageBtn).trigger('click');
+        }
+    });
+    
     $(document).on('click', autoCompleteItems, function() {
         getMyFiles('{$myImageFilesUrl}?keywords=' + $(searchInput).val() );
     });
@@ -227,6 +248,7 @@ $js = <<< JS
         if(this.files && this.files[0]) {
             selectedImage.mimetype = this.files[0]['type'];
             selectedImage.name = this.files[0]['name'];
+            $(imageNameInput).val(selectedImage.name);
 
             var type = selectedImage.mimetype.split("/");
             selectedImage.extension = type[1];
@@ -247,12 +269,16 @@ $js = <<< JS
     });
  
     $(cropperTabLink).click(function() {
-        resetMyPhotosTab();
+        // resetMyPhotosTab();
+        $(editBtn).hide();
+        $(confirmBtn).hide();
+
         showCropperBtnOptions();
     });
 
     $(myPhotosTabLink).click(function() {
         hideCropperBtnOptions();
+        showMyPhotosButton();
     });
 
     $(editBtn).click(function() {
@@ -262,6 +288,16 @@ $js = <<< JS
         }
         cropper = new Cropper(image, options);
         $(cropperTabLink).trigger('click');
+        $(imageNameInput).val(selectedImage.name);
+
+        $(cropImageName).text($(imageName).text());
+        $(cropImageExtension).text($(imageExtension).text());
+        $(cropImageSize).text($(imageSize).text());
+        $(cropImageWidth).text($(imageWidth).text());
+        $(cropImageHeight).text($(imageHeight).text());
+        $(cropImageLocation).text($(imageLocation).text());
+        $(cropImageToken).text($(imageToken).text());
+        $(cropImageCreatedAt).text($(imageCreatedAt).text());
     });
 
     $(saveImageBtn).click(function() {
@@ -274,7 +310,7 @@ $js = <<< JS
         
             const formData = new FormData();
             // Pass the image file name as the third parameter if necessary.
-            formData.append('UploadForm[fileInput]', blob, selectedImage.name + '.' + selectedImage.extension);
+            formData.append('UploadForm[fileInput]', blob, $(imageNameInput).val() + '.' + selectedImage.extension);
             let parameters = {$parameters};
             for ( let key in parameters ) {
                 formData.append(key, parameters[key]);
@@ -458,12 +494,57 @@ CSS);
                             </div>
                             <div class="tab-pane fade cropper-tab-container" id="cropper-tab-<?= $id ?>" role="tabpanel">
                                 <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-7 col-sm-6 br-dashed">
                                         <?= Html::img($defaultPhoto, [
                                             'id' => 'cropper-image-' . $id
                                         ]) ?>
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Filename</span>
+                                            </div>
+                                            <input type="text" class="image-name form-control" placeholder="File Name">
+                                        </div>
                                     </div>
+                                    <div class="col-md-5 col-sm-6 image-properties-panel-crop pl-8">
+                                        <p class="lead text-warning">Image Properties</p>
+                                        <table class="table-bordered font-size-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <td class="crop-td-name"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Extension</th>
+                                                    <td class="crop-td-extension"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <td class="crop-td-size"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Width</th>
+                                                    <td class="crop-td-width"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Height</th>
+                                                    <td class="crop-td-height"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Location</th>
+                                                    <td class="crop-td-location"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Token</th>
+                                                    <td class="crop-td-token"> None </td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="30%">Created At</th>
+                                                    <td class="crop-td-created_at"> None </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
