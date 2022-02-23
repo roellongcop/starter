@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\Label;
-
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%notifications}}".
@@ -32,14 +32,22 @@ class Notification extends ActiveRecord
     const STATUS = [
         0 => [
             'id' => 0,
-            'label' => 'Read',
-            'class' => 'success'
-        ],
-        1 => [
-            'id' => 1,
             'label' => 'New',
             'class' => 'danger'
         ],
+        1 => [
+            'id' => 1,
+            'label' => 'Read',
+            'class' => 'success'
+        ],
+    ];
+
+    const TYPES = [
+        0 => [
+            'id' => 0,
+            'type' => 'notification_change_password',
+            'label' => 'Password Changed'
+        ]
     ];
 
     /**
@@ -218,4 +226,18 @@ class Notification extends ActiveRecord
     {
         return parent::updateAll(['status' => self::STATUS_UNREAD], $condition);
     }
+
+    public static function unread()
+    {
+        return self::find()
+            ->unread()
+            ->all();
+    }
+
+    public function getLabel()
+    {
+        $data = ArrayHelper::map(self::TYPES, 'type', 'label');
+        return $data[$this->type];
+    }
+    
 }
