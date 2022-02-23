@@ -7,7 +7,7 @@ use app\helpers\App;
 use app\models\File;
 use yii\helpers\Inflector;
 use yii\helpers\FileHelper;
-
+use yii\helpers\StringHelper;
 
 class UploadForm extends \yii\base\Model
 {
@@ -72,7 +72,7 @@ class UploadForm extends \yii\base\Model
         $input = $this->fileInput;
 
         $file = new File([
-            'name' => $input->baseName,
+            'name' => StringHelper::truncate($input->baseName, 255),
             'location' => $location,
             'extension' => $input->extension,
             'size' => $input->size,
@@ -81,6 +81,9 @@ class UploadForm extends \yii\base\Model
 
         if ($file->save()) {
             return $file;
+        }
+        else {
+            $this->addError('file', $file->errors);
         }
     }
 
