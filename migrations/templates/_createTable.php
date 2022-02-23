@@ -8,7 +8,7 @@
 /* @var $foreignKeys array the foreign keys */
 
 ?>        $this->createTable($this->tableName(), $this->attributes([
-            'name' => $this->string(255)->notNull()->unique(),
+            'name' => $this->string()->notNull()->unique(),
             'description' => $this->text(),
         ]));
 <?= $this->render('_addForeignKeys', [

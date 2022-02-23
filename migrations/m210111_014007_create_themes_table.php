@@ -16,7 +16,7 @@ class m210111_014007_create_themes_table extends \app\migrations\Migration
     public function safeUp()
     {
         $this->createTable($this->tableName(), $this->attributes([
-            'name' => $this->string(255)->notNull()->unique(),
+            'name' => $this->string()->notNull()->unique(),
             'description' => $this->text(),
             'base_path' => $this->text(),
             'base_url' => $this->text(),

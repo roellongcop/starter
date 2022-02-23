@@ -16,7 +16,7 @@ class m201129_112459_create_backups_table extends \app\migrations\Migration
     public function safeUp()
     {
         $this->createTable($this->tableName(), $this->attributes([
-            'filename' => $this->string(255)->notNull()->unique(),
+            'filename' => $this->string()->notNull()->unique(),
             'tables' => $this->text(),
             'description' => $this->text(),
             'slug' => $this->string()->notNull()->unique(),

@@ -16,9 +16,9 @@ class m201111_135954_create_settings_table extends \app\migrations\Migration
     public function safeUp()
     {
         $this->createTable($this->tableName(), $this->attributes([
-            'name' => $this->string(255)->notNull()->unique(),
+            'name' => $this->string()->notNull()->unique(),
             'value' => $this->text(),
-            'slug' => $this->string(255)->notNull(),
+            'slug' => $this->string()->notNull(),
             'type' => $this->string(128)->notNull(),
             'sort_order' => $this->integer(11)->notNull()->defaultValue(0),
         ]));

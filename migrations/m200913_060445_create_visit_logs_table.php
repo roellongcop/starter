@@ -17,7 +17,7 @@ class m200913_060445_create_visit_logs_table extends \app\migrations\Migration
     {
         $this->createTable($this->tableName(), $this->attributes([
             'user_id' => $this->bigInteger(20)->notNull(),
-            'ip' => $this->string(255)->notNull(),
+            'ip' => $this->string()->notNull(),
             'action' => $this->tinyInteger(2)->notNull()->defaultValue(0),
         ]));
 

@@ -16,7 +16,7 @@ class m210524_085128_create_queues_table extends \app\migrations\Migration
     public function safeUp()
     {
         $this->createTable($this->tableName(), $this->attributes([
-            'channel' => $this->string(255)->notNull(),
+            'channel' => $this->string()->notNull(),
             'job' => $this->binary(),
             'pushed_at' => $this->integer(11)->notNull(),
             'ttr' => $this->integer(11)->notNull(),

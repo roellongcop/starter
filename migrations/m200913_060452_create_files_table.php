@@ -16,11 +16,11 @@ class m200913_060452_create_files_table extends \app\migrations\Migration
     public function safeUp()
     {
         $this->createTable($this->tableName(), $this->attributes([
-            'name' => $this->string(255)->notNull(),
+            'name' => $this->string()->notNull(),
             'extension' => $this->string(16)->notNull(),
             'size' => $this->bigInteger(20)->notNull(),
             'location' => $this->text(),
-            'token' => $this->string(255)->notNull()->unique(),
+            'token' => $this->string()->notNull()->unique(),
         ]));
     }
 

@@ -17,7 +17,7 @@ class m201229_073837_create_user_meta_table extends \app\migrations\Migration
     {
         $this->createTable($this->tableName(), $this->attributes([
             'user_id' => $this->bigInteger(20)->notNull(),
-            'name' => $this->string(255)->notNull(),
+            'name' => $this->string()->notNull(),
             'value' => $this->text(),
         ]));
 
