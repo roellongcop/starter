@@ -38,10 +38,9 @@ class FormatterComponent extends \yii\i18n\Formatter
         return $this->pluralize( $interval->s, 'second' ) . $suffix;
     }
 
-
     private function pluralize( $count, $text )
     {
-        return $count . ( ( $count == 1 ) ? ( " $text" ) : ( " $text"."s" ) );
+        return $count . (($count == 1)? " {$text}": " {$text}s");
     }
 
     public function asFulldate($value)
