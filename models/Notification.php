@@ -234,6 +234,13 @@ class Notification extends ActiveRecord
             ->all();
     }
 
+    public static function totalUnread()
+    {
+        return self::find()
+            ->unread()
+            ->count();
+    }
+
     public function getLabel()
     {
         $data = ArrayHelper::map(self::TYPES, 'type', 'label');

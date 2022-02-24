@@ -30,9 +30,11 @@ CSS);
             <span class="pulse-ring"></span>
             
         </div>
-        <label class="badge badge-danger badge-pill notification-badge">
-            <?= count(Notification::unread()) ?>
-        </label>
+        <?= Html::if(($total = Notification::totalUnread()) > 0, function() use($total) {
+            return Html::tag('label', $total, [
+                'class' => 'badge badge-danger badge-pill notification-badge'
+            ]);
+        }) ?>
     </div>
     <!--end::Toggle-->
     <!--begin::Dropdown-->
@@ -43,8 +45,8 @@ CSS);
                 <!--begin::Title-->
                 <h4 class="d-flex flex-center rounded-top">
                     <span class="text-white">Message Center</span>
-                    <span class="btn btn-success btn-sm font-weight-bold ml-2">
-                        <?= count(Notification::unread()) ?>
+                    <span class="btn btn-danger btn-sm font-weight-bold ml-2">
+                        <?= $total ?>
                     </span>
                 </h4>
                 <!--end::Title-->
@@ -70,9 +72,10 @@ CSS);
                 <div class="tab-pane active p-8" id="topbar_notifications_events" role="tabpanel">
                     <!--begin::Scroll-->
                     <div class="scroll pr-7 mr-n7" data-scroll="true" data-height="300" data-mobile-height="200">
-                        <?= Html::foreach(Notification::unread(), function($notification) {
-                            return <<< HTML
-                                <!--begin::Item-->
+                        <?= Html::if(($notifications = Notification::unread()) != NULL, function() use($notifications) {
+                            return Html::foreach($notifications, function($notification) {
+                                return <<< HTML
+                                    <!--begin::Item-->
                                     <div class="d-flex align-items-center mb-6">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-40 symbol-light-primary mr-5">
@@ -103,7 +106,8 @@ CSS);
                                         <!--end::Text-->
                                     </div>
                                     <!--end::Item-->
-                            HTML;
+                                HTML;
+                            });
                         }) ?>
                         
                     </div>

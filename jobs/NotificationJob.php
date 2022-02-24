@@ -15,7 +15,7 @@ class NotificationJob extends \yii\base\BaseObject implements \yii\queue\JobInte
     public function execute($queue)
     {
     	$notification = new Notification([
-            'status' => 1,
+            'status' => Notification::STATUS_UNREAD,
     		'record_status' => 1,
     		'user_id' => $this->user_id,
     		'type' => $this->type,
