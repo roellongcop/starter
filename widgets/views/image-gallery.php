@@ -72,6 +72,28 @@ $js = <<< JS
 
     $(imageNameInput).val(selectedImage.name);
 
+    var resetImageProperties = function() {
+        $(imageName).text('None');
+        $(imageExtension).text('None');
+        $(imageSize).text('None');
+        $(imageWidth).text('None');
+        $(imageHeight).text('None');
+        $(imageLocation).text('None');
+        $(imageToken).text('None');
+        $(imageCreatedAt).text('None');
+    }
+
+    var resetImagePropertiesCrop = function() {
+        $(cropImageName).text('None');
+        $(cropImageExtension).text('None');
+        $(cropImageSize).text('None');
+        $(cropImageWidth).text('None');
+        $(cropImageHeight).text('None');
+        $(cropImageLocation).text('None');
+        $(cropImageToken).text('None');
+        $(cropImageCreatedAt).text('None');
+    }
+
     var hideCropperBtnOptions = function() {
         $(cropperBtnOptions).hide();
     }
@@ -95,14 +117,7 @@ $js = <<< JS
 
         $(images).css('border', '');
 
-        $(imageName).text('None');
-        $(imageExtension).text('None');
-        $(imageSize).text('None');
-        $(imageWidth).text('None');
-        $(imageHeight).text('None');
-        $(imageLocation).text('None');
-        $(imageToken).text('None');
-        $(imageCreatedAt).text('None');
+        resetImageProperties();
     }
 
     var showLoading = function() {
@@ -211,6 +226,8 @@ $js = <<< JS
         getMyFiles('{$myImageFilesUrl}?keywords=' + $(searchInput).val());
         hideMyPhotosButton();
         hideCropperBtnOptions();
+        resetImageProperties();
+        resetImagePropertiesCrop();
 
         image.src = '{$defaultPhoto}';
 
@@ -260,6 +277,8 @@ $js = <<< JS
                 }
                 cropper = new Cropper(image, options);
                 $(selectImageInput).value = null;
+
+                resetImagePropertiesCrop();
             }
             reader.readAsDataURL(this.files[0]); 
         }
