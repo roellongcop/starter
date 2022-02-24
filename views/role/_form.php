@@ -10,13 +10,21 @@ $controller_actions = App::component('access')->controllerActions;
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerCss(<<< CSS
+    .card-header {border-bottom: 0;}
+    #card-header, #card-body {padding-top: 3px;}
+    #role-form menu {margin-top: 0; padding-left: 0;}
+CSS);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'role-form']); ?>
     <div class="form-group">
         <?= AnchorForm::widget() ?>
     </div>
-    <div class="card card-custom gutter-b">
-        <div class="card-header card-header-tabs-line">
+    <div>
+    <!-- <div class="card card-custom gutter-b"> -->
+        <div>
+        <div class="card-header card-header-tabs-line" id="card-header">
             <div class="card-toolbar">
                 <ul class="nav nav-tabs nav-bold nav-tabs-line">
                     <li class="nav-item">
@@ -48,11 +56,11 @@ $controller_actions = App::component('access')->controllerActions;
                 </ul>
             </div> 
         </div>
-        <div class="card-body">
+        <div class="card-body" id="card-body">
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="_main_form" role="tabpanel" aria-labelledby="_main_form">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-5">
                             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                             <?= RecordStatusInput::widget([
                                 'model' => $model,

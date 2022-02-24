@@ -86,22 +86,20 @@ $js = <<< JS
 JS;
 $this->registerWidgetJs($widgetFunction, $js);
 ?>
+<datalist id="link-list-<?= $id ?>">
+    <?= Html::foreach($controller_actions, function($actions, $controller) {
+        return Html::foreach($actions, function($action) use ($controller) {
+            return '<option value="'. Url::to(["{$controller}/{$action}"]) .'"> </option>';
+        });
+    }) ?>
+</datalist>
 <div class="row">
     <div class="col-md-12">
-        <datalist id="link-list-<?= $id ?>">
-            <?= Html::foreach($controller_actions, function($actions, $controller) {
-                return Html::foreach($actions, function($action) use ($controller) {
-                    return '<option value="'. Url::to(["{$controller}/{$action}"]) .'"> </option>';
-                });
-            }) ?>
-        </datalist>
-        <a href="#!" class="btn btn-secondary" id="add-main-navigation-<?= $id ?>">
-            Add Menu
-        </a>
-        <menu id="nestable-menu-<?= $id ?>" class="btn btn-group pull-right">
-            <button class="btn btn-secondary" 
-                type="button" 
-                data-action="collapse-all" onclick="collapseNavigation(this)">
+        <menu id="nestable-menu-<?= $id ?>" class="btn btn-group">
+            <a href="#!" class="btn btn-secondary btn-linkedin btn-sm" id="add-main-navigation-<?= $id ?>">
+                Add Menu
+            </a>
+            <button class="btn btn-secondary btn-sm" type="button" data-action="collapse-all" onclick="collapseNavigation(this)">
                 Toggle
             </button>
         </menu>
