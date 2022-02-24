@@ -9,7 +9,7 @@
 	
 	```yii serve``` (start server)
 
-4) goto development server created: ```[http://host]/api/v1/user/available-users``` for available user
+4) goto development server created: ```http://[host]/api/v1/user/available-users``` for available user
 5) Additional Command
 
 	```yii fixture *``` Create fixed set of data, Overwrite migration fixed data)
