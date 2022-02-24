@@ -124,6 +124,11 @@ class Queue extends ActiveRecord
         ];
     }
 
+    public static function push($job)
+    {
+        App::queue()->push($job);
+    }
+
     /**
     public function getExportColumns()
     {

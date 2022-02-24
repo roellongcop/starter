@@ -6,6 +6,7 @@ use Yii;
 use app\helpers\App;
 use app\jobs\BackupJob;
 use app\models\Backup;
+use app\models\Queue;
 use app\models\search\BackupSearch;
 use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
@@ -71,7 +72,7 @@ class BackupController extends Controller
                 $model->tables = $model->tables ?: App::component('general')->getAllTables();
                 
                 if ($model->save()) {
-                    App::queue()->push(new BackupJob([
+                    Queue::push(new BackupJob([
                         'backupId' => $model->id,
                         'created_by' => App::identity('id')
                     ]));
@@ -108,7 +109,7 @@ class BackupController extends Controller
             $model->tables = $model->tables ?: App::component('general')->getAllTables();
             
             if ($model->save()) {
-                App::queue()->push(new BackupJob([
+                Queue::push(new BackupJob([
                     'backupId' => $model->id,
                 ]));
 
