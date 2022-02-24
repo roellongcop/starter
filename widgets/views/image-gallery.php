@@ -377,7 +377,6 @@ $this->registerCss(<<< CSS
     #image-gallery-container-{$id} .br-dashed {
         border-right: 1px dashed #ccc
     }
-
     #image-gallery-container-{$id} table tbody tr th {
         padding: 5px;
     }
@@ -387,7 +386,6 @@ $this->registerCss(<<< CSS
     #image-gallery-container-{$id} .my-photos-tab-container img:hover {
         outline: 2px solid #1bc5bd;
     }
-
     #image-gallery-container-{$id} .cropper-tab-container {
         margin: 0 auto;
     }
@@ -396,7 +394,6 @@ $this->registerCss(<<< CSS
         display: block;
         max-width: 100%;
     }
-
     #image-gallery-container-{$id} .cropper-container {
         margin: 0 auto;
     }
