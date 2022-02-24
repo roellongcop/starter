@@ -85,6 +85,10 @@ $js = <<< JS
     initNestable();
 JS;
 $this->registerWidgetJs($widgetFunction, $js);
+
+$this->registerCss(<<< CSS
+    #nestable-menu-{$id} {margin-top: 0; padding-left: 0;}
+CSS);
 ?>
 <datalist id="link-list-<?= $id ?>">
     <?= Html::foreach($controller_actions, function($actions, $controller) {
