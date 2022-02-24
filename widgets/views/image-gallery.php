@@ -25,7 +25,7 @@ $js = <<< JS
 
         container = '#image-gallery-container-{$id}',
 
-        autoCompleteItems          = [container, '.autocomplete-items div'].join(' '),
+        autoCompleteItems = [container, '.autocomplete-items div'].join(' '),
 
         fileIdInput          = [container, '.file-id-input'].join(' '),
         imageGalleryBtn      = [container, '.image-gallery-btn'].join(' '),
