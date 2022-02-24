@@ -39,7 +39,7 @@ abstract class ActiveController extends \yii\rest\ActiveController
 
         // Supporting Authenticator
         // sample request
-        // http://localhost:8080/api/v1/user/available-users?access-token=access-fGurkHEAh4OSAT6BuC66_1621994603
+        // http://[host]/api/v1/user/available-users?access-token=access-fGurkHEAh4OSAT6BuC66_1621994603
 
         
         // $behaviors['authenticator'] = [
