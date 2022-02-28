@@ -4,10 +4,9 @@ namespace app\behaviors;
 
 use app\helpers\App;
 use app\models\Log;
-use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
-class LogBehavior extends Behavior
+class LogBehavior extends \yii\base\Behavior
 {
     public $logAfterSave = true;
     public $logAfterDelete = true;

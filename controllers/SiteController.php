@@ -111,8 +111,6 @@ class SiteController extends Controller
         $model = new LoginForm();
         $PSR = new PasswordResetForm();
         if ($model->load(App::post()) && $model->login()) {
-            VisitLog::login();
-
             return $this->goBack();
         }
 
@@ -130,7 +128,6 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        VisitLog::logout();
         App::logout();
 
         return $this->goHome();

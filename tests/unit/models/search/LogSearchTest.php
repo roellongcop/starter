@@ -18,7 +18,7 @@ class LogSearchTest extends \Codeception\Test\Unit
         $searchModel = new LogSearch();
         $dataProviders = $searchModel->search(['LogSearch' => ['keywords' => '']]);
         expect_that($dataProviders);
-        expect($dataProviders->totalCount)->equals(2);
+        expect($dataProviders->totalCount)->equals(3);
     }
 
     public function testSearchWithNoResult()

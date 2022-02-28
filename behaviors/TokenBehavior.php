@@ -3,10 +3,9 @@
 namespace app\behaviors;
 
 use app\helpers\App;
-use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
-class TokenBehavior extends Behavior
+class TokenBehavior extends \yii\base\Behavior
 {
     public $tokenField = 'token';
 

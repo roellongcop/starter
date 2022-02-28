@@ -3,10 +3,9 @@
 namespace app\behaviors;
 
 use app\helpers\App;
-use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
-class ProcessBehavior extends Behavior
+class ProcessBehavior extends \yii\base\Behavior
 {
     public function events()
     {

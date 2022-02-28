@@ -2,10 +2,9 @@
 
 namespace app\behaviors;
 
-use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
-class JsonBehavior extends Behavior
+class JsonBehavior extends \yii\base\Behavior
 {
     public $fields = [];
 
