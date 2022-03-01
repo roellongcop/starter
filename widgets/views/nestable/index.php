@@ -53,15 +53,6 @@ $js = <<< JS
         // initNestable();
     })
 
-    var collapseNavigation = function(self) {
-        var action = $(self).data('action');
-        if (action == 'collapse-all') {
-            $(self).data('action', 'expand-all')
-        }
-        else {
-            $(self).data('action', 'collapse-all')
-        }
-    }
     var initNestable = function() {
         if ($('#nestable-menu-{$id}').length) {
             $('#nestable-menu-{$id}').on('click', function(e) {
@@ -103,8 +94,11 @@ CSS);
             <a href="#!" class="btn btn-secondary btn-linkedin btn-sm" id="add-main-navigation-<?= $id ?>">
                 Add Menu
             </a>
-            <button class="btn btn-secondary btn-sm" type="button" data-action="collapse-all" onclick="collapseNavigation(this)">
-                Toggle
+            <button class="btn btn-outline-secondary btn-sm" type="button" data-action="collapse-all">
+                <i class="fas fa-compress"></i> Collapse
+            </button>
+            <button class="btn btn-outline-secondary btn-sm" type="button" data-action="expand-all">
+                <i class="fas fa-expand"></i> Expand
             </button>
         </menu>
         <div class="dd" id="dd-<?= $id ?>">
