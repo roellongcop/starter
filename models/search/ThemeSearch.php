@@ -64,7 +64,7 @@ class ThemeSearch extends Theme
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['created_at' => SORT_DESC]],
+            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
             'pagination' => [
                 'pageSize' => $this->pagination
             ]
