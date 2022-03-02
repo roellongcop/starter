@@ -77,7 +77,6 @@ class Notification extends ActiveRecord
             [['message', 'link'], 'string'],
             [['type', 'user_id'], 'required'],
             [['type'], 'string', 'max' => 128],
-            [['token'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'targetRelation' => 'user'],
             ['status', 'in', 'range' => [self::STATUS_READ, self::STATUS_UNREAD]],
         ]);
@@ -94,7 +93,6 @@ class Notification extends ActiveRecord
             'message' => 'Message',
             'link' => 'Link',
             'type' => 'Type',
-            'token' => 'Token',
             'status' => 'Status',
         ]);
     }

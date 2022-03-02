@@ -228,6 +228,7 @@ $js = <<< JS
         hideCropperBtnOptions();
         resetImageProperties();
         resetImagePropertiesCrop();
+        $(imageNameInput).val("");
 
         image.src = '{$defaultPhoto}';
 

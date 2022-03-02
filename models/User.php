@@ -118,7 +118,6 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'trim'],
             ['email', 'unique'],
             ['username', 'unique'],
-            [['slug', 'role_id'], 'safe'],
             [['password_hint', 'password_reset_token', 'password_hash', 'photo'], 'safe'],
             ['role_id', 'exist', 'targetRelation' => 'role'],
             ['role_id', 'validateRoleId'],
@@ -487,8 +486,6 @@ class User extends ActiveRecord implements IdentityInterface
         $behaviors['SluggableBehavior'] = [
             'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'username',
-            'slugAttribute' => 'slug',
-            'immutable' => false,
             'ensureUnique' => true,
         ];
 

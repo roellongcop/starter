@@ -127,8 +127,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function setRules($rules)
     {
         return array_merge($rules, [
-            'integer' => [['created_by', 'updated_by', 'record_status'], 'integer'],
-            'safe' => [['created_at', 'updated_at'], 'safe'],
+            // 'blameable' => [['created_by', 'updated_by'], 'integer'],
+            // 'timestamp' => [['created_at', 'updated_at'], 'safe'],
+            'integer' => [['record_status'], 'integer'],
             'default' => ['record_status', 'default', 'value' => self::RECORD_ACTIVE],
             'range' => ['record_status', 'in', 'range' => [
                 self::RECORD_ACTIVE, 

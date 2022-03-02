@@ -63,9 +63,8 @@ class File extends ActiveRecord
         return $this->setRules([
             [['size',], 'integer'],
             [['name', 'extension', 'size',], 'required'],
-            [['token'], 'unique'],
             [['location'], 'string'],
-            [['name', 'token'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
             [['extension'], 'string', 'max' => 16],
             ['extension', 'in', 'range' => array_merge(
                 self::EXTENSIONS['image'],
@@ -87,7 +86,6 @@ class File extends ActiveRecord
             'extension' => 'Extension',
             'size' => 'Size',
             'location' => 'Location',
-            'token' => 'Token',
         ]);
     }
 

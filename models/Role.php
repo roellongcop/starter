@@ -54,9 +54,8 @@ class Role extends ActiveRecord
         return $this->setRules([
             [['name',], 'required'],
             [['main_navigation', 'role_access', 'module_access'], 'safe'],
-            [['name', 'slug'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
-            [['slug'], 'unique'],
         ]);
     }
 
@@ -181,8 +180,6 @@ class Role extends ActiveRecord
         $behaviors['SluggableBehavior'] = [
             'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'name',
-            'slugAttribute' => 'slug',
-            'immutable' => false,
             'ensureUnique' => true,
         ];
 

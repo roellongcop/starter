@@ -19,7 +19,7 @@ class TokenBehavior extends \yii\base\Behavior
     public function beforeSave($event)
     {
         if ($this->owner->hasProperty($this->tokenField)) {
-            $this->owner->{$this->tokenField} = $this->owner->{$this->tokenField} ?: $this->generateToken();
+            $this->owner->{$this->tokenField} = $this->generateToken();
         }
     }
 
