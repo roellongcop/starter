@@ -2,7 +2,6 @@
 
 namespace app\helpers;
 
-use Yii;
 use app\helpers\App;
 
 class FixtureData
