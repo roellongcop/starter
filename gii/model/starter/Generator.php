@@ -454,8 +454,18 @@ class Generator extends \yii\gii\Generator
                     $attributesCount = count($uniqueColumns);
 
                     if ($attributesCount === 1) {
+                        if (in_array($uniqueColumns[0], ['slug', 'token'])) {
+                            continue;
+                        }
                         $rules[] = "[['" . $uniqueColumns[0] . "'], 'unique']";
                     } elseif ($attributesCount > 1) {
+                        if (isset($uniqueColumns['slug'])) {
+                            unset($uniqueColumns['slug']);
+                        }
+                        if (isset($uniqueColumns['token'])) {
+                            unset($uniqueColumns['token']);
+                        }
+                        
                         $columnsList = implode("', '", $uniqueColumns);
                         $rules[] = "[['$columnsList'], 'unique', 'targetAttribute' => ['$columnsList']]";
                     }
