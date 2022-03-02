@@ -27,16 +27,16 @@ class ActiveQuery extends \yii\db\ActiveQuery
 
     public function _getAlias()
     {
-        if ($this->from && is_array($this->from)) {
-            $alias = array_keys($this->from)[0] ?? '';
+        $tableNameAndAlias = $this->getTableNameAndAlias();
 
-            return $alias;
+        if (isset($tableNameAndAlias[1])) {
+            return $tableNameAndAlias[1];
         }
     }
     
     public function field($field)
     {
-        if (($alias = $this->_getAlias()) != null) {
+        if (($alias = $this->_getAlias()) != NULL) {
             return "{$alias}.{$field}";
         }
         return $field;
