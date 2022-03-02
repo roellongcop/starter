@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class UserFixture extends \yii\test\ActiveFixture

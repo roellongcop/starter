@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class BackupFixture extends \yii\test\ActiveFixture

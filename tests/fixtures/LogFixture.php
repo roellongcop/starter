@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class LogFixture extends \yii\test\ActiveFixture

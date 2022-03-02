@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class NotificationFixture extends \yii\test\ActiveFixture

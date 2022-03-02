@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class IpFixture extends \yii\test\ActiveFixture

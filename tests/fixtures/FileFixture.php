@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class FileFixture extends \yii\test\ActiveFixture

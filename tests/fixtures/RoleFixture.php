@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class RoleFixture extends \yii\test\ActiveFixture

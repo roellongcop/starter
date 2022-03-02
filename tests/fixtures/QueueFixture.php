@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class QueueFixture extends \yii\test\ActiveFixture

@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures;
 
 class SessionFixture extends \yii\test\ActiveFixture
