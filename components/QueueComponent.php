@@ -2,7 +2,6 @@
 
 namespace app\components;
 
-use Yii;
 use app\models\Queue;
 
 class QueueComponent extends \yii\queue\db\Queue

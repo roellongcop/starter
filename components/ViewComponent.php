@@ -2,7 +2,6 @@
 
 namespace app\components;
 
-use Yii;
 use app\helpers\App;
 use yii\helpers\Json;
 use app\helpers\Url;

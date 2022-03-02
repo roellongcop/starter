@@ -2,7 +2,6 @@
 
 namespace app\components;
 
-use Yii;
 use app\models\form\setting\EmailSettingForm;
 use app\models\form\setting\ImageSettingForm;
 use app\models\form\setting\NotificationSettingForm;

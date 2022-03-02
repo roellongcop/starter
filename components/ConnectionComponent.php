@@ -2,8 +2,6 @@
 
 namespace app\components;
 
-use Yii;
-
 class ConnectionComponent extends \yii\db\Connection
 {
     public $dsn = 'mysql:host=localhost;dbname=db_starter';

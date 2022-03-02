@@ -2,11 +2,9 @@
 
 namespace app\components;
 
-use Yii;
 use app\helpers\App;
-use yii\base\Component;
 
-class GeneralComponent extends Component
+class GeneralComponent extends \yii\base\Component
 {
     public function getAllTables()
     {

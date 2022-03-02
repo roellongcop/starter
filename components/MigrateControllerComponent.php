@@ -2,8 +2,6 @@
 
 namespace app\components;
 
-use Yii;
-
 class MigrateControllerComponent extends \yii\console\controllers\MigrateController
 {
     public $migrationTable = '{{%migrations}}';

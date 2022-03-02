@@ -2,7 +2,6 @@
 
 namespace app\components;
 
-use Yii;
 use kartik\mpdf\Pdf;
 
 class PdfComponent extends \kartik\mpdf\Pdf

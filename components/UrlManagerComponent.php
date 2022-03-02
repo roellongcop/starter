@@ -2,8 +2,6 @@
 
 namespace app\components;
 
-use Yii;
-
 class UrlManagerComponent extends \yii\web\UrlManager
 {
     public $enablePrettyUrl = true;

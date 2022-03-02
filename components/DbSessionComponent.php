@@ -2,7 +2,6 @@
 
 namespace app\components;
 
-use Yii;
 use app\helpers\App;
 use app\models\Session;
 use yii\db\Expression;
