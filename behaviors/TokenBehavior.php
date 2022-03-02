@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 class TokenBehavior extends \yii\base\Behavior
 {
     public $tokenField = 'token';
+    public $tokenValue;
 
     public function events()
     {
@@ -19,7 +20,12 @@ class TokenBehavior extends \yii\base\Behavior
     public function beforeSave($event)
     {
         if ($this->owner->hasProperty($this->tokenField)) {
-            $this->owner->{$this->tokenField} = $this->generateToken();
+            if ($this->tokenValue && is_callable($this->tokenValue)) {
+                $this->owner->{$this->tokenField} = call_user_func($this->tokenValue, $this->owner);
+            }
+            else {
+                $this->owner->{$this->tokenField} = $this->generateToken();
+            }
         }
     }
 

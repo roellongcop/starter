@@ -1,6 +1,7 @@
 <?php
 
 use app\models\File;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($params) {
     return [
@@ -9,6 +10,8 @@ $model = new \app\helpers\FixtureData(function($params) {
         'size' => $params['size'] ?? 1606,
         'location' => $params['location'] ?? 'default/default-image_200.png',
         'token' => $params['token'] ?? 'default-6ccb4a66-0ca3-46c7-88dd-default',
+        'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
         'created_by' => 1,
         'updated_by' => 1,
     ];
