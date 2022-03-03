@@ -3,13 +3,16 @@
 namespace app\models\form\user;
 
 use Yii;
+use app\helpers\App;
 use app\models\User;
+use app\models\UserMeta;
 
 abstract class UserForm extends \yii\base\Model
 {
     public $user_id;
 
     protected $_user;
+    protected $_meta;
 
     public function setRules($rules)
     {
@@ -31,12 +34,8 @@ abstract class UserForm extends \yii\base\Model
     {
         parent::init();
 
-        if (($user = $this->getUser()) != NULL) {
-            if (($meta = $user->meta(static::META_NAME)) != NULL) {
-                $this->load([
-                    (new \ReflectionClass($this))->getShortName() => json_decode($meta, true)
-                ]);
-            }
+        if (($meta = $this->getMeta()) != NULL) {
+            $this->load([App::className($this) => json_decode($meta, true)]);
         }
     }
 
@@ -52,12 +51,35 @@ abstract class UserForm extends \yii\base\Model
     public function save()
     {
         if ($this->validate()) {
-            if (($user = $this->getUser()) != NULL) {
-                $user->saveMeta([static::META_NAME => $this->attributes]);
+            $condition = [
+                'user_id' => $this->user_id,
+                'name' => static::META_NAME,
+            ];
+            $meta = UserMeta::findOne($condition);
+
+            $meta = $meta ?: new UserMeta($condition);
+            $meta->value = json_encode($this->attributes);
+
+            if ($meta->save()) {
                 return true;
+            }
+            else {
+                $this->addError('meta', $meta->errors);
             }
         }
 
         return false;
+    }
+
+    public function getMeta()
+    {
+        if ($this->_meta === NULL) {
+            $this->_meta = UserMeta::findOne([
+                'user_id' => $this->user_id,
+                'name' => static::META_NAME
+            ]);
+        }
+
+        return $this->_meta;
     }
 }

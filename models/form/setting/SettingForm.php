@@ -3,6 +3,7 @@
 namespace app\models\form\setting;
 
 use Yii;
+use app\helpers\App;
 use app\models\Setting;
 use yii\helpers\ArrayHelper;
 
@@ -18,7 +19,7 @@ abstract class SettingForm extends \yii\base\Model
         if (($model = Setting::findByName(static::NAME)) != NULL) {
             $data = array_replace($data, json_decode($model->value, true));
         }
-        $this->load([(new \ReflectionClass($this))->getShortName() => $data]);
+        $this->load([App::className($this) => $data]);
     }
 
     public function save()

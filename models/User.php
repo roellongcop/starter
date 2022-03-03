@@ -624,53 +624,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return new ProfileForm(['user_id' => $this->id]);
     }
-    
-    public function metas($name='')
-    {
-        $name = is_array($name)? $name: [$name];
-
-        $meta = UserMeta::dropdown('name', 'value', [
-            'user_id' => $this->id,
-            'name' => $name
-        ]);
-
-        return $meta;
-    }
-
-    public function meta($name='')
-    {
-        $meta = $this->metas($name);
-
-        return $meta[$name] ?? '';
-    }
-
-    public function saveMeta($data)
-    {
-        $success = [];
-        $failed = [];
-
-        foreach ($data as $name => $value) {
-            $condition = [
-                'user_id' => $this->id,
-                'name' => $name,
-            ];
-            $meta = UserMeta::findOne($condition);
-
-            $meta = $meta ?: new UserMeta($condition);
-            $meta->value = is_array($value)? json_encode($value): $value;
-            if ($meta->save()) {
-                $success[$name] = $meta->attributes;
-            }
-            else {
-                $failed[$name] = $meta->errors;
-            }
-        }
-
-        return [
-            'success' => $success,
-            'failed' => $failed,
-        ];
-    }
 
     public function getIsDeleted()
     {
