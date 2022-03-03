@@ -18,7 +18,7 @@ class UserMetaSearchTest extends \Codeception\Test\Unit
         $searchModel = new UserMetaSearch();
         $dataProviders = $searchModel->search(['UserMetaSearch' => ['keywords' => '']]);
         expect_that($dataProviders);
-        expect($dataProviders->totalCount)->equals(2);
+        expect($dataProviders->totalCount)->equals(3);
     }
 
     public function testSearchWithNoResult()

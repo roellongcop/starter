@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit\models\form;
+namespace tests\unit\models\form\user;
 
 use app\helpers\App;
 use app\models\form\user\MySettingForm;
@@ -13,6 +13,12 @@ class MySettingFormTest extends \Codeception\Test\Unit
             'user_id' => 2,
             'theme_id' => 1,
         ], $replace);
+    }
+
+    public function testFetch()
+    {
+        $model = new MySettingForm(['user_id' => 1]);
+        expect($model->theme_id)->equals(1);
     }
 
     public function testSuccess()

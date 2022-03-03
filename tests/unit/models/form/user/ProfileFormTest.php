@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit\models\form;
+namespace tests\unit\models\form\user;
 
 use app\helpers\App;
 use app\models\form\user\ProfileForm;
@@ -14,6 +14,13 @@ class ProfileFormTest extends \Codeception\Test\Unit
             'first_name' => 'John',
             'last_name' => 'Doe',
         ], $replace);
+    }
+
+    public function testFetch()
+    {
+        $model = new ProfileForm(['user_id' => 1]);
+        expect($model->first_name)->equals('admin_firstname');
+        expect($model->last_name)->equals('admin_lastname');
     }
 
     public function testSuccess()

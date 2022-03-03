@@ -35,7 +35,7 @@ abstract class UserForm extends \yii\base\Model
         parent::init();
 
         if (($meta = $this->getMeta()) != NULL) {
-            $this->load([App::className($this) => json_decode($meta, true)]);
+            $this->load([App::className($this) => json_decode($meta->value, true)]);
         }
     }
 

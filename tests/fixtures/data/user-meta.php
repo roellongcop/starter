@@ -17,6 +17,12 @@ $model = new \app\helpers\FixtureData(function($name) {
 });
 
 $model->add('profile', 'profile');
+$model->add('my-settings', 'my-settings', [
+    'value' => json_encode([
+        'user_id' => 1,
+        'theme_id' => 1,
+    ]),
+]);
 $model->add('inactive', 'inactive', [
     'record_status' => UserMeta::RECORD_INACTIVE,
 ]);
