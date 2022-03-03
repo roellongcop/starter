@@ -4,7 +4,7 @@ use app\helpers\App;
 use app\helpers\Html;
 ?>
 
-<?= Html::foreach($menus, function($key, $menu) use ($subMenuClass, $withIcon) {
+<?= Html::foreach($menus, function($menu, $key) use ($subMenuClass, $withIcon) {
     return Html::ifElse(isset($menu['group_menu']) && $menu['group_menu'], 
         '', 
         function() use($menu, $withIcon, $subMenuClass) {

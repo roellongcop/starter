@@ -24,13 +24,11 @@ class KeenDemo1NoAsideDarkAppAsset extends AssetBundle
         'css/themes/layout/header/menu/dark.css',
         'css/themes/layout/brand/light.css',
         'css/themes/layout/aside/dark.css',
-        'css/starter.css'
     ];
     public $js = [
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
         'plugins/custom/draggable/draggable.bundle.js',
-        'js/starter.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
