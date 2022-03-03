@@ -72,7 +72,7 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 				$.ajax({
 					url: '{$url}',
 					method: 'get',
-					data: {keyword: val},
+					data: {keywords: val},
 					dataType: 'json',
 					success: function(s) {
 						createSuggestion(inp, a, val, s);

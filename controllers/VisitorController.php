@@ -15,10 +15,10 @@ use yii\helpers\Inflector;
  */
 class VisitorController extends Controller 
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     { 
         return $this->asJson(
-            Visitor::findByKeyword($keyword, [
+            Visitor::findByKeywords($keywords, [
                 'expire',
                 'cookie',
                 'ip',

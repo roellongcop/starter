@@ -46,10 +46,10 @@ use yii\helpers\Inflector;
  */
 class <?= $controllerClass ?> extends Controller <?= "\n" ?>
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     {
         return $this->asJson(
-            <?= $modelClass ?>::findByKeyword($keyword, ['id'])
+            <?= $modelClass ?>::findByKeywords($keywords, ['id'])
         );
     }
 

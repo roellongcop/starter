@@ -19,10 +19,10 @@ use yii\web\NotFoundHttpException;
  */
 class UserController extends Controller
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     { 
         $data = array_merge(
-            User::findByKeyword($keyword, ['username', 'email']), 
+            User::findByKeywords($keywords, ['username', 'email']), 
             User::roles()
         );
 

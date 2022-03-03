@@ -457,7 +457,7 @@ CSS);
                                                 'class' => 'form-control search-input',
                                                 'placeholder' => 'Search Photo',
                                             ]),
-                                            'url' => Url::to(['file/find-by-keyword-image']),
+                                            'url' => Url::to(['file/find-by-keywords-image']),
                                             'submitOnclick' => false
                                         ]) ?>
                                         <?php Pjax::begin([

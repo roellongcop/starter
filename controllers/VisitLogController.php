@@ -17,10 +17,10 @@ use yii\helpers\ArrayHelper;
  */
 class VisitLogController extends Controller
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     { 
         $data = array_merge(
-            VisitLog::findByKeyword($keyword, ['ip']), 
+            VisitLog::findByKeywords($keywords, ['ip']), 
             VisitLog::users()
         );
 

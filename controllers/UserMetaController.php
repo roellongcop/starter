@@ -17,10 +17,10 @@ use yii\web\NotFoundHttpException;
  */
 class UserMetaController extends Controller
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     { 
         $data = array_merge(
-            UserMeta::findByKeyword($keyword, ['name', 'value']), 
+            UserMeta::findByKeywords($keywords, ['name', 'value']), 
             UserMeta::users()
         );
 

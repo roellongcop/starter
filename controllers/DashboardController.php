@@ -24,23 +24,23 @@ use app\models\search\DashboardSearch;
  */
 class DashboardController extends Controller
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     {
         $data = array_merge(
-            File::findByKeyword($keyword, ['name', 'extension', 'token']),
-            Backup::findByKeyword($keyword, ['filename', 'tables', 'description']),
-            Ip::findByKeyword($keyword, ['name', 'description']),
-            Log::findByKeyword($keyword, ['method', 'action', 'controller', 'table_name', 'model_name']),
-            Notification::findByKeyword($keyword, ['message']),
-            Queue::findByKeyword($keyword, ['channel', 'job', 'pushed_at']),
-            Role::findByKeyword($keyword, ['name']),
-            Session::findByKeyword($keyword, ['id', 'expire', 'ip', 'browser', 'os', 'device']),
-            Setting::findByKeyword($keyword, ['name', 'value']),
-            Theme::findByKeyword($keyword, ['name', 'description']),
-            User::findByKeyword($keyword, ['username', 'email']), 
-            UserMeta::findByKeyword($keyword, ['name', 'value']), 
-            VisitLog::findByKeyword($keyword, ['ip']), 
-            Visitor::findByKeyword($keyword, ['expire', 'cookie', 'ip', 'browser', 'os', 'device', 'location'])
+            File::findByKeywords($keywords, ['name', 'extension', 'token']),
+            Backup::findByKeywords($keywords, ['filename', 'tables', 'description']),
+            Ip::findByKeywords($keywords, ['name', 'description']),
+            Log::findByKeywords($keywords, ['method', 'action', 'controller', 'table_name', 'model_name']),
+            Notification::findByKeywords($keywords, ['message']),
+            Queue::findByKeywords($keywords, ['channel', 'job', 'pushed_at']),
+            Role::findByKeywords($keywords, ['name']),
+            Session::findByKeywords($keywords, ['id', 'expire', 'ip', 'browser', 'os', 'device']),
+            Setting::findByKeywords($keywords, ['name', 'value']),
+            Theme::findByKeywords($keywords, ['name', 'description']),
+            User::findByKeywords($keywords, ['username', 'email']), 
+            UserMeta::findByKeywords($keywords, ['name', 'value']), 
+            VisitLog::findByKeywords($keywords, ['ip']), 
+            Visitor::findByKeywords($keywords, ['expire', 'cookie', 'ip', 'browser', 'os', 'device', 'location'])
         );
 
         $data = array_unique($data);

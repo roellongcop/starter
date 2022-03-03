@@ -131,7 +131,7 @@ abstract class Controller extends \yii\web\Controller
         }
     }
 
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     {
         $data = [];
 

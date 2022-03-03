@@ -15,10 +15,10 @@ use yii\helpers\Inflector;
  */
 class NotificationController extends Controller 
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     {
         return $this->asJson(
-            Notification::findByKeyword($keyword, ['message'])
+            Notification::findByKeywords($keywords, ['message'])
         );
     }
 

@@ -15,10 +15,10 @@ use yii\web\NotFoundHttpException;
  */
 class IpController extends Controller
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     {
         return $this->asJson(
-            Ip::findByKeyword($keyword, ['name', 'description'])
+            Ip::findByKeywords($keywords, ['name', 'description'])
         );
     }
     /**

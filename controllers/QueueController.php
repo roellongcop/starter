@@ -15,10 +15,10 @@ use yii\helpers\Inflector;
  */
 class QueueController extends Controller 
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     {
         return $this->asJson(
-            Queue::findByKeyword($keyword, ['channel', 'job', 'pushed_at'])
+            Queue::findByKeywords($keywords, ['channel', 'job', 'pushed_at'])
         );
     }
     

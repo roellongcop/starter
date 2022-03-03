@@ -23,10 +23,10 @@ use yii\web\NotFoundHttpException;
  */
 class SettingController extends Controller
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     { 
         return $this->asJson(
-            Setting::findByKeyword($keyword, ['name', 'value'])
+            Setting::findByKeywords($keywords, ['name', 'value'])
         );
     }
 

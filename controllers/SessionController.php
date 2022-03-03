@@ -15,10 +15,10 @@ use yii\web\NotFoundHttpException;
  */
 class SessionController extends Controller
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     { 
         return $this->asJson(
-            Session::findByKeyword($keyword, [
+            Session::findByKeywords($keywords, [
                 'id',
                 'expire',
                 'ip',

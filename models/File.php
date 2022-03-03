@@ -321,13 +321,13 @@ class File extends ActiveRecord
             ->one();
     }
 
-    public static function findByKeywordImage($keyword='', $attributes, $limit=3)
+    public static function findByKeywordsImage($keywords='', $attributes, $limit=3)
     {
         $data = [];
         foreach ($attributes as $attribute) {
             $data = array_merge($data, array_values(
                 self::filter($attribute, ['and',
-                    ['LIKE', $attribute, $keyword],
+                    ['LIKE', $attribute, $keywords],
                     ['extension' => self::EXTENSIONS['image']],
                 ], 3)
             ));

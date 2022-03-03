@@ -16,10 +16,10 @@ use yii\web\NotFoundHttpException;
  */
 class ThemeController extends Controller 
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     { 
         return $this->asJson(
-            Theme::findByKeyword($keyword, ['name', 'description'])
+            Theme::findByKeywords($keywords, ['name', 'description'])
         );
     }
 

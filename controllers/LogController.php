@@ -15,10 +15,10 @@ use yii\web\NotFoundHttpException;
  */
 class LogController extends Controller
 {
-    public function actionFindByKeyword($keyword='')
+    public function actionFindByKeywords($keywords='')
     {
         return $this->asJson(
-            Log::findByKeyword($keyword, [
+            Log::findByKeywords($keywords, [
                 'method', 
                 'action', 
                 'controller',

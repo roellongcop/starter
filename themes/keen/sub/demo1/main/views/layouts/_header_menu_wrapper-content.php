@@ -9,6 +9,7 @@ use app\widgets\Search;
     'method' => 'get'
 ]); ?>
     <?= Search::widget([
+        'submitOnclick' => true,
         'model' => $searchModel,
         'options' => [
             'style' => 'margin-top: 17px;width: 30vw;margin-left: 10px;',
