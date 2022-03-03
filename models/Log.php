@@ -250,7 +250,7 @@ class Log extends ActiveRecord
 
     public static function record($model, $changedAttributes=[])
     {
-        if (App::isLogin() && App::getModelName($model) != 'Log') {
+        if (App::isLogin()) {
 
             $userAgent = new UserAgentForm();
 
