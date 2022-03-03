@@ -2,6 +2,7 @@
 
 use app\models\Setting;
 use yii\helpers\Inflector;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($name) {
     return [
@@ -10,6 +11,8 @@ $model = new \app\helpers\FixtureData(function($name) {
 		'slug' => Inflector::slug($name),
 		'type' => Setting::TYPE_INPUT,
 		'sort_order' => 0,
+		'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
 		'created_by' => 1,
 		'updated_by' => 1,
 	];

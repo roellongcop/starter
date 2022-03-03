@@ -3,6 +3,7 @@
 use yii\helpers\Inflector;
 use app\helpers\App;
 use app\models\User;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($username) {
     $email = implode('@', [$username, "{$username}.com"]);
@@ -20,6 +21,8 @@ $model = new \app\helpers\FixtureData(function($username) {
         'status' => User::STATUS_ACTIVE,
         'slug' => Inflector::slug($username),
         'is_blocked' => User::UNBLOCKED,
+        'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
     ];
 });
 

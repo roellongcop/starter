@@ -2,6 +2,7 @@
 
 use app\helpers\Url;
 use app\models\Notification;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($type) {
     return [
@@ -11,6 +12,8 @@ $model = new \app\helpers\FixtureData(function($type) {
 		'type' => $type,
 		'token' => 'TftF853osh1623298888',
 		'status' => Notification::STATUS_UNREAD,
+		'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
 		'created_by' => 1,
 		'updated_by' => 1,
 	];

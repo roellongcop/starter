@@ -2,6 +2,7 @@
 
 use app\models\Ip;
 use yii\helpers\Inflector;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($name) {
     return [
@@ -9,6 +10,8 @@ $model = new \app\helpers\FixtureData(function($name) {
         'description' => 'testing IP',
         'type' => Ip::TYPE_WHITELIST,
         'slug' => Inflector::slug($name),
+        'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
         'created_by' => 1,
         'updated_by' => 1,
     ];

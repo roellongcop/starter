@@ -1,6 +1,7 @@
 <?php
 
 use app\models\UserMeta;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($name) {
     return [
@@ -11,6 +12,8 @@ $model = new \app\helpers\FixtureData(function($name) {
             'first_name' => 'admin_firstname',
             'last_name' => 'admin_lastname',
         ]),
+        'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
         'created_by' => 1,
         'updated_by' => 1,
     ];

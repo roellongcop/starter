@@ -2,6 +2,7 @@
 
 use app\models\Log;
 use app\helpers\Url;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($name) {
     return [
@@ -67,6 +68,8 @@ $model = new \app\helpers\FixtureData(function($name) {
 			'REQUEST_TIME_FLOAT' => 1623125700.650181,
 			'REQUEST_TIME' => 1623125700,
 		]),
+		'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
 		'updated_by' => 1,
 		'created_by' => 1,
 	];

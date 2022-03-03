@@ -52,7 +52,7 @@ class LogBehaviorTest extends \Codeception\Test\Unit
         $model = new Ip($this->data());
         expect_that($model->save());
 
-        $this->tester->dontSeeRecord('app\models\Log', [
+        $this->tester->seeRecord('app\models\Log', [
             'model_id' => $model->id,
             'action' => 'index',
             'controller' => 'console',
@@ -66,7 +66,7 @@ class LogBehaviorTest extends \Codeception\Test\Unit
         $model = $this->tester->grabRecord('app\models\Ip', ['record_status' => Ip::RECORD_ACTIVE]);
         $model->delete();
         
-        $this->tester->dontSeeRecord('app\models\Log', [
+        $this->tester->seeRecord('app\models\Log', [
             'model_id' => $model->id,
             'action' => 'index',
             'controller' => 'console',

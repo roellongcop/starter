@@ -67,7 +67,9 @@ class Log extends ActiveRecord
             [['method', 'ip'], 'string', 'max' => 32],
             [['action', 'controller', 'table_name', 'model_name'], 'string', 'max' => 255],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
-            ['user_id', 'exist', 'targetRelation' => 'user'],
+            ['user_id', 'validateUserId', 'when' => function($model) {
+                return $model->user_id;
+            }],
         ]);
     }
 
@@ -105,6 +107,13 @@ class Log extends ActiveRecord
     {
         return new \app\models\query\LogQuery(get_called_class());
     }
+
+    public function validateUserId($attribute, $params)
+    {
+        if (($user = User::findOne($this->user_id)) == NULL) {
+            $this->addError($attribute, 'Not existing User');
+        }
+    }
      
     public function getTableFullname()
     {
@@ -137,11 +146,14 @@ class Log extends ActiveRecord
                 'label' => 'Username',
                 'format' => 'raw',
                 'value' => function($model) {
-                    return Anchor::widget([
-                        'title' => $model->username,
-                        'link' => $model->user->viewUrl,
-                        'text' => true
-                    ]);
+                    if ($model->username) {
+                        return Anchor::widget([
+                            'title' => $model->username,
+                            'link' => $model->user->viewUrl,
+                            'text' => true
+                        ]);
+                    }
+                    return 'Guest';
                 }
             ],
             // 'model_id' => ['attribute' => 'model_id', 'format' => 'raw'],
@@ -250,15 +262,13 @@ class Log extends ActiveRecord
 
     public static function record($model, $changedAttributes=[])
     {
-        if (App::isLogin()) {
-
+        // if (App::isLogin()) {
             $userAgent = new UserAgentForm();
-
             $log                   = new Log();
             $log->request_data     = App::getBodyParams();
             $log->method           = App::getMethod();
             $log->url              = App::isWeb()? App::absoluteUrl(): '';
-            $log->user_id          = App::identity('id');
+            $log->user_id          = App::identity() ? App::identity('id'): 0;
             $log->model_id         = $model->id ?: 0;
             $log->action           = App::actionID();
             $log->controller       = App::controllerID();
@@ -275,6 +285,6 @@ class Log extends ActiveRecord
                 return true;
             }
             App::danger($log->errors);
-        }
+        // }
     }
 }

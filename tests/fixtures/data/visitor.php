@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Visitor;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($params) {
     return [
@@ -12,6 +13,8 @@ $model = new \app\helpers\FixtureData(function($params) {
 		'os' => 'Os',
 		'device' => 'Device',
 		'location' => 'Location',
+		'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
     ];
 });
 

@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Session;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($id) {
     return [
@@ -12,6 +13,8 @@ $model = new \app\helpers\FixtureData(function($id) {
 		'browser' => 'Chrome',
 		'os' => 'Windows',
 		'device' => 'Computer',
+		'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
 		'created_by' => 1,
 		'updated_by' => 1,
 	];

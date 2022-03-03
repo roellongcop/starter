@@ -1,6 +1,8 @@
 <?php
+
 use app\models\Backup;
 use yii\helpers\Inflector;
+use yii\db\Expression;
 
 $model = new \app\helpers\FixtureData(function($filename) {
 	$dbPref = \Yii::$app->db->tablePrefix;
@@ -24,6 +26,8 @@ $model = new \app\helpers\FixtureData(function($filename) {
 		]),
 		'description' => 'Description',
 		'slug' => (string) Inflector::slug($filename),
+		'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
 		'created_by' => 1,
 	    'updated_by' => 1,
 	    'sql' => 'default-OxFBeC2Dzw1624513904-default'
