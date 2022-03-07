@@ -16,13 +16,16 @@ use app\widgets\SearchButton;
 <?php $form = ActiveForm::begin([
     'action' => $model->searchAction,
     'method' => 'get',
-    'id' => 'log-search-form'
+    'id' => 'log-search-form',
+    'fieldConfig' => [
+        'labelOptions' => ['class' => 'control-label font-weight-bold'],
+    ],
 ]); ?>
     <?= Search::widget(['model' => $model]) ?>
     <?= DateRange::widget(['model' => $model]) ?>
     <br>
     <?= $form->field($model, 'model_id')->textInput([
-        'name' => 'model_id'
+        'name' => 'model_id',
     ]) ?>
     <?= Filter::widget([
         'data' => LogSearch::filter('method'),

@@ -36,7 +36,7 @@ JS;
 $this->registerWidgetJs($widgetFunction, $js);
 ?>
 <br>
-<p class=""><?= $title ?></p>
+<p class="font-weight-bold"><?= $title ?></p>
 <div class="date-range-search" id="<?= $id ?>">
     <input name="<?= $name ?>" class="form-control pointer"  readonly placeholder="Select Date" type="hidden"  />
     <span class="form-control pointer"> </span>

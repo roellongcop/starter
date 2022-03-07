@@ -4,8 +4,7 @@ $this->registerJs(<<< JS
     $('.kt-selectpicker-{$widgetId}').selectpicker();
 JS);
 ?>
-<hr>
-<p class=""><?= $title ?></p>
+<p class="mt-5 font-weight-bold"><?= $title ?></p>
 <?= $form->field($model, $attribute)->dropDownList(
     $paginations, [
         'class' => "form-control kt-selectpicker-{$widgetId}",
