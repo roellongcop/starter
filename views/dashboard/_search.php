@@ -37,7 +37,6 @@ ksort($modules);
             'Last Year',
         ]
     ]) ?>
-    <br>
     <?= Filter::widget([
         'data' => $modules,
         'title' => 'Module',
