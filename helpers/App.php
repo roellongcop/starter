@@ -10,8 +10,12 @@ use yii\web\NotFoundHttpException;
 
 class App {
 
-	public static function app()
+	public static function app($attr='')
 	{
+		if ($attr) {
+			return Yii::$app->{$attr};
+		}
+		
 		return Yii::$app;
 	}
 
