@@ -116,19 +116,19 @@ class File extends ActiveRecord
     public function getDisplay($params = [], $fullpath=false, $path='@web/default/file-preview/')
     {
         switch ($this->extension) {
-            case 'css': $path .= 'css.svg'; break;
-            case 'zip': $path .= 'zip.svg'; break;
+            case 'css': $path .= 'css.png'; break;
+            case 'zip': $path .= 'zip.png'; break;
             case 'sql': $path .= 'sql.png'; break;
-            case 'csv': $path .= 'csv.svg'; break;
+            case 'csv': $path .= 'csv.png'; break;
             case 'docx':
             case 'doc':
             case 'txt': 
-                $path .= 'doc.svg'; break;
-            case 'html': $path .= 'html.svg'; break;
-            case 'javacript': $path .= 'javacript.svg'; break;
-            case 'mp4': $path .= 'mp4.svg'; break;
-            case 'pdf': $path .= 'pdf.svg'; break;
-            case 'xml': $path .= 'xml.svg'; break;
+                $path .= 'doc.png'; break;
+            case 'html': $path .= 'html.png'; break;
+            case 'js': $path .= 'js.png'; break;
+            case 'mp4': $path .= 'mp4.png'; break;
+            case 'pdf': $path .= 'pdf.png'; break;
+            case 'xml': $path .= 'xml.png'; break;
             default:
                 $path = array_merge(['file/display', 'token' => $this->token], $params);
                 $path = Url::to($path, $fullpath);
