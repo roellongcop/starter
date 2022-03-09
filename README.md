@@ -46,7 +46,7 @@
 * Dynamic roles implementation
 * Search everything from dashboard
 * Dynamic columns filtering
-* Export capabilities (pdf, csv, xls, xlxs, browser print)
+* Export capabilities (pdf, csv, xls, xlsx, browser print)
 * Bulk action implementation
 * On click activation of records on gridview
 * Backup and restore application

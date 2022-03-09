@@ -33,7 +33,7 @@ class File extends ActiveRecord
 {
     const EXTENSIONS = [
         'image' => ['jpeg', 'jpg', 'gif', 'bmp', 'tiff','png', 'ico',],
-        'file' => ['doc', 'docx', 'pdf', 'xls', 'xlxs', 'csv', 'sql'],
+        'file' => ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'csv', 'sql'],
     ];
     const IMAGE_HOLDER = 'https://via.placeholder.com/100';
 
