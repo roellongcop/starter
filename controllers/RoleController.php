@@ -84,10 +84,10 @@ class RoleController extends Controller
         $model = new Role();
         $model->attributes = $originalModel->attributes;
 
-        if (($post = App::post()) != NULL) {
-            $post['Role']['main_navigation'] = $post['Role']['main_navigation'] ?? NULL;
-            $post['Role']['role_access'] = $post['Role']['role_access'] ?? NULL;
-            $post['Role']['module_access'] = $post['Role']['module_access'] ?? NULL;
+        if (($post = App::post()) != null) {
+            $post['Role']['main_navigation'] = $post['Role']['main_navigation'] ?? null;
+            $post['Role']['role_access'] = $post['Role']['role_access'] ?? null;
+            $post['Role']['module_access'] = $post['Role']['module_access'] ?? null;
 
             if ($model->load($post) && $model->save()) {
                 App::success('Successfully Duplicated');
@@ -112,10 +112,10 @@ class RoleController extends Controller
     {
         $model = $this->findModel($slug, 'slug');
 
-        if (($post = App::post()) != NULL) {
-            $post['Role']['main_navigation'] = $post['Role']['main_navigation'] ?? NULL;
-            $post['Role']['role_access'] = $post['Role']['role_access'] ?? NULL;
-            $post['Role']['module_access'] = $post['Role']['module_access'] ?? NULL;
+        if (($post = App::post()) != null) {
+            $post['Role']['main_navigation'] = $post['Role']['main_navigation'] ?? null;
+            $post['Role']['role_access'] = $post['Role']['role_access'] ?? null;
+            $post['Role']['module_access'] = $post['Role']['module_access'] ?? null;
 
             if ($model->load($post) && $model->save()) {
                 App::success('Successfully Updated');
@@ -254,13 +254,13 @@ class RoleController extends Controller
             $post = App::post();
             $model->load($post);
             if (empty($post['Role']['main_navigation'])) {
-                $model->main_navigation = NULL;
+                $model->main_navigation = null;
             }
             if (empty($post['Role']['role_access'])) {
-                $model->role_access = NULL;
+                $model->role_access = null;
             }
             if (empty($post['Role']['module_access'])) {
-                $model->module_access = NULL;
+                $model->module_access = null;
             }
             if ($model->save()) {
                 App::success('Successfully Updated');

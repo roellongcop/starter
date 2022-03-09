@@ -12,7 +12,7 @@ use app\widgets\Anchors;
 
 class Html extends \yii\helpers\Html
 {
-    public static function a($text, $url = NULL, $options = [])
+    public static function a($text, $url = null, $options = [])
     {
         return Anchor::widget([
             'title' => $text ,

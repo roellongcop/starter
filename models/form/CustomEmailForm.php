@@ -27,11 +27,11 @@ class CustomEmailForm extends \yii\base\Model
             [['cc', 'bcc',], 'safe'],
             [['content', 'sender_name', 'template'], 'string'],
             ['content', 'required', 'when' => function($model) {
-                return $model->template == NULL;
+                return $model->template == null;
             }],
 
             ['template', 'required', 'when' => function($model) {
-                return $model->content == NULL;
+                return $model->content == null;
             }],
             ['parameters', 'validateParameters'],
             [['cc', 'bcc'], 'validateCCBCC'],

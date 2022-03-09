@@ -67,7 +67,7 @@ class SiteController extends Controller
     {
         $model = new PasswordResetForm();
         if ($model->load(App::post())) {
-            if (($user = $model->process()) != NULL) {
+            if (($user = $model->process()) != null) {
                 if ($model->hint) {
                     App::success("Your password hint is: '{$user->password_hint}'.");
                 }

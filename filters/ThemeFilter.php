@@ -20,7 +20,7 @@ class ThemeFilter extends ActionFilter
 
         $theme = '';
         if (App::isLogin()) {
-            if (($slug = App::get('preview-theme')) != NULL) {
+            if (($slug = App::get('preview-theme')) != null) {
                 $theme = Theme::findOne(['slug' => $slug]);
             }
             else {

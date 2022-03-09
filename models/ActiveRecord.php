@@ -162,7 +162,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-    public function validate($attributeNames = NULL, $clearErrors = true)
+    public function validate($attributeNames = null, $clearErrors = true)
     {
         $validate = parent::validate($attributeNames, $clearErrors);
 
@@ -173,7 +173,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $validate;
     }
 
-    public function save($runValidation = true, $attributeNames = NULL)
+    public function save($runValidation = true, $attributeNames = null)
     {
         $save = parent::save($runValidation, $attributeNames);
 
@@ -204,7 +204,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $result;
     }
 
-    public static function deleteAll($condition = NULL, $params = []) 
+    public static function deleteAll($condition = null, $params = []) 
     {
         $models = static::findAll($condition);
         $result = parent::deleteAll($condition);
@@ -270,9 +270,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCanDelete()
     {
-        if ($this->_canDelete === NULL) {
+        if ($this->_canDelete === null) {
             $res = [];
-            if (($relatedModels = $this->relatedModels) != NULL) {
+            if (($relatedModels = $this->relatedModels) != null) {
                 foreach ($relatedModels as $model) {
                     if ($this->{$model}) {
                         $res[] = $model;
@@ -287,7 +287,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCanCreate()
     {
-        if ($this->_canCreate === NULL) {
+        if ($this->_canCreate === null) {
             $this->_canCreate = true;
         }
         
@@ -296,7 +296,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     
     public function getCanView()
     {
-        if ($this->_canView === NULL) {
+        if ($this->_canView === null) {
             $this->_canView = true;
         }
         
@@ -305,7 +305,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCanUpdate()
     {
-        if ($this->_canUpdate === NULL) {
+        if ($this->_canUpdate === null) {
             $this->_canUpdate = true;
         }
         
@@ -314,7 +314,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCanActivate()
     {
-        if ($this->_canActivate === NULL) {
+        if ($this->_canActivate === null) {
             if (App::isGuest()) {
                 $this->_canActivate = true;
             }
@@ -332,7 +332,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCanInactivate()
     {
-        if ($this->_canInactivate === NULL) {
+        if ($this->_canInactivate === null) {
             if (App::isLogin()
                 && App::identity()->can('in-active-data', $this->controllerID())
                 && App::identity()->can('change-record-status', $this->controllerID())) {
@@ -700,8 +700,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCreatedByEmail()
     {
-        if ($this->_createdByEmail === NULL) {
-            if(($model = $this->createdBy) != NULL) {
+        if ($this->_createdByEmail === null) {
+            if(($model = $this->createdBy) != null) {
                 $this->_createdByEmail = $model->email;
             }
         }
@@ -715,8 +715,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getUpdatedByEmail()
     {
-        if ($this->_updatedByEmail === NULL) {
-            if(($model = $this->updatedBy) != NULL) {
+        if ($this->_updatedByEmail === null) {
+            if(($model = $this->updatedBy) != null) {
                 $this->_updatedByEmail = $model->email;
             }
         }
@@ -854,7 +854,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return date('F d, Y', strtotime($date));
         }
         else {
-            if ($this->_startDate === NULL) {
+            if ($this->_startDate === null) {
                 $this->_startDate = static::find()
                     ->visible()
                     ->min('created_at');
@@ -872,7 +872,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return date('F d, Y', strtotime($date));
         }
         else {
-            if ($this->_endDate === NULL) {
+            if ($this->_endDate === null) {
                 $this->_endDate = static::find()
                     ->visible()
                     ->max('created_at');

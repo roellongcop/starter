@@ -17,7 +17,7 @@ class BaseWidget extends \yii\base\Widget
 
     public function getWidgetFunction()
     {
-        if ($this->widgetFunction == NULL) {
+        if ($this->widgetFunction == null) {
             $this->widgetFunction = Inflector::id2camel($this->getId());
         }
         

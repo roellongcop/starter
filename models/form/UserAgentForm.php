@@ -172,7 +172,7 @@ class UserAgentForm extends \yii\base\Model
 		try {
 	    	$ip = $this->ip;
 	    	
-	        $output = NULL;
+	        $output = null;
 	        if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
 	            $ip = $_SERVER["REMOTE_ADDR"];
 	            if ($this->deep_detect) {
@@ -182,7 +182,7 @@ class UserAgentForm extends \yii\base\Model
 	                    $ip = $_SERVER['HTTP_CLIENT_IP'];
 	            }
 	        }
-	        $purpose = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
+	        $purpose = str_replace(array("name", "\n", "\t", " ", "-", "_"), null, strtolower(trim($purpose)));
 
 	        $continents = self::CONTINENTS;
 

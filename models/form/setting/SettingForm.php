@@ -16,7 +16,7 @@ abstract class SettingForm extends \yii\base\Model
         parent::init();
         $data = ArrayHelper::map($this->default(), 'name', 'default');
 
-        if (($model = Setting::findByName(static::NAME)) != NULL) {
+        if (($model = Setting::findByName(static::NAME)) != null) {
             $data = array_replace($data, json_decode($model->value, true));
         }
         $this->load([App::className($this) => $data]);

@@ -36,7 +36,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     
     public function field($field)
     {
-        if (($alias = $this->_getAlias()) != NULL) {
+        if (($alias = $this->_getAlias()) != null) {
             return "{$alias}.{$field}";
         }
         return $field;
@@ -101,7 +101,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
         ]);
     }
 
-    public function count($q = '*', $db = NULL)
+    public function count($q = '*', $db = null)
     {
         $this->visible();
         return parent::count($q, $db);

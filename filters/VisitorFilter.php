@@ -32,7 +32,7 @@ class VisitorFilter extends \yii\base\ActionFilter
 
             if ($cookies->has($this->cookieId)) {
                 
-                if (($model = Visitor::findByCookie($cookies->getValue($this->cookieId))) != NULL) {
+                if (($model = Visitor::findByCookie($cookies->getValue($this->cookieId))) != null) {
                     if ($model->isExpire()) {
                         $this->addCookie();
                     }
@@ -63,7 +63,7 @@ class VisitorFilter extends \yii\base\ActionFilter
         $cookies = Yii::$app->response->cookies;
         $expire = time() + ($this->duration ?? App::setting('system')->auto_logout_timer);
 
-        if (($model = Visitor::findOne(['session_id' => $session_id])) == NULL) {
+        if (($model = Visitor::findOne(['session_id' => $session_id])) == null) {
             $userAgent = new UserAgentForm();
             $model = new Visitor([
                 'expire' => $expire,

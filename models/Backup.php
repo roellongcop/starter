@@ -149,14 +149,14 @@ class Backup extends ActiveRecord
 
     public function getSqlFileLocation()
     {
-        if (($file = $this->file) != NULL) {
+        if (($file = $this->file) != null) {
             return $file->rootPath;
         }
     }
 
     public function download()
     {
-        if (($file = $this->file) != NULL) {
+        if (($file = $this->file) != null) {
             return $file->download();
         }
     }
@@ -179,7 +179,7 @@ class Backup extends ActiveRecord
 
     public function getGenerated()
     {
-        if (($file = $this->file) != NULL) {
+        if (($file = $this->file) != null) {
             return $file;
         }
     }

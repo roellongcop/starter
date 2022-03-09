@@ -46,7 +46,7 @@ class UploadForm extends \yii\base\Model
 
     public function validateExtensions($attribute, $params)
     {
-        if (($fileInput = $this->fileInput) != NULL) {
+        if (($fileInput = $this->fileInput) != null) {
             if (!in_array($fileInput->extension, $this->extensions)) {
                 $this->addError($attribute, 'File Extension Invalid');
             }

@@ -44,7 +44,7 @@ class MySettingForm extends UserForm
 
     public function validateThemeId($attribute, $params)
     {
-        if (($theme = $this->getTheme()) == NULL) {
+        if (($theme = $this->getTheme()) == null) {
             $this->addError($attribute, 'Theme don\'t exist.');
         }
     }
@@ -60,7 +60,7 @@ class MySettingForm extends UserForm
 
     public function getTheme()
     {
-        if ($this->_theme === NULL) {
+        if ($this->_theme === null) {
             $this->_theme = Theme::findOne($this->theme_id);
         }
         return $this->_theme;

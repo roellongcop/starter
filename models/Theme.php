@@ -163,11 +163,11 @@ class Theme extends ActiveRecord
 
     public function getImageFiles()
     {
-        if (($photos = $this->photos) != NULL) {
+        if (($photos = $this->photos) != null) {
             $files = [];
 
             foreach ($photos as $token) {
-                if (($file = File::findByToken($token)) != NULL) {
+                if (($file = File::findByToken($token)) != null) {
                     $files[] = $file;
                 }
             }
@@ -178,7 +178,7 @@ class Theme extends ActiveRecord
 
     public function getImages()
     {
-        if (($photos = $this->photos) != NULL) {
+        if (($photos = $this->photos) != null) {
             $images = [];
 
             foreach ($photos as $photo) {
@@ -194,7 +194,7 @@ class Theme extends ActiveRecord
     public function getPreviewImage($params = ['w' => 100], $options = [])
     {
         $token = '';
-        if (($photos = $this->photos) != NULL) {
+        if (($photos = $this->photos) != null) {
             $token = $photos[0];
         }
 

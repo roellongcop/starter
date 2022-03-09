@@ -110,7 +110,7 @@ class Log extends ActiveRecord
 
     public function validateUserId($attribute, $params)
     {
-        if (($user = User::findOne($this->user_id)) == NULL) {
+        if (($user = User::findOne($this->user_id)) == null) {
             $this->addError($attribute, 'Not existing User');
         }
     }

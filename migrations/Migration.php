@@ -10,7 +10,7 @@ class Migration extends \yii\db\Migration
 {
     public $options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
 
-    public function createTable($tableName, $columns, $options = NULL) 
+    public function createTable($tableName, $columns, $options = null) 
     {
         $options = $options ?: $this->options;
 

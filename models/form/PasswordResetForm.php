@@ -38,7 +38,7 @@ class PasswordResetForm extends \yii\base\Model
 
     public function validateEmail($attribute, $params)
     {
-        if (($user = $this->getUser()) != NULL) {
+        if (($user = $this->getUser()) != null) {
             if ($user->is_blocked == User::BLOCKED) {
                 $this->addError($attribute, 'User is blocked.');
             }
@@ -59,7 +59,7 @@ class PasswordResetForm extends \yii\base\Model
 
     public function getUser()
     {
-        if ($this->_user == NULL) {
+        if ($this->_user == null) {
             $this->_user = User::findByEmail($this->email);
         }
 

@@ -43,7 +43,7 @@ class ChangePasswordForm extends \yii\base\Model
 
     public function getUser()
     {
-        if ($this->_user === NULL) {
+        if ($this->_user === null) {
             $this->_user = User::findOne($this->user_id);
         }
 
@@ -52,7 +52,7 @@ class ChangePasswordForm extends \yii\base\Model
 
     public function validateUser($attribute, $params)
     {
-        if (($user = $this->getUser()) == NULL) {
+        if (($user = $this->getUser()) == null) {
             $this->addError($attribute, 'User don\'t exist');
         }
     }

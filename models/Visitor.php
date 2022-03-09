@@ -139,7 +139,7 @@ class Visitor extends ActiveRecord
     {
         $cookie = implode('-', [App::randomString(5), time()]);
 
-        if (($model = Visitor::findOne(['cookie' => $cookie])) == NULL) {
+        if (($model = Visitor::findOne(['cookie' => $cookie])) == null) {
             return $cookie;
         }
 

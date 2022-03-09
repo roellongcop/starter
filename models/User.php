@@ -397,7 +397,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getCurrentTheme()
     {
-        if ($this->_currentTheme === NULL) {
+        if ($this->_currentTheme === null) {
             if (($theme = $this->theme) != null) {
                 $this->_currentTheme = $theme;
             }

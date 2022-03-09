@@ -25,7 +25,7 @@ abstract class UserForm extends \yii\base\Model
 
     public function validateUserId($attribute, $params)
     {
-        if (($user = $this->getUser()) == NULL) {
+        if (($user = $this->getUser()) == null) {
             $this->addError($attribute, 'User don\'t exist.');
         }
     }
@@ -34,14 +34,14 @@ abstract class UserForm extends \yii\base\Model
     {
         parent::init();
 
-        if (($meta = $this->getMeta()) != NULL) {
+        if (($meta = $this->getMeta()) != null) {
             $this->load([App::className($this) => json_decode($meta->value, true)]);
         }
     }
 
     public function getUser()
     {
-        if ($this->_user === NULL) {
+        if ($this->_user === null) {
             $this->_user = User::findOne($this->user_id);
         }
 
@@ -73,7 +73,7 @@ abstract class UserForm extends \yii\base\Model
 
     public function getMeta()
     {
-        if ($this->_meta === NULL) {
+        if ($this->_meta === null) {
             $this->_meta = UserMeta::findOne([
                 'user_id' => $this->user_id,
                 'name' => static::META_NAME

@@ -4,7 +4,7 @@ use app\helpers\App;
 use app\helpers\Html;
 ?>
 
-<?= Html::if(($searchModel = $this->params['searchModel'] ?? '') != NULL, 
+<?= Html::if(($searchModel = $this->params['searchModel'] ?? '') != null, 
 	function() use($searchModel) {
 		return $this->render('_search-content', [
 			'searchModel' => $searchModel,

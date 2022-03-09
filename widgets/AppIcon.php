@@ -11,7 +11,7 @@ class AppIcon extends BaseWidget
      */
     public function run()
     {
-        if ($this->icon == NULL) {
+        if ($this->icon == null) {
             return ;
         }
         return $this->render("icon/{$this->icon}");

@@ -81,8 +81,8 @@ class ThemeController extends Controller
         $model = new Theme();
         $model->attributes = $originalModel->attributes;
 
-        if (($post = App::post()) != NULL) {
-            $post['Theme']['photos'] = $post['Theme']['photos'] ?? NULL;
+        if (($post = App::post()) != null) {
+            $post['Theme']['photos'] = $post['Theme']['photos'] ?? null;
 
             if ($model->load($post) && $model->save()) {
                 App::success('Successfully Duplicated');
@@ -108,8 +108,8 @@ class ThemeController extends Controller
     {
         $model = $this->findModel($slug, 'slug');
 
-        if (($post = App::post()) != NULL) {
-            $post['Theme']['photos'] = $post['Theme']['photos'] ?? NULL;
+        if (($post = App::post()) != null) {
+            $post['Theme']['photos'] = $post['Theme']['photos'] ?? null;
 
             if ($model->load($post) && $model->save()) {
                 App::success('Successfully Updated');

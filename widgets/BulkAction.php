@@ -21,7 +21,7 @@ class BulkAction extends BaseWidget
 
     public function setControllerId()
     {
-        if ($this->controllerID == NULL) {
+        if ($this->controllerID == null) {
             if ($this->searchModel && $this->searchModel->hasProperty('controllerID')) {
                 $this->controllerID = $this->searchModel->controllerID();
             }
