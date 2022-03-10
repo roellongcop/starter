@@ -9,8 +9,6 @@ use app\models\UserMeta;
 use app\models\search\UserMetaSearch;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * UserMetaController implements the CRUD actions for UserMeta model.
@@ -55,7 +53,7 @@ class UserMetaController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => UserMeta::controllerFind($id),
         ]);
     }
 
@@ -88,7 +86,7 @@ class UserMetaController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = UserMeta::controllerFind($id);
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
@@ -109,7 +107,7 @@ class UserMetaController extends Controller
      */
     public function actionDuplicate($id)
     {
-        $originalModel = $this->findModel($id);
+        $originalModel = UserMeta::controllerFind($id);
         $model = new UserMeta();
         $model->attributes = $originalModel->attributes;
 
@@ -134,7 +132,7 @@ class UserMetaController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
+        $model = UserMeta::controllerFind($id);
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -144,25 +142,6 @@ class UserMetaController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the UserMeta model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return UserMeta the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = UserMeta::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

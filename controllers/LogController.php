@@ -7,8 +7,6 @@ use app\helpers\App;
 use app\models\Log;
 use app\models\search\LogSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * LogController implements the CRUD actions for Log model.
@@ -52,7 +50,7 @@ class LogController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => Log::controllerFind($id),
         ]);
     }
  
@@ -65,7 +63,7 @@ class LogController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
+        $model = Log::controllerFind($id);
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -75,25 +73,6 @@ class LogController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the Log model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Log the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Log::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

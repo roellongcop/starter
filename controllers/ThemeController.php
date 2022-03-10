@@ -8,8 +8,6 @@ use app\models\Theme;
 use app\models\form\user\MySettingForm;
 use app\models\search\ThemeSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * ThemeController implements the CRUD actions for Theme model.
@@ -47,7 +45,7 @@ class ThemeController extends Controller
     public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($slug, 'slug'),
+            'model' => Theme::controllerFind($slug, 'slug'),
         ]);
     }
 
@@ -77,7 +75,7 @@ class ThemeController extends Controller
      */
     public function actionDuplicate($slug)
     {
-        $originalModel = $this->findModel($slug, 'slug');
+        $originalModel = Theme::controllerFind($slug, 'slug');
         $model = new Theme();
         $model->attributes = $originalModel->attributes;
 
@@ -106,7 +104,7 @@ class ThemeController extends Controller
      */
     public function actionUpdate($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Theme::controllerFind($slug, 'slug');
 
         if (($post = App::post()) != null) {
             $post['Theme']['photos'] = $post['Theme']['photos'] ?? null;
@@ -131,7 +129,7 @@ class ThemeController extends Controller
      */
     public function actionDelete($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Theme::controllerFind($slug, 'slug');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -141,25 +139,6 @@ class ThemeController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the Theme model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Theme the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Theme::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()
@@ -242,7 +221,7 @@ class ThemeController extends Controller
 
     public function actionActivate($slug)
     {
-        $theme = $this->findModel($slug, 'slug');
+        $theme = Theme::controllerFind($slug, 'slug');
 
         $model = new MySettingForm(['user_id' => App::identity('id')]);
         $model->theme_id = $theme->id;

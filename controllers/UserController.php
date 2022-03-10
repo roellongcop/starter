@@ -11,8 +11,6 @@ use app\models\form\ChangePasswordForm;
 use app\models\search\UserSearch;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -56,7 +54,7 @@ class UserController extends Controller
     public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($slug, 'slug'),
+            'model' => User::controllerFind($slug, 'slug'),
         ]);
     }
 
@@ -91,7 +89,7 @@ class UserController extends Controller
      */
     public function actionDuplicate($slug)
     {
-        $originalModel = $this->findModel($slug, 'slug');
+        $originalModel = User::controllerFind($slug, 'slug');
         $model = new User();
         $model->attributes = $originalModel->attributes;
 
@@ -118,7 +116,7 @@ class UserController extends Controller
      */
     public function actionUpdate($slug)
     {
-        $model = $this->findModel($slug, 'slug'); 
+        $model = User::controllerFind($slug, 'slug'); 
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
@@ -139,7 +137,7 @@ class UserController extends Controller
      */
     public function actionDelete($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = User::controllerFind($slug, 'slug');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -149,25 +147,6 @@ class UserController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return User the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = User::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()
@@ -256,7 +235,7 @@ class UserController extends Controller
 
     public function actionMyPassword($token='')
     {
-        $user = ($token)? $this->findModel($token, 'password_reset_token'): App::identity();
+        $user = ($token)? User::controllerFind($token, 'password_reset_token'): App::identity();
 
         $model = new ChangePasswordForm([
             'user_id' => $user->id,
@@ -275,7 +254,7 @@ class UserController extends Controller
 
     public function actionProfile($slug)
     {
-        $user = $this->findModel($slug, 'slug'); 
+        $user = User::controllerFind($slug, 'slug'); 
         $model = $user->profile;
 
         if ($model->load(App::post()) && $model->save()) {

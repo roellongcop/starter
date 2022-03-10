@@ -7,8 +7,6 @@ use app\helpers\App;
 use app\models\Ip;
 use app\models\search\IpSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * IpController implements the CRUD actions for Ip model.
@@ -44,7 +42,7 @@ class IpController extends Controller
     public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($slug, 'slug'),
+            'model' => Ip::controllerFind($slug, 'slug'),
         ]);
     }
 
@@ -75,7 +73,7 @@ class IpController extends Controller
      */
     public function actionDuplicate($slug)
     {
-        $originalModel = $this->findModel($slug, 'slug');
+        $originalModel = Ip::controllerFind($slug, 'slug');
         $model = new Ip();
         $model->attributes = $originalModel->attributes;
 
@@ -100,7 +98,7 @@ class IpController extends Controller
      */
     public function actionUpdate($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Ip::controllerFind($slug, 'slug');
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
@@ -121,7 +119,7 @@ class IpController extends Controller
      */
     public function actionDelete($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Ip::controllerFind($slug, 'slug');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -131,25 +129,6 @@ class IpController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the Ip model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Ip the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Ip::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

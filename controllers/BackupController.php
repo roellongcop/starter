@@ -9,8 +9,6 @@ use app\models\Backup;
 use app\models\Queue;
 use app\models\search\BackupSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * BackupController implements the CRUD actions for Backup model.
@@ -46,7 +44,7 @@ class BackupController extends Controller
      */
     public function actionView($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Backup::controllerFind($slug, 'slug');
 
         if (! $model->generated) {
             App::info('The SQL file is currently generating...');
@@ -100,7 +98,7 @@ class BackupController extends Controller
      */
     public function actionDuplicate($slug)
     {
-        $originalModel = $this->findModel($slug, 'slug');
+        $originalModel = Backup::controllerFind($slug, 'slug');
 
         $model = new Backup();
         $model->attributes = $originalModel->attributes;
@@ -126,25 +124,6 @@ class BackupController extends Controller
             'model' => $model,
             'originalModel' => $originalModel,
         ]);
-    }
-    
-    /**
-     * Finds the Backup model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Backup the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Backup::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()
@@ -227,7 +206,7 @@ class BackupController extends Controller
 
     public function actionRestore($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Backup::controllerFind($slug, 'slug');
 
         if (!$model || !$model->restore()) {
             App::warning('File currently don\'t exist or cannot be restored.');
@@ -240,7 +219,7 @@ class BackupController extends Controller
 
     public function actionDownload($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Backup::controllerFind($slug, 'slug');
         if (!$model || !$model->download()) {
             App::warning('File currently don\'t exist');
             return $this->redirect($model->indexUrl);

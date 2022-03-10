@@ -37,8 +37,6 @@ use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? 
 <?php else: ?>
 use yii\data\ActiveDataProvider;
 <?php endif; ?>
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 use yii\helpers\Inflector;
 
 /**
@@ -87,7 +85,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
     public function actionView(<?= $actionParams ?>)
     {
         return $this->render('view', [
-            'model' => $this->findModel(<?= $actionParams ?>),
+            'model' => <?= $modelClass ?>::controllerFind(<?= $actionParams ?>),
         ]);
     }
 
@@ -118,7 +116,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
      */
     public function actionDuplicate(<?= $actionParams ?>)
     {
-        $originalModel = $this->findModel(<?= $actionParams ?>);
+        $originalModel = <?= $modelClass ?>::controllerFind(<?= $actionParams ?>);
         $model = new <?= $modelClass ?>();
         $model->attributes = $originalModel->attributes;
 
@@ -143,7 +141,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
      */
     public function actionUpdate(<?= $actionParams ?>)
     {
-        $model = $this->findModel(<?= $actionParams ?>);
+        $model = <?= $modelClass ?>::controllerFind(<?= $actionParams ?>);
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
@@ -164,7 +162,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
      */
     public function actionDelete(<?= $actionParams ?>)
     {
-        $model = $this->findModel($id);
+        $model = <?= $modelClass ?>::controllerFind($id);
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -174,36 +172,6 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the <?= $modelClass ?> model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
-     * @return <?=                   $modelClass ?> the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel(<?= $actionParams ?>, $field='id')
-    {
-<?php
-if (count($pks) === 1) {
-    $condition = '$id';
-} else {
-    $condition = [];
-    foreach ($pks as $pk) {
-        $condition[] = "'$pk' => \$$pk";
-    }
-    $condition = '[' . implode(', ', $condition) . ']';
-}
-?>
-        if (($model = <?= $modelClass ?>::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

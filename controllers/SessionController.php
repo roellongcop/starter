@@ -7,8 +7,6 @@ use app\helpers\App;
 use app\models\Session;
 use app\models\search\SessionSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * SessionController implements the CRUD actions for Session model.
@@ -53,7 +51,7 @@ class SessionController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => Session::controllerFind($id),
         ]);
     }
 
@@ -66,7 +64,7 @@ class SessionController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
+        $model = Session::controllerFind($id);
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -76,25 +74,6 @@ class SessionController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the Session model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Session the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Session::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

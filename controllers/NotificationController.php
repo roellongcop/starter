@@ -6,8 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Notification;
 use app\models\search\NotificationSearch;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 use yii\helpers\Inflector;
 
 /**
@@ -45,7 +43,7 @@ class NotificationController extends Controller
      */
     public function actionView($token)
     {
-        $model = $this->findModel($token, 'token');
+        $model = Notification::controllerFind($token, 'token');
         $model->setToRead();
         $model->save();
 
@@ -61,7 +59,7 @@ class NotificationController extends Controller
      */
     public function actionDelete($token)
     {
-        $model = $this->findModel($token, 'token');
+        $model = Notification::controllerFind($token, 'token');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -71,25 +69,6 @@ class NotificationController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the Notification model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Notification the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Notification::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

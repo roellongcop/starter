@@ -6,8 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Visitor;
 use app\models\search\VisitorSearch;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 use yii\helpers\Inflector;
 
 /**
@@ -54,7 +52,7 @@ class VisitorController extends Controller
     public function actionView($cookie)
     {
         return $this->render('view', [
-            'model' => $this->findModel($cookie, 'cookie'),
+            'model' => Visitor::controllerFind($cookie, 'cookie'),
         ]);
     }
  
@@ -67,7 +65,7 @@ class VisitorController extends Controller
      */
     public function actionDelete($cookie)
     {
-        $model = $this->findModel($cookie, 'cookie');
+        $model = Visitor::controllerFind($cookie, 'cookie');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -77,25 +75,6 @@ class VisitorController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the Visitor model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Visitor the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Visitor::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

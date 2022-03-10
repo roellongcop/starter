@@ -8,8 +8,6 @@ use app\models\File;
 use app\models\form\UploadForm;
 use app\models\search\FileSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 /**
  * FileController implements the CRUD actions for File model.
@@ -106,7 +104,7 @@ class FileController extends Controller
     public function actionView($token)
     {
         return $this->render('view', [
-            'model' => $this->findModel($token, 'token'),
+            'model' => File::controllerFind($token, 'token'),
         ]);
     }
 
@@ -119,7 +117,7 @@ class FileController extends Controller
      */
     public function actionDelete($token = '')
     {
-        $model = $this->findModel($token, 'token');
+        $model = File::controllerFind($token, 'token');
 
         if (App::isAjax()) {
             if ($model && $model->canDelete) {
@@ -152,25 +150,6 @@ class FileController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the File model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return File the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = File::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()
@@ -286,7 +265,7 @@ class FileController extends Controller
 
     public function actionDownload($token)
     {
-        $model = $this->findModel($token, 'token');
+        $model = File::controllerFind($token, 'token');
         if ($model->download()) {
             
         }

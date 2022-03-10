@@ -15,8 +15,6 @@ use app\models\form\setting\SystemSettingForm;
 use app\models\form\user\MySettingForm;
 use app\models\search\SettingSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * SettingController implements the CRUD actions for Setting model.
@@ -54,7 +52,7 @@ class SettingController extends Controller
     public function actionView($name)
     {
         return $this->render('view', [
-            'model' => $this->findModel($name, 'name'),
+            'model' => Setting::controllerFind($name, 'name'),
         ]);
     }
 
@@ -67,7 +65,7 @@ class SettingController extends Controller
      */
     public function actionUpdate($name)
     {
-        $model = $this->findModel($name, 'name');
+        $model = Setting::controllerFind($name, 'name');
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
@@ -88,7 +86,7 @@ class SettingController extends Controller
      */
     public function actionDelete($name)
     {
-        $model = $this->findModel($name, 'name');
+        $model = Setting::controllerFind($name, 'name');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -98,25 +96,6 @@ class SettingController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the Setting model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Setting the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Setting::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

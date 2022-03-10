@@ -15,7 +15,9 @@ use app\widgets\RecordHtml;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
- 
+use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
+
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     public abstract function config();
@@ -898,5 +900,26 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         sort($data);
 
         return $data;
+    }
+
+    public static function findOrFailed($value, $field='id', $action='')
+    {
+        $action = $action ?: App::actionID();
+
+        if (($model = static::findVisible([$field => $value])) != null) {
+            return $model;
+        }
+        
+        throw new NotFoundHttpException('Page not found.');
+    }
+
+    public static function controllerFind($value, $field='id', $action='')
+    {
+        $model = self::findOrFailed($value, $field, $action);
+
+        if (App::modelCan($model, $action)) {
+            return $model;
+        }
+        throw new ForbiddenHttpException('Forbidden action to data');
     }
 }

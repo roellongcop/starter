@@ -7,8 +7,6 @@ use app\helpers\App;
 use app\models\Role;
 use app\models\search\RoleSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * RoleController implements the CRUD actions for Role model.
@@ -46,7 +44,7 @@ class RoleController extends Controller
     public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($slug, 'slug'),
+            'model' => Role::controllerFind($slug, 'slug'),
         ]);
     }
 
@@ -80,7 +78,7 @@ class RoleController extends Controller
      */
     public function actionDuplicate($slug)
     {
-        $originalModel = $this->findModel($slug, 'slug');
+        $originalModel = Role::controllerFind($slug, 'slug');
         $model = new Role();
         $model->attributes = $originalModel->attributes;
 
@@ -110,7 +108,7 @@ class RoleController extends Controller
      */
     public function actionUpdate($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Role::controllerFind($slug, 'slug');
 
         if (($post = App::post()) != null) {
             $post['Role']['main_navigation'] = $post['Role']['main_navigation'] ?? null;
@@ -137,7 +135,7 @@ class RoleController extends Controller
      */
     public function actionDelete($slug)
     {
-        $model = $this->findModel($slug, 'slug');
+        $model = Role::controllerFind($slug, 'slug');
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -147,25 +145,6 @@ class RoleController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the Role model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Role the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = Role::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()

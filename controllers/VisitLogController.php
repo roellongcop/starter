@@ -8,8 +8,6 @@ use app\models\User;
 use app\models\VisitLog;
 use app\models\search\VisitLogSearch;
 use yii\helpers\Inflector;
-use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -55,7 +53,7 @@ class VisitLogController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => VisitLog::controllerFind($id),
         ]);
     }
 
@@ -68,7 +66,7 @@ class VisitLogController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
+        $model = VisitLog::controllerFind($id);
 
         if($model->delete()) {
             App::success('Successfully Deleted');
@@ -78,25 +76,6 @@ class VisitLogController extends Controller
         }
 
         return $this->redirect($model->indexUrl);
-    }
-
-    /**
-     * Finds the VisitLog model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return VisitLog the loaded model
-     * @throws ForbiddenHttpException if the model cannot be found
-     */
-    protected function findModel($id, $field='id')
-    {
-        if (($model = VisitLog::findVisible([$field => $id])) != null) {
-            if (App::modelCan($model)) {
-                return $model;
-            }
-            throw new ForbiddenHttpException('Forbidden action to data');
-        }
-        
-        throw new NotFoundHttpException('Page not found.');
     }
 
     public function actionChangeRecordStatus()
