@@ -120,10 +120,10 @@ class FormatterComponent extends \yii\i18n\Formatter
             $bytes = number_format($bytes / $kb, 2) . ' KB';
         }
         elseif ($bytes > 1) {
-            $bytes = $bytes . ' bytes';
+            $bytes = number_format($bytes) . ' bytes';
         }
         elseif ($bytes == 1) {
-            $bytes = $bytes . ' byte';
+            $bytes = number_format($bytes) . ' byte';
         }
         else {
             $bytes = '0 bytes';
