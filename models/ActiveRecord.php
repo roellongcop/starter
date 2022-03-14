@@ -915,6 +915,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public static function controllerFind($value, $field='id', $action='')
     {
+        $action = $action ?: App::actionID();
         $model = self::findOrFailed($value, $field, $action);
 
         if (App::modelCan($model, $action)) {
