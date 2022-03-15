@@ -49,7 +49,6 @@ $(document).ready(function() {
         warningClass: "label label-info label-rounded label-inline",
         limitReachedClass: "label label-success label-rounded label-inline"
     });
-})
 
-
-
+    autosize($('textarea'));
+})k
