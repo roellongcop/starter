@@ -10,8 +10,6 @@
 ?>        $this->createTable($this->tableName(), $this->attributes([
             'name' => $this->string()->notNull()->unique(),
             'description' => $this->text(),
-            'created_at' => new Expression('UTC_TIMESTAMP'),
-            'updated_at' => new Expression('UTC_TIMESTAMP'),
         ]));
 <?= $this->render('_addForeignKeys', [
     'table' => $table,
