@@ -97,7 +97,7 @@ class AccessComponent extends Component
 	        'sub' => [
 	        	'5.0' => [
 	                'label' => 'Setting List',
-	                'link' => '/setting/index',
+	                'link' => '/setting',
 	                'icon' => '<i class="fa fa-cog"></i>',
 	            ],
 	            '5.1' => [
