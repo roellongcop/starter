@@ -17,16 +17,9 @@ class UserMetaController extends Controller
 {
     public function actionFindByKeywords($keywords='')
     { 
-        $data = array_merge(
-            UserMeta::findByKeywords($keywords, ['name', 'value']), 
-            UserMeta::users()
+        return $this->asJson(
+            UserMeta::findByKeywords($keywords, ['um.name', 'um.value', 'u.username'])
         );
-
-        $data = array_unique($data);
-        $data = array_values($data);
-        sort($data);
-
-        return $this->asJson($data);
     }
 
     /**

@@ -152,19 +152,29 @@ class VisitLog extends ActiveRecord
         ];
     }
 
-    public static function users()
+    public static function findByKeywords($keywords='', $attributes, $limit=10)
     {
-        $data = User::find()
-            ->select('u.*')
-            ->alias('u')
-            ->innerJoinWith('visitLogs vl')
-            ->groupBy('u.username')
-            ->all();
+        $data = [];
+        foreach ($attributes as $attribute) {
 
-        $data = array_values(ArrayHelper::map($data, 'id', 'username'));
+            $models = self::find()
+                ->select("{$attribute} AS data")
+                ->alias('v')
+                ->joinWith('user u')
+                ->groupBy($attribute)
+                ->where(['LIKE', $attribute, $keywords])
+                ->limit($limit)
+                ->asArray()
+                ->all();
 
+            $data = array_merge($data, array_values(ArrayHelper::map($models, 'data', 'data')));
+        }
+
+        $data = array_unique($data);
         $data = array_values($data);
         
+        sort($data);
+
         return $data;
     }
 }

@@ -696,18 +696,28 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
-    public static function roles()
-    { 
-        $data = Role::find()
-            ->select('r.*')
-            ->alias('r')
-            ->innerJoinWith('users u')
-            ->groupBy('r.name')
-            ->all();
+    public static function findByKeywords($keywords='', $attributes, $limit=10)
+    {
+        $data = [];
+        foreach ($attributes as $attribute) {
 
-        $data = array_values(ArrayHelper::map($data, 'id', 'name'));
+            $models = self::find()
+                ->select("{$attribute} AS data")
+                ->alias('u')
+                ->joinWith('role r')
+                ->groupBy($attribute)
+                ->where(['LIKE', $attribute, $keywords])
+                ->limit($limit)
+                ->asArray()
+                ->all();
 
+            $data = array_merge($data, array_values(ArrayHelper::map($models, 'data', 'data')));
+        }
+
+        $data = array_unique($data);
         $data = array_values($data);
+        
+        sort($data);
 
         return $data;
     }
