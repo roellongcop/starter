@@ -32,11 +32,11 @@ class Migration extends \yii\db\Migration
             'record_status' => $this->tinyInteger(2)->notNull()->defaultValue(1),
             'created_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'updated_by' => $this->bigInteger(20)->notNull()->defaultValue(0),
-            // 'created_at' => $this->datetime()->notNull(),
-            // 'updated_at' => $this->timestamp()->notNull()
-            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
-                ->append('ON UPDATE CURRENT_TIMESTAMP')
+            'created_at' => $this->datetime()->notNull(),
+            'updated_at' => $this->timestamp()->notNull()
+            // 'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
+            // 'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
+            //     ->append('ON UPDATE CURRENT_TIMESTAMP')
         ];
 
         return array_merge($headerFields, $fields, $footerFields);

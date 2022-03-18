@@ -2,6 +2,7 @@
 
 use app\models\Role;
 use app\models\User;
+use yii\db\Expression;
 
 /**
  * Class m210528_070049_seed_users_table
@@ -40,6 +41,8 @@ class m210528_070049_seed_users_table extends \app\migrations\Migration
                 'slug' => 'developer',
                 'is_blocked' => User::UNBLOCKED,
                 'record_status' => User::RECORD_ACTIVE,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
             ],
             'superadmin' => [
                 'role_id' => Role::SUPERADMIN,
@@ -55,6 +58,8 @@ class m210528_070049_seed_users_table extends \app\migrations\Migration
                 'slug' => 'superadmin',
                 'is_blocked' => User::UNBLOCKED,
                 'record_status' => User::RECORD_ACTIVE,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
             ],
             'admin' => [
                 'role_id' => Role::ADMIN,
@@ -70,6 +75,8 @@ class m210528_070049_seed_users_table extends \app\migrations\Migration
                 'slug' => 'admin',
                 'is_blocked' => User::UNBLOCKED,
                 'record_status' => User::RECORD_ACTIVE,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
             ]
         ];
     }

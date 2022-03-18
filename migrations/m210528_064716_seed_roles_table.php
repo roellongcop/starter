@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Role;
+use yii\db\Expression;
 
 /**
  * Class m210528_064716_seed_roles_table
@@ -38,6 +39,8 @@ class m210528_064716_seed_roles_table extends \app\migrations\Migration
                 'main_navigation' => json_encode($defaultNavigation),
                 'slug' => 'developer', 
                 'record_status' => Role::RECORD_ACTIVE,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
             ],
             'superadmin' => [
                 'name' => 'superadmin', 
@@ -49,6 +52,8 @@ class m210528_064716_seed_roles_table extends \app\migrations\Migration
                 'main_navigation' => json_encode($defaultNavigation),
                 'slug' => 'superadmin', 
                 'record_status' => Role::RECORD_ACTIVE,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
             ],
             'admin' => [
                 'name' => 'admin', 
@@ -59,6 +64,8 @@ class m210528_064716_seed_roles_table extends \app\migrations\Migration
                 'main_navigation' => json_encode($defaultNavigation),
                 'slug' => 'admin', 
                 'record_status' => Role::RECORD_ACTIVE,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
             ],
         ];
     }
