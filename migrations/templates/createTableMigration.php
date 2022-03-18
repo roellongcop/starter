@@ -17,6 +17,8 @@ if (!empty($namespace)) {
 }
 ?>
 
+use yii\db\Expression;
+
 /**
  * Handles the creation of table `<?= $table ?>`.
 <?= $this->render('_foreignTables', [
