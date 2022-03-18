@@ -51,9 +51,7 @@ class FormatterComponent extends \yii\i18n\Formatter
     public function asDateToTimezone($date='', $format='F d, Y h:i:s A', $timezone="")
     {
         if (!$timezone) {
-            if (($timezone = App::setting('system')->timezone) == null) {
-                $timezone = Setting::GENERAL['timezone']['default'];
-            }
+            $timezone = App::setting('system')->timezone ?: Setting::GENERAL['timezone']['default'];
         }
 
         $date = ($date)? $date: date('Y-m-d h:i:s A');
