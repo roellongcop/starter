@@ -103,7 +103,7 @@ class Role extends ActiveRecord
 
     public function getUsers()
     {
-        return $this->hasMany(User::ClassName(), ['role_id' => 'id']);
+        return $this->hasMany(User::className(), ['role_id' => 'id']);
     }
       
     public function getCanDelete()
