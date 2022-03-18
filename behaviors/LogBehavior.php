@@ -29,7 +29,6 @@ class LogBehavior extends \yii\base\Behavior
         if ($this->logAfterSave) {
             Log::record($this->owner, $event->changedAttributes);
         }
-        
     }
 
     public function afterDelete()
