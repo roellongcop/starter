@@ -32,7 +32,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
 		return AnchorForm::widget();
 	}
 
-	public static function recordStatusInput($params)
+	public static function recordStatus($params)
 	{
 		return RecordStatusInput::widget($params);
 	}

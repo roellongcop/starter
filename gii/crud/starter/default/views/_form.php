@@ -32,7 +32,7 @@ echo "\t\t\t<?= " . $generator->generateActiveField($attribute) . " ?>\n";
 }
 }
 } ?>
-            <?= '<?=' ?> ActiveForm::recordStatusInput([
+            <?= '<?=' ?> ActiveForm::recordStatus([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
