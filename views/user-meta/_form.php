@@ -1,7 +1,5 @@
 <?php
 
-use app\widgets\AnchorForm;
-use app\widgets\RecordStatusInput;
 use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -14,13 +12,13 @@ use app\widgets\ActiveForm;
             <?= $form->field($model, 'user_id')->textInput() ?>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
-            <?= RecordStatusInput::widget([
+            <?= ActiveForm::recordStatus([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
         </div>
     </div>
     <div class="form-group">
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

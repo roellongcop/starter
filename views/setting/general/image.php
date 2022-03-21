@@ -2,7 +2,6 @@
 
 use app\helpers\Html;
 use app\widgets\ActiveForm;
-use app\widgets\AnchorForm;
 use app\widgets\ImageGallery;
 ?>
 <?php $form = ActiveForm::begin(['id' => 'setting-general-image-form']); ?>
@@ -76,6 +75,6 @@ use app\widgets\ImageGallery;
 		</div>
 	</div>
 	<div class="form-group"> <br>
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
 	</div>
 <?php ActiveForm::end(); ?>

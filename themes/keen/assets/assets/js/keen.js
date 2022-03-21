@@ -51,4 +51,4 @@ $(document).ready(function() {
     });
 
     autosize($('textarea'));
-})k
+});

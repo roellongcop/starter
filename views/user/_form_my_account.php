@@ -5,10 +5,8 @@ use app\helpers\Html;
 use app\models\User;
 use app\models\search\RoleSearch;
 use app\widgets\ActiveForm;
-use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ImageGallery;
-use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -32,7 +30,7 @@ use app\widgets\RecordStatusInput;
                 'form' => $form,
                 'data' => App::mapParams(User::STATUS),
             ]) ?>
-            <?= RecordStatusInput::widget([
+            <?= ActiveForm::recordStatus([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
@@ -63,7 +61,7 @@ use app\widgets\RecordStatusInput;
         </div>
     </div>
     <div class="form-group"><br>
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>
 

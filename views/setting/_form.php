@@ -2,8 +2,6 @@
 
 use app\helpers\Html;
 use app\widgets\ActiveForm;
-use app\widgets\AnchorForm;
-use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Setting */
@@ -14,7 +12,7 @@ use app\widgets\RecordStatusInput;
         <div class="col-md-5">
             <?= $form->field($model, 'name')->textInput(['readonly' => true]) ?>
             <?= $model->getFormInput($form) ?>
-            <?= RecordStatusInput::widget([
+            <?= ActiveForm::recordStatus([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
@@ -26,6 +24,6 @@ use app\widgets\RecordStatusInput;
         </div>
     </div>
     <div class="form-group"> <br>
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

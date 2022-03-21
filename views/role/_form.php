@@ -1,8 +1,6 @@
 <?php
 
 use app\helpers\App;
-use app\widgets\AnchorForm;
-use app\widgets\RecordStatusInput;
 use app\widgets\ActiveForm;
 
 $controller_actions = App::component('access')->controllerActions;
@@ -18,7 +16,7 @@ CSS);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'role-form']); ?>
     <div class="form-group">
-        <?= AnchorForm::widget() ?>
+        <?= ActiveForm::buttons() ?>
     </div>
     <div class="card-header card-header-tabs-line" id="card-header">
         <div class="card-toolbar">
@@ -58,7 +56,7 @@ CSS);
                 <div class="row">
                     <div class="col-md-5">
                         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-                        <?= RecordStatusInput::widget([
+                        <?= ActiveForm::recordStatus([
                             'model' => $model,
                             'form' => $form,
                         ]) ?>
@@ -85,6 +83,6 @@ CSS);
         </div>
     </div>
     <div class="form-group">
-        <?= AnchorForm::widget() ?>
+        <?= ActiveForm::buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

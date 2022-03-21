@@ -3,9 +3,7 @@
 use app\helpers\App;
 use app\models\Ip;
 use app\widgets\ActiveForm;
-use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
-use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
@@ -22,13 +20,13 @@ use app\widgets\RecordStatusInput;
 	            'form' => $form,
 	            'data' => App::mapParams(Ip::TYPES),
 	        ]) ?>
-	        <?= RecordStatusInput::widget([
+	        <?= ActiveForm::recordStatus([
 	            'model' => $model,
 	            'form' => $form,
 	        ]) ?>
 		</div>
 	</div>
 	<div class="form-group">
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
 	</div>
 <?php ActiveForm::end(); ?>

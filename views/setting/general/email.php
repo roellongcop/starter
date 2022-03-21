@@ -1,6 +1,5 @@
 <?php
 
-use app\widgets\AnchorForm;
 use app\widgets\ActiveForm;
 ?>
 <?php $form = ActiveForm::begin(['id' => 'setting-general-email-form']); ?>
@@ -22,6 +21,6 @@ use app\widgets\ActiveForm;
 		</div>
 	</div>
 	<div class="form-group"> <br>
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
 	</div>
 <?php ActiveForm::end(); ?>

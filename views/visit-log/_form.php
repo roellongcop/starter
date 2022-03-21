@@ -3,9 +3,7 @@
 use app\models\VisitLog;
 use app\models\search\UserSearch;
 use app\widgets\ActiveForm;
-use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
-use app\widgets\RecordStatusInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\VisitLog */
@@ -29,13 +27,13 @@ use app\widgets\RecordStatusInput;
                 'form' => $form,
                 'data' => ArrayHelper::map(VisitLog::ACTIONS, 'id', 'label'),
             ]) ?>
-            <?= RecordStatusInput::widget([
+            <?= ActiveForm::recordStatus([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
         </div>
     </div>
     <div class="form-group">
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

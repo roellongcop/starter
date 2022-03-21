@@ -1,8 +1,6 @@
 <?php
 
 use app\helpers\App;
-use app\widgets\AnchorForm;
-use app\widgets\RecordStatusInput;
 use app\widgets\Checkbox;
 use app\widgets\ActiveForm;
 
@@ -31,7 +29,7 @@ JS);
 
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-            <?= RecordStatusInput::widget([
+            <?= ActiveForm::recordStatus([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
@@ -55,6 +53,6 @@ JS);
         </div>
     </div>
     <div class="form-group">
-        <?= AnchorForm::widget() ?>
+        <?= ActiveForm::buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

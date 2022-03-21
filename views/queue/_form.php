@@ -1,7 +1,5 @@
 <?php
 
-use app\widgets\RecordStatusInput;
-use app\widgets\AnchorForm;
 use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -20,13 +18,13 @@ use app\widgets\ActiveForm;
 			<?= $form->field($model, 'reserved_at')->textInput() ?>
 			<?= $form->field($model, 'attempt')->textInput() ?>
 			<?= $form->field($model, 'done_at')->textInput() ?>
-			<?= RecordStatusInput::widget([
+			<?= ActiveForm::recordStatus([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
         </div>
     </div>
     <div class="form-group">
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

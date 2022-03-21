@@ -1,7 +1,6 @@
 <?php
 
 use app\models\search\UserSearch;
-use app\widgets\AnchorForm;
 use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -22,7 +21,7 @@ $this->params['searchModel'] = new UserSearch();
 			</div>
 		</div>
 		<div class="form-group">
-			<?= AnchorForm::widget() ?>
+			<?= ActiveForm::buttons() ?>
 		</div>
 	<?php ActiveForm::end(); ?>
 </div>

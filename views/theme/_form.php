@@ -4,10 +4,8 @@ use app\helpers\Url;
 use app\models\File;
 use app\widgets\ActiveForm;
 use app\widgets\Anchor;
-use app\widgets\AnchorForm;
 use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
-use app\widgets\RecordStatusInput;
 use app\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -30,7 +28,7 @@ JS);
             <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'base_path')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'base_url')->textInput(['maxlength' => true]) ?>
-            <?= RecordStatusInput::widget([
+            <?= ActiveForm::recordStatus([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
@@ -69,6 +67,6 @@ JS);
     ]) ?>
 
     <div class="form-group"><br>
-        <?= AnchorForm::widget() ?>
+        <?= ActiveForm::buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

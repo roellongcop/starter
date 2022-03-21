@@ -2,7 +2,6 @@
 
 use app\helpers\Html;
 use app\models\search\ThemeSearch;
-use app\widgets\AnchorForm;
 use app\widgets\ThemeView;
 use yii\widgets\ActiveForm;
 
@@ -16,7 +15,7 @@ $this->params['searchModel'] = new ThemeSearch();
 <div class="setting-my-setting-page">
 	<?php $form = ActiveForm::begin(['id' => 'setting-my-setting-form']); ?>
 		<div class="form-group">
-			<?= AnchorForm::widget() ?>
+			<?= ActiveForm::buttons() ?>
 		</div>
 	<?php ActiveForm::end(); ?>
 	<div class="row">

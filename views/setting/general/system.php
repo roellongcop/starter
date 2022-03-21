@@ -2,7 +2,6 @@
 
 use app\helpers\App;
 use app\models\search\ThemeSearch;
-use app\widgets\AnchorForm;
 use app\widgets\BootstrapSelect;
 use app\widgets\ActiveForm;
 ?>
@@ -69,6 +68,6 @@ use app\widgets\ActiveForm;
 		</div>
 	</div>
 	<div class="form-group"> <br>
-		<?= AnchorForm::widget() ?>
+		<?= ActiveForm::buttons() ?>
 	</div>
 <?php ActiveForm::end(); ?>
