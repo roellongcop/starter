@@ -4,6 +4,8 @@ namespace app\widgets;
 
 use app\helpers\App;
 use app\models\Theme;
+use app\widgets\AnchorForm;
+use app\widgets\RecordStatusInput;
 
 class ActiveForm extends \yii\widgets\ActiveForm
 {
@@ -23,5 +25,15 @@ class ActiveForm extends \yii\widgets\ActiveForm
 				$this->options['novalidate'] = 'novalidate';
 			}
 		}
+	}
+
+	public static function buttons()
+	{
+		return AnchorForm::widget();
+	}
+
+	public static function recordStatusInput($params)
+	{
+		return RecordStatusInput::widget($params);
 	}
 }

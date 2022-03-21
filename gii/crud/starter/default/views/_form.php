@@ -16,9 +16,6 @@ $ignore_attr = ['status', 'record_status', 'created_by', 'updated_by', 'created_
 echo "<?php\n";
 ?>
 
-use app\helpers\App;
-use app\widgets\RecordStatusInput;
-use app\widgets\AnchorForm;
 use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -35,13 +32,13 @@ echo "\t\t\t<?= " . $generator->generateActiveField($attribute) . " ?>\n";
 }
 }
 } ?>
-			<?= '<?=' ?> RecordStatusInput::widget([
+            <?= '<?=' ?> ActiveForm::recordStatusInput([
                 'model' => $model,
                 'form' => $form,
             ]) ?>
         </div>
     </div>
     <div class="form-group">
-		<?= '<?=' ?> AnchorForm::widget() ?>
+        <?= '<?=' ?> ActiveForm::buttons() ?>
     </div>
 <?= "<?php " ?>ActiveForm::end(); ?>
