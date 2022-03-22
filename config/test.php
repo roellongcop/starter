@@ -15,7 +15,7 @@ return [
         'db' => ['class' => 'app\components\ConnectionComponent'],
         'queue' => [
             'class' => 'app\components\QueueComponent',
-            'as log' => \yii\queue\LogBehavior::class,
+            'as log' => 'yii\queue\LogBehavior',
         ],
         'access' => ['class' => 'app\components\AccessComponent'],
         'setting' => ['class' => 'app\components\SettingComponent'],

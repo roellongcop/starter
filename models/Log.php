@@ -266,7 +266,7 @@ class Log extends ActiveRecord
             $userAgent = new UserAgentForm();
             $log                   = new Log();
             $log->request_data     = App::getBodyParams();
-            $log->method           = App::getMethod();
+            $log->method           = App::getMethod() ?: 'console';
             $log->url              = App::isWeb()? App::absoluteUrl(): '';
             $log->user_id          = App::identity() ? App::identity('id'): 0;
             $log->model_id         = $model->id ?: 0;
@@ -284,7 +284,6 @@ class Log extends ActiveRecord
             if ($log->save()) {
                 return true;
             }
-            App::danger($log->errors);
         // }
     }
 }

@@ -54,6 +54,10 @@ class App {
 	
 	public static function request($obj='')
 	{
+		if (! self::isWeb()) {
+			return '';
+		}
+
 		if ($obj == '') {
 			return self::app()->request;
 		}
@@ -256,12 +260,12 @@ class App {
 
 	public static function getMethod()
 	{
-		return self::request()->method;
+		return self::request('method');
 	}
 
 	public static function getBodyParams()
 	{
-		return self::request()->getBodyParams() ?? [];
+		return self::request('bodyParams');
 	}
 
 	public static function isAjax()

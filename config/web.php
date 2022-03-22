@@ -20,7 +20,7 @@ $config = [
         'db' => ['class' => 'app\components\ConnectionComponent'],
         'queue' => [
             'class' => 'app\components\QueueComponent',
-            'as log' => \yii\queue\LogBehavior::class,
+            'as log' => 'yii\queue\LogBehavior',
         ],
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
