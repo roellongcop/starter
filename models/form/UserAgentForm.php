@@ -3,6 +3,7 @@
 namespace app\models\form;
 
 use Yii;
+use app\helpers\App;
 /**
  * Ip Information
  */
@@ -119,8 +120,8 @@ class UserAgentForm extends \yii\base\Model
     public function init()
     {
     	parent::init();
-    	$this->ip = Yii::$app->request->userIp ?: '000.000.0.0';
-    	$this->userAgent = Yii::$app->request->userAgent;
+    	$this->ip = App::ip();
+    	$this->userAgent = App::userAgent();
     }
 
     private function filterUserAgent($array)
