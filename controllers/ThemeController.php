@@ -148,50 +148,7 @@ class ThemeController extends Controller
 
     public function actionBulkAction()
     {
-        $model = new Theme();
-        $post = App::post();
-
-        if (isset($post['process-selected'])) {
-            $process = Inflector::humanize($post['process-selected']);
-            if (isset($post['selection'])) {
-
-                $models = Theme::all($post['selection']);
-
-                if (isset($post['confirm_button'])) {
-                    switch ($post['process-selected']) {
-                        case 'active':
-                            Theme::activeAll(['id' => $post['selection']]);
-                            break;
-                        case 'in_active':
-                            Theme::inactiveAll(['id' => $post['selection']]);
-                            break;
-                        case 'delete':
-                            Theme::deleteAll(['id' => $post['selection']]);
-                            break;
-                        default:
-                            # code...
-                            break;
-                    }
-                    App::success("Data set to '{$process}'");  
-                }
-                else {
-                    return $this->render('bulk-action', [
-                        'model' => $model,
-                        'models' => $models,
-                        'process' => $process,
-                        'post' => $post
-                    ]);
-                }
-            }
-            else {
-                App::warning('No Checkbox Selected');
-            }
-        }
-        else {
-            App::warning('No Process Selected');
-        }
-
-        return $this->redirect($model->indexUrl);
+        return $this->bulkAction();
     }
 
     public function actionPrint()

@@ -84,50 +84,7 @@ class VisitorController extends Controller
 
     public function actionBulkAction()
     {
-        $model = new Visitor();
-        $post = App::post();
-
-        if (isset($post['process-selected'])) {
-            $process = Inflector::humanize($post['process-selected']);
-            if (isset($post['selection'])) {
-
-                $models = Visitor::all($post['selection']);
-
-                if (isset($post['confirm_button'])) {
-                    switch ($post['process-selected']) {
-                        case 'active':
-                            Visitor::activeAll(['id' => $post['selection']]);
-                            break;
-                        case 'in_active':
-                            Visitor::inactiveAll(['id' => $post['selection']]);
-                            break;
-                        case 'delete':
-                            Visitor::deleteAll(['id' => $post['selection']]);
-                            break;
-                        default:
-                            # code...
-                            break;
-                    }
-                    App::success("Data set to '{$process}'");  
-                }
-                else {
-                    return $this->render('bulk-action', [
-                        'model' => $model,
-                        'models' => $models,
-                        'process' => $process,
-                        'post' => $post
-                    ]);
-                }
-            }
-            else {
-                App::warning('No Checkbox Selected');
-            }
-        }
-        else {
-            App::warning('No Process Selected');
-        }
-
-        return $this->redirect($model->indexUrl);
+        return $this->bulkAction();
     }
 
     public function actionPrint()

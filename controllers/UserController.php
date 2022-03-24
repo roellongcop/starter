@@ -149,56 +149,23 @@ class UserController extends Controller
 
     public function actionBulkAction()
     {
-        $model = new User();
-        $post = App::post();
-
-        if (isset($post['process-selected'])) {
-            $process = Inflector::humanize($post['process-selected']);
-            if (isset($post['selection'])) {
-
-                $models = User::all($post['selection']);
-
-                if (isset($post['confirm_button'])) {
-                    switch ($post['process-selected']) {
-                        case 'active':
-                            User::activeAll(['id' => $post['selection']]);
-                            break;
-                        case 'in_active':
-                            User::inactiveAll(['id' => $post['selection']]);
-                            break;
-                        case 'delete':
-                            User::deleteAll(['id' => $post['selection']]);
-                            break;
-                        case 'allowed':
-                            User::allowedAll(['id' => $post['selection']]);
-                            break;
-                        case 'blocked':
-                            User::blockedAll(['id' => $post['selection']]);
-                            break;
-                        default:
-                            # code...
-                            break;
-                    }
-                    App::success("Data set to '{$process}'");  
-                }
-                else {
-                    return $this->render('bulk-action', [
-                        'model' => $model,
-                        'models' => $models,
-                        'process' => $process,
-                        'post' => $post
-                    ]);
-                }
-            }
-            else {
-                App::warning('No Checkbox Selected');
-            }
-        }
-        else {
-            App::warning('No Process Selected');
-        }
-
-        return $this->redirect($model->indexUrl);
+        return $this->bulkAction([
+            'active' => function($post) {
+                User::activeAll(['id' => $post['selection']]);
+            },
+            'in_active' => function($post) {
+                User::inactiveAll(['id' => $post['selection']]);
+            },
+            'delete' => function($post) {
+                User::deleteAll(['id' => $post['selection']]);
+            },
+            'allowed' => function($post) {
+                User::allowedAll(['id' => $post['selection']]);
+            },
+            'blocked' => function($post) {
+                User::blockedAll(['id' => $post['selection']]);
+            },
+        ]);
     }
 
     public function actionPrint()

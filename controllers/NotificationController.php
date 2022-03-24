@@ -78,56 +78,23 @@ class NotificationController extends Controller
 
     public function actionBulkAction()
     {
-        $model = new Notification();
-        $post = App::post();
-
-        if (isset($post['process-selected'])) {
-            $process = Inflector::humanize($post['process-selected']);
-            if (isset($post['selection'])) {
-
-                $models = Notification::all($post['selection']);
-
-                if (isset($post['confirm_button'])) {
-                    switch ($post['process-selected']) {
-                        case 'read':
-                            Notification::readAll(['id' => $post['selection']]);
-                            break;
-                        case 'unread':
-                            Notification::unreadAll(['id' => $post['selection']]);
-                            break;
-                        case 'active':
-                            Notification::activeAll(['id' => $post['selection']]);
-                            break;
-                        case 'in_active':
-                            Notification::inactiveAll(['id' => $post['selection']]);
-                            break;
-                        case 'delete':
-                            Notification::deleteAll(['id' => $post['selection']]);
-                            break;
-                        default:
-                            # code...
-                            break;
-                    }
-                    App::success("Data set to '{$process}'");  
-                }
-                else {
-                    return $this->render('bulk-action', [
-                        'model' => $model,
-                        'models' => $models,
-                        'process' => $process,
-                        'post' => $post
-                    ]);
-                }
-            }
-            else {
-                App::warning('No Checkbox Selected');
-            }
-        }
-        else {
-            App::warning('No Process Selected');
-        }
-
-        return $this->redirect($model->indexUrl);
+        return $this->bulkAction([
+            'active' => function($post) {
+                Notification::activeAll(['id' => $post['selection']]);
+            },
+            'in_active' => function($post) {
+                Notification::inactiveAll(['id' => $post['selection']]);
+            },
+            'delete' => function($post) {
+                Notification::deleteAll(['id' => $post['selection']]);
+            },
+            'read' => function($post) {
+                Notification::readAll(['id' => $post['selection']]);
+            },
+            'unread' => function($post) {
+                Notification::unreadAll(['id' => $post['selection']]);
+            },
+        ]);
     }
 
     public function actionPrint()

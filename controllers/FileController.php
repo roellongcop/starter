@@ -159,49 +159,7 @@ class FileController extends Controller
 
     public function actionBulkAction()
     {
-        $model = new File();
-        $post = App::post();
-
-        if (isset($post['process-selected'])) {
-            $process = Inflector::humanize($post['process-selected']);
-            if (isset($post['selection'])) {
-
-                $models = File::all($post['selection']);
-
-                if (isset($post['confirm_button'])) {
-                    switch ($post['process-selected']) {
-                        case 'active':
-                            File::activeAll(['id' => $post['selection']]);
-                            break;
-                        case 'in_active':
-                            File::inactiveAll(['id' => $post['selection']]);
-                            break;
-                        case 'delete':
-                            File::deleteAll(['id' => $post['selection']]);
-                            break;
-                        default:
-                            break;
-                    }
-                    App::success("Data set to '{$process}'");  
-                }
-                else {
-                    return $this->render('bulk-action', [
-                        'model' => $model,
-                        'models' => $models,
-                        'process' => $process,
-                        'post' => $post
-                    ]);
-                }
-            }
-            else {
-                App::warning('No Checkbox Selected');
-            }
-        }
-        else {
-            App::warning('No Process Selected');
-        }
-
-        return $this->redirect($model->indexUrl);
+        return $this->bulkAction();
     }
 
     public function actionPrint()

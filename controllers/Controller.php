@@ -8,6 +8,7 @@ use app\models\form\export\ExportCsvForm;
 use app\models\form\export\ExportExcelForm;
 use app\models\form\export\ExportPdfForm;
 use app\widgets\ExportContent;
+use yii\helpers\Inflector;
 
 /**
  * RoleController implements the CRUD actions for Role model.
@@ -153,5 +154,66 @@ abstract class Controller extends \yii\web\Controller
         $data = [];
 
         return $this->asJson($data);
+    }
+
+    public function bulkAction($actions=[], $class='')
+    {
+        if (! $class) {
+            $class = str_replace('Controller', '', App::className($this));
+        }
+
+        if (! str_contains($class, '\\')) { 
+            $class = "app\\models\\{$class}";
+        }
+
+        if (! $actions) {
+            $actions = [
+                'active' => function($post) use($class) {
+                    $class::activeAll(['id' => $post['selection']]);
+                },
+                'in_active' => function($post) use($class) {
+                    $class::inactiveAll(['id' => $post['selection']]);
+                },
+                'delete' => function($post) use($class) {
+                    $class::deleteAll(['id' => $post['selection']]);
+                },
+            ];
+        }
+
+        $model = new $class();
+        $post = App::post();
+
+        if (isset($post['process-selected'])) {
+            $process = Inflector::humanize($post['process-selected']);
+            if (isset($post['selection'])) {
+
+                $models = $class::all($post['selection']);
+
+                if (isset($post['confirm_button'])) {
+                    foreach ($actions as $postAction => $function) {
+                        if ($postAction == $post['process-selected']) {
+                            call_user_func($function, $post);
+                        }
+                    }
+                    App::success("Data set to '{$process}'");  
+                }
+                else {
+                    return $this->render('bulk-action', [
+                        'model' => $model,
+                        'models' => $models,
+                        'process' => $process,
+                        'post' => $post
+                    ]);
+                }
+            }
+            else {
+                App::warning('No Checkbox Selected');
+            }
+        }
+        else {
+            App::warning('No Process Selected');
+        }
+
+        return $this->redirect($model->indexUrl);
     }
 }

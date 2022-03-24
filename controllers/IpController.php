@@ -138,56 +138,23 @@ class IpController extends Controller
 
     public function actionBulkAction()
     {
-        $model = new Ip();
-        $post = App::post();
-
-        if (isset($post['process-selected'])) {
-            $process = Inflector::humanize($post['process-selected']);
-            if (isset($post['selection'])) {
-
-                $models = Ip::all($post['selection']);
-
-                if (isset($post['confirm_button'])) {
-                    switch ($post['process-selected']) {
-                        case 'active':
-                            Ip::activeAll(['id' => $post['selection']]);
-                            break;
-                        case 'in_active':
-                            Ip::inactiveAll(['id' => $post['selection']]);
-                            break;
-                        case 'delete':
-                            Ip::deleteAll(['id' => $post['selection']]);
-                            break;
-                        case 'white_list':
-                            Ip::whitelistAll(['id' => $post['selection']]);
-                            break;
-                        case 'black_list':
-                            Ip::blacklistAll(['id' => $post['selection']]);
-                            break;
-                        default:
-                            # code...
-                            break;
-                    }
-                    App::success("Data set to '{$process}'");  
-                }
-                else {
-                    return $this->render('bulk-action', [
-                        'model' => $model,
-                        'models' => $models,
-                        'process' => $process,
-                        'post' => $post
-                    ]);
-                }
-            }
-            else {
-                App::warning('No Checkbox Selected');
-            }
-        }
-        else {
-            App::warning('No Process Selected');
-        }
-
-        return $this->redirect($model->indexUrl);
+        return $this->bulkAction([
+            'active' => function($post) {
+                Ip::activeAll(['id' => $post['selection']]);
+            },
+            'in_active' => function($post) {
+                Ip::inactiveAll(['id' => $post['selection']]);
+            },
+            'delete' => function($post) {
+                Ip::deleteAll(['id' => $post['selection']]);
+            },
+            'white_list' => function($post) {
+                Ip::whitelistAll(['id' => $post['selection']]);
+            },
+            'black_list' => function($post) {
+                Ip::blacklistAll(['id' => $post['selection']]);
+            },
+        ]);
     }
 
     public function actionPrint()
