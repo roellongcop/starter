@@ -108,10 +108,27 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function changeRecordStatus()
+    public function changeRecordStatus($class='')
     {
         if (($post = App::post()) != null) {
-            $model = $this->findModel($post['id']);
+            if (! $class) {
+                $class = str_replace('Controller', '', App::className($this));
+            }
+
+            if (! str_contains($class, '\\')) { 
+                $class = "app\\models\\{$class}";
+            }
+
+            $model = $class::controllerFind($post['id']);
+
+            if (!$model) {
+                return $this->asJson([
+                    'status' => 'failed',
+                    'errors' => 'No data found.',
+                    'errorSummary' => 'No data found.'
+                ]);
+            }
+
             $model->record_status = $post['record_status'];
 
             if ($model->save()) {
