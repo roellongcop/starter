@@ -149,23 +149,7 @@ class UserController extends Controller
 
     public function actionBulkAction()
     {
-        return $this->bulkAction([
-            'active' => function($post) {
-                User::activeAll(['id' => $post['selection']]);
-            },
-            'in_active' => function($post) {
-                User::inactiveAll(['id' => $post['selection']]);
-            },
-            'delete' => function($post) {
-                User::deleteAll(['id' => $post['selection']]);
-            },
-            'allowed' => function($post) {
-                User::allowedAll(['id' => $post['selection']]);
-            },
-            'blocked' => function($post) {
-                User::blockedAll(['id' => $post['selection']]);
-            },
-        ]);
+        return $this->bulkAction();
     }
 
     public function actionPrint()

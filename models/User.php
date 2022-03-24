@@ -597,11 +597,17 @@ class User extends ActiveRecord implements IdentityInterface
             'label' => 'Allowed',
             'process' => 'allowed',
             'icon' => 'check',
+            'function' => function($post) {
+                self::allowedAll(['id' => $post['selection']]);
+            },
         ];
         $getBulkActions['blocked'] = [
             'label' => 'Blocked',
             'process' => 'blocked',
             'icon' => 'close',
+            'function' => function($post) {
+                self::blockedAll(['id' => $post['selection']]);
+            },
         ];
         return $getBulkActions;
     }

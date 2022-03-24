@@ -156,7 +156,7 @@ abstract class Controller extends \yii\web\Controller
         return $this->asJson($data);
     }
 
-    public function bulkAction($actions=[], $class='')
+    public function bulkAction($class='')
     {
         if (! $class) {
             $class = str_replace('Controller', '', App::className($this));
@@ -164,20 +164,6 @@ abstract class Controller extends \yii\web\Controller
 
         if (! str_contains($class, '\\')) { 
             $class = "app\\models\\{$class}";
-        }
-
-        if (! $actions) {
-            $actions = [
-                'active' => function($post) use($class) {
-                    $class::activeAll(['id' => $post['selection']]);
-                },
-                'in_active' => function($post) use($class) {
-                    $class::inactiveAll(['id' => $post['selection']]);
-                },
-                'delete' => function($post) use($class) {
-                    $class::deleteAll(['id' => $post['selection']]);
-                },
-            ];
         }
 
         $model = new $class();
@@ -190,9 +176,9 @@ abstract class Controller extends \yii\web\Controller
                 $models = $class::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
-                    foreach ($actions as $postAction => $function) {
+                    foreach ($model->bulkActions as $postAction => $action) {
                         if ($postAction == $post['process-selected']) {
-                            call_user_func($function, $post);
+                            call_user_func($action['function'], $post);
                         }
                     }
                     App::success("Data set to '{$process}'");  

@@ -138,23 +138,7 @@ class IpController extends Controller
 
     public function actionBulkAction()
     {
-        return $this->bulkAction([
-            'active' => function($post) {
-                Ip::activeAll(['id' => $post['selection']]);
-            },
-            'in_active' => function($post) {
-                Ip::inactiveAll(['id' => $post['selection']]);
-            },
-            'delete' => function($post) {
-                Ip::deleteAll(['id' => $post['selection']]);
-            },
-            'white_list' => function($post) {
-                Ip::whitelistAll(['id' => $post['selection']]);
-            },
-            'black_list' => function($post) {
-                Ip::blacklistAll(['id' => $post['selection']]);
-            },
-        ]);
+        return $this->bulkAction();
     }
 
     public function actionPrint()

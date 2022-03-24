@@ -147,11 +147,17 @@ class Ip extends ActiveRecord
             'label' => 'White List',
             'process' => 'white_list',
             'icon' => 'plus',
+            'function' => function($post) {
+                self::whitelistAll(['id' => $post['selection']]);
+            },
         ];
         $getBulkActions['black_list'] = [
             'label' => 'Black List',
             'process' => 'black_list',
             'icon' => 'minus',
+            'function' => function($post) {
+                self::blacklistAll(['id' => $post['selection']]);
+            },
         ];
         return $getBulkActions;
     }

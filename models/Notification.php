@@ -201,16 +201,26 @@ class Notification extends ActiveRecord
                 'label' => 'Read',
                 'process' => 'read',
                 'icon' => 'read',
+                'function' => function($post) {
+                    self::readAll(['id' => $post['selection']]);
+                }
+
             ],
             'unread' => [
                 'label' => 'Un-Read',
                 'process' => 'unread',
                 'icon' => 'in_active',
+                'function' => function($post) {
+                    self::unreadAll(['id' => $post['selection']]);
+                }
             ],
             'delete' => [
                 'label' => 'Delete',
                 'process' => 'delete',
                 'icon' => 'delete',
+                'function' => function($post) {
+                    self::deleteAll(['id' => $post['selection']]);
+                }
             ]
         ];
     }

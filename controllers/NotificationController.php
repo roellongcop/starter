@@ -78,23 +78,7 @@ class NotificationController extends Controller
 
     public function actionBulkAction()
     {
-        return $this->bulkAction([
-            'active' => function($post) {
-                Notification::activeAll(['id' => $post['selection']]);
-            },
-            'in_active' => function($post) {
-                Notification::inactiveAll(['id' => $post['selection']]);
-            },
-            'delete' => function($post) {
-                Notification::deleteAll(['id' => $post['selection']]);
-            },
-            'read' => function($post) {
-                Notification::readAll(['id' => $post['selection']]);
-            },
-            'unread' => function($post) {
-                Notification::unreadAll(['id' => $post['selection']]);
-            },
-        ]);
+        return $this->bulkAction();
     }
 
     public function actionPrint()

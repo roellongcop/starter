@@ -751,11 +751,17 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                     'label' => 'Set as Active',
                     'process' => 'active',
                     'icon' => 'active',
+                    'function' => function($post) {
+                        static::activeAll(['id' => $post['selection']]);
+                    }
                 ],
                 'in_active' => [
                     'label' => 'Set as In-active',
                     'process' => 'in_active',
                     'icon' => 'in_active',
+                    'function' => function($post) {
+                        static::inactiveAll(['id' => $post['selection']]);
+                    }
                 ],
             ];
         }
@@ -765,6 +771,9 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'label' => 'Delete',
                 'process' => 'delete',
                 'icon' => 'delete',
+                'function' => function($post) {
+                    static::deleteAll(['id' => $post['selection']]);
+                }
             ];
         }
         
