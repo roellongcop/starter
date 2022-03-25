@@ -26,9 +26,9 @@ class NotificationSearch extends Notification
     public function rules()
     {
         return [
-            [['id', 'user_id', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'user_id', 'created_by', 'updated_by'], 'integer'],
             [['message', 'link', 'type', 'token', 'created_at', 'updated_at'], 'safe'],
-            [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
+            [['keywords', 'pagination', 'date_range', 'record_status', 'status'], 'safe'],
             [['keywords'], 'trim'],
         ];
     }

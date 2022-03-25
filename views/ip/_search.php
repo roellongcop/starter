@@ -22,7 +22,7 @@ use app\widgets\SearchButton;
     <?= Search::widget(['model' => $model]) ?>
     <?= DateRange::widget(['model' => $model]) ?>
     <?= Filter::widget([
-        'data' => App::mapParams(Ip::TYPES),
+        'data' => App::keyMapParams('ip_types'),
         'title' => 'Type',
         'attribute' => 'type',
         'model' => $model,

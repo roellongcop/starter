@@ -30,7 +30,7 @@ use app\widgets\SearchButton;
         'form' => $form,
     ]) ?>
     <?= Filter::widget([
-        'data' => App::mapParams(User::IS_BLOCKED),
+        'data' => App::keyMapParams('user_block_status'),
         'title' => 'Blocked',
         'attribute' => 'is_blocked',
         'model' => $model,

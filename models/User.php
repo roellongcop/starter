@@ -36,39 +36,8 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-    const STATUS = [
-        0 => [
-            'id' => 0,
-            'label' => 'Archived',
-            'class' => 'danger'
-        ],
-        9 => [
-            'id' => 9,
-            'label' => 'Not Verified',
-            'class' => 'warning'
-        ],
-        10 => [
-            'id' => 10,
-            'label' => 'Active',
-            'class' => 'success'
-        ],
-    ];
-
     const BLOCKED = 1;
     const UNBLOCKED = 0;
-
-    const IS_BLOCKED = [
-        0 => [
-            'id' => 0,
-            'label' => 'Allowed',
-            'class' => 'success'
-        ],
-        1 => [
-            'id' => 1,
-            'label' => 'Blocked',
-            'class' => 'danger'
-        ],
-    ];
 
     const SCENARIO_ADMIN_CREATE = 'admin_create';
 
@@ -333,7 +302,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getUserStatus()
     {
-        return self::STATUS[$this->status];
+        return App::params('user_status')[$this->status];
     }
 
     public function getUserStatusLabel()
@@ -343,7 +312,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getBlockedStatus()
     {
-        return self::IS_BLOCKED[$this->is_blocked];
+        return App::params('user_block_status')[$this->is_blocked];
     }
 
     public function getBlockedStatusLabel()

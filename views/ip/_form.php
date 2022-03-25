@@ -18,7 +18,7 @@ use app\widgets\BootstrapSelect;
 	            'attribute' => 'type',
 	            'model' => $model,
 	            'form' => $form,
-	            'data' => App::mapParams(Ip::TYPES),
+	            'data' => App::keyMapParams('ip_types'),
 	        ]) ?>
 	        <?= ActiveForm::recordStatus([
 	            'model' => $model,

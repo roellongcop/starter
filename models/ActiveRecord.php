@@ -25,19 +25,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
 
-    const RECORDS = [
-        1 => [
-            'id' => 1,
-            'label' => 'Active',
-            'class' => 'success'
-        ],
-        0 => [
-            'id' => 0,
-            'label' => 'In-active',
-            'class' => 'danger'
-        ],
-    ];
-
     public $_startDate;
     public $_endDate;
     public $_createdByEmail;
@@ -55,7 +42,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public static function mapRecords()
     {
-        return ArrayHelper::map(self::RECORDS, 'id', 'label');
+        return App::keyMapParams('record_status');
     }
 
     public function getRelatedModels()
@@ -658,7 +645,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getRecordStatus()
     {
-        return self::RECORDS[$this->record_status];
+        return App::params('record_status')[$this->record_status];
     }
 
     public function getRecordStatusLabel()

@@ -26,20 +26,6 @@ class Ip extends ActiveRecord
     const TYPE_BLACKLIST = 0;
     const TYPE_WHITELIST = 1;
 
-    const TYPES = [
-        0 => [
-            'id' => 0,
-            'label' => 'Black List',
-            'class' => 'success'
-        ],
-        1 => [
-            'id' => 1,
-            'label' => 'White List',
-            'class' => 'danger'
-        ],
-    ];
-
-
     /**
      * {@inheritdoc}
      */
@@ -97,7 +83,7 @@ class Ip extends ActiveRecord
      
     public function getIpType()
     {
-        return self::TYPES[$this->type];
+        return App::params('ip_types')[$this->type];
     }
 
     public function getIpTypeLabel()

@@ -35,7 +35,7 @@ use app\widgets\ImageGallery;
                 'searchable' => false,
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams(User::STATUS),
+                'data' => App::keyMapParams('user_status'),
             ]) ?>
             <?= ActiveForm::recordStatus([
                 'model' => $model,
@@ -46,7 +46,7 @@ use app\widgets\ImageGallery;
                 'searchable' => false,
                 'model' => $model,
                 'form' => $form,
-                'data' => App::mapParams(User::IS_BLOCKED),
+                'data' => App::keyMapParams('user_block_status'),
             ]) ?>
         </div>
         <div class="col-md-7">

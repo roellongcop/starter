@@ -29,27 +29,6 @@ class Notification extends ActiveRecord
     const STATUS_READ = 1;
     const STATUS_UNREAD = 0;
 
-    const STATUS = [
-        0 => [
-            'id' => 0,
-            'label' => 'New',
-            'class' => 'danger'
-        ],
-        1 => [
-            'id' => 1,
-            'label' => 'Read',
-            'class' => 'success'
-        ],
-    ];
-
-    const TYPES = [
-        0 => [
-            'id' => 0,
-            'type' => 'notification_change_password',
-            'label' => 'Password Changed'
-        ]
-    ];
-
     /**
      * {@inheritdoc}
      */
@@ -158,7 +137,7 @@ class Notification extends ActiveRecord
 
     public function getStatusData()
     {
-        return self::STATUS[$this->status];
+        return App::params('notification_status')[$this->status];
     }
 
     public function getStatusHtml()
@@ -244,8 +223,7 @@ class Notification extends ActiveRecord
 
     public function getLabel()
     {
-        $data = ArrayHelper::map(self::TYPES, 'type', 'label');
+        $data = App::keyMapParams('notification_types', 'type', 'label');
         return $data[$this->type];
     }
-    
 }

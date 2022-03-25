@@ -25,7 +25,7 @@ use app\widgets\BootstrapSelect;
                 'label' => 'Action',
                 'model' => $model,
                 'form' => $form,
-                'data' => ArrayHelper::map(VisitLog::ACTIONS, 'id', 'label'),
+                'data' => App::keyMapParams('visit_log_actions'),
             ]) ?>
             <?= ActiveForm::recordStatus([
                 'model' => $model,

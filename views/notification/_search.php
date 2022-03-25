@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\App;
 use app\widgets\DateRange;
 use app\widgets\Filter;
 use app\widgets\Pagination;
@@ -19,6 +20,13 @@ use yii\widgets\ActiveForm;
 ]); ?>
     <?= Search::widget(['model' => $model]) ?>
     <?= DateRange::widget(['model' => $model]) ?>
+    <?= Filter::widget([
+        'data' => App::keyMapParams('notification_status'),
+        'title' => 'Status',
+        'attribute' => 'status',
+        'model' => $model,
+        'form' => $form,
+    ]) ?>
     <?= RecordStatusFilter::widget([
         'model' => $model,
         'form' => $form,

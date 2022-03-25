@@ -535,4 +535,9 @@ class App {
     {
        return ArrayHelper::map($params, $key, $value);
     }
+
+    public static function keyMapParams($paramName, $key='id', $value='label')
+    {
+       return self::mapParams(self::params($paramName), $key, $value);
+    }
 }
