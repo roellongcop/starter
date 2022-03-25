@@ -109,18 +109,18 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function changeRecordStatus($class='')
+    public function changeRecordStatus($function='')
     {
         if (($post = App::post()) != null) {
-            if (! $class) {
-                $class = str_replace('Controller', '', App::className($this));
-            }
 
-            if (! str_contains($class, '\\')) { 
+            if (! $function) {
+                $class = substr(App::className($this), 0, -10);
                 $class = "app\\models\\{$class}";
+                $model = $class::controllerFind($post['id']);
             }
-
-            $model = $class::controllerFind($post['id']);
+            else {
+                $model = call_user_func($function, $post['id']);
+            }
 
             if (!$model) {
                 return $this->asJson([
@@ -156,17 +156,14 @@ abstract class Controller extends \yii\web\Controller
         return $this->asJson($data);
     }
 
-    public function bulkAction($class='')
+    public function bulkAction($model='')
     {
-        if (! $class) {
-            $class = str_replace('Controller', '', App::className($this));
-        }
-
-        if (! str_contains($class, '\\')) { 
+        if (! $model) {
+            $class = substr(App::className($this), 0, -10);
             $class = "app\\models\\{$class}";
+            $model = new $class();
         }
 
-        $model = new $class();
         $post = App::post();
 
         if (isset($post['process-selected'])) {
@@ -178,7 +175,7 @@ abstract class Controller extends \yii\web\Controller
                 if (isset($post['confirm_button'])) {
                     foreach ($model->bulkActions as $postAction => $action) {
                         if ($postAction == $post['process-selected']) {
-                            call_user_func($action['function'], $post);
+                            call_user_func($action['function'], $post['selection']);
                         }
                     }
                     App::success("Data set to '{$process}'");  

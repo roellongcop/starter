@@ -142,24 +142,24 @@ class Ip extends ActiveRecord
 
     public function getBulkActions()
     {
-        $getBulkActions = parent::getBulkActions();
-        $getBulkActions['white_list'] = [
+        $bulkActions = parent::getBulkActions();
+        $bulkActions['white_list'] = [
             'label' => 'White List',
             'process' => 'white_list',
             'icon' => 'plus',
-            'function' => function($post) {
-                self::whitelistAll(['id' => $post['selection']]);
+            'function' => function($id) {
+                self::whitelistAll(['id' => $id]);
             },
         ];
-        $getBulkActions['black_list'] = [
+        $bulkActions['black_list'] = [
             'label' => 'Black List',
             'process' => 'black_list',
             'icon' => 'minus',
-            'function' => function($post) {
-                self::blacklistAll(['id' => $post['selection']]);
+            'function' => function($id) {
+                self::blacklistAll(['id' => $id]);
             },
         ];
-        return $getBulkActions;
+        return $bulkActions;
     }
 
     public function behaviors()

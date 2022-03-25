@@ -196,33 +196,26 @@ class Notification extends ActiveRecord
 
     public function getBulkActions()
     {
-        return [
-            'read' => [
-                'label' => 'Read',
-                'process' => 'read',
-                'icon' => 'read',
-                'function' => function($post) {
-                    self::readAll(['id' => $post['selection']]);
-                }
+        $bulkActions = parent::getBulkActions();
 
-            ],
-            'unread' => [
-                'label' => 'Un-Read',
-                'process' => 'unread',
-                'icon' => 'in_active',
-                'function' => function($post) {
-                    self::unreadAll(['id' => $post['selection']]);
-                }
-            ],
-            'delete' => [
-                'label' => 'Delete',
-                'process' => 'delete',
-                'icon' => 'delete',
-                'function' => function($post) {
-                    self::deleteAll(['id' => $post['selection']]);
-                }
-            ]
+        $bulkActions['read'] = [
+            'label' => 'Read',
+            'process' => 'read',
+            'icon' => 'read',
+            'function' => function($id) {
+                self::readAll(['id' => $id]);
+            }
         ];
+        $bulkActions['unread'] = [
+            'label' => 'Un-Read',
+            'process' => 'unread',
+            'icon' => 'in_active',
+            'function' => function($id) {
+                self::unreadAll(['id' => $id]);
+            }
+        ];
+        
+        return $bulkActions;
     }
 
     public static function readAll($condition='')

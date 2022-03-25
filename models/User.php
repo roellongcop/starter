@@ -592,24 +592,24 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getBulkActions()
     {
-        $getBulkActions = parent::getBulkActions();
-        $getBulkActions['allowed'] = [
+        $bulkActions = parent::getBulkActions();
+        $bulkActions['allowed'] = [
             'label' => 'Allowed',
             'process' => 'allowed',
             'icon' => 'check',
-            'function' => function($post) {
-                self::allowedAll(['id' => $post['selection']]);
+            'function' => function($id) {
+                self::allowedAll(['id' => $id]);
             },
         ];
-        $getBulkActions['blocked'] = [
+        $bulkActions['blocked'] = [
             'label' => 'Blocked',
             'process' => 'blocked',
             'icon' => 'close',
-            'function' => function($post) {
-                self::blockedAll(['id' => $post['selection']]);
+            'function' => function($id) {
+                self::blockedAll(['id' => $id]);
             },
         ];
-        return $getBulkActions;
+        return $bulkActions;
     }
 
     public function can($action, $controller='')
