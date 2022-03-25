@@ -7,7 +7,6 @@ use app\helpers\App;
 use app\models\File;
 use app\models\form\UploadForm;
 use app\models\search\FileSearch;
-use yii\helpers\Inflector;
 use yii\web\UploadedFile;
 /**
  * FileController implements the CRUD actions for File model.

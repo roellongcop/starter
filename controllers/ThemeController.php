@@ -7,7 +7,6 @@ use app\helpers\App;
 use app\models\Theme;
 use app\models\form\user\MySettingForm;
 use app\models\search\ThemeSearch;
-use yii\helpers\Inflector;
 
 /**
  * ThemeController implements the CRUD actions for Theme model.

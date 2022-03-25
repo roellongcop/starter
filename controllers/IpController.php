@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Ip;
 use app\models\search\IpSearch;
-use yii\helpers\Inflector;
 
 /**
  * IpController implements the CRUD actions for Ip model.

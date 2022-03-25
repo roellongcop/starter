@@ -7,7 +7,6 @@ use app\helpers\App;
 use app\models\User;
 use app\models\VisitLog;
 use app\models\search\VisitLogSearch;
-use yii\helpers\Inflector;
 use yii\helpers\ArrayHelper;
 
 /**

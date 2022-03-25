@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Role;
 use app\models\search\RoleSearch;
-use yii\helpers\Inflector;
 
 /**
  * RoleController implements the CRUD actions for Role model.

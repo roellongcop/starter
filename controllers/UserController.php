@@ -10,7 +10,6 @@ use app\models\VisitLog;
 use app\models\form\ChangePasswordForm;
 use app\models\search\UserSearch;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Inflector;
 
 /**
  * UserController implements the CRUD actions for User model.

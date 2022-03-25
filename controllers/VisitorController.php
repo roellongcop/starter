@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Visitor;
 use app\models\search\VisitorSearch;
-use yii\helpers\Inflector;
 
 /**
  * VisitorController implements the CRUD actions for Visitor model.

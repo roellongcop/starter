@@ -8,7 +8,6 @@ use app\jobs\BackupJob;
 use app\models\Backup;
 use app\models\Queue;
 use app\models\search\BackupSearch;
-use yii\helpers\Inflector;
 
 /**
  * BackupController implements the CRUD actions for Backup model.

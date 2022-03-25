@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Log;
 use app\models\search\LogSearch;
-use yii\helpers\Inflector;
 
 /**
  * LogController implements the CRUD actions for Log model.

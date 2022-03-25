@@ -8,7 +8,6 @@ use app\models\User;
 use app\models\UserMeta;
 use app\models\search\UserMetaSearch;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Inflector;
 
 /**
  * UserMetaController implements the CRUD actions for UserMeta model.

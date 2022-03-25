@@ -14,7 +14,6 @@ use app\models\form\setting\NotificationSettingForm;
 use app\models\form\setting\SystemSettingForm;
 use app\models\form\user\MySettingForm;
 use app\models\search\SettingSearch;
-use yii\helpers\Inflector;
 
 /**
  * SettingController implements the CRUD actions for Setting model.

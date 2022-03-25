@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Session;
 use app\models\search\SessionSearch;
-use yii\helpers\Inflector;
 
 /**
  * SessionController implements the CRUD actions for Session model.

@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Notification;
 use app\models\search\NotificationSearch;
-use yii\helpers\Inflector;
 
 /**
  * NotificationController implements the CRUD actions for Notification model.

@@ -6,7 +6,6 @@ use Yii;
 use app\helpers\App;
 use app\models\Queue;
 use app\models\search\QueueSearch;
-use yii\helpers\Inflector;
 
 /**
  * QueueController implements the CRUD actions for Queue model.
