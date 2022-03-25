@@ -95,7 +95,7 @@ class Dropzone extends BaseWidget
             ((is_array($this->model->{$this->attribute}))? '[]': '')
         ]);
 
-        $this->success = "
+        $this->success = $this->success .= "
             $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->inputName}' data-uuid='\"+ file.upload.uuid +\"' type='hidden' value='\"+ s.file.token +\"'> \");
         ";
 
