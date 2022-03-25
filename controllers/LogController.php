@@ -86,27 +86,27 @@ class LogController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new LogSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new LogSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new LogSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new LogSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new LogSearch());
+        return $this->exportXlsx();
     }
 
     public function actionInActiveData()

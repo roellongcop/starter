@@ -185,27 +185,27 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
 
     public function actionPrint()
     {
-        return $this->exportPrint(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>());
+        return $this->exportXlsx();
     }
 
     public function actionInActiveData()

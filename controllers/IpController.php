@@ -142,27 +142,27 @@ class IpController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new IpSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new IpSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new IpSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new IpSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new IpSearch());
+        return $this->exportXlsx();
     }
 
     public function actionInActiveData()

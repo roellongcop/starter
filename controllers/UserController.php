@@ -153,27 +153,27 @@ class UserController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new UserSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new UserSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new UserSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new UserSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new UserSearch());
+        return $this->exportXlsx();
     }
 
     public function actionMyPassword($token='')

@@ -137,27 +137,27 @@ class BackupController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new BackupSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new BackupSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new BackupSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new BackupSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new BackupSearch());
+        return $this->exportXlsx();
     }
 
     public function actionRestore($slug)

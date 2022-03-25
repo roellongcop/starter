@@ -53,8 +53,9 @@ abstract class Controller extends \yii\web\Controller
         return $behaviors;
     }
 
-    public function exportPrint($searchModel)
+    public function exportPrint($searchModel='')
     {
+        $searchModel = $searchModel ?: $this->searchModelObject();
         return $this->render('/layouts/_print', [
             'content' => ExportContent::widget([
                 'file' => 'pdf',
@@ -63,8 +64,9 @@ abstract class Controller extends \yii\web\Controller
         ]);
     }
 
-    public function exportPdf($searchModel)
+    public function exportPdf($searchModel='')
     {
+        $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportPdfForm([
             'content' => ExportContent::widget([
                 'file' => 'pdf',
@@ -74,8 +76,9 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function exportCsv($searchModel)
+    public function exportCsv($searchModel='')
     {
+        $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportCsvForm([
             'content' => ExportContent::widget([
                 'file' => 'excel',
@@ -85,8 +88,9 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function exportXlsx($searchModel)
+    public function exportXlsx($searchModel='')
     {
+        $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportExcelForm([
             'content' => ExportContent::widget([
                 'file' => 'excel',
@@ -97,8 +101,9 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function exportXls($searchModel)
+    public function exportXls($searchModel='')
     {
+        $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportExcelForm([
             'content' => ExportContent::widget([
                 'file' => 'excel',
@@ -109,14 +114,25 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
+    protected function modelObject()
+    {
+        $class = substr(App::className($this), 0, -10);
+        return Yii::createObject("app\\models\\{$class}");
+    }
+
+    protected function searchModelObject()
+    {
+        $class = substr(App::className($this), 0, -10);
+        return Yii::createObject("app\\models\\search\\{$class}Search");
+    }
+
     public function changeRecordStatus($function='')
     {
         if (($post = App::post()) != null) {
 
             if (! $function) {
-                $class = substr(App::className($this), 0, -10);
-                $class = "app\\models\\{$class}";
-                $model = $class::controllerFind($post['id']);
+                $obj = $this->modelObject();
+                $model = $obj::controllerFind($post['id']);
             }
             else {
                 $model = call_user_func($function, $post['id']);
@@ -158,11 +174,7 @@ abstract class Controller extends \yii\web\Controller
 
     public function bulkAction($model='')
     {
-        if (! $model) {
-            $class = substr(App::className($this), 0, -10);
-            $class = "app\\models\\{$class}";
-            $model = new $class();
-        }
+        $model = $model ?: $this->modelObject();
 
         $post = App::post();
 
@@ -170,7 +182,7 @@ abstract class Controller extends \yii\web\Controller
             $process = Inflector::humanize($post['process-selected']);
             if (isset($post['selection'])) {
 
-                $models = $class::all($post['selection']);
+                $models = $model::all($post['selection']);
 
                 if (isset($post['confirm_button'])) {
                     foreach ($model->bulkActions as $postAction => $action) {

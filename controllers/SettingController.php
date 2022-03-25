@@ -109,27 +109,27 @@ class SettingController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new SettingSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new SettingSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new SettingSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new SettingSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new SettingSearch());
+        return $this->exportXlsx();
     }
 
     public function actionMySetting()

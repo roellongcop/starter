@@ -82,27 +82,27 @@ class NotificationController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new NotificationSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new NotificationSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new NotificationSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new NotificationSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new NotificationSearch());
+        return $this->exportXlsx();
     }
 
     public function actionInActiveData()

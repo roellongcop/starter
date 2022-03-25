@@ -87,27 +87,27 @@ class SessionController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new SessionSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new SessionSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new SessionSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new SessionSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new SessionSearch());
+        return $this->exportXlsx();
     }
 
     public function actionInActiveData()

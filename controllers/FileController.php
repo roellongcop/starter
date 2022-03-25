@@ -163,27 +163,27 @@ class FileController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new FileSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new FileSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new FileSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new FileSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new FileSearch());
+        return $this->exportXlsx();
     }
 
     public function actionUpload()

@@ -80,27 +80,27 @@ class QueueController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new QueueSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new QueueSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new QueueSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new QueueSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new QueueSearch());
+        return $this->exportXlsx();
     }
 
     public function actionInActiveData()

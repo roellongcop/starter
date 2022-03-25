@@ -148,27 +148,27 @@ class UserMetaController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new UserMetaSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new UserMetaSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new UserMetaSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new UserMetaSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new UserMetaSearch());
+        return $this->exportXlsx();
     }
 
     public function actionFilter()

@@ -152,27 +152,27 @@ class ThemeController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new ThemeSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new ThemeSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new ThemeSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new ThemeSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new ThemeSearch());
+        return $this->exportXlsx();
     }
 
     public function actionActivate($slug)

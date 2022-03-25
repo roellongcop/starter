@@ -80,27 +80,27 @@ class VisitLogController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new VisitLogSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new VisitLogSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new VisitLogSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new VisitLogSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new VisitLogSearch());
+        return $this->exportXlsx();
     }
 
     public function actionInActiveData()

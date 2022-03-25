@@ -158,27 +158,27 @@ class RoleController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new RoleSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new RoleSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new RoleSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new RoleSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new RoleSearch());
+        return $this->exportXlsx();
     }
 
     public function actionMyRole()

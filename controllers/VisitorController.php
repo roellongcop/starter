@@ -88,27 +88,27 @@ class VisitorController extends Controller
 
     public function actionPrint()
     {
-        return $this->exportPrint(new VisitorSearch());
+        return $this->exportPrint();
     }
 
     public function actionExportPdf()
     {
-        return $this->exportPdf(new VisitorSearch());
+        return $this->exportPdf();
     }
 
     public function actionExportCsv()
     {
-        return $this->exportCsv(new VisitorSearch());
+        return $this->exportCsv();
     }
 
     public function actionExportXls()
     {
-        return $this->exportXls(new VisitorSearch());
+        return $this->exportXls();
     }
 
     public function actionExportXlsx()
     {
-        return $this->exportXlsx(new VisitorSearch());
+        return $this->exportXlsx();
     }
 
     public function actionInActiveData()
