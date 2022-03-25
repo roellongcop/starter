@@ -133,8 +133,23 @@ $this->registerJs(<<< JS
         imgName.text($(this).data('name'));
         imgExt.text($(this).data('extension'));
         imgSize.text($(this).data('size'));
-        imgWidth.text($(this).data('width') + 'px');
-        imgHeight.text($(this).data('height') + 'px');
+
+        if($(this).data('width')) {
+            imgWidth.closest('tr').show();
+            imgWidth.text($(this).data('width') + 'px');
+        }
+        else {
+            imgWidth.closest('tr').hide();
+        }
+
+        if($(this).data('height')) {
+            imgHeight.closest('tr').show();
+            imgHeight.text($(this).data('height') + 'px');
+        }
+        else {
+            imgHeight.closest('tr').hide();
+        }
+
         imgLocation.text($(this).data('location'));
         imgToken.text($(this).data('token'));
         imgCreatedAt.text($(this).data('created_at'));
