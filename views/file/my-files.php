@@ -207,7 +207,7 @@ CSS);
                 'class' => 'form-control search-photo',
                 'placeholder' => 'Search File',
             ]),
-            'url' => Url::to(['file/find-by-keyword'])
+            'url' => Url::to(['file/find-by-keywords'])
         ]) ?>
         <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
             <?= $this->render('my-files-ajax', [
