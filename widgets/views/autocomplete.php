@@ -112,6 +112,16 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 			}
 		}, 1000));
 
+		inp.addEventListener("input", function(e) {
+			if(this.value) {
+				this.classList.add("typing");
+				closeAllLists();
+			}
+			else {
+				this.classList.remove("typing");
+			}
+		});
+
 		/*execute a function presses a key on the keyboard:*/
 		inp.addEventListener("keydown", function(e) {
 			var x = document.getElementById(this.id + "autocomplete-list");
@@ -137,15 +147,6 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 					/*and simulate a click on the "active" item:*/
 					if (x) x[currentFocus].click();
 				}
-			} 
-			else if (e.keyCode == 39) {}
-			else if (e.keyCode == 37) {}
-			else if (e.keyCode == 8 && this.value.length == 1) {
-				this.classList.remove("typing");
-			}
-			else {
-				this.classList.add("typing");
-				closeAllLists();
 			}
 		});
 		function addActive(x) {
