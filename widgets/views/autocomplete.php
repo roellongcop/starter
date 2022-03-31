@@ -110,7 +110,7 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 					createSuggestion(inp, a, val, {$data});
 				}
 			}
-		}, 1000));
+		}, 500));
 
 		inp.addEventListener("input", function(e) {
 			if(this.value) {
