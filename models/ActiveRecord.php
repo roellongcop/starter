@@ -881,6 +881,23 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return App::formatter()->asDateToTimezone($date, 'F d, Y');
     }
 
+    public static function findByKeywordsData($attributes, $function)
+    {
+        $data = [];
+        foreach ($attributes as $attribute) {
+
+            $models = call_user_func($function, $attribute);
+
+            $data = array_merge($data, array_values(ArrayHelper::map($models, 'data', 'data')));
+        }
+
+        $data = array_values(array_unique(array_map('trim', $data)));
+        
+        sort($data);
+
+        return $data;
+    }
+
     public static function findByKeywords($keywords='', $attributes, $limit=10)
     {
         $data = [];
@@ -890,8 +907,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             ));
         }
 
-        $data = array_unique($data);
-        $data = array_values($data);
+        $data = array_values(array_unique(array_map('trim', $data)));
         
         sort($data);
 

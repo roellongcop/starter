@@ -323,22 +323,12 @@ class File extends ActiveRecord
 
     public static function findByKeywordsImage($keywords='', $attributes, $limit=3)
     {
-        $data = [];
-        foreach ($attributes as $attribute) {
-            $data = array_merge($data, array_values(
-                self::filter($attribute, ['and',
-                    ['LIKE', $attribute, $keywords],
-                    ['extension' => self::EXTENSIONS['image']],
-                ], 3)
-            ));
-        }
-
-        $data = array_unique($data);
-        $data = array_values($data);
-        
-        sort($data);
-
-        return $data;
+        return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit) {
+            return self::filter($attribute, ['and',
+                ['LIKE', $attribute, $keywords],
+                ['extension' => self::EXTENSIONS['image']],
+            ], 3)
+        });
     }
 
     public function getMimeType()

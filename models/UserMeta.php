@@ -128,10 +128,8 @@ class UserMeta extends ActiveRecord
 
     public static function findByKeywords($keywords='', $attributes, $limit=10)
     {
-        $data = [];
-        foreach ($attributes as $attribute) {
-
-            $models = self::find()
+        return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit) {
+            return self::find()
                 ->select("{$attribute} AS data")
                 ->alias('um')
                 ->joinWith('user u')
@@ -140,15 +138,6 @@ class UserMeta extends ActiveRecord
                 ->limit($limit)
                 ->asArray()
                 ->all();
-
-            $data = array_merge($data, array_values(ArrayHelper::map($models, 'data', 'data')));
-        }
-
-        $data = array_unique($data);
-        $data = array_values($data);
-        
-        sort($data);
-
-        return $data;
+        });
     }
 }
