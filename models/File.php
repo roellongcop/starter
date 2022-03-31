@@ -324,10 +324,14 @@ class File extends ActiveRecord
     public static function findByKeywordsImage($keywords='', $attributes, $limit=3)
     {
         return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit) {
-            return self::filter($attribute, ['and',
-                ['LIKE', $attribute, $keywords],
-                ['extension' => self::EXTENSIONS['image']],
-            ], 3)
+            return self::find()
+                ->select("{$attribute} AS data")
+                ->groupBy($attribute)
+                ->where(['LIKE', $attribute, $keywords])
+                ->andWhere(['extension' => self::EXTENSIONS['image']])
+                ->limit($limit)
+                ->asArray()
+                ->all();
         });
     }
 
