@@ -1,6 +1,7 @@
 <?php
 
 $this->registerCss(<<< CSS
+	
 	/*the container must be positioned relative:*/
 	.autocomplete {
 		position: relative;
@@ -46,46 +47,71 @@ $this->registerCss(<<< CSS
 		background-color: DodgerBlue !important; 
 		color: #ffffff !important; 
 	}
+
+	.autocomplete input.typing {
+		background: url(/default/loading.gif) no-repeat right center !important;
+	}
 CSS, [], 'autocomplete');
 
 $this->registerWidgetJs($widgetFunction, <<< JS
+	var ignoreKeys = [
+		37, // left arrow key
+		38, // up arrow key
+		39, // right arrow key
+		40, // down arrow key
+		38, // backspace
+	];
+
 	function autocomplete(inp) {
+		function debounce(callback, wait) {
+			let timeout;
+			return (...args) => {
+				clearTimeout(timeout);
+				timeout = setTimeout(function () { callback.apply(this, args); }, wait);
+			};
+		}
+
 		/*the autocomplete function takes two arguments,
 		the text field element and an array of possible autocompleted values:*/
 		var currentFocus;
 		/*execute a function when someone writes in the text field:*/
-		inp.addEventListener("input", function(e) {
-			var a, b, i, val = this.value;
-			/*close any already open lists of autocompleted values*/
-			closeAllLists();
-			if (!val) { return false;}
-			currentFocus = -1;
-			/*create a DIV element that will contain the items (values):*/
-			a = document.createElement("DIV");
-			a.setAttribute("id", this.id + "autocomplete-list");
-			a.setAttribute("class", "autocomplete-items");
-			/*append the DIV element as a child of the autocomplete container:*/
-			this.parentNode.appendChild(a);
-			/*for each item in the array...*/
+		 
+		inp.addEventListener('keyup', debounce( (e) => {
+			if(! ignoreKeys.includes(e.keyCode)) {
 
-			if ({$ajax}) {
-				$.ajax({
-					url: '{$url}',
-					method: 'get',
-					data: {keywords: val},
-					dataType: 'json',
-					success: function(s) {
-						createSuggestion(inp, a, val, s);
-					},
-					error: function(e) {
-						console.log(e);
-					}
-				})
+				var a, b, i, val = inp.value;
+				/*close any already open lists of autocompleted values*/
+				closeAllLists();
+				if (!val) { return false;}
+				currentFocus = -1;
+				/*create a DIV element that will contain the items (values):*/
+				a = document.createElement("DIV");
+				a.setAttribute("id", inp.id + "autocomplete-list");
+				a.setAttribute("class", "autocomplete-items");
+				/*append the DIV element as a child of the autocomplete container:*/
+				inp.parentNode.appendChild(a);
+				/*for each item in the array...*/
+				if ({$ajax}) {
+					$.ajax({
+						url: '{$url}',
+						method: 'get',
+						data: {keywords: val},
+						dataType: 'json',
+						success: function(s) {
+							createSuggestion(inp, a, val, s);
+						},
+						error: function(e) {
+							console.log(e);
+						}
+					})
+					inp.classList.remove("typing");
+				}
+				else {
+					createSuggestion(inp, a, val, {$data});
+				}
 			}
-			else {
-				createSuggestion(inp, a, val, {$data});
-			}
-		});
+		}, 1000));
+
 		/*execute a function presses a key on the keyboard:*/
 		inp.addEventListener("keydown", function(e) {
 			var x = document.getElementById(this.id + "autocomplete-list");
@@ -96,19 +122,30 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 				currentFocus++;
 				/*and and make the current item more visible:*/
 				addActive(x);
-			} else if (e.keyCode == 38) { //up
+			} 
+			else if (e.keyCode == 38) { //up
 				/*If the arrow UP key is pressed,
 				decrease the currentFocus variable:*/
 				currentFocus--;
 				/*and and make the current item more visible:*/
 				addActive(x);
-			} else if (e.keyCode == 13) {
+			} 
+			else if (e.keyCode == 13) {
 				/*If the ENTER key is pressed, prevent the form from being submitted,*/
 				// e.preventDefault();
 				if (currentFocus > -1) {
 					/*and simulate a click on the "active" item:*/
 					if (x) x[currentFocus].click();
 				}
+			} 
+			else if (e.keyCode == 39) {}
+			else if (e.keyCode == 37) {}
+			else if (e.keyCode == 8 && this.value.length == 1) {
+				this.classList.remove("typing");
+			}
+			else {
+				this.classList.add("typing");
+				closeAllLists();
 			}
 		});
 		function addActive(x) {
