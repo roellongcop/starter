@@ -23,7 +23,7 @@ $js = <<< JS
         options = {
             minContainerWidth: 400,
             minContainerHeight: 400,
-            viewMode: 3,
+            // viewMode: 3,
             aspectRatio: finalAspectRatio,
             zoomable: true,
             dragMode: 'move',
