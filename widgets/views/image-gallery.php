@@ -17,9 +17,16 @@ $js = <<< JS
         },
         rotate = 0,
         image = document.getElementById('cropper-image-{$id}'),
+        finalCropWidth = 500,
+        finalCropHeight = 500,
+        finalAspectRatio = finalCropWidth / finalCropHeight,
         options = {
             minContainerWidth: 400,
             minContainerHeight: 400,
+            viewMode: 3,
+            aspectRatio: finalAspectRatio,
+            zoomable: true,
+            dragMode: 'move',
         },
         cropper = new Cropper(image, options),
 
