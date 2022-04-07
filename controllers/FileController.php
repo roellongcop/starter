@@ -5,8 +5,10 @@ namespace app\controllers;
 use Yii;
 use app\helpers\App;
 use app\models\File;
+use app\models\form\FileForm;
 use app\models\form\UploadForm;
 use app\models\search\FileSearch;
+use app\widgets\ActiveForm;
 use yii\web\UploadedFile;
 /**
  * FileController implements the CRUD actions for File model.
@@ -274,6 +276,7 @@ class FileController extends Controller
         $data = [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => new FileForm()
         ];
 
         if (App::isAjax()) {
@@ -281,5 +284,32 @@ class FileController extends Controller
         }
 
         return $this->render('my-files', $data); 
+    }
+
+    public function actionRename()
+    {
+        $model = new FileForm();
+        if ($model->load(App::post())) {
+            if (App::get('ajaxValidate')) {
+                return $this->asJson(ActiveForm::validate($model));
+            }
+            if ($model->rename()) {
+                return $this->asJson([
+                    'status' => 'success',
+                    'message' => 'File renamed.',
+                    'model' => $model
+                ]);
+            }
+            else {
+                return $this->asJson([
+                    'status' => 'failed',
+                    'error' => $model->errors
+                ]);
+            }
+        }
+        return $this->asJson([
+            'status' => 'failed',
+            'error' => 'No post data'
+        ]);
     }
 }

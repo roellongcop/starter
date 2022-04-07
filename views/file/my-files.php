@@ -3,8 +3,9 @@
 use app\helpers\Html;
 use app\helpers\Url;
 use app\models\search\FileSearch;
-use yii\widgets\Pjax;
+use app\widgets\ActiveForm;
 use app\widgets\Autocomplete;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\File */
@@ -128,9 +129,12 @@ $this->registerJs(<<< JS
         }
     });
     $(document).on('click', imageContainer, function() {
+        $('#fileform-name').val($(this).attr('data-name'));
+        $('#fileform-token').val($(this).data('token'));
+
         selectedFile = $(this).data('id');
         selectedToken = $(this).data('token');
-        imgName.text($(this).data('name'));
+        imgName.text($(this).attr('data-name'));
         imgExt.text($(this).data('extension'));
         imgSize.text($(this).data('size'));
 
@@ -158,15 +162,21 @@ $this->registerJs(<<< JS
             actionButtons += 'Download';
             actionButtons += '</a>';
             if($(this).data('can-delete')) {
-                actionButtons += '<a href="#" class="btn btn-danger btn-sm btn-remove-file">';
-                actionButtons += 'Remove';
-                actionButtons += '</a>';
+                actionButtons += '&nbsp; <a href="#" class="btn btn-danger btn-sm btn-remove-file"> Remove </a>';
             }
+
+            actionButtons += '&nbsp; <a href="#" class="btn btn-secondary btn-sm btn-rename-file" data-toggle="modal" data-target="#modal-rename-file"> Rename </a>';
         imgActionBtn.html(actionButtons);
         $(imageContainer).css('outline', '');
         $(this).css('outline', '2px solid #1bc5bd');
+        $(imageContainer).removeClass('selected-container');
+        $(this).addClass('selected-container');
         showActionButton();
     }); 
+
+    $('#modal-rename-file').on('shown.bs.modal', function () {
+        $('#fileform-name').focus();
+    })
 
     $(document).on("pjax:beforeSend",function(){
         KTApp.block('#my-files .my-photos', {
@@ -185,6 +195,53 @@ $this->registerJs(<<< JS
         }
     });
     hideActionButton();
+
+
+    $('#file-rename-form').on('beforeSubmit', function(e) {
+        e.preventDefault();
+
+        let form = $(this);
+        KTApp.block('#modal-rename-file .modal-body', {
+            state: 'warning', // a bootstrap color
+            message: 'Saving...',
+        });
+
+        let conf = {
+            url: form.attr('action'),
+            method: form.attr('method'),
+            dataType: 'json',
+            data: form.serialize(),
+            success: function(s) {
+                if(s.status == 'success') {
+                    Swal.fire({
+                        icon: "success",
+                        title: s.message,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                    $('.selected-container').next('p').text(s.model.name);
+                    $('.selected-container').attr('data-name', s.model.name);
+                    $('#td-name').text(s.model.name);
+                    $('#modal-rename-file').modal('hide');
+                    form[0].reset();
+                    $('#fileform-name').val(s.model.name);
+                    $('#fileform-token').val(s.model.token);
+                }
+                else {
+                    Swal.fire("Warning", s.error, "warning");
+                    form[0].reset();
+                }
+                KTApp.unblock('#modal-rename-file .modal-body');
+            },
+            error: function(e) {
+                 Swal.fire("Error", e.responseText, "error");
+                KTApp.unblock('#modal-rename-file .modal-body');
+            }
+        };
+
+        $.ajax(conf);
+        return false;
+    });
 JS);
 
 $this->registerCss(<<< CSS
@@ -257,5 +314,37 @@ CSS);
                 </tr>
             </tbody>
         </table>
+
+        
     </div>
 </div>
+ 
+<!-- Modal-->
+<div class="modal fade" id="modal-rename-file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rename File</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php $form = ActiveForm::begin([
+                    'id' => 'file-rename-form',
+                    'enableAjaxValidation' => true,
+                    'action' => ['file/rename'],
+                    'validationUrl' => ['file/rename', 'ajaxValidate' => true]
+                ]); ?>
+                    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'token')->hiddenInput()->label(false) ?>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                    </div>
+                <?php ActiveForm::end(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+ 
