@@ -28,9 +28,9 @@ class KeenDemo1AppAsset extends AssetBundle
         'css/demo1.css'
     ];
     public $js = [
+        'plugins/custom/cropper/cropper.bundle.js',
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        'plugins/custom/cropper/cropper.bundle.js',
         'js/demo1.js'
     ];
     public $depends = [

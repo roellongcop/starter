@@ -18,6 +18,7 @@ class KeenDemo1NoAsideDarkAppAsset extends AssetBundle
     public $sourcePath = '@app/themes/keen/sub/demo1/main/assets/assets';
     public $css = [
         'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700',
+        'plugins/custom/cropper/cropper.bundle.css',
         'plugins/custom/prismjs/prismjs.bundle.css',
         'css/style.bundle.css',
         'css/themes/layout/header/base/dark.css',
@@ -26,9 +27,9 @@ class KeenDemo1NoAsideDarkAppAsset extends AssetBundle
         'css/themes/layout/aside/dark.css',
     ];
     public $js = [
+        'plugins/custom/cropper/cropper.bundle.js',
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        'plugins/custom/draggable/draggable.bundle.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

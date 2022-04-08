@@ -26,13 +26,11 @@ class KeenDemo1DarkAppAsset extends AssetBundle
         'css/themes/layout/aside/dark.css',
         'css/themes/layout/header/base/dark.css',
         'css/themes/layout/header/menu/dark.css',
-        'css/starter.css'
     ];
     public $js = [
+        'plugins/custom/cropper/cropper.bundle.js',
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        'plugins/custom/draggable/draggable.bundle.js',
-        'js/starter.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

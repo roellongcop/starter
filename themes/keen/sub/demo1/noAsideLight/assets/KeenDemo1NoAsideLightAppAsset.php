@@ -19,6 +19,7 @@ class KeenDemo1NoAsideLightAppAsset extends AssetBundle
     
     public $css = [
         'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700',
+        'plugins/custom/cropper/cropper.bundle.css',
         'plugins/custom/prismjs/prismjs.bundle.css',
         'css/style.bundle.css',
         'css/themes/layout/header/base/light.css',
@@ -27,9 +28,9 @@ class KeenDemo1NoAsideLightAppAsset extends AssetBundle
         'css/themes/layout/aside/dark.css',
     ];
     public $js = [
+        'plugins/custom/cropper/cropper.bundle.js',
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        'plugins/custom/draggable/draggable.bundle.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
