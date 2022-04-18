@@ -16,7 +16,7 @@ class m210524_104252_create_notifications_table extends \app\migrations\Migratio
     public function safeUp()
     {
         $this->createTable($this->tableName(), $this->attributes([
-            'user_id' => $this->bigInteger(20)->notNull(),
+            'user_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'message' => $this->text(),
             'link' => $this->text(),
             'type' => $this->string(128)->notNull(),

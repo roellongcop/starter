@@ -16,8 +16,8 @@ class m200913_060425_create_logs_table extends \app\migrations\Migration
     public function safeUp()
     {
         $this->createTable($this->tableName(), $this->attributes([
-            'user_id' => $this->bigInteger(20)->notNull(),
-            'model_id' => $this->bigInteger(20)->notNull(),
+            'user_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
+            'model_id' => $this->bigInteger(20)->notNull()->defaultValue(0),
             'request_data' => $this->text(),
             'change_attribute' => $this->text(),
             'method' => $this->string(32)->notNull(),
