@@ -3,6 +3,7 @@
 namespace app\models\form\setting;
 
 use Yii;
+use app\helpers\App;
 
 class SystemSettingForm extends SettingForm
 {
@@ -28,6 +29,12 @@ class SystemSettingForm extends SettingForm
 	        [['timezone',], 'string'],
 	        [['whitelist_ip_only', 'enable_visitor'], 'safe'],
 	        [['pagination', 'auto_logout_timer', 'theme', 'whitelist_ip_only', 'enable_visitor'], 'integer'],
+
+	        ['pagination', 'in', 'range' => array_keys(App::params('pagination'))],
+	        ['whitelist_ip_only', 'in', 'range' => array_keys(App::params('whitelist_ip_only'))],
+	        ['enable_visitor', 'in', 'range' => array_keys(App::params('enable_visitor'))],
+	        ['theme', 'exist', 'targetClass' => 'app\models\Theme', 'targetAttribute' => 'id'],
+	        ['timezone', 'in', 'range' => array_keys(App::component('general')->timezoneList())],
         ];
     }
 
@@ -48,7 +55,7 @@ class SystemSettingForm extends SettingForm
             ],
             'theme' => [
                 'name' => 'theme',
-                'default' => 1,
+                'default' => 2,
             ],
             'whitelist_ip_only' => [
                 'name' => 'whitelist_ip_only',
