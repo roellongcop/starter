@@ -176,7 +176,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public static function activeAll($condition = '')
     {
         $models = static::findAll($condition);
-        $result = static::updateAll(['record_status' => 1], $condition);
+        $result = static::updateAll(['record_status' => self::RECORD_ACTIVE], $condition);
 
         Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
 
@@ -186,7 +186,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public static function inactiveAll($condition = '')
     {
         $models = static::findAll($condition);
-        $result = static::updateAll(['record_status' => 0], $condition);
+        $result = static::updateAll(['record_status' => self::RECORD_INACTIVE], $condition);
 
         Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
         
