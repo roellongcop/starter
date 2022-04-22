@@ -5,7 +5,7 @@ use app\widgets\ActiveForm;
 use app\widgets\ImageGallery;
 ?>
 <?php $form = ActiveForm::begin(['id' => 'setting-general-image-form']); ?>
-	<p class="lead">Images</p>
+    <h4 class="mb-10 font-weight-bold text-dark">Images</h4>
 	<div class="row">
 		<div class="col-md-4">
             <p class="text-warning">Primary Logo</p>

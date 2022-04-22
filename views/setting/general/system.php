@@ -6,7 +6,7 @@ use app\widgets\BootstrapSelect;
 use app\widgets\ActiveForm;
 ?>
 <?php $form = ActiveForm::begin(['id' => 'setting-general-notification-form']); ?>
-	<p class="lead">System</p>
+    <h4 class="mb-10 font-weight-bold text-dark">System</h4>
 	<div class="row">
 		<div class="col-md-4">
 			<?= BootstrapSelect::widget([

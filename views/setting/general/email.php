@@ -3,7 +3,7 @@
 use app\widgets\ActiveForm;
 ?>
 <?php $form = ActiveForm::begin(['id' => 'setting-general-email-form']); ?>
-	<p class="lead">Email</p>
+    <h4 class="mb-10 font-weight-bold text-dark">Email</h4>
 	<div class="row">
 		<div class="col-md-4">
 			<?= $form->field($model, 'admin_email')->textInput(['maxlength' => true]) ?>
