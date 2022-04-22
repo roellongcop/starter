@@ -66,50 +66,71 @@ $access = App::component('access');
 					<!--end::Header-->
 					<!--begin::Nav-->
 					<div class="navi navi-spacer-x-0 pt-5">
-						<?= Html::a(
-							'<div class="navi-link">
-								<div class="navi-icon mr-2">
-									<i class="flaticon2-calendar-3 text-success"></i>
+						<?= Html::a(<<< HTML
+								<div class="navi-link">
+									<div class="navi-icon mr-2">
+										<i class="flaticon2-calendar-3 text-success"></i>
+									</div>
+									<div class="navi-text">
+										<div class="font-weight-bold">My Profile</div>
+										<div class="text-muted">Account settings and more
+										<span class="label label-light-danger label-inline font-weight-bold">update</span></div>
+									</div>
 								</div>
-								<div class="navi-text">
-									<div class="font-weight-bold">My Profile</div>
-									<div class="text-muted">Account settings and more
-									<span class="label label-light-danger label-inline font-weight-bold">update</span></div>
-								</div>
-							</div>', 
-							['user/my-account'], 
-							['class' => 'navi-item px-8']
+							HTML, ['user/my-account'], ['class' => 'navi-item px-8']
 						) ?>
 
-						<?= Html::a('<div class="navi-link">
-							<div class="navi-icon mr-2">
-								<i class="flaticon2-mail text-warning"></i>
-							</div>
-							<div class="navi-text">
-								<div class="font-weight-bold">My Password</div>
-								<div class="text-muted">Change Password</div>
-							</div>
-						</div>', ['user/my-password'], ['class' => 'navi-item px-8']) ?>
+						<?= Html::a(<<< HTML
+								<div class="navi-link">
+									<div class="navi-icon mr-2">
+										<i class="fa fa-lock text-info"></i>
+									</div>
+									<div class="navi-text">
+										<div class="font-weight-bold">My Password</div>
+										<div class="text-muted">Change Password</div>
+									</div>
+								</div>
+							HTML, ['user/my-password'], ['class' => 'navi-item px-8']
+						) ?>
 
-						<?= Html::a('<div class="navi-link">
-							<div class="navi-icon mr-2">
-								<i class="flaticon2-rocket-1 text-danger"></i>
-							</div>
-							<div class="navi-text">
-								<div class="font-weight-bold">My Settings</div>
-                    			<div class="text-muted">General & Themes</div>
-							</div>
-						</div>', ['setting/my-setting'], ['class' => 'navi-item px-8']) ?>
+						<?= Html::a(<<< HTML
+								<div class="navi-link">
+									<div class="navi-icon mr-2">
+										<i class="fa fa-file text-warning"></i>
+									</div>
+									<div class="navi-text">
+										<div class="font-weight-bold">My Files</div>
+										<div class="text-muted">File Manager</div>
+									</div>
+								</div>
+							HTML, ['file/my-files'], ['class' => 'navi-item px-8']
+						) ?>
 
-						<?= Html::a('<div class="navi-link">
-							<div class="navi-icon mr-2">
-								<i class="flaticon2-hourglass text-primary"></i>
-							</div>
-							<div class="navi-text">
-                    			<div class="font-weight-bold">My Role</div>
-                    			<div class="text-muted">Access and Navigations</div>
-							</div>
-						</div>', ['role/my-role'], ['class' => 'navi-item px-8']) ?>
+						<?= Html::a(<<< HTML
+								<div class="navi-link">
+									<div class="navi-icon mr-2">
+										<i class="flaticon2-rocket-1 text-danger"></i>
+									</div>
+									<div class="navi-text">
+										<div class="font-weight-bold">My Settings</div>
+										<div class="text-muted">General & Themes</div>
+									</div>
+								</div>
+							HTML, ['setting/my-setting'], ['class' => 'navi-item px-8']
+						) ?>
+
+						<?= Html::a(<<< HTML
+								<div class="navi-link">
+									<div class="navi-icon mr-2">
+										<i class="flaticon2-hourglass text-primary"></i>
+									</div>
+									<div class="navi-text">
+										<div class="font-weight-bold">My Role</div>
+										<div class="text-muted">Access and Navigations</div>
+									</div>
+								</div>
+							HTML, ['role/my-role'], ['class' => 'navi-item px-8']
+						) ?>
  
 						<!--begin::Footer-->
 						<div class="navi-separator mt-3"></div>
