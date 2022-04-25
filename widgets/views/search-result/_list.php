@@ -1,7 +1,6 @@
 <?php
 use app\helpers\App;
 use app\widgets\Anchors;
-use app\widgets\Detail;
 ?>
 <div class="card">
 	<div class="card-header">
@@ -26,7 +25,7 @@ use app\widgets\Detail;
 			    	'model' => $model,
 			    ]) ?> 
 			</p>
-			<?= Detail::widget(['model' => $model]) ?>
+			<?= $model->detailView ?>
 		</div>
 	</div>
 </div>
