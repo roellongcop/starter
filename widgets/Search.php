@@ -24,6 +24,7 @@ class Search extends BaseWidget
 
         $this->options['class'] = $this->getClass();
         $this->options['name'] = $this->getInputName();
+        $this->options['autofocus'] = true;
     }
 
     public function getInputName()
