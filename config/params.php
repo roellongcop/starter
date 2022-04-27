@@ -30,5 +30,13 @@ return [
     'visit_log_actions' => [
         0 => ['id' => 0, 'label' => 'Login', 'class' => 'success'],
         1 => ['id' => 1, 'label' => 'Logout', 'class' => 'danger'],
-    ]
+    ],
+    'whitelist_ip_only' => [
+        0 => ['id' => 0, 'label' => 'All', 'class' => 'danger'],
+        1 => ['id' => 1, 'label' => 'Whitelist Only', 'class' => 'success'],
+    ],
+    'enable_visitor' => [
+        0 => ['id' => 0, 'label' => 'Disable', 'class' => 'danger'],
+        1 => ['id' => 1, 'label' => 'Enable (require internet connection)', 'class' => 'success'],
+    ],
 ];
