@@ -939,6 +939,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getDefaultGridColumns()
     {
-        return ;
+        return array_keys($this->gridColumns);
     }
 }
