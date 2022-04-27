@@ -470,6 +470,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         $gridColumns = $this->getGridColumns();
         $filterColumns = App::identity()->filterColumns($this, false);
+        $filterColumns = $filterColumns ?: $this->defaultGridColumns;
 
         if (App::isLogin()) {
             foreach ($gridColumns as $key => &$column) {
@@ -934,5 +935,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $model;
         }
         throw new ForbiddenHttpException('Forbidden action to data');
+    }
+
+    public function getDefaultGridColumns()
+    {
+        return ;
     }
 }

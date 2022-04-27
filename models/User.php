@@ -407,7 +407,7 @@ class User extends ActiveRecord implements IdentityInterface
         $table_columns = $this->getTableColumnsMeta($model);
 
         if ($default) {
-            return $table_columns ?: array_keys($model->tableColumns);
+            return $table_columns ?: $model->defaultGridColumns;
         }
         return $table_columns ?: [];
     }
