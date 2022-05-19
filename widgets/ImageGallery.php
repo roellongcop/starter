@@ -27,6 +27,18 @@ class ImageGallery extends BaseWidget
     public $attribute;
     public $extensions;
 
+    public $finalCropWidth = 500;
+    public $finalCropHeight = 500;
+    public $cropperOptions = [
+        'minContainerWidth' => 400,
+        'minContainerHeight' => 400,
+        // viewMode: 3,
+        // aspectRatio: finalAspectRatio,
+        'zoomable' => true,
+        'dragMode' => 'move',
+    ];
+
+    public $fixedSize = true;
 
     public function init() 
     {
@@ -45,6 +57,10 @@ class ImageGallery extends BaseWidget
         $this->extensions = $this->extensions ?: File::EXTENSIONS['image'];
         foreach ($this->extensions as $key => $extension) {
             $this->parameters["UploadForm[extensions][{$key}]"] = $extension;
+        }
+
+        if ($this->fixedSize) {
+            $this->cropperOptions['aspectRatio'] = $this->finalCropWidth / $this->finalCropHeight;
         }
     } 
     
@@ -69,6 +85,9 @@ class ImageGallery extends BaseWidget
             'parameters' => json_encode($this->parameters),
             'buttonOptions' => $this->buttonOptions,
             'extensions' => $this->extensions,
+            'cropperOptions' => json_encode($this->cropperOptions),
+            'finalCropWidth' => $this->finalCropWidth,
+            'finalCropHeight' => $this->finalCropHeight,
         ]);
     }
 }
