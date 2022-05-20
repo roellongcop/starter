@@ -3,8 +3,9 @@
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
-use yii\widgets\Pjax;
 use app\widgets\Autocomplete;
+use app\widgets\Webcam;
+use yii\widgets\Pjax;
 
 $js = <<< JS
     var selectedImage = {
@@ -25,6 +26,8 @@ $js = <<< JS
 
         container = '#image-gallery-container-{$id}',
 
+        btnCloseModal = [container, '.btn-close-modal'].join(' '),
+
         autoCompleteItems = [container, '.autocomplete-items div'].join(' '),
 
         fileIdInput          = [container, '.file-id-input'].join(' '),
@@ -32,6 +35,7 @@ $js = <<< JS
         imageGalleryModal    = [container, '.image-gallery-modal'].join(' '),
         myPhotosTabLink      = [container, '.my-photos-tab-link'].join(' '),
         cropperTabLink       = [container, '.cropper-tab-link'].join(' '),
+        webcamTabLink       = [container, '.webcam-tab-link'].join(' '),
         myPhotosTabContainer = [container, '.my-photos-tab-container'].join(' '),
         cropperTabContainer  = [container, '.cropper-tab-container'].join(' '),
         searchInput          = [container, '.search-input'].join(' '),
@@ -150,7 +154,7 @@ $js = <<< JS
         $.ajax(conf);
     }
 
-    $(imageNameInput).on('keydown', function(e) {
+    $(document).on('keydown', imageNameInput, function(e) {
         if (e.keyCode == 13) {
             /*If the ENTER key is pressed, prevent the form from being submitted,*/
             e.preventDefault();
@@ -192,7 +196,7 @@ $js = <<< JS
         showMyPhotosButton();
     });
 
-    $(searchInput).on('keydown', function(e) { 
+    $(document).on('keydown', searchInput, function(e) { 
         let input = $(this);
 
         if(event.key === 'Enter') {
@@ -201,13 +205,13 @@ $js = <<< JS
         }
     });
 
-    $(searchInput).on('input', function(e) { 
+    $(document).on('input', searchInput, function(e) { 
         if($(this).val() == '') {
             getMyFiles('{$myImageFilesUrl}?keywords=' + $(this).val());
         }
     });
 
-    $(confirmBtn).click(function() {
+    $(document).on('click', confirmBtn, function() {
         let s = {
             status: 'success',
             src: selectedImage.path
@@ -220,9 +224,10 @@ $js = <<< JS
         {$ajaxSuccess}
         setTimeout(() => {KTApp.unblock('body');}, 500);
         $(fileIdInput).val(selectedImage.token);
+        $(imageGalleryModal).modal('hide');
     });
 
-    $(imageGalleryBtn).click(function() {
+    $(document).on('click', imageGalleryBtn, function() {
         getMyFiles('{$myImageFilesUrl}?keywords=' + $(searchInput).val());
         hideMyPhotosButton();
         hideCropperBtnOptions();
@@ -242,25 +247,25 @@ $js = <<< JS
         $(imageGalleryModal).modal('show');
     });
 
-    $(rotateLeftBtn).click(function() {
+    $(document).on('click', rotateLeftBtn, function() {
        rotate = (rotate <= 0)? (rotate-1): -1;
        cropper.rotate(rotate);
     });
 
-    $(rotateRightBtn).click(function() {
+    $(document).on('click', rotateRightBtn, function() {
        rotate = (rotate >= 0)? (rotate+1): 1;
        cropper.rotate(rotate);
     });
 
-    $(resetCropperBtn).click(function() {
+    $(document).on('click', resetCropperBtn, function() {
        cropper.reset();
     });
 
-    $(selectImageBtn).click(function(){ 
+    $(document).on('click', selectImageBtn, function(){ 
         $(selectImageInput).trigger('click'); 
     });
 
-    $(selectImageInput).change(function() {
+    $(document).on('change', selectImageInput, function() {
         var reader = new FileReader();
 
         if(this.files && this.files[0]) {
@@ -288,7 +293,7 @@ $js = <<< JS
         }
     });
  
-    $(cropperTabLink).click(function() {
+    $(document).on('click', cropperTabLink, function() {
         // resetMyPhotosTab();
         $(editBtn).hide();
         $(confirmBtn).hide();
@@ -296,12 +301,19 @@ $js = <<< JS
         showCropperBtnOptions();
     });
 
-    $(myPhotosTabLink).click(function() {
+    $(document).on('click', webcamTabLink, function() {
+        $(editBtn).hide();
+        $(confirmBtn).hide();
+
+        hideCropperBtnOptions();
+    });
+
+    $(document).on('click', myPhotosTabLink, function() {
         hideCropperBtnOptions();
         showMyPhotosButton();
     });
 
-    $(editBtn).click(function() {
+    $(document).on('click', editBtn, function() {
         image.src = selectedImage.path + '&w=500';
         if (cropper) {
             cropper.destroy();
@@ -320,7 +332,11 @@ $js = <<< JS
         $(cropImageCreatedAt).text($(imageCreatedAt).text());
     });
 
-    $(saveImageBtn).click(function() {
+    $(document).on('click', btnCloseModal, function() {
+        $(imageGalleryModal).modal('hide');
+    });
+
+    $(document).on('click', saveImageBtn, function() {
         cropper.getCroppedCanvas().toBlob((blob) => {
             KTApp.block(cropperTabContainer, {
                 overlayColor: '#000000',
@@ -405,7 +421,9 @@ CSS);
     <!-- type, model, model attribute name, options -->
     <?= Html::activeInput('hidden', $model, $attribute, ['class' => 'file-id-input']) ?>
 
-    <?= Html::button($buttonTitle, $buttonOptions) ?>
+    <div class="button-container">
+        <?= Html::button($buttonTitle, $buttonOptions) ?>
+    </div>
 
     <div class="modal fade image-gallery-modal" 
         tabindex="-1" 
@@ -420,7 +438,7 @@ CSS);
                     <h5 class="modal-title">
                         <?= $modalTitle ?>
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close btn-close-modal" aria-label="Close">
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
@@ -441,6 +459,15 @@ CSS);
                                         <i class="flaticon-upload"></i>
                                     </span>
                                     <span class="nav-text">Upload</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link webcam-tab-link" data-toggle="tab" href="#webcam-tab-<?= $id ?>">
+                                    <span class="nav-icon">
+                                        <i class="fas fa-camera"></i>
+                                    </span>
+                                    <span class="nav-text">Webcam</span>
                                 </a>
                             </li>
                         </ul>
@@ -564,11 +591,38 @@ CSS);
                                     
                                 </div>
                             </div>
+
+                            <div class="tab-pane fade webcam-tab-container" id="webcam-tab-<?= $id ?>" role="tabpanel">
+                                <?= Webcam::widget([
+                                    'withNameInput' => false,
+                                    'withInput' => false,
+                                    'model' => $model,
+                                    'videoOptions' => [
+                                        'width' => $finalCropWidth,
+                                        'height' => $finalCropHeight,
+                                        'autoplay' => true,
+                                        'style' => 'margin: 0 auto;width: 100%; height: auto;max-width: 400px;'
+                                    ],
+                                    'buttonOptions' => [
+                                        'class' => 'btn btn-primary btn-sm mt-3',
+                                        'value' => 'Capture',
+                                        'style' => 'max-width: 200px;margin: 0 auto;',
+                                    ],
+                                    'ajaxSuccess' => $ajaxSuccess . <<< JS
+                                        let container = '#image-gallery-container-{$id}',
+                                        fileIdInput = [container, '.file-id-input'].join(' '),
+                                        imageGalleryModal = [container, '.image-gallery-modal'].join(' ');
+
+                                        $(fileIdInput).val(s.file.token);
+                                        $(imageGalleryModal).modal('hide');
+                                    JS
+                                ]) ?>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light-primary font-weight-bold btn-close-modal">Close</button>
 
                     <div class="btn-group btn-options">
                         <button type="button" class="btn btn-light-info rotate-left-btn" title="Rotate Left">
@@ -615,7 +669,7 @@ CSS);
 
                     <?= Html::button('Confirm', [
                         'class' => 'btn btn-success font-weight-bold confirm-btn',
-                        'data-dismiss' => 'modal'
+                        // 'data-dismiss' => 'modal'
                     ]) ?>
                 </div>
             </div>

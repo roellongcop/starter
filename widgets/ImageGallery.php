@@ -40,6 +40,7 @@ class ImageGallery extends BaseWidget
 
     public $fixedSize = true;
 
+
     public function init() 
     {
         // your logic here
