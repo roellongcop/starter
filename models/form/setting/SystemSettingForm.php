@@ -8,6 +8,7 @@ use app\helpers\App;
 class SystemSettingForm extends SettingForm
 {
     const NAME = 'system-settings';
+    const ASIA_MANILA = 'Asia/Manila';
 
     const OFF = 0;
     const ON = 1;
@@ -43,7 +44,7 @@ class SystemSettingForm extends SettingForm
         return [
             'timezone' => [
                 'name' => 'timezone',
-                'default' => 'Asia/Manila',
+                'default' => self::ASIA_MANILA,
             ],
             'pagination' => [
                 'name' => 'pagination',
