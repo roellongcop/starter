@@ -255,6 +255,9 @@ class Setting extends ActiveRecord
 
     public static function findByName($name='')
     {
-        return self::findOne(['name' => $name]);
+        return self::find()
+            ->where(['name' => $name])
+            ->orderBy(['id' => SORT_DESC])
+            ->one();
     }
 }
