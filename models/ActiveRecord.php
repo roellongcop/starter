@@ -40,6 +40,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public $errorSummary;
     public $date_range;
 
+    public function addError($attribute, $error = '')
+    {
+        $error = is_array($error)? json_encode($error): $error;
+
+        parent::addError($attribute, $error);
+    }
+    
     public static function mapRecords()
     {
         return App::keyMapParams('record_status');
