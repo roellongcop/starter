@@ -3,8 +3,6 @@
 namespace app\components;
 
 use app\helpers\App;
-use app\models\Setting;
-use app\models\form\setting\SystemSettingForm;
 use app\widgets\JsonEditor;
 use yii\helpers\Inflector;
 use yii\helpers\Json;
@@ -52,17 +50,7 @@ class FormatterComponent extends \yii\i18n\Formatter
 
     public function asDateToTimezone($date='', $format='F d, Y h:i:s A', $timezone="")
     {
-        if (!$timezone) {
-            $setting = Setting::findOne(['name' => 'system']);
-
-            if ($setting) {
-                $value = json_decode($setting->value);
-                $timezone = $value['timezone'] ?? SystemSettingForm::ASIA_MANILA;
-            }
-            else {
-                $timezone = SystemSettingForm::ASIA_MANILA;
-            }
-        }
+        $timezone = $timezone ?: App::setting('system')->timezone;
 
         $date = ($date)? $date: date('Y-m-d h:i:s A');
 
