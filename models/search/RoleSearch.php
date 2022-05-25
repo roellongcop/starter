@@ -98,6 +98,7 @@ class RoleSearch extends Role
         ]);
 
         $query->daterange($this->date_range);
+        $query->andWhere(['id' => App::identity('roleAccess')]);
 
         return $dataProvider;
     }

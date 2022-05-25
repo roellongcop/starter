@@ -110,6 +110,7 @@ class UserSearch extends User
         ]);
 
         $query->daterange($this->date_range);
+        $query->andWhere(['role_id' => App::identity('roleAccess')]);
 
         $query->joinWith('role r');
         $query->groupBy('u.id');

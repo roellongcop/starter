@@ -197,26 +197,50 @@ class Notification extends ActiveRecord
         return $bulkActions;
     }
 
+    public static function activeAll($condition = '')
+    {
+        $condition['user_id'] = $condition['user_id'] ?? App::identity('id');
+        return parent::activeAll($condition);
+    }
+
+    public static function inactiveAll($condition = '')
+    {
+        $condition['user_id'] = $condition['user_id'] ?? App::identity('id');
+        return parent::inactiveAll($condition);
+    }
+
+    public static function deleteAll($condition = null, $params = []) 
+    {
+        $condition['user_id'] = $condition['user_id'] ?? App::identity('id');
+        return parent::deleteAll($condition, $params);
+    }
+
     public static function readAll($condition='')
     {
+        $condition['user_id'] = $condition['user_id'] ?? App::identity('id');
         return parent::updateAll(['status' => self::STATUS_READ], $condition);
     }
 
     public static function unreadAll($condition='')
     {
+        $condition['user_id'] = $condition['user_id'] ?? App::identity('id');
         return parent::updateAll(['status' => self::STATUS_UNREAD], $condition);
     }
 
-    public static function unread()
+    public static function unread($user_id='')
     {
+        $user_id = $user_id ?: App::identity('id');
         return self::find()
+            ->where(['user_id' => $user_id])
             ->unread()
             ->all();
     }
 
-    public static function totalUnread()
+    public static function totalUnread($user_id='')
     {
+        $user_id = $user_id ?: App::identity('id');
         return self::find()
+            ->where(['user_id' => $user_id])
             ->unread()
             ->count();
     }

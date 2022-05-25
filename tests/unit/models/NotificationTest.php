@@ -85,6 +85,10 @@ class NotificationTest extends \Codeception\Test\Unit
 
     public function testDeleteSuccess()
     {
+        \Yii::$app->user->login($this->tester->grabRecord('app\models\User', [
+            'username' => 'developer'
+        ]));
+        
         $model = $this->tester->grabRecord('app\models\Notification', [
             'record_status' => Notification::RECORD_ACTIVE
         ]);
