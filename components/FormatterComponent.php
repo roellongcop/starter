@@ -55,7 +55,8 @@ class FormatterComponent extends \yii\i18n\Formatter
         $date = ($date)? $date: date('Y-m-d h:i:s A');
 
         $usersTimezone = new \DateTimeZone($timezone);
-        $l10nDate = new \DateTime($date);
+        $l10nDate = new \DateTime();
+        $l10nDate->setTimestamp(strtotime($date));
         $l10nDate->setTimeZone($usersTimezone);
 
         return $l10nDate->format($format);
