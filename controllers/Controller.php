@@ -9,6 +9,8 @@ use app\models\form\export\ExportExcelForm;
 use app\models\form\export\ExportPdfForm;
 use app\widgets\ExportContent;
 use yii\helpers\Inflector;
+use app\helpers\Html;
+use app\widgets\ActiveForm;
 
 /**
  * RoleController implements the CRUD actions for Role model.
@@ -210,5 +212,34 @@ abstract class Controller extends \yii\web\Controller
         }
 
         return $this->redirect($model->indexUrl);
+    }
+
+    public function _ajaxCreated($model)
+    {
+        $model->refresh();
+        $response['status'] = 'success';
+        $response['model'] = $model;
+
+        return $this->asJson($response);
+    }
+
+    public function _ajaxValidate($model)
+    {
+        if ($model->load(App::post())) {
+            return $this->asJson(ActiveForm::validate($model));
+        }
+    }
+
+    public function _ajaxForm($model, $template='_form-ajax')
+    {
+        $response['status'] = ($model->errors)? 'failed': 'success';
+        $response['errors'] = $model->errors;
+        $response['errorSummary'] = Html::errorSummary($model);
+        $response['model'] = $model;
+        $response['form'] = $this->renderAjax($template, [
+            'model' => $model
+        ]);
+
+        return $this->asJson($response);
     }
 }
