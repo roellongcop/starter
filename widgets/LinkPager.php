@@ -40,7 +40,7 @@ class LinkPager extends Widget
      * @var array HTML attributes for the pager container tag.
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
-    public $options = ['class' => 'd-flex flex-wrap py-2 mr-3'];
+    public $options = ['class' => 'd-flex flex-wrap py-2'];
     /**
      * @var array HTML attributes which will be applied to all link containers
      * @since 2.0.13
