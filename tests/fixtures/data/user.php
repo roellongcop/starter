@@ -21,6 +21,9 @@ $model = new \app\helpers\FixtureData(function($username) {
         'status' => User::STATUS_ACTIVE,
         'slug' => Inflector::slug($username),
         'is_blocked' => User::UNBLOCKED,
+        'record_status' => User::RECORD_ACTIVE,
+        'created_by' => 1,
+        'updated_by' => 1,
         'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
     ];

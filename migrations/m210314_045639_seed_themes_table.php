@@ -28,12 +28,12 @@ class m210314_045639_seed_themes_table extends \app\migrations\Migration
                 'path_map' => json_encode($theme['pathMap']),
                 'bundles' => json_encode($theme['bundles'] ?? []),
                 'slug' => Inflector::slug($theme['name']),
+                'photos' => json_encode(['token-default-image_200']),
                 'record_status' => Theme::RECORD_ACTIVE,
+                'created_by' => 1,
+                'updated_by' => 1,
                 'created_at' => new Expression('UTC_TIMESTAMP'),
                 'updated_at' => new Expression('UTC_TIMESTAMP'),
-                'photos' => json_encode([
-                    'default-6ccb4a66-0ca3-46c7-88dd-default',
-                ])
             ];
             $this->insert($this->tableName(), $data);
         }

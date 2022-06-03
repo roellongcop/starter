@@ -26,10 +26,11 @@ $model = new \app\helpers\FixtureData(function($filename) {
 		]),
 		'description' => 'Description',
 		'slug' => (string) Inflector::slug($filename),
-		'created_at' => new Expression('UTC_TIMESTAMP'),
-        'updated_at' => new Expression('UTC_TIMESTAMP'),
+		'record_status' => Backup::RECORD_ACTIVE,
 		'created_by' => 1,
 	    'updated_by' => 1,
+		'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
 	    'sql' => 'default-OxFBeC2Dzw1624513904-default'
 	];
 });

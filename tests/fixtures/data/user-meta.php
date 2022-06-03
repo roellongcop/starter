@@ -12,10 +12,11 @@ $model = new \app\helpers\FixtureData(function($name) {
             'first_name' => 'admin_firstname',
             'last_name' => 'admin_lastname',
         ]),
-        'created_at' => new Expression('UTC_TIMESTAMP'),
-        'updated_at' => new Expression('UTC_TIMESTAMP'),
+        'record_status' => UserMeta::RECORD_ACTIVE,
         'created_by' => 1,
         'updated_by' => 1,
+        'created_at' => new Expression('UTC_TIMESTAMP'),
+        'updated_at' => new Expression('UTC_TIMESTAMP'),
     ];
 });
 

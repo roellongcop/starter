@@ -3,6 +3,7 @@
 use app\models\Role;
 use app\models\User;
 use yii\db\Expression;
+use yii\helpers\Inflector;
 
 /**
  * Class m210528_070049_seed_users_table
@@ -20,64 +21,37 @@ class m210528_070049_seed_users_table extends \app\migrations\Migration
     public function safeUp()
     {
         foreach ($this->data() as $data) {
-            $this->insert($this->tableName(), $data);
+            list($username, $role_id) = $data;
+            $email = "{$username}@{$username}.com";
+
+            $this->insert($this->tableName(), [
+                'role_id' => $role_id,
+                'username' => $username, 
+                'email' => $email,
+                'auth_key' => "auth_key-{$username}",
+                'password_hash' => Yii::$app->security->generatePasswordHash($email),
+                'password_hint' => 'Same as Email',
+                'password_reset_token' => "password_reset_token-{$username}",
+                'verification_token' => "verification_token-{$username}",
+                'access_token' => "access_token-{$username}",
+                'status' => User::STATUS_ACTIVE,
+                'slug' => Inflector::slug($username), 
+                'is_blocked' => User::UNBLOCKED,
+                'record_status' => User::RECORD_ACTIVE,
+                'created_by' => 1,
+                'updated_by' => 1,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
+            ]);
         }
     }
 
     public function data()
     {
         return [
-            'developer' => [
-                'role_id' => Role::DEVELOPER,
-                'username' => 'developer', 
-                'email' => 'developer@developer.com',
-                'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd31',
-                'password_hash' => Yii::$app->security->generatePasswordHash('developer@developer.com'),
-                'password_hint' => 'Same as Email',
-                'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994601',
-                'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994601',
-                'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994601',
-                'status' => User::STATUS_ACTIVE,
-                'slug' => 'developer',
-                'is_blocked' => User::UNBLOCKED,
-                'record_status' => User::RECORD_ACTIVE,
-                'created_at' => new Expression('UTC_TIMESTAMP'),
-                'updated_at' => new Expression('UTC_TIMESTAMP'),
-            ],
-            'superadmin' => [
-                'role_id' => Role::SUPERADMIN,
-                'username' => 'superadmin', 
-                'email' => 'superadmin@superadmin.com',
-                'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd32',
-                'password_hash' => Yii::$app->security->generatePasswordHash('superadmin@superadmin.com'),
-                'password_hint' => 'Same as Email',
-                'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994602',
-                'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994602',
-                'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994602',
-                'status' => User::STATUS_ACTIVE,
-                'slug' => 'superadmin',
-                'is_blocked' => User::UNBLOCKED,
-                'record_status' => User::RECORD_ACTIVE,
-                'created_at' => new Expression('UTC_TIMESTAMP'),
-                'updated_at' => new Expression('UTC_TIMESTAMP'),
-            ],
-            'admin' => [
-                'role_id' => Role::ADMIN,
-                'username' => 'admin', 
-                'email' => 'admin@admin.com',
-                'auth_key' => 'nq74j8c0ETbVr60piMEj6HWSbnVqYd33',
-                'password_hash' => Yii::$app->security->generatePasswordHash('admin@admin.com'),
-                'password_hint' => 'Same as Email',
-                'password_reset_token' => 'lhOjDuhePXXncJJgjCNfS8NFee2HYWsp_1621994603',
-                'verification_token' => 'T3w4HHxCXcU-fGurkHEAh4OSAT6BuC66_1621994603',
-                'access_token' => 'access-fGurkHEAh4OSAT6BuC66_1621994603',
-                'status' => User::STATUS_ACTIVE,
-                'slug' => 'admin',
-                'is_blocked' => User::UNBLOCKED,
-                'record_status' => User::RECORD_ACTIVE,
-                'created_at' => new Expression('UTC_TIMESTAMP'),
-                'updated_at' => new Expression('UTC_TIMESTAMP'),
-            ]
+            ['developer', Role::DEVELOPER],
+            ['superadmin', Role::SUPERADMIN],
+            ['admin', Role::ADMIN],
         ];
     }
 

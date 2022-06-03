@@ -15,6 +15,9 @@ $model = new \app\helpers\FixtureData(function($params) {
 <?php endif ?>
 <?php endif ?>
 <?php endforeach; ?>
+		'record_status' => <?= $className ?>::RECORD_ACTIVE,
+        'created_by' => 1,
+        'updated_by' => 1,
 		'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
     ];

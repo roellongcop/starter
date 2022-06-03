@@ -13,10 +13,11 @@ $model = new \app\helpers\FixtureData(function($id) {
 		'browser' => 'Chrome',
 		'os' => 'Windows',
 		'device' => 'Computer',
+		'record_status' => Session::RECORD_ACTIVE,
+		'created_by' => 1,
+	    'updated_by' => 1,
 		'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
-		'created_by' => 1,
-		'updated_by' => 1,
 	];
 });
 

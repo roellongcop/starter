@@ -11,10 +11,11 @@ $model = new \app\helpers\FixtureData(function($name) {
 		'slug' => Inflector::slug($name),
 		'type' => Setting::TYPE_INPUT,
 		'sort_order' => 0,
+		'record_status' => Setting::RECORD_ACTIVE,
+		'created_by' => 1,
+	    'updated_by' => 1,
 		'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
-		'created_by' => 1,
-		'updated_by' => 1,
 	];
 });
 

@@ -8,10 +8,11 @@ $model = new \app\helpers\FixtureData(function($action) {
 		'user_id' => 1,
 		'ip' => '::1',
 		'action' => $action,
+		'record_status' => VisitLog::RECORD_ACTIVE,
+		'created_by' => 1,
+	    'updated_by' => 1,
 		'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
-		'created_by' => 1,
-		'updated_by' => 1,
 	];
 });
 

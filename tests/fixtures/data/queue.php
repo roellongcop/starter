@@ -14,10 +14,11 @@ $model = new \app\helpers\FixtureData(function($channel) {
 		'reserved_at' => NULL,
 		'attempt' => NULL,
 		'done_at' => NULL,
+		'record_status' => Queue::RECORD_ACTIVE,
+		'created_by' => 1,
+	    'updated_by' => 1,
 		'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
-		'created_by' => 1,
-		'updated_by' => 1,
 	];
 });
 

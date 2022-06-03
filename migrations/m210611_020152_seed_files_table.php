@@ -17,19 +17,27 @@ class m210611_020152_seed_files_table extends \app\migrations\Migration
      */
     public function safeUp()
     {
-        $data = [
-            'name' => 'default-image_200', 
-            'extension' => 'png',
-            'size' => 1606,
-            'location' => 'default/default-image_200.png',
-            'token' => 'default-6ccb4a66-0ca3-46c7-88dd-default',
-            'record_status' => File::RECORD_ACTIVE,
-            'created_by' => 1,
-            'updated_by' => 1,
-            'created_at' => new Expression('UTC_TIMESTAMP'),
-            'updated_at' => new Expression('UTC_TIMESTAMP'),
+        foreach ($this->getData() as $name) {
+            $this->insert($this->tableName(), [
+                'name' => $name, 
+                'extension' => 'png',
+                'size' => 1000,
+                'location' => "default/{$name}.png",
+                'token' => "token-{$name}",
+                'record_status' => File::RECORD_ACTIVE,
+                'created_by' => 1,
+                'updated_by' => 1,
+                'created_at' => new Expression('UTC_TIMESTAMP'),
+                'updated_at' => new Expression('UTC_TIMESTAMP'),
+            ]);
+        }
+    }
+
+    public function getData()
+    {
+        return [
+            'default-image_200',
         ];
-        $this->insert($this->tableName(), $data);
     }
 
     /**

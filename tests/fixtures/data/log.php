@@ -68,10 +68,11 @@ $model = new \app\helpers\FixtureData(function($name) {
 			'REQUEST_TIME_FLOAT' => 1623125700.650181,
 			'REQUEST_TIME' => 1623125700,
 		]),
+		'record_status' => Log::RECORD_ACTIVE,
+		'created_by' => 1,
+	    'updated_by' => 1,
 		'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
-		'updated_by' => 1,
-		'created_by' => 1,
 	];
 });
 

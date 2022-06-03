@@ -12,6 +12,9 @@ $model = new \app\helpers\FixtureData(function($name) {
         'module_access' => json_encode(App::component('access')->controllerActions),
         'main_navigation' => json_encode(App::component('access')->defaultNavigation),
         'slug' => Inflector::slug($name), 
+        'record_status' => Role::RECORD_ACTIVE,
+        'created_by' => 1,
+        'updated_by' => 1,
         'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
     ];

@@ -12,10 +12,11 @@ $model = new \app\helpers\FixtureData(function($type) {
 		'type' => $type,
 		'token' => 'TftF853osh1623298888',
 		'status' => Notification::STATUS_UNREAD,
+		'record_status' => Notification::RECORD_ACTIVE,
+		'created_by' => 1,
+	    'updated_by' => 1,
 		'created_at' => new Expression('UTC_TIMESTAMP'),
         'updated_at' => new Expression('UTC_TIMESTAMP'),
-		'created_by' => 1,
-		'updated_by' => 1,
 	];
 });
 $model->add('unread', 'notification_change_password');
