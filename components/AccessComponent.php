@@ -233,8 +233,8 @@ class AccessComponent extends Component
  			'general-setting',
  			'dashboard',
  			'site',
- 			'api',
- 			'model-file',
+ 			// 'api',
+ 			// 'model-file',
  		];
 
  		foreach ($controller_actions as $controller => $actions) {
