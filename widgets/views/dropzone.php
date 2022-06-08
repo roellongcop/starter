@@ -58,6 +58,9 @@ $this->registerCss(<<< CSS
     .dropzone .dz-preview .dz-remove {
         font-size: 12px !important;
     }
+    .dropzone .dz-preview.dz-error .dz-error-message {
+        margin-top: 30px;
+    }
 CSS);
 ?>
 
