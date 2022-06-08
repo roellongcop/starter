@@ -71,7 +71,7 @@ class Anchor extends BaseWidget
     public function run()
     {
         if ($this->link) {
-            if ($this->link == '#') {
+            if ($this->link == '#' || $this->link == '#!') {
                 return Html::a($this->title, $this->link, $this->options);
             }
 
