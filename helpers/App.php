@@ -366,12 +366,12 @@ class App {
         return ! self::can($model, $action);
     }
 
-	public static function modelCan($model, $action='')
+	public static function modelCan($model, $action='', $prefix='can')
 	{
 		if ($model) {
 	        $action = Inflector::id2camel(($action ?: self::actionID()));
 
-			$action = "can{$action}";
+			$action = "{$prefix}{$action}";
 
 			if ($model->hasProperty($action)) {
 	            return $model->{$action};
@@ -382,6 +382,11 @@ class App {
 		}
 		
 		return false;
+	}
+
+	public static function modelBeforeCan($model, $action='')
+	{
+		return self::modelCan($model, $action, 'beforeCan');
 	}
 
     public static function getModelName($model)

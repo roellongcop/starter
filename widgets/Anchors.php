@@ -71,7 +71,7 @@ class Anchors extends BaseWidget
             }
 
             if ($this->model) {
-                if (App::modelCan($this->model, $name)) {
+                if (App::modelBeforeCan($this->model, $name)) {
                     
                     $this->anchors[] = Anchor::widget([
                         'title' => $title,

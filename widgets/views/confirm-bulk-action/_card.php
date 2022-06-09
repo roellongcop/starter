@@ -15,7 +15,7 @@ use app\widgets\Detail;
 			</div>
 			<span>
 				<?= Html::ifElse(
-					App::modelCan($model, $post['process-selected']),
+					App::modelBeforeCan($model, $post['process-selected']),
 					"<input type='hidden' name='selection[]' value='{$model->id}'>
 					<span class='badge badge-success'>Applicable</span>",
 					'<span class="badge badge-danger">Not Applicable</span>'

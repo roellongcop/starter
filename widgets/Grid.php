@@ -73,7 +73,7 @@ class Grid extends BaseWidget
 
             'buttons' => [
                 'view' => function($url, $model) use($controller) {
-                    if (App::modelCan($model, 'view')) {
+                    if (App::modelBeforeCan($model, 'view')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/view'), $this->actionName('View')]),
                             'link' =>  $model->viewUrl,
@@ -85,7 +85,7 @@ class Grid extends BaseWidget
                     }
                 },
                 'update' => function($url, $model) use ($controller){
-                    if (App::modelCan($model, 'update')) {
+                    if (App::modelBeforeCan($model, 'update')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/edit'), $this->actionName('Update')]),
                             'link' =>  $model->updateUrl,
@@ -97,7 +97,7 @@ class Grid extends BaseWidget
                     }
                 },
                 'duplicate' => function($url, $model) use ($controller){
-                    if (App::modelCan($model, 'duplicate')) {
+                    if (App::modelBeforeCan($model, 'duplicate')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/copy'), $this->actionName('Duplicate')]),
                             'link' =>  $model->duplicateUrl,
@@ -109,7 +109,7 @@ class Grid extends BaseWidget
                     }
                 },
                 'delete' => function($url, $model) use ($controller) {
-                    if (App::modelCan($model, 'delete')) {
+                    if (App::modelBeforeCan($model, 'delete')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/delete'), $this->actionName('Delete')]),
                             'link' =>  $model->deleteUrl,
@@ -123,7 +123,7 @@ class Grid extends BaseWidget
                     }
                 }, 
                 'activate' => function($url, $model) use ($controller) {
-                    if (App::modelCan($model, 'activate')) {
+                    if (App::modelBeforeCan($model, 'activate')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/check'), $this->actionName('Activate')]),
                             'link' => $model->activateUrl,
@@ -136,7 +136,7 @@ class Grid extends BaseWidget
                     }
                 }, 
                 'download' => function($url, $model) use ($controller) {
-                    if (App::modelCan($model, 'download')) {
+                    if (App::modelBeforeCan($model, 'download')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/download'), $this->actionName('Download')]),
                             'link' => $model->downloadUrl,

@@ -342,6 +342,41 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $this->_canInactivate;
     }
 
+    public function getBeforeCanDuplicate()
+    {
+        return $this->canDuplicate;
+    }
+
+    public function getBeforeCanDelete()
+    {
+        return $this->canDelete;
+    }
+
+    public function getBeforeCanCreate()
+    {
+        return $this->canCreate;
+    }
+
+    public function getBeforeCanView()
+    {
+        return $this->canView;
+    }
+
+    public function getBeforeCanUpdate()
+    {
+        return $this->canUpdate;
+    }
+
+    public function getBeforeCanActivate()
+    {
+        return $this->canActivate;
+    }
+
+    public function getBeforeCanInactivate()
+    {
+        return $this->canInactivate;
+    }
+
     public function activate()
     {
         $this->setActive();
@@ -938,7 +973,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $action = $action ?: App::actionID();
         $model = self::findOrFailed($value, $field, $action);
 
-        if (App::modelCan($model, $action)) {
+        if (App::modelBeforeCan($model, $action)) {
             return $model;
         }
         throw new ForbiddenHttpException('Forbidden action to data');
