@@ -53,7 +53,7 @@ class Search extends BaseWidget
             return implode(' ', [self::PLACEHOLDER, $this->model->searchLabel]);
         }
 
-        return PLACEHOLDER;
+        return self::PLACEHOLDER;
     }
 
     /**
