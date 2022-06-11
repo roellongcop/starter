@@ -29,19 +29,19 @@ class ImageSettingForm extends SettingForm
         return [
             'primary_logo' => [
                 'name' => 'primary_logo',
-                'default' => 'default-6ccb4a66-0ca3-46c7-88dd-default'
+                'default' => 'token-default-image_200'
             ],
             'secondary_logo' => [
                 'name' => 'secondary_logo',
-                'default' => 'default-6ccb4a66-0ca3-46c7-88dd-default'
+                'default' => 'token-default-image_200'
             ],
             'image_holder' => [
                 'name' => 'image_holder',
-                'default' => 'default-6ccb4a66-0ca3-46c7-88dd-default'
+                'default' => 'token-default-image_200'
             ],
             'favicon' => [
                 'name' => 'favicon',
-                'default' => 'default-6ccb4a66-0ca3-46c7-88dd-default'
+                'default' => 'token-default-image_200'
             ],
         ];
     }
