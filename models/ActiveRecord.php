@@ -148,11 +148,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             }
         }
         else {
-            if ($this->isActive && !$this->canActivate) {
+            if ($this->isActive && !$this->beforeCanActivate) {
                 $this->addError($attribute, 'Cannot be Activated');
             }
 
-            if ($this->isInactive && !$this->canInactivate) {
+            if ($this->isInactive && !$this->beforeCanInactivate) {
                 $this->addError($attribute, 'Cannot be Inactivated');
             }
         }
@@ -707,7 +707,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             return $this->recordStatusLabel;
         }
 
-        if (($this->canActivate || $this->canInactivate) && $this->canUpdate) {
+        if (($this->beforeCanActivate || $this->beforeCanInactivate) && $this->beforeCanUpdate) {
             return RecordHtml::widget([
                 'model' => $this,
                 'controller' => $controller
