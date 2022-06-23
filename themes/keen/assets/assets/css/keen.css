@@ -39,3 +39,7 @@ th {
 .mw200 {
     max-width: 200px;
 }
+
+select.kt-selectpicker.is-invalid + button.dropdown-toggle {
+    border-color: #F64E60 !important;
+}
