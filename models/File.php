@@ -120,6 +120,8 @@ class File extends ActiveRecord
             case 'zip': $path .= 'zip.png'; break;
             case 'sql': $path .= 'sql.png'; break;
             case 'csv': $path .= 'csv.png'; break;
+            case 'xlsx': $path .= 'xlsx.png'; break;
+            case 'xls': $path .= 'xls.png'; break;
             case 'docx':
             case 'doc':
             case 'txt': 
