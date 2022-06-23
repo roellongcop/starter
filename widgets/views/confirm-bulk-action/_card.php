@@ -14,6 +14,7 @@ use app\widgets\Detail;
 				<?= $model->mainAttribute ?>
 			</div>
 			<span>
+				<span class="badge badge-danger btn-remove-from-list">Remove</span>
 				<?= Html::ifElse(
 					App::modelBeforeCan($model, $post['process-selected']),
 					"<input type='hidden' name='selection[]' value='{$model->id}'>

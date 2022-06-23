@@ -2,6 +2,12 @@
 
 use app\widgets\AnchorForm;
 use app\helpers\Html;
+
+$this->registerJs(<<< JS
+	$('.btn-remove-from-list').click(function() {
+		$(this).closest('.card').remove();
+	});
+JS);
 ?>
 <div>
 	<div class="alert alert-custom alert-light-primary fade show mb-5" role="alert" style="padding: 0.5rem 2rem;">
