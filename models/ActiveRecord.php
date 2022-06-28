@@ -344,26 +344,46 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getBeforeCanDuplicate()
     {
+        if (App::isLogin()) {
+            return App::identity()->can('duplicate', $this->controllerID());
+        }
+
         return $this->canDuplicate;
     }
 
     public function getBeforeCanDelete()
     {
+        if (App::isLogin()) {
+            return App::identity()->can('delete', $this->controllerID());
+        }
+
         return $this->canDelete;
     }
 
     public function getBeforeCanCreate()
     {
+        if (App::isLogin()) {
+            return App::identity()->can('create', $this->controllerID());
+        }
+
         return $this->canCreate;
     }
 
     public function getBeforeCanView()
     {
+        if (App::isLogin()) {
+            return App::identity()->can('view', $this->controllerID());
+        }
+
         return $this->canView;
     }
 
     public function getBeforeCanUpdate()
     {
+        if (App::isLogin()) {
+            return App::identity()->can('update', $this->controllerID());
+        }
+
         return $this->canUpdate;
     }
 
