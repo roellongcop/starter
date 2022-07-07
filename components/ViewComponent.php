@@ -28,6 +28,25 @@ class ViewComponent extends \yii\web\View
         JS;
 
         $this->registerJs($js, \yii\web\View::POS_HEAD, 'app');
+        $this->registerCss(<<< CSS
+            .page-loading * {
+                opacity: 0;
+                pointer-events: none;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                    supported by Chrome, Edge, Opera and Firefox */
+            }
+            /*.page-loading::before {
+                content: "Loading...";
+            }*/
+            .page-loading {
+                background: white url('/default/loader-blocks.gif') no-repeat center center / 10rem;
+            }
+        CSS);
     }
 
 	public function registerWidgetJs($widgetFunction, $js, $position = parent::POS_READY, $key = null)
