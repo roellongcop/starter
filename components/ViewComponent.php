@@ -27,6 +27,8 @@ class ViewComponent extends \yii\web\View
             console.log(app)
         JS;
 
+        $loadingIcon = App::baseUrl('default/loader-blocks.gif');
+
         $this->registerJs($js, \yii\web\View::POS_HEAD, 'app');
         $this->registerCss(<<< CSS
             .page-loading * {
@@ -44,7 +46,7 @@ class ViewComponent extends \yii\web\View
                 content: "Loading...";
             }*/
             .page-loading {
-                background: white url('/default/loader-blocks.gif') no-repeat center center / 10rem;
+                background: white url('{$loadingIcon}') no-repeat center center / 10rem;
             }
         CSS);
     }
