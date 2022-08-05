@@ -31,8 +31,8 @@ $config = [
         'user' => ['class' => 'app\components\UserComponent'],
         'urlManager' => [
             'class' => 'app\components\UrlManagerComponent',
-            'scriptUrl' => '',
-            'baseUrl' => '',
+            'scriptUrl' => '@web',
+            'baseUrl' => '@web',
         ],
         'pdf' => ['class' => '\app\components\PdfComponent'],
         'request' => ['class' => '\app\components\RequestComponent'],

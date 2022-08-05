@@ -26,9 +26,9 @@ $config = [
         'formatter' => ['class' => 'app\components\FormatterComponent'],
         'urlManager' => [
             'class' => 'app\components\UrlManagerComponent',
-            'scriptUrl' => 'http://localhost:8080',
-            'baseUrl' => 'http://localhost:8080',
-            'hostInfo' => 'http://localhost:8080',
+            'scriptUrl' => '@web',
+            'baseUrl' => '@web',
+            'hostInfo' => '@web',
         ],
         'session' => ['class' => 'app\components\DbSessionComponent'],
         'pdf' => ['class' => '\app\components\PdfComponent'],
