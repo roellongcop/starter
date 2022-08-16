@@ -51,8 +51,14 @@ class ExportForm extends \yii\base\Model
 
     public function getExportColumns($searchModel, $type='excel')
     {
-        if ($searchModel->exportColumns) {
-            return $searchModel->exportColumns;
+        if ($searchModel->{$this->exportColumnsName}) {
+            $columns = $searchModel->{$this->exportColumnsName};
+
+            foreach ($columns as &$column) {
+                $column['enableSorting'] = false;
+            }
+
+            return $columns;
         }
         
         $ignoreAttributes = self::IGNORE_ATTRIBUTES;
@@ -80,6 +86,7 @@ class ExportForm extends \yii\base\Model
 
             $attribute['header'] = strtoupper(str_replace('_', ' ', $column));
             $attribute['format'] = 'stripTags';
+            $attribute['enableSorting'] = false;
 
             foreach (self::FORMATS as $format => $columns) {
                 if (in_array($column, $columns)) {
