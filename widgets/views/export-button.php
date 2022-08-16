@@ -58,7 +58,7 @@ JS;
 $this->registerWidgetJs($widgetFunction, $js);
 ?>
 <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="top">
-    <a href="#" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm px-5 mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a href="#" class="btn btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm px-5 mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="svg-icon svg-icon-primary svg-icon-2x svgicon-md">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
