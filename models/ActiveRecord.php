@@ -971,6 +971,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         $data = array_values(array_unique(array_map('trim', $data)));
+        $data = array_filter($data);
         
         sort($data);
 
