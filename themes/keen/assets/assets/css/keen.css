@@ -43,3 +43,7 @@ th {
 select.kt-selectpicker.is-invalid + button.dropdown-toggle {
     border-color: #F64E60 !important;
 }
+
+select.kt-selectpicker.is-valid + button.dropdown-toggle {
+    border-color: #1BC5BD !important;
+}
