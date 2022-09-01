@@ -908,6 +908,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $models;
     }
 
+    public function getDateAttribute()
+    {
+        $config = $this->config();
+        
+        return $config['dateAttribute'] ?? 'created_at';
+    }
+
     public function getStartDate($from_database = false)
     {
         if ($this->date_range && $from_database == false) {
@@ -918,7 +925,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             if ($this->_startDate === null) {
                 $this->_startDate = static::find()
                     ->visible()
-                    ->min('created_at');
+                    ->min($this->dateAttribute);
             }
             $date = $this->_startDate ?: 'today';
         }
@@ -936,7 +943,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             if ($this->_endDate === null) {
                 $this->_endDate = static::find()
                     ->visible()
-                    ->max('created_at');
+                    ->max($this->dateAttribute);
             }
             $date = ($this->_endDate)? $this->_endDate: 'today';
         }
