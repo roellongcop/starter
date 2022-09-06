@@ -905,6 +905,8 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
         $models = ArrayHelper::map($models, $key, $key);
 
+        $models = array_filter($models);
+
         return $models;
     }
 
