@@ -7,8 +7,13 @@ use app\helpers\App;
 
 class ActiveQuery extends \yii\db\ActiveQuery
 {
-    public function daterange($daterange='', $field='created_at')
+    public function daterange($daterange='', $field='')
     {
+        $model = Yii::createObject($this->modelClass);
+        if ($model && $model->hasProperty('dateAttribute')) {
+            $field = $field ?: $model->dateAttribute;
+        }
+
         if ($daterange) {
             $field = $this->field($field);
             
@@ -44,7 +49,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
 
     public function visible()
     {
-        $class = Yii::createObject($this->modelClass);
+        $model = Yii::createObject($this->modelClass);
 
         $field = $this->field('record_status');
         $condition[$field] = 1;
@@ -53,9 +58,9 @@ class ActiveQuery extends \yii\db\ActiveQuery
             return $this->andFilterWhere($condition);
         }
 
-        if ($class && $class->hasMethod('controllerID') && App::isLogin()) {
+        if ($model && $model->hasMethod('controllerID') && App::isLogin()) {
 
-            if (App::identity()->can('in-active-data', $class->controllerID())) {
+            if (App::identity()->can('in-active-data', $model->controllerID())) {
                 $condition[$field] = '';
             }
         }
