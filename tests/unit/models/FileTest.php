@@ -11,6 +11,7 @@ class FileTest extends \Codeception\Test\Unit
     {
         return array_replace([
             'name' => 'file-name-test',
+            'tag' => 'Setting',
             'extension' => 'png',
             'size' => 1000,
             'location' => 'default/default-image_200.png',

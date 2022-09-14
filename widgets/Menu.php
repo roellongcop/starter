@@ -7,6 +7,7 @@ use app\helpers\App;
 class Menu extends BaseWidget
 {
     public $menus;
+    public $viewParams;
 
     public function init() 
     {
@@ -22,7 +23,8 @@ class Menu extends BaseWidget
     public function run()
     {
         return $this->render('menu/index', [
-            'menus' => $this->menus
+            'menus' => $this->menus,
+            'viewParams' => $this->viewParams,
         ]);
     }
 }

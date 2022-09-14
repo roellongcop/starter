@@ -56,6 +56,7 @@ JS);
     
     <p class="lead">Upload Images</p>
     <?= Dropzone::widget([
+        'tag' => 'Theme',
         'files' => $model->imageFiles,
         'model' => $model,
         'attribute' => 'photos',

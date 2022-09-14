@@ -12,8 +12,11 @@ use yii\widgets\Pjax;
 
 $this->title = 'My Files';
 $this->params['breadcrumbs'][] = 'Files';
-$this->params['searchModel'] = new FileSearch();
+$this->params['searchModel'] = new FileSearch([
+    'searchAction' => ['my-files'],
+]);
 $this->params['showCreateButton'] = true; 
+$this->params['activeMenuLink'] = '/my-files';
 
 $myFilesUrl = Url::to(['file/my-files']);
 $deleteFileUrl = Url::to(['file/delete']);
@@ -266,7 +269,10 @@ CSS);
             ]),
             'url' => Url::to(['file/find-by-keywords'])
         ]) ?>
-        <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
+        <?php Pjax::begin([
+            'options' => ['class' => 'my-photos'],
+            'timeout' => false,
+        ]); ?>
             <?= $this->render('my-files-ajax', [
                 'dataProvider' => $dataProvider,
             ]) ?>

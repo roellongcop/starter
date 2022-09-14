@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['searchModel'] = $searchModel; 
 $this->params['showCreateButton'] = true; 
 $this->params['showExportButton'] = true;
+$this->params['activeMenuLink'] = '/setting';
 ?>
 <div class="setting-index-page">
     <?= FilterColumn::widget(['searchModel' => $searchModel]) ?>

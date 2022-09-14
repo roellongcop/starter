@@ -20,6 +20,7 @@ class m210611_020152_seed_files_table extends \app\migrations\Migration
         foreach ($this->getData() as $name) {
             $this->insert($this->tableName(), [
                 'name' => $name, 
+                'tag' => 'Setting',
                 'extension' => 'png',
                 'size' => 1000,
                 'location' => "default/{$name}.png",

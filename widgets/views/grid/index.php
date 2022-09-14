@@ -1,7 +1,6 @@
 <?php
 
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 
 $js = <<< JS
     let bulkaction = $('.bulk-action-label'),

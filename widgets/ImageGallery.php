@@ -27,6 +27,8 @@ class ImageGallery extends BaseWidget
     public $attribute;
     public $extensions;
 
+    public $tag;
+
     public $finalCropWidth = 500;
     public $finalCropHeight = 500;
     public $cropperOptions = [
@@ -45,6 +47,11 @@ class ImageGallery extends BaseWidget
     {
         // your logic here
         parent::init();
+
+        if ($this->tag) {
+            $this->myImageFilesUrl['tag'] = $this->tag;
+            $this->parameters['UploadForm[tag]'] = $this->tag;
+        }
 
         $this->uploadUrl = Url::to($this->uploadUrl);
         $this->modelName = App::getModelName($this->model);
@@ -89,6 +96,7 @@ class ImageGallery extends BaseWidget
             'cropperOptions' => json_encode($this->cropperOptions),
             'finalCropWidth' => $this->finalCropWidth,
             'finalCropHeight' => $this->finalCropHeight,
+            'tag' => $this->tag,
         ]);
     }
 }

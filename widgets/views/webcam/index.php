@@ -53,6 +53,7 @@ $this->registerWidgetJs($widgetFunction, <<< JS
 	   		let modelName = $('#webcam-container-{$widgetId} .model-name-input').val();
 	   		modelName = (modelName)? modelName: '{$modelName}-webcam-' + Date.now();
 
+	    	formData.append('UploadForm[tag]', '{$tag}');
 	    	formData.append('UploadForm[modelName]', '{$modelName}');
         	formData.append('UploadForm[fileInput]', blob, modelName + '.jpeg');
 

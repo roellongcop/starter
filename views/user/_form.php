@@ -56,6 +56,7 @@ use app\widgets\ImageGallery;
             ] ) ?>
             <br>
             <?= ImageGallery::widget([
+                'tag' => 'User',
                 'model' => $model,
                 'attribute' => 'photo',
                 'ajaxSuccess' => "

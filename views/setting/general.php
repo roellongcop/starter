@@ -13,6 +13,7 @@ $this->title = 'General Settings';
 $this->params['breadcrumbs'][] = 'Set Up';
 $this->params['breadcrumbs'][] = $setting_modules[$tab]['label'];
 $this->params['searchModel'] = new SettingSearch();
+$this->params['activeMenuLink'] = '/setting/general';
 ?>
 <div class="setting-general-page">
 	<p>

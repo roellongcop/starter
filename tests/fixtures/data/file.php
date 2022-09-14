@@ -6,6 +6,7 @@ use yii\db\Expression;
 $model = new \app\helpers\FixtureData(function($params) {
     return [
         'name' => $params['name'] ?? 'default-image_200', 
+        'tag' =>  $params['tag'] ?? 'Setting',
         'extension' => $params['extension'] ?? 'png',
         'size' => $params['size'] ?? 1606,
         'location' => $params['location'] ?? 'default/default-image_200.png',
@@ -18,10 +19,13 @@ $model = new \app\helpers\FixtureData(function($params) {
     ];
 });
 
-$model->add('profile');
+$model->add('profile', [
+    'tag' => 'User'
+]);
 
 $model->add('backup', [
     'name' => 'default-backup', 
+    'tag' => 'Sql',
     'extension' => 'sql',
     'size' => 81341,
     'location' => 'default/default-backup.sql',

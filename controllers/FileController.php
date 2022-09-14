@@ -18,14 +18,14 @@ class FileController extends Controller
     public function actionFindByKeywords($keywords='')
     {
         return $this->asJson(
-            File::findByKeywords($keywords, ['name', 'extension', 'token'])
+            File::findByKeywords($keywords, ['name', 'tag', 'extension', 'token'])
         );
     }
 
     public function actionFindByKeywordsImage($keywords='')
     {
         return $this->asJson(
-            File::findByKeywordsImage($keywords, ['name', 'extension', 'token'])
+            File::findByKeywordsImage($keywords, ['name', 'tag', 'extension', 'token'])
         );
     }
      

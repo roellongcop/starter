@@ -145,7 +145,10 @@ CSS);
 <div class="row my-image-files-page" id="my-image-files">
     <div class="col-md-7">
         <input type="search" class="form-control search-photo" placeholder="Search Photo">
-        <?php Pjax::begin(['options' => ['class' => 'my-photos']]); ?>
+        <?php Pjax::begin([
+            'options' => ['class' => 'my-photos'],
+            'timeout' => false
+        ]); ?>
             <?= $this->render('my-image-files-ajax', [
                 'dataProvider' => $dataProvider,
             ]) ?>

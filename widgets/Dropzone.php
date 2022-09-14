@@ -19,6 +19,7 @@ class Dropzone extends BaseWidget
     public $description;
     public $dictRemoveFileConfirmation = 'Remove File ?';
     public $dictRemoveFile = 'Remove';
+    public $tag;
 
     public $model;
     public $removeFileUrl = ['file/delete'];
@@ -37,9 +38,13 @@ class Dropzone extends BaseWidget
     {
         // your logic here
         parent::init();
+
         $className = App::className($this->model);
         if (!$this->description) {
             $this->description = "Upload up to {$this->maxFiles} file(s)";
+        }
+        if ($this->tag) {
+            $this->parameters['UploadForm[tag]'] = $this->tag;
         }
         $this->parameters[App::request('csrfParam')] = App::request('csrfToken');
         $this->parameters['UploadForm[modelName]'] = $className;

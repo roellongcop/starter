@@ -164,7 +164,7 @@ $js = <<< JS
     });
     
     $(document).on('click', autoCompleteItems, function() {
-        getMyFiles('{$myImageFilesUrl}?keywords=' + $(searchInput).val() );
+        getMyFiles('{$myImageFilesUrl}&keywords=' + $(searchInput).val() );
     });
 
     $(document).on("pjax:beforeSend", function() { 
@@ -201,13 +201,13 @@ $js = <<< JS
 
         if(event.key === 'Enter') {
             e.preventDefault();
-            getMyFiles('{$myImageFilesUrl}?keywords=' + input.val() );
+            getMyFiles('{$myImageFilesUrl}&keywords=' + input.val() );
         }
     });
 
     $(document).on('input', searchInput, function(e) { 
         if($(this).val() == '') {
-            getMyFiles('{$myImageFilesUrl}?keywords=' + $(this).val());
+            getMyFiles('{$myImageFilesUrl}&keywords=' + $(this).val());
         }
     });
 
@@ -228,7 +228,7 @@ $js = <<< JS
     });
 
     $(document).on('click', imageGalleryBtn, function() {
-        getMyFiles('{$myImageFilesUrl}?keywords=' + $(searchInput).val());
+        getMyFiles('{$myImageFilesUrl}&keywords=' + $(searchInput).val());
         hideMyPhotosButton();
         hideCropperBtnOptions();
         resetImageProperties();
@@ -594,6 +594,7 @@ CSS);
 
                             <div class="tab-pane fade webcam-tab-container" id="webcam-tab-<?= $id ?>" role="tabpanel">
                                 <?= Webcam::widget([
+                                    'tag' => $tag,
                                     'withNameInput' => false,
                                     'withInput' => false,
                                     'model' => $model,

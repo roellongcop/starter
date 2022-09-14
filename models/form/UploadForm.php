@@ -15,6 +15,7 @@ class UploadForm extends \yii\base\Model
     public $fileInput;
     public $token;
     public $extensions;
+    public $tag;
 
     public function init()
     {
@@ -32,7 +33,7 @@ class UploadForm extends \yii\base\Model
     {
         return [
             [['modelName'], 'required'],
-            [['modelName', 'token'], 'string'],
+            [['modelName', 'token', 'tag'], 'string'],
             [['extensions'], 'validateExtensions'],
             [
                 ['fileInput'], 
@@ -73,6 +74,7 @@ class UploadForm extends \yii\base\Model
 
         $file = new File([
             'name' => StringHelper::truncate($input->baseName, 255),
+            'tag' => $this->tag ?: ($this->modelName ?: App::className($this)),
             'location' => $location,
             'extension' => $input->extension,
             'size' => $input->size,

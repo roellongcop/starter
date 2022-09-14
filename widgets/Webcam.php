@@ -17,6 +17,8 @@ class Webcam extends BaseWidget
 
     public $withInput = true;
 
+    public $tag;
+
     public $videoOptions = [
         'width' => 2600,
         'height' => 1900,
@@ -70,6 +72,7 @@ class Webcam extends BaseWidget
             'modelName' => $this->modelName,
             'withInput' => $this->withInput,
             'withNameInput' => $this->withNameInput,
+            'tag' => $this->tag,
         ]);
     }
 }

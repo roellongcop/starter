@@ -27,7 +27,7 @@ class FileSearch extends File
     {
         return [
             [['id', 'size', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'extension', 'location', 'token', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'extension', 'location', 'token', 'created_at', 'updated_at', 'tag'], 'safe'],
             [['keywords', 'pagination', 'date_range', 'record_status'], 'safe'],
             [['keywords'], 'trim'],
         ];
@@ -86,6 +86,7 @@ class FileSearch extends File
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'extension' => $this->extension,
+            'tag' => $this->tag,
         ]);
         
         $query->andFilterWhere(['like', 'name', $this->name])
@@ -94,6 +95,7 @@ class FileSearch extends File
         
         $query->andFilterWhere(['or', 
             ['like', 'name', $this->keywords],  
+            ['like', 'tag', $this->keywords],  
             ['like', 'extension', $this->keywords],  
             ['like', 'token', $this->keywords],  
         ]);

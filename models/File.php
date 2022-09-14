@@ -9,9 +9,10 @@ use Imagine\Image\BoxInterface;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
+use app\helpers\Url;
 use app\models\ModelFile;
 use app\widgets\Anchor;
-use app\helpers\Url;
+use app\widgets\FileTagFilter;
 use yii\imagine\Image;
 
 /**
@@ -64,7 +65,8 @@ class File extends ActiveRecord
             [['size',], 'integer'],
             [['name', 'extension', 'size',], 'required'],
             [['location'], 'string'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'tag'], 'string', 'max' => 255],
+            [['tag'], 'safe'],
             [['extension'], 'string', 'max' => 16],
             ['extension', 'in', 'range' => array_merge(
                 self::EXTENSIONS['image'],
@@ -83,6 +85,7 @@ class File extends ActiveRecord
             'model_id' => 'Model ID',
             'model' => 'Model',
             'name' => 'Name',
+            'tag' => 'Tag',
             'extension' => 'Extension',
             'size' => 'Size',
             'location' => 'Location',
@@ -187,6 +190,7 @@ class File extends ActiveRecord
                 }
             ],
             
+            'tag' => ['attribute' => 'tag', 'format' => 'raw'],
             'extension' => ['attribute' => 'extension', 'format' => 'raw'],
             'size' => ['attribute' => 'size', 'format' => 'fileSize'],
             'location' => ['attribute' => 'location', 'format' => 'raw'],
@@ -199,6 +203,7 @@ class File extends ActiveRecord
         return [
             'previewImage:raw',
             'name:raw',
+            'tag:raw',
             'extension:raw',
             'size:raw',
             'location:raw',
@@ -344,5 +349,13 @@ class File extends ActiveRecord
         }
 
         return implode('/', ['image', $this->extension]);
+    }
+
+    public static function tagFilterBtn($activeTag='', $type='all')
+    {
+        return FileTagFilter::widget([
+            'activeTag' => $activeTag,
+            'type' => $type,
+        ]);
     }
 }

@@ -14,6 +14,7 @@ use app\widgets\ImageGallery;
                 'loading' => 'lazy',
             ]) ?>
             <?= ImageGallery::widget([
+                'tag' => 'Setting',
                 'model' => $model,
                 'attribute' => 'primary_logo',
                 'ajaxSuccess' => "
@@ -30,6 +31,7 @@ use app\widgets\ImageGallery;
                 'loading' => 'lazy',
             ]) ?>
             <?= ImageGallery::widget([
+                'tag' => 'Setting',
                 'model' => $model,
                 'attribute' => 'secondary_logo',
                 'ajaxSuccess' => "
@@ -46,6 +48,7 @@ use app\widgets\ImageGallery;
                 'loading' => 'lazy',
             ]) ?>
             <?= ImageGallery::widget([
+                'tag' => 'Setting',
                 'model' => $model,
                 'attribute' => 'favicon',
                 'ajaxSuccess' => "
@@ -64,6 +67,7 @@ use app\widgets\ImageGallery;
                 'loading' => 'lazy',
             ]) ?>
             <?= ImageGallery::widget([
+                'tag' => 'Setting',
                 'model' => $model,
                 'attribute' => 'image_holder',
                 'ajaxSuccess' => "

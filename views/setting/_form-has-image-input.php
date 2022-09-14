@@ -4,6 +4,7 @@ use app\helpers\Html;
 use app\widgets\ImageGallery;
 ?>
 <?= ImageGallery::widget([
+    'tag' => 'Setting',
     'model' => $model,
     'attribute' => 'value',
     'ajaxSuccess' => "
