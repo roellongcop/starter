@@ -33,8 +33,13 @@ class Html extends \yii\helpers\Html
 
     public static function navController($link)
     {
+        if(! filter_var($link, FILTER_VALIDATE_URL)) {
+            $link = App::baseUrl(\yii\helpers\Url::to($link));
+            $link = str_replace('//', '/', $link);
+        }
+
         $request = new Request([
-            'url' => parse_url(\yii\helpers\Url::to($link, true), PHP_URL_PATH)
+            'url' => parse_url($link, PHP_URL_PATH)
         ]);
         $url = App::urlManager()->parseRequest($request);
         list($controller, $actionID) = App::app()->createController($url[0]);
