@@ -455,11 +455,11 @@ class App {
 		return self::schema()->getTableNames();
 	}
 
-	public static function publishedUrl($path='')
+	public static function publishedUrl($path='', $basePath='')
 	{
-		return self::app()->assetManager->getPublishedUrl(
-			self::app()->view->theme->basePath
-		) . $path;
+		$basePath = $basePath ?: self::app()->view->theme->basePath;
+
+		return self::app()->assetManager->getPublishedUrl($basePath) . $path;
 	}
 
 	public static function appName()
