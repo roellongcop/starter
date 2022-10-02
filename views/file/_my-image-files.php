@@ -8,7 +8,7 @@ use yii\helpers\StringHelper;
 <?= Html::image($model->token, ['w' => 120], [
     'class' => "img-thumbnail pointer",
     'loading' => 'lazy',
-    'data-src' => Url::to(['file/display', 'token' => $model->token]),
+    'data-src' => Url::image($model),
     'data-id' => $model->id,
     'data-name' => $model->name,
     'data-extension' => $model->extension,

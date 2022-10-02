@@ -177,7 +177,7 @@ class File extends ActiveRecord
 
     public function getPreviewImage()
     {
-        return Html::image($this->token, [
+        return Html::image($this, [
             'w' => 50, 
             'h' => 50,
             'ratio' => 'false',
