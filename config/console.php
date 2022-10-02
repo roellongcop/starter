@@ -15,6 +15,7 @@ $config = [
         '@consoleWebroot' => dirname(__DIR__) . '/web',
     ],
     'components' => [
+        'imageResize' => ['class' => 'app\components\ImageResizeComponent'],
         'db' => ['class' => 'app\components\ConnectionComponent'],
         'queue' => [
             'class' => 'app\components\QueueComponent',

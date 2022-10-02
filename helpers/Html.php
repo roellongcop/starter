@@ -49,6 +49,7 @@ class Html extends \yii\helpers\Html
 
     public static function image($token, $params=[], $options=[])
     {
+        $options['class'] = ($options['class'] ?? '') . ' mw-' . ($params['w'] ?? 0);
         return parent::img(Url::image($token, $params), $options);
     }
 

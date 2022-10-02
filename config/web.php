@@ -17,6 +17,7 @@ $config = [
         ],
     ],
     'components' => [
+        'imageResize' => ['class' => 'app\components\ImageResizeComponent'],
         'db' => ['class' => 'app\components\ConnectionComponent'],
         'queue' => [
             'class' => 'app\components\QueueComponent',

@@ -31,23 +31,30 @@ class ViewComponent extends \yii\web\View
 
         $this->registerJs($js, \yii\web\View::POS_HEAD, 'app');
         $this->registerCss(<<< CSS
-            .page-loading * {
-                opacity: 0;
-                pointer-events: none;
-                -webkit-touch-callout: none; /* iOS Safari */
-                -webkit-user-select: none; /* Safari */
-                -khtml-user-select: none; /* Konqueror HTML */
-                -moz-user-select: none; /* Old versions of Firefox */
-                -ms-user-select: none; /* Internet Explorer/Edge */
-                user-select: none; /* Non-prefixed version, currently
+            .mw-500 {width: -webkit-fill-available !important; max-width: 500px !important;}
+            .mw-400 {width: -webkit-fill-available !important; max-width: 400px !important;}
+            .mw-200 {width: -webkit-fill-available !important; max-width: 200px !important;}
+            .mw-150 {width: -webkit-fill-available !important; max-width: 150px !important;}
+            .mw-100 {width: -webkit-fill-available !important; max-width: 100px !important;}
+            .mw-120 {width: -webkit-fill-available !important; max-width: 120px !important;}
+            
+            /*.page-loading * {*/
+                /*opacity: 0;*/
+                /*pointer-events: none;*/
+                /*-webkit-touch-callout: none;*/ /* iOS Safari */
+                /*-webkit-user-select: none;*/ /* Safari */
+                /*-khtml-user-select: none;*/ /* Konqueror HTML */
+                /*-moz-user-select: none;*/ /* Old versions of Firefox */
+                /*-ms-user-select: none;*/ /* Internet Explorer/Edge */
+                /*user-select: none;*/ /* Non-prefixed version, currently
                     supported by Chrome, Edge, Opera and Firefox */
-            }
+            /*}*/
             /*.page-loading::before {
                 content: "Loading...";
             }*/
-            .page-loading {
+            /*.page-loading {
                 background: white url('{$loadingIcon}') no-repeat center center / 10rem;
-            }
+            }*/
         CSS);
     }
 

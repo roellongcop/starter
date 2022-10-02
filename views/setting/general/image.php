@@ -19,7 +19,7 @@ use app\widgets\ImageGallery;
                 'attribute' => 'primary_logo',
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
-                        $('img.primary_logo').attr('src', s.src + '&w=200');
+                        $('img.primary_logo').attr('src', s.src);
                     }
                 ",
             ]) ?> 
@@ -36,7 +36,7 @@ use app\widgets\ImageGallery;
                 'attribute' => 'secondary_logo',
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
-                        $('img.secondary_logo').attr('src', s.src + '&w=200');
+                        $('img.secondary_logo').attr('src', s.src);
                     }
                 ",
             ]) ?> 
@@ -53,7 +53,7 @@ use app\widgets\ImageGallery;
                 'attribute' => 'favicon',
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
-                        $('img.favicon').attr('src', s.src + '&w=200');
+                        $('img.favicon').attr('src', s.src);
                     }
                 ",
             ]) ?> 
@@ -72,7 +72,7 @@ use app\widgets\ImageGallery;
                 'attribute' => 'image_holder',
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
-                        $('img.image_holder').attr('src', s.src + '&w=200');
+                        $('img.image_holder').attr('src', s.src);
                     }
                 ",
             ]) ?> 

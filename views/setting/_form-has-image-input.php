@@ -18,7 +18,7 @@ use app\widgets\ImageGallery;
             setTimeout(function() {
                 KTApp.unblock('#sipc');
             }, 1000);
-            $('#sipc img').attr('src', s.src + '&w=200')
+            $('#sipc img').attr('src', s.src)
         }
     ",
 ]) ?> 

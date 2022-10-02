@@ -314,7 +314,7 @@ $js = <<< JS
     });
 
     $(document).on('click', editBtn, function() {
-        image.src = selectedImage.path + '&w=500';
+        image.src = selectedImage.path;
         if (cropper) {
             cropper.destroy();
         }

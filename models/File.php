@@ -108,6 +108,15 @@ class File extends ActiveRecord
             ->all();
     }
 
+    public function getDisplayPath($w='', $h='')
+    {
+        $w = $w ?: $this->width;
+        $h = $h ?: $this->height;
+
+        return Url::image($this, ['w' => $w, 'h' => $h]);
+        // return App::baseUrl($this->location);
+    }
+
     public function getDisplayRootPath()
     {
         $doc_path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) 
@@ -135,6 +144,7 @@ class File extends ActiveRecord
             case 'pdf': $path .= 'pdf.png'; break;
             case 'xml': $path .= 'xml.png'; break;
             default:
+                return Url::image($this, $params);
                 $path = array_merge(['file/display', 'token' => $this->token], $params);
                 $path = Url::to($path, $fullpath);
                 break;
@@ -146,13 +156,23 @@ class File extends ActiveRecord
     public function show($params=[], $w=150)
     {
         if ($this->isDocument) {
-            $params['style'] = "width:200px;height:auto";
+            $params['style'] = $params['style'] ?? "width:{$w}px;height:auto";
 
-            return Html::img($this->display, $params);
+            return Html::img(Url::image($this, ['w' => $w]), $params);
         }
         else {
-            return Html::img(['file/display', 'token' => $this->token, 'w' => $w,], $params);
+            return Html::img(Url::image($this, ['w' => $w]), $params);
         }
+    }
+
+    public function getUrlImage($params=[])
+    {
+        return Url::image($this, $params);
+    }
+
+    public function getTruncatedName($char=25)
+    {
+        return StringHelper::truncate($this->name, $char);
     }
 
     public function getPreviewImage()
@@ -357,5 +377,10 @@ class File extends ActiveRecord
             'activeTag' => $activeTag,
             'type' => $type,
         ]);
+    }
+
+    public function getLocationPath()
+    {
+        return Url::home(true) . $this->location;
     }
 }

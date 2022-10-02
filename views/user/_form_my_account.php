@@ -55,7 +55,7 @@ use app\widgets\ImageGallery;
                 'attribute' => 'photo',
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
-                        $('.user-photo').attr('src', s.src + '&w=200');
+                        $('.user-photo').attr('src', s.src);
                     }
                 ",
             ]) ?> 
