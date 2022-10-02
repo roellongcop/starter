@@ -29,9 +29,7 @@ $config = [
         'view' => ['class' => '\app\components\ViewComponent'],
         'session' => ['class' => 'app\components\DbSessionComponent'],
         'user' => ['class' => 'app\components\UserComponent'],
-        'urlManager' => [
-            'class' => 'app\components\UrlManagerComponent',
-        ],
+        'urlManager' => ['class' => 'app\components\UrlManagerComponent'],
         'pdf' => ['class' => '\app\components\PdfComponent'],
         'request' => ['class' => '\app\components\RequestComponent'],
         'cache' => ['class' => 'yii\caching\FileCache'],
