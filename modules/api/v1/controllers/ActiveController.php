@@ -3,7 +3,6 @@
 namespace app\modules\api\v1\controllers;
 
 use yii\web\Response;
-use app\helpers\App;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
@@ -14,20 +13,6 @@ use yii\filters\auth\QueryParamAuth;
  */
 abstract class ActiveController extends \yii\rest\ActiveController
 {
-
-    public function beforeAction($action)
-    {
-        App::component('response')->formatters = [
-            Response::FORMAT_JSON => [
-                'class' => 'yii\web\JsonResponseFormatter',
-                'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
-                'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
-            ],
-        ];
-
-        return parent::beforeAction($action);
-    }
-
     public function behaviors()
     {
         $behaviors = parent::behaviors();
