@@ -26,6 +26,7 @@ class Version1Module extends \yii\base\Module
         Yii::$app->user->enableSession = false;
 
         Yii::$app->setComponents([
+            'user' => 'app\modules\api\v1\components\UserComponent',
             'request' => 'app\modules\api\v1\components\RequestComponent',
             'response' => 'app\modules\api\v1\components\ResponseComponent',
         ]);
