@@ -22,9 +22,6 @@ class Version1Module extends \yii\base\Module
         parent::init();
 
         // custom initialization code goes here
-
-        Yii::$app->user->enableSession = false;
-
         Yii::$app->setComponents([
             'user' => 'app\modules\api\v1\components\UserComponent',
             'request' => 'app\modules\api\v1\components\RequestComponent',
