@@ -26,22 +26,8 @@ class Version1Module extends \yii\base\Module
         Yii::$app->user->enableSession = false;
 
         Yii::$app->setComponents([
-            'request' => [
-                'class' => '\app\components\RequestComponent',
-                'parsers' => [
-                    'application/json' => '\yii\web\JsonParser'
-                ]
-            ],
-            'response' => [
-                'class' => '\app\modules\api\v1\components\ResponseComponent',
-                'formatters' => [
-                    \yii\web\Response::FORMAT_JSON => [
-                        'class' => 'yii\web\JsonResponseFormatter',
-                        'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
-                        'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
-                    ],
-                ]
-            ],
+            'request' => 'app\modules\api\v1\components\RequestComponent',
+            'response' => 'app\modules\api\v1\components\ResponseComponent',
         ]);
     }
 }

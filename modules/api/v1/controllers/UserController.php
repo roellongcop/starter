@@ -20,11 +20,11 @@ class UserController extends ActiveController
     {
         $actions = parent::actions();
 
-        $actions['index']['dataFilter'] = [
+        /*$actions['index']['dataFilter'] = [
             'class' => \yii\data\ActiveDataFilter::class,
             // 'attributeMap' => ['username' => 'username'],
             'searchModel' => \app\models\search\UserSearch::class
-        ];
+        ];*/
 
         $actions['index']['prepareSearchQuery'] = function($query, $requestParams) {
             $query->andFilterWhere(['or', 

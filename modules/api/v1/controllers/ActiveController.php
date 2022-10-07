@@ -3,10 +3,6 @@
 namespace app\modules\api\v1\controllers;
 
 use yii\web\Response;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBasicAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
 
 /**
  * Default controller for the `api` module
@@ -28,11 +24,11 @@ abstract class ActiveController extends \yii\rest\ActiveController
 
         
         // $behaviors['authenticator'] = [
-        //     'class' => CompositeAuth::class,
+        //     'class' => 'yii\filters\auth\CompositeAuth',
         //     'authMethods' => [
-        //         HttpBasicAuth::class,
-        //         HttpBearerAuth::class,
-        //         QueryParamAuth::class,
+        //         'yii\filters\auth\HttpBasicAuth',
+        //         'yii\filters\auth\HttpBearerAuth',
+        //         'yii\filters\auth\QueryParamAuth',
         //     ],
         // ];
         return $behaviors;
