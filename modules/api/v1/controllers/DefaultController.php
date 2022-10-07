@@ -2,12 +2,10 @@
 
 namespace app\modules\api\v1\controllers;
 
-use yii\web\Controller;
-
 /**
  * Default controller for the `api` module
  */
-class DefaultController extends Controller
+class DefaultController extends RestController
 {
     /**
      * Renders the index view for the module
@@ -15,6 +13,6 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return 'app\modules\api\v1\controllers';
+        return ['app\modules\api\v1\controllers'];
     }
 }
