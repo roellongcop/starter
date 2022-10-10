@@ -837,26 +837,26 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $behaviors['TimestampBehavior'] = [
             'class' => 'yii\behaviors\TimestampBehavior',
             'value' => new Expression('UTC_TIMESTAMP'),
-        ],
+        ];
         $behaviors['BlameableBehavior'] = [
             'class' => 'yii\behaviors\BlameableBehavior',
             'defaultValue' => 0
-        ],
+        ];
         $behaviors['AttributeTypecastBehavior'] = [
             'class' => 'yii\behaviors\AttributeTypecastBehavior'
-        ],
+        ];
         $behaviors['LogBehavior'] = [
             'class' => 'app\behaviors\LogBehavior'
-        ],
+        ];
         $behaviors['ProcessBehavior'] = [
             'class' => 'app\behaviors\ProcessBehavior'
-        ],
+        ];
         $behaviors['TokenBehavior'] = [
             'class' => 'app\behaviors\TokenBehavior'
-        ],
+        ];
         $behaviors['JsonBehavior'] = [
             'class' => 'app\behaviors\JsonBehavior'
-        ],
+        ];
 
         return $behaviors;
     }
