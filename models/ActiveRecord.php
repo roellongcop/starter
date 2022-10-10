@@ -832,31 +832,33 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function behaviors()
     {
-        return [
-            'TimestampBehavior' => [
-                'class' => 'yii\behaviors\TimestampBehavior',
-                'value' => new Expression('UTC_TIMESTAMP'),
-            ],
-            'BlameableBehavior' => [
-                'class' => 'yii\behaviors\BlameableBehavior',
-                'defaultValue' => 0
-            ],
-            'AttributeTypecastBehavior' => [
-                'class' => 'yii\behaviors\AttributeTypecastBehavior'
-            ],
-            'LogBehavior' => [
-                'class' => 'app\behaviors\LogBehavior'
-            ],
-            'ProcessBehavior' => [
-                'class' => 'app\behaviors\ProcessBehavior'
-            ],
-            'TokenBehavior' => [
-                'class' => 'app\behaviors\TokenBehavior'
-            ],
-            'JsonBehavior' => [
-                'class' => 'app\behaviors\JsonBehavior'
-            ],
-        ];
+        $behaviors = parent::behaviors();
+
+        $behaviors['TimestampBehavior'] = [
+            'class' => 'yii\behaviors\TimestampBehavior',
+            'value' => new Expression('UTC_TIMESTAMP'),
+        ],
+        $behaviors['BlameableBehavior'] = [
+            'class' => 'yii\behaviors\BlameableBehavior',
+            'defaultValue' => 0
+        ],
+        $behaviors['AttributeTypecastBehavior'] = [
+            'class' => 'yii\behaviors\AttributeTypecastBehavior'
+        ],
+        $behaviors['LogBehavior'] = [
+            'class' => 'app\behaviors\LogBehavior'
+        ],
+        $behaviors['ProcessBehavior'] = [
+            'class' => 'app\behaviors\ProcessBehavior'
+        ],
+        $behaviors['TokenBehavior'] = [
+            'class' => 'app\behaviors\TokenBehavior'
+        ],
+        $behaviors['JsonBehavior'] = [
+            'class' => 'app\behaviors\JsonBehavior'
+        ],
+
+        return $behaviors;
     }
 
     public static function one($value, $key='id', $array=false)
