@@ -82,6 +82,8 @@ class CustomEmailForm extends \yii\base\Model
                 $this->content = Yii::$app->mailer->render($this->template, $this->parameters);
             }
 
+            $mailer->setHtmlBody($this->content);
+
             $mailer->setSubject($this->subject)
                 ->setFrom([$this->from => $this->sender_name])
                 ->setTo($this->to);
@@ -94,9 +96,6 @@ class CustomEmailForm extends \yii\base\Model
                 $mailer->setBcc($this->cc);
             }
             
-            if ($this->content) {
-                $mailer->setHtmlBody($this->content);
-            }
 
             switch ($type) {
                 case 'multiple':
