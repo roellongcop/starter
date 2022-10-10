@@ -77,7 +77,8 @@ class CustomEmailForm extends \yii\base\Model
         if ($this->validate()) {
 
             if ($this->template) {
-                $mailer = Yii::$app->mailer->compose($this->template, $this->parameters);
+                // $mailer = Yii::$app->mailer->compose($this->template, $this->parameters);
+                $this->content = Yii::$app->mailer->render($this->template, $this->parameters);
             }
             else {
                 $mailer = Yii::$app->mailer->compose();
