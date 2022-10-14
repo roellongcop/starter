@@ -243,7 +243,7 @@ class File extends ActiveRecord
             $this->location
         ];
 
-        return implode('/', $paths);
+        return implode(DIRECTORY_SEPARATOR, $paths);
     }
 
     public function getIsDocument()

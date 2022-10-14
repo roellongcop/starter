@@ -75,7 +75,7 @@ class UploadForm extends \yii\base\Model
         $file = new File([
             'name' => StringHelper::truncate($input->baseName, 255),
             'tag' => $this->tag ?: ($this->modelName ?: App::className($this)),
-            'location' => $location,
+            'location' => str_replace('\\', '/', $location),
             'extension' => $input->extension,
             'size' => $input->size,
            // 'token' => $this->token ?: ''
@@ -104,12 +104,12 @@ class UploadForm extends \yii\base\Model
         $this->createDirectory($folders);
         $this->createIndexFile($folders);
 
-        $file_path = implode('/', $folders);
+        $file_path = implode(DIRECTORY_SEPARATOR, $folders);
 
         do {
             $time = time();
             $string = App::randomString(10);
-            $path = "{$file_path}/{$input->baseName}-{$string}-{$time}.{$input->extension}";
+            $path = "{$file_path}".DIRECTORY_SEPARATOR."{$input->baseName}-{$string}-{$time}.{$input->extension}";
         } while (file_exists($path));
         
         return $path;
@@ -120,7 +120,7 @@ class UploadForm extends \yii\base\Model
         if (! App::isWeb()) {
             array_unshift($folders, Yii::getAlias('@consoleWebroot'));
         }
-        $file_path = implode('/', $folders);
+        $file_path = implode(DIRECTORY_SEPARATOR, $folders);
         FileHelper::createDirectory($file_path);
     }
 
@@ -138,10 +138,10 @@ class UploadForm extends \yii\base\Model
 
     public function createIndexFile($folders)
     {
-        $path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) . '/';
+        $path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) . DIRECTORY_SEPARATOR;
 
         foreach ($folders as $folder) {
-            $path .=  "{$folder}/";
+            $path .=  "{$folder}" . DIRECTORY_SEPARATOR;
 
             $this->createHtaccessFile($path);
             if (! file_exists($path . 'index.php')) {
