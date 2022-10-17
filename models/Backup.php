@@ -165,10 +165,10 @@ class Backup extends ActiveRecord
     {
         // ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-        
-        $file = $this->sqlFileLocation;
-        if (file_exists($file) && $this->generated) {
-            $sql = file_get_contents($file);
+        $file = $this->file;
+
+        if ($file && $file->exists && $this->generated) {
+            $sql = file_get_contents($file->rootPath);
             App::execute($sql);
 
             return true;

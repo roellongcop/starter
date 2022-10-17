@@ -242,7 +242,7 @@ class AccessComponent extends Component
  				&& !in_array($controller, $ignoreControllers)) {
  				$searchModelClass = Inflector::id2camel($controller) . 'Search';
 
-            	$path = Yii::getAlias("@app/models/search/{$searchModelClass}.php");
+            	$path = FileHelper::normalizePath(Yii::getAlias("@app/models/search/{$searchModelClass}.php"));
 
  				if (file_exists($path)) {
  					$data[$searchModelClass] = Inflector::camel2words(

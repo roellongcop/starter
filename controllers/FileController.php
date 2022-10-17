@@ -59,22 +59,18 @@ class FileController extends Controller
 
         $file = File::findByToken($token) ?: File::findByToken(App::setting('image')->image_holder);
 
-        if ($file) { 
+        if ($file && $file->exists) { 
+            $w = ($w)? (int)$w: $file->width;
+            $h = ($h)? (int)$h: $file->height;
 
-            if (file_exists($file->displayRootPath)) {
-                    
-                $w = ($w)? (int)$w: $file->width;
-                $h = ($h)? (int)$h: $file->height;
-
-                if ($ratio == 'true') {
-                    return $file->getImageRatio($w, $quality, $extension);
-                }
-                elseif ($crop == 'true') {
-                    return $file->getImageCrop($w, $h, $quality, $extension);
-                }
-                else {
-                    return $file->getImage($w, $h, $quality, $extension);
-                }
+            if ($ratio == 'true') {
+                return $file->getImageRatio($w, $quality, $extension);
+            }
+            elseif ($crop == 'true') {
+                return $file->getImageCrop($w, $h, $quality, $extension);
+            }
+            else {
+                return $file->getImage($w, $h, $quality, $extension);
             }
         }
 

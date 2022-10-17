@@ -13,15 +13,12 @@ class Url extends \yii\helpers\Url
     {
         $file = is_object($token)? $token: File::findByToken($token);
 
-        if ($file && file_exists($file->displayRootPath)) { 
-            // code...
-        }
+        if ($file && $file->exists) { }
         else {
             $file = File::findByToken(App::setting('image')->image_holder);
         }
 
-        if ($file && file_exists($file->displayRootPath)) {
-
+        if ($file && $file->exists) {
             return App::component('imageResize')->getUrl(
                 $file->displayRootPath, 
                 (($params['w'] ?? ($file->width ?: 100)) ?: 100), 
@@ -32,11 +29,7 @@ class Url extends \yii\helpers\Url
                 $file->location
             );
         }
-
-        // if ($displayPath) {
-        //     $file = File::findByToken($token);
-        //     return $file ? $file->displayPath: '';
-        // }
+        
         return self::to(array_merge(['file/display', 'token' => $token], $params), $scheme);
     }
 

@@ -13,7 +13,7 @@ use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\imagine\Image;
 
-class ImageResizeComponent {
+class ImageResizeComponent extends \yii\base\Component {
 
 	const IMAGE_OUTBOUND = ManipulatorInterface::THUMBNAIL_OUTBOUND;
 	const IMAGE_INSET = ManipulatorInterface::THUMBNAIL_INSET;
@@ -263,7 +263,7 @@ class ImageResizeComponent {
 	        if (! App::isWeb()) {
 	            array_unshift($folders, Yii::getAlias('@consoleWebroot'));
 	        }
-	        $file_path = implode('/', $folders);
+	        $file_path = implode(DIRECTORY_SEPARATOR, $folders);
 	        FileHelper::createDirectory($file_path);
         	$this->createIndexFile($folders);
     	}
@@ -283,10 +283,10 @@ class ImageResizeComponent {
 
     public function createIndexFile($folders)
     {
-        $path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) . '/';
+        $path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) . DIRECTORY_SEPARATOR;
 
         foreach ($folders as $folder) {
-            $path .=  "{$folder}/";
+            $path .=  $folder . DIRECTORY_SEPARATOR;
 
             $this->createHtaccessFile($path);
             if (! file_exists($path . 'index.php')) {

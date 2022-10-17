@@ -9,8 +9,8 @@ use Imagine\Image\BoxInterface;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
+use yii\helpers\FileHelper;
 use app\helpers\Url;
-use app\models\ModelFile;
 use app\widgets\Anchor;
 use app\widgets\FileTagFilter;
 use yii\imagine\Image;
@@ -119,14 +119,16 @@ class File extends ActiveRecord
 
     public function getDisplayRootPath()
     {
-        $doc_path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) 
-            . '/default/file-preview/';
+        $doc_path = FileHelper::normalizePath((App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) 
+        . '/default/file-preview/');
 
         return ($this->isImage)? $this->rootPath: $this->getDisplay([], false, $doc_path);
     }
 
     public function getDisplay($params = [], $fullpath=false, $path='@web/default/file-preview/')
     {
+        $path = strcmp($path, DIRECTORY_SEPARATOR) === 0 ? $path: $path . DIRECTORY_SEPARATOR;
+
         switch ($this->extension) {
             case 'css': $path .= 'css.png'; break;
             case 'zip': $path .= 'zip.png'; break;
@@ -145,8 +147,6 @@ class File extends ActiveRecord
             case 'xml': $path .= 'xml.png'; break;
             default:
                 return Url::image($this, $params);
-                $path = array_merge(['file/display', 'token' => $this->token], $params);
-                $path = Url::to($path, $fullpath);
                 break;
         }
 
@@ -243,7 +243,7 @@ class File extends ActiveRecord
             $this->location
         ];
 
-        return implode(DIRECTORY_SEPARATOR, $paths);
+        return FileHelper::normalizePath(implode(DIRECTORY_SEPARATOR, $paths));
     }
 
     public function getIsDocument()
@@ -266,12 +266,19 @@ class File extends ActiveRecord
         return $this->dimension['height'];
     }
 
+    public function getExists()
+    {
+        if ($this->rootPath) {
+            return file_exists($this->rootPath);
+        }
+    }
+
     public function getDimension()
     {
         $width = 0;
         $height = 0;
 
-        if (file_exists($this->displayRootPath)) {
+        if ($this->exists) {
             list($width, $height) = getimagesize($this->displayRootPath);
         }
         return [
@@ -282,7 +289,7 @@ class File extends ActiveRecord
 
     public function getImageRatio($w, $quality=100, $extension='png')
     {
-        if (file_exists($this->displayRootPath)) {
+        if ($this->exists) {
             $imagineObj = new Imagine();
             $image = $imagineObj->open($this->displayRootPath);
             $image->resize($image->getSize()->widen($w));
@@ -293,7 +300,7 @@ class File extends ActiveRecord
 
     public function getImageCrop($w, $h, $quality=100, $extension='png')
     {
-        if (file_exists($this->displayRootPath)) {
+        if ($this->exists) {
             $image = Image::crop($this->displayRootPath, $w, $h); 
 
             return $image->show($extension, ['quality' => $quality]); 
@@ -302,7 +309,7 @@ class File extends ActiveRecord
 
     public function getImage($w, $h, $quality=100, $extension='png')
     {
-        if (file_exists($this->displayRootPath)) {
+        if ($this->exists) {
             $image = Image::getImagine() 
                 ->open($this->displayRootPath) 
                 ->resize(new Box($w, $h));
@@ -332,9 +339,8 @@ class File extends ActiveRecord
 
     public function download()
     {
-        $file = $this->rootPath;
-        if (file_exists($file)) {
-            App::response()->sendFile($file, implode('.', [$this->name, $this->extension]));
+        if ($this->exists) {
+            App::response()->sendFile($this->rootPath, implode('.', [$this->name, $this->extension]));
 
             return true;
         }
@@ -343,7 +349,7 @@ class File extends ActiveRecord
 
     public static function findByToken($token)
     {
-        return static::find()
+        return self::find()
             ->where(['token' => $token])
             ->one();
     }

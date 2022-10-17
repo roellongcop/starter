@@ -22,7 +22,7 @@ class BackupJobTest extends \Codeception\Test\Unit
             date('m'),
         ];
 
-        expect_that(file_exists(implode('/', $folders)));
+        expect_that(file_exists(implode(DIRECTORY_SEPARATOR, $folders)));
 
         $file = $this->tester->grabRecord('app\models\File', [
             'name' => 'first-backup',
