@@ -146,7 +146,7 @@ class File extends ActiveRecord
             case 'pdf': $path .= 'pdf.png'; break;
             case 'xml': $path .= 'xml.png'; break;
             default:
-                return Url::image($this, $params);
+                // return Url::image($this, $params);
                 break;
         }
 
