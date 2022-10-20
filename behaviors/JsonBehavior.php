@@ -11,13 +11,14 @@ class JsonBehavior extends \yii\base\Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
-            ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
-            ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
+            ActiveRecord::EVENT_BEFORE_INSERT => 'encode',
+            ActiveRecord::EVENT_BEFORE_UPDATE => 'encode',
+            ActiveRecord::EVENT_AFTER_FIND => 'decode',
+            ActiveRecord::EVENT_INIT => 'decode',
         ];
     }
 
-    public function beforeSave($event)
+    public function encode($event)
     {
         if ($this->fields) {
             foreach ($this->fields as $e) {
@@ -30,7 +31,7 @@ class JsonBehavior extends \yii\base\Behavior
         }
     }
 
-    public function afterFind($event)
+    public function decode($event)
     {
         if ($this->fields) {
             foreach ($this->fields as $e) {
