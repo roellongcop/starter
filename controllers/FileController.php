@@ -196,7 +196,7 @@ class FileController extends Controller
 
                     $result['status'] = 'success';
                     $result['message'] = 'Uploaded';
-                    $result['src'] = $file->display;
+                    $result['src'] = $file->urlImage;
                     $result['file'] = $file;
                 }
                 else {
