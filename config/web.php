@@ -66,28 +66,20 @@ if (YII_ENV_DEV) {
         //'allowedIPs' => ['127.0.0.1', '::1'],
 
         'generators' => [
-            // generator name
             'crud' => [
-                // generator class
                 'class' => 'app\gii\crud\starter\Generator',
-                // 'class' => 'yii\gii\generators\crud\Generator',
                 'templates' => [
-                    // template name => path to template
                     'starter' => '@app/gii/crud/starter/default',
+                    'default' => '@vendor/yiisoft/yii2-gii/src/generators/crud/default'
                 ]
             ],
             'model' => [
                 'class' => 'app\gii\model\starter\Generator',
                 'templates' => [ 
                     'starter' => '@app/gii/model/starter/default', 
+                    'default' => '@vendor/yiisoft/yii2-gii/src/generators/model/default'
                 ]
             ],
-            'controller' => [
-                'class' => 'yii\gii\generators\controller\Generator',
-                'templates' => [ 
-                    'api' => '@app/gii/controller/api/default', 
-                ]
-            ]
         ],
     ];
 }
