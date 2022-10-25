@@ -208,4 +208,11 @@ class Html extends \yii\helpers\Html
 
         return $lines;
     }
+
+    public static function popupCenter($text, $url = null, $options = [])
+    {
+        $options['onClick'] = "popupCenter('{$url}')";
+
+        return self::a($text, '#', $options);
+    }
 }
