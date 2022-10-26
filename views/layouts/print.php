@@ -10,6 +10,16 @@ use app\helpers\Url;
 
 AppAsset::register($this);
 // MainAsset::register($this);
+
+$sleep = $this->params['sleep'] ?? 1300;
+
+$this->registerJs(<<< JS
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+    (async () => {
+        await sleep({$sleep});
+        window.print()
+    })();
+JS);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -22,6 +32,27 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style type="text/css">
+        table { page-break-inside:auto; }
+        tr    { page-break-inside:avoid;}
+        thead { display:table-header-group; }
+        tfoot { display:table-footer-group;}
+        body {
+            background-color: #fff;
+            width: 100%;
+        }
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                width: 100%;
+            }
+        }
+        @page { 
+            size: A4;
+            margin: 0.3in 0.5in;
+            -webkit-print-color-adjust: exact;
+        }
+    </style>
     <script type="text/javascript">
         var base_url = "<?= Url::home(true) ?>"
     </script>

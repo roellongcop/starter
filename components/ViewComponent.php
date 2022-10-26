@@ -2,6 +2,7 @@
 
 namespace app\components;
 
+use Yii;
 use app\helpers\App;
 use yii\helpers\Json;
 use app\helpers\Url;
@@ -74,5 +75,32 @@ class ViewComponent extends \yii\web\View
         JS;
 
         parent::registerjs($js, $position, $key);
+    }
+
+    public function registerWidgetCssFile ($files)
+    {
+        $files = is_array($files) ? $files: [$files];
+
+        foreach ($files as $css) {
+            $this->registerCssFile(App::publishedUrl("/widget/css/{$css}.css", Yii::getAlias('@app/assets')), [
+                'depends' => [
+                    'yii\web\YiiAsset',
+                    'yii\bootstrap\BootstrapAsset',
+                ]
+            ]);
+        }
+    }
+
+    public function registerWidgetJsFile ($files)
+    {
+        $files = is_array($files) ? $files: [$files];
+        foreach ($files as $js) {
+            $this->registerJsFile(App::publishedUrl("/widget/js/{$js}.js", Yii::getAlias('@app/assets')), [
+                'depends' => [
+                    'yii\web\YiiAsset',
+                    'yii\bootstrap\BootstrapAsset',
+                ]
+            ]);
+        }
     }
 }

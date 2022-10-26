@@ -3,12 +3,7 @@
 use app\helpers\Html;
 use app\helpers\Url;
 
-$this->registerCss(<<< CSS
-	.dropdown-item-hover {
-        color: #101221;
-        background-color: #F3F6F9;
-    }
-CSS);
+$this->registerWidgetCssFile('file-tag-filter');
 ?>
 
 <div class="text-right mt-2">

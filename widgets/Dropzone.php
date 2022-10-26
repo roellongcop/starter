@@ -68,13 +68,13 @@ class Dropzone extends BaseWidget
             //     }
             // })";
 
-            $this->removedFile = "
+            $this->removedFile = <<< JS
                 let inp = $('input[data-uuid=\"'+ file.upload.uuid +'\"]');
 
                 if(inp.length) {
                     inp.remove();
                 }
-            ";
+            JS;
         }
 
         if (!$this->acceptedFiles) {
@@ -100,9 +100,11 @@ class Dropzone extends BaseWidget
             ((is_array($this->model->{$this->attribute}))? '[]': '')
         ]);
 
-        $this->success = $this->success .= "
-            $(\"#dropzone-{$this->id}\").append(\"<input name='{$this->inputName}' data-uuid='\"+ file.upload.uuid +\"' type='hidden' value='\"+ s.file.token +\"'> \");
-        ";
+        $this->success = <<< JS
+            {$this->success}
+
+            $('#dropzone-{$this->id}').append("<input name='{$this->inputName}' data-uuid='"+ file.upload.uuid +"' type='hidden' value='"+ s.file.token +"'> ");
+        JS;
 
         if ($this->files) {
             $this->files = ArrayHelper::toArray($this->files, [
@@ -145,7 +147,7 @@ class Dropzone extends BaseWidget
             'paramName' => $this->paramName,
             'maxFiles' => $this->maxFiles,
             'maxFilesize' => $this->maxFilesize,
-            'addRemoveLinks' => $this->addRemoveLinks,
+            'addRemoveLinks' => $this->addRemoveLinks ? 'true': 'false',
             'url' => $this->url,
             'title' => $this->title,
             'description' => $this->description,

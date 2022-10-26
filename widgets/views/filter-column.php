@@ -6,87 +6,12 @@ use app\helpers\Html;
 use yii\helpers\Inflector;
 
 $model = new UserMeta();
-$js = <<< JS
-    let filter = function(form, success) {
-        KTApp.blockPage();
-        $.ajax({
-            url: form.attr('action'),
-            method: form.attr('method'),
-            data: form.serialize(),
-            dataType: 'json',
-            success: success,
-            error: function(e) {
-                toastr.error(e.responseText);
-                KTApp.unblockPage();
-            }
-        });
-    }
 
-    $('.check-all-filter').on('change', function() {
-        let input = $(this),
-            is_checked = input.is(':checked'),
-            inputs = input.parents('.dropdown-menu').find('input._filter_column_checkbox'),
-            form = input.closest('form'),
-            th = $('th.table-th'),
-            td = $('td.table-td');
-
-        if (is_checked) {
-            inputs.prop('checked', true);
-        }
-        else {
-            inputs.prop('checked', false);
-        }
-
-        filter(form, function(s) {
-            if(s.status == 'success') {
-                if(is_checked) {
-                    th.show();
-                    td.show();
-                }
-                else {
-                    th.hide();
-                    td.hide();
-                }
-            }
-            else {
-                toastr.error(s.error);
-            }
-            KTApp.unblockPage();
-        });
-        
-    });
-
-    $('._filter_column_checkbox').on('change', function() {
-
-        let input = $(this),
-            key = input.data('key'),
-            th = $('th[data-key="'+ key +'"]'),
-            td = $('td[data-key="'+ key +'"]'),
-            is_checked = input.is(':checked'),
-            form = input.closest('form');
-
-        filter(form, function(s) {
-            if(s.status == 'success') {
-                if(is_checked) {
-                    th.show();
-                    td.show();
-                }
-                else {
-                    th.hide();
-                    td.hide();
-                }
-            }
-            else {
-                toastr.error(s.error);
-            }
-            KTApp.unblockPage();
-        });
-        
-    });
-
-
-JS;
-$this->registerWidgetJs($widgetFunction, $js);
+$this->registerWidgetJsFile('filter-column');
+$this->registerWidgetJs($widgetFunction, <<< JS
+    const filterColumn = new FilterColumnWidget();
+    filterColumn.init();
+JS);
 ?>
 <div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;"> 
     <a href="#!" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm  mr-3 btn-sm _filter_columns"  aria-haspopup="true" aria-expanded="false" style="border: 1px solid #ccc;" data-toggle="dropdown">

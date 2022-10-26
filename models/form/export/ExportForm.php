@@ -6,6 +6,10 @@ use Yii;
 
 class ExportForm extends \yii\base\Model
 {
+    public $exportColumnsName = 'exportColumns';
+    public $excelIgnoreAttributesName = 'excelIgnoreAttributes';
+    public $tableColumnsName = 'tableColumns';
+    
     const EXPORT_ACTIONS = [
         'print', 
         'export-pdf', 

@@ -62,7 +62,7 @@ let popupCenter = (url, title='Print Report', w=1000, h=700) => {
       left=left
       `
     )
-    if (window.focus) newWindow.print();
+    // if (window.focus) newWindow.print();
 }
 
 $(document).ready(function() {

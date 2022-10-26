@@ -73,7 +73,6 @@ class DateRange extends BaseWidget
     {
         return $this->render('date-range', [
             'model' => $this->model,
-            'id' => $this->id,
             'title' => $this->title,
             'name' => $this->name,
             'start' => $this->start,
