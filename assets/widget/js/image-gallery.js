@@ -2,16 +2,16 @@ class imageGalleryWidget {
     rotate = 0;
 
     constructor(options) {
-        this.id = options?.id;
-        this.uploadFileName = options?.uploadFileName;
-        this.finalCropWidth = options?.finalCropWidth;
+        this.id              = options?.id;
+        this.uploadFileName  = options?.uploadFileName;
+        this.finalCropWidth  = options?.finalCropWidth;
         this.finalCropHeight = options?.finalCropHeight;
-        this.cropperOptions = options?.cropperOptions;
+        this.cropperOptions  = options?.cropperOptions;
         this.myImageFilesUrl = options?.myImageFilesUrl;
-        this.ajaxSuccess = options?.ajaxSuccess;
-        this.defaultPhoto = options?.defaultPhoto;
-        this.parameters = options?.parameters;
-        this.uploadUrl = options?.uploadUrl;
+        this.ajaxSuccess     = options?.ajaxSuccess;
+        this.defaultPhoto    = options?.defaultPhoto;
+        this.parameters      = options?.parameters;
+        this.uploadUrl       = options?.uploadUrl;
 
         this.selectedImage = {
             id: 0,
@@ -23,25 +23,23 @@ class imageGalleryWidget {
         };
 
         this.image = document.getElementById(`cropper-image-${this.id}`);
-        this.cropper = new Cropper(this.image, this.cropperOptions);
+        
 
         this.container = `#image-gallery-container-${this.id}`;
         
-        this.btnCloseModal = this.createElement('.btn-close-modal');
-
-        this.autoCompleteItems = this.createElement('.autocomplete-items div');
-
+        this.btnCloseModal        = this.createElement('.btn-close-modal');
+        this.autoCompleteItems    = this.createElement('.autocomplete-items div');
         this.fileIdInput          = this.createElement('.file-id-input');
         this.imageGalleryBtn      = this.createElement('.image-gallery-btn');
         this.imageGalleryModal    = this.createElement('.image-gallery-modal');
         this.myPhotosTabLink      = this.createElement('.my-photos-tab-link');
         this.cropperTabLink       = this.createElement('.cropper-tab-link');
-        this.webcamTabLink       = this.createElement('.webcam-tab-link');
+        this.webcamTabLink        = this.createElement('.webcam-tab-link');
         this.myPhotosTabContainer = this.createElement('.my-photos-tab-container');
         this.cropperTabContainer  = this.createElement('.cropper-tab-container');
         this.searchInput          = this.createElement('.search-input');
         this.myPhotosContainer    = this.createElement('.my-photos-container');
-        this.imageNameInput    = this.createElement('.image-name');
+        this.imageNameInput       = this.createElement('.image-name');
 
         this.imageName      = this.createElement('.td-name');
         this.imageExtension = this.createElement('.td-extension');
@@ -74,6 +72,20 @@ class imageGalleryWidget {
         this.cropperBtnOptions = this.createElement('.btn-options');
 
         this.images = `${this.myPhotosContainer} img`;
+
+        this.createCropper();
+    }
+    reCreateCropper() {
+        this.destroyCropper();
+        this.createCropper();
+    }
+    destroyCropper() {
+        if (this.cropper) {
+            this.cropper.destroy();
+        }
+    }
+    createCropper() {
+        this.cropper = new Cropper(this.image, this.cropperOptions);
     }
     createElement(el) {
         return `${this.container} ${el}`;
@@ -147,14 +159,14 @@ class imageGalleryWidget {
         });
     }
     loadMyFiles(keywords) {
-        self.getMyFiles(self.myImageFilesUrl + '&keywords=' + keywords);
+        this.getMyFiles(this.myImageFilesUrl + '&keywords=' + keywords);
     }
 
     hideGalleryModal() {
-        $(self.imageGalleryModal).modal('hide');
+        $(this.imageGalleryModal).modal('hide');
     }
     showGalleryModal() {
-        $(self.imageGalleryModal).modal('show');
+        $(this.imageGalleryModal).modal('show');
     }
     showBodyLoading() {
         KTApp.block('body', {
@@ -188,39 +200,43 @@ class imageGalleryWidget {
         });
 
         $(document).on('click', self.images, function() {
-            self.selectedImage.id = $(this).data('id');
-            self.selectedImage.path = $(this).data('src');
-            self.selectedImage.token = $(this).data('token');
-            self.selectedImage.name = $(this).data('name');
-            self.selectedImage.mimetype = $(this).data('mimetype');
-            self.selectedImage.extension = $(this).data('extension');
+            let clickImage = $(this);
 
-            $(self.imageName).text($(this).data('name'));
-            $(self.imageExtension).text($(this).data('extension'));
-            $(self.imageSize).text($(this).data('size'));
-            $(self.imageWidth).text($(this).data('width') + 'px');
-            $(self.imageHeight).text($(this).data('height') + 'px');
-            $(self.imageLocation).text($(this).data('location'));
-            $(self.imageToken).text($(this).data('token'));
-            $(self.imageCreatedAt).text($(this).data('created_at'));
+            self.selectedImage.id = clickImage.data('id');
+            self.selectedImage.path = clickImage.data('src');
+            self.selectedImage.token = clickImage.data('token');
+            self.selectedImage.name = clickImage.data('name');
+            self.selectedImage.mimetype = clickImage.data('mimetype');
+            self.selectedImage.extension = clickImage.data('extension');
+
+            $(self.imageName).text(clickImage.data('name'));
+            $(self.imageExtension).text(clickImage.data('extension'));
+            $(self.imageSize).text(clickImage.data('size'));
+            $(self.imageWidth).text(clickImage.data('width') + 'px');
+            $(self.imageHeight).text(clickImage.data('height') + 'px');
+            $(self.imageLocation).text(clickImage.data('location'));
+            $(self.imageToken).text(clickImage.data('token'));
+            $(self.imageCreatedAt).text(clickImage.data('created_at'));
             $(self.images).css('outline', '');
 
-            $(this).css('outline', '2px solid #1bc5bd');
+            clickImage.css('outline', '2px solid #1bc5bd');
             self.showMyPhotosButton();
         });
 
         $(document).on('keydown', self.searchInput, function(e) { 
-            if(event.key === 'Enter') {
+            if(e.key === 'Enter') {
                 e.preventDefault();
                 self.loadMyFiles($(this).val());
             }
         });
 
-        $(document).on('input', self.searchInput, function(e) { 
-            if((val = $(this).val()) != null) {
-                self.loadMyFiles(val);
-            }
-        });
+        // $(document).on('input', self.searchInput, function(e) { 
+        //     let val = $(this).val();
+
+        //     if(val) {
+        //         self.loadMyFiles(val);
+        //     }
+        // });
 
         $(document).on('click', self.confirmBtn, function() {
             let s = {
@@ -228,7 +244,7 @@ class imageGalleryWidget {
                 src: self.selectedImage.path
             };
             self.showBodyLoading();
-            self.ajaxSuccess
+            self.ajaxSuccess(s);
             setTimeout(() => {
                 self.hideBodyLoading();
             }, 500);
@@ -236,8 +252,8 @@ class imageGalleryWidget {
             self.hideGalleryModal();
         });
 
-        $(document).on('click', imageGalleryBtn, function() {
-            self.loadMyFiles($(searchInput).val());
+        $(document).on('click', self.imageGalleryBtn, function() {
+            self.loadMyFiles($(self.searchInput).val());
             self.hideMyPhotosButton();
             self.hideCropperBtnOptions();
             self.resetImageProperties();
@@ -246,11 +262,7 @@ class imageGalleryWidget {
 
             self.image.src = self.defaultPhoto;
 
-            if (self.cropper) {
-                self.cropper.destroy();
-            }
-
-            self.cropper = new Cropper(self.image, self.cropperOptions);
+            self.reCreateCropper();
 
             $(self.myPhotosTabLink).trigger('click');
             self.showGalleryModal();
@@ -273,123 +285,112 @@ class imageGalleryWidget {
         $(document).on('click', self.selectImageBtn, function(){ 
             $(self.selectImageInput).trigger('click'); 
         });
+
+        $(document).on('change', self.selectImageInput, function() {
+            let reader = new FileReader();
+        
+            if(this.files && this.files[0]) {
+                self.selectedImage.mimetype = this.files[0]['type'];
+                self.selectedImage.name = this.files[0]['name'];
+                $(self.imageNameInput).val(self.selectedImage.name);
+        
+                let type = self.selectedImage.mimetype.split("/");
+                self.selectedImage.extension = type[1];
+        
+                reader.onload = function(e) {
+                    self.image.src = e.target.result;
+                    self.reCreateCropper();
+                    $(self.selectImageInput).value = null;
+        
+                    self.resetImagePropertiesCrop();
+                }
+                reader.readAsDataURL(this.files[0]); 
+            }
+            else {
+                alert('Select Image');
+            }
+        });
+
+        $(document).on('click', self.cropperTabLink, function() {
+            $(self.editBtn).hide();
+            $(self.confirmBtn).hide();
+            self.showCropperBtnOptions();
+        });
+
+        $(document).on('click', self.webcamTabLink, function() {
+            $(self.editBtn).hide();
+            $(self.confirmBtn).hide();
+            self.hideCropperBtnOptions();
+        });
+
+        $(document).on('click', self.myPhotosTabLink, function() {
+            self.hideCropperBtnOptions();
+            self.showMyPhotosButton();
+        });
+
+        $(document).on('click', self.editBtn, function() {
+            self.image.src = self.selectedImage.path;
+            self.reCreateCropper();
+            $(self.cropperTabLink).trigger('click');
+            $(self.imageNameInput).val(self.selectedImage.name);
+        
+            $(self.cropImageName).text($(self.imageName).text());
+            $(self.cropImageExtension).text($(self.imageExtension).text());
+            $(self.cropImageSize).text($(self.imageSize).text());
+            $(self.cropImageWidth).text($(self.imageWidth).text());
+            $(self.cropImageHeight).text($(self.imageHeight).text());
+            $(self.cropImageLocation).text($(self.imageLocation).text());
+            $(self.cropImageToken).text($(self.imageToken).text());
+            $(self.cropImageCreatedAt).text($(self.imageCreatedAt).text());
+        });
+
+        $(document).on('click', self.btnCloseModal, function() {
+            self.hideGalleryModal();
+        });
+
+        $(document).on('click', self.saveImageBtn, function() {
+            self.cropper.getCroppedCanvas().toBlob((blob) => {
+                KTApp.block(self.cropperTabContainer, {
+                    overlayColor: '#000000',
+                    state: 'primary',
+                    message: 'Uploading...'
+                }); 
+            
+                const formData = new FormData();
+                // Pass the image file name as the third parameter if necessary.
+                formData.append('UploadForm[fileInput]', blob, $(self.imageNameInput).val() + '.' + self.selectedImage.extension);
+                let parameters = self.parameters;
+                for ( let key in parameters ) {
+                    formData.append(key, parameters[key]);
+                }
+        
+                $.ajax({
+                    url: self.uploadUrl,
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function(s) {
+                        if(s.status == 'success') {
+                            self.destroyCropper();
+                            $(self.fileIdInput).val(s.file.token);
+                            self.hideGalleryModal();
+                        }
+                        else {
+                            alert(s.message);
+                        }
+        
+                        self.ajaxSuccess(s);
+        
+                        KTApp.unblock(self.cropperTabContainer);
+                    },
+                    error:function(e) {
+                        alert(e.responseText);
+                        KTApp.unblockPage();
+                    },
+                });
+            }, self.selectedImage.mimetype);
+        });
     }
 }
-
-$(document).on('change', selectImageInput, function() {
-    let reader = new FileReader();
-
-    if(this.files && this.files[0]) {
-        selectedImage.mimetype = this.files[0]['type'];
-        selectedImage.name = this.files[0]['name'];
-        $(imageNameInput).val(selectedImage.name);
-
-        let type = selectedImage.mimetype.split("/");
-        selectedImage.extension = type[1];
-
-        reader.onload = function(e) {
-            image.src = e.target.result;
-            if (cropper) {
-                cropper.destroy();
-            }
-            cropper = new Cropper(image, options);
-            $(selectImageInput).value = null;
-
-            resetImagePropertiesCrop();
-        }
-        reader.readAsDataURL(this.files[0]); 
-    }
-    else {
-        alert('Select Image');
-    }
-});
-
-$(document).on('click', cropperTabLink, function() {
-    // resetMyPhotosTab();
-    $(editBtn).hide();
-    $(confirmBtn).hide();
-
-    showCropperBtnOptions();
-});
-
-$(document).on('click', webcamTabLink, function() {
-    $(editBtn).hide();
-    $(confirmBtn).hide();
-
-    hideCropperBtnOptions();
-});
-
-$(document).on('click', myPhotosTabLink, function() {
-    hideCropperBtnOptions();
-    showMyPhotosButton();
-});
-
-$(document).on('click', editBtn, function() {
-    image.src = selectedImage.path;
-    if (cropper) {
-        cropper.destroy();
-    }
-    cropper = new Cropper(image, options);
-    $(cropperTabLink).trigger('click');
-    $(imageNameInput).val(selectedImage.name);
-
-    $(cropImageName).text($(imageName).text());
-    $(cropImageExtension).text($(imageExtension).text());
-    $(cropImageSize).text($(imageSize).text());
-    $(cropImageWidth).text($(imageWidth).text());
-    $(cropImageHeight).text($(imageHeight).text());
-    $(cropImageLocation).text($(imageLocation).text());
-    $(cropImageToken).text($(imageToken).text());
-    $(cropImageCreatedAt).text($(imageCreatedAt).text());
-});
-
-$(document).on('click', btnCloseModal, function() {
-    $(imageGalleryModal).modal('hide');
-});
-
-$(document).on('click', saveImageBtn, function() {
-    cropper.getCroppedCanvas().toBlob((blob) => {
-        KTApp.block(cropperTabContainer, {
-            overlayColor: '#000000',
-            state: 'primary',
-            message: 'Uploading...'
-        }); 
-    
-        const formData = new FormData();
-        // Pass the image file name as the third parameter if necessary.
-        formData.append('UploadForm[fileInput]', blob, $(imageNameInput).val() + '.' + selectedImage.extension);
-        let parameters = {$parameters};
-        for ( let key in parameters ) {
-            formData.append(key, parameters[key]);
-        }
-
-        $.ajax({
-            url: '{$uploadUrl}',
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success: function(s) {
-                if(s.status == 'success') {
-                    if (cropper) {
-                        cropper.destroy();
-                    }
-                    $(fileIdInput).val(s.file.token);
-                    $(imageGalleryModal).modal('hide');
-                }
-                else {
-                    alert(s.message);
-                }
-
-                {$ajaxSuccess}
-
-                KTApp.unblock(cropperTabContainer);
-            },
-            error:function(e) {
-                alert(e.responseText);
-                KTApp.unblockPage();
-            },
-        });
-    }, selectedImage.mimetype);
-});

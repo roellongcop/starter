@@ -1,0 +1,27 @@
+.image-gallery-container table tbody tr td {
+    overflow-wrap: anywhere;
+    padding: 5px;
+}
+.image-gallery-container .br-dashed {
+    border-right: 1px dashed #ccc
+}
+.image-gallery-container table tbody tr th {
+    padding: 5px;
+}
+.image-gallery-container .d-flex {
+    display: grid !important;
+}
+.image-gallery-container .my-photos-tab-container img:hover {
+    outline: 2px solid #1bc5bd;
+}
+.image-gallery-container .cropper-tab-container {
+    margin: 0 auto;
+}
+/* Ensure the size of the image fit the container perfectly */
+.image-gallery-container .cropper-tab-container img {
+    display: block;
+    max-width: 100%;
+}
+.image-gallery-container .cropper-container {
+    margin: 0 auto;
+}
