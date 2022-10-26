@@ -54,7 +54,7 @@ $this->registerCss(<<< CSS
 CSS, [], 'autocomplete');
 
 $this->registerWidgetJs($widgetFunction, <<< JS
-	var ignoreKeys = [
+	let ignoreKeys = [
 		37, // left arrow key
 		38, // up arrow key
 		39, // right arrow key

@@ -8,7 +8,7 @@ use app\widgets\Webcam;
 use yii\widgets\Pjax;
 
 $js = <<< JS
-    var selectedImage = {
+    let selectedImage = {
             id: 0,
             path: '',
             token: '',
@@ -76,7 +76,7 @@ $js = <<< JS
 
     $(imageNameInput).val(selectedImage.name);
 
-    var resetImageProperties = function() {
+    let resetImageProperties = function() {
         $(imageName).text('None');
         $(imageExtension).text('None');
         $(imageSize).text('None');
@@ -87,7 +87,7 @@ $js = <<< JS
         $(imageCreatedAt).text('None');
     }
 
-    var resetImagePropertiesCrop = function() {
+    let resetImagePropertiesCrop = function() {
         $(cropImageName).text('None');
         $(cropImageExtension).text('None');
         $(cropImageSize).text('None');
@@ -98,25 +98,25 @@ $js = <<< JS
         $(cropImageCreatedAt).text('None');
     }
 
-    var hideCropperBtnOptions = function() {
+    let hideCropperBtnOptions = function() {
         $(cropperBtnOptions).hide();
     }
 
-    var showCropperBtnOptions = function() {
+    let showCropperBtnOptions = function() {
         $(cropperBtnOptions).show();
     }
 
-    var hideMyPhotosButton = function() {
+    let hideMyPhotosButton = function() {
         $(confirmBtn).hide();
         $(editBtn).hide();
     }
 
-    var showMyPhotosButton = function() {
+    let showMyPhotosButton = function() {
         $(confirmBtn).show();
         $(editBtn).show();
     }
 
-    var resetMyPhotosTab = function() {
+    let resetMyPhotosTab = function() {
         hideMyPhotosButton();
 
         $(images).css('border', '');
@@ -124,7 +124,7 @@ $js = <<< JS
         resetImageProperties();
     }
 
-    var showLoading = function() {
+    let showLoading = function() {
         KTApp.block(myPhotosContainer, {
             overlayColor: '#000000',
             message: 'Loading Images...',
@@ -132,11 +132,11 @@ $js = <<< JS
         });
     }
 
-    var hideLoading = function() {
+    let hideLoading = function() {
         KTApp.unblock(myPhotosContainer);
     }
 
-    var getMyFiles = function(url) {
+    let getMyFiles = function(url) {
         $(myPhotosContainer).html('');
         showLoading();
         let conf = {
@@ -266,14 +266,14 @@ $js = <<< JS
     });
 
     $(document).on('change', selectImageInput, function() {
-        var reader = new FileReader();
+        let reader = new FileReader();
 
         if(this.files && this.files[0]) {
             selectedImage.mimetype = this.files[0]['type'];
             selectedImage.name = this.files[0]['name'];
             $(imageNameInput).val(selectedImage.name);
 
-            var type = selectedImage.mimetype.split("/");
+            let type = selectedImage.mimetype.split("/");
             selectedImage.extension = type[1];
 
             reader.onload = function(e) {

@@ -61,8 +61,8 @@ class ViewComponent extends \yii\web\View
 	public function registerWidgetJs($widgetFunction, $js, $position = parent::POS_READY, $key = null)
     {
         $js = <<< JS
-            var {$widgetFunction} = function() {
-                var load = function() {
+            let {$widgetFunction} = function() {
+                let load = function() {
                     {$js}
                 }
                 return {
