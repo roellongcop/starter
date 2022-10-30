@@ -4,9 +4,8 @@ use app\helpers\Html;
 
 $this->registerWidgetJsFile('export-button');
 
-$this->registerWidgetJs($widgetFunction, <<< JS
-    const exportButton = new ExportButtonWidget();
-    exportButton.init();
+$this->registerJs(<<< JS
+    new ExportButtonWidget().init();
 JS);
 ?>
 <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="top">

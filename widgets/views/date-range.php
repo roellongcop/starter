@@ -2,16 +2,15 @@
 
 $this->registerWidgetJsFile('date-range');
 
-$this->registerWidgetJs($widgetFunction, <<< JS
-    const dateRange = new DateRangeWidget({
+$this->registerJs( <<< JS
+    new DateRangeWidget({
         start: '{$start}',
         end: '{$end}',
         all_start: '{$all_start}',
         all_end: '{$all_end}',
         ranges: {$ranges},
         id: '{$widgetId}',
-    });
-    dateRange.init();
+    }).init();
 JS);
 ?>
 <br>

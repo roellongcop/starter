@@ -10,8 +10,8 @@ use yii\widgets\Pjax;
 $this->registerWidgetCssFile('image-gallery');
 $this->registerWidgetJsFile('image-gallery');
 
-$this->registerWidgetJs($widgetFunction, <<< JS
-    const imageGalley = new imageGalleryWidget({
+$this->registerJs(<<< JS
+    new imageGalleryWidget({
         id: '{$widgetId}',
         uploadFileName: '{$uploadFileName}',
         finalCropWidth: {$finalCropWidth},
@@ -24,8 +24,7 @@ $this->registerWidgetJs($widgetFunction, <<< JS
         defaultPhoto: '{$defaultPhoto}',
         parameters: {$parameters},
         uploadUrl: '{$uploadUrl}'
-    });
-    imageGalley.init();
+    }).init();
 JS);
 ?>
 <div id="image-gallery-container-<?= $id ?>" class="image-gallery-container">
@@ -95,7 +94,7 @@ JS);
                                                 'class' => 'form-control search-input',
                                                 'placeholder' => 'Search Photo',
                                             ]),
-                                            'url' => Url::to(['file/find-by-keywords-image', 'tag' => $tag]),
+                                            'url' => Url::to(['file/find-by-keywords-image']),
                                             'submitOnclick' => false
                                         ]) ?>
                                         <?php Pjax::begin([

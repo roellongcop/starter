@@ -253,6 +253,7 @@ class imageGalleryWidget {
         });
 
         $(document).on('click', self.imageGalleryBtn, function() {
+            $(self.searchInput).val('');
             self.loadMyFiles($(self.searchInput).val());
             self.hideMyPhotosButton();
             self.hideCropperBtnOptions();

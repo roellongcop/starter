@@ -9,7 +9,8 @@ class FileTagFilter extends BaseWidget
 {
     public $activeTag;
     public $type = 'all';
-
+    public $keywords;
+    
     public $tags;
 
     public function init() 
@@ -22,6 +23,7 @@ class FileTagFilter extends BaseWidget
         $this->tags =  File::filter('tag', [
             'extension' => ($this->type == 'all' ? '': File::EXTENSIONS['image'])
         ]);
+        
     }
 
     /**
@@ -38,6 +40,7 @@ class FileTagFilter extends BaseWidget
             'type' => $this->type,
             'tags' => $this->tags,
             'action' => ($this->type == 'all')? 'my-files': 'my-image-files',
+            'keywords' => $this->keywords,
         ]);
     }
 }

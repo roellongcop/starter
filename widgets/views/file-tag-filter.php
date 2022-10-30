@@ -16,8 +16,8 @@ $this->registerWidgetCssFile('file-tag-filter');
             <?= Html::a('- ALL -', Url::to([$action, 'tag' => '']), [
                 'class' => 'dropdown-item ' . (($activeTag == '')? 'dropdown-item-hover': '')
             ]); ?>
-            <?=	Html::foreach ($tags, function($tag) use($activeTag, $action) {
-				return Html::a($tag, Url::to([$action, 'tag' => $tag]), [
+            <?=	Html::foreach ($tags, function($tag) use($activeTag, $action, $keywords) {
+				return Html::a($tag, Url::to([$action, 'tag' => $tag, 'keywords' => $keywords]), [
 				    'class' => 'dropdown-item ' . (($activeTag == $tag)? 'dropdown-item-hover': '')
 				]);
 			}); ?>

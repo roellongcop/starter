@@ -8,9 +8,8 @@ use yii\helpers\Inflector;
 $model = new UserMeta();
 
 $this->registerWidgetJsFile('filter-column');
-$this->registerWidgetJs($widgetFunction, <<< JS
-    const filterColumn = new FilterColumnWidget();
-    filterColumn.init();
+$this->registerJs(<<< JS
+    new FilterColumnWidget().init();
 JS);
 ?>
 <div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;"> 

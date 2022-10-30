@@ -5,7 +5,11 @@ use app\helpers\Html;
 use app\widgets\FileTagFilter;
 use yii\widgets\ListView;
 
-$tagFilterBtn = FileTagFilter::widget(['activeTag' => App::get('tag')]);
+$tagFilterBtn = FileTagFilter::widget([
+    'activeTag' => App::get('tag'), 
+    'keywords' => $searchModel->keywords,
+    'type' => 'image'
+]);
 
 $layout = Html::ifElse(
     $dataProvider->totalCount > 12, 

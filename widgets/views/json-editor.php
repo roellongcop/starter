@@ -1,16 +1,13 @@
 <?php
 
-$js = <<< JS
-    let container = document.getElementById('{$id}')
+$this->registerWidgetJsFile('json-editor');
 
-    if (container) {
-
-        let options = {$options}
-
-        let editor = new JSONEditor(container, options, {$data})
-        editors['{$id}'] = editor;
-    }
-JS;
-$this->registerWidgetJs($widgetFunction, $js);
+$this->registerJs(<<< JS
+    new JsonEditorWidget({
+        id: '{$widgetId}',
+        config: {$options},
+        data: {$data},
+    }).init();
+JS);
 ?>
-<div id="<?= $id ?>"> </div>
+<div id="<?= $widgetId ?>"> </div>

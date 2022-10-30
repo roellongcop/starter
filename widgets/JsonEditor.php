@@ -9,8 +9,6 @@ class JsonEditor extends BaseWidget
         'mode' =>  'view'
     ];
     
-    
-
     public function init() 
     {
         // your logic here
@@ -29,7 +27,6 @@ class JsonEditor extends BaseWidget
     {
         return $this->render('json-editor', [
             'data' => $this->data,
-            'id' => $this->id,
             'options' => $this->options,
         ]);
     }

@@ -5,8 +5,8 @@ use app\helpers\Html;
 $this->registerWidgetCssFile('dropzone');
 $this->registerWidgetJsFile('dropzone');
 
-$this->registerWidgetJs($widgetFunction, <<< JS
-    const dropzone = new DropzoneWidget({
+$this->registerJs(<<< JS
+    new DropzoneWidget({
         id: '{$id}',
         url: '{$url}',
         paramName: '{$paramName}',
@@ -27,9 +27,7 @@ $this->registerWidgetJs($widgetFunction, <<< JS
         success: function (file, s) {
             {$success}
         },
-    });
-
-    dropzone.init();
+    }).init();
 JS);
 ?>
 
