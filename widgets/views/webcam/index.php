@@ -14,7 +14,7 @@ $this->registerJs(<<< JS
     	buttonOptions: {$buttonOptionsEncoded},
     	modelName: '{$modelName}',
     	tag: '{$tag}',
-    	ajaxSuccess: (s) => {
+        ajaxSuccess: function(s) {
     		{$ajaxSuccess}	
 		},
     }).init();
