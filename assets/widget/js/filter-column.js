@@ -1,5 +1,10 @@
 class FilterColumnWidget {
 
+    constructor(options) {
+        this.widgetId = options?.widgetId
+    }
+    
+
     filter(form, success) {
         KTApp.blockPage();
         $.ajax({
@@ -18,7 +23,7 @@ class FilterColumnWidget {
     init() {
         const self = this;
 
-        $('.check-all-filter').on('change', function() {
+        $(`#${self.widgetId} .check-all-filter`).on('change', function() {
             let input = $(this),
                 is_checked = input.is(':checked'),
                 inputs = input.parents('.dropdown-menu').find('input._filter_column_checkbox'),
@@ -46,7 +51,7 @@ class FilterColumnWidget {
             });
         });
 
-        $('._filter_column_checkbox').on('change', function() {
+        $(`#${self.widgetId} ._filter_column_checkbox`).on('change', function() {
             let input = $(this),
                 key = input.data('key'),
                 th = $('th[data-key="'+ key +'"]'),

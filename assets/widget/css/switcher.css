@@ -1,0 +1,7 @@
+.switch.switch-outline.switch-danger-custom input:empty ~ span:before {
+    border: 2px solid #f64e60 !important;
+}
+
+.switch.switch-outline.switch-danger-custom input:empty ~ span:after {
+    background-color: #f64e60 !important;
+}

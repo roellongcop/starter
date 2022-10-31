@@ -1,7 +1,11 @@
 class ExportButtonWidget {
 
+    constructor(options) {
+        this.widgetId = options?.widgetId
+    }
+    
     init() {
-        $('.export-link').on('click', function() {
+        $(`#${this.widgetId} .export-link`).on('click', function() {
             KTApp.blockPage({
                 overlayColor: '#000000',
                 message: 'Exporting...',

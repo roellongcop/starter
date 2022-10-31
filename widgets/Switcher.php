@@ -41,7 +41,6 @@ class Switcher extends BaseWidget
             'checked' => $this->checked,
             'onchange' => $this->onchange,
             'data_link' => $this->data_link,
-            'id' => $this->id,
         ]);
     }
 }

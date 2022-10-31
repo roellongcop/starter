@@ -9,10 +9,12 @@ $model = new UserMeta();
 
 $this->registerWidgetJsFile('filter-column');
 $this->registerJs(<<< JS
-    new FilterColumnWidget().init();
+    new FilterColumnWidget({
+        widgetId: '{$widgetId}'
+    }).init();
 JS);
 ?>
-<div data-widget_id="<?= $id ?>" class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;"> 
+<div id="<?= $widgetId ?>" data-widget_id="<?= $widgetId ?>" class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;"> 
     <a href="#!" class="btn btn-fixed-height btn-bg-white btn-text-dark-50 btn-hover-text-primary btn-icon-primary font-weight-bolder font-size-sm  mr-3 btn-sm _filter_columns"  aria-haspopup="true" aria-expanded="false" style="border: 1px solid #ccc;" data-toggle="dropdown">
         <span class="svg-icon svg-icon-md">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -24,7 +26,7 @@ JS);
         </span>
         <?= $title ?>
     </a>
-    <div data-widget_id="<?= $id ?>" class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0" style="">
+    <div data-widget_id="<?= $widgetId ?>" class="dropdown-menu dropdown-menu-sm dropdown-menu-right p-0 m-0" style="">
         <!--begin::Navigation-->
         <?= Html::beginForm(['user-meta/filter'], 'post',  [
             'style' => 'max-height: 56vh; overflow: auto;',

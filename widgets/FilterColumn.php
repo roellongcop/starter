@@ -29,7 +29,6 @@ class FilterColumn extends BaseWidget
             'searchModel' => $this->searchModel,
             'title' => $this->title,
             'buttonTitle' => $this->buttonTitle,
-            'id' => $this->id,
             'filterColumns' => $this->filterColumns,
         ]);
     }

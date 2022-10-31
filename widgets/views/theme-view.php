@@ -6,7 +6,7 @@ use app\helpers\Html;
 use app\helpers\Url;
 use app\widgets\ActiveForm;
 ?>
-<div id="container-<?= $id ?>" class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
+<div id="container-<?= $widgetId ?>" class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
 	<!--begin::Header-->
 	<div class="card-header border-0 pt-6 p11">
 		<h3 class="card-title align-items-start flex-column">

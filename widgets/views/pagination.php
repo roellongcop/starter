@@ -1,7 +1,11 @@
 <?php
 
+$this->registerWidgetJsFile('pagination');
+
 $this->registerJs(<<< JS
-    $('.kt-selectpicker-{$widgetId}').selectpicker();
+    new PaginationWidget({
+        widgetId: '{$widgetId}',
+    }).init();
 JS);
 ?>
 <p class="mt-5 font-weight-bold"><?= $title ?></p>

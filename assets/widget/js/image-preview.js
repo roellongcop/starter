@@ -13,7 +13,7 @@ class ImagePreviewWidget {
                 let preview_id = $(input).attr('id')
 
                 reader.onload = function(e) {
-                    $('#' + preview_id + '-preview').attr('src', e.target.result);
+                    $(`#${preview_id}-preview`).attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(input.files[0]); 

@@ -31,7 +31,6 @@ class ThemeView extends BaseWidget
             'theme' => $this->theme,
             'currentTheme' => $this->currentTheme,
             'uploadUrl' => $this->uploadUrl,
-            'id' => $this->id,
         ]);
     }
 }
