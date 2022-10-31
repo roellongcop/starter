@@ -895,10 +895,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $models;
     }
 
-    public static function filter($key='id', $condition=[], $limit=false)
+    public static function filter($key='id', $condition=[], $limit=false, $andFilterWhere=[])
     {
         $models = static::find()
             ->andFilterWhere($condition)
+            ->andFilterWhere($andFilterWhere)
             ->orderBy([$key => SORT_ASC])
             ->limit($limit)
             ->groupBy($key)
@@ -972,12 +973,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function findByKeywords($keywords='', $attributes, $limit=10)
+    public static function findByKeywords($keywords='', $attributes, $limit=10, $andFilterWhere=[])
     {
         $data = [];
         foreach ($attributes as $attribute) {
             $data = array_merge($data, array_values(
-                static::filter($attribute, ['LIKE', $attribute, $keywords], $limit)
+                static::filter($attribute, ['LIKE', $attribute, $keywords], $limitl, $andFilterWhere)
             ));
         }
 

@@ -15,17 +15,17 @@ use yii\web\UploadedFile;
  */
 class FileController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($tag='', $keywords='')
     {
         return $this->asJson(
-            File::findByKeywords($keywords, ['name', 'tag', 'extension', 'token'])
+            File::findByKeywords($keywords, ['name', 'tag', 'extension', 'token'], 10, ['tag' => $tag])
         );
     }
 
-    public function actionFindByKeywordsImage($keywords='')
+    public function actionFindByKeywordsImage($tag='', $keywords='')
     {
         return $this->asJson(
-            File::findByKeywordsImage($keywords, ['name', 'tag', 'extension', 'token'])
+            File::findByKeywordsImage($keywords, ['name', 'tag', 'extension', 'token'], 10, ['tag' => $tag])
         );
     }
      

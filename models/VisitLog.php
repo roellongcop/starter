@@ -139,15 +139,16 @@ class VisitLog extends ActiveRecord
         ];
     }
 
-    public static function findByKeywords($keywords='', $attributes, $limit=10)
+    public static function findByKeywords($keywords='', $attributes, $limit=10, $andFilterWhere)
     {
-        return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit) {
+        return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit, $andFilterWhere) {
             return self::find()
                 ->select("{$attribute} AS data")
                 ->alias('v')
                 ->joinWith('user u')
                 ->groupBy($attribute)
                 ->where(['LIKE', $attribute, $keywords])
+                ->andFilterWhere($andFilterWhere)
                 ->limit($limit)
                 ->asArray()
                 ->all();
