@@ -5,9 +5,7 @@ use app\helpers\Html;
 $this->registerWidgetJsFile('export-button');
 
 $this->registerJs(<<< JS
-    new ExportButtonWidget({
-        widgetId: '{$widgetId}'
-    }).init();
+    new ExportButtonWidget({widgetId: '{$widgetId}'}).init();
 JS);
 ?>
 <div id="<?= $widgetId ?>" class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="top">

@@ -3,13 +3,14 @@
 use app\widgets\AnchorForm;
 use app\helpers\Html;
 
+
+$this->registerWidgetJsFile('confirm-bulk-action');
+
 $this->registerJs(<<< JS
-	$('.btn-remove-from-list').click(function() {
-		$(this).closest('.card').remove();
-	});
+    new ConfirmBulkActionWidget({widgetId: '{$widgetId}'}).init();
 JS);
 ?>
-<div>
+<div id="<?= $widgetId ?>">
 	<div class="alert alert-custom alert-light-primary fade show mb-5" role="alert" style="padding: 0.5rem 2rem;">
 		<div class="alert-icon">
 			<i class="flaticon-warning"></i>

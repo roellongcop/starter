@@ -3,9 +3,7 @@
 $this->registerWidgetJsFile('pagination');
 
 $this->registerJs(<<< JS
-    new PaginationWidget({
-        widgetId: '{$widgetId}',
-    }).init();
+    new PaginationWidget({widgetId: '{$widgetId}'}).init();
 JS);
 ?>
 <p class="mt-5 font-weight-bold"><?= $title ?></p>

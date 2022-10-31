@@ -9,9 +9,7 @@ $model = new UserMeta();
 
 $this->registerWidgetJsFile('filter-column');
 $this->registerJs(<<< JS
-    new FilterColumnWidget({
-        widgetId: '{$widgetId}'
-    }).init();
+    new FilterColumnWidget({widgetId: '{$widgetId}'}).init();
 JS);
 ?>
 <div id="<?= $widgetId ?>" data-widget_id="<?= $widgetId ?>" class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="top" data-original-title="" style="float: right;margin-right: -8px;"> 

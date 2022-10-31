@@ -26,7 +26,6 @@ class Nestable extends BaseWidget
     public function run()
     {
         return $this->render('nestable/index', [
-            'id' => $this->id,
             'controller_actions' => $this->controller_actions,
             'navigations' => $this->navigations,
             'defaultName' => $this->defaultName,

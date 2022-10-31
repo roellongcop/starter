@@ -73,6 +73,10 @@ class Webcam extends BaseWidget
             'withInput' => $this->withInput,
             'withNameInput' => $this->withNameInput,
             'tag' => $this->tag,
+
+            'videoOptionsEncoded' => json_encode($this->videoOptions),
+            'buttonOptionsEncoded' => json_encode($this->buttonOptions),
+            'canvasOptionsEncoded' => json_encode($this->canvasOptions),
         ]);
     }
 }

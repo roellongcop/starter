@@ -19,7 +19,7 @@ use app\helpers\Html;
             <div class="col-md-3">
                 <input data-id="link"
                     required
-                        list="link-list-<?= $id ?>" 
+                    list="link-list-<?= $widgetId ?>" 
                     value="<?= $nav['link'] ?? '' ?>" 
                     placeholder="Link"
                     class="form-control">
@@ -63,12 +63,12 @@ use app\helpers\Html;
             </span>
         </div>
     </div>
-    <?= Html::if(isset($nav['sub']), function() use($data_id, $nav, $id) {
+    <?= Html::if(isset($nav['sub']), function() use($data_id, $nav, $widgetId) {
         return Html::tag('ol', 
             $this->render('_navigation', [
                 'data_id' => $data_id,
                 'navigations' => $nav['sub'] ?? [],
-                'id' => $id,
+                'widgetId' => $widgetId,
             ]),
             ['class' => 'dd-list']
         );

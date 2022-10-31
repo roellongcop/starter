@@ -4,13 +4,8 @@ $this->registerWidgetCssFile('switcher');
 $this->registerWidgetJsFile('switcher');
 
 $this->registerJs(<<< JS
-    new SwitcherWidget({
-        widgetId: '{$widgetId}',
-    }).init();
+    new SwitcherWidget({widgetId: '{$widgetId}'}).init();
 JS);
-$this->registerCss(<<< CSS
-    
-CSS);
 ?>
 <span id="<?= $widgetId ?>" class="switch switch-outline switch-icon switch-sm switch-success <?= ($checked) ? '': 'switch-danger-custom' ?>" data-widget_id="<?= $widgetId ?>">
 	<label>
