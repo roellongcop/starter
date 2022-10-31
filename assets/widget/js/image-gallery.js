@@ -12,6 +12,8 @@ class imageGalleryWidget {
         this.defaultPhoto    = options?.defaultPhoto;
         this.parameters      = options?.parameters;
         this.uploadUrl       = options?.uploadUrl;
+        this.findByKeywordsImageUrl = options?.findByKeywordsImageUrl;
+        this.tag = options?.tag;
 
         this.selectedImage = {
             id: 0,
@@ -72,6 +74,9 @@ class imageGalleryWidget {
         this.cropperBtnOptions = this.createElement('.btn-options');
 
         this.images = `${this.myPhotosContainer} img`;
+
+        this.filterTag = this.createElement('a[data-tag]');
+        this.autoComplete = this.createElement('.autocomplete');
 
         this.createCropper();
     }
@@ -158,8 +163,21 @@ class imageGalleryWidget {
             }
         });
     }
+
+    updateQueryStringParameter(uri, key, value) {
+      var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+      var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+      if (uri.match(re)) {
+        return uri.replace(re, '$1' + key + "=" + value + '$2');
+      }
+      else {
+        return uri + separator + key + "=" + value;
+      }
+    }
     loadMyFiles(keywords) {
-        this.getMyFiles(this.myImageFilesUrl + '&keywords=' + keywords);
+        let url = this.updateQueryStringParameter(this.myImageFilesUrl + '&keywords=' + keywords, 'tag', this.tag);
+
+        this.getMyFiles(url);
     }
 
     hideGalleryModal() {
@@ -181,6 +199,20 @@ class imageGalleryWidget {
 
     init() {
         const self = this;
+
+        $(document).on('click', self.filterTag, function() {
+            let widgetId = $(self.autoComplete).attr('id'),
+                tag = $(this).data('tag');
+
+            self.tag = tag;
+
+            new AutoCompleteWidget({
+                ajax: true,
+                url: `${self.findByKeywordsImageUrl}?tag=${tag}`,
+                submitOnclick: false,
+                inp: document.querySelector(`.autocomplete-${widgetId} input`)
+            }).init();
+        });
 
         $(self.imageNameInput).val(self.selectedImage.name);
 

@@ -13,12 +13,14 @@ $this->registerWidgetCssFile('file-tag-filter');
             <span class="sr-only">Toggle Dropdown</span>
         </button>
         <div class="dropdown-menu">
-            <?= Html::a('- ALL -', Url::to([$action, 'tag' => '']), [
-                'class' => 'dropdown-item ' . (($activeTag == '')? 'dropdown-item-hover': '')
+            <?= Html::a('- ALL -', Url::to([$action, 'tag' => '', 'keywords' => $keywords]), [
+                'class' => 'dropdown-item ' . (($activeTag == '')? 'dropdown-item-hover': ''),
+                'data-tag' => '',
             ]); ?>
             <?=	Html::foreach ($tags, function($tag) use($activeTag, $action, $keywords) {
 				return Html::a($tag, Url::to([$action, 'tag' => $tag, 'keywords' => $keywords]), [
-				    'class' => 'dropdown-item ' . (($activeTag == $tag)? 'dropdown-item-hover': '')
+				    'class' => 'dropdown-item ' . (($activeTag == $tag)? 'dropdown-item-hover': ''),
+                    'data-tag' => $tag,
 				]);
 			}); ?>
         </div>

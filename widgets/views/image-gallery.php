@@ -7,6 +7,7 @@ use app\widgets\Autocomplete;
 use app\widgets\Webcam;
 use yii\widgets\Pjax;
 
+$this->registerWidgetJsFile('autocomplete');
 $this->registerWidgetCssFile('image-gallery');
 $this->registerWidgetJsFile('image-gallery');
 
@@ -23,7 +24,9 @@ $this->registerJs(<<< JS
         },
         defaultPhoto: '{$defaultPhoto}',
         parameters: {$parameters},
-        uploadUrl: '{$uploadUrl}'
+        uploadUrl: '{$uploadUrl}',
+        findByKeywordsImageUrl: '{$findByKeywordsImageUrl}',
+        tag: '{$tag}',
     }).init();
 JS);
 ?>
@@ -94,7 +97,7 @@ JS);
                                                 'class' => 'form-control search-input',
                                                 'placeholder' => 'Search Photo',
                                             ]),
-                                            'url' => Url::to(['file/find-by-keywords-image']),
+                                            'url' => Url::to(['file/find-by-keywords-image', 'tag' => $tag]),
                                             'submitOnclick' => false
                                         ]) ?>
                                         <?php Pjax::begin([

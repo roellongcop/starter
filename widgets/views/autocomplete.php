@@ -16,6 +16,6 @@ $this->registerJs(<<< JS
 JS);
 ?>
 
-<div class="autocomplete autocomplete-<?= $widgetId ?>">
+<div class="autocomplete autocomplete-<?= $widgetId ?>" id="<?= $widgetId ?>">
 	<?= $input ?>
 </div>

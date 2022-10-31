@@ -26,6 +26,7 @@ class ImageGallery extends BaseWidget
     public $modelName;
     public $attribute;
     public $extensions;
+    public $findByKeywordsImageUrl = ['file/find-by-keywords-image'];
 
     public $tag;
 
@@ -53,6 +54,7 @@ class ImageGallery extends BaseWidget
             $this->parameters['UploadForm[tag]'] = $this->tag;
         }
 
+        $this->findByKeywordsImageUrl = Url::to($this->findByKeywordsImageUrl);
         $this->uploadUrl = Url::to($this->uploadUrl);
         $this->modelName = App::getModelName($this->model);
 
@@ -97,6 +99,7 @@ class ImageGallery extends BaseWidget
             'finalCropWidth' => $this->finalCropWidth,
             'finalCropHeight' => $this->finalCropHeight,
             'tag' => $this->tag,
+            'findByKeywordsImageUrl' => $this->findByKeywordsImageUrl,
         ]);
     }
 }
