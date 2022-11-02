@@ -33,18 +33,18 @@ class Html extends \yii\helpers\Html
 
     public static function navController($link)
     {
-        if(! filter_var($link, FILTER_VALIDATE_URL)) {
+        // simple
+        list($controller, $actionID) = Yii::$app->createController($link);
+        return $controller ? $controller->id: '';
+
+        /*if(! filter_var($link, FILTER_VALIDATE_URL)) {
             $link = App::baseUrl(\yii\helpers\Url::to($link));
             $link = str_replace('//', '/', $link);
         }
-
-        $request = new Request([
-            'url' => parse_url($link, PHP_URL_PATH)
-        ]);
+        $request = new Request(['url' => parse_url($link, PHP_URL_PATH)]);
         $url = App::urlManager()->parseRequest($request);
         list($controller, $actionID) = App::app()->createController($url[0]);
-
-        return $controller ? $controller->id: '';
+        return $controller ? $controller->id: '';*/
     }
 
     public static function image($token, $params=[], $options=[])
