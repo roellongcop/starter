@@ -19,7 +19,7 @@ class AccessControl extends \yii\filters\AccessControl
         $adminActions = array_merge($adminActions, $this->publicActions);
         
         $this->adminActions = array_unique($adminActions);
-        $this->only = $access->actions();
+        $this->only = $this->only ?: $access->actions();
 
         $this->rules = [
             [
