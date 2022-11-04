@@ -40,16 +40,16 @@ class Url extends \yii\helpers\Url
 
     public static function to($url = '', $scheme = false)
     {
-        if (! App::isWeb()) {
+        // if (! App::isWeb()) {
             if ($scheme) {
                 return Yii::$app->urlManager->createAbsoluteUrl($url);
             }
             else {
                 return Yii::$app->urlManager->createUrl($url);
             }
-        }
+        // }
 
-        return parent::to($url, $scheme);
+        // return parent::to($url, $scheme);
     }
 
     public static function userCanRoute($link)
