@@ -2,6 +2,7 @@
 
 namespace app\widgets;
 
+use Yii;
 use app\helpers\App;
 use yii\helpers\Html;
 use app\helpers\Url;
@@ -25,7 +26,9 @@ class Anchor extends BaseWidget
 
         $request = new Request(['url' => parse_url(Url::to($this->link, true), PHP_URL_PATH)]);
         $url = App::urlManager()->parseRequest($request);
-        list($controller, $actionID) = App::app()->createController($url[0]);
+        // list($controller, $actionID) = App::app()->createController($url[0]);
+        list($controller, $actionID) = Yii::$app->createController(Url::to($this->link, true));
+
 
         $this->controller = $controller ? $controller->id: '';
         $this->action = $actionID;
