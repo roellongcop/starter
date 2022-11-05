@@ -973,7 +973,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function findByKeywords($keywords='', $attributes, $limit=10, $andFilterWhere=[])
+    public static function findByKeywords($keywords='', $attributes='', $limit=10, $andFilterWhere=[])
     {
         $data = [];
         foreach ($attributes as $attribute) {

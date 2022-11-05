@@ -671,7 +671,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
-    public static function findByKeywords($keywords='', $attributes, $limit=10, $andFilterWhere=[])
+    public static function findByKeywords($keywords='', $attributes='', $limit=10, $andFilterWhere=[])
     {
         return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit, $andFilterWhere) {
             return self::find()
