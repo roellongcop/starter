@@ -1,7 +1,6 @@
 <?php
 
 use app\helpers\Html;
-use app\helpers\Url;
 
 $this->registerWidgetCssFile('file-tag-filter');
 ?>
@@ -13,12 +12,12 @@ $this->registerWidgetCssFile('file-tag-filter');
             <span class="sr-only">Toggle Dropdown</span>
         </button>
         <div class="dropdown-menu">
-            <?= Html::a('- ALL -', Url::to([$action, 'tag' => '', 'keywords' => $keywords]), [
+            <?= Html::a('- ALL -', ["file/{$action}", 'tag' => '', 'keywords' => $keywords], [
                 'class' => 'dropdown-item ' . (($activeTag == '')? 'dropdown-item-hover': ''),
                 'data-tag' => '',
             ]); ?>
             <?=	Html::foreach ($tags, function($tag) use($activeTag, $action, $keywords) {
-				return Html::a($tag, Url::to([$action, 'tag' => $tag, 'keywords' => $keywords]), [
+				return Html::a($tag, ["file/{$action}", 'tag' => $tag, 'keywords' => $keywords], [
 				    'class' => 'dropdown-item ' . (($activeTag == $tag)? 'dropdown-item-hover': ''),
                     'data-tag' => $tag,
 				]);

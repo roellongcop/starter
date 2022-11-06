@@ -21,7 +21,7 @@ class m200912_033904_create_users_table extends \app\migrations\Migration
             'email' => $this->string()->notNull()->unique(),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
-            'password_hint' => $this->string()->notNull(),
+            'password_hint' => $this->string(),
             'password_reset_token' => $this->string()->unique(),
             'verification_token' => $this->string()->unique(),
             'access_token' => $this->string()->unique(),

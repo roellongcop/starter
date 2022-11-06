@@ -30,7 +30,7 @@ CSS);
             <span class="pulse-ring"></span>
             
         </div>
-        <?= Html::if(Notification::totalUnread(), function($total) {
+        <?= Html::if(($total = Notification::totalUnread() != null), function() use($total) {
             return Html::tag('label', $total, [
                 'class' => 'badge badge-danger badge-pill notification-badge'
             ]);

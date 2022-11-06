@@ -20,10 +20,9 @@ class FileTagFilter extends BaseWidget
 
         $this->activeTag = $this->activeTag ?: 'Filter Tag';
 
-        $this->tags =  File::filter('tag', [
+        $this->tags = File::filter('tag', [
             'extension' => ($this->type == 'all' ? '': File::EXTENSIONS['image'])
         ]);
-        
     }
 
     /**
