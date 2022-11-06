@@ -2,11 +2,9 @@
 
 use app\helpers\App;
 use app\helpers\Html;
-
-$searchModel = $this->params['searchModel'] ?? '';
 ?>
 
-<?= Html::if($searchModel, 
+<?= Html::if($this->params['searchModel'] ?? false, 
 	function($searchModel) {
 		return $this->render('_search-content', [
 			'searchModel' => $searchModel,

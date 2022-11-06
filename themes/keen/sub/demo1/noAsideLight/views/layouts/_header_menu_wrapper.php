@@ -3,9 +3,8 @@
 use app\helpers\App;
 use app\widgets\Menu;
 use app\helpers\Html;
-
-$searchModel = $this->params['searchModel'] ?? '';
 ?>
+
 <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
     <!--begin::Header Logo-->
     <div class="header-logo">
@@ -22,7 +21,7 @@ $searchModel = $this->params['searchModel'] ?? '';
         <!--begin::Header Nav-->
         <?= Menu::widget() ?>
         <!--end::Header Nav-->
-        <?= Html::if($searchModel, 
+        <?= Html::if($this->params['searchModel'] ?? false, 
             function($searchModel) {
                 return $this->render('_header_menu_wrapper-content', [
                     'searchModel' => $searchModel,

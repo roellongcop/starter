@@ -34,7 +34,11 @@ use yii\helpers\Inflector;
                         'inputClass' => 'module_access checkbox',
                         'options' => ['data-belongs_to' => $controller],
                         'checkedFunction' => function($value) use ($model, $controller) {
-                            return Html::if(isset($model->module_access[$controller]) && in_array($value, $model->module_access[$controller]), 'checked');
+                            return Html::if($model->module_access[$controller] ?? false, 
+                                function($moduleAccess) use($value) {
+                                    return in_array($value, $moduleAccess) ? 'checked': '';
+                                }
+                            );
                         },
                     ]) ?>
                 </div>

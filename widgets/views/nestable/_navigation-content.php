@@ -63,7 +63,7 @@ use app\helpers\Html;
             </span>
         </div>
     </div>
-    <?= Html::if(isset($nav['sub']), function($navSub) use($data_id, $widgetId) {
+    <?= Html::if($nav['sub'] ?? false, function($navSub) use($data_id, $widgetId) {
         return Html::tag('ol', 
             $this->render('_navigation', [
                 'data_id' => $data_id,

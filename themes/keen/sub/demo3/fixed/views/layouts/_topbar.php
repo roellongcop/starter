@@ -1,11 +1,10 @@
 <?php
 
 use app\helpers\Html;
-
-$searchModel = $this->params['searchModel'] ?? '';
 ?>
+
 <div class="topbar">
-    <?= Html::if($searchModel, 
+    <?= Html::if($this->params['searchModel'] ?? false, 
         function($searchModel) {
             return $this->render('_topbar-search-form', [
                 'searchModel' => $searchModel,

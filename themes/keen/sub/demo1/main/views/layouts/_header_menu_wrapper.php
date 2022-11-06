@@ -2,9 +2,8 @@
 
 use app\helpers\Html;
 use app\widgets\AnchorBack;
-
-$searchModel = $this->params['searchModel'] ?? '';
 ?>
+
 <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
     <!--begin::Header Menu-->
     <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
@@ -21,7 +20,7 @@ $searchModel = $this->params['searchModel'] ?? '';
             ]) ?>
         </div>
         
-        <?= Html::if($searchModel, 
+        <?= Html::if($this->params['searchModel'] ?? false, 
             function($searchModel) {
                 return $this->render('_header_menu_wrapper-content', [
                     'searchModel' => $searchModel,
