@@ -3,6 +3,8 @@
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\AnchorBack;
+
+$searchModel = $this->params['searchModel'] ?? '';
 ?>
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
     <!--begin::Logo-->
@@ -25,8 +27,8 @@ use app\widgets\AnchorBack;
     </div>
     <!--begin::Toolbar-->
     <div style="position: absolute; width: 50%; left: 111px;">
-        <?= Html::if(($searchModel = $this->params['searchModel'] ?? '') != NULL, 
-            function() use($searchModel) {
+        <?= Html::if($searchModel, 
+            function($searchModel) {
                 return $this->render('_header_mobile-content', [
                     'searchModel' => $searchModel,
                     'searchAction' => $searchModel->searchAction ?? ['index'],

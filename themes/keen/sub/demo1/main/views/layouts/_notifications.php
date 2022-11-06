@@ -30,7 +30,7 @@ CSS);
             <span class="pulse-ring"></span>
             
         </div>
-        <?= Html::if(($total = Notification::totalUnread()) > 0, function() use($total) {
+        <?= Html::if(Notification::totalUnread(), function($total) {
             return Html::tag('label', $total, [
                 'class' => 'badge badge-danger badge-pill notification-badge'
             ]);
@@ -72,7 +72,7 @@ CSS);
                 <div class="tab-pane active p-8" id="topbar_notifications_events" role="tabpanel">
                     <!--begin::Scroll-->
                     <div class="scroll pr-7 mr-n7" data-scroll="true" data-height="300" data-mobile-height="200">
-                        <?= Html::if(($notifications = Notification::unread()) != NULL, function() use($notifications) {
+                        <?= Html::if(Notification::unread(), function($notifications) {
                             return Html::foreach($notifications, function($notification) {
                                 return <<< HTML
                                     <!--begin::Item-->

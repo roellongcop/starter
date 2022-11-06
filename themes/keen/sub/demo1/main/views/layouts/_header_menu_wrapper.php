@@ -2,6 +2,8 @@
 
 use app\helpers\Html;
 use app\widgets\AnchorBack;
+
+$searchModel = $this->params['searchModel'] ?? '';
 ?>
 <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
     <!--begin::Header Menu-->
@@ -19,8 +21,8 @@ use app\widgets\AnchorBack;
             ]) ?>
         </div>
         
-        <?= Html::if(($searchModel = $this->params['searchModel'] ?? '') != NULL, 
-            function() use($searchModel) {
+        <?= Html::if($searchModel, 
+            function($searchModel) {
                 return $this->render('_header_menu_wrapper-content', [
                     'searchModel' => $searchModel,
                     'searchAction' => $searchModel->searchAction ?? ['index'],

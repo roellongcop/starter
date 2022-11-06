@@ -74,7 +74,7 @@ class Html extends \yii\helpers\Html
     {
         if ($condition) {
             if (is_callable($content)) {
-                return call_user_func($content, $params);
+                return call_user_func($content, $condition, $params);
             }
             return $content;
         }
@@ -84,14 +84,14 @@ class Html extends \yii\helpers\Html
     {
         if ($condition) {
             if (is_callable($trueContent)) {
-                return call_user_func($trueContent, $params);
+                return call_user_func($trueContent, $condition, $params);
             }
 
             return $trueContent;
         }
 
         if (is_callable($falseContent)) {
-            return call_user_func($falseContent, $params);
+            return call_user_func($falseContent, $condition, $params);
         }
         return $falseContent;
     }
@@ -102,7 +102,7 @@ class Html extends \yii\helpers\Html
             foreach ($arr as $key => $data) {
                 if ($data['condition']) {
                     if (is_callable($data['content'])) {
-                        return call_user_func($data['content'], $params);
+                        return call_user_func($data['content'], $data['condition'], $params);
                     }
                     return $data['content'];
                 }

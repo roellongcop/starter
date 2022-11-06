@@ -63,11 +63,11 @@ use app\helpers\Html;
             </span>
         </div>
     </div>
-    <?= Html::if(isset($nav['sub']), function() use($data_id, $nav, $widgetId) {
+    <?= Html::if(isset($nav['sub']), function($navSub) use($data_id, $widgetId) {
         return Html::tag('ol', 
             $this->render('_navigation', [
                 'data_id' => $data_id,
-                'navigations' => $nav['sub'] ?? [],
+                'navigations' => $navSub,
                 'widgetId' => $widgetId,
             ]),
             ['class' => 'dd-list']

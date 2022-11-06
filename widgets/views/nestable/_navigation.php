@@ -5,7 +5,7 @@ use app\helpers\Html;
 ?>
 
 <?= Html::if($navigations,
-    function() use($navigations, $data_id, $widgetId) {
+    function($navigations) use($data_id, $widgetId) {
         return Html::foreach($navigations, function($nav, $key) use ($data_id, $widgetId) {
             $data_id = App::generateRandomKey($data_id);
             return $this->render('_navigation-content', [

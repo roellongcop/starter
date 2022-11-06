@@ -3,7 +3,7 @@
 use app\helpers\Html;
 ?>
 
-<?= Html::if($menus, function() use ($menus, $viewParams) {
+<?= Html::if($menus, function($menus) use($viewParams) {
     return Html::tag('ul', 
         $this->render('_link_creator', [
             'menus' => $menus,
