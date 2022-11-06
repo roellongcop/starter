@@ -275,6 +275,7 @@ CSS);
         ]); ?>
             <?= $this->render('my-files-ajax', [
                 'dataProvider' => $dataProvider,
+                'searchModel' => $searchModel,
             ]) ?>
         <?php Pjax::end(); ?>
     </div>

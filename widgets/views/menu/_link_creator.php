@@ -45,8 +45,8 @@ $controller = $this->params['controller'] ?? App::controllerID();
                     'viewParams' => $viewParams,
                 ]);
 
-                $class = Html::ifElse($viewParams['activeMenuLink'] ?? false, function($viewParams) use($menu) {
-                    return ($viewParams['activeMenuLink'] == $menu['link']) ? 'menu-item-active': '';
+                $class = Html::ifElse($viewParams['activeMenuLink'] ?? false, function($activeMenuLink) use($menu) {
+                    return ($activeMenuLink == $menu['link']) ? 'menu-item-active': '';
                 }, function() use($menu, $controller) {
                     return (Html::navController($menu['link']) == $controller)? 'menu-item-active': '';
                 });

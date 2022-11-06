@@ -6,7 +6,7 @@ use Yii;
 use app\helpers\App;
 use yii\helpers\Html;
 use app\helpers\Url;
-use yii\web\Request;
+use app\components\RequestComponent;
 
 class Anchor extends BaseWidget
 {
@@ -19,16 +19,16 @@ class Anchor extends BaseWidget
     public $user;
     public $tooltip;
 
+    public $stringLink;
+
     public function init() 
     {
         // your logic here
         parent::init();
-
-        $request = new Request(['url' => parse_url(Url::to($this->link, true), PHP_URL_PATH)]);
+        $this->stringLink = is_array($this->link)? Url::to($this->link): $this->link;
+        $request = new RequestComponent(['url' => parse_url($this->stringLink, PHP_URL_PATH)]);
         $url = App::urlManager()->parseRequest($request);
-        // list($controller, $actionID) = App::app()->createController($url[0]);
-        list($controller, $actionID) = Yii::$app->createController(Url::to($this->link, true));
-
+        list($controller, $actionID) = App::app()->createController($url[0]);
 
         $this->controller = $controller ? $controller->id: '';
         $this->action = $actionID;
@@ -46,6 +46,7 @@ class Anchor extends BaseWidget
                 $this->action = $this->action ?: $explodedLink[1];
             }
         }
+
         $this->user = $this->user ?: App::user();
         $this->options['title'] = $this->options['title'] ?? $this->tooltip;
     }
@@ -73,18 +74,19 @@ class Anchor extends BaseWidget
      */
     public function run()
     {
-        if ($this->link && !is_array($this->link)) {
-            if ($this->link == '#' || $this->link == '#!') {
-                return Html::a($this->title, $this->link, $this->options);
+        if ($this->stringLink) {
+                
+            if ($this->isExternal($this->stringLink)) {
+                return Html::a($this->title, $this->stringLink, $this->options);
             }
 
-            if ($this->isExternal($this->link)) {
-                return Html::a($this->title, $this->link, $this->options);
+            if ($this->stringLink == '#' || $this->stringLink == '#!') {
+                return Html::a($this->title, $this->stringLink, $this->options);
             }
-        }
 
-        if (App::component('access')->userCan($this->action, $this->controller, $this->user)) {
-            return Html::a($this->title, Url::to($this->link), $this->options);
+            if (App::component('access')->userCan($this->action, $this->controller, $this->user)) {
+                return Html::a($this->title, $this->stringLink, $this->options);
+            }
         }
 
         if ($this->text) {
