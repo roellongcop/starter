@@ -63,7 +63,6 @@ class Anchor extends BaseWidget
     public function run()
     {
         if ($this->stringLink) {
-                
             if ($this->isExternalLink) {
                 return Html::a($this->title, $this->stringLink, $this->options);
             }
