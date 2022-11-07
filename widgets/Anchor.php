@@ -19,55 +19,43 @@ class Anchor extends BaseWidget
     public $user;
     public $tooltip;
 
-    public $stringLink;
+    private $stringLink;
+    private $isExternalLink = false;
 
     public function init() 
     {
         // your logic here
         parent::init();
+
         $this->stringLink = is_array($this->link)? Url::to($this->link): $this->link;
-        $request = new RequestComponent(['url' => parse_url($this->stringLink, PHP_URL_PATH)]);
-        $url = App::urlManager()->parseRequest($request);
-        list($controller, $actionID) = App::app()->createController($url[0]);
+        $this->isExternalLink = Url::isExternal($this->stringLink);
 
-        $this->controller = $controller ? $controller->id: '';
-        $this->action = $actionID;
+        if (! $this->isExternalLink) {
+            $request = new RequestComponent(['url' => parse_url($this->stringLink, PHP_URL_PATH)]);
+            $url = App::urlManager()->parseRequest($request);
+            list($controller, $actionID) = App::app()->createController($url[0]);
 
-        if (is_array($this->link)) {
-            $url = $this->link[0] ?? '';
+            $this->controller = $controller ? $controller->id: '';
+            $this->action = $actionID;
 
-            $explodedLink = explode('/', $url);
-            if (count($explodedLink) == 1) {
-                $this->controller = $this->controller ?: App::controllerID();
-                $this->action = $this->action ?: $explodedLink[0];
+            if (is_array($this->link)) {
+                $url = $this->link[0] ?? '';
+
+                $explodedLink = explode('/', $url);
+                if (count($explodedLink) == 1) {
+                    $this->controller = $this->controller ?: App::controllerID();
+                    $this->action = $this->action ?: $explodedLink[0];
+                }
+                else {
+                    $this->controller = $this->controller ?: $explodedLink[0];
+                    $this->action = $this->action ?: $explodedLink[1];
+                }
             }
-            else {
-                $this->controller = $this->controller ?: $explodedLink[0];
-                $this->action = $this->action ?: $explodedLink[1];
-            }
+
+            $this->user = $this->user ?: App::user();
         }
-
-        $this->user = $this->user ?: App::user();
         $this->options['title'] = $this->options['title'] ?? $this->tooltip;
     }
-
-    public function isExternal($url) 
-    {
-        $hostName = App::request('hostName');
-
-        $components = parse_url($url);
-        if ( empty($components['host']) ) {
-            // we will treat url like '/relative.php' as relative
-            return false;  
-        }
-        if ( strcasecmp($components['host'], $hostName) === 0 ) {
-            // url host looks exactly like the local host
-            return false; 
-        } 
-        // check if the url host is a subdomain
-        return strrpos(strtolower($components['host']), ".{$hostName}") !== strlen($components['host']) - strlen(".{$hostName}"); 
-    }
-
 
     /**
      * {@inheritdoc}
@@ -76,7 +64,7 @@ class Anchor extends BaseWidget
     {
         if ($this->stringLink) {
                 
-            if ($this->isExternal($this->stringLink)) {
+            if ($this->isExternalLink) {
                 return Html::a($this->title, $this->stringLink, $this->options);
             }
 
