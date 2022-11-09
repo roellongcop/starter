@@ -1,15 +1,13 @@
 class WebcamWidget {
 
-    constructor(options) {
-        this.widgetId = options?.widgetId;
-        this.videoOptions = options?.videoOptions;
-        this.buttonOptions = options?.buttonOptions;
-        this.canvasOptions = options?.canvasOptions;
-        this.modelName = options?.modelName;
-        this.tag = options?.tag;
-        this.ajaxSuccess = options?.ajaxSuccess;
-
-
+    constructor({widgetId, videoOptions, buttonOptions, canvasOptions, modelName, tag, ajaxSuccess}) {
+        this.widgetId = widgetId;
+        this.videoOptions = videoOptions;
+        this.buttonOptions = buttonOptions;
+        this.canvasOptions = canvasOptions;
+        this.modelName = modelName;
+        this.tag = tag;
+        this.ajaxSuccess = ajaxSuccess;
 
         this.video = document.querySelector(`#${this.videoOptions.id}`);
         this.click_button = document.querySelector(`#${this.buttonOptions.id}`);

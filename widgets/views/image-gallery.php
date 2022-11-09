@@ -13,7 +13,7 @@ $this->registerWidgetJsFile('image-gallery');
 
 $this->registerJs(<<< JS
     new imageGalleryWidget({
-        id: '{$widgetId}',
+        widgetId: '{$widgetId}',
         uploadFileName: '{$uploadFileName}',
         finalCropWidth: {$finalCropWidth},
         finalCropHeight: {$finalCropHeight},
@@ -30,7 +30,7 @@ $this->registerJs(<<< JS
     }).init();
 JS);
 ?>
-<div id="image-gallery-container-<?= $id ?>" class="image-gallery-container">
+<div id="image-gallery-container-<?= $widgetId ?>" class="image-gallery-container">
 
     <!-- type, model, model attribute name, options -->
     <?= Html::activeInput('hidden', $model, $attribute, ['class' => 'file-id-input']) ?>
@@ -60,7 +60,7 @@ JS);
                     <div >
                         <ul class="nav nav-tabs nav-bold nav-tabs-line">
                             <li class="nav-item">
-                                <a class="nav-link active my-photos-tab-link" data-toggle="tab" href="#my-photos-tab-<?= $id ?>">
+                                <a class="nav-link active my-photos-tab-link" data-toggle="tab" href="#my-photos-tab-<?= $widgetId ?>">
                                     <span class="nav-icon">
                                         <i class="flaticon2-files-and-folders"></i>
                                     </span>
@@ -68,7 +68,7 @@ JS);
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link cropper-tab-link" data-toggle="tab" href="#cropper-tab-<?= $id ?>">
+                                <a class="nav-link cropper-tab-link" data-toggle="tab" href="#cropper-tab-<?= $widgetId ?>">
                                     <span class="nav-icon">
                                         <i class="flaticon-upload"></i>
                                     </span>
@@ -77,7 +77,7 @@ JS);
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link webcam-tab-link" data-toggle="tab" href="#webcam-tab-<?= $id ?>">
+                                <a class="nav-link webcam-tab-link" data-toggle="tab" href="#webcam-tab-<?= $widgetId ?>">
                                     <span class="nav-icon">
                                         <i class="fas fa-camera"></i>
                                     </span>
@@ -87,7 +87,7 @@ JS);
                         </ul>
                         <div class="tab-content pt-10">
                             <div class="tab-pane fade show active my-photos-tab-container" 
-                                id="my-photos-tab-<?= $id ?>" 
+                                id="my-photos-tab-<?= $widgetId ?>" 
                                 role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6 br-dashed">
@@ -149,11 +149,11 @@ JS);
                                 </div>
                                 
                             </div>
-                            <div class="tab-pane fade cropper-tab-container" id="cropper-tab-<?= $id ?>" role="tabpanel">
+                            <div class="tab-pane fade cropper-tab-container" id="cropper-tab-<?= $widgetId ?>" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6 br-dashed">
                                         <?= Html::img($defaultPhoto, [
-                                            'id' => 'cropper-image-' . $id
+                                            'id' => 'cropper-image-' . $widgetId
                                         ]) ?>
                                         <div class="input-group mt-2">
                                             <div class="input-group-prepend">
@@ -205,7 +205,7 @@ JS);
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade webcam-tab-container" id="webcam-tab-<?= $id ?>" role="tabpanel">
+                            <div class="tab-pane fade webcam-tab-container" id="webcam-tab-<?= $widgetId ?>" role="tabpanel">
                                 <?= Webcam::widget([
                                     'tag' => $tag,
                                     'withNameInput' => false,
@@ -223,7 +223,7 @@ JS);
                                         'style' => 'max-width: 200px;margin: 0 auto;',
                                     ],
                                     'ajaxSuccess' => $ajaxSuccess . <<< JS
-                                        let container = '#image-gallery-container-{$id}',
+                                        let container = '#image-gallery-container-{$widgetId}',
                                         fileIdInput = [container, '.file-id-input'].join(' '),
                                         imageGalleryModal = [container, '.image-gallery-modal'].join(' ');
 

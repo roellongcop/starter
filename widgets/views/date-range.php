@@ -9,7 +9,7 @@ $this->registerJs( <<< JS
         all_start: '{$all_start}',
         all_end: '{$all_end}',
         ranges: {$ranges},
-        id: '{$widgetId}',
+        widgetId: '{$widgetId}',
     }).init();
 JS);
 ?>

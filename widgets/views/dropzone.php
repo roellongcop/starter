@@ -7,7 +7,7 @@ $this->registerWidgetJsFile('dropzone');
 
 $this->registerJs(<<< JS
     new DropzoneWidget({
-        id: '{$id}',
+        widgetId: '{$widgetId}',
         url: '{$url}',
         paramName: '{$paramName}',
         maxFiles: {$maxFiles},
@@ -31,7 +31,7 @@ $this->registerJs(<<< JS
 JS);
 ?>
 
-<div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $id ?>">
+<div class="dropzone dropzone-default dropzone-primary" id="dropzone-<?= $widgetId ?>">
     <div class="dropzone-msg dz-message needsclick">
         <h3 class="dropzone-msg-title">
         	<?= $title ?>

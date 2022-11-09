@@ -1,10 +1,9 @@
 class FilterColumnWidget {
 
-    constructor(options) {
-        this.widgetId = options?.widgetId
+    constructor({widgetId}) {
+        this.widgetId = widgetId;
     }
     
-
     filter(form, success) {
         KTApp.blockPage();
         $.ajax({

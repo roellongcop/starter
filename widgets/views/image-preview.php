@@ -6,7 +6,7 @@ use app\helpers\Html;
 $this->registerWidgetJsFile('image-preview');
 
 $this->registerJs(<<< JS
-    new ImagePreviewWidget({id: '{$imageID}'}).init();
+    new ImagePreviewWidget({imageId: '{$imageId}'}).init();
 JS);
 
 ?>

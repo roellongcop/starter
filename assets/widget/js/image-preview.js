@@ -1,7 +1,7 @@
 class ImagePreviewWidget {
 
-    constructor(options) {
-		this.id = options?.id;
+    constructor({imageId}) {
+		this.imageId = imageId;
 	}
 
     init() {

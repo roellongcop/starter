@@ -8,12 +8,12 @@ class AutoCompleteWidget {
 		38, // backspace
 	]
 
-	constructor(options) {
-		this.ajax = options?.ajax;
-		this.url = options?.url;
-		this.data = options?.data;
-		this.submitOnclick = options?.submitOnclick;
-		this.inp = options?.inp;
+	constructor({ajax, url, data, submitOnclick, inp}) {
+		this.ajax = ajax;
+		this.url = url;
+		this.data = data;
+		this.submitOnclick = submitOnclick;
+		this.inp = inp;
 	}
 
 	debounce(callback, wait) {

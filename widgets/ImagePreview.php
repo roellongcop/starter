@@ -15,7 +15,7 @@ class ImagePreview extends BaseWidget
         'style' => 'max-height:200px',
     ];
     public $src;
-    public $imageID;
+    public $imageId;
     public $imageClass = 'img-thumbnail';
 
     public function init() 
@@ -26,7 +26,7 @@ class ImagePreview extends BaseWidget
             strtolower(App::getModelName($this->model)), 
             strtolower($this->attribute),
         ];
-        $this->imageID = implode('-', $arr);
+        $this->imageId = implode('-', $arr);
 
         $arr[] = 'preview';
 
@@ -42,7 +42,7 @@ class ImagePreview extends BaseWidget
         return $this->render('image-preview', [
             'src' => $this->src,
             'options' => $this->options,
-            'imageID' => $this->imageID,
+            'imageId' => $this->imageId,
         ]);
     }
 }

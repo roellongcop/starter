@@ -1,7 +1,7 @@
 class PaginationWidget {
 
-    constructor(options) {
-        this.widgetId = options?.widgetId;
+    constructor({widgetId}) {
+        this.widgetId = widgetId;
     }
 
     init() {

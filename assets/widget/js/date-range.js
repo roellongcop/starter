@@ -1,20 +1,20 @@
 class DateRangeWidget {
     newRanges = {};
 
-    constructor(options) {
-        this.start = options?.start;
-        this.end = options?.end;
-        this.all_start = options?.all_start;
-        this.all_end = options?.all_end;
-        this.ranges = options?.ranges;
-        this.id = options?.id;
+    constructor({ start, end, all_start, all_end, ranges, widgetId }) {
+        this.start = start;
+        this.end = end;
+        this.all_start = all_start;
+        this.all_end = all_end;
+        this.ranges = ranges;
+        this.widgetId = widgetId;
     }
 
     init() {
         let start = moment(this.start);
         let end = moment(this.end);
-        let span = $(`#${this.id} span`);
-        let input = $(`#${this.id} input`);
+        let span = $(`#${this.widgetId} span`);
+        let input = $(`#${this.widgetId} input`);
 
         let defaultRanges = {
             'All': [moment(this.all_start), moment(this.all_end)],
@@ -30,7 +30,7 @@ class DateRangeWidget {
         for(let key in this.ranges) {
             this.newRanges[this.ranges[key]] = defaultRanges[this.ranges[key]];
         }
-        $(`#${this.id}`).daterangepicker({
+        $(`#${this.widgetId}`).daterangepicker({
             // buttonClasses: 'btn btn-sm',
             applyClass: 'btn-primary',
             cancelClass: 'btn-secondary',

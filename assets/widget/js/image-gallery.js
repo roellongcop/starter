@@ -1,19 +1,19 @@
 class imageGalleryWidget {
     rotate = 0;
 
-    constructor(options) {
-        this.id              = options?.id;
-        this.uploadFileName  = options?.uploadFileName;
-        this.finalCropWidth  = options?.finalCropWidth;
-        this.finalCropHeight = options?.finalCropHeight;
-        this.cropperOptions  = options?.cropperOptions;
-        this.myImageFilesUrl = options?.myImageFilesUrl;
-        this.ajaxSuccess     = options?.ajaxSuccess;
-        this.defaultPhoto    = options?.defaultPhoto;
-        this.parameters      = options?.parameters;
-        this.uploadUrl       = options?.uploadUrl;
-        this.findByKeywordsImageUrl = options?.findByKeywordsImageUrl;
-        this.tag = options?.tag;
+    constructor({widgetId, uploadFileName, finalCropWidth, finalCropHeight, cropperOptions, myImageFilesUrl, ajaxSuccess, defaultPhoto, parameters, uploadUrl, findByKeywordsImageUrl, tag}) {
+        this.widgetId = widgetId;
+        this.uploadFileName = uploadFileName;
+        this.finalCropWidth = finalCropWidth;
+        this.finalCropHeight = finalCropHeight;
+        this.cropperOptions = cropperOptions;
+        this.myImageFilesUrl = myImageFilesUrl;
+        this.ajaxSuccess = ajaxSuccess;
+        this.defaultPhoto = defaultPhoto;
+        this.parameters = parameters;
+        this.uploadUrl = uploadUrl;
+        this.findByKeywordsImageUrl = findByKeywordsImageUrl;
+        this.tag = tag;
 
         this.selectedImage = {
             id: 0,
@@ -24,10 +24,10 @@ class imageGalleryWidget {
             name: this.uploadFileName + new Date().getTime(),
         };
 
-        this.image = document.getElementById(`cropper-image-${this.id}`);
+        this.image = document.getElementById(`cropper-image-${this.widgetId}`);
         
 
-        this.container = `#image-gallery-container-${this.id}`;
+        this.container = `#image-gallery-container-${this.widgetId}`;
         
         this.btnCloseModal        = this.createElement('.btn-close-modal');
         this.autoCompleteItems    = this.createElement('.autocomplete-items div');

@@ -1,25 +1,25 @@
 class DropzoneWidget {
 
-    constructor(options) {
-        this.id = options?.id;
-        this.url = options?.url;
-        this.paramName = options?.paramName;
-        this.maxFiles = options?.maxFiles;
-        this.maxFilesize = options?.maxFilesize;
-        this.addRemoveLinks = options?.addRemoveLinks;
-        this.dictRemoveFileConfirmation = options?.dictRemoveFileConfirmation;
-        this.dictRemoveFile = options?.dictRemoveFile;
-        this.acceptedFiles = options?.acceptedFiles;
-        this.encodedFiles = options?.encodedFiles;
-        this.parameters = options?.parameters;
-        this.removedFile = options?.removedFile;
-        this.complete = options?.complete;
-        this.success = options?.success;
+    constructor({widgetId, url, paramName, maxFiles, maxFilesize, addRemoveLinks, dictRemoveFileConfirmation, dictRemoveFile, acceptedFiles, encodedFiles, parameters, removedFile, complete, success}) {
+        this.widgetId = widgetId;
+        this.url = url;
+        this.paramName = paramName;
+        this.maxFiles = maxFiles;
+        this.maxFilesize = maxFilesize;
+        this.addRemoveLinks = addRemoveLinks;
+        this.dictRemoveFileConfirmation = dictRemoveFileConfirmation;
+        this.dictRemoveFile = dictRemoveFile;
+        this.acceptedFiles = acceptedFiles;
+        this.encodedFiles = encodedFiles;
+        this.parameters = parameters;
+        this.removedFile = removedFile;
+        this.complete = complete;
+        this.success = success;
     }
 
     init() {
         const self = this;
-        $(`#dropzone-${self.id}`).dropzone({
+        $(`#dropzone-${self.widgetId}`).dropzone({
             url: self.url, // Set the url for your upload script location
             paramName: self.paramName, // The name that will be used to transfer the file
             maxFiles: self.maxFiles,

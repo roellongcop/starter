@@ -1,9 +1,9 @@
 class NestableWidget {
     index = 0;
 
-    constructor(options) {
-        this.defaultName = options?.defaultName;
-        this.widgetId = options?.widgetId;
+    constructor({widgetId, defaultName}) {
+        this.defaultName = defaultName;
+        this.widgetId = widgetId;
     }
 
     initNestable() {
