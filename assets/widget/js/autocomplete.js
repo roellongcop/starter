@@ -118,7 +118,7 @@ class AutoCompleteWidget {
 					self.inp.classList.remove("typing");
 				}
 				else {
-					self.createSuggestion(self.inp, a, val, {$data});
+					self.createSuggestion(self.inp, a, val, self.data);
 				}
 			}
 		}, 500));
