@@ -54,8 +54,8 @@ class ImageGallery extends BaseWidget
             $this->parameters['UploadForm[tag]'] = $this->tag;
         }
 
-        $this->findByKeywordsImageUrl = Url::to($this->findByKeywordsImageUrl);
-        $this->uploadUrl = Url::to($this->uploadUrl);
+        $this->findByKeywordsImageUrl = Url::toRoute($this->findByKeywordsImageUrl);
+        $this->uploadUrl = Url::toRoute($this->uploadUrl);
         $this->modelName = App::getModelName($this->model);
 
         $this->parameters[App::request('csrfParam')] = App::request('csrfToken');
@@ -89,7 +89,7 @@ class ImageGallery extends BaseWidget
             'uploadUrl' => $this->uploadUrl,
             'ajaxSuccess' => $this->ajaxSuccess,
             'ajaxError' => $this->ajaxError,
-            'myImageFilesUrl' => Url::to($this->myImageFilesUrl),
+            'myImageFilesUrl' => Url::toRoute($this->myImageFilesUrl),
             'defaultPhoto' => $this->defaultPhoto,
             'uploadFileName' => $this->uploadFileName,
             'parameters' => json_encode($this->parameters),

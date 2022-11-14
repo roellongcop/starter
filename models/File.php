@@ -334,7 +334,7 @@ class File extends ActiveRecord
 
     public function getDownloadUrl($scheme = false)
     {
-        return Url::to(['file/download', 'token' => $this->token], $scheme);
+        return Url::toRoute(['file/download', 'token' => $this->token], $scheme);
     }
 
     public function download()

@@ -197,7 +197,7 @@ class Backup extends ActiveRecord
                 implode('/', [$this->controllerID(), 'download']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::to($url, true): $url;
+            return ($fullpath)? Url::toRoute($url, true): $url;
         }
     }
 }

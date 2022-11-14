@@ -97,7 +97,7 @@ JS);
                                                 'class' => 'form-control search-input',
                                                 'placeholder' => 'Search Photo',
                                             ]),
-                                            'url' => Url::to(['file/find-by-keywords-image', 'tag' => $tag]),
+                                            'url' => Url::toRoute(['file/find-by-keywords-image', 'tag' => $tag]),
                                             'submitOnclick' => false
                                         ]) ?>
                                         <?php Pjax::begin([

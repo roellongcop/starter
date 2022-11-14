@@ -28,7 +28,7 @@ class Switcher extends BaseWidget
             return $this->model->changeRecordStatusUrl;
         }
 
-        return Url::to([$this->controller . '/' . $this->action]);
+        return Url::toRoute([$this->controller . '/' . $this->action]);
     }
 
     /**

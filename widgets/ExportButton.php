@@ -57,7 +57,7 @@ class ExportButton extends BaseWidget
             if ($this->user->can($action, $this->controller)) {
                 $params = App::queryParams();
                 array_unshift($params, $action);
-                $link = Url::to($params);
+                $link = Url::toRoute($params);
 
                 $icon = Html::isHtml($data['icon'])? $data['icon']: $this->render("icon/{$data['icon']}");
 

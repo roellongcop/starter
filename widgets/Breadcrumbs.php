@@ -83,7 +83,7 @@ class Breadcrumbs extends Widget
      * ```php
      * [
      *     'label' => 'label of the link',  // required
-     *     'url' => 'url of the link',      // optional, will be processed by Url::to()
+     *     'url' => 'url of the link',      // optional, will be processed by Url::toRoute()
      *     'template' => 'own template of the item', // optional, if not set $this->itemTemplate will be used
      * ]
      * ```

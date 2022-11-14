@@ -48,8 +48,8 @@ class Dropzone extends BaseWidget
         }
         $this->parameters[App::request('csrfParam')] = App::request('csrfToken');
         $this->parameters['UploadForm[modelName]'] = $className;
-        $this->url = Url::to($this->url);
-        $this->removeFileUrl = Url::to($this->removeFileUrl);
+        $this->url = Url::toRoute($this->url);
+        $this->removeFileUrl = Url::toRoute($this->removeFileUrl);
         if (!$this->removedFile) {
             // $this->removedFile = "$.ajax({
             //     url: '{$this->removeFileUrl}/?token=' + file.upload.uuid,

@@ -421,12 +421,6 @@ class App {
     {
     	return (new \ReflectionClass($model))->getShortName();
     }
-    
-	public static function createUrl($path, $params=[])
-	{
-		$path = "{$path}&" . http_build_query($params);
-		return \app\helpers\Url::to($path, true);
-	}
 
 	public static function include($file='', $params=[], $layout_path="_includes")
 	{

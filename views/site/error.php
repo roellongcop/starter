@@ -21,7 +21,7 @@ $publishedUrl = App::publishedUrl('/media/error/bg1.jpg');
                 <p class="font-size-h3 text-center text-muted font-weight-normal py-2">
                     <?= nl2br(Html::encode($message)) ?>
                 </p>
-                <a href="<?= Url::to(['dashboard/index']) ?>" class="btn btn-light-primary font-weight-bolder py-4 px-8">
+                <a href="<?= Url::toRoute(['dashboard/index']) ?>" class="btn btn-light-primary font-weight-bolder py-4 px-8">
                 <span class="svg-icon svg-icon-md mr-3">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

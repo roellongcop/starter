@@ -12,9 +12,9 @@ $this->params['breadcrumbs'][] = 'Files';
 $this->params['searchModel'] = new FileSearch();
 $this->params['showCreateButton'] = true; 
 
-$myImageFilesUrl = Url::to(['file/my-image-files']);
-$deleteFileUrl = Url::to(['file/delete']);
-$myFilesUrl =  $myFilesUrl ?? Url::to(['file/my-files']);
+$myImageFilesUrl = Url::toRoute(['file/my-image-files']);
+$deleteFileUrl = Url::toRoute(['file/delete']);
+$myFilesUrl =  $myFilesUrl ?? Url::toRoute(['file/my-files']);
 
 
 $this->registerJs(<<< JS

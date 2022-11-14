@@ -103,7 +103,7 @@ class Theme extends ActiveRecord
 
     public function getActivateUrl()
     {
-        return Url::to(['theme/activate', 'slug' => $this->slug], true);
+        return Url::toRoute(['theme/activate', 'slug' => $this->slug], true);
     }
      
     public function gridColumns()

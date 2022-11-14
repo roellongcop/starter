@@ -22,7 +22,7 @@ JS);
         <?= Html::foreach($controller_actions, function($actions, $controller) {
             return Html::foreach($actions, function($action) use ($controller) {
                 return Html::tag('option', '', [
-                    'value' => str_replace(App::baseUrl(), '', Url::to(["{$controller}/{$action}"]))
+                    'value' => str_replace(App::baseUrl(), '', Url::toRoute(["{$controller}/{$action}"]))
                 ]);
             });
         }) ?>

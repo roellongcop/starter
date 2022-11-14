@@ -88,7 +88,7 @@ class ChangePasswordForm extends \yii\base\Model
                     'user_id' => $user->id,
                     'type' => 'notification_change_password',
                     'message' => App::setting('notification')->notification_change_password,
-                    'link' => Url::to(['user/my-password'], true),
+                    'link' => Url::toRoute(['user/my-password'], true),
                 ]));
 
                 Queue::push(new EmailJob([

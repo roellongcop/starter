@@ -195,7 +195,7 @@ class Log extends ActiveRecord
             }
             $url = $model->viewUrl;
             return Anchor::widget([
-                'title' => Url::to($url, true),
+                'title' => Url::toRoute($url, true),
                 'link' => $url,
                 'text' => true
             ]);

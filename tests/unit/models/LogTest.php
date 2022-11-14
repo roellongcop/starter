@@ -31,7 +31,7 @@ class LogTest extends \Codeception\Test\Unit
                'id' => NULL,
             ],
             'method' => 'POST',
-            'url' => Url::to(['site/login'], true),
+            'url' => Url::toRoute(['site/login'], true),
             'action' => 'login',
             'controller' => 'site',
             'table_name' => 'visit_logs',

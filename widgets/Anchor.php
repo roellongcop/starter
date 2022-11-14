@@ -27,7 +27,7 @@ class Anchor extends BaseWidget
         // your logic here
         parent::init();
 
-        $this->stringLink = is_array($this->link)? Url::to($this->link): $this->link;
+        $this->stringLink = is_array($this->link)? Url::toRoute($this->link): $this->link;
         $this->isExternalLink = Url::isExternal($this->stringLink);
 
         if (! $this->isExternalLink) {

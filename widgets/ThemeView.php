@@ -18,7 +18,7 @@ class ThemeView extends BaseWidget
         parent::init();
 
         $this->currentTheme = App::identity('currentTheme');
-        $this->uploadUrl = $this->uploadUrl ?: Url::to(['theme/change-image']);
+        $this->uploadUrl = $this->uploadUrl ?: Url::toRoute(['theme/change-image']);
     }
 
 

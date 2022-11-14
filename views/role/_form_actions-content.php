@@ -46,7 +46,7 @@ use yii\helpers\Inflector;
                     <div class="checkbox-list">
                         <?= Html::foreach($actions, function($action) use ($controller) {
                             return '<label class="checkbox">'
-                                . Url::to(["{$controller}/{$action}"], true) .
+                                . Url::toRoute(["{$controller}/{$action}"], true) .
                                 '</label>';
                         }) ?>
                     </div>

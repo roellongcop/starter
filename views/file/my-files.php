@@ -18,8 +18,8 @@ $this->params['searchModel'] = new FileSearch([
 $this->params['showCreateButton'] = true; 
 $this->params['activeMenuLink'] = '/my-files';
 
-$myFilesUrl = Url::to(['file/my-files']);
-$deleteFileUrl = Url::to(['file/delete']);
+$myFilesUrl = Url::toRoute(['file/my-files']);
+$deleteFileUrl = Url::toRoute(['file/delete']);
 
 $this->registerJs(<<< JS
     let selectedFile = 0,
@@ -267,7 +267,7 @@ CSS);
                 'class' => 'form-control search-photo',
                 'placeholder' => 'Search File',
             ]),
-            'url' => Url::to(['file/find-by-keywords'])
+            'url' => Url::toRoute(['file/find-by-keywords'])
         ]) ?>
         <?php Pjax::begin([
             'options' => ['class' => 'my-photos'],

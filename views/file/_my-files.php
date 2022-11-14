@@ -19,7 +19,7 @@ $params = [
     'data-created_at' => App::formatter('asFulldate', $model->created_at),
     'title' => $model->name,
     'data-can-delete' => $model->canDelete ? 'true': 'false',
-    'data-download-url' => Url::to(['file/download', 'token' => $model->token], true),
+    'data-download-url' => Url::toRoute(['file/download', 'token' => $model->token], true),
 ];
 ?>
 
