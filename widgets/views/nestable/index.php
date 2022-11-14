@@ -2,6 +2,7 @@
 
 use app\helpers\Html;
 use app\helpers\Url;
+use app\helpers\App;
 
 
 $this->registerWidgetCssFile('nestable');
@@ -20,7 +21,9 @@ JS);
     <datalist id="link-list-<?= $widgetId ?>">
         <?= Html::foreach($controller_actions, function($actions, $controller) {
             return Html::foreach($actions, function($action) use ($controller) {
-                return '<option value="'. Url::to(["{$controller}/{$action}"]) .'"> </option>';
+                return Html::tag('option', '', [
+                    'value' => str_replace(App::baseUrl(), '', Url::to(["{$controller}/{$action}"]))
+                ]);
             });
         }) ?>
     </datalist>
