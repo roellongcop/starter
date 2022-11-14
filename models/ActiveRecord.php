@@ -1016,4 +1016,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     {
         return array_keys($this->gridColumns);
     }
+
+    public function flashErrors()
+    {
+        if ($this->errors) {
+            App::danger($this->errorSummary);
+        }
+    }
 }
