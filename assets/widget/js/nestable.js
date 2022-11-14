@@ -83,5 +83,7 @@ class NestableWidget {
             `);
             dd.trigger('change');
         });
+
+        dd.nestable('createName');
     }
 }
