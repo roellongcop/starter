@@ -4,7 +4,7 @@ namespace app\components;
 
 class ConnectionComponent extends \yii\db\Connection
 {
-    public $dsn = 'mysql:host=localhost;dbname=db_starter';
+    public $dsn = 'mysql:host=localhost;dbname=db_ezshop';
     public $username = 'root';
     public $password = '';
     public $charset = 'utf8';
