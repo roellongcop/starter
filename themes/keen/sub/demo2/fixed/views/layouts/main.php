@@ -2,17 +2,13 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\assets\AppAsset;
 use app\helpers\App;
 use app\helpers\Url;
-use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo2\fixed\assets\KeenDemo2FixedAppAsset;
 use app\widgets\Alert;
 use app\helpers\Html;
 
 KeenDemo2FixedAppAsset::register($this);
-KeenAsset::register($this);
-AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

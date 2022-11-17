@@ -25,16 +25,15 @@ class KeenDemo1AppAsset extends AssetBundle
         'css/themes/layout/header/menu/light.css',
         'css/themes/layout/brand/dark.css',
         'css/themes/layout/aside/dark.css',
-        'css/demo1.css'
+        // 'css/demo1.css'
     ];
     public $js = [
         'plugins/custom/cropper/cropper.bundle.js',
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        'js/demo1.js'
+        // 'js/demo1.js'
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'app\themes\keen\assets\KeenAsset',
     ];
 }

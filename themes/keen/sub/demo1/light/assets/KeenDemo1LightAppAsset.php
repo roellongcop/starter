@@ -34,7 +34,6 @@ class KeenDemo1LightAppAsset extends AssetBundle
         'js/scripts.bundle.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'app\themes\keen\assets\KeenAsset',
     ];
 }

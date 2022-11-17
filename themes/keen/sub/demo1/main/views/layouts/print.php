@@ -3,13 +3,11 @@
 /* @var $content string */
 
 use app\helpers\App;
-use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo1\main\assets\KeenDemo1AppAsset;
 use app\helpers\Html;
 use app\helpers\Url;
 
 KeenDemo1AppAsset::register($this);
-KeenAsset::register($this);
 
 $sleep = $this->params['sleep'] ?? 1300;
 

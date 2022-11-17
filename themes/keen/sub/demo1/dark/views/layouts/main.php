@@ -2,17 +2,13 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\assets\AppAsset;
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
-use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo1\dark\assets\KeenDemo1DarkAppAsset;
 use app\widgets\Alert;
 
 KeenDemo1DarkAppAsset::register($this);
-KeenAsset::register($this);
-AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

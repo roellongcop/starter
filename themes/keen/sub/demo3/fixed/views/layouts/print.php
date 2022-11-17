@@ -3,13 +3,11 @@
 /* @var $content string */
 
 use app\helpers\App;
-use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo3\fixed\assets\KeenDemo3FixedAppAsset;
 use app\helpers\Html;
 use app\helpers\Url;
 
 KeenDemo3FixedAppAsset::register($this);
-KeenAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

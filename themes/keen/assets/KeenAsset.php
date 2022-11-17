@@ -23,7 +23,6 @@ class KeenAsset extends AssetBundle
         'js/keen.js'
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'app\assets\AppAsset',
     ];
 }

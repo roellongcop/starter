@@ -21,13 +21,12 @@ class AppAsset extends AssetBundle
 
     public $css = [
         // 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css',
-        'jsoneditor/jsoneditor.css', 
+        // 'jsoneditor/jsoneditor.css', 
         'css/starter.css'
     ];
     public $js = [
-        'js/jquery.nestable.js',
-        'jsoneditor/jsoneditor.js',
-        // 'sortable/Sortable.js',
+        // 'js/jquery.nestable.js',
+        // 'jsoneditor/jsoneditor.js',
         'js/starter.js'
     ];
 

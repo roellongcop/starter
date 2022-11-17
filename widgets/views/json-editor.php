@@ -1,5 +1,7 @@
 <?php
 
+$this->addCssFile('jsoneditor/jsoneditor');
+$this->addJsFile('jsoneditor/jsoneditor');
 $this->registerWidgetJsFile('json-editor');
 
 $this->registerJs(<<< JS

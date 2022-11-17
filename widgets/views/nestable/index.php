@@ -5,6 +5,7 @@ use app\helpers\Url;
 use app\helpers\App;
 
 
+$this->addJsFile('js/jquery.nestable');
 $this->registerWidgetCssFile('nestable');
 $this->registerWidgetJsFile('nestable');
 

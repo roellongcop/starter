@@ -4,13 +4,11 @@
 
 use app\helpers\App;
 use app\helpers\Url;
-use app\themes\keen\assets\KeenAsset;
 use app\themes\keen\sub\demo1\main\assets\KeenDemo1LoginAsset;
 use app\widgets\Alert;
 use app\helpers\Html;
 
 KeenDemo1LoginAsset::register($this);
-KeenAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

@@ -27,15 +27,14 @@ class KeenDemo2FixedErrorAsset extends AssetBundle
         'css/themes/layout/header/menu/light.css',
         'css/themes/layout/brand/dark.css',
         'css/themes/layout/aside/dark.css',
-        'css/demo2.css'
+        // 'css/demo2.css'
     ];
     public $js = [
         'plugins/custom/prismjs/prismjs.bundle.js',
         'js/scripts.bundle.js',
-        'js/demo2.js'
+        // 'js/demo2.js'
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'app\themes\keen\assets\KeenAsset',
     ];
 }

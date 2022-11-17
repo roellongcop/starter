@@ -20,7 +20,7 @@ class ViewComponent extends \yii\web\View
             'api' => Url::base(true) . '/api/v1/',
             'csrfToken' => App::request('csrfToken'),
             'csrfParam' => App::request('csrfParam'),
-            'params' => App::params()
+            // 'params' => App::params(),
         ]);
 
         $this->registerJs(<<< JS
@@ -76,7 +76,20 @@ class ViewComponent extends \yii\web\View
     {
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $js) {
-            $this->registerJsFile(App::publishedUrl("/js/{$js}.js", Yii::getAlias('@app/assets')), [
+            $this->registerJsFile(App::publishedUrl("/{$js}.js", Yii::getAlias('@app/assets')), [
+                'depends' => [
+                    'app\assets\AppAsset'
+                ]
+            ]);
+        }
+    }
+
+    public function addCssFile ($files)
+    {
+        $files = is_array($files) ? $files: [$files];
+
+        foreach ($files as $css) {
+            $this->registerCssFile(App::publishedUrl("/{$css}.css", Yii::getAlias('@app/assets')), [
                 'depends' => [
                     'app\assets\AppAsset'
                 ]
