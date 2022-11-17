@@ -23,43 +23,13 @@ class ViewComponent extends \yii\web\View
             'params' => App::params()
         ]);
 
-        $js = <<< JS
-            var app = {$options};
-            console.log(app)
-        JS;
+        $this->registerJs(<<< JS
+            const app = {$options};
+        JS, self::POS_HEAD, 'app');
 
-        $loadingIcon = App::baseUrl('default/loader-blocks.gif');
-
-        $this->registerJs($js, \yii\web\View::POS_HEAD, 'app');
-        $this->registerCss(<<< CSS
-            .mw-500 {width: -webkit-fill-available !important; max-width: 500px !important;}
-            .mw-400 {width: -webkit-fill-available !important; max-width: 400px !important;}
-            .mw-200 {width: -webkit-fill-available !important; max-width: 200px !important;}
-            .mw-150 {width: -webkit-fill-available !important; max-width: 150px !important;}
-            .mw-100 {width: -webkit-fill-available !important; max-width: 100px !important;}
-            .mw-120 {width: -webkit-fill-available !important; max-width: 120px !important;}
-            
-            /*.page-loading * {*/
-                /*opacity: 0;*/
-                /*pointer-events: none;*/
-                /*-webkit-touch-callout: none;*/ /* iOS Safari */
-                /*-webkit-user-select: none;*/ /* Safari */
-                /*-khtml-user-select: none;*/ /* Konqueror HTML */
-                /*-moz-user-select: none;*/ /* Old versions of Firefox */
-                /*-ms-user-select: none;*/ /* Internet Explorer/Edge */
-                /*user-select: none;*/ /* Non-prefixed version, currently
-                    supported by Chrome, Edge, Opera and Firefox */
-            /*}*/
-            /*.page-loading::before {
-                content: "Loading...";
-            }*/
-            /*.page-loading {
-                background: white url('{$loadingIcon}') no-repeat center center / 10rem;
-            }*/
-        CSS);
     }
 
-	public function registerWidgetJs($widgetFunction, $js, $position = parent::POS_READY, $key = null)
+    public function registerWidgetJs($widgetFunction, $js, $position = parent::POS_READY, $key = null)
     {
         $js = <<< JS
             let {$widgetFunction} = function() {
@@ -84,8 +54,7 @@ class ViewComponent extends \yii\web\View
         foreach ($files as $css) {
             $this->registerCssFile(App::publishedUrl("/widget/css/{$css}.css", Yii::getAlias('@app/assets')), [
                 'depends' => [
-                    'yii\web\YiiAsset',
-                    'yii\bootstrap\BootstrapAsset',
+                    'app\assets\AppAsset'
                 ]
             ]);
         }
@@ -97,8 +66,19 @@ class ViewComponent extends \yii\web\View
         foreach ($files as $js) {
             $this->registerJsFile(App::publishedUrl("/widget/js/{$js}.js", Yii::getAlias('@app/assets')), [
                 'depends' => [
-                    'yii\web\YiiAsset',
-                    'yii\bootstrap\BootstrapAsset',
+                    'app\assets\AppAsset'
+                ]
+            ]);
+        }
+    }
+
+    public function addJsFile ($files)
+    {
+        $files = is_array($files) ? $files: [$files];
+        foreach ($files as $js) {
+            $this->registerJsFile(App::publishedUrl("/js/{$js}.js", Yii::getAlias('@app/assets')), [
+                'depends' => [
+                    'app\assets\AppAsset'
                 ]
             ]);
         }
