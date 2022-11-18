@@ -5,11 +5,11 @@
 
 use app\helpers\App;
 use app\helpers\Url;
-use app\themes\keen\sub\demo1\noAsideLight\assets\KeenDemo1NoAsideLightAppAsset;
+use app\themes\keen\sub\demo1\noAsideLight\assets\AppAsset;
 use app\widgets\Alert;
 use app\helpers\Html;
 
-KeenDemo1NoAsideLightAppAsset::register($this);
+AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

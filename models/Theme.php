@@ -217,4 +217,16 @@ class Theme extends ActiveRecord
         ];
         return $behaviors;
     }
+
+    public function getAppAssetClass()
+    {
+        $remove_at = str_replace('@', '', $this->base_path);
+        $replace_separator = str_replace('/', '\\', $remove_at);
+        $to_array = explode('\\', $replace_separator);
+        array_pop($to_array);
+        $toString = implode('\\', $to_array);
+        $addClass = implode('\\', [$toString, 'AppAsset']);
+
+        return $addClass;
+    }
 }

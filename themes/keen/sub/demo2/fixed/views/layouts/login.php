@@ -4,10 +4,10 @@
 
 use app\helpers\App;
 use app\helpers\Url;
-use app\themes\keen\sub\demo2\fixed\assets\KeenDemo2FixedLoginAsset;
+use app\themes\keen\sub\demo2\fixed\assets\LoginAsset;
 use app\helpers\Html;
 
-KeenDemo2FixedLoginAsset::register($this);
+LoginAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

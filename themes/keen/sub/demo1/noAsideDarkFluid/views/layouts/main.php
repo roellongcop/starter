@@ -4,11 +4,11 @@
 
 use app\helpers\App;
 use app\helpers\Url;
-use app\themes\keen\sub\demo1\noAsideDark\assets\KeenDemo1NoAsideDarkAppAsset;
+use app\themes\keen\sub\demo1\noAsideDark\assets\AppAsset;
 use app\widgets\Alert;
 use app\helpers\Html;
 
-KeenDemo1NoAsideDarkAppAsset::register($this);
+AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

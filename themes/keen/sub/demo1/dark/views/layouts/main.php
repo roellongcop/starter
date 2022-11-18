@@ -5,10 +5,10 @@
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
-use app\themes\keen\sub\demo1\dark\assets\KeenDemo1DarkAppAsset;
+use app\themes\keen\sub\demo1\dark\assets\AppAsset;
 use app\widgets\Alert;
 
-KeenDemo1DarkAppAsset::register($this);
+AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
