@@ -24,7 +24,14 @@ $controller = $this->params['controller'] ?? App::controllerID();
         HTML;
     },
     function() use($menu, $controller, $withIcon) {
-        $class = (Html::navController($menu['link']) == $controller) ? 'menu-item-active': '';
+        $class = Html::ifElse($viewParams['activeMenuLink'] ?? false, function($activeMenuLink) use($menu) {
+            return ($activeMenuLink == $menu['link']) ? 'menu-item-active': '';
+        }, function() use($menu, $controller) {
+            list($c, $a) = App::app()->createController($menu['link']);
+            $controllerId = $c ? $c->id: '';
+            return ($controllerId == $controller)? 'menu-item-active': '';
+        });
+
         $child = $this->render('_a_child', [
             'menu' => $menu,
             'withIcon' => $withIcon,
