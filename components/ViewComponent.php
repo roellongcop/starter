@@ -47,8 +47,9 @@ class ViewComponent extends \yii\web\View
         parent::registerjs($js, $position, $key);
     }
 
-    public function registerWidgetCssFile ($files, $depends=['app\assets\AppAsset'])
+    public function registerWidgetCssFile ($files, $depends=[])
     {
+        $depends = $depends ?: [App::setting('theme')->appAssetClass];
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $css) {
             $this->registerCssFile(App::publishedUrl("/widget/css/{$css}.css", Yii::getAlias('@app/assets')), [
@@ -57,8 +58,9 @@ class ViewComponent extends \yii\web\View
         }
     }
 
-    public function registerWidgetJsFile ($files, $depends=['app\assets\AppAsset'])
+    public function registerWidgetJsFile ($files, $depends=[])
     {
+        $depends = $depends ?: [App::setting('theme')->appAssetClass];
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $js) {
             $this->registerJsFile(App::publishedUrl("/widget/js/{$js}.js", Yii::getAlias('@app/assets')), [
@@ -67,8 +69,9 @@ class ViewComponent extends \yii\web\View
         }
     }
 
-    public function addJsFile ($files, $depends=['app\assets\AppAsset'])
+    public function addJsFile ($files, $depends=[])
     {
+        $depends = $depends ?: [App::setting('theme')->appAssetClass];
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $js) {
             $this->registerJsFile(App::publishedUrl("/{$js}.js", Yii::getAlias('@app/assets')), [
@@ -77,8 +80,9 @@ class ViewComponent extends \yii\web\View
         }
     }
 
-    public function addCssFile ($files, $depends=['app\assets\AppAsset'])
+    public function addCssFile ($files, $depends=[])
     {
+        $depends = $depends ?: [App::setting('theme')->appAssetClass];
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $css) {
             $this->registerCssFile(App::publishedUrl("/{$css}.css", Yii::getAlias('@app/assets')), [
