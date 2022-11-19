@@ -24,7 +24,7 @@ class ViewComponent extends \yii\web\View
         ]);
 
         $this->registerJs(<<< JS
-            const app = {$options};
+            var app = {$options};
         JS, self::POS_HEAD, 'app');
 
     }
