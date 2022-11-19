@@ -4,10 +4,12 @@
 
 use app\helpers\App;
 use app\helpers\Url;
-use app\themes\keen\sub\demo1\main\assets\ErrorAsset;
 use app\helpers\Html;
+use app\themes\keen\assets\KeenAsset;
+use app\themes\keen\sub\demo1\main\assets\ErrorAsset;
 
 ErrorAsset::register($this);
+KeenAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

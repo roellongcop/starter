@@ -8,6 +8,7 @@
 namespace app\assets;
 
 use yii\web\AssetBundle;
+use app\helpers\App;
 
 /**
  * Main application asset bundle.
@@ -20,13 +21,10 @@ class AppAsset extends AssetBundle
     public $sourcePath = '@app/assets';
 
     public $css = [
-        // 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css',
-        // 'jsoneditor/jsoneditor.css', 
+        'css/font-Poppins.css',
         'css/starter.css'
     ];
     public $js = [
-        // 'js/jquery.nestable.js',
-        // 'jsoneditor/jsoneditor.js',
         'js/starter.js'
     ];
 
@@ -34,5 +32,4 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
-
 }

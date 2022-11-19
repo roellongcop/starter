@@ -6,7 +6,9 @@
  */
 
 namespace app\themes\keen\assets;
+
 use yii\web\AssetBundle;
+use app\helpers\App;
 /**
  * Main application asset bundle.
  *

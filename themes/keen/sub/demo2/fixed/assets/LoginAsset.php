@@ -32,6 +32,7 @@ class LoginAsset extends AssetBundle
         // 'js/demo2.js'
     ];
     public $depends = [
-        'app\themes\keen\assets\KeenAsset',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

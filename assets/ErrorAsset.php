@@ -8,6 +8,7 @@
 namespace app\assets;
 
 use yii\web\AssetBundle;
+use app\helper\App;
 
 /**
  * Main application asset bundle.
@@ -20,11 +21,13 @@ class ErrorAsset extends AssetBundle
     public $sourcePath = '@app/assets';
 
     public $css = [
-       
+        'css/font-Poppins.css',
+        'css/starter.css'
     ];
     public $js = [
-       
+        'js/starter.js'
     ];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

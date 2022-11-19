@@ -218,15 +218,29 @@ class Theme extends ActiveRecord
         return $behaviors;
     }
 
-    public function getAppAssetClass()
+    public function getAssetClass($class='AppAsset')
     {
         $remove_at = str_replace('@', '', $this->base_path);
-        $replace_separator = str_replace('/', '\\', $remove_at);
-        $to_array = explode('\\', $replace_separator);
+        $to_array = explode('/', $remove_at);
         array_pop($to_array);
         $toString = implode('\\', $to_array);
-        $addClass = implode('\\', [$toString, 'AppAsset']);
+        $addClass = implode('\\', [$toString, $class]);
 
         return $addClass;
+    }
+
+    public function getAppAssetClass()
+    {
+        return $this->getAssetClass();
+    }
+
+    public function getErrorAssetClass()
+    {
+        return $this->getAssetClass('ErrorAsset');
+    }
+
+    public function getLoginAssetClass()
+    {
+        return $this->getAssetClass('ErrorAsset');
     }
 }

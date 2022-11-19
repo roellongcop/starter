@@ -34,6 +34,7 @@ class ErrorAsset extends AssetBundle
         // 'js/demo3.js'
     ];
     public $depends = [
-        'app\themes\keen\assets\KeenAsset',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

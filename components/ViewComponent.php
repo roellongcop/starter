@@ -9,8 +9,6 @@ use app\helpers\Url;
 
 class ViewComponent extends \yii\web\View
 {
-    public $depends = ['app\assets\AppAsset'];
-
     public function init()
     {
         parent::init();
@@ -49,42 +47,42 @@ class ViewComponent extends \yii\web\View
         parent::registerjs($js, $position, $key);
     }
 
-    public function registerWidgetCssFile ($files)
+    public function registerWidgetCssFile ($files, $depends=['app\assets\AppAsset'])
     {
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $css) {
             $this->registerCssFile(App::publishedUrl("/widget/css/{$css}.css", Yii::getAlias('@app/assets')), [
-                'depends' => $this->depends
+                'depends' => $depends
             ]);
         }
     }
 
-    public function registerWidgetJsFile ($files)
+    public function registerWidgetJsFile ($files, $depends=['app\assets\AppAsset'])
     {
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $js) {
             $this->registerJsFile(App::publishedUrl("/widget/js/{$js}.js", Yii::getAlias('@app/assets')), [
-                'depends' => $this->depends
+                'depends' => $depends
             ]);
         }
     }
 
-    public function addJsFile ($files)
+    public function addJsFile ($files, $depends=['app\assets\AppAsset'])
     {
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $js) {
             $this->registerJsFile(App::publishedUrl("/{$js}.js", Yii::getAlias('@app/assets')), [
-                'depends' => $this->depends
+                'depends' => $depends
             ]);
         }
     }
 
-    public function addCssFile ($files)
+    public function addCssFile ($files, $depends=['app\assets\AppAsset'])
     {
         $files = is_array($files) ? $files: [$files];
         foreach ($files as $css) {
             $this->registerCssFile(App::publishedUrl("/{$css}.css", Yii::getAlias('@app/assets')), [
-                'depends' => $this->depends
+                'depends' => $depends
             ]);
         }
     }

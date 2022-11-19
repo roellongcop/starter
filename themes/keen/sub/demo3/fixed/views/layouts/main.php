@@ -5,14 +5,16 @@
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
-use app\themes\keen\sub\demo3\fixed\assets\AppAsset;
 use app\widgets\Alert;
 use app\widgets\AnchorBack;
-use app\widgets\Anchors;
 use app\widgets\Breadcrumbs;
 use app\widgets\ExportButton;
 
+use app\themes\keen\assets\KeenAsset;
+use app\themes\keen\sub\demo3\fixed\assets\AppAsset;
+
 AppAsset::register($this);
+KeenAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
