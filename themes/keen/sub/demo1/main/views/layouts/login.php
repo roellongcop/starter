@@ -12,7 +12,6 @@ use app\themes\keen\sub\demo1\main\assets\LoginAsset;
 LoginAsset::register($this);
 KeenAsset::register($this);
 ?>
-?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
