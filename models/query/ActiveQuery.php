@@ -4,6 +4,7 @@ namespace app\models\query;
 
 use Yii;
 use app\helpers\App;
+use app\models\ActiveRecord;
 
 class ActiveQuery extends \yii\db\ActiveQuery
 {
@@ -76,14 +77,14 @@ class ActiveQuery extends \yii\db\ActiveQuery
             $condition = [];
 
             foreach ($alias as $a) {
-                $condition["{$a}.record_status"] = 1;
+                $condition["{$a}.record_status"] = ActiveRecord::RECORD_ACTIVE;
             }
 
             return $this->andWhere($condition);
         }
 
         return $this->andWhere([
-            $this->field('record_status') => 1
+            $this->field('record_status') => ActiveRecord::RECORD_ACTIVE
         ]);
     }
 
@@ -95,14 +96,14 @@ class ActiveQuery extends \yii\db\ActiveQuery
             $condition = [];
 
             foreach ($alias as $a) {
-                $condition["{$a}.record_status"] = 0;
+                $condition["{$a}.record_status"] = ActiveRecord::RECORD_INACTIVE;
             }
 
             return $this->andWhere($condition);
         }
 
         return $this->andWhere([
-            $this->field('record_status') => 0
+            $this->field('record_status') => ActiveRecord::RECORD_INACTIVE
         ]);
     }
 
