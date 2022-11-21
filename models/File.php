@@ -246,6 +246,16 @@ class File extends ActiveRecord
         return FileHelper::normalizePath(implode(DIRECTORY_SEPARATOR, $paths));
     }
 
+    public function getRawUrlRootPath()
+    {
+        $paths = [
+            (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')),
+            $this->rawUrlLocation
+        ];
+
+        return FileHelper::normalizePath(implode(DIRECTORY_SEPARATOR, $paths));
+    }
+
     public function getIsDocument()
     {
         return in_array($this->extension, self::EXTENSIONS['file']);
@@ -389,5 +399,20 @@ class File extends ActiveRecord
     public function getLocationPath()
     {
         return Url::home(true) . $this->location;
+    }
+
+    public function getRawUrlLocation()
+    {
+        $location = explode('/', $this->location);
+        $name = rawurlencode(end($location));
+        array_pop($location);
+        $location[] = $name;
+
+        return implode('/', $location);
+    }
+
+    public function getRawUrlLocationPath()
+    {
+        return Url::home(true) . $this->rawUrlLocation;
     }
 }

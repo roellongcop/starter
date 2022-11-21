@@ -168,7 +168,7 @@ class Backup extends ActiveRecord
         $file = $this->file;
 
         if ($file && $file->exists && $this->generated) {
-            $sql = file_get_contents($file->rootPath);
+            $sql = file_get_contents($file->rawUrlRootPath);
             App::execute($sql);
 
             return true;
