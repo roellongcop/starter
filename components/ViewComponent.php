@@ -13,7 +13,7 @@ class ViewComponent extends \yii\web\View
     {
         parent::init();
 
-        $options = Json::htmlEncode([
+        $this->registerJsVar('app', [
             'appName' => App::appName(),
             'baseUrl' => Url::base(true) . '/',
             'language' => App::appLanguage(),
@@ -22,7 +22,6 @@ class ViewComponent extends \yii\web\View
             'csrfParam' => App::request('csrfParam'),
             // 'params' => App::params(),
         ]);
-        $this->registerJsVar('app', $options);
     }
 
     public function registerWidgetJs($widgetFunction, $js, $position = parent::POS_READY, $key = null)
