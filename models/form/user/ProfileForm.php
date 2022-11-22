@@ -2,6 +2,11 @@
 
 namespace app\models\form\user;
 
+use Yii;
+use app\helpers\App;
+use app\models\User;
+use app\models\UserMeta;
+
 /**
  * LoginForm is the model behind the login form.
  *

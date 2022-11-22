@@ -2,10 +2,14 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\helpers\App;
+use app\helpers\Html;
+use app\models\VisitLog;
 use app\models\form\ContactForm;
 use app\models\form\LoginForm;
 use app\models\form\PasswordResetForm;
+use yii\web\Response;
 
 class SiteController extends Controller
 {

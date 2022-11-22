@@ -25,6 +25,7 @@ echo "<?php\n";
 
 namespace <?= $generator->ns ?>;
 
+use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
 

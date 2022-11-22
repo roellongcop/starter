@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\helpers\App;
 use app\models\File;
 use app\models\form\FileForm;

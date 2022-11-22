@@ -2,6 +2,8 @@
 
 namespace app\components;
 
+use app\models\Queue;
+
 class QueueComponent extends \yii\queue\db\Queue
 {
     public $db = 'db'; // DB connection component or its config 

@@ -2,6 +2,8 @@
 
 namespace app\models\form\setting;
 
+use Yii;
+
 class NotificationSettingForm extends SettingForm
 {
     const NAME = 'notification-settings';

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\helpers\App;
 use app\models\Backup;
 use app\models\File;

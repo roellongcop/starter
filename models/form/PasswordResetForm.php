@@ -3,6 +3,7 @@
 namespace app\models\form;
 
 use Yii;
+use app\helpers\App;
 use app\models\User;
 use app\models\form\CustomEmailForm;
 

@@ -2,11 +2,13 @@
 
 namespace app\filters;
 
+use Yii;
 use app\helpers\App;
 use app\models\Theme;
+use yii\base\ActionFilter;
 use yii\base\Theme as BaseTheme;
 
-class ThemeFilter extends \yii\base\ActionFilter
+class ThemeFilter extends ActionFilter
 {
     public $theme;
 

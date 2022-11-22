@@ -4,6 +4,7 @@ namespace app\filters;
 
 use Yii;
 use app\helpers\App;
+use yii\base\ActionFilter;
 
 class AccessControl extends \yii\filters\AccessControl
 {

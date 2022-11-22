@@ -7,13 +7,16 @@
 
 namespace app\assets;
 
+use yii\web\AssetBundle;
+use app\helpers\App;
+
 /**
  * Main application asset bundle.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class LoginAsset extends \yii\web\AssetBundle
+class LoginAsset extends AssetBundle
 {
     public $sourcePath = '@app/assets';
 

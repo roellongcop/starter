@@ -2,6 +2,8 @@
 
 namespace app\models\form\setting;
 
+use Yii;
+
 class EmailSettingForm extends SettingForm
 {
     const NAME = 'email-settings';

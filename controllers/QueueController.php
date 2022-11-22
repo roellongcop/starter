@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\helpers\App;
 use app\models\Queue;
 use app\models\search\QueueSearch;

@@ -5,6 +5,7 @@ namespace app\jobs;
 use Yii;
 use app\helpers\App;
 use app\models\Backup;
+use app\models\ModelFile;
 use app\models\form\UploadForm;
 use yii\helpers\FileHelper;
 

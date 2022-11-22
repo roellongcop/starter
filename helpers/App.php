@@ -6,6 +6,7 @@ use Yii;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
+use yii\web\NotFoundHttpException; 
 
 class App {
 
