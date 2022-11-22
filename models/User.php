@@ -686,4 +686,9 @@ class User extends ActiveRecord implements IdentityInterface
                 ->all();
         });
     }
+
+    public function getCanDelete()
+    {
+        return false;
+    }
 }
