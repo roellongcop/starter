@@ -23,6 +23,8 @@ abstract class Controller extends \yii\web\Controller
             return false;
         }
 
+        App::view()->params['activeMenuLink'] = "/{$this->owner->id}";
+        
         switch ($action->id) {
             case 'print':
                 $this->layout = 'print';
