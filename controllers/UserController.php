@@ -237,11 +237,8 @@ class UserController extends Controller
             ->one();
 
         if ($model) {
-            VisitLog::logout();
             App::user()->logout();
-
             App::user()->login($model, 0);
-            VisitLog::login();
 
             return $this->redirect(['dashboard/index']);
         }
