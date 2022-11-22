@@ -2,8 +2,6 @@
 
 namespace app\models\form\setting;
 
-use Yii;
-
 class ImageSettingForm extends SettingForm
 {
     const NAME = 'image-settings';

@@ -2,7 +2,6 @@
 
 namespace app\models\form\export;
 
-use Yii;
 use PhpOffice\PhpSpreadsheet\Writer\Csv as CsvWriter;
 use PhpOffice\PhpSpreadsheet\Reader\Html as HtmlReader;
 use app\helpers\App;

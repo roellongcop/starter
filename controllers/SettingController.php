@@ -2,13 +2,10 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\helpers\App;
 use app\models\Setting;
 use app\models\Theme;
-use app\models\form\SettingForm;
 use app\models\form\setting\EmailSettingForm;
-use app\models\form\setting\GeneralSettingForm;
 use app\models\form\setting\ImageSettingForm;
 use app\models\form\setting\NotificationSettingForm;
 use app\models\form\setting\SystemSettingForm;

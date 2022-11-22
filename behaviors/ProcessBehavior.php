@@ -2,7 +2,6 @@
 
 namespace app\behaviors;
 
-use app\helpers\App;
 use yii\db\ActiveRecord;
 
 class ProcessBehavior extends \yii\base\Behavior

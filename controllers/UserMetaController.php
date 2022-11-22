@@ -2,12 +2,9 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\helpers\App;
-use app\models\User;
 use app\models\UserMeta;
 use app\models\search\UserMetaSearch;
-use yii\helpers\ArrayHelper;
 
 /**
  * UserMetaController implements the CRUD actions for UserMeta model.

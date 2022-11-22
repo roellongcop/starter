@@ -2,8 +2,6 @@
 
 namespace app\commands\models;
 
-use Yii;
-
 class Role extends \app\models\Role
 {
     public function rules()

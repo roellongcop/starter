@@ -2,14 +2,12 @@
 
 namespace app\filters;
 
-use Yii;
 use app\helpers\App;
 use app\models\search\IpSearch;
 use app\models\Ip;
-use yii\base\ActionFilter;
 use yii\web\ForbiddenHttpException;
 
-class IpFilter extends ActionFilter
+class IpFilter extends \yii\base\ActionFilter
 {
     public function beforeAction($action)
     {
@@ -23,13 +21,11 @@ class IpFilter extends ActionFilter
         if (! App::isControllerAction('site/error')) {
             if (in_array($ip, IpSearch::blackList())) {
                 throw new ForbiddenHttpException('IP is Blocked !');
-                return false;
             }
 
             if (App::setting('system')->whitelist_ip_only) { 
                 if (! in_array($ip, IpSearch::whiteList())) {
                     throw new ForbiddenHttpException('IP not WhiteListed.');
-                    return false;
                 }
             }
         }

@@ -3,7 +3,6 @@
 namespace app\components;
 
 use Imagine\Image\Box;
-use Imagine\Image\ImageInterface;
 use Imagine\Image\ManipulatorInterface;
 use Imagine\Image\Point;
 use Yii;

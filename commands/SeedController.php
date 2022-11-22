@@ -8,8 +8,6 @@
 namespace app\commands;
 
 use Yii;
-use app\helpers\App;
-use yii\helpers\Console;
 use yii\helpers\Inflector;
 
 /**

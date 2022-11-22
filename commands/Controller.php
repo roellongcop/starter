@@ -7,11 +7,7 @@
 
 namespace app\commands;
 
-use Faker\Factory;
-use Yii;
 use app\helpers\App;
-use yii\console\ExitCode;
-use yii\console\widgets\Table;
 use yii\helpers\Console;
 
 /**

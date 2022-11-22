@@ -2,8 +2,6 @@
 
 namespace app\commands\models;
 
-use Yii;
-
 class User extends \app\models\User
 {
     public function rules()

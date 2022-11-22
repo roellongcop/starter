@@ -2,8 +2,6 @@
 
 namespace app\commands\models;
 
-use Yii;
-
 class Ip extends \app\models\Ip
 {
     public function rules()

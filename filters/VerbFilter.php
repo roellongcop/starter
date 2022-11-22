@@ -7,8 +7,6 @@
 
 namespace app\filters;
 
-use Yii;
- 
 class VerbFilter extends \yii\filters\VerbFilter
 {
     public $verbActions = [

@@ -2,14 +2,10 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\helpers\App;
-use app\models\Role;
 use app\models\User;
-use app\models\VisitLog;
 use app\models\form\ChangePasswordForm;
 use app\models\search\UserSearch;
-use yii\helpers\ArrayHelper;
 
 /**
  * UserController implements the CRUD actions for User model.
