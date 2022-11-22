@@ -23,7 +23,7 @@ abstract class Controller extends \yii\web\Controller
             return false;
         }
 
-        App::view()->params['activeMenuLink'] = "/{$this->owner->id}";
+        App::view()->params['controllerLink'] = Url::toRoute(["{$this->owner->id}/index"]);
         
         switch ($action->id) {
             case 'print':

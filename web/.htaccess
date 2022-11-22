@@ -1,7 +1,7 @@
 RewriteEngine On
 
-RewriteBase /starter/web
+RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /starter/web/index.php
+RewriteRule . /index.php
