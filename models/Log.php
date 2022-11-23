@@ -127,12 +127,8 @@ class Log extends ActiveRecord
 
     public function getUsername()
     {
-        if ($this->_username) {
-            return $this->_username;
-        }
-
-        if(($user = $this->user) != null) {
-            $this->_username = $user->username;
+        if ($this->_username === null) {
+            $this->_username = App::if($this->user, fn($user) => $user->username);
         }
 
         return $this->_username;

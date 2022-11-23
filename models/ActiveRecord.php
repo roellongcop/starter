@@ -753,9 +753,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getCreatedByEmail()
     {
         if ($this->_createdByEmail === null) {
-            if(($model = $this->createdBy) != null) {
-                $this->_createdByEmail = $model->email;
-            }
+            $this->_createdByEmail = App::if($this->createdBy, fn($user) => $user->email);
         }
 
         if ($this->created_by == 0) {
@@ -768,9 +766,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getUpdatedByEmail()
     {
         if ($this->_updatedByEmail === null) {
-            if(($model = $this->updatedBy) != null) {
-                $this->_updatedByEmail = $model->email;
-            }
+            $this->_updatedByEmail = App::if($this->updatedBy, fn($user) => $user->email);
         }
 
         if ($this->updated_by == 0) {
@@ -993,7 +989,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public static function findOrFailed($value, $field='id', $action='')
     {
         $action = $action ?: App::actionID();
-
+        
         if (($model = static::findVisible([$field => $value])) != null) {
             return $model;
         }

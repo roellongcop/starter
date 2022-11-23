@@ -163,40 +163,27 @@ class Theme extends ActiveRecord
 
     public function getImageFiles()
     {
-        if (($photos = $this->photos) != null) {
-            $files = [];
-
-            foreach ($photos as $token) {
-                if (($file = File::findByToken($token)) != null) {
-                    $files[] = $file;
-                }
-            }
-
-            return $files;
-        }
+        return App::if($this->photos, function($photos) {
+            return App::foreach($photos, function($photo) {
+                return App::if(File::findByToken($photo), fn($file) => $file);
+            }, false);
+        });
     }
 
     public function getImages()
     {
-        if (($photos = $this->photos) != null) {
-            $images = [];
-
-            foreach ($photos as $photo) {
-                $images[] = Html::image($photo, ['w' => 100, 'h' => 100, 'ratio' => 'false'], [
+        return App::if($this->photos, function($photos) {
+            return App::foreach($photos, function($photo) {
+                return Html::image($photo, ['w' => 100, 'h' => 100, 'ratio' => 'false'], [
                     'class' => 'img-thumbnail'
                 ]);
-            }
-
-            return implode(' ', $images);
-        }
+            });
+        });
     }
 
     public function getPreviewImage($params = ['w' => 100], $options = [])
     {
-        $token = '';
-        if (($photos = $this->photos) != null) {
-            $token = $photos[0];
-        }
+        $token = App::if($this->photos, fn($photos) => $photos[0]);
 
         return Html::image($token, $params, $options);
     }

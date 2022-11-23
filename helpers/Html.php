@@ -54,58 +54,25 @@ class Html extends \yii\helpers\Html
         }
     }
 
-    public static function if($condition = true, $content='', $params=[])
+    public static function if($condition=true, $content='', $params=[])
     {
-        if ($condition) {
-            if (is_callable($content)) {
-                return call_user_func($content, $condition, $params);
-            }
-            return $content;
-        }
+        return App::if($condition, $content, $params);
     }
 
-    public static function ifELse($condition = true, $trueContent='', $falseContent='', $params=[])
+    public static function ifELse($condition=true, $trueContent='', $falseContent='', $params=[])
     {
-        if ($condition) {
-            if (is_callable($trueContent)) {
-                return call_user_func($trueContent, $condition, $params);
-            }
-
-            return $trueContent;
-        }
-
-        if (is_callable($falseContent)) {
-            return call_user_func($falseContent, $condition, $params);
-        }
-        return $falseContent;
+        return App::ifELse($condition, $trueContent, $falseContent, $params);
     }
 
     public static function ifElseIf($arr=[], $params=[])
     {
-        if ($arr) {
-            foreach ($arr as $key => $data) {
-                if ($data['condition']) {
-                    if (is_callable($data['content'])) {
-                        return call_user_func($data['content'], $data['condition'], $params);
-                    }
-                    return $data['content'];
-                }
-            }
-        }
+        return App::ifElseIf($arr, $params);
     }
 
-    public static function foreach($array=[], $function, $glue=' ')
+    public static function foreach($array, $function, $glue=' ')
     {
-        $content = [];
-        if ($array) {
-            foreach ($array as $key => $value) {
-                $content[] = call_user_func($function, $value, $key);
-            }
-
-            return implode($glue, $content);
-        }
+        return App::foreach($array, $function, $glue);
     }
-
 
     public static function content($content, $params)
     {
