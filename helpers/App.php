@@ -565,10 +565,10 @@ class App {
         return $falseContent;
     }
 
-    public static function ifElseIf($arr, $params=[])
+    public static function ifElseIf($array, $params=[])
     {
-        if ($arr) {
-            foreach ($arr as $key => $data) {
+        if ($array && is_array($array)) {
+            foreach ($array as $key => $data) {
                 if ($data['condition']) {
                     if (is_callable($data['content'])) {
                         return call_user_func($data['content'], $data['condition'], $params);
@@ -582,7 +582,7 @@ class App {
     public static function foreach($array, $function, $glue=' ')
     {
         $content = [];
-        if ($array) {
+        if ($array && is_array($array)) {
             foreach ($array as $key => $value) {
             	$result = call_user_func($function, $value, $key);
             	if ($result) {
