@@ -2,7 +2,6 @@
 
 namespace app\models\form\export;
 
-use Yii;
 use app\helpers\App;
 
 class ExportPdfForm extends ExportForm

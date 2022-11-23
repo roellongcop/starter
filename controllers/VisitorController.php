@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\helpers\App;
 use app\models\Visitor;
 use app\models\search\VisitorSearch;

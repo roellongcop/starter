@@ -2,8 +2,6 @@
 
 namespace app\modules\api\v1\models\sub;
 
-use Yii;
-
 class AvailableUser extends \app\modules\api\v1\models\User
 {
     public function fields()

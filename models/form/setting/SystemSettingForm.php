@@ -2,7 +2,6 @@
 
 namespace app\models\form\setting;
 
-use Yii;
 use app\helpers\App;
 
 class SystemSettingForm extends SettingForm

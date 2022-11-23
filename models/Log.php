@@ -5,8 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
-use app\widgets\JsonEditor;
-use yii\helpers\Inflector;
 use app\helpers\Url;
 use app\models\form\UserAgentForm;
 /**

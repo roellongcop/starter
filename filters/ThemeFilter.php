@@ -2,13 +2,11 @@
 
 namespace app\filters;
 
-use Yii;
 use app\helpers\App;
 use app\models\Theme;
-use yii\base\ActionFilter;
 use yii\base\Theme as BaseTheme;
 
-class ThemeFilter extends ActionFilter
+class ThemeFilter extends \yii\base\ActionFilter
 {
     public $theme;
 
@@ -20,12 +18,11 @@ class ThemeFilter extends ActionFilter
 
         $theme = '';
         if (App::isLogin()) {
-            if (($slug = App::get('preview-theme')) != null) {
-                $theme = Theme::findOne(['slug' => $slug]);
-            }
-            else {
-                $theme = App::identity('currentTheme');
-            }
+            $theme = App::ifElse(
+                App::get('preview-theme'), 
+                fn($slug) => Theme::findOne(['slug' => $slug]), 
+                fn($slug) => App::identity('currentTheme')
+            );
         }
         $theme = $theme ?: App::setting('theme');
         $theme = $this->theme ?: $theme;

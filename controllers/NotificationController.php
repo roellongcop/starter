@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\helpers\App;
 use app\models\Notification;
 use app\models\search\NotificationSearch;

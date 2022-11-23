@@ -2,7 +2,6 @@
 
 namespace app\models\form;
 
-use Yii;
 use app\helpers\App;
 use app\helpers\Url;
 use app\jobs\EmailJob;
@@ -10,12 +9,6 @@ use app\jobs\NotificationJob;
 use app\models\Queue;
 use app\models\User;
 
-/**
- * LoginForm is the model behind the login form.
- *
- * @property User|null $user This property is read-only.
- *
- */
 class ChangePasswordForm extends \yii\base\Model
 {
     public $user_id;

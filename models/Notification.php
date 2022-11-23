@@ -2,11 +2,9 @@
 
 namespace app\models;
 
-use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
 use app\widgets\Label;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%notifications}}".

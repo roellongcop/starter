@@ -2,8 +2,6 @@
 
 namespace app\modules\api\v1\models;
 
-use Yii;
-
 class User extends \app\models\User
 {
     public function fields()

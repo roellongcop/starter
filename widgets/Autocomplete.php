@@ -2,7 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
 use app\helpers\Url;
  
 class Autocomplete extends BaseWidget

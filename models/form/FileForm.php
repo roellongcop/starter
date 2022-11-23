@@ -2,7 +2,6 @@
 
 namespace app\models\form;
 
-use Yii;
 use app\models\File;
 
 class FileForm extends \yii\base\Model

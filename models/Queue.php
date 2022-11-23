@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use app\helpers\App;
 use app\widgets\Anchor;
 

@@ -2,7 +2,6 @@
 
 namespace app\widgets;
 
-use Yii;
 use app\models\File;
  
 class FileTagFilter extends BaseWidget

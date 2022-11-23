@@ -2,8 +2,6 @@
 
 namespace app\models\form\export;
 
-use Yii;
-
 class ExportForm extends \yii\base\Model
 {
     public $exportColumnsName = 'exportColumns';

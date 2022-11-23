@@ -2,7 +2,6 @@
 
 namespace app\jobs;
 
-use Yii;
 use app\models\form\CustomEmailForm;
 
 class EmailJob extends \yii\base\BaseObject implements \yii\queue\JobInterface

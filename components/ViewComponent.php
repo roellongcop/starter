@@ -4,7 +4,6 @@ namespace app\components;
 
 use Yii;
 use app\helpers\App;
-use yii\helpers\Json;
 use app\helpers\Url;
 
 class ViewComponent extends \yii\web\View
@@ -72,7 +71,7 @@ class ViewComponent extends \yii\web\View
 
     public function addJsFile ($files, $depends=[])
     {
-        $$depends = $depends ?: [
+        $depends = $depends ?: [
             'yii\web\YiiAsset',
             'yii\bootstrap\BootstrapAsset',
         ];

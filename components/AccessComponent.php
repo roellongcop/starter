@@ -4,14 +4,10 @@ namespace app\components;
 
 use Yii;
 use app\helpers\App;
-use yii\base\Component;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
-use app\helpers\Url;
 
-class AccessComponent extends Component
+class AccessComponent extends \yii\base\Component
 {
 	const NAVIGATIONS = [
 	    '1' => [

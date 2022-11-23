@@ -5,15 +5,12 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
-use app\helpers\Url;
 use app\models\Role;
 use app\models\form\export\ExportForm;
 use app\models\form\user\MySettingForm;
 use app\models\form\user\ProfileForm;
 use app\widgets\Anchor;
 use app\widgets\Label;
-use yii\web\IdentityInterface;
-use yii\helpers\ArrayHelper;
 
 /**
  * User model
@@ -30,7 +27,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $updated_at
  * @property string $password write-only password
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;

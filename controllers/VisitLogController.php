@@ -2,12 +2,9 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\helpers\App;
-use app\models\User;
 use app\models\VisitLog;
 use app\models\search\VisitLogSearch;
-use yii\helpers\ArrayHelper;
 
 /**
  * VisitLogController implements the CRUD actions for VisitLog model.

@@ -2,12 +2,10 @@
 
 namespace app\filters;
 
-use Yii;
 use app\helpers\App;
-use yii\base\ActionFilter;
 use yii\web\ForbiddenHttpException;
 
-class UserFilter extends ActionFilter
+class UserFilter extends \yii\base\ActionFilter
 {
     public function beforeAction($action)
     {
@@ -18,7 +16,6 @@ class UserFilter extends ActionFilter
         if (! App::isControllerAction('site/error')) {
             if (App::isLogin() && App::identity('is_blocked')) {
                 throw new ForbiddenHttpException('User is Blocked !');
-                return false;
             }
         }
 

@@ -1,21 +1,8 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
 
 namespace app\themes\keen\assets;
 
-use yii\web\AssetBundle;
-use app\helpers\App;
-/**
- * Main application asset bundle.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
-class KeenAsset extends AssetBundle
+class KeenAsset extends \yii\web\AssetBundle
 {
     public $sourcePath = '@app/themes/keen/assets/assets';
     public $css = [

@@ -2,12 +2,9 @@
 
 namespace app\models;
 
-use Yii;
 use app\helpers\App;
 use app\helpers\Url;
-use app\models\File;
 use app\widgets\Anchor;
-use app\widgets\JsonEditor;
 use app\widgets\Label;
 
 /**

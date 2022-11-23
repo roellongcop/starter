@@ -7,16 +7,13 @@
 
 namespace app\assets;
 
-use yii\web\AssetBundle;
-use app\helpers\App;
-
 /**
  * Main application asset bundle.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class AppAsset extends \yii\web\AssetBundle
 {  
     public $sourcePath = '@app/assets';
 

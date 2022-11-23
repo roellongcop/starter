@@ -2,17 +2,6 @@
 
 namespace app\models\form\user;
 
-use Yii;
-use app\helpers\App;
-use app\models\User;
-use app\models\UserMeta;
-
-/**
- * LoginForm is the model behind the login form.
- *
- * @property User|null $user This property is read-only.
- *
- */
 class ProfileForm extends UserForm
 {
     const META_NAME = 'profile';

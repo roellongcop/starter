@@ -2,19 +2,16 @@
 
 namespace app\models;
 
-use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
 use app\models\Log;
 use app\models\form\export\ExportForm;
-use app\models\search\SettingSearch;
 use app\widgets\Anchor;
 use app\widgets\Detail;
 use app\widgets\RecordHtml;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Inflector;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 

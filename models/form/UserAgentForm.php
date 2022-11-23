@@ -2,7 +2,6 @@
 
 namespace app\models\form;
 
-use Yii;
 use app\helpers\App;
 /**
  * Ip Information

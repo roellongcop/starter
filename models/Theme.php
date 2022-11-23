@@ -2,11 +2,9 @@
 
 namespace app\models;
 
-use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\Anchor;
-use app\widgets\Dropzone;
 use app\widgets\JsonEditor;
 use app\helpers\Url;
 

@@ -2,8 +2,6 @@
 
 namespace app\modules\api\v1\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%roles}}".
  *

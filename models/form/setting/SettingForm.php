@@ -2,7 +2,6 @@
 
 namespace app\models\form\setting;
 
-use Yii;
 use app\helpers\App;
 use app\models\Setting;
 use yii\helpers\ArrayHelper;

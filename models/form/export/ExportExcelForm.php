@@ -2,7 +2,6 @@
 
 namespace app\models\form\export;
 
-use Yii;
 use app\helpers\App;
 use PhpOffice\PhpSpreadsheet\Reader\Html as HtmlReader;
 use PhpOffice\PhpSpreadsheet\IOFactory;

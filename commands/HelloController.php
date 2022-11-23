@@ -7,7 +7,6 @@
 
 namespace app\commands;
 
-use yii\console\Controller;
 use yii\console\ExitCode;
 
 /**
@@ -18,7 +17,7 @@ use yii\console\ExitCode;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class HelloController extends Controller
+class HelloController extends \yii\console\Controller
 {
     /**
      * This command echoes what you have entered as the message.
