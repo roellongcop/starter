@@ -27,7 +27,7 @@ class Grid extends BaseWidget
         $currentTheme = App::identity('currentTheme');
         $keenThemes = Theme::KEEN;
         if (in_array($currentTheme->slug, $keenThemes)) {
-            $this->pager['class'] = 'app\widgets\LinkPager';
+            $this->pager['class'] = $this->pager['class'] ?? 'app\widgets\LinkPager';
         }
 
         $this->columns = $this->searchModel->tableColumns;
