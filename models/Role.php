@@ -106,13 +106,11 @@ class Role extends ActiveRecord
       
     public function getCanDelete()
     {
-        $dontDelete = parent::getCanDelete();
-
-        if (App::identity('role_id') == $this->id) {
-            $dontDelete = false;
-        }
-
-        return $dontDelete;
+        return App::ifElse(
+            App::identity('role_id') == $this->id, 
+            false, 
+            App::ifElse($this->users, false, true)
+        );
     }
     
     public function getJsonRoleAccess()

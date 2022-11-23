@@ -264,15 +264,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getCanDelete()
     {
         if ($this->_canDelete === null) {
-            $res = [];
-            if (($relatedModels = $this->relatedModels) != null) {
-                foreach ($relatedModels as $model) {
-                    if ($this->{$model}) {
-                        $res[] = $model;
-                    }
-                }
-            }
-            $this->_canDelete = ($res)? false: true;
+            $this->_canDelete = true;
         }
 
         return $this->_canDelete;

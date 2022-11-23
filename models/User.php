@@ -106,6 +106,11 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return new \app\models\query\UserQuery(get_called_class());
     }
 
+    public function getCanDelete()
+    {
+        return false;
+    }
+
     public function validateRoleId($attribute, $params)
     {
         if (App::isGuest() && $this->role->isInactive) {
@@ -659,10 +664,5 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
                 ->asArray()
                 ->all();
         });
-    }
-
-    public function getCanDelete()
-    {
-        return false;
     }
 }
