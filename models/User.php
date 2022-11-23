@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use app\helpers\App;
 use app\helpers\Html;
-use app\models\Role;
 use app\models\form\export\ExportForm;
 use app\models\form\user\MySettingForm;
 use app\models\form\user\ProfileForm;

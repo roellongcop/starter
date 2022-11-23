@@ -5,7 +5,6 @@ namespace app\models;
 use app\helpers\App;
 use app\helpers\Html;
 use app\helpers\Url;
-use app\models\Log;
 use app\models\form\export\ExportForm;
 use app\widgets\Anchor;
 use app\widgets\Detail;
