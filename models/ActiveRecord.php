@@ -741,12 +741,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCreatedByEmail()
     {
-        if ($this->_createdByEmail === null) {
-            $this->_createdByEmail = App::if($this->createdBy, fn($user) => $user->email);
+        if ($this->created_by == 0) {
+            return;
         }
 
-        if ($this->created_by == 0) {
-            $this->_createdByEmail = '';
+        if ($this->_createdByEmail === null) {
+            $this->_createdByEmail = App::if($this->createdBy, fn($user) => $user->email);
         }
 
         return $this->_createdByEmail;
@@ -754,12 +754,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getUpdatedByEmail()
     {
-        if ($this->_updatedByEmail === null) {
-            $this->_updatedByEmail = App::if($this->updatedBy, fn($user) => $user->email);
+        if ($this->updated_by == 0) {
+            return;
         }
 
-        if ($this->updated_by == 0) {
-            $this->_updatedByEmail = '';
+        if ($this->_updatedByEmail === null) {
+            $this->_updatedByEmail = App::if($this->updatedBy, fn($user) => $user->email);
         }
 
         return $this->_updatedByEmail;

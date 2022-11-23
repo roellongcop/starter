@@ -161,21 +161,17 @@ class Theme extends ActiveRecord
 
     public function getImageFiles()
     {
-        return App::if($this->photos, function($photos) {
-            return App::foreach($photos, function($photo) {
-                return App::if(File::findByToken($photo), fn($file) => $file);
-            }, false);
-        });
+        return App::foreach($this->photos, function($photo) {
+            return App::if(File::findByToken($photo), fn($file) => $file);
+        }, false);
     }
 
     public function getImages()
     {
-        return App::if($this->photos, function($photos) {
-            return App::foreach($photos, function($photo) {
-                return Html::image($photo, ['w' => 100, 'h' => 100, 'ratio' => 'false'], [
-                    'class' => 'img-thumbnail'
-                ]);
-            });
+        return App::foreach($this->photos, function($photo) {
+            return Html::image($photo, ['w' => 100, 'h' => 100, 'ratio' => 'false'], [
+                'class' => 'img-thumbnail'
+            ]);
         });
     }
 
