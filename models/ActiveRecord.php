@@ -1008,4 +1008,17 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             App::danger($this->errorSummary);
         }
     }
+
+    public static function batchInsert($data)
+    {
+        if ($data) {
+            $arr = array_chunk($data, 1000);
+            $columns = array_keys($data[0]);
+            foreach ($arr as $r) {
+                App::createCommand()
+                    ->batchInsert(static::tableName(), $columns, $r)
+                    ->execute();
+            }
+        }
+    }
 }
