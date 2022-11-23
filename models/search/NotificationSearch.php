@@ -2,7 +2,6 @@
 
 namespace app\models\search;
 
-use Yii;
 use yii\data\ActiveDataProvider;
 use app\models\Notification;
 use app\helpers\App;

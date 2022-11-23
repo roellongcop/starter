@@ -2,7 +2,6 @@
 
 namespace app\models\search;
 
-use Yii;
 use yii\data\ActiveDataProvider;
 use app\models\Theme;
 use app\helpers\App;

@@ -2,9 +2,7 @@
 
 namespace app\models\search;
 
-use Yii;
 use app\helpers\App;
-use app\helpers\Url;
 use app\models\Setting;
 use yii\data\ActiveDataProvider;
 

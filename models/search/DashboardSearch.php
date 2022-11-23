@@ -4,12 +4,7 @@ namespace app\models\search;
 
 use Yii;
 use app\helpers\App;
-use app\models\Ip;
-use yii\data\ActiveDataProvider;
 
-/**
- * IpSearch represents the model behind the search form of `app\models\Ip`.
- */
 class DashboardSearch extends \yii\base\Model
 {
     public $keywords;

@@ -2,7 +2,6 @@
 
 namespace app\models\search;
 
-use Yii;
 use app\helpers\App;
 use app\models\Ip;
 use yii\data\ActiveDataProvider;
