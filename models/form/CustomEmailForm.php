@@ -75,13 +75,14 @@ class CustomEmailForm extends \yii\base\Model
     {
         if ($this->validate()) {
 
-            $mailer = Yii::$app->mailer->compose();
             if ($this->template) {
-                // $mailer = Yii::$app->mailer->compose($this->template, $this->parameters);
-                $this->content = Yii::$app->mailer->render($this->template, $this->parameters);
+                $mailer = Yii::$app->mailer->compose($this->template, $this->parameters);
+                // $this->content = Yii::$app->mailer->render($this->template, $this->parameters);
             }
-
-            $mailer->setHtmlBody($this->content);
+            else {
+                $mailer = Yii::$app->mailer->compose();
+                $mailer->setHtmlBody($this->content);
+            }
 
             $mailer->setSubject($this->subject)
                 ->setFrom([$this->from => $this->sender_name])
