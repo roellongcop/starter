@@ -23,7 +23,7 @@ $config = [
         ],
         'setting' => ['class' => 'app\components\SettingComponent'],
         'access' => ['class' => 'app\components\AccessComponent'],
-        'general' => ['class' => 'app\components\General'],
+        'general' => ['class' => 'app\components\GeneralComponent'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
         'urlManager' => [
             'class' => 'app\components\UrlManagerComponent',
