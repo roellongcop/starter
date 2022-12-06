@@ -39,7 +39,7 @@ class <?= $className ?> extends \app\migrations\Migration
         ];
 
         // FOR SETTING utf
-        // ->append('CHARACTER SET utf8 COLLATE utf8_general_ci')
+        // ->append('CHARACTER SET utf8 COLLATE utf8mb4_unicode_520_ci')
     }
 
     /**

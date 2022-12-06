@@ -8,7 +8,7 @@ use Yii;
  */
 class Migration extends \yii\db\Migration
 {
-    public $options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+    public $options = 'CHARACTER SET utf8 COLLATE utf8mb4_unicode_520_ci ENGINE=InnoDB';
 
     public function createTable($tableName, $columns, $options = null) 
     {
