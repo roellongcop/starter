@@ -8,7 +8,9 @@ use app\widgets\Menu;
 		<!--begin::Menu Container-->
 		<div id="kt_aside_offcanvas_menu" class="aside-offcanvas-menu my-4" data-menu-vertical="1">
 			<!--begin::Menu Nav-->
-			<?= Menu::widget() ?>
+			<?= Menu::widget([
+            	'viewParams' => $this->params
+			]) ?>
 			<!--end::Menu Nav-->
 		</div>
 		<!--end::Menu Container-->
