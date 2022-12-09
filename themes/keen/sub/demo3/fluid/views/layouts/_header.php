@@ -9,7 +9,9 @@ use app\widgets\Menu;
 			<!--begin::Header Menu-->
 			<div id="kt_header_menu" class="header-menu header-menu-left header-menu-mobile header-menu-layout-default">
 				<!--begin::Header Nav-->
-				<?= Menu::widget() ?>
+				<?= Menu::widget([
+            		'viewParams' => $this->params
+				]) ?>
 				<!--end::Header Nav-->
 			</div>
 			<!--end::Header Menu-->
