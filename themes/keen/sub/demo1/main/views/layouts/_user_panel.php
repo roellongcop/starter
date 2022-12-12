@@ -31,7 +31,7 @@ $access = App::component('access');
             <div class="d-flex flex-column">
                 <?= Anchor::widget([
                     'title' => $identity->username,
-                    'link' => ['user/view', 'id' => $identity->id],
+                    'link' => ['user/my-account'],
                     'text' => true,
                     'options' => [
                         'class' => 'font-weight-bold font-size-h5 text-dark-75 text-hover-primary'
