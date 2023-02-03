@@ -18,9 +18,11 @@ use app\models\UserMeta;
 use app\models\VisitLog;
 use app\models\Visitor;
 use app\models\search\DashboardSearch;
+
 /**
- * BackupController implements the CRUD actions for Backup model.
+ * DashboardController.
  */
+
 class DashboardController extends Controller
 {
     public function actionFindByKeywords($keywords='')
