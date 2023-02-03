@@ -14,7 +14,7 @@ use app\helpers\Html;
 use app\widgets\ActiveForm;
 
 /**
- * RoleController implements the CRUD actions for Role model.
+ * abstract Main Controller.
  */
 abstract class Controller extends \yii\web\Controller
 {
