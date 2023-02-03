@@ -19,10 +19,6 @@ use app\models\VisitLog;
 use app\models\Visitor;
 use app\models\search\DashboardSearch;
 
-/**
- * DashboardController.
- */
-
 class DashboardController extends Controller
 {
     public function actionFindByKeywords($keywords='')
