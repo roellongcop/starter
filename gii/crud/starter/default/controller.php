@@ -166,7 +166,7 @@ class <?= $controllerClass ?> extends Controller <?= "\n" ?>
             App::success('Successfully Deleted');
         }
         else {
-            App::danger(json_encode($model->errors));
+            App::danger($model->errors);
         }
 
         return $this->redirect($model->indexUrl);
