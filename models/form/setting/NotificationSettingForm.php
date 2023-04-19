@@ -13,7 +13,7 @@ class NotificationSettingForm extends SettingForm
     public function rules()
     {
         return [
-	        [['notification_change_password', ], 'safe'],
+            [['notification_change_password',], 'safe'],
         ];
     }
 

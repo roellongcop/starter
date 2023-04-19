@@ -24,44 +24,40 @@ class DateRange extends BaseWidget
         'This Year',
         'Last Year',
     ];
-    
 
-    public function init() 
+
+    public function init()
     {
         // your logic here
         parent::init();
 
-        if (! $this->name) {
+        if (!$this->name) {
             $this->name = $this->attribute;
         }
 
         $this->id = "date-range-{$this->id}";
 
-        if (! $this->start && $this->model->hasMethod('getStartDate')) {
+        if (!$this->start && $this->model->hasMethod('getStartDate')) {
             $this->start = $this->model->startDate;
-        }
-        else {
+        } else {
             $this->start = $this->start ?: date('F d, Y');
         }
 
-        if (! $this->all_start && $this->model->hasMethod('getStartDate')) {
+        if (!$this->all_start && $this->model->hasMethod('getStartDate')) {
             $this->all_start = $this->model->getStartDate(true);
-        }
-        else {
+        } else {
             $this->all_start = $this->all_start ?: date('F d, Y');
         }
 
-        if (! $this->end && $this->model->hasMethod('getEndDate')) {
+        if (!$this->end && $this->model->hasMethod('getEndDate')) {
             $this->end = $this->model->endDate;
-        }
-        else {
+        } else {
             $this->end = $this->end ?: date('F d, Y');
         }
 
-        if (! $this->all_end && $this->model->hasMethod('getEndDate')) {
+        if (!$this->all_end && $this->model->hasMethod('getEndDate')) {
             $this->all_end = $this->model->getEndDate(true);
-        }
-        else {
+        } else {
             $this->all_end = $this->all_end ?: date('F d, Y');
         }
     }

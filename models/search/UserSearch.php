@@ -93,7 +93,7 @@ class UserSearch extends User
             'u.created_at' => $this->created_at,
             'u.updated_at' => $this->updated_at,
         ]);
-        
+
         $query->andFilterWhere(['like', 'u.username', $this->username])
             ->andFilterWhere(['like', 'u.email', $this->email])
             ->andFilterWhere(['like', 'u.auth_key', $this->auth_key])
@@ -101,11 +101,12 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'u.password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'u.verification_token', $this->verification_token])
             ->andFilterWhere(['like', 'u.slug', $this->slug]);
-                
-        $query->andFilterWhere(['or', 
-            ['like', 'r.name', $this->keywords],  
-            ['like', 'u.username', $this->keywords],  
-            ['like', 'u.email', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'r.name', $this->keywords],
+            ['like', 'u.username', $this->keywords],
+            ['like', 'u.email', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

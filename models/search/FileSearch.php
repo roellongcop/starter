@@ -87,16 +87,17 @@ class FileSearch extends File
             'extension' => $this->extension,
             'tag' => $this->tag,
         ]);
-        
+
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'location', $this->location])
             ->andFilterWhere(['like', 'token', $this->token]);
-        
-        $query->andFilterWhere(['or', 
-            ['like', 'name', $this->keywords],  
-            ['like', 'tag', $this->keywords],  
-            ['like', 'extension', $this->keywords],  
-            ['like', 'token', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'name', $this->keywords],
+            ['like', 'tag', $this->keywords],
+            ['like', 'extension', $this->keywords],
+            ['like', 'token', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

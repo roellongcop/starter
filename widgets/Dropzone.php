@@ -6,7 +6,7 @@ use app\helpers\App;
 use app\helpers\Url;
 use app\models\File;
 use yii\helpers\ArrayHelper;
- 
+
 class Dropzone extends BaseWidget
 {
     public $parameters = [];
@@ -34,7 +34,7 @@ class Dropzone extends BaseWidget
     public $extensions;
 
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
@@ -68,7 +68,7 @@ class Dropzone extends BaseWidget
             //     }
             // })";
 
-            $this->removedFile = <<< JS
+            $this->removedFile = <<<JS
                 let inp = $('input[data-uuid=\"'+ file.upload.uuid +'\"]');
 
                 if(inp.length) {
@@ -82,7 +82,8 @@ class Dropzone extends BaseWidget
                 File::EXTENSIONS['image'],
                 File::EXTENSIONS['file']
             );
-            $this->acceptedFiles = array_map(function($val) { return ".{$val}"; }, $acceptedFiles);
+            $this->acceptedFiles = array_map(function ($val) {
+                return ".{$val}"; }, $acceptedFiles);
         }
 
         if (is_array($this->acceptedFiles)) {
@@ -95,12 +96,13 @@ class Dropzone extends BaseWidget
         }
 
         $this->inputName = implode('', [
-            $className, 
-            '[', $this->attribute, ']',
-            ((is_array($this->model->{$this->attribute}))? '[]': '')
+            $className,
+            '[', $this->attribute,
+            ']',
+            ((is_array($this->model->{$this->attribute})) ? '[]' : '')
         ]);
 
-        $this->success = <<< JS
+        $this->success = <<<JS
             {$this->success}
 
             $('#dropzone-{$this->id}').append("<input name='{$this->inputName}' data-uuid='"+ file.upload.uuid +"' type='hidden' value='"+ s.file.token +"'> ");
@@ -115,17 +117,17 @@ class Dropzone extends BaseWidget
                     'extension',
                     'name',
                     'location',
-                    'upload' => function($model) {
+                    'upload' => function ($model) {
                         return [
                             'uuid' => $model->token
                         ];
                     },
-                    'fullname' => function($model) {
+                    'fullname' => function ($model) {
                         return implode('.', [$model->name, $model->extension]);
                     },
-                    'imagePath' => function($model) {
+                    'imagePath' => function ($model) {
                         return Url::image($model->token, [
-                            'w' => 120, 
+                            'w' => 120,
                             'quality' => 90,
                         ]);
                     }
@@ -147,7 +149,7 @@ class Dropzone extends BaseWidget
             'paramName' => $this->paramName,
             'maxFiles' => $this->maxFiles,
             'maxFilesize' => $this->maxFilesize,
-            'addRemoveLinks' => $this->addRemoveLinks ? 'true': 'false',
+            'addRemoveLinks' => $this->addRemoveLinks ? 'true' : 'false',
             'url' => $this->url,
             'title' => $this->title,
             'description' => $this->description,
@@ -157,7 +159,7 @@ class Dropzone extends BaseWidget
             'complete' => $this->complete,
             'removedFile' => $this->removedFile,
             'acceptedFiles' => $this->acceptedFiles,
-            'success' => $this->success, 
+            'success' => $this->success,
             'inputName' => $this->inputName,
             'attribute' => $this->attribute,
             'model' => $this->model,

@@ -82,14 +82,14 @@ class Queue extends ActiveRecord
     {
         return new \app\models\query\QueueQuery(get_called_class());
     }
-     
+
     public function gridColumns()
     {
         return [
             'channel' => [
-                'attribute' => 'channel', 
+                'attribute' => 'channel',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->channel,
                         'link' => $model->viewUrl,
@@ -128,10 +128,10 @@ class Queue extends ActiveRecord
         App::queue()->push($job);
     }
 
-    /**
-    public function getExportColumns()
-    {
-        return [];
-    }
-    */
+/**
+public function getExportColumns()
+{
+return [];
+}
+*/
 }

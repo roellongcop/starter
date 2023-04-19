@@ -6,16 +6,16 @@ class JsonEditor extends BaseWidget
 {
     public $data;
     public $options = [
-        'mode' =>  'view'
+        'mode' => 'view'
     ];
-    
-    public function init() 
+
+    public function init()
     {
         // your logic here
         parent::init();
-        
+
         $this->data = $this->data ?: [];
-        $this->data = is_array($this->data)? json_encode($this->data): $this->data;
+        $this->data = is_array($this->data) ? json_encode($this->data) : $this->data;
         $this->data = strip_tags($this->data);
         $this->options = json_encode($this->options);
     }

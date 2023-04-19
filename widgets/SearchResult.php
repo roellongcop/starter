@@ -17,5 +17,5 @@ class SearchResult extends BaseWidget
             'searchModel' => $this->searchModel,
         ]);
     }
-        
+
 }

@@ -10,15 +10,15 @@ class ImageSettingForm extends SettingForm
     public $secondary_logo;
     public $image_holder;
     public $favicon;
-    
+
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
-            [['primary_logo', 'secondary_logo', 'image_holder', 'favicon', ], 'string'],
-            [['primary_logo', 'secondary_logo', 'image_holder', 'favicon', ], 'safe'],
+            [['primary_logo', 'secondary_logo', 'image_holder', 'favicon',], 'string'],
+            [['primary_logo', 'secondary_logo', 'image_holder', 'favicon',], 'safe'],
         ];
     }
 

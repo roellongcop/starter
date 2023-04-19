@@ -15,62 +15,61 @@ class Html extends \yii\helpers\Html
     public static function a($text, $url = null, $options = [])
     {
         return Anchor::widget([
-            'title' => $text ,
+            'title' => $text,
             'link' => $url,
             'options' => $options,
         ]);
     }
-    
-    public static function nbsp($count=1)
+
+    public static function nbsp($count = 1)
     {
         $space = '';
-        for ($i=0; $i < $count; $i++) { 
+        for ($i = 0; $i < $count; $i++) {
             $space .= "&nbsp;";
         }
         return $space;
     }
 
-    public static function image($token, $params=[], $options=[])
+    public static function image($token, $params = [], $options = [])
     {
         $options['class'] = ($options['class'] ?? '') . ' mw-' . ($params['w'] ?? 0);
         return parent::img(Url::image($token, $params), $options);
     }
 
-    public static function download($token, $params=[], $options=[])
+    public static function download($token, $params = [], $options = [])
     {
         return parent::img(Url::download($token, $params), $options);
     }
 
     public static function isHtml($string)
     {
-        if($string != strip_tags($string)) {
+        if ($string != strip_tags($string)) {
             // is HTML
             return true;
-        }
-        else {
+        } else {
             // not HTML
             return false;
         }
     }
 
-    public static function if($condition=true, $content='', $params=[])
+    public static function if ($condition = true, $content = '', $params = [])
     {
-        return App::if($condition, $content, $params);
+        return App::if ($condition, $content, $params);
     }
 
-    public static function ifELse($condition=true, $trueContent='', $falseContent='', $params=[])
+    public static function ifELse($condition = true, $trueContent = '', $falseContent = '', $params = [])
     {
         return App::ifELse($condition, $trueContent, $falseContent, $params);
     }
 
-    public static function ifElseIf($arr=[], $params=[])
+    public static function ifElseIf($arr = [], $params = [])
     {
         return App::ifElseIf($arr, $params);
     }
 
-    public static function foreach($array, $function, $glue=' ')
+    public static function foreach ($array, $function, $glue = ' ')
     {
-        return App::foreach($array, $function, $glue);
+        return App::foreach ($array, $function, $glue);
     }
 
     public static function content($content, $params)
@@ -151,7 +150,7 @@ class Html extends \yii\helpers\Html
 
         if ($encode) {
             foreach ($lines as &$line) {
-                $line = is_array($line)? json_encode($line): $line;
+                $line = is_array($line) ? json_encode($line) : $line;
                 $line = Html::encode($line);
             }
         }

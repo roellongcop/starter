@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class Pagination extends BaseWidget
 {
     public $model;
@@ -14,16 +14,16 @@ class Pagination extends BaseWidget
     public $name;
     public $label = false;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
 
-        if (! $this->name) {
+        if (!$this->name) {
             $this->name = $this->attribute;
         }
 
-        if (! $this->paginations) {
+        if (!$this->paginations) {
             $this->paginations = App::params('pagination');
         }
     }

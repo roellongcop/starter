@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class ConfirmBulkAction extends BaseWidget
 {
     public $models;
@@ -11,10 +11,10 @@ class ConfirmBulkAction extends BaseWidget
     public $post;
     public $controllerID;
 
-    public function init() 
+    public function init()
     {
         // your logic here
-        parent::init(); 
+        parent::init();
 
         $this->controllerID = $this->controllerID ?: App::controllerID();
     }

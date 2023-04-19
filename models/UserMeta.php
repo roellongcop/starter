@@ -35,7 +35,7 @@ class UserMeta extends ActiveRecord
             'mainAttribute' => 'name',
         ];
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -66,12 +66,12 @@ class UserMeta extends ActiveRecord
 
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     public function getUsername()
     {
-        return App::if($this->user, fn($user) => $user->username);
+        return App::if ($this->user, fn($user) => $user->username);
     }
 
     /**
@@ -82,15 +82,15 @@ class UserMeta extends ActiveRecord
     {
         return new \app\models\query\UserMetaQuery(get_called_class());
     }
-     
+
     public function gridColumns()
     {
         return [
             'user_id' => [
-                'attribute' => 'user_id', 
+                'attribute' => 'user_id',
                 'format' => 'raw',
                 'label' => 'username',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->username,
                         'link' => $model->user->viewUrl,
@@ -99,9 +99,9 @@ class UserMeta extends ActiveRecord
                 }
             ],
             'name' => [
-                'attribute' => 'name', 
+                'attribute' => 'name',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->name,
                         'link' => $model->viewUrl,
@@ -122,19 +122,17 @@ class UserMeta extends ActiveRecord
         ];
     }
 
-    public static function findByKeywords($keywords='', $attributes='', $limit=10, $andFilterWhere=[])
+    public static function findByKeywords($keywords = '', $attributes = [], $limit = 10, $andFilterWhere = [])
     {
-        return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit, $andFilterWhere) {
-            return self::find()
-                ->select("{$attribute} AS data")
-                ->alias('um')
-                ->joinWith('user u')
-                ->groupBy($attribute)
-                ->where(['LIKE', $attribute, $keywords])
-                ->andFilterWhere($andFilterWhere)
-                ->limit($limit)
-                ->asArray()
-                ->all();
-        });
+        return parent::findByKeywordsData($attributes, fn($attribute) => self::find()
+            ->select("{$attribute} AS data")
+            ->alias('um')
+            ->joinWith('user u')
+            ->groupBy($attribute)
+            ->where(['LIKE', $attribute, $keywords])
+            ->andFilterWhere($andFilterWhere)
+            ->limit($limit)
+            ->asArray()
+            ->all());
     }
 }

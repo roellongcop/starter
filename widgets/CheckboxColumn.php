@@ -15,6 +15,7 @@ use yii\base\ViewContextInterface;
 use yii\grid\Column;
 use app\helpers\Html;
 use yii\helpers\Json;
+use yii\web\View;
 
 /**
  * CheckboxColumn displays a column of checkboxes in a grid view.
@@ -139,7 +140,7 @@ class CheckboxColumn extends Column implements ViewContextInterface
         if ($this->cssClass !== null) {
             Html::addCssClass($options, $this->cssClass);
         }
- 
+
         return $this->render('checkbox-column/content-template', [
             'checkbox' => Html::checkbox($this->name, !empty($options['checked']), $options)
         ]);
@@ -208,7 +209,7 @@ class CheckboxColumn extends Column implements ViewContextInterface
         $this->_view = $view;
     }
 
- 
+
 
     /**
      * Renders a view.

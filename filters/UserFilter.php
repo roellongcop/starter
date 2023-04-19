@@ -12,8 +12,8 @@ class UserFilter extends \yii\base\ActionFilter
         if (!parent::beforeAction($action)) {
             return false;
         }
-        
-        if (! App::isControllerAction('site/error')) {
+
+        if (!App::isControllerAction('site/error')) {
             if (App::isLogin() && App::identity('is_blocked')) {
                 throw new ForbiddenHttpException('User is Blocked !');
             }

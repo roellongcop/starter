@@ -84,15 +84,16 @@ class VisitorSearch extends Visitor
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-                
-        $query->andFilterWhere(['or', 
-            ['like', 'expire', $this->keywords],  
-            ['like', 'cookie', $this->keywords],  
-            ['like', 'ip', $this->keywords],  
-            ['like', 'browser', $this->keywords],  
-            ['like', 'os', $this->keywords],  
-            ['like', 'device', $this->keywords],  
-            ['like', 'location', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'expire', $this->keywords],
+            ['like', 'cookie', $this->keywords],
+            ['like', 'ip', $this->keywords],
+            ['like', 'browser', $this->keywords],
+            ['like', 'os', $this->keywords],
+            ['like', 'device', $this->keywords],
+            ['like', 'location', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

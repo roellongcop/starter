@@ -86,14 +86,15 @@ class NotificationSearch extends Notification
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-        
+
         $query->andFilterWhere(['like', 'message', $this->message])
             ->andFilterWhere(['like', 'link', $this->link])
             ->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'token', $this->token]);
-        
-        $query->andFilterWhere(['or', 
-            ['like', 'message', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'message', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

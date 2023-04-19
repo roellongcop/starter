@@ -355,7 +355,7 @@ class App
 		$message = (is_array($message)) ? json_encode($message) : $message;
 		self::session()->addFlash('primary', $message);
 	}
-	
+
 	public static function warning($message = '')
 	{
 		$message = (is_array($message)) ? json_encode($message) : $message;
@@ -540,7 +540,7 @@ class App
 		return self::mapParams(self::params($paramName), $key, $value);
 	}
 
-	public static function if($condition = true, $content = '', $params = [])
+	public static function if ($condition = true, $content = '', $params = [])
 	{
 		if ($condition) {
 			if (is_callable($content)) {
@@ -580,7 +580,7 @@ class App
 		}
 	}
 
-	public static function foreach($array, $function, $glue = ' ')
+	public static function foreach ($array, $function, $glue = ' ')
 	{
 		$content = [];
 		if ($array && is_array($array)) {

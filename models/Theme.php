@@ -42,7 +42,7 @@ class Theme extends ActiveRecord
         'demo3-fixed',
         'demo3-fluid',
     ];
-    
+
     /**
      * {@inheritdoc}
      */
@@ -103,20 +103,20 @@ class Theme extends ActiveRecord
     {
         return Url::toRoute(['theme/activate', 'slug' => $this->slug], true);
     }
-     
+
     public function gridColumns()
     {
         return [
             'preview' => [
-                'attribute' => 'name', 
-                'label' => 'preview', 
+                'attribute' => 'name',
+                'label' => 'preview',
                 'format' => 'raw',
                 'value' => 'previewImage'
             ],
             'name' => [
-                'attribute' => 'name', 
+                'attribute' => 'name',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->name,
                         'link' => $model->viewUrl,
@@ -131,7 +131,7 @@ class Theme extends ActiveRecord
             // 'bundles' => ['attribute' => 'bundles', 'format' => 'raw'],
         ];
     }
-    
+
     public function getpath_mapdata()
     {
         return JsonEditor::widget([
@@ -161,14 +161,14 @@ class Theme extends ActiveRecord
 
     public function getImageFiles()
     {
-        return App::foreach($this->photos, function($photo) {
-            return App::if(File::findByToken($photo), fn($file) => $file);
+        return App::foreach ($this->photos, function ($photo) {
+            return App::if (File::findByToken($photo), fn($file) => $file);
         }, false);
     }
 
     public function getImages()
     {
-        return App::foreach($this->photos, function($photo) {
+        return App::foreach ($this->photos, function ($photo) {
             return Html::image($photo, ['w' => 100, 'h' => 100, 'ratio' => 'false'], [
                 'class' => 'img-thumbnail'
             ]);
@@ -177,7 +177,7 @@ class Theme extends ActiveRecord
 
     public function getPreviewImage($params = ['w' => 100], $options = [])
     {
-        $token = App::if($this->photos, fn($photos) => $photos[0]);
+        $token = App::if ($this->photos, fn($photos) => $photos[0]);
 
         return Html::image($token, $params, $options);
     }
@@ -186,7 +186,7 @@ class Theme extends ActiveRecord
     {
         $behaviors = parent::behaviors();
         $behaviors['JsonBehavior']['fields'] = [
-            'path_map', 
+            'path_map',
             'bundles',
             'photos',
         ];
@@ -199,7 +199,7 @@ class Theme extends ActiveRecord
         return $behaviors;
     }
 
-    public function getAssetClass($class='AppAsset')
+    public function getAssetClass($class = 'AppAsset')
     {
         $remove_at = str_replace('@', '', $this->base_path);
         $to_array = explode('/', $remove_at);

@@ -4,13 +4,13 @@ namespace app\widgets;
 
 use app\widgets\AnchorBack;
 use app\helpers\Html;
- 
+
 class AnchorForm extends BaseWidget
 {
     public $glue = ' ';
     public $submitLabel = 'Save';
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

@@ -3,20 +3,20 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class Nestable extends BaseWidget
 {
     public $controller_actions;
     public $navigations;
     public $defaultName = 'Role[main_navigation]';
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
 
 
-       $this->controller_actions = $this->controller_actions ?: App::component('access')->controllerActions;
+        $this->controller_actions = $this->controller_actions ?: App::component('access')->controllerActions;
     }
 
 

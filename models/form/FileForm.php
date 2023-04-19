@@ -40,8 +40,7 @@ class FileForm extends \yii\base\Model
 
             if ($file->save()) {
                 return $file;
-            }
-            else {
+            } else {
                 $this->addError('file', $file->errors);
             }
         }

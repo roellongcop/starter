@@ -11,7 +11,7 @@ class ApiBehavior extends \yii\base\Behavior
         return [
             Response::EVENT_BEFORE_SEND => 'beforeSend',
         ];
-    } 
+    }
 
     public function beforeSend($event)
     {

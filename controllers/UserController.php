@@ -12,8 +12,8 @@ use app\models\search\UserSearch;
  */
 class UserController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
-    { 
+    public function actionFindByKeywords($keywords = '')
+    {
         return $this->asJson(
             User::findByKeywords($keywords, ['u.username', 'u.email', 'r.name'])
         );
@@ -104,7 +104,7 @@ class UserController extends Controller
      */
     public function actionUpdate($slug)
     {
-        $model = User::controllerFind($slug, 'slug'); 
+        $model = User::controllerFind($slug, 'slug');
 
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
@@ -127,10 +127,9 @@ class UserController extends Controller
     {
         $model = User::controllerFind($slug, 'slug');
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 
@@ -172,9 +171,9 @@ class UserController extends Controller
         return $this->exportXlsx();
     }
 
-    public function actionMyPassword($token='')
+    public function actionMyPassword($token = '')
     {
-        $user = ($token)? User::controllerFind($token, 'password_reset_token'): App::identity();
+        $user = ($token) ? User::controllerFind($token, 'password_reset_token') : App::identity();
 
         $model = new ChangePasswordForm([
             'user_id' => $user->id,
@@ -193,7 +192,7 @@ class UserController extends Controller
 
     public function actionProfile($slug)
     {
-        $user = User::controllerFind($slug, 'slug'); 
+        $user = User::controllerFind($slug, 'slug');
         $model = $user->profile;
 
         if ($model->load(App::post()) && $model->save()) {
@@ -214,7 +213,7 @@ class UserController extends Controller
         if ($model->load(App::post()) && $model->save()) {
             App::success('Successfully Updated');
             return $this->refresh();
-        } 
+        }
 
         return $this->render('my_account', [
             'model' => $model,
@@ -237,8 +236,7 @@ class UserController extends Controller
             App::user()->login($model, 0);
 
             return $this->redirect(['dashboard/index']);
-        }
-        else {
+        } else {
             App::danger('No user found or user is cannot be log in.');
         }
 

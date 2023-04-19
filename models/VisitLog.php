@@ -78,12 +78,12 @@ class VisitLog extends ActiveRecord
 
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     public function getUsername()
     {
-        return App::if($this->user, fn($user) => $user->username);
+        return App::if ($this->user, fn($user) => $user->username);
     }
 
     public function getVisitLogsAction()
@@ -95,10 +95,10 @@ class VisitLog extends ActiveRecord
     {
         return [
             'username' => [
-                'attribute' => 'username', 
+                'attribute' => 'username',
                 'label' => 'Username',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->username,
                         'link' => $model->user->viewUrl,
@@ -107,9 +107,9 @@ class VisitLog extends ActiveRecord
                 }
             ],
             'action' => [
-                'attribute' => 'action', 
+                'attribute' => 'action',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->actionLabel,
                         'link' => $model->viewUrl,
@@ -135,10 +135,11 @@ class VisitLog extends ActiveRecord
         ];
     }
 
-    public static function findByKeywords($keywords='', $attributes='', $limit=10, $andFilterWhere=[])
+    public static function findByKeywords($keywords = '', $attributes = [], $limit = 10, $andFilterWhere = [])
     {
-        return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit, $andFilterWhere) {
-            return self::find()
+        return parent::findByKeywordsData(
+            $attributes,
+            fn($attribute) => self::find()
                 ->select("{$attribute} AS data")
                 ->alias('v')
                 ->joinWith('user u')
@@ -147,7 +148,7 @@ class VisitLog extends ActiveRecord
                 ->andFilterWhere($andFilterWhere)
                 ->limit($limit)
                 ->asArray()
-                ->all();
-        });
+                ->all()
+        );
     }
 }

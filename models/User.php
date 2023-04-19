@@ -69,12 +69,15 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return $this->setRules([
             [['password', 'password_repeat'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
             ['password', 'string', 'min' => 6],
-            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message'=>"Passwords don't match" ],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match"],
             [['username', 'role_id', 'status', 'is_blocked'], 'required'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [
-                    self::STATUS_ACTIVE, 
-                    self::STATUS_INACTIVE, 
+            [
+                'status',
+                'in',
+                'range' => [
+                    self::STATUS_ACTIVE,
+                    self::STATUS_INACTIVE,
                     self::STATUS_DELETED
                 ]
             ],
@@ -88,7 +91,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             ['role_id', 'validateRoleId'],
         ]);
     }
- 
+
     public function attributeLabels()
     {
         return $this->setAttributeLabels([
@@ -117,7 +120,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         }
 
         if (App::isLogin() && $this->role->isInactive) {
-            if (! App::identity()->can('in-active-data', 'role')) {
+            if (!App::identity()->can('in-active-data', 'role')) {
                 $this->addError($attribute, 'User don\'t have access to role');
             }
         }
@@ -167,7 +170,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return static::findOne(['email' => $email]);
         // return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
-    
+
     /**
      * Finds user by password reset token
      *
@@ -192,7 +195,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      * @param string $token verify email token
      * @return static|null
      */
-    public static function findByVerificationToken($token) {
+    public static function findByVerificationToken($token)
+    {
         return static::findOne([
             'verification_token' => $token,
             // 'status' => self::STATUS_INACTIVE
@@ -325,26 +329,26 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         if (in_array(App::actionID(), ExportForm::EXPORT_ACTIONS)) {
             return $this->blockedStatus['label'];
-        } 
-        
+        }
+
         return Label::widget([
             'options' => $this->blockedStatus
         ]);
     }
 
     public function getUserStatusHtml()
-    { 
+    {
         return Label::widget([
             'options' => $this->userStatus
         ]);
     }
-   
+
     public function beforeSave($insert)
     {
         if (!parent::beforeSave($insert)) {
             return false;
         }
-        
+
         if ($this->isNewRecord) {
             $this->generateAuthKey();
             $this->generatePasswordResetToken();
@@ -375,12 +379,12 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public function getRole()
     {
-        return $this->hasOne(Role::className(), ['id' => 'role_id']);
-    } 
+        return $this->hasOne(Role::class, ['id' => 'role_id']);
+    }
 
     public function getTableColumnsMeta($model)
     {
-        $user_meta = ($this->_tableColumnsMeta !== false) ? $this->_tableColumnsMeta: UserMeta::findOne([
+        $user_meta = ($this->_tableColumnsMeta !== false) ? $this->_tableColumnsMeta : UserMeta::findOne([
             'user_id' => $this->id,
             'name' => 'table_columns'
         ]);
@@ -398,7 +402,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
-    public function filterColumns($model, $default=true)
+    public function filterColumns($model, $default = true)
     {
         $table_columns = $this->getTableColumnsMeta($model);
 
@@ -416,28 +420,28 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public function getRoleAccess()
     {
-        return App::if($this->role, fn($role) => $role->role_access);
+        return App::if ($this->role, fn($role) => $role->role_access);
     }
 
     public function getRoleName()
     {
-        return App::if($this->role, fn($role) => $role->name);
+        return App::if ($this->role, fn($role) => $role->name);
     }
 
     public function getModuleAccess()
     {
-        return App::if($this->role, fn($role) => $role->module_access);
+        return App::if ($this->role, fn($role) => $role->module_access);
     }
 
     public function getMainNavigation()
     {
-        return App::if($this->role, fn($role) => $role->main_navigation);
+        return App::if ($this->role, fn($role) => $role->main_navigation);
     }
 
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-  
+
         $behaviors['SluggableBehavior'] = [
             'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'username',
@@ -449,24 +453,25 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public function getRoleViewUrl()
     {
-        return App::if($this->role, fn($role) => $role->viewUrl);
+        return App::if ($this->role, fn($role) => $role->viewUrl);
     }
 
     public function gridColumns()
     {
         return [
             'photo' => [
-                'attribute' => 'id', 
+                'attribute' => 'id',
                 'label' => 'Photo',
                 'format' => 'raw',
-                'value' => function($model) {
-                    return Html::image($model->photo, 
+                'value' => function ($model) {
+                    return Html::image(
+                        $model->photo,
                         [
                             'w' => 50,
                             'h' => 50,
                             'quality' => 90,
                             'ratio' => 'false',
-                        ], 
+                        ],
                         [
                             'loading' => 'lazy',
                             'style' => 'border-radius: 50%;max-width:40px'
@@ -475,9 +480,9 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
                 }
             ],
             'username' => [
-                'attribute' => 'username', 
+                'attribute' => 'username',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->username,
                         'link' => $model->viewUrl,
@@ -487,10 +492,10 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             ],
             'email' => ['attribute' => 'email', 'format' => 'raw'],
             'role' => [
-                'attribute' => 'roleName', 
+                'attribute' => 'roleName',
                 'format' => 'raw',
                 'label' => 'Role',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->roleName,
                         'link' => $model->roleViewUrl,
@@ -506,8 +511,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'is_blocked' => [
                 'attribute' => 'is_blocked',
                 'label' => 'is blocked',
-                'format' => 'raw', 
-                'value' => function($model) {
+                'format' => 'raw',
+                'value' => function ($model) {
                     return $model->blockedStatusHtml;
                 }
             ],
@@ -520,10 +525,10 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             [
                 'label' => 'Photo',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Html::image(
                         $model->photo,
-                        ['w'=>40, 'h'=>40, 'ratio'=>'false', 'quality'=>90],
+                        ['w' => 40, 'h' => 40, 'ratio' => 'false', 'quality' => 90],
                         ['style' => 'border-radius: 50%;']
                     );
                 }
@@ -550,7 +555,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'label' => 'Allowed',
             'process' => 'allowed',
             'icon' => 'check',
-            'function' => function($id) {
+            'function' => function ($id) {
                 self::allowedAll(['id' => $id]);
             },
         ];
@@ -558,14 +563,14 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'label' => 'Blocked',
             'process' => 'blocked',
             'icon' => 'close',
-            'function' => function($id) {
+            'function' => function ($id) {
                 self::blockedAll(['id' => $id]);
             },
         ];
         return $bulkActions;
     }
 
-    public function can($action, $controller='')
+    public function can($action, $controller = '')
     {
         return App::component('access')
             ->userCan($action, $controller);
@@ -573,7 +578,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public function getMyImageFiles()
     {
-        return $this->hasMany(File::className(), ['created_by' => 'id'])
+        return $this->hasMany(File::class, ['created_by' => 'id'])
             ->onCondition(['extension' => File::EXTENSIONS['image']])
             ->groupBy(['name', 'size', 'extension'])
             ->orderBy(['id' => SORT_DESC]);
@@ -604,55 +609,56 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return $this->is_blocked == 1;
     }
 
-    public static function allowedAll($condition='')
+    public static function allowedAll($condition = '')
     {
         return parent::updateAll(['is_blocked' => 0], $condition);
     }
 
-    public static function blockedAll($condition='')
+    public static function blockedAll($condition = '')
     {
         return parent::updateAll(['is_blocked' => 1], $condition);
     }
 
     public function getUserMetas()
     {
-        return $this->hasMany(UserMeta::className(), ['user_id' => 'id']);
+        return $this->hasMany(UserMeta::class, ['user_id' => 'id']);
     }
 
     public function getLogs()
     {
-        return $this->hasMany(Log::className(), ['user_id' => 'id']);
+        return $this->hasMany(Log::class, ['user_id' => 'id']);
     }
 
     public function getVisitLogs()
     {
-        return $this->hasMany(VisitLog::className(), ['user_id' => 'id']);
+        return $this->hasMany(VisitLog::class, ['user_id' => 'id']);
     }
 
     public function getNotifications()
     {
-        return $this->hasMany(Notification::className(), ['user_id' => 'id']);
+        return $this->hasMany(Notification::class, ['user_id' => 'id']);
     }
 
     public function getIsDeveloper()
     {
-        return App::if($this->role, fn($role) => $role->getIsDeveloper());
+        return App::if ($this->role, fn($role) => $role->getIsDeveloper());
     }
 
     public function getIsSuperadmin()
     {
-        return App::if($this->role, fn($role) => $role->getIsSuperadmin());
+        return App::if ($this->role, fn($role) => $role->getIsSuperadmin());
     }
 
     public function getIsAdmin()
     {
-        return App::if($this->role, fn($role) => $role->getIsAdmin());
+        return App::if ($this->role, fn($role) => $role->getIsAdmin());
     }
 
-    public static function findByKeywords($keywords='', $attributes='', $limit=10, $andFilterWhere=[])
+    public static function findByKeywords($keywords = '', $attributes = [], $limit = 10, $andFilterWhere = [])
     {
-        return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit, $andFilterWhere) {
-            return self::find()
+        return parent::findByKeywordsData(
+            $attributes,
+            fn($attribute) => self::find()
                 ->select("{$attribute} AS data")
                 ->alias('u')
                 ->joinWith('role r')
@@ -661,7 +667,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
                 ->andFilterWhere($andFilterWhere)
                 ->limit($limit)
                 ->asArray()
-                ->all();
-        });
+                ->all()
+        );
     }
 }

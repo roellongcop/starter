@@ -89,21 +89,21 @@ class Visitor extends ActiveRecord
         parent::init();
         $this->record_status = parent::RECORD_ACTIVE;
     }
-     
+
     public function gridColumns()
     {
         return [
             'country' => [
-                'attribute' => 'location', 
-                'format' => 'raw', 
+                'attribute' => 'location',
+                'format' => 'raw',
                 'value' => 'countryName',
                 'label' => 'Country'
             ],
             'session_id' => ['attribute' => 'session_id', 'format' => 'raw'],
             'expire' => [
-                'attribute' => 'expire', 
+                'attribute' => 'expire',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->expire,
                         'link' => $model->viewUrl,
@@ -145,9 +145,9 @@ class Visitor extends ActiveRecord
         return $this->createCookieValue();
     }
 
-    public static function findByCookie($cookie='')
+    public static function findByCookie($cookie = '')
     {
-       return self::findOne(['cookie' => $cookie]);
+        return self::findOne(['cookie' => $cookie]);
     }
 
     public function isExpire()
@@ -158,7 +158,7 @@ class Visitor extends ActiveRecord
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        
+
         $behaviors['JsonBehavior'] = [
             'class' => 'app\behaviors\JsonBehavior',
             'fields' => ['location', 'server']

@@ -20,9 +20,9 @@ use yii\helpers\Console;
  */
 abstract class Controller extends \yii\console\Controller
 {
-	public function actionTruncate($tables=[])
+    public function actionTruncate($tables = [])
     {
-        $tables = is_array($tables)? $tables: [$tables];
+        $tables = is_array($tables) ? $tables : [$tables];
 
         foreach ($tables as $table) {
             Console::output("Truncate {$table}");

@@ -9,10 +9,10 @@ use app\models\search\VisitorSearch;
 /**
  * VisitorController implements the CRUD actions for Visitor model.
  */
-class VisitorController extends Controller 
+class VisitorController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
-    { 
+    public function actionFindByKeywords($keywords = '')
+    {
         return $this->asJson(
             Visitor::findByKeywords($keywords, [
                 'expire',
@@ -53,7 +53,7 @@ class VisitorController extends Controller
             'model' => Visitor::controllerFind($cookie, 'cookie'),
         ]);
     }
- 
+
     /**
      * Deletes an existing Visitor model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -65,10 +65,9 @@ class VisitorController extends Controller
     {
         $model = Visitor::controllerFind($cookie, 'cookie');
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 

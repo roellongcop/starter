@@ -3,13 +3,13 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class Menu extends BaseWidget
 {
     public $menus;
     public $viewParams;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

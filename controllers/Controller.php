@@ -25,12 +25,12 @@ abstract class Controller extends \yii\web\Controller
         }
 
         App::view()->params['controllerLink'] = Url::toRoute(["{$this->owner->id}/index"]);
-        
+
         switch ($action->id) {
             case 'print':
                 $this->layout = 'print';
                 break;
-            
+
             default:
                 // code...
                 break;
@@ -58,7 +58,7 @@ abstract class Controller extends \yii\web\Controller
         return $behaviors;
     }
 
-    public function exportPrint($searchModel='')
+    public function exportPrint($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         return $this->render('/layouts/_print', [
@@ -69,7 +69,7 @@ abstract class Controller extends \yii\web\Controller
         ]);
     }
 
-    public function exportPdf($searchModel='')
+    public function exportPdf($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportPdfForm([
@@ -81,7 +81,7 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function exportCsv($searchModel='')
+    public function exportCsv($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportCsvForm([
@@ -93,27 +93,27 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function exportXlsx($searchModel='')
+    public function exportXlsx($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportExcelForm([
             'content' => ExportContent::widget([
                 'file' => 'excel',
                 'searchModel' => $searchModel
-            ]), 
+            ]),
             'type' => 'xlsx'
         ]);
         return $model->export();
     }
 
-    public function exportXls($searchModel='')
+    public function exportXls($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportExcelForm([
             'content' => ExportContent::widget([
                 'file' => 'excel',
                 'searchModel' => $searchModel
-            ]), 
+            ]),
             'type' => 'xls'
         ]);
         return $model->export();
@@ -131,15 +131,14 @@ abstract class Controller extends \yii\web\Controller
         return Yii::createObject("app\\models\\search\\{$class}Search");
     }
 
-    public function changeRecordStatus($function='')
+    public function changeRecordStatus($function = '')
     {
         if (($post = App::post()) != null) {
 
-            if (! $function) {
+            if (!$function) {
                 $obj = $this->modelObject();
                 $model = $obj::controllerFind($post['id']);
-            }
-            else {
+            } else {
                 $model = call_user_func($function, $post['id']);
             }
 
@@ -159,8 +158,7 @@ abstract class Controller extends \yii\web\Controller
                     'status' => 'success',
                     'attributes' => $model->attributes
                 ]);
-            }
-            else {
+            } else {
                 return $this->asJson([
                     'status' => 'failed',
                     'errors' => $model->errors,
@@ -170,14 +168,14 @@ abstract class Controller extends \yii\web\Controller
         }
     }
 
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         $data = [];
 
         return $this->asJson($data);
     }
 
-    public function bulkAction($model='')
+    public function bulkAction($model = '')
     {
         $model = $model ?: $this->modelObject();
 
@@ -195,9 +193,8 @@ abstract class Controller extends \yii\web\Controller
                             call_user_func($action['function'], $post['selection']);
                         }
                     }
-                    App::success("Data set to '{$process}'");  
-                }
-                else {
+                    App::success("Data set to '{$process}'");
+                } else {
                     return $this->render('bulk-action', [
                         'model' => $model,
                         'models' => $models,
@@ -205,12 +202,10 @@ abstract class Controller extends \yii\web\Controller
                         'post' => $post
                     ]);
                 }
-            }
-            else {
+            } else {
                 App::warning('No Checkbox Selected');
             }
-        }
-        else {
+        } else {
             App::warning('No Process Selected');
         }
 
@@ -233,9 +228,9 @@ abstract class Controller extends \yii\web\Controller
         }
     }
 
-    public function _ajaxForm($model, $template='_form-ajax')
+    public function _ajaxForm($model, $template = '_form-ajax')
     {
-        $response['status'] = ($model->errors)? 'failed': 'success';
+        $response['status'] = ($model->errors) ? 'failed' : 'success';
         $response['errors'] = $model->errors;
         $response['errorSummary'] = Html::errorSummary($model);
         $response['model'] = $model;

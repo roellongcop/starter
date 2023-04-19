@@ -10,7 +10,7 @@ class Role extends \app\models\Role
         $rules[] = [['created_at', 'updated_at'], 'safe'];
         return $rules;
     }
-    
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();

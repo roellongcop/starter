@@ -76,7 +76,7 @@ class LoginForm extends \yii\base\Model
     public function login()
     {
         if ($this->validate()) {
-            return App::loginUser($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return App::loginUser($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         return false;
     }
@@ -89,7 +89,7 @@ class LoginForm extends \yii\base\Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user =  User::find()
+            $this->_user = User::find()
                 ->where(['email' => $this->username])
                 ->orWhere(['username' => $this->username])
                 ->one();

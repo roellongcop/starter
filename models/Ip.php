@@ -77,7 +77,7 @@ class Ip extends ActiveRecord
     {
         return new \app\models\query\IpQuery(get_called_class());
     }
-     
+
     public function getIpType()
     {
         return App::params('ip_types')[$this->type];
@@ -87,14 +87,14 @@ class Ip extends ActiveRecord
     {
         return $this->ipType['label'];
     }
- 
+
     public function gridColumns()
     {
         return [
             'name' => [
-                'attribute' => 'name', 
+                'attribute' => 'name',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->name,
                         'link' => $model->viewUrl,
@@ -103,9 +103,9 @@ class Ip extends ActiveRecord
                 }
             ],
             'ip_type' => [
-                'attribute' => 'type', 
+                'attribute' => 'type',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return $model->ipTypeLabel;
                 },
             ],
@@ -130,7 +130,7 @@ class Ip extends ActiveRecord
             'label' => 'White List',
             'process' => 'white_list',
             'icon' => 'plus',
-            'function' => function($id) {
+            'function' => function ($id) {
                 self::whitelistAll(['id' => $id]);
             },
         ];
@@ -138,7 +138,7 @@ class Ip extends ActiveRecord
             'label' => 'Black List',
             'process' => 'black_list',
             'icon' => 'minus',
-            'function' => function($id) {
+            'function' => function ($id) {
                 self::blacklistAll(['id' => $id]);
             },
         ];
@@ -157,12 +157,12 @@ class Ip extends ActiveRecord
         return $behaviors;
     }
 
-    public static function whitelistAll($condition='')
+    public static function whitelistAll($condition = '')
     {
         return parent::updateAll(['type' => 1], $condition);
     }
 
-    public static function blacklistAll($condition='')
+    public static function blacklistAll($condition = '')
     {
         return parent::updateAll(['type' => 0], $condition);
     }

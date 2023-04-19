@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use app\helpers\App;
 use app\helpers\Url;
- 
+
 class ThemeView extends BaseWidget
 {
     public $theme = [];
@@ -12,7 +12,7 @@ class ThemeView extends BaseWidget
     public $uploadUrl;
 
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

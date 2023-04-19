@@ -22,7 +22,7 @@ abstract class ActiveController extends \yii\rest\ActiveController
         // sample request
         // http://[host]/api/v1/user/available-users?access-token=access-fGurkHEAh4OSAT6BuC66_1621994603
 
-        
+
         // $behaviors['authenticator'] = [
         //     'class' => 'yii\filters\auth\CompositeAuth',
         //     'authMethods' => [

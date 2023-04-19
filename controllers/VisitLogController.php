@@ -11,8 +11,8 @@ use app\models\search\VisitLogSearch;
  */
 class VisitLogController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
-    { 
+    public function actionFindByKeywords($keywords = '')
+    {
         return $this->asJson(VisitLog::findByKeywords($keywords, ['v.ip', 'u.username']));
     }
 
@@ -55,10 +55,9 @@ class VisitLogController extends Controller
     {
         $model = VisitLog::controllerFind($id);
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 

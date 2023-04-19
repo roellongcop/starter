@@ -84,17 +84,18 @@ class ThemeSearch extends Theme
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-        
+
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'base_path', $this->base_path])
             ->andFilterWhere(['like', 'base_url', $this->base_url])
             ->andFilterWhere(['like', 'path_map', $this->path_map])
             ->andFilterWhere(['like', 'bundles', $this->bundles]);
-                
-        $query->andFilterWhere(['or', 
-            ['like', 'name', $this->keywords],  
-            ['like', 'description', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'name', $this->keywords],
+            ['like', 'description', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

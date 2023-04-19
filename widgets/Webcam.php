@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class Webcam extends BaseWidget
 {
     public $model;
@@ -36,8 +36,8 @@ class Webcam extends BaseWidget
         // 'height' => 300,
         'style' => 'display: none;width:300px; height: 300px'
     ];
-   
-    public function init() 
+
+    public function init()
     {
         parent::init();
 
@@ -50,7 +50,7 @@ class Webcam extends BaseWidget
         $this->modelName = App::className($this->model);
 
         if ($this->withInput) {
-            $this->ajaxSuccess .= <<< JS
+            $this->ajaxSuccess .= <<<JS
                 $('#webcam-container-{$this->id} input').val(s.file.token);
             JS;
         }

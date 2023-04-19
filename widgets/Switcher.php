@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use app\helpers\App;
 use app\helpers\Url;
- 
+
 class Switcher extends BaseWidget
 {
     public $model;
@@ -14,7 +14,7 @@ class Switcher extends BaseWidget
     public $controller;
     public $action;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

@@ -4,8 +4,8 @@ namespace app\widgets;
 
 use app\helpers\App;
 use app\helpers\Html;
-use app\helpers\Url; 
- 
+use app\helpers\Url;
+
 class ExportButton extends BaseWidget
 {
     public $actions = [
@@ -33,15 +33,15 @@ class ExportButton extends BaseWidget
             'icon' => 'excel',
             'ext' => '.xlsx'
         ],
-    ]; 
-    
+    ];
+
     public $exports = [];
     public $controller;
     public $title = 'Export Data';
     public $view = 'widget';
     public $user;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
@@ -59,7 +59,7 @@ class ExportButton extends BaseWidget
                 array_unshift($params, $action);
                 $link = Url::toRoute($params);
 
-                $icon = Html::isHtml($data['icon'])? $data['icon']: $this->render("icon/{$data['icon']}");
+                $icon = Html::isHtml($data['icon']) ? $data['icon'] : $this->render("icon/{$data['icon']}");
 
                 $title = "{$icon}<span class='navi-text'> &nbsp; {$data['title']}</span>";
 
@@ -73,8 +73,7 @@ class ExportButton extends BaseWidget
                             'onclick' => "popupCenter('{$link}')"
                         ]
                     ]);
-                }
-                else {
+                } else {
                     $this->exports[] = Anchor::widget([
                         'title' => $title,
                         'link' => '#',
@@ -95,10 +94,10 @@ class ExportButton extends BaseWidget
      * {@inheritdoc}
      */
     public function run()
-    { 
+    {
         return $this->render('export-button', [
             'exports' => $this->exports,
             'title' => $this->title,
-        ]); 
+        ]);
     }
 }

@@ -18,29 +18,38 @@ class FormatterComponent extends \yii\i18n\Formatter
     {
         $today = new \DateTime('now');
         $datetime = new \DateTime($value);
-        $interval = $today->diff( $datetime );
-        $suffix = ( $interval->invert ? ' ago' : ' to go' );
-        
-        if ( $v = $interval->y >= 1 ) return self::pluralize( $interval->y, 'year' ) . $suffix;
-        if ( $v = $interval->m >= 1 ) return self::pluralize( $interval->m, 'month' ) . $suffix;
-        if ( $v = $interval->d >= 28 ) return self::pluralize( 4, 'week' ) . $suffix;
-        if ( $v = $interval->d >= 21 ) return self::pluralize( 3, 'week' ) . $suffix;
-        if ( $v = $interval->d >= 14 ) return self::pluralize( 2, 'week' ) . $suffix;
-        if ( $v = $interval->d >= 7 ) return self::pluralize( 1, 'week' ) . $suffix;
-        if ( $v = $interval->d >= 1 ) return self::pluralize( $interval->d, 'day' ) . $suffix;
-        if ( $v = $interval->h >= 1 ) return self::pluralize( $interval->h, 'hour' ) . $suffix;
-        if ( $v = $interval->i >= 1 ) return self::pluralize( $interval->i, 'minute' ) . $suffix;
+        $interval = $today->diff($datetime);
+        $suffix = ($interval->invert ? ' ago' : ' to go');
+
+        if ($v = $interval->y >= 1)
+            return self::pluralize($interval->y, 'year') . $suffix;
+        if ($v = $interval->m >= 1)
+            return self::pluralize($interval->m, 'month') . $suffix;
+        if ($v = $interval->d >= 28)
+            return self::pluralize(4, 'week') . $suffix;
+        if ($v = $interval->d >= 21)
+            return self::pluralize(3, 'week') . $suffix;
+        if ($v = $interval->d >= 14)
+            return self::pluralize(2, 'week') . $suffix;
+        if ($v = $interval->d >= 7)
+            return self::pluralize(1, 'week') . $suffix;
+        if ($v = $interval->d >= 1)
+            return self::pluralize($interval->d, 'day') . $suffix;
+        if ($v = $interval->h >= 1)
+            return self::pluralize($interval->h, 'hour') . $suffix;
+        if ($v = $interval->i >= 1)
+            return self::pluralize($interval->i, 'minute') . $suffix;
 
         if ($interval->s == 0) {
             return 'Just now';
         }
-        
-        return $this->pluralize( $interval->s, 'second' ) . $suffix;
+
+        return $this->pluralize($interval->s, 'second') . $suffix;
     }
 
-    private function pluralize( $count, $text )
+    private function pluralize($count, $text)
     {
-        return $count . (($count == 1)? " {$text}": " {$text}s");
+        return $count . (($count == 1) ? " {$text}" : " {$text}s");
     }
 
     public function asFulldate($value)
@@ -48,11 +57,11 @@ class FormatterComponent extends \yii\i18n\Formatter
         return $this->asDateToTimezone($value);
     }
 
-    public function asDateToTimezone($date='', $format='F d, Y h:i:s A', $timezone="")
+    public function asDateToTimezone($date = '', $format = 'F d, Y h:i:s A', $timezone = "")
     {
         $timezone = $timezone ?: App::setting('system')->timezone;
 
-        $date = ($date)? $date: date('Y-m-d h:i:s A');
+        $date = ($date) ? $date : date('Y-m-d h:i:s A');
 
         $usersTimezone = new \DateTimeZone($timezone);
         $l10nDate = new \DateTime();
@@ -75,7 +84,7 @@ class FormatterComponent extends \yii\i18n\Formatter
 
     public function asBoolString($value)
     {
-        return $value ? 'True': 'False';
+        return $value ? 'True' : 'False';
     }
 
     public function asEncode($value)
@@ -109,32 +118,27 @@ class FormatterComponent extends \yii\i18n\Formatter
 
         if ($bytes >= $gb) {
             $bytes = number_format($bytes / $gb, 2) . ' GB';
-        }
-        elseif ($bytes >= $mb) {
+        } elseif ($bytes >= $mb) {
             $bytes = number_format($bytes / $mb, 2) . ' MB';
-        }
-        elseif ($bytes >= $kb) {
+        } elseif ($bytes >= $kb) {
             $bytes = number_format($bytes / $kb, 2) . ' KB';
-        }
-        elseif ($bytes > 1) {
+        } elseif ($bytes > 1) {
             $bytes = number_format($bytes) . ' bytes';
-        }
-        elseif ($bytes == 1) {
+        } elseif ($bytes == 1) {
             $bytes = number_format($bytes) . ' byte';
-        }
-        else {
+        } else {
             $bytes = '0 bytes';
         }
 
         return $bytes;
     }
 
-    public function asDaterangeToSingle($date_range, $return='start')
+    public function asDaterangeToSingle($date_range, $return = 'start')
     {
         $dates = explode(' - ', $date_range);
-        $start = date("Y-m-d", strtotime($dates[0])); 
-        $end = date("Y-m-d", strtotime($dates[1])); 
+        $start = date("Y-m-d", strtotime($dates[0]));
+        $end = date("Y-m-d", strtotime($dates[1]));
 
-        return ($return == 'start')? $start: $end;
+        return ($return == 'start') ? $start : $end;
     }
 }

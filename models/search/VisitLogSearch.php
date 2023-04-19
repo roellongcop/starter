@@ -93,13 +93,14 @@ class VisitLogSearch extends VisitLog
             'vl.created_at' => $this->created_at,
             'vl.updated_at' => $this->updated_at,
         ]);
-        
+
         $query->andFilterWhere(['like', 'vl.ip', $this->ip]);
-                
-        $query->andFilterWhere(['or', 
-            ['like', 'u.username', $this->keywords],  
-            ['like', 'vl.ip', $this->keywords],  
-            ['like', 'vl.action', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'u.username', $this->keywords],
+            ['like', 'vl.ip', $this->keywords],
+            ['like', 'vl.action', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

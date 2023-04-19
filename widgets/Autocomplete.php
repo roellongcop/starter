@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\Url;
- 
+
 class Autocomplete extends BaseWidget
 {
     public $input;
@@ -11,7 +11,7 @@ class Autocomplete extends BaseWidget
     public $data = [];
     public $submitOnclick = true;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
@@ -21,7 +21,7 @@ class Autocomplete extends BaseWidget
 
     public function ajax()
     {
-        return Url::userCanRoute($this->url) ? 'true': 'false';
+        return Url::userCanRoute($this->url) ? 'true' : 'false';
     }
 
     /**
@@ -33,7 +33,7 @@ class Autocomplete extends BaseWidget
             'input' => $this->input,
             'url' => $this->url,
             'data' => $this->data,
-            'submitOnclick' => $this->submitOnclick ? 'true': 'false',
+            'submitOnclick' => $this->submitOnclick ? 'true' : 'false',
             'ajax' => $this->ajax()
         ]);
     }

@@ -15,10 +15,9 @@ class SettingComponent extends \yii\base\Component
     public $image;
     public $notification;
 
-
     public $theme;
 
-	public function init()
+    public function init()
     {
         parent::init();
 

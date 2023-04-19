@@ -12,15 +12,16 @@ class Checkbox extends BaseWidget
     public $label;
     public $wrapperClass = 'checkbox-list';
 
-    public function init() 
+    public function init()
     {
         // your logic here
-        parent::init(); 
+        parent::init();
 
         if ($this->options) {
             $link = [];
+            $options = is_array($this->options) ? $this->options: json_decode($this->options, true);
 
-            foreach ($this->options as $key => $value) {
+            foreach ($options as $key => $value) {
                 $link[] = "{$key}='{$value}'";
             }
 
@@ -42,6 +43,6 @@ class Checkbox extends BaseWidget
             'checkedFunction' => $this->checkedFunction,
             'options' => $this->options
         ]);
-       
+
     }
 }

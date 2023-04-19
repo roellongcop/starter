@@ -6,7 +6,7 @@ use app\helpers\App;
 use app\models\Theme;
 use app\widgets\Anchor;
 
- 
+
 class Grid extends BaseWidget
 {
     public $dataProvider;
@@ -17,10 +17,10 @@ class Grid extends BaseWidget
     public $template = ['view', 'update', 'duplicate', 'delete'];
     public $controller;
     public $formatter = ['class' => '\app\components\FormatterComponent'];
-    
+
     public $paramName = 'id';
     public $layout;
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
@@ -60,23 +60,23 @@ class Grid extends BaseWidget
             $action = $explode_template[0] ?? '';
 
             if (App::component('access')->userCan($action, $_controller)) {
-                $template[] = '{'.$action.'}';
+                $template[] = '{' . $action . '}';
             }
         }
- 
+
         return [
             'class' => 'yii\grid\ActionColumn',
             'header' => '<span style="color:#3699FF">Actions</span>',
             'headerOptions' => ['class' => 'text-center'],
             'contentOptions' => ['class' => 'text-center', 'width' => '70'],
-            'template' => $this->render('grid/grid_action', ['template' => $template ]),
+            'template' => $this->render('grid/grid_action', ['template' => $template]),
 
             'buttons' => [
-                'view' => function($url, $model) use($controller) {
+                'view' => function ($url, $model) use ($controller) {
                     if (App::modelBeforeCan($model, 'view')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/view'), $this->actionName('View')]),
-                            'link' =>  $model->viewUrl,
+                            'link' => $model->viewUrl,
                             'options' => [
                                 'class' => 'navi-link',
                                 'title' => 'View',
@@ -84,11 +84,11 @@ class Grid extends BaseWidget
                         ]);
                     }
                 },
-                'update' => function($url, $model) use ($controller){
+                'update' => function ($url, $model) use ($controller) {
                     if (App::modelBeforeCan($model, 'update')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/edit'), $this->actionName('Update')]),
-                            'link' =>  $model->updateUrl,
+                            'link' => $model->updateUrl,
                             'options' => [
                                 'class' => 'navi-link',
                                 'title' => 'Update',
@@ -96,11 +96,11 @@ class Grid extends BaseWidget
                         ]);
                     }
                 },
-                'duplicate' => function($url, $model) use ($controller){
+                'duplicate' => function ($url, $model) use ($controller) {
                     if (App::modelBeforeCan($model, 'duplicate')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/copy'), $this->actionName('Duplicate')]),
-                            'link' =>  $model->duplicateUrl,
+                            'link' => $model->duplicateUrl,
                             'options' => [
                                 'class' => 'navi-link',
                                 'title' => 'Duplicate',
@@ -108,11 +108,11 @@ class Grid extends BaseWidget
                         ]);
                     }
                 },
-                'delete' => function($url, $model) use ($controller) {
+                'delete' => function ($url, $model) use ($controller) {
                     if (App::modelBeforeCan($model, 'delete')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/delete'), $this->actionName('Delete')]),
-                            'link' =>  $model->deleteUrl,
+                            'link' => $model->deleteUrl,
                             'options' => [
                                 'class' => 'navi-link delete',
                                 'title' => 'Delete',
@@ -121,8 +121,8 @@ class Grid extends BaseWidget
                             ]
                         ]);
                     }
-                }, 
-                'activate' => function($url, $model) use ($controller) {
+                },
+                'activate' => function ($url, $model) use ($controller) {
                     if (App::modelBeforeCan($model, 'activate')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/check'), $this->actionName('Activate')]),
@@ -132,10 +132,10 @@ class Grid extends BaseWidget
                                 'data-method' => 'post',
                                 'data-confirm' => 'Are you sure ?'
                             ]
-                        ]) ;
+                        ]);
                     }
-                }, 
-                'download' => function($url, $model) use ($controller) {
+                },
+                'download' => function ($url, $model) use ($controller) {
                     if (App::modelBeforeCan($model, 'download')) {
                         return Anchor::widget([
                             'title' => implode('', [$this->render('icon/download'), $this->actionName('Download')]),
@@ -143,9 +143,9 @@ class Grid extends BaseWidget
                             'options' => [
                                 'class' => 'navi-link',
                             ]
-                        ]) ;
+                        ]);
                     }
-                }, 
+                },
             ]
         ];
     }

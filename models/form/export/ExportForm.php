@@ -7,27 +7,27 @@ class ExportForm extends \yii\base\Model
     public $exportColumnsName = 'exportColumns';
     public $excelIgnoreAttributesName = 'excelIgnoreAttributes';
     public $tableColumnsName = 'tableColumns';
-    
+
     const EXPORT_ACTIONS = [
-        'print', 
-        'export-pdf', 
-        'export-csv', 
-        'export-xls', 
+        'print',
+        'export-pdf',
+        'export-csv',
+        'export-xls',
         'export-xlsx'
     ];
 
     const IGNORE_ATTRIBUTES = [
-        'checkbox', 
+        'checkbox',
         'actions'
     ];
-    
+
     const FORMATS = [
         'raw' => [
-            'photo', 
+            'photo',
             'icon'
         ],
         'fulldate' => [
-            'created_at', 
+            'created_at',
             'updated_at'
         ],
         'ago' => [
@@ -51,7 +51,7 @@ class ExportForm extends \yii\base\Model
         ];
     }
 
-    public function getExportColumns($searchModel, $type='excel')
+    public function getExportColumns($searchModel, $type = 'excel')
     {
         if ($searchModel->{$this->exportColumnsName}) {
             $columns = $searchModel->{$this->exportColumnsName};
@@ -62,19 +62,21 @@ class ExportForm extends \yii\base\Model
 
             return $columns;
         }
-        
+
         $ignoreAttributes = self::IGNORE_ATTRIBUTES;
- 
-        if ($type == 'excel' && (($excelIgnoreAttributes = $searchModel->excelIgnoreAttributes) != null) ) {
+
+        if ($type == 'excel' && (($excelIgnoreAttributes = $searchModel->excelIgnoreAttributes) != null)) {
             $ignoreAttributes = array_merge($ignoreAttributes, $excelIgnoreAttributes);
         }
 
-        $tableColumns = array_filter($searchModel->tableColumns,
-            function($column, $key) use ($ignoreAttributes) {
+        $tableColumns = array_filter(
+            $searchModel->tableColumns,
+            function ($column, $key) use ($ignoreAttributes) {
                 if (!in_array($key, $ignoreAttributes)) {
                     return $column;
                 }
-            }, ARRAY_FILTER_USE_BOTH
+            },
+            ARRAY_FILTER_USE_BOTH
         );
 
         foreach ($tableColumns as $column => &$attribute) {

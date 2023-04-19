@@ -19,8 +19,8 @@ class ThemeFilter extends \yii\base\ActionFilter
         $theme = '';
         if (App::isLogin()) {
             $theme = App::ifElse(
-                App::get('preview-theme'), 
-                fn($slug) => Theme::findOne(['slug' => $slug]), 
+                App::get('preview-theme'),
+                fn($slug) => Theme::findOne(['slug' => $slug]),
                 fn($slug) => App::identity('currentTheme')
             );
         }
@@ -31,14 +31,14 @@ class ThemeFilter extends \yii\base\ActionFilter
             if ($theme->bundles) {
                 App::assetManager()->bundles = $theme->bundles;
             }
-            
+
             $themeModel = new BaseTheme();
             $themeModel->basePath = $theme->base_path;
             $themeModel->baseUrl = $theme->base_url;
             $themeModel->pathMap = $theme->path_map;
             App::view()->theme = $themeModel;
         }
-        
+
         return true;
     }
 }

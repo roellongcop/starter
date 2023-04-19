@@ -91,14 +91,15 @@ class QueueSearch extends Queue
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-        
+
         $query->andFilterWhere(['like', 'channel', $this->channel])
             ->andFilterWhere(['like', 'job', $this->job]);
-        
-        $query->andFilterWhere(['or', 
-            ['like', 'channel', $this->keywords],  
-            ['like', 'job', $this->keywords],  
-            ['like', 'pushed_at', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'channel', $this->keywords],
+            ['like', 'job', $this->keywords],
+            ['like', 'pushed_at', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

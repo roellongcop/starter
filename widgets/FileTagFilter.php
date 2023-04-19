@@ -3,16 +3,16 @@
 namespace app\widgets;
 
 use app\models\File;
- 
+
 class FileTagFilter extends BaseWidget
 {
     public $activeTag;
     public $type = 'all';
     public $keywords;
-    
+
     public $tags;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
@@ -20,7 +20,7 @@ class FileTagFilter extends BaseWidget
         $this->activeTag = $this->activeTag ?: 'Filter Tag';
 
         $this->tags = File::filter('tag', [
-            'extension' => ($this->type == 'all' ? '': File::EXTENSIONS['image'])
+            'extension' => ($this->type == 'all' ? '' : File::EXTENSIONS['image'])
         ]);
     }
 
@@ -37,7 +37,7 @@ class FileTagFilter extends BaseWidget
             'activeTag' => $this->activeTag,
             'type' => $this->type,
             'tags' => $this->tags,
-            'action' => ($this->type == 'all')? 'my-files': 'my-image-files',
+            'action' => ($this->type == 'all') ? 'my-files' : 'my-image-files',
             'keywords' => $this->keywords,
         ]);
     }

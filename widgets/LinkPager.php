@@ -246,7 +246,7 @@ class LinkPager extends Widget
         $linkOptions = $this->linkOptions;
         $linkOptions['data-page'] = $page;
 
-        
+
         if ($active) {
             // Html::addCssClass($options, $this->activePageCssClass);
             Html::addCssClass($linkOptions, $this->activePageCssClass);
@@ -258,10 +258,10 @@ class LinkPager extends Widget
 
             return Html::tag($linkWrapTag, Html::tag($tag, $label, $disabledItemOptions), $options);
         }
-        
+
 
         return Html::a($label, $this->pagination->createUrl($page), $linkOptions);
-        return Html::tag($linkWrapTag, Html::a($label, $this->pagination->createUrl($page), $linkOptions), $options);
+        // return Html::tag($linkWrapTag, Html::a($label, $this->pagination->createUrl($page), $linkOptions), $options);
     }
 
     /**

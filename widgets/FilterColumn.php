@@ -11,7 +11,7 @@ class FilterColumn extends BaseWidget
     public $buttonTitle = 'Filter';
     public $filterColumns;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

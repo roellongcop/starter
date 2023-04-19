@@ -9,6 +9,7 @@ use app\models\ActiveRecord;
 use yii\console\ExitCode;
 use yii\console\widgets\Table;
 use yii\helpers\Console;
+
 /**
  * This command echoes the first argument that you have entered.
  *
@@ -66,9 +67,9 @@ abstract class Seeder
         return implode(' ', [$this->faker->date, $this->faker->time]);
     }
 
-    public function actionTruncate($tables=[])
+    public function actionTruncate($tables = [])
     {
-        $tables = is_array($tables)? $tables: [$tables];
+        $tables = is_array($tables) ? $tables : [$tables];
 
         foreach ($tables as $table) {
             Console::output("Truncate {$table}");
@@ -77,21 +78,20 @@ abstract class Seeder
         Console::output("\n");
     }
 
-    public function startProgress($done=0, $total, $prefix='', $width=1)
+    public function startProgress($done = 0, $total, $prefix = '', $width = 1)
     {
         if ($this->showProgress) {
             Console::startProgress($done, $total, $prefix, $width);
         }
     }
- 
-    public function save($model, $done=1)
+
+    public function save($model, $done = 1)
     {
         if ($model->save($this->validation)) {
             $this->success++;
 
             $this->success_attributes[$done] = $model->attributes;
-        }
-        else {
+        } else {
             $this->failed++;
             $this->model_errors[$done] = $model->errors;
             $this->error_attributes[$done] = $model->attributes;
@@ -111,8 +111,8 @@ abstract class Seeder
                 'headers' => ['Success', 'Failed', 'Total'],
                 'rows' => [
                     [
-                        number_format($this->success), 
-                        number_format($this->failed), 
+                        number_format($this->success),
+                        number_format($this->failed),
                         number_format($this->totalRecords)
                     ],
                 ],
@@ -140,18 +140,18 @@ abstract class Seeder
         }
 
         $this->resetProperties();
-        
+
         return ExitCode::OK;
     }
 
     public function seed()
     {
-        $modelClass = is_array($this->modelClass)? $this->modelClass['class']: $this->modelClass;
+        $modelClass = is_array($this->modelClass) ? $this->modelClass['class'] : $this->modelClass;
         if ($this->showProgress) {
             $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
         }
 
-        for ($i=1; $i <= $this->rows; $i++) { 
+        for ($i = 1; $i <= $this->rows; $i++) {
             $model = Yii::createObject($this->modelClass);
             $model->load([App::className($model) => $this->attributes()]);
 
@@ -168,9 +168,8 @@ abstract class Seeder
 
         if ($this->showProgress) {
             if (method_exists($this, 'total')) {
-               $this->totalRecords = $this->total();
-            }
-            else {
+                $this->totalRecords = $this->total();
+            } else {
                 $result = $modelClass::find()
                     ->select(['COUNT("*") as total'])
                     ->createCommand()
@@ -178,12 +177,12 @@ abstract class Seeder
 
                 $this->totalRecords = $result['total'];
             }
-            
+
             $this->summary();
         }
     }
 
-    public function seeder($conf='')
+    public function seeder($conf = '')
     {
         $seeder = Yii::createObject($conf);
         $seeder->seed();

@@ -15,8 +15,8 @@ class ProfileForm extends UserForm
     public function rules()
     {
         return $this->setRules([
-            [['first_name', 'last_name', ], 'required'],
-            [['first_name', 'last_name', ], 'string'],
+            [['first_name', 'last_name',], 'required'],
+            [['first_name', 'last_name',], 'string'],
         ]);
     }
 
@@ -26,7 +26,7 @@ class ProfileForm extends UserForm
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
         ];
-    } 
+    }
 
     public function getDetailColumns()
     {

@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use app\helpers\App;
 use app\widgets\Anchor;
- 
+
 class AnchorBack extends BaseWidget
 {
     public $title = 'Back';
@@ -12,7 +12,7 @@ class AnchorBack extends BaseWidget
     public $link;
     public $tooltip;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

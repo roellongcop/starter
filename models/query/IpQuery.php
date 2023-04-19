@@ -9,17 +9,17 @@ namespace app\models\query;
  */
 class IpQuery extends ActiveQuery
 {
-	public function blackList()
+    public function blackList()
     {
         return $this->andWhere([
-        	$this->field('type') => 0
+            $this->field('type') => 0
         ]);
     }
 
-	public function whiteList()
+    public function whiteList()
     {
         return $this->andWhere([
-        	$this->field('type') => 1
+            $this->field('type') => 1
         ]);
     }
 }

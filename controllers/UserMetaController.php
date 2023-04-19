@@ -11,8 +11,8 @@ use app\models\search\UserMetaSearch;
  */
 class UserMetaController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
-    { 
+    public function actionFindByKeywords($keywords = '')
+    {
         return $this->asJson(
             UserMeta::findByKeywords($keywords, ['um.name', 'um.value', 'u.username'])
         );
@@ -123,10 +123,9 @@ class UserMetaController extends Controller
     {
         $model = UserMeta::controllerFind($id);
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 
@@ -183,8 +182,7 @@ class UserMetaController extends Controller
             if ($model->isNewRecord) {
                 $model->user_id = App::identity('id');
                 $model->name = 'table_columns';
-            }
-            else {
+            } else {
                 $table_columns = json_decode($model->value, true);
             }
             $table_columns[$post['UserMeta']['table_name']] = $post['UserMeta']['columns'] ?? [];
@@ -192,13 +190,11 @@ class UserMetaController extends Controller
             if ($model->save()) {
                 $response['status'] = 'success';
                 $response['message'] = 'Filtered Column';
-            }
-            else {
+            } else {
                 $response['status'] = 'failed';
                 $response['error'] = $model->errorSummary;
             }
-        }
-        else {
+        } else {
             $response['status'] = 'failed';
             $response['error'] = 'No post data';
         }

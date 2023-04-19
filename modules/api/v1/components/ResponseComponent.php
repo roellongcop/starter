@@ -9,12 +9,13 @@ class ResponseComponent extends \yii\web\Response
     public $format = Response::FORMAT_JSON;
 
     public $formatters = [
-		Response::FORMAT_JSON => [
+        Response::FORMAT_JSON => [
             'class' => 'yii\web\JsonResponseFormatter',
-            'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
+            'prettyPrint' => YII_DEBUG,
+            // use "pretty" output in debug mode
             'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
         ],
-	];
+    ];
 
 
     public function behaviors()

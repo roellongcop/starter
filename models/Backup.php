@@ -79,9 +79,9 @@ class Backup extends ActiveRecord
     {
         return [
             'filename' => [
-                'attribute' => 'filename', 
+                'attribute' => 'filename',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->filename,
                         'link' => $model->viewUrl,
@@ -90,15 +90,15 @@ class Backup extends ActiveRecord
                 }
             ],
             'description' => [
-                'attribute' => 'description', 
+                'attribute' => 'description',
                 'format' => 'raw'
             ],
             'status' => [
-                'attribute' => 'id', 
+                'attribute' => 'id',
                 'format' => 'raw',
                 'label' => 'Status',
-                'value' => function($model) {
-                    $options = $model->isGenerating ? 
+                'value' => function ($model) {
+                    $options = $model->isGenerating ?
                         ['class' => 'warning', 'label' => 'Generating']
                         : ['class' => 'success', 'label' => 'Generated'];
 
@@ -141,17 +141,17 @@ class Backup extends ActiveRecord
 
     public function getFile()
     {
-        return $this->hasOne(File::className(), ['token' => 'sql']);
+        return $this->hasOne(File::class, ['token' => 'sql']);
     }
 
     public function getSqlFileLocation()
     {
-        return App::if($this->file, fn($file) => $file->rootPath);
+        return App::if ($this->file, fn($file) => $file->rootPath);
     }
 
     public function download()
     {
-        return App::if($this->file, fn($file) => $file->download());
+        return App::if ($this->file, fn($file) => $file->download());
     }
 
     public function restore()
@@ -166,13 +166,13 @@ class Backup extends ActiveRecord
 
             return true;
         }
-        
+
         return false;
     }
 
     public function getGenerated()
     {
-        return App::if($this->file, fn($file) => $file);
+        return App::if ($this->file, fn($file) => $file);
     }
 
     public function getIsGenerating()
@@ -180,7 +180,7 @@ class Backup extends ActiveRecord
         return !$this->generated;
     }
 
-    public function getDownloadUrl($fullpath=true)
+    public function getDownloadUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('download')) {
             $paramName = $this->paramName();
@@ -188,7 +188,7 @@ class Backup extends ActiveRecord
                 implode('/', [$this->controllerID(), 'download']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 }

@@ -28,7 +28,7 @@ abstract class UserForm extends \yii\base\Model
             $this->addError($attribute, 'User don\'t exist.');
         }
     }
-    
+
     public function init()
     {
         parent::init();
@@ -61,8 +61,7 @@ abstract class UserForm extends \yii\base\Model
 
             if ($meta->save()) {
                 return true;
-            }
-            else {
+            } else {
                 $this->addError('meta', $meta->errors);
             }
         }

@@ -9,11 +9,11 @@ namespace app\models\query;
  */
 class SettingQuery extends ActiveQuery
 {
-    public function general($alias='')
+    public function general($alias = '')
     {
-    	$field = ($alias)? "{$alias}.type": 'type';
+        $field = ($alias) ? "{$alias}.type" : 'type';
 
-    	return $this->andWhere([
+        return $this->andWhere([
             $field => 'general'
         ]);
     }

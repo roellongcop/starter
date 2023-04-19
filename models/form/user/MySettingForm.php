@@ -7,7 +7,7 @@ use app\models\Theme;
 class MySettingForm extends UserForm
 {
     const META_NAME = 'my-settings';
-    
+
     public $theme_id;
 
     private $_theme;

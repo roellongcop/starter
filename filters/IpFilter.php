@@ -18,13 +18,13 @@ class IpFilter extends \yii\base\ActionFilter
         $ip = App::ip();
 
 
-        if (! App::isControllerAction('site/error')) {
+        if (!App::isControllerAction('site/error')) {
             if (in_array($ip, IpSearch::blackList())) {
                 throw new ForbiddenHttpException('IP is Blocked !');
             }
 
-            if (App::setting('system')->whitelist_ip_only) { 
-                if (! in_array($ip, IpSearch::whiteList())) {
+            if (App::setting('system')->whitelist_ip_only) {
+                if (!in_array($ip, IpSearch::whiteList())) {
                     throw new ForbiddenHttpException('IP not WhiteListed.');
                 }
             }
@@ -40,7 +40,7 @@ class IpFilter extends \yii\base\ActionFilter
             ]);
             $model->save();
         }
-        
+
         return true;
     }
 }

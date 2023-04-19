@@ -10,10 +10,10 @@ use app\models\search\ThemeSearch;
 /**
  * ThemeController implements the CRUD actions for Theme model.
  */
-class ThemeController extends Controller 
+class ThemeController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
-    { 
+    public function actionFindByKeywords($keywords = '')
+    {
         return $this->asJson(
             Theme::findByKeywords($keywords, ['name', 'description'])
         );
@@ -129,10 +129,9 @@ class ThemeController extends Controller
     {
         $model = Theme::controllerFind($slug, 'slug');
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 
@@ -181,14 +180,13 @@ class ThemeController extends Controller
         $model = new MySettingForm(['user_id' => App::identity('id')]);
         $model->theme_id = $theme->id;
 
-       if ( $model->save()) {
+        if ($model->save()) {
             App::success('Theme Changed.');
-       }
-       else {
+        } else {
             App::danger($model->errors);
-       }
+        }
 
-       return $this->redirect(App::referrer());
+        return $this->redirect(App::referrer());
     }
 
     public function actionInActiveData()

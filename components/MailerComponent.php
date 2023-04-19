@@ -4,7 +4,7 @@ namespace app\components;
 
 class MailerComponent extends \yii\symfonymailer\Mailer
 {
-    const TRANSPORT = [
+	const TRANSPORT = [
 		// LIVE
 		'scheme' => 'smtps',
 		'host' => 'gennakar.accessgov.ph',
@@ -12,12 +12,12 @@ class MailerComponent extends \yii\symfonymailer\Mailer
 		'password' => '',
 		'port' => 465,
 	];
-	
-    public $useFileTransport = true;
 
-    // public function init()
-	// {
-	// 	parent::init();
-	// 	$this->setTransport(self::TRANSPORT);
-	// }
+	public $useFileTransport = true;
+
+// public function init()
+// {
+// 	parent::init();
+// 	$this->setTransport(self::TRANSPORT);
+// }
 }

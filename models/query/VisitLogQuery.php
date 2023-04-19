@@ -15,13 +15,13 @@ class VisitLogQuery extends ActiveQuery
     {
         return $this->andWhere([
             $this->field('action') => VisitLog::ACTION_LOGIN
-        ]); 
+        ]);
     }
 
     public function logout()
     {
         return $this->andWhere([
             $this->field('action') => VisitLog::ACTION_LOGOUT
-        ]); 
+        ]);
     }
 }

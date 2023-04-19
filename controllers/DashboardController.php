@@ -21,7 +21,7 @@ use app\models\search\DashboardSearch;
 
 class DashboardController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         $data = array_merge(
             File::findByKeywords($keywords, ['name', 'extension', 'token']),
@@ -34,9 +34,9 @@ class DashboardController extends Controller
             Session::findByKeywords($keywords, ['id', 'expire', 'ip', 'browser', 'os', 'device']),
             Setting::findByKeywords($keywords, ['name', 'value']),
             Theme::findByKeywords($keywords, ['name', 'description']),
-            User::findByKeywords($keywords, ['username', 'email']), 
-            UserMeta::findByKeywords($keywords, ['name', 'value']), 
-            VisitLog::findByKeywords($keywords, ['ip']), 
+            User::findByKeywords($keywords, ['username', 'email']),
+            UserMeta::findByKeywords($keywords, ['name', 'value']),
+            VisitLog::findByKeywords($keywords, ['ip']),
             Visitor::findByKeywords($keywords, ['expire', 'cookie', 'ip', 'browser', 'os', 'device', 'location'])
         );
 
@@ -63,8 +63,7 @@ class DashboardController extends Controller
                     'dataProviders' => $dataProviders,
                     'searchModel' => $searchModel,
                 ]);
-            }
-            else {
+            } else {
                 return $this->redirect(['index']);
             }
         }

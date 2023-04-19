@@ -25,13 +25,21 @@ class CustomEmailForm extends \yii\base\Model
             [['to', 'from',], 'trim'],
             [['cc', 'bcc',], 'safe'],
             [['content', 'sender_name', 'template'], 'string'],
-            ['content', 'required', 'when' => function($model) {
-                return $model->template == null;
-            }],
+            [
+                'content',
+                'required',
+                'when' => function ($model) {
+                    return $model->template == null;
+                }
+            ],
 
-            ['template', 'required', 'when' => function($model) {
-                return $model->content == null;
-            }],
+            [
+                'template',
+                'required',
+                'when' => function ($model) {
+                    return $model->content == null;
+                }
+            ],
             ['parameters', 'validateParameters'],
             [['cc', 'bcc'], 'validateCCBCC'],
         ];
@@ -44,13 +52,12 @@ class CustomEmailForm extends \yii\base\Model
         if ($emails) {
             if (is_array($emails)) {
                 foreach ($emails as $email) {
-                    if(! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         $this->addError($attribute, "{$email} was not a valid {$attribute} email.");
                     }
                 }
-            }
-            else {
-                if(! filter_var($emails, FILTER_VALIDATE_EMAIL)) {
+            } else {
+                if (!filter_var($emails, FILTER_VALIDATE_EMAIL)) {
                     $this->addError($attribute, "{$emails} was not a valid {$attribute} email.");
                 }
             }
@@ -78,8 +85,7 @@ class CustomEmailForm extends \yii\base\Model
             if ($this->template) {
                 $mailer = Yii::$app->mailer->compose($this->template, $this->parameters);
                 // $this->content = Yii::$app->mailer->render($this->template, $this->parameters);
-            }
-            else {
+            } else {
                 $mailer = Yii::$app->mailer->compose();
                 $mailer->setHtmlBody($this->content);
             }
@@ -95,13 +101,13 @@ class CustomEmailForm extends \yii\base\Model
             if ($this->cc) {
                 $mailer->setBcc($this->cc);
             }
-            
+
 
             switch ($type) {
                 case 'multiple':
                     return $mailer;
                     break;
-                
+
                 default:
                     return $mailer->send();
                     break;

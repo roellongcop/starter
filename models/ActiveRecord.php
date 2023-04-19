@@ -17,7 +17,7 @@ use yii\web\NotFoundHttpException;
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     public abstract function config();
-    
+
     const RECORD_ACTIVE = 1;
     const RECORD_INACTIVE = 0;
 
@@ -38,11 +38,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function addError($attribute, $error = '')
     {
-        $error = is_array($error)? json_encode($error): $error;
+        $error = is_array($error) ? json_encode($error) : $error;
 
         parent::addError($attribute, $error);
     }
-    
+
     public static function mapRecords()
     {
         return App::keyMapParams('record_status');
@@ -51,7 +51,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getRelatedModels()
     {
         $config = $this->config();
-        
+
         return $config['relatedModels'] ?? [];
     }
 
@@ -85,7 +85,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function paramName()
     {
         $config = $this->config();
-        
+
         return $config['paramName'] ?? 'id';
     }
 
@@ -123,10 +123,14 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             // 'timestamp' => [['created_at', 'updated_at'], 'safe'],
             'integer' => [['record_status'], 'integer'],
             'default' => ['record_status', 'default', 'value' => self::RECORD_ACTIVE],
-            'range' => ['record_status', 'in', 'range' => [
-                self::RECORD_ACTIVE, 
-                self::RECORD_INACTIVE
-            ]],
+            'range' => [
+                'record_status',
+                'in',
+                'range' => [
+                    self::RECORD_ACTIVE,
+                    self::RECORD_INACTIVE
+                ]
+            ],
             'custom' => ['record_status', 'validateRecordStatus'],
         ]);
     }
@@ -136,14 +140,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->isNewRecord) {
             if (App::isGuest() && $this->isInactive) {
                 $this->addError($attribute, 'Guest Cannot create deactivated data.');
-            }
-            else {
+            } else {
                 if ($this->isInactive && !App::identity()->can('in-active-data', $this->controllerID())) {
                     $this->addError($attribute, 'Dont have access to create deactivated data.');
                 }
             }
-        }
-        else {
+        } else {
             if ($this->isActive && !$this->beforeCanActivate) {
                 $this->addError($attribute, 'Cannot be Activated');
             }
@@ -192,11 +194,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $result = static::updateAll(['record_status' => self::RECORD_INACTIVE], $condition);
 
         Log::record(new static(), ArrayHelper::map($models, 'id', 'attributes'));
-        
+
         return $result;
     }
 
-    public static function deleteAll($condition = null, $params = []) 
+    public static function deleteAll($condition = null, $params = [])
     {
         $models = static::findAll($condition);
         $result = parent::deleteAll($condition);
@@ -208,16 +210,16 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public static function findInactive($condition)
     {
-        $condition = is_array($condition)? $condition: ['id' => $condition];
+        $condition = is_array($condition) ? $condition : ['id' => $condition];
         return static::find()
             ->where($condition)
             ->inActive()
             ->one();
-    } 
+    }
 
     public static function findActive($condition)
     {
-        $condition = is_array($condition)? $condition: ['id' => $condition];
+        $condition = is_array($condition) ? $condition : ['id' => $condition];
         return static::find()
             ->where($condition)
             ->active()
@@ -226,7 +228,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public static function findVisible($condition)
     {
-        $condition = is_array($condition)? $condition: ['id' => $condition];
+        $condition = is_array($condition) ? $condition : ['id' => $condition];
 
         return static::find()
             ->where($condition)
@@ -236,7 +238,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public static function findOrCreate($condition)
     {
-        $condition = is_array($condition)? $condition: ['id' => $condition];
+        $condition = is_array($condition) ? $condition : ['id' => $condition];
 
         return static::findOne($condition) ?: new static($condition);
     }
@@ -274,16 +276,16 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->_canCreate === null) {
             $this->_canCreate = true;
         }
-        
+
         return $this->_canCreate;
     }
-    
+
     public function getCanView()
     {
         if ($this->_canView === null) {
             $this->_canView = true;
         }
-        
+
         return $this->_canView;
     }
 
@@ -292,7 +294,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->_canUpdate === null) {
             $this->_canUpdate = true;
         }
-        
+
         return $this->_canUpdate;
     }
 
@@ -301,12 +303,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->_canActivate === null) {
             if (App::isGuest()) {
                 $this->_canActivate = true;
-            }
-            else {
+            } else {
                 if (App::identity()->can('change-record-status', $this->controllerID())) {
                     $this->_canActivate = true;
-                }
-                else {
+                } else {
                     $this->_canActivate = false;
                 }
             }
@@ -317,12 +317,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getCanInactivate()
     {
         if ($this->_canInactivate === null) {
-            if (App::isLogin()
+            if (
+                App::isLogin()
                 && App::identity()->can('in-active-data', $this->controllerID())
-                && App::identity()->can('change-record-status', $this->controllerID())) {
-                    $this->_canInactivate = true;
-            }
-            else {
+                && App::identity()->can('change-record-status', $this->controllerID())
+            ) {
+                $this->_canInactivate = true;
+            } else {
                 $this->_canInactivate = false;
             }
         }
@@ -480,7 +481,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->bulkActions) {
             $columns['checkbox'] = ['class' => 'app\widgets\CheckboxColumn'];
         }
-        
+
         return $columns;
     }
 
@@ -499,11 +500,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             $columns['active'] = [
                 'attribute' => 'record_status',
                 'label' => 'active',
-                'format' => 'raw', 
+                'format' => 'raw',
                 'value' => 'recordStatusHtml'
             ];
         }
-        
+
         return $columns;
     }
 
@@ -525,10 +526,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if (App::isLogin()) {
             foreach ($gridColumns as $key => &$column) {
 
-                if ($filterColumns && ! in_array($key, $filterColumns)) {
+                if ($filterColumns && !in_array($key, $filterColumns)) {
                     $column['headerOptions']['style'] = 'display:none';
                     $column['contentOptions']['style'] = 'display:none';
-                } 
+                }
 
                 $column['headerOptions']['data-key'] = $key;
                 $column['contentOptions']['data-key'] = $key;
@@ -541,7 +542,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $gridColumns;
     }
 
-    protected function checkLinkAccess($action, $controllerID='')
+    protected function checkLinkAccess($action, $controllerID = '')
     {
         $controllerID = $controllerID ?: $this->controllerID();
 
@@ -550,94 +551,94 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
     }
 
-    public function getLogUrl($fullpath=true)
+    public function getLogUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('index', 'log')) {
             $url = [
-                'log/index', 
+                'log/index',
                 'model_id' => ($this->id ?? ''),
                 'model_name' => App::className($this)
             ];
 
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getIndexUrl($fullpath=true)
+    public function getIndexUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('index')) {
             $paramName = $this->paramName();
             $url = [
                 implode('/', [$this->controllerID(), 'index']),
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getCreateUrl($fullpath=true)
+    public function getCreateUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('create')) {
             $paramName = $this->paramName();
             $url = [
                 implode('/', [$this->controllerID(), 'create']),
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getPrintUrl($fullpath=true)
+    public function getPrintUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('print')) {
             $url = [implode('/', [$this->controllerID(), 'print'])];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getExportPdfUrl($fullpath=true)
+    public function getExportPdfUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('export-pdf')) {
             $url = [implode('/', [$this->controllerID(), 'export-pdf'])];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getExportCsvUrl($fullpath=true)
+    public function getExportCsvUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('export-csv')) {
             $url = [implode('/', [$this->controllerID(), 'export-csv'])];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getExportXlsUrl($fullpath=true)
+    public function getExportXlsUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('export-xls')) {
             $url = [implode('/', [$this->controllerID(), 'export-xls'])];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getExportXlsxUrl($fullpath=true)
+    public function getExportXlsxUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('export-xlsx')) {
             $url = [
                 implode('/', [$this->controllerID(), 'export-xlsx']),
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getChangeRecordStatusUrl($fullpath=true)
+    public function getChangeRecordStatusUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('change-record-status')) {
             $url = [
                 implode('/', [$this->controllerID(), 'change-record-status']),
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getViewUrl($fullpath=true)
+    public function getViewUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('view')) {
             $paramName = $this->paramName();
@@ -645,11 +646,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 implode('/', [$this->controllerID(), 'view']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getUpdateUrl($fullpath=true)
+    public function getUpdateUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('update')) {
             $paramName = $this->paramName();
@@ -657,11 +658,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 implode('/', [$this->controllerID(), 'update']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
-    public function getDuplicateUrl($fullpath=true)
+    public function getDuplicateUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('duplicate')) {
             $paramName = $this->paramName();
@@ -669,11 +670,11 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 implode('/', [$this->controllerID(), 'duplicate']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
-    
-    public function getDeleteUrl($fullpath=true)
+
+    public function getDeleteUrl($fullpath = true)
     {
         if ($this->checkLinkAccess('delete')) {
             $paramName = $this->paramName();
@@ -681,7 +682,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 implode('/', [$this->controllerID(), 'delete']),
                 $paramName => $this->{$paramName}
             ];
-            return ($fullpath)? Url::toRoute($url, true): $url;
+            return ($fullpath) ? Url::toRoute($url, true) : $url;
         }
     }
 
@@ -730,12 +731,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
     public function getCreatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
     public function getUpdatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
     public function getCreatedByEmail()
@@ -745,7 +746,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         if ($this->_createdByEmail === null) {
-            $this->_createdByEmail = App::if($this->createdBy, fn($user) => $user->email);
+            $this->_createdByEmail = App::if ($this->createdBy, fn($user) => $user->email);
         }
 
         return $this->_createdByEmail;
@@ -758,7 +759,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         if ($this->_updatedByEmail === null) {
-            $this->_updatedByEmail = App::if($this->updatedBy, fn($user) => $user->email);
+            $this->_updatedByEmail = App::if ($this->updatedBy, fn($user) => $user->email);
         }
 
         return $this->_updatedByEmail;
@@ -785,7 +786,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                     'label' => 'Set as Active',
                     'process' => 'active',
                     'icon' => 'active',
-                    'function' => function($id) {
+                    'function' => function ($id) {
                         static::activeAll(['id' => $id]);
                     }
                 ],
@@ -793,7 +794,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                     'label' => 'Set as In-active',
                     'process' => 'in_active',
                     'icon' => 'in_active',
-                    'function' => function($id) {
+                    'function' => function ($id) {
                         static::inactiveAll(['id' => $id]);
                     }
                 ],
@@ -805,12 +806,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
                 'label' => 'Delete',
                 'process' => 'delete',
                 'icon' => 'delete',
-                'function' => function($id) {
+                'function' => function ($id) {
                     static::deleteAll(['id' => $id]);
                 }
             ];
         }
-        
+
         return $columns;
     }
 
@@ -845,28 +846,28 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return $behaviors;
     }
 
-    public static function one($value, $key='id', $array=false)
+    public static function one($value, $key = 'id', $array = false)
     {
         $model = static::find()
             ->visible()
             ->andWhere([$key => $value]);
 
-        $model = ($array) ? $model->asArray()->one(): $model->one();
+        $model = ($array) ? $model->asArray()->one() : $model->one();
 
-        return ($model)? $model: '';
+        return ($model) ? $model : '';
     }
 
-    public static function all($value='', $key='id', $array=false)
+    public static function all($value = '', $key = 'id', $array = false)
     {
         $models = static::find()
             ->andFilterWhere([$key => $value]);
 
-        $models = ($array) ? $models->asArray()->all(): $models->all();
+        $models = ($array) ? $models->asArray()->all() : $models->all();
 
-        return ($models)? $models: '';
+        return ($models) ? $models : '';
     }
 
-    public static function dropdown($key='id', $value='name', $condition=[], $map=true, $limit=false)
+    public static function dropdown($key = 'id', $value = 'name', $condition = [], $map = true, $limit = false)
     {
         $models = static::find()
             ->andFilterWhere($condition)
@@ -874,12 +875,12 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             ->limit($limit)
             ->all();
 
-        $models = ($map)? ArrayHelper::map($models, $key, $value): $models;
+        $models = ($map) ? ArrayHelper::map($models, $key, $value) : $models;
 
         return $models;
     }
 
-    public static function filter($key='id', $condition=[], $limit=false, $andFilterWhere=[])
+    public static function filter($key = 'id', $condition = [], $limit = false, $andFilterWhere = [])
     {
         $models = static::find()
             ->andFilterWhere($condition)
@@ -900,7 +901,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public function getDateAttribute()
     {
         $config = $this->config();
-        
+
         return $config['dateAttribute'] ?? 'created_at';
     }
 
@@ -909,8 +910,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->date_range && $from_database == false) {
             $date = App::formatter()->asDaterangeToSingle($this->date_range, 'start');
             return date('F d, Y', strtotime($date));
-        }
-        else {
+        } else {
             if ($this->_startDate === null) {
                 $this->_startDate = static::find()
                     ->visible()
@@ -927,14 +927,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         if ($this->date_range && $from_database == false) {
             $date = App::formatter()->asDaterangeToSingle($this->date_range, 'end');
             return date('F d, Y', strtotime($date));
-        }
-        else {
+        } else {
             if ($this->_endDate === null) {
                 $this->_endDate = static::find()
                     ->visible()
                     ->max($this->dateAttribute);
             }
-            $date = ($this->_endDate)? $this->_endDate: 'today';
+            $date = ($this->_endDate) ? $this->_endDate : 'today';
         }
 
         return App::formatter()->asDateToTimezone($date, 'F d, Y');
@@ -951,41 +950,42 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         $data = array_values(array_unique(array_map('trim', $data)));
-        
+
         sort($data);
 
         return $data;
     }
 
-    public static function findByKeywords($keywords='', $attributes='', $limit=10, $andFilterWhere=[])
+    public static function findByKeywords($keywords = '', $attributes = [], $limit = 10, $andFilterWhere = [])
     {
         $data = [];
         foreach ($attributes as $attribute) {
             $data = array_merge($data, array_values(
                 static::filter($attribute, ['LIKE', $attribute, $keywords], $limit, $andFilterWhere)
-            ));
+            )
+            );
         }
 
         $data = array_values(array_unique(array_map('trim', $data)));
         $data = array_filter($data);
-        
+
         sort($data);
 
         return $data;
     }
 
-    public static function findOrFailed($value, $field='id', $action='')
+    public static function findOrFailed($value, $field = 'id', $action = '')
     {
         $action = $action ?: App::actionID();
-        
+
         if (($model = static::findVisible([$field => $value])) != null) {
             return $model;
         }
-        
+
         throw new NotFoundHttpException('Page not found.');
     }
 
-    public static function controllerFind($value, $field='id', $action='')
+    public static function controllerFind($value, $field = 'id', $action = '')
     {
         $action = $action ?: App::actionID();
         $model = self::findOrFailed($value, $field, $action);

@@ -5,7 +5,7 @@ namespace app\widgets;
 use app\helpers\App;
 use app\helpers\Url;
 use app\models\File;
- 
+
 class ImageGallery extends BaseWidget
 {
     public $modalTitle = 'Image Gallery';
@@ -13,7 +13,7 @@ class ImageGallery extends BaseWidget
     public $buttonOptions = ['class' => 'btn btn-primary btn-sm image-gallery-btn'];
     public $uploadUrl = ['file/upload'];
     public $ajaxSuccess;
-    
+
     public $ajaxError = 'function(e) {alert(e.responseText)}';
     public $myImageFilesUrl = ['file/my-image-files'];
 
@@ -44,7 +44,7 @@ class ImageGallery extends BaseWidget
     public $fixedSize = true;
 
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
@@ -72,8 +72,8 @@ class ImageGallery extends BaseWidget
         if ($this->fixedSize) {
             $this->cropperOptions['aspectRatio'] = $this->finalCropWidth / $this->finalCropHeight;
         }
-    } 
-    
+    }
+
     /**
      * {@inheritdoc}
      */

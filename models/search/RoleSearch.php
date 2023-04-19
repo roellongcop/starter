@@ -85,15 +85,16 @@ class RoleSearch extends Role
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-        
+
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'main_navigation', $this->main_navigation])
             ->andFilterWhere(['like', 'role_access', $this->role_access])
             ->andFilterWhere(['like', 'module_access', $this->module_access])
             ->andFilterWhere(['like', 'slug', $this->slug]);
-        
-        $query->andFilterWhere(['or', 
-            ['like', 'name', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'name', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

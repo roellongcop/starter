@@ -11,8 +11,8 @@ use app\models\search\SessionSearch;
  */
 class SessionController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
-    { 
+    public function actionFindByKeywords($keywords = '')
+    {
         return $this->asJson(
             Session::findByKeywords($keywords, [
                 'id',
@@ -64,10 +64,9 @@ class SessionController extends Controller
     {
         $model = Session::controllerFind($id);
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 

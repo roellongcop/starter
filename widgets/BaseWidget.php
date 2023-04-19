@@ -3,12 +3,12 @@
 namespace app\widgets;
 
 use yii\helpers\Inflector;
- 
+
 class BaseWidget extends \yii\base\Widget
 {
     public $widgetFunction;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
@@ -20,7 +20,7 @@ class BaseWidget extends \yii\base\Widget
         if ($this->widgetFunction == null) {
             $this->widgetFunction = Inflector::id2camel($this->getId());
         }
-        
+
         return $this->widgetFunction;
     }
 

@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class ExportContent extends BaseWidget
 {
     public $dataProvider;
@@ -12,20 +12,20 @@ class ExportContent extends BaseWidget
     public $file = 'excel';
     public $reportName;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
 
         $params = $this->params ?: App::queryParams();
-        if (! is_array($params)) {
+        if (!is_array($params)) {
             $params = json_decode($params);
         }
 
         $modelName = App::className($this->searchModel);
 
         $this->params[$modelName] = $params;
- 
+
         $this->reportName = str_replace('Search', '', $modelName);
         $this->dataProvider = $this->searchModel->search($this->params);
     }

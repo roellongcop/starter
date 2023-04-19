@@ -11,18 +11,18 @@ class EmailSettingForm extends SettingForm
     public $sender_email;
     public $sender_name;
     public $email_change_password;
-    
+
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [
-            [['admin_email', 'sender_email', 'sender_name', ], 'required'],
-	        [['admin_email', 'sender_email', 'sender_name', ], 'string'],
-            [['admin_email', 'sender_email', ], 'trim'],
-            [['admin_email', 'sender_email', ], 'email'],
-	        [['email_change_password', ], 'safe'],
+            [['admin_email', 'sender_email', 'sender_name',], 'required'],
+            [['admin_email', 'sender_email', 'sender_name',], 'string'],
+            [['admin_email', 'sender_email',], 'trim'],
+            [['admin_email', 'sender_email',], 'email'],
+            [['email_change_password',], 'safe'],
         ];
     }
 

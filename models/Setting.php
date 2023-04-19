@@ -30,19 +30,19 @@ class Setting extends ActiveRecord
 
     const MODULE = [
         'system' => [
-            'label' => 'System', 
+            'label' => 'System',
             'icon' => '<i class="fas fa-cog"></i>'
         ],
         'email' => [
-            'label' => 'Email', 
+            'label' => 'Email',
             'icon' => '<i class="far fa-envelope"></i>'
         ],
         'image' => [
-            'label' => 'Image', 
+            'label' => 'Image',
             'icon' => '<i class="far fa-file-image"></i>'
         ],
         'notification' => [
-            'label' => 'Notification', 
+            'label' => 'Notification',
             'icon' => '<i class="far fa-file-image"></i>'
         ],
     ];
@@ -99,13 +99,17 @@ class Setting extends ActiveRecord
             [['value'], 'safe'],
             [['type', 'options', 'sort_order'], 'safe'],
             [['name', 'slug'], 'string', 'max' => 255],
-            [['type'], 'in', 'range' => [
-                self::TYPE_INPUT,
-                self::TYPE_TEXTAREA,
-                self::TYPE_SELECT,
-                self::TYPE_FILE,
-                self::TYPE_JSON,
-            ]],
+            [
+                ['type'],
+                'in',
+                'range' => [
+                    self::TYPE_INPUT,
+                    self::TYPE_TEXTAREA,
+                    self::TYPE_SELECT,
+                    self::TYPE_FILE,
+                    self::TYPE_JSON,
+                ]
+            ],
             [['name'], 'unique'],
         ]);
     }
@@ -139,7 +143,7 @@ class Setting extends ActiveRecord
     {
         return in_array($this->name, $this->withImageInput);
     }
-     
+
     public function getLabel()
     {
         return Inflector::camel2words($this->name);
@@ -149,9 +153,9 @@ class Setting extends ActiveRecord
     {
         return [
             'name' => [
-                'attribute' => 'name', 
+                'attribute' => 'name',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->name,
                         'link' => $model->viewUrl,
@@ -180,7 +184,7 @@ class Setting extends ActiveRecord
 
         return $columns;
     }
-    
+
     public function getIsInput()
     {
         return $this->isType('input');
@@ -208,7 +212,7 @@ class Setting extends ActiveRecord
 
     public function getFormInput($form)
     {
-        switch ($this->name)  {
+        switch ($this->name) {
             case 'pagination':
                 $input = BootstrapSelect::widget([
                     'label' => 'Number of Records',
@@ -226,7 +230,7 @@ class Setting extends ActiveRecord
                     'type' => 'number'
                 ])->label('Number of seconds');
                 break;
-            
+
             default:
                 $input = $form->field($this, 'value')->textarea([
                     'rows' => 6
@@ -240,7 +244,7 @@ class Setting extends ActiveRecord
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        
+
         $behaviors['SluggableBehavior'] = [
             'class' => 'yii\behaviors\SluggableBehavior',
             'attribute' => 'name',
@@ -251,7 +255,7 @@ class Setting extends ActiveRecord
         return $behaviors;
     }
 
-    public static function findByName($name='')
+    public static function findByName($name = '')
     {
         return self::find()
             ->where(['name' => $name])

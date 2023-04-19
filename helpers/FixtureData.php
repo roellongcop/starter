@@ -14,7 +14,7 @@ class FixtureData
         $this->function = $function;
     }
 
-    public function add($key='', $params=[], $replace=[])
+    public function add($key = '', $params = [], $replace = [])
     {
         $key = $key ?: implode('-', [App::randomString(), time()]);
         $this->data[$key] = array_replace(call_user_func($this->function, $params), $replace);

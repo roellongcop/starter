@@ -34,7 +34,7 @@ class SeedController extends Controller
         }
     }
 
-    public function actionIndex($class, $rows=1)
+    public function actionIndex($class, $rows = 1)
     {
         $class = Inflector::id2camel($class);
         $model = Yii::createObject([

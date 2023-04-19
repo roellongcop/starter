@@ -8,7 +8,7 @@ class UrlManagerComponent extends \yii\web\UrlManager
     public $showScriptName = false;
     public $rules = [
         [
-            'class' => 'yii\rest\UrlRule', 
+            'class' => 'yii\rest\UrlRule',
             'controller' => 'api/v1/user',
             'pluralize' => false
         ],
@@ -23,16 +23,16 @@ class UrlManagerComponent extends \yii\web\UrlManager
 
         'setting/general/<tab>' => 'setting/general',
         'setting/general' => 'setting/general',
-        
+
         'setting/<action>/<name>' => 'setting/<action>',
 
-        
+
         '<controller>' => '<controller>/index',
         '<controller:(notification)>/<action>/<token>' => '<controller>/<action>',
         '<controller:(ip|user|theme|backup|role)>/<action>/<slug>' => '<controller>/<action>',
 
         '<controller>/<id:\d+>' => '<controller>/view',
         '<controller>/<action>/<id:\d+>' => '<controller>/<action>',
-        '<controller>/<action>' => '<controller>/<action>', 
+        '<controller>/<action>' => '<controller>/<action>',
     ];
 }

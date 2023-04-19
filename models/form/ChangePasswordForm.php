@@ -13,11 +13,11 @@ class ChangePasswordForm extends \yii\base\Model
 {
     public $user_id;
     public $old_password;
-    public $new_password; 
-    public $confirm_password; 
-    public $password_hint; 
+    public $new_password;
+    public $confirm_password;
+    public $password_hint;
 
-    public $_user; 
+    public $_user;
 
     /**
      * @return array the validation rules.
@@ -90,8 +90,7 @@ class ChangePasswordForm extends \yii\base\Model
                 ]));
 
                 return $user;
-            }
-            else {
+            } else {
                 $this->addError('user', $user->errors);
             }
         }

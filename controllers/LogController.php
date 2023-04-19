@@ -11,19 +11,19 @@ use app\models\search\LogSearch;
  */
 class LogController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
             Log::findByKeywords($keywords, [
-                'method', 
-                'action', 
+                'method',
+                'action',
                 'controller',
                 'table_name',
                 'model_name',
             ])
         );
     }
-    
+
     /**
      * Lists all Log models.
      * @return mixed
@@ -51,7 +51,7 @@ class LogController extends Controller
             'model' => Log::controllerFind($id),
         ]);
     }
- 
+
     /**
      * Deletes an existing Log model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -63,10 +63,9 @@ class LogController extends Controller
     {
         $model = Log::controllerFind($id);
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 

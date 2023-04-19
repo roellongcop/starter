@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 abstract class SettingForm extends \yii\base\Model
 {
     public abstract function default();
-    
+
     public function init()
     {
         parent::init();
@@ -26,7 +26,7 @@ abstract class SettingForm extends \yii\base\Model
         if ($this->validate()) {
 
             $condition = [
-                'name' => static::NAME, 
+                'name' => static::NAME,
                 'type' => Setting::TYPE_JSON
             ];
 
@@ -34,8 +34,7 @@ abstract class SettingForm extends \yii\base\Model
             $model->value = json_encode($this->attributes);
             if ($model->save()) {
                 return $model;
-            }
-            else {
+            } else {
                 $this->addError('setting', $model->errors);
             }
         }

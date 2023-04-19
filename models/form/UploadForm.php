@@ -25,7 +25,7 @@ class UploadForm extends \yii\base\Model
             File::EXTENSIONS['file']
         );
     }
-  
+
     /**
      * {@inheritdoc}
      */
@@ -36,14 +36,14 @@ class UploadForm extends \yii\base\Model
             [['modelName', 'token', 'tag'], 'string'],
             [['extensions'], 'validateExtensions'],
             [
-                ['fileInput'], 
-                'file', 
-                'skipOnEmpty' => false, 
-                'extensions' => $this->extensions, 
+                ['fileInput'],
+                'file',
+                'skipOnEmpty' => false,
+                'extensions' => $this->extensions,
                 'checkExtensionByMimeType' => false
             ],
         ];
-    } 
+    }
 
     public function validateExtensions($attribute, $params)
     {
@@ -59,16 +59,16 @@ class UploadForm extends \yii\base\Model
         if ($this->validate()) {
             if ($this->fileInput) {
                 $path = $this->uploadPath($this, $this->fileInput);
-                
+
                 $this->fileInput->saveAs($path);
 
                 return $this->saveFile($path);
-            } 
+            }
         }
         return false;
-    }  
-  
-    public function saveFile($location='')
+    }
+
+    public function saveFile($location = '')
     {
         $input = $this->fileInput;
 
@@ -78,13 +78,12 @@ class UploadForm extends \yii\base\Model
             'location' => str_replace('\\', '/', $location),
             'extension' => $input->extension,
             'size' => $input->size,
-           // 'token' => $this->token ?: ''
+            // 'token' => $this->token ?: ''
         ]);
 
         if ($file->save()) {
             return $file;
-        }
-        else {
+        } else {
             $this->addError('file', $file->errors);
         }
     }
@@ -109,15 +108,15 @@ class UploadForm extends \yii\base\Model
         do {
             $time = time();
             $string = App::randomString(10);
-            $path = "{$file_path}".DIRECTORY_SEPARATOR."{$input->baseName}-{$string}-{$time}.{$input->extension}";
+            $path = "{$file_path}" . DIRECTORY_SEPARATOR . "{$input->baseName}-{$string}-{$time}.{$input->extension}";
         } while (file_exists($path));
-        
+
         return $path;
     }
 
     public function createDirectory($folders)
     {
-        if (! App::isWeb()) {
+        if (!App::isWeb()) {
             array_unshift($folders, Yii::getAlias('@consoleWebroot'));
         }
         $file_path = implode(DIRECTORY_SEPARATOR, $folders);
@@ -129,7 +128,7 @@ class UploadForm extends \yii\base\Model
         $content = "#disable directory browsing \nOptions -Indexes\n\n#prevent folder listing\nIndexIgnore *\n\n#If you want to deny access to all files: \n#deny from all";
         // $content = "#If you want to deny access to all files: \ndeny from all";
 
-        if (! file_exists($path . '.htaccess')) {
+        if (!file_exists($path . '.htaccess')) {
             $htaccess = fopen($path . '.htaccess', "w");
             fwrite($htaccess, $content);
             fclose($htaccess);
@@ -138,17 +137,17 @@ class UploadForm extends \yii\base\Model
 
     public function createIndexFile($folders)
     {
-        $path = (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) . DIRECTORY_SEPARATOR;
+        $path = (App::isWeb() ? Yii::getAlias('@webroot') : Yii::getAlias('@consoleWebroot')) . DIRECTORY_SEPARATOR;
 
         foreach ($folders as $folder) {
-            $path .=  "{$folder}" . DIRECTORY_SEPARATOR;
+            $path .= "{$folder}" . DIRECTORY_SEPARATOR;
 
             $this->createHtaccessFile($path);
-            if (! file_exists($path . 'index.php')) {
+            if (!file_exists($path . 'index.php')) {
                 $index_file = fopen($path . 'index.php', "w");
                 fwrite($index_file, "Forbidden Access");
                 fclose($index_file);
             }
         }
-    } 
+    }
 }

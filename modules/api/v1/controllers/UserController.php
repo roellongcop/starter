@@ -21,15 +21,16 @@ class UserController extends ActiveController
         $actions = parent::actions();
 
         /*$actions['index']['dataFilter'] = [
-            'class' => \yii\data\ActiveDataFilter::class,
-            // 'attributeMap' => ['username' => 'username'],
-            'searchModel' => \app\models\search\UserSearch::class
+        'class' => \yii\data\ActiveDataFilter::class,
+        // 'attributeMap' => ['username' => 'username'],
+        'searchModel' => \app\models\search\UserSearch::class
         ];*/
 
-        $actions['index']['prepareSearchQuery'] = function($query, $requestParams) {
-            $query->andFilterWhere(['or', 
-                ['like', 'username', $requestParams['keywords'] ?? ''],  
-                ['like', 'email', $requestParams['keywords'] ?? ''],  
+        $actions['index']['prepareSearchQuery'] = function ($query, $requestParams) {
+            $query->andFilterWhere([
+                'or',
+                ['like', 'username', $requestParams['keywords'] ?? ''],
+                ['like', 'email', $requestParams['keywords'] ?? ''],
             ]);
 
             return $query;
@@ -54,5 +55,5 @@ class UserController extends ActiveController
             ]),
             'post' => \app\helpers\App::post()
         ];
-    } 
+    }
 }

@@ -26,15 +26,15 @@ class SystemSettingForm extends SettingForm
     {
         return [
             [['timezone', 'pagination', 'theme', 'auto_logout_timer',], 'required'],
-	        [['timezone',], 'string'],
-	        [['whitelist_ip_only', 'enable_visitor'], 'safe'],
-	        [['pagination', 'auto_logout_timer', 'theme', 'whitelist_ip_only', 'enable_visitor'], 'integer'],
+            [['timezone',], 'string'],
+            [['whitelist_ip_only', 'enable_visitor'], 'safe'],
+            [['pagination', 'auto_logout_timer', 'theme', 'whitelist_ip_only', 'enable_visitor'], 'integer'],
 
-	        ['pagination', 'in', 'range' => array_keys(App::params('pagination'))],
-	        ['whitelist_ip_only', 'in', 'range' => array_keys(App::params('whitelist_ip_only'))],
-	        ['enable_visitor', 'in', 'range' => array_keys(App::params('enable_visitor'))],
-	        ['theme', 'exist', 'targetClass' => 'app\models\Theme', 'targetAttribute' => 'id'],
-	        ['timezone', 'in', 'range' => array_keys(App::component('general')->timezoneList())],
+            ['pagination', 'in', 'range' => array_keys(App::params('pagination'))],
+            ['whitelist_ip_only', 'in', 'range' => array_keys(App::params('whitelist_ip_only'))],
+            ['enable_visitor', 'in', 'range' => array_keys(App::params('enable_visitor'))],
+            ['theme', 'exist', 'targetClass' => 'app\models\Theme', 'targetAttribute' => 'id'],
+            ['timezone', 'in', 'range' => array_keys(App::component('general')->timezoneList())],
         ];
     }
 

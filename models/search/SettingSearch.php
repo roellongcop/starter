@@ -85,13 +85,14 @@ class SettingSearch extends Setting
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-        
+
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'value', $this->value]);
-        
-        $query->andFilterWhere(['or', 
-            ['like', 'name', $this->keywords],  
-            ['like', 'value', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'name', $this->keywords],
+            ['like', 'value', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

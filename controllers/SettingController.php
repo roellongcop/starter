@@ -18,8 +18,8 @@ use app\models\search\SettingSearch;
  */
 class SettingController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
-    { 
+    public function actionFindByKeywords($keywords = '')
+    {
         return $this->asJson(
             Setting::findByKeywords($keywords, ['name', 'value'])
         );
@@ -85,10 +85,9 @@ class SettingController extends Controller
     {
         $model = Setting::controllerFind($name, 'name');
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 
@@ -133,7 +132,7 @@ class SettingController extends Controller
     public function actionMySetting()
     {
         if (App::isLogin()) {
-            $user = App::identity(); 
+            $user = App::identity();
             $model = new MySettingForm(['user_id' => $user->id]);
 
             $themes = Theme::find()
@@ -153,7 +152,7 @@ class SettingController extends Controller
         }
     }
 
-    public function actionGeneral($tab='system')
+    public function actionGeneral($tab = 'system')
     {
         switch ($tab) {
             case 'system':
@@ -171,7 +170,7 @@ class SettingController extends Controller
             case 'notification':
                 $model = new NotificationSettingForm();
                 break;
-            
+
             default:
                 $model = new SystemSettingForm();
                 break;

@@ -11,7 +11,7 @@ use app\models\search\IpSearch;
  */
 class IpController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
             Ip::findByKeywords($keywords, ['name', 'description'])
@@ -119,10 +119,9 @@ class IpController extends Controller
     {
         $model = Ip::controllerFind($slug, 'slug');
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 

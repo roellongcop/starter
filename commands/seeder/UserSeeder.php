@@ -26,22 +26,22 @@ class UserSeeder extends Seeder
 		$created_at = $this->created_at();
 
 		return [
-           	'role_id' => $this->faker->randomElement($this->roles),
-            'username' => $this->faker->firstName,
-            'email' => $email,
-            'password_hash' => App::hash($email),
-            'status' => $this->faker->randomElement([
-	            User::STATUS_DELETED,
-	            User::STATUS_INACTIVE,
-	            User::STATUS_ACTIVE,
-	        ]),
-            'record_status' => $this->recordStatus(),
-            'is_blocked' => $this->faker->randomElement([
-	            User::BLOCKED,
-	            User::UNBLOCKED,
-	        ]),
-            'created_at' => $created_at,
-            'updated_at' => $created_at,
+			'role_id' => $this->faker->randomElement($this->roles),
+			'username' => $this->faker->firstName,
+			'email' => $email,
+			'password_hash' => App::hash($email),
+			'status' => $this->faker->randomElement([
+				User::STATUS_DELETED,
+				User::STATUS_INACTIVE,
+				User::STATUS_ACTIVE,
+			]),
+			'record_status' => $this->recordStatus(),
+			'is_blocked' => $this->faker->randomElement([
+				User::BLOCKED,
+				User::UNBLOCKED,
+			]),
+			'created_at' => $created_at,
+			'updated_at' => $created_at,
 		];
 	}
 }

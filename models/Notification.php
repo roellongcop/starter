@@ -85,16 +85,16 @@ class Notification extends ActiveRecord
 
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
-     
+
     public function gridColumns()
     {
         return [
             'message' => [
-                'attribute' => 'message', 
+                'attribute' => 'message',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->message,
                         'link' => $model->viewUrl,
@@ -103,9 +103,9 @@ class Notification extends ActiveRecord
                 }
             ],
             'link' => [
-                'attribute' => 'id', 
-                'value' => 'statusHtml', 
-                'label' => 'Status', 
+                'attribute' => 'id',
+                'value' => 'statusHtml',
+                'label' => 'Status',
                 'format' => 'raw'
             ],
             // 'type' => ['attribute' => 'type', 'format' => 'raw'],
@@ -155,7 +155,7 @@ class Notification extends ActiveRecord
         if (!parent::beforeSave($insert)) {
             return false;
         }
-        
+
         $this->message = $this->message ?: App::setting('notification')->{$this->type};
 
         return true;
@@ -179,7 +179,7 @@ class Notification extends ActiveRecord
             'label' => 'Read',
             'process' => 'read',
             'icon' => 'read',
-            'function' => function($id) {
+            'function' => function ($id) {
                 self::readAll(['id' => $id]);
             }
         ];
@@ -187,11 +187,11 @@ class Notification extends ActiveRecord
             'label' => 'Un-Read',
             'process' => 'unread',
             'icon' => 'in_active',
-            'function' => function($id) {
+            'function' => function ($id) {
                 self::unreadAll(['id' => $id]);
             }
         ];
-        
+
         return $bulkActions;
     }
 
@@ -207,25 +207,25 @@ class Notification extends ActiveRecord
         return parent::inactiveAll($condition);
     }
 
-    public static function deleteAll($condition = null, $params = []) 
+    public static function deleteAll($condition = null, $params = [])
     {
         $condition['user_id'] = $condition['user_id'] ?? App::identity('id');
         return parent::deleteAll($condition, $params);
     }
 
-    public static function readAll($condition='')
+    public static function readAll($condition = '')
     {
         $condition['user_id'] = $condition['user_id'] ?? App::identity('id');
         return parent::updateAll(['status' => self::STATUS_READ], $condition);
     }
 
-    public static function unreadAll($condition='')
+    public static function unreadAll($condition = '')
     {
         $condition['user_id'] = $condition['user_id'] ?? App::identity('id');
         return parent::updateAll(['status' => self::STATUS_UNREAD], $condition);
     }
 
-    public static function unread($user_id='')
+    public static function unread($user_id = '')
     {
         $user_id = $user_id ?: App::identity('id');
         return self::find()
@@ -234,7 +234,7 @@ class Notification extends ActiveRecord
             ->all();
     }
 
-    public static function totalUnread($user_id='')
+    public static function totalUnread($user_id = '')
     {
         $user_id = $user_id ?: App::identity('id');
         return self::find()

@@ -15,7 +15,7 @@ class Search extends BaseWidget
     public $options;
     public $submitOnclick = false;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

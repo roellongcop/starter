@@ -21,20 +21,20 @@ class Anchor extends BaseWidget
     private $stringLink;
     private $isExternalLink = false;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
 
-        $this->stringLink = is_array($this->link)? Url::toRoute($this->link): $this->link;
+        $this->stringLink = is_array($this->link) ? Url::toRoute($this->link) : $this->link;
         $this->isExternalLink = Url::isExternal($this->stringLink);
 
-        if (! $this->isExternalLink) {
+        if (!$this->isExternalLink) {
             $request = new RequestComponent(['url' => parse_url($this->stringLink, PHP_URL_PATH)]);
             $url = App::urlManager()->parseRequest($request);
             list($controller, $actionID) = App::app()->createController($url[0]);
 
-            $this->controller = $controller ? $controller->id: '';
+            $this->controller = $controller ? $controller->id : '';
             $this->action = $actionID;
 
             if (is_array($this->link)) {
@@ -44,8 +44,7 @@ class Anchor extends BaseWidget
                 if (count($explodedLink) == 1) {
                     $this->controller = $this->controller ?: App::controllerID();
                     $this->action = $this->action ?: $explodedLink[0];
-                }
-                else {
+                } else {
                     $this->controller = $this->controller ?: $explodedLink[0];
                     $this->action = $this->action ?: $explodedLink[1];
                 }

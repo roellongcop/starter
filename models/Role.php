@@ -101,18 +101,18 @@ class Role extends ActiveRecord
 
     public function getUsers()
     {
-        return $this->hasMany(User::className(), ['role_id' => 'id']);
+        return $this->hasMany(User::class, ['role_id' => 'id']);
     }
-      
+
     public function getCanDelete()
     {
         return App::ifElse(
-            App::identity('role_id') == $this->id, 
-            false, 
+            App::identity('role_id') == $this->id,
+            false,
             App::ifElse($this->users, false, true)
         );
     }
-    
+
     public function getJsonRoleAccess()
     {
         return JsonEditor::widget([
@@ -138,9 +138,9 @@ class Role extends ActiveRecord
     {
         return [
             'name' => [
-                'attribute' => 'name', 
+                'attribute' => 'name',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->name,
                         'link' => $model->viewUrl,
@@ -169,7 +169,7 @@ class Role extends ActiveRecord
     {
         $behaviors = parent::behaviors();
         $behaviors['JsonBehavior']['fields'] = [
-            'role_access', 
+            'role_access',
             'main_navigation',
             'module_access',
         ];

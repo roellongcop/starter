@@ -15,10 +15,10 @@ class EmailJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
     public $sender_name;
     public $template;
     public $parameters = [];
-    
+
     public function execute($queue)
     {
-    	$mail = new CustomEmailForm([
+        $mail = new CustomEmailForm([
             'to' => $this->to,
             'subject' => $this->subject,
             'cc' => $this->cc,

@@ -12,13 +12,13 @@ class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
 {
     public $created_by = 0;
     public $backupId;
-    
+
     public function execute($queue)
     {
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '-1');
-        
-    	$model = Backup::findOne($this->backupId);
+
+        $model = Backup::findOne($this->backupId);
 
         if ($model) {
             $backup = $this->backupDB($model->filename, $model->tables);
@@ -45,46 +45,44 @@ class BackupJob extends \yii\base\BaseObject implements \yii\queue\JobInterface
         }
     }
 
-    public function backupDB($name='', $tables='') 
+    public function backupDB($name = '', $tables = '')
     {
         $name = $name ?: time();
         $tables = $tables ?: '*';
 
         $micro_date = microtime();
-        $date_array = explode(" ",$micro_date);
+        $date_array = explode(" ", $micro_date);
         $uploadPath = $this->uploadPath($name);
         $filepath = implode('/', [Yii::getAlias('@consoleWebroot'), $uploadPath]);
 
         if ($tables == '*') {
             $tables = array();
             $tables = App::getTableNames();
-        } 
-        else {
+        } else {
             $tables = is_array($tables) ? $tables : explode(',', $tables);
         }
         $return = '';
         foreach ($tables as $table) {
             $result = App::query("SELECT * FROM {$table}");
-            $return.= 'DROP TABLE IF EXISTS `' . $table . '`;';
+            $return .= 'DROP TABLE IF EXISTS `' . $table . '`;';
             $row2 = App::queryOne("SHOW CREATE TABLE {$table}");
-            $return.= "\n\n" . $row2['Create Table'] . ";\n\n";
+            $return .= "\n\n" . $row2['Create Table'] . ";\n\n";
             foreach ($result as $row) {
-                $return.= 'INSERT INTO ' . $table . ' VALUES(';
+                $return .= 'INSERT INTO ' . $table . ' VALUES(';
                 foreach ($row as $data) {
                     $data = addslashes($data);
                     $data = preg_replace("/\n/", "\\n", $data);
                     if (isset($data)) {
-                        $return.= "'" . $data . "'";
-                    } 
-                    else {
-                        $return.= '""';
+                        $return .= "'" . $data . "'";
+                    } else {
+                        $return .= '""';
                     }
-                    $return.= ',';
+                    $return .= ',';
                 }
                 $return = substr($return, 0, strlen($return) - 1);
-                $return.= ");\n";
+                $return .= ");\n";
             }
-            $return.="\n\n\n";
+            $return .= "\n\n\n";
         }
         $handle = fopen($filepath, 'w+');
         fwrite($handle, $return);

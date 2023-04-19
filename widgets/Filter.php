@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use app\helpers\Html;
 use app\widgets\BootstrapSelect;
- 
+
 class Filter extends BaseWidget
 {
     public $attribute;
@@ -15,23 +15,23 @@ class Filter extends BaseWidget
     public $name;
     public $form;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
 
-        if (! $this->name) {
+        if (!$this->name) {
             $this->name = "{$this->attribute}[]";
         }
 
         $filters = $this->model->{$this->attribute} ?? [];
-        $filters = is_array($filters) ? $filters: [$filters];
+        $filters = is_array($filters) ? $filters : [$filters];
 
         foreach ($this->data as $id => $name) {
-            $checked = in_array($id, $filters)? 'checked': '';
+            $checked = in_array($id, $filters) ? 'checked' : '';
 
-            $_name = is_array($name)? $name['name']: $name;
-            $tags = is_array($name)? $name['tags']: '';
+            $_name = is_array($name) ? $name['name'] : $name;
+            $tags = is_array($name) ? $name['tags'] : '';
 
             $this->inputs .= $this->render('filter/checkbox', [
                 'id' => $id,
@@ -42,10 +42,10 @@ class Filter extends BaseWidget
             ]);
         }
 
-        if (! $this->title && $this->title !== false) {
+        if (!$this->title && $this->title !== false) {
             $this->title = ucwords(str_replace('_', ' ', $this->attribute));
         }
-        
+
     }
 
     /**
@@ -54,7 +54,7 @@ class Filter extends BaseWidget
     public function run()
     {
         if (count($this->data) <= 1) {
-            return ;
+            return;
         }
 
         if (count($this->data) > 20) {

@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class ImagePreview extends BaseWidget
 {
 
@@ -18,12 +18,12 @@ class ImagePreview extends BaseWidget
     public $imageId;
     public $imageClass = 'img-thumbnail';
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
         $arr = [
-            strtolower(App::getModelName($this->model)), 
+            strtolower(App::getModelName($this->model)),
             strtolower($this->attribute),
         ];
         $this->imageId = implode('-', $arr);

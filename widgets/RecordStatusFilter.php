@@ -5,14 +5,14 @@ namespace app\widgets;
 use app\helpers\App;
 use app\models\ActiveRecord;
 use app\widgets\Filter;
- 
+
 class RecordStatusFilter extends BaseWidget
 {
     public $form;
     public $model;
     public $controllerId;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

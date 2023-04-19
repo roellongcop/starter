@@ -5,7 +5,7 @@ namespace app\widgets;
 use app\helpers\App;
 use app\models\ActiveRecord;
 use app\widgets\BootstrapSelect;
- 
+
 class RecordStatusInput extends BaseWidget
 {
     public $attribute = 'record_status';
@@ -15,9 +15,9 @@ class RecordStatusInput extends BaseWidget
     public $options = [
         'class' => 'kt-selectpicker form-control',
         'tabindex' => 'null',
-    ]; 
+    ];
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

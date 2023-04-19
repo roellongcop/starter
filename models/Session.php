@@ -82,24 +82,24 @@ class Session extends ActiveRecord
     {
         return new \app\models\query\SessionQuery(get_called_class());
     }
-     
+
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     public function getUsername()
     {
-        return App::if($this->user, fn($user) => $user->username);
+        return App::if ($this->user, fn($user) => $user->username);
     }
 
     public function gridColumns()
     {
         return [
             'id' => [
-                'attribute' => 'id', 
+                'attribute' => 'id',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->id,
                         'link' => $model->viewUrl,
@@ -110,9 +110,9 @@ class Session extends ActiveRecord
             'expire' => ['attribute' => 'expire', 'format' => 'raw'],
             // 'data' => ['attribute' => 'data', 'format' => 'raw'],
             'username' => [
-                'attribute' => 'username', 
+                'attribute' => 'username',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     if ($model->username) {
                         return Anchor::widget([
                             'title' => $model->username,

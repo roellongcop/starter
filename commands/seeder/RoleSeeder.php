@@ -22,10 +22,10 @@ class RoleSeeder extends Seeder
 	{
 		$created_at = $this->created_at();
 		return [
-            'name' => $this->faker->jobTitle, 
-            'record_status' => $this->recordStatus(),
-            'created_at' => $created_at,
-            'updated_at' => $created_at,
+			'name' => $this->faker->jobTitle,
+			'record_status' => $this->recordStatus(),
+			'created_at' => $created_at,
+			'updated_at' => $created_at,
 		];
 	}
 }

@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class Anchors extends BaseWidget
 {
     public $controller;
@@ -33,20 +33,20 @@ class Anchors extends BaseWidget
     public $glue = ' ';
     public $defaultOptions = ['class' => 'btn btn-primary btn-bold btn-upper btn-font-sm'];
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
 
         $controller = $this->controller ?: App::controllerID();
-        $names = is_array($this->names) ? $this->names: [$this->names];
+        $names = is_array($this->names) ? $this->names : [$this->names];
 
 
         foreach ($names as $name) {
             $title = $this->titles[$name] ?? ucwords($name);
             $options = $this->options[$name] ?? $this->defaultOptions;
 
-            switch ($name) { 
+            switch ($name) {
                 case 'log':
                     $link = $this->model->logUrl;
                     break;
@@ -72,26 +72,25 @@ class Anchors extends BaseWidget
 
             if ($this->model) {
                 if (App::modelBeforeCan($this->model, $name)) {
-                    
+
                     $this->anchors[] = Anchor::widget([
                         'title' => $title,
                         'link' => $link,
                         'options' => $options,
                     ]);
                 }
-            }
-            else {
+            } else {
                 $this->anchors[] = Anchor::widget([
                     'title' => $title,
                     'link' => $link,
                     'options' => $options,
                 ]);
             }
-        } 
+        }
     }
 
 
- 
+
     /**
      * {@inheritdoc}
      */

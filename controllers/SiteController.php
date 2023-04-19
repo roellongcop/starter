@@ -34,7 +34,7 @@ class SiteController extends Controller
             case 'contact':
                 $this->layout = 'login';
                 break;
-            
+
             default:
                 # code...
                 break;
@@ -66,12 +66,10 @@ class SiteController extends Controller
             if (($user = $model->process()) != null) {
                 if ($model->hint) {
                     App::success("Your password hint is: '{$user->password_hint}'.");
-                }
-                else {
+                } else {
                     App::success("Email sent.");
                 }
-            }
-            else {
+            } else {
                 App::danger($model->errors);
             }
         }
@@ -87,7 +85,8 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (App::isLogin()) {
-            return $this->redirect(['dashboard/index']);
+            $this->redirect(['dashboard/index']);
+            return 0;
         }
 
         return $this->render('index');

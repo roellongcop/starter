@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class BootstrapSelect extends BaseWidget
 {
 
@@ -16,19 +16,19 @@ class BootstrapSelect extends BaseWidget
         'class' => 'kt-selectpicker form-control',
         'tabindex' => 'null',
         'prompt' => 'Select'
-    ]; 
+    ];
     public $searchable = true;
     public $multiple = false;
     public $label = true;
 
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
 
         $className = App::className($this->model);
-        if (! $this->name) {
+        if (!$this->name) {
             $this->name = "{$className}[{$this->attribute}]";
         }
         $this->options['name'] = $this->name;
@@ -45,7 +45,7 @@ class BootstrapSelect extends BaseWidget
 
     }
 
-    public function listOptions($value='')
+    public function listOptions($value = '')
     {
         return ['data-tokens' => $value];
     }
@@ -57,10 +57,10 @@ class BootstrapSelect extends BaseWidget
     {
         $select = $this->form->field($this->model, $this->attribute)
             ->dropDownList(
-                $this->data, 
+                $this->data,
                 $this->options
             );
 
-        return (!$this->label || $this->label === true)? $select: $select->label($this->label);
+        return (!$this->label || $this->label === true) ? $select : $select->label($this->label);
     }
 }

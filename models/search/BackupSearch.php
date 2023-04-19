@@ -84,11 +84,12 @@ class BackupSearch extends Backup
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-        
-        $query->andFilterWhere(['or', 
-            ['like', 'filename', $this->keywords],  
-            ['like', 'tables', $this->keywords],  
-            ['like', 'description', $this->keywords],  
+
+        $query->andFilterWhere([
+            'or',
+            ['like', 'filename', $this->keywords],
+            ['like', 'tables', $this->keywords],
+            ['like', 'description', $this->keywords],
         ]);
 
         $query->daterange($this->date_range);

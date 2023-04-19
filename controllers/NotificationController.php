@@ -9,9 +9,9 @@ use app\models\search\NotificationSearch;
 /**
  * NotificationController implements the CRUD actions for Notification model.
  */
-class NotificationController extends Controller 
+class NotificationController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
             Notification::findByKeywords($keywords, ['message'])
@@ -59,10 +59,9 @@ class NotificationController extends Controller
     {
         $model = Notification::controllerFind($token, 'token');
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 

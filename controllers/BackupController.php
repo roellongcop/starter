@@ -13,7 +13,7 @@ use app\models\search\BackupSearch;
  */
 class BackupController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
             Backup::findByKeywords($keywords, ['filename', 'tables', 'description'])
@@ -44,7 +44,7 @@ class BackupController extends Controller
     {
         $model = Backup::controllerFind($slug, 'slug');
 
-        if (! $model->generated) {
+        if (!$model->generated) {
             App::info('The SQL file is currently generating...');
         }
         return $this->render('view', [
@@ -66,20 +66,18 @@ class BackupController extends Controller
         if ($model->load(App::post())) {
             if ($model->validate()) {
                 $model->tables = $model->tables ?: App::component('general')->getAllTables();
-                
+
                 if ($model->save()) {
                     Queue::push(new BackupJob([
                         'backupId' => $model->id,
                         'created_by' => App::identity('id')
                     ]));
                     App::success('Successfully Created');
-                }
-                else {
+                } else {
                     App::danger('Error in creating backup file.');
                 }
                 return $this->redirect($model->viewUrl);
-            }
-            else {
+            } else {
                 App::danger($model->errorSummary);
             }
         }
@@ -100,18 +98,17 @@ class BackupController extends Controller
 
         $model = new Backup();
         $model->attributes = $originalModel->attributes;
-        
+
         if ($model->load(App::post()) && $model->validate()) {
             $model->tables = $model->tables ?: App::component('general')->getAllTables();
-            
+
             if ($model->save()) {
                 Queue::push(new BackupJob([
                     'backupId' => $model->id,
                 ]));
 
                 App::success('Successfully Duplicated');
-            }
-            else {
+            } else {
                 App::danger('Error in duplicating backup file.');
             }
 

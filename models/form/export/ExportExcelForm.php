@@ -14,9 +14,9 @@ class ExportExcelForm extends ExportForm
     {
         parent::init();
         $this->filename = implode('-', [
-            App::controllerID(), 
-            'export', 
-            $this->type, 
+            App::controllerID(),
+            'export',
+            $this->type,
             time()
         ]) . ".{$this->type}";
     }

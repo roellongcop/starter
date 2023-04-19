@@ -3,15 +3,15 @@
 namespace app\widgets;
 
 use app\helpers\App;
- 
+
 class BulkAction extends BaseWidget
 {
     public $title = 'Bulk Action';
-    
+
     public $controllerID;
     public $searchModel;
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();
@@ -34,9 +34,9 @@ class BulkAction extends BaseWidget
      * {@inheritdoc}
      */
     public function run()
-    { 
-        if(! App::component('access')->userCan('bulk-action', $this->controllerID)) {
-            return ;
+    {
+        if (!App::component('access')->userCan('bulk-action', $this->controllerID)) {
+            return;
         }
 
         return $this->render('bulk-action/index', [

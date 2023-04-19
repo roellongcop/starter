@@ -7,10 +7,10 @@ use app\models\form\CustomEmailForm;
 
 class PasswordResetForm extends \yii\base\Model
 {
-    public $email; 
-    public $hint = false; 
+    public $email;
+    public $hint = false;
 
-    public $_user; 
+    public $_user;
 
     /**
      * @return array the validation rules.

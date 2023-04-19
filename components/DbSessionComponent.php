@@ -13,18 +13,18 @@ class DbSessionComponent extends \yii\web\DbSession
 	{
 		$this->timeout = App::setting('system')->auto_logout_timer;
 		$this->sessionTable = Session::tableName();
-		$this->writeCallback = function ($session) { 
+		$this->writeCallback = function ($session) {
 			$userAgent = new UserAgentForm();
-	        return [
-	            'user_id' => App::user('id'),
-	            'ip' => App::ip(),
-	            'browser' => $userAgent->browser,
-	            'os' => $userAgent->os,
-	            'device' => $userAgent->device,
-	            'created_at' => new Expression('UTC_TIMESTAMP'),
-	            'updated_at' => new Expression('UTC_TIMESTAMP'),
-	       ];
-	    };
+			return [
+				'user_id' => App::user('id'),
+				'ip' => App::ip(),
+				'browser' => $userAgent->browser,
+				'os' => $userAgent->os,
+				'device' => $userAgent->device,
+				'created_at' => new Expression('UTC_TIMESTAMP'),
+				'updated_at' => new Expression('UTC_TIMESTAMP'),
+			];
+		};
 		parent::init();
 	}
 }

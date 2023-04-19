@@ -11,13 +11,13 @@ use app\models\search\RoleSearch;
  */
 class RoleController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
             Role::findByKeywords($keywords, ['name'])
         );
     }
-    
+
     /**
      * Lists all Role models.
      * @return mixed
@@ -135,10 +135,9 @@ class RoleController extends Controller
     {
         $model = Role::controllerFind($slug, 'slug');
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 

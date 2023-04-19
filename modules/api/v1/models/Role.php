@@ -19,5 +19,5 @@ namespace app\modules\api\v1\models;
  */
 class Role extends \app\models\Role
 {
-    
+
 }

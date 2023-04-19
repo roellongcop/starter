@@ -33,7 +33,8 @@ use yii\imagine\Image;
 class File extends ActiveRecord
 {
     const EXTENSIONS = [
-        'image' => ['jpeg', 'jpg', 'gif', 'bmp', 'tiff','png', 'ico',],
+        'image' => ['jpeg', 'jpg', 'gif', 'bmp', 'tiff', 'png', 'ico',
+        ],
         'file' => ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'csv', 'sql'],
     ];
     const IMAGE_HOLDER = 'https://via.placeholder.com/100';
@@ -68,10 +69,14 @@ class File extends ActiveRecord
             [['name', 'tag'], 'string', 'max' => 255],
             [['tag'], 'safe'],
             [['extension'], 'string', 'max' => 16],
-            ['extension', 'in', 'range' => array_merge(
-                self::EXTENSIONS['image'],
-                self::EXTENSIONS['file'],
-            )],
+            [
+                'extension',
+                'in',
+                'range' => array_merge(
+                    self::EXTENSIONS['image'],
+                    self::EXTENSIONS['file'],
+                )
+            ],
         ]);
     }
 
@@ -99,7 +104,7 @@ class File extends ActiveRecord
     public static function find()
     {
         return new \app\models\query\FileQuery(get_called_class());
-    } 
+    }
 
     public function getImageFiles()
     {
@@ -108,7 +113,7 @@ class File extends ActiveRecord
             ->all();
     }
 
-    public function getDisplayPath($w='', $h='')
+    public function getDisplayPath($w = '', $h = '')
     {
         $w = $w ?: $this->width;
         $h = $h ?: $this->height;
@@ -119,32 +124,55 @@ class File extends ActiveRecord
 
     public function getDisplayRootPath()
     {
-        $doc_path = FileHelper::normalizePath((App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')) 
-        . '/default/file-preview/');
+        $doc_path = FileHelper::normalizePath((App::isWeb() ? Yii::getAlias('@webroot') : Yii::getAlias('@consoleWebroot'))
+            . '/default/file-preview/');
 
-        return ($this->isImage)? $this->rootPath: $this->getDisplay([], false, $doc_path);
+        return ($this->isImage) ? $this->rootPath : $this->getDisplay([], false, $doc_path);
     }
 
-    public function getDisplay($params = [], $fullpath=false, $path='@web/default/file-preview/')
+    public function getDisplay($params = [], $fullpath = false, $path = '@web/default/file-preview/')
     {
-        $path = strcmp($path, DIRECTORY_SEPARATOR) === 0 ? $path: $path . DIRECTORY_SEPARATOR;
+        $path = strcmp($path, DIRECTORY_SEPARATOR) === 0 ? $path : $path . DIRECTORY_SEPARATOR;
 
         switch ($this->extension) {
-            case 'css': $path .= 'css.png'; break;
-            case 'zip': $path .= 'zip.png'; break;
-            case 'sql': $path .= 'sql.png'; break;
-            case 'csv': $path .= 'csv.png'; break;
-            case 'xlsx': $path .= 'xlsx.png'; break;
-            case 'xls': $path .= 'xls.png'; break;
+            case 'css':
+                $path .= 'css.png';
+                break;
+            case 'zip':
+                $path .= 'zip.png';
+                break;
+            case 'sql':
+                $path .= 'sql.png';
+                break;
+            case 'csv':
+                $path .= 'csv.png';
+                break;
+            case 'xlsx':
+                $path .= 'xlsx.png';
+                break;
+            case 'xls':
+                $path .= 'xls.png';
+                break;
             case 'docx':
             case 'doc':
-            case 'txt': 
-                $path .= 'doc.png'; break;
-            case 'html': $path .= 'html.png'; break;
-            case 'js': $path .= 'js.png'; break;
-            case 'mp4': $path .= 'mp4.png'; break;
-            case 'pdf': $path .= 'pdf.png'; break;
-            case 'xml': $path .= 'xml.png'; break;
+            case 'txt':
+                $path .= 'doc.png';
+                break;
+            case 'html':
+                $path .= 'html.png';
+                break;
+            case 'js':
+                $path .= 'js.png';
+                break;
+            case 'mp4':
+                $path .= 'mp4.png';
+                break;
+            case 'pdf':
+                $path .= 'pdf.png';
+                break;
+            case 'xml':
+                $path .= 'xml.png';
+                break;
             default:
                 // return Url::image($this, $params);
                 break;
@@ -153,24 +181,23 @@ class File extends ActiveRecord
         return $path;
     }
 
-    public function show($params=[], $w=150)
+    public function show($params = [], $w = 150)
     {
         if ($this->isDocument) {
             $params['style'] = $params['style'] ?? "width:{$w}px;height:auto";
 
             return Html::img(Url::image($this, ['w' => $w]), $params);
-        }
-        else {
+        } else {
             return Html::img(Url::image($this, ['w' => $w]), $params);
         }
     }
 
-    public function getUrlImage($params=[])
+    public function getUrlImage($params = [])
     {
         return Url::image($this, $params);
     }
 
-    public function getTruncatedName($char=25)
+    public function getTruncatedName($char = 25)
     {
         return StringHelper::truncate($this->name, $char);
     }
@@ -178,30 +205,30 @@ class File extends ActiveRecord
     public function getPreviewImage()
     {
         return Html::image($this, [
-            'w' => 50, 
+            'w' => 50,
             'h' => 50,
             'ratio' => 'false',
             'quality' => 90
         ], [
-            'class' => 'img-thumbnail',
-            'loading' => 'lazy'
-        ]);
+                'class' => 'img-thumbnail',
+                'loading' => 'lazy'
+            ]);
     }
 
     public function gridColumns()
     {
         return [
             'icon' => [
-                'attribute' => 'name', 
-                'label' => 'Preview', 
+                'attribute' => 'name',
+                'label' => 'Preview',
                 'format' => 'raw',
                 'value' => 'previewImage',
             ],
 
             'name' => [
-                'attribute' => 'name', 
+                'attribute' => 'name',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->name,
                         'link' => $model->viewUrl,
@@ -209,7 +236,7 @@ class File extends ActiveRecord
                     ]);
                 }
             ],
-            
+
             'tag' => ['attribute' => 'tag', 'format' => 'raw'],
             'extension' => ['attribute' => 'extension', 'format' => 'raw'],
             'size' => ['attribute' => 'size', 'format' => 'fileSize'],
@@ -239,7 +266,7 @@ class File extends ActiveRecord
     public function getRootPath()
     {
         $paths = [
-            (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')),
+            (App::isWeb() ? Yii::getAlias('@webroot') : Yii::getAlias('@consoleWebroot')),
             $this->location
         ];
 
@@ -249,7 +276,7 @@ class File extends ActiveRecord
     public function getRawUrlRootPath()
     {
         $paths = [
-            (App::isWeb()? Yii::getAlias('@webroot'): Yii::getAlias('@consoleWebroot')),
+            (App::isWeb() ? Yii::getAlias('@webroot') : Yii::getAlias('@consoleWebroot')),
             $this->rawUrlLocation
         ];
 
@@ -292,42 +319,42 @@ class File extends ActiveRecord
             list($width, $height) = getimagesize($this->displayRootPath);
         }
         return [
-            'width' => ($this->isImage)? $width: 0,
-            'height' => ($this->isImage)? $height: 0,
+            'width' => ($this->isImage) ? $width : 0,
+            'height' => ($this->isImage) ? $height : 0,
         ];
     }
 
-    public function getImageRatio($w, $quality=100, $extension='png')
+    public function getImageRatio($w, $quality = 100, $extension = 'png')
     {
         if ($this->exists) {
             $imagineObj = new Imagine();
             $image = $imagineObj->open($this->displayRootPath);
             $image->resize($image->getSize()->widen($w));
 
-            return $image->show($extension, ['quality' => $quality]); 
+            return $image->show($extension, ['quality' => $quality]);
         }
     }
 
-    public function getImageCrop($w, $h, $quality=100, $extension='png')
+    public function getImageCrop($w, $h, $quality = 100, $extension = 'png')
     {
         if ($this->exists) {
-            $image = Image::crop($this->displayRootPath, $w, $h); 
+            $image = Image::crop($this->displayRootPath, $w, $h);
 
-            return $image->show($extension, ['quality' => $quality]); 
+            return $image->show($extension, ['quality' => $quality]);
         }
     }
 
-    public function getImage($w, $h, $quality=100, $extension='png')
+    public function getImage($w, $h, $quality = 100, $extension = 'png')
     {
         if ($this->exists) {
-            $image = Image::getImagine() 
-                ->open($this->displayRootPath) 
+            $image = Image::getImagine()
+                ->open($this->displayRootPath)
                 ->resize(new Box($w, $h));
 
             return $image->show($extension, ['quality' => $quality]);
         }
     }
-    
+
     public function getIsSql()
     {
         return in_array($this->extension, ['sql']);
@@ -364,9 +391,9 @@ class File extends ActiveRecord
             ->one();
     }
 
-    public static function findByKeywordsImage($keywords='', $attributes='', $limit=3, $andFilterWhere=[])
+    public static function findByKeywordsImage($keywords = '', $attributes = '', $limit = 3, $andFilterWhere = [])
     {
-        return parent::findByKeywordsData($attributes, function($attribute) use($keywords, $limit, $andFilterWhere) {
+        return parent::findByKeywordsData($attributes, function ($attribute) use ($keywords, $limit, $andFilterWhere) {
             return self::find()
                 ->select("{$attribute} AS data")
                 ->groupBy($attribute)
@@ -388,7 +415,7 @@ class File extends ActiveRecord
         return implode('/', ['image', $this->extension]);
     }
 
-    public static function tagFilterBtn($activeTag='', $type='all')
+    public static function tagFilterBtn($activeTag = '', $type = 'all')
     {
         return FileTagFilter::widget([
             'activeTag' => $activeTag,

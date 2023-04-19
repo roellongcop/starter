@@ -5,7 +5,7 @@ namespace app\widgets;
 use app\helpers\App;
 use app\helpers\Html;
 use app\widgets\Switcher;
- 
+
 class RecordHtml extends BaseWidget
 {
     public $model;
@@ -13,7 +13,7 @@ class RecordHtml extends BaseWidget
     public $controller;
     public $action = 'change-record-status';
 
-    public function init() 
+    public function init()
     {
         // your logic here
         parent::init();

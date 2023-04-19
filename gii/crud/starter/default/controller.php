@@ -42,7 +42,7 @@ use yii\data\ActiveDataProvider;
  */
 class <?= $controllerClass ?> extends Controller <?= "\n" ?>
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
             <?= $modelClass ?>::findByKeywords($keywords, ['id'])

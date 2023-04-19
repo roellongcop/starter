@@ -10,8 +10,8 @@ namespace app\filters;
 class VerbFilter extends \yii\filters\VerbFilter
 {
     public $verbActions = [
-        'index'  => ['get'],
-        'view'   => ['get'],
+        'index' => ['get'],
+        'view' => ['get'],
         'create' => ['get', 'post'],
         'update' => ['get', 'put', 'post'],
         'delete' => ['post', 'delete'],
@@ -22,6 +22,6 @@ class VerbFilter extends \yii\filters\VerbFilter
     public function init()
     {
         parent::init();
-        $this->actions =  $this->verbActions;
+        $this->actions = $this->verbActions;
     }
 }

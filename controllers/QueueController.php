@@ -9,15 +9,15 @@ use app\models\search\QueueSearch;
 /**
  * QueueController implements the CRUD actions for Queue model.
  */
-class QueueController extends Controller 
+class QueueController extends Controller
 {
-    public function actionFindByKeywords($keywords='')
+    public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
             Queue::findByKeywords($keywords, ['channel', 'job', 'pushed_at'])
         );
     }
-    
+
     /**
      * Lists all Queue models.
      * @return mixed
@@ -57,10 +57,9 @@ class QueueController extends Controller
     {
         $model = Queue::controllerFind($id);
 
-        if($model->delete()) {
+        if ($model->delete()) {
             App::success('Successfully Deleted');
-        }
-        else {
+        } else {
             App::danger(json_encode($model->errors));
         }
 

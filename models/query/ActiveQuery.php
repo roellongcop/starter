@@ -8,7 +8,7 @@ use app\models\ActiveRecord;
 
 class ActiveQuery extends \yii\db\ActiveQuery
 {
-    public function daterange($daterange='', $field='')
+    public function daterange($daterange = '', $field = '')
     {
         $model = Yii::createObject($this->modelClass);
         if ($model && $model->hasProperty('dateAttribute')) {
@@ -17,14 +17,14 @@ class ActiveQuery extends \yii\db\ActiveQuery
 
         if ($daterange) {
             $field = $this->field($field);
-            
+
             $hours = App::formatter()->asDateToTimezone(date("Y-m-d H:i:s"), "P");
 
             return $this->andFilterWhere([
-                "between", 
-                "date(DATE_ADD({$field},INTERVAL '{$hours}' HOUR_MINUTE))", 
-                App::formatter()->asDaterangeToSingle($daterange, 'start'), 
-                App::formatter()->asDaterangeToSingle($daterange, 'end'), 
+                "between",
+                "date(DATE_ADD({$field},INTERVAL '{$hours}' HOUR_MINUTE))",
+                App::formatter()->asDaterangeToSingle($daterange, 'start'),
+                App::formatter()->asDaterangeToSingle($daterange, 'end'),
             ]);
         }
 
@@ -39,7 +39,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
             return $tableNameAndAlias[1];
         }
     }
-    
+
     public function field($field)
     {
         if (($alias = $this->_getAlias()) != null) {
@@ -69,10 +69,10 @@ class ActiveQuery extends \yii\db\ActiveQuery
         return $this->andFilterWhere($condition);
     }
 
-    public function active($alias='')
+    public function active($alias = '')
     {
         if ($alias) {
-            $alias = is_array($alias)? $alias: [$alias];
+            $alias = is_array($alias) ? $alias : [$alias];
 
             $condition = [];
 
@@ -88,11 +88,11 @@ class ActiveQuery extends \yii\db\ActiveQuery
         ]);
     }
 
-    public function inActive($alias='')
+    public function inActive($alias = '')
     {
         if ($alias) {
-            $alias = is_array($alias)? $alias: [$alias];
-            
+            $alias = is_array($alias) ? $alias : [$alias];
+
             $condition = [];
 
             foreach ($alias as $a) {
@@ -124,41 +124,41 @@ class ActiveQuery extends \yii\db\ActiveQuery
         return parent::one($db);
     }
 
-    public function sum($q, $db = null) 
+    public function sum($q, $db = null)
     {
         $this->visible();
         return parent::sum($q, $db);
     }
 
-    public function average($q, $db = null) 
+    public function average($q, $db = null)
     {
         $this->visible();
         return parent::average($q, $db);
     }
 
-    public function min($q, $db = null) 
+    public function min($q, $db = null)
     {
         $this->visible();
         return parent::min($q, $db);
     }
 
-    public function max($q, $db = null) 
+    public function max($q, $db = null)
     {
         $this->visible();
         return parent::max($q, $db);
     }
 
-    public function scalar($db = null) 
+    public function scalar($db = null)
     {
         return parent::scalar($db);
     }
 
-    public function column($db = null) 
+    public function column($db = null)
     {
         return parent::column($db);
     }
 
-    public function exists($db = null) 
+    public function exists($db = null)
     {
         return parent::exists($db);
     }

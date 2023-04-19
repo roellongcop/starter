@@ -23,25 +23,25 @@ class VisitorFilter extends \yii\base\ActionFilter
             return false;
         }
 
-        if ((!in_array(App::controllerAction(), $this->exempted) 
-            && App::isWeb()
-            && !App::isAjax()
-            && !$this->isBot()) || $this->test) {
+        if (
+            (!in_array(App::controllerAction(), $this->exempted)
+                && App::isWeb()
+                && !App::isAjax()
+                && !$this->isBot()) || $this->test
+        ) {
 
             $cookies = Yii::$app->request->cookies;
 
             if ($cookies->has($this->cookieId)) {
-                
+
                 if (($model = Visitor::findByCookie($cookies->getValue($this->cookieId))) != null) {
                     if ($model->isExpire()) {
                         $this->addCookie();
                     }
-                }
-                else {
+                } else {
                     $this->addCookie();
                 }
-            }
-            else {
+            } else {
                 $this->addCookie();
             }
         }
@@ -49,7 +49,7 @@ class VisitorFilter extends \yii\base\ActionFilter
         return true;
     }
 
-    public function isBot() 
+    public function isBot()
     {
         return (
             isset($_SERVER['HTTP_USER_AGENT'])
@@ -59,7 +59,7 @@ class VisitorFilter extends \yii\base\ActionFilter
 
     public function addCookie()
     {
-        $session_id = ($this->test)? App::randomString(10): App::session('id');
+        $session_id = ($this->test) ? App::randomString(10) : App::session('id');
         $cookies = Yii::$app->response->cookies;
         $expire = time() + ($this->duration ?? App::setting('system')->auto_logout_timer);
 
@@ -84,8 +84,7 @@ class VisitorFilter extends \yii\base\ActionFilter
                     'secure' => true,
                     'expire' => $expire
                 ]));
-            }
-            else {
+            } else {
                 Yii::debug($model->errors);
             }
         }

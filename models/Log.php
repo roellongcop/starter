@@ -7,6 +7,7 @@ use app\helpers\App;
 use app\widgets\Anchor;
 use app\helpers\Url;
 use app\models\form\UserAgentForm;
+
 /**
  * This is the model class for table "{{%logs}}".
  *
@@ -59,15 +60,19 @@ class Log extends ActiveRecord
         return $this->setRules([
             [['user_id',], 'integer'],
             [['user_id', 'model_id'], 'default', 'value' => 0],
-            [[ 'url'], 'string'],
+            [['url'], 'string'],
             [['request_data', 'change_attribute', 'server', 'ip', 'action', 'controller'], 'safe'],
             [['method', 'table_name', 'model_name', 'browser', 'os', 'device'], 'required'],
             [['method', 'ip'], 'string', 'max' => 32],
             [['action', 'controller', 'table_name', 'model_name'], 'string', 'max' => 255],
             [['browser', 'os', 'device'], 'string', 'max' => 128],
-            ['user_id', 'validateUserId', 'when' => function($model) {
-                return $model->user_id;
-            }],
+            [
+                'user_id',
+                'validateUserId',
+                'when' => function ($model) {
+                    return $model->user_id;
+                }
+            ],
         ]);
     }
 
@@ -112,34 +117,34 @@ class Log extends ActiveRecord
             $this->addError($attribute, 'Not existing User');
         }
     }
-     
+
     public function getTableFullname()
     {
         return App::db('tablePrefix') . $this->table_name;
     }
-   
+
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     public function getUsername()
     {
         if ($this->_username === null) {
-            $this->_username = App::if($this->user, fn($user) => $user->username);
+            $this->_username = App::if ($this->user, fn($user) => $user->username);
         }
 
         return $this->_username;
     }
-   
+
     public function gridColumns()
     {
         return [
             'username' => [
-                'attribute' => 'username', 
+                'attribute' => 'username',
                 'label' => 'Username',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     if ($model->username) {
                         return Anchor::widget([
                             'title' => $model->username,
@@ -155,10 +160,10 @@ class Log extends ActiveRecord
             // 'change_attribute' => ['attribute' => 'change_attribute', 'format' => 'raw'],
 
             'action' => [
-                'attribute' => 'action', 
+                'attribute' => 'action',
                 'label' => 'Action',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->action,
                         'link' => $model->viewUrl,
@@ -201,18 +206,18 @@ class Log extends ActiveRecord
     public function getModelInstance()
     {
         $class = Yii::createObject("\\app\\models\\{$this->model_name}");
-        
-        return $this->hasOne($class::className(), ['id' => 'model_id']);
+
+        return $this->hasOne($class::class, ['id' => 'model_id']);
     }
 
     public function detailColumns()
     {
         return [
             [
-                'attribute' => 'user_id', 
+                'attribute' => 'user_id',
                 'label' => 'Username',
                 'format' => 'raw',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Anchor::widget([
                         'title' => $model->username,
                         'link' => ['user/view', 'id' => $model->user_id],
@@ -221,8 +226,8 @@ class Log extends ActiveRecord
                 }
             ],
             /*[
-                'attribute' => 'model_id', 
-                'label' => 'Model ID',
+            'attribute' => 'model_id', 
+            'label' => 'Model ID',
             ],*/
             'preview:raw',
             'action:raw',
@@ -240,12 +245,12 @@ class Log extends ActiveRecord
             'device:raw',
         ];
     }
-    
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['JsonBehavior']['fields'] = [
-            'change_attribute', 
+            'change_attribute',
             'request_data',
             'server',
         ];
@@ -254,30 +259,30 @@ class Log extends ActiveRecord
         return $behaviors;
     }
 
-    public static function record($model, $changedAttributes=[])
+    public static function record($model, $changedAttributes = [])
     {
         // if (App::isLogin()) {
-            $userAgent = new UserAgentForm();
-            $log                   = new Log();
-            $log->request_data     = App::getBodyParams();
-            $log->method           = App::getMethod() ?: 'console';
-            $log->url              = App::isWeb()? App::absoluteUrl(): '';
-            $log->user_id          = App::identity() ? App::identity('id'): 0;
-            $log->model_id         = $model->id ?: 0;
-            $log->action           = App::actionID();
-            $log->controller       = App::controllerID();
-            $log->table_name       = App::tableName($model, false);
-            $log->model_name       = App::getModelName($model);
-            $log->server           = App::server();
-            $log->ip               = App::ip();
-            $log->browser          = $userAgent->browser;
-            $log->os               = $userAgent->os;
-            $log->device           = $userAgent->device;
-            $log->change_attribute = $changedAttributes;
+        $userAgent = new UserAgentForm();
+        $log = new Log();
+        $log->request_data = App::getBodyParams();
+        $log->method = App::getMethod() ?: 'console';
+        $log->url = App::isWeb() ? App::absoluteUrl() : '';
+        $log->user_id = App::identity() ? App::identity('id') : 0;
+        $log->model_id = $model->id ?: 0;
+        $log->action = App::actionID();
+        $log->controller = App::controllerID();
+        $log->table_name = App::tableName($model, false);
+        $log->model_name = App::getModelName($model);
+        $log->server = App::server();
+        $log->ip = App::ip();
+        $log->browser = $userAgent->browser;
+        $log->os = $userAgent->os;
+        $log->device = $userAgent->device;
+        $log->change_attribute = $changedAttributes;
 
-            if ($log->save()) {
-                return true;
-            }
+        if ($log->save()) {
+            return true;
+        }
         // }
     }
 }
