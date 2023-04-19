@@ -85,8 +85,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (App::isLogin()) {
-            $this->redirect(['dashboard/index']);
-            return 0;
+            return $this->redirect(['dashboard/index']);
         }
 
         return $this->render('index');

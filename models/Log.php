@@ -207,7 +207,7 @@ class Log extends ActiveRecord
     {
         $class = Yii::createObject("\\app\\models\\{$this->model_name}");
 
-        return $this->hasOne($class::class, ['id' => 'model_id']);
+        return $this->hasOne($class::classname(), ['id' => 'model_id']);
     }
 
     public function detailColumns()
