@@ -22,10 +22,10 @@ return [
         'setting' => ['class' => 'app\components\SettingComponent'],
         'general' => ['class' => 'app\components\GeneralComponent'],
         'formatter' => ['class' => 'app\components\FormatterComponent'],
-        'view' => ['class' => '\app\components\ViewComponent'],
-        'pdf' => ['class' => '\app\components\PdfComponent'],
+        'view' => ['class' => 'app\components\ViewComponent'],
+        'pdf' => ['class' => 'app\components\PdfComponent'],
         'session' => ['class' => 'app\components\DbSessionComponent'],
-        'mailer' => ['class' => '\app\components\MailerComponent'],
+        'mailer' => ['class' => 'app\components\MailerComponent'],
         'urlManager' => ['class' => 'app\components\UrlManagerComponent'],
         'assetManager' => [
             'class' => 'app\components\AssetManagerComponent',

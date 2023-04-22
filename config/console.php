@@ -32,8 +32,8 @@ $config = [
             'hostInfo' => '/',
         ],
         'session' => ['class' => 'app\components\DbSessionComponent'],
-        'pdf' => ['class' => '\app\components\PdfComponent'],
-        'mailer' => ['class' => '\app\components\MailerComponent'],
+        'pdf' => ['class' => 'app\components\PdfComponent'],
+        'mailer' => ['class' => 'app\components\MailerComponent'],
         'user' => [
             'class' => 'app\components\UserComponent',
             'enableSession' => false,
