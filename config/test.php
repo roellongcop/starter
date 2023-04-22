@@ -25,7 +25,10 @@ return [
         'view' => ['class' => 'app\components\ViewComponent'],
         'pdf' => ['class' => 'app\components\PdfComponent'],
         'session' => ['class' => 'app\components\DbSessionComponent'],
-        'mailer' => ['class' => 'app\components\MailerComponent'],
+        'mailer' => [
+            'class' => 'app\components\MailerComponent',
+            'messageClass' => 'yii\symfonymailer\Message'
+        ],
         'urlManager' => ['class' => 'app\components\UrlManagerComponent'],
         'assetManager' => [
             'class' => 'app\components\AssetManagerComponent',
