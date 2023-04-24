@@ -5,5 +5,8 @@ use app\widgets\Search;
 ?>
 
 <?php $form = ActiveForm::begin(['action' => $searchAction, 'method' => 'get']); ?>
-    <?= Search::widget(['model' => $searchModel]) ?>
+    <?= Search::widget([
+        'submitOnclick' => true,
+        'model' => $searchModel
+    ]) ?>
 <?php ActiveForm::end(); ?>
