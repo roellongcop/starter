@@ -21,7 +21,7 @@ $this->params['searchModel'] = new UserSearch();
 			</div>
 		</div>
 		<div class="form-group">
-			<?= ActiveForm::buttons() ?>
+			<?= $form->buttons() ?>
 		</div>
 	<?php ActiveForm::end(); ?>
 </div>

@@ -79,6 +79,6 @@ use app\widgets\ImageGallery;
 		</div>
 	</div>
 	<div class="form-group"> <br>
-		<?= ActiveForm::buttons() ?>
+		<?= $form->buttons() ?>
 	</div>
 <?php ActiveForm::end(); ?>

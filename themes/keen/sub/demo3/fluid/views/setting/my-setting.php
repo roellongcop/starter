@@ -3,7 +3,7 @@
 use app\helpers\Html;
 use app\models\search\ThemeSearch;
 use app\widgets\ThemeView;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
@@ -15,7 +15,7 @@ $this->params['searchModel'] = new ThemeSearch();
 <div class="setting-my-setting-page">
 	<?php $form = ActiveForm::begin(['id' => 'setting-my-setting-form']); ?>
 		<div class="form-group">
-			<?= ActiveForm::buttons() ?>
+			<?= $form->buttons() ?>
 		</div>
 	<?php ActiveForm::end(); ?>
 	<div class="row">

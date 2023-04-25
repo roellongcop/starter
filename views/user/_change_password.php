@@ -12,6 +12,6 @@ use app\widgets\ActiveForm;
         </div>
     </div>
     <div class="form-group">
-		<?= ActiveForm::buttons() ?>
+		<?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

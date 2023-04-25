@@ -12,13 +12,10 @@ use app\widgets\ActiveForm;
             <?= $form->field($model, 'user_id')->textInput() ?>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
-            <?= ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+            <?= $form->recordStatus($model) ?>
         </div>
     </div>
     <div class="form-group">
-		<?= ActiveForm::buttons() ?>
+		<?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

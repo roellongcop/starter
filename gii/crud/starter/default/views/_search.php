@@ -12,12 +12,7 @@ $modelClass = StringHelper::basename($generator->modelClass);
 echo "<?php\n";
 ?>
 
-use app\widgets\Pagination;
-use app\widgets\Search;
-use app\widgets\DateRange;
-use yii\widgets\ActiveForm;
-use app\widgets\SearchButton;
-use app\widgets\RecordStatusFilter;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
@@ -33,15 +28,9 @@ use app\widgets\RecordStatusFilter;
     ],
 <?php endif; ?>
 ]); ?>
-    <?= '<?=' ?> Search::widget(['model' => $model]) ?>
-    <?= '<?=' ?> DateRange::widget(['model' => $model]) ?>
-    <?= '<?=' ?> RecordStatusFilter::widget([
-        'model' => $model,
-        'form' => $form,
-    ]) ?>
-    <?= '<?=' ?> Pagination::widget([
-        'model' => $model,
-        'form' => $form,
-    ]) ?>
-    <?= '<?=' ?> SearchButton::widget() ?>
+    <?= '<?=' ?> $form->search($model) ?>
+    <?= '<?=' ?> $form->dateRange($model) ?>
+    <?= '<?=' ?> $form->recordStatusFilter($model) ?>
+    <?= '<?=' ?> $form->pagination($model) ?>
+    <?= '<?=' ?> $form->searchButton() ?>
 <?= "<?php " ?>ActiveForm::end(); ?>

@@ -17,10 +17,7 @@ $this->addJsFile('js/backup-form');
 
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-            <?= ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+            <?= $form->recordStatus($model) ?>
         </div>
         <div class="col-md-7">
             <div class="checkbox-list">
@@ -41,6 +38,6 @@ $this->addJsFile('js/backup-form');
         </div>
     </div>
     <div class="form-group">
-        <?= ActiveForm::buttons() ?>
+        <?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

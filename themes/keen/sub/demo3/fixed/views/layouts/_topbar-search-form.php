@@ -1,14 +1,10 @@
 <?php
 
 use app\widgets\ActiveForm;
-use app\widgets\Search;
 ?>
 <?php $form = ActiveForm::begin(['action' => $searchAction, 'method' => 'get']); ?>
-    <?= Search::widget([
+    <?= $form->search($searchModel, [
         'submitOnclick' => true,
-        'model' => $searchModel,
-        'options' => [
-            'style' => 'margin-top: 20px;'
-        ]
+        'options' => ['style' => 'margin-top: 20px;']
     ]) ?>
 <?php ActiveForm::end(); ?>

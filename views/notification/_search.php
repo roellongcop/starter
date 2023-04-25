@@ -7,11 +7,11 @@ use app\widgets\Pagination;
 use app\widgets\RecordStatusFilter;
 use app\widgets\Search;
 use app\widgets\SearchButton;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\search\NotificationSearch */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 ?>
 <?php $form = ActiveForm::begin([
     'action' => $model->searchAction,

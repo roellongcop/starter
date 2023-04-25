@@ -14,13 +14,10 @@ use app\widgets\ActiveForm;
             <?= $form->field($model, 'size')->textInput() ?>
             <?= $form->field($model, 'location')->textarea(['rows' => 6]) ?>
             <?= $form->field($model, 'token')->textInput(['maxlength' => true]) ?>
-            <?= ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+            <?= $form->recordStatus($model) ?>
         </div>
     </div>
     <div class="form-group">
-		<?= ActiveForm::buttons() ?>
+		<?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

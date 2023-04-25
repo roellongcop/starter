@@ -32,13 +32,10 @@ echo "\t\t\t<?= " . $generator->generateActiveField($attribute) . " ?>\n";
 }
 }
 } ?>
-            <?= '<?=' ?> ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+            <?= '<?=' ?> $form->recordStatus($model) ?>
         </div>
     </div>
     <div class="form-group">
-        <?= '<?=' ?> ActiveForm::buttons() ?>
+        <?= '<?=' ?> $form->buttons() ?>
     </div>
 <?= "<?php " ?>ActiveForm::end(); ?>

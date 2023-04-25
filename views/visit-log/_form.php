@@ -27,13 +27,10 @@ use app\widgets\BootstrapSelect;
                 'form' => $form,
                 'data' => App::keyMapParams('visit_log_actions'),
             ]) ?>
-            <?= ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+            <?= $form->recordStatus($model) ?>
         </div>
     </div>
     <div class="form-group">
-		<?= ActiveForm::buttons() ?>
+		<?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

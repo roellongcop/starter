@@ -10,7 +10,7 @@ use app\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 $this->addJsFile('jsoneditor/jsoneditor');
 $this->addJsFile('js/theme-form');
 ?>
@@ -21,10 +21,7 @@ $this->addJsFile('js/theme-form');
             <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'base_path')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'base_url')->textInput(['maxlength' => true]) ?>
-            <?= ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+            <?= $form->recordStatus($model) ?>
         </div>
         <div class="col-md-7">
             <?= $form->field($model, 'path_map')
@@ -61,6 +58,6 @@ $this->addJsFile('js/theme-form');
     ]) ?>
 
     <div class="form-group"><br>
-        <?= ActiveForm::buttons() ?>
+        <?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

@@ -11,7 +11,7 @@ use app\widgets\ImageGallery;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 ?>
 <?php $form = ActiveForm::begin(['id' => 'user-form']); ?>
     <div class="row">
@@ -37,10 +37,7 @@ use app\widgets\ImageGallery;
                 'form' => $form,
                 'data' => App::keyMapParams('user_status'),
             ]) ?>
-            <?= ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+            <?= $form->recordStatus($model) ?>
             <?= BootstrapSelect::widget([
                 'attribute' => 'is_blocked',
                 'searchable' => false,
@@ -68,6 +65,6 @@ use app\widgets\ImageGallery;
         </div>
     </div>
     <div class="form-group"><br>
-		<?= ActiveForm::buttons() ?>
+		<?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

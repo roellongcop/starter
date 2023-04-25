@@ -7,7 +7,7 @@ $controller_actions = App::component('access')->controllerActions;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Role */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form app\widgets\ActiveForm */
 
 $this->registerCss(<<< CSS
     .card-header {border-bottom: 0;}
@@ -16,7 +16,7 @@ CSS);
 ?>
 <?php $form = ActiveForm::begin(['id' => 'role-form']); ?>
     <div class="form-group">
-        <?= ActiveForm::buttons() ?>
+        <?= $form->buttons() ?>
     </div>
     <div class="card-header card-header-tabs-line" id="card-header">
         <div class="card-toolbar">
@@ -56,10 +56,7 @@ CSS);
                 <div class="row">
                     <div class="col-md-5">
                         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-                        <?= ActiveForm::recordStatus([
-                            'model' => $model,
-                            'form' => $form,
-                        ]) ?>
+                        <?= $form->recordStatus($model) ?>
                     </div>
                 </div>
             </div>
@@ -83,6 +80,6 @@ CSS);
         </div>
     </div>
     <div class="form-group">
-        <?= ActiveForm::buttons() ?>
+        <?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

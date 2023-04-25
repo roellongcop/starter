@@ -17,13 +17,10 @@ use app\widgets\ActiveForm;
             <?= $form->field($model, 'browser')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'os')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'device')->textInput(['maxlength' => true]) ?>
-            <?= ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+            <?= $form->recordStatus($model) ?>
         </div>
     </div>
     <div class="form-group">
-    	<?= ActiveForm::buttons() ?>
+    	<?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

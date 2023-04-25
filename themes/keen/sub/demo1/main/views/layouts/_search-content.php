@@ -1,14 +1,13 @@
 <?php
 
 use app\helpers\Html;
-use app\widgets\Search;
-use yii\widgets\ActiveForm;
+use app\widgets\ActiveForm;
 ?>
 
 <div class="row">
 	<div class="col-md-4">
 		<?php $form = ActiveForm::begin(['action' => ['index'], 'method' => 'get']); ?>
-		    <?= Search::widget(['model' => $searchModel]) ?>
+		    <?= $form->search($searchModel) ?>
 	    <?php ActiveForm::end(); ?>
 	</div>
 	<div class="col-md-2">

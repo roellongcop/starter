@@ -20,13 +20,10 @@ use app\widgets\BootstrapSelect;
 	            'form' => $form,
 	            'data' => App::keyMapParams('ip_types'),
 	        ]) ?>
-	        <?= ActiveForm::recordStatus([
-	            'model' => $model,
-	            'form' => $form,
-	        ]) ?>
+	        <?= $form->recordStatus($model) ?>
 		</div>
 	</div>
 	<div class="form-group">
-		<?= ActiveForm::buttons() ?>
+		<?= $form->buttons() ?>
 	</div>
 <?php ActiveForm::end(); ?>

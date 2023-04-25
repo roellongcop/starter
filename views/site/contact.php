@@ -1,11 +1,6 @@
 <?php
-/* @var $form yii\bootstrap\KeenActiveForm */
-/* @var $model app\models\LoginForm */
+
 use app\helpers\App;
-use app\widgets\ActiveForm;
-use app\widgets\Alert;
-use app\widgets\KeenActiveForm;
-use yii\captcha\Captcha;
 use app\helpers\Html;
 
 $this->title = 'Contact';

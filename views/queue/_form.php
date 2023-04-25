@@ -18,13 +18,10 @@ use app\widgets\ActiveForm;
 			<?= $form->field($model, 'reserved_at')->textInput() ?>
 			<?= $form->field($model, 'attempt')->textInput() ?>
 			<?= $form->field($model, 'done_at')->textInput() ?>
-			<?= ActiveForm::recordStatus([
-                'model' => $model,
-                'form' => $form,
-            ]) ?>
+			<?= $form->recordStatus($model) ?>
         </div>
     </div>
     <div class="form-group">
-		<?= ActiveForm::buttons() ?>
+		<?= $form->buttons() ?>
     </div>
 <?php ActiveForm::end(); ?>

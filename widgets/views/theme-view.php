@@ -1,10 +1,8 @@
 <?php
 
-use app\helpers\App;
 use app\widgets\Anchor;
 use app\helpers\Html;
 use app\helpers\Url;
-use app\widgets\ActiveForm;
 ?>
 <div id="container-<?= $widgetId ?>" class="card card-custom gutter-b card-stretch" style="border: 1px solid <?= ($theme->id == $currentTheme->id)? '#1BC5BD': '#ccc;' ?>">
 	<!--begin::Header-->
