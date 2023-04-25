@@ -162,6 +162,9 @@ class AccessComponent extends \yii\base\Component
 				if (($actionID = substr(Inflector::camel2id($action), 7)) == '')
 					continue;
 
+				if (in_array($actionID, $controllerObject->hideParentActions())) 
+					continue;
+				
 				$_actions[] = $actionID;
 			}
 

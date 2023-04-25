@@ -39,6 +39,11 @@ abstract class Controller extends \yii\web\Controller
         return true;
     }
 
+    public function hideParentActions()
+    {
+        return [];
+    }
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -58,7 +63,7 @@ abstract class Controller extends \yii\web\Controller
         return $behaviors;
     }
 
-    public function exportPrint($searchModel = '')
+    public function actionPrint($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         return $this->render('/layouts/_print', [
@@ -69,7 +74,7 @@ abstract class Controller extends \yii\web\Controller
         ]);
     }
 
-    public function exportPdf($searchModel = '')
+    public function actionExportPdf($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportPdfForm([
@@ -81,7 +86,7 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function exportCsv($searchModel = '')
+    public function actionExportCsv($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportCsvForm([
@@ -93,7 +98,7 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function exportXlsx($searchModel = '')
+    public function actionExportXlsx($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportExcelForm([
@@ -106,7 +111,7 @@ abstract class Controller extends \yii\web\Controller
         return $model->export();
     }
 
-    public function exportXls($searchModel = '')
+    public function actionExportXls($searchModel = '')
     {
         $searchModel = $searchModel ?: $this->searchModelObject();
         $model = new ExportExcelForm([
@@ -131,7 +136,7 @@ abstract class Controller extends \yii\web\Controller
         return Yii::createObject("app\\models\\search\\{$class}Search");
     }
 
-    public function changeRecordStatus($function = '')
+    public function actionChangeRecordStatus($function = '')
     {
         if (($post = App::post()) != null) {
 
@@ -175,7 +180,7 @@ abstract class Controller extends \yii\web\Controller
         return $this->asJson($data);
     }
 
-    public function bulkAction($model = '')
+    public function actionBulkAction($model = '')
     {
         $model = $model ?: $this->modelObject();
 
@@ -239,5 +244,10 @@ abstract class Controller extends \yii\web\Controller
         ]);
 
         return $this->asJson($response);
+    }
+
+    public function actionInActiveData()
+    {
+        # dont delete; use in condition if user has access to in-active data
     }
 }

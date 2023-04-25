@@ -73,44 +73,4 @@ class VisitorController extends Controller
 
         return $this->redirect($model->indexUrl);
     }
-
-    public function actionChangeRecordStatus()
-    {
-        return $this->changeRecordStatus();
-    }
-
-    public function actionBulkAction()
-    {
-        return $this->bulkAction();
-    }
-
-    public function actionPrint()
-    {
-        return $this->exportPrint();
-    }
-
-    public function actionExportPdf()
-    {
-        return $this->exportPdf();
-    }
-
-    public function actionExportCsv()
-    {
-        return $this->exportCsv();
-    }
-
-    public function actionExportXls()
-    {
-        return $this->exportXls();
-    }
-
-    public function actionExportXlsx()
-    {
-        return $this->exportXlsx();
-    }
-
-    public function actionInActiveData()
-    {
-        # dont delete; use in condition if user has access to in-active data
-    }
 }
