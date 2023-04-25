@@ -2,26 +2,17 @@
 
 use app\helpers\App;
 use app\models\search\ThemeSearch;
-use app\widgets\BootstrapSelect;
 use app\widgets\ActiveForm;
 ?>
 <?php $form = ActiveForm::begin(['id' => 'setting-general-notification-form']); ?>
     <h4 class="mb-10 font-weight-bold text-dark">System</h4>
 	<div class="row">
 		<div class="col-md-4">
-			<?= BootstrapSelect::widget([
-	            'attribute' => 'timezone',
-	            'model' => $model,
-	            'form' => $form,
-	            'data' => App::component('general')->timezoneList(),
-	        ]) ?>
+			<?= $form->bootstrapSelect($model, 'timezone', App::component('general')->timezoneList()) ?>
+			
 		</div>
 		<div class="col-md-4">
-	        <?= $form->field($model, 'pagination')->dropDownList(
-			    App::params('pagination'), [
-			        'class' => "form-control kt-selectpicker",
-			    ]
-			) ?>
+			<?= $form->pagination($model, ['template' => 'pagination/pagination-form']) ?>
 		</div>
 		<div class="col-md-4">
 			<?= $form->field($model, 'auto_logout_timer')->textInput(['maxlength' => true]) ?>
@@ -29,42 +20,30 @@ use app\widgets\ActiveForm;
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<?= BootstrapSelect::widget([
-	            'attribute' => 'theme',
-	            'model' => $model,
-	            'form' => $form,
-	            'data' => ThemeSearch::dropdown(),
-	            'searchable' => false,
-	            'options' => [
+			<?= $form->bootstrapSelect($model, 'theme', ThemeSearch::dropdown(), [
+				'searchable' => false,
+				'options' =>  [
 			        'class' => 'kt-selectpicker form-control',
 			    ]
-	        ]) ?>
+			]) ?>
 		</div>
 		<div class="col-md-4">
-            <?= BootstrapSelect::widget([
-	            'attribute' => 'whitelist_ip_only',
-	            'model' => $model,
-	            'form' => $form,
+			<?= $form->bootstrapSelect($model, 'whitelist_ip_only', ['All', 'Whitelist Only'], [
 	            'label' => 'Ip Access',
-	            'data' => ['All', 'Whitelist Only'],
-	            'searchable' => false,
-	            'options' => [
+				'searchable' => false,
+				'options' =>  [
 			        'class' => 'kt-selectpicker form-control',
 			    ]
-	        ]) ?>
+			]) ?>
 		</div>
 		<div class="col-md-4">
-            <?= BootstrapSelect::widget([
-	            'attribute' => 'enable_visitor',
-	            'model' => $model,
-	            'form' => $form,
+			<?= $form->bootstrapSelect($model, 'enable_visitor', ['Disable', 'Enable (require internet connection)'], [
 	            'label' => 'Enable Visitor',
-	            'data' => ['Disable', 'Enable (require internet connection)'],
-	            'searchable' => false,
-	            'options' => [
+				'searchable' => false,
+				'options' =>  [
 			        'class' => 'kt-selectpicker form-control',
 			    ]
-	        ]) ?>
+			]) ?>
 		</div>
 	</div>
 	<div class="form-group"> <br>

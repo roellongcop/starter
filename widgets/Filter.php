@@ -43,7 +43,8 @@ class Filter extends BaseWidget
         }
 
         if (!$this->title && $this->title !== false) {
-            $this->title = ucwords(str_replace('_', ' ', $this->attribute));
+            // $this->title = ucwords(str_replace('_', ' ', $this->attribute));
+            $this->title = $this->model->getAttributeLabel($this->attribute);
         }
 
     }

@@ -442,4 +442,9 @@ class File extends ActiveRecord
     {
         return Url::home(true) . $this->rawUrlLocation;
     }
+
+    public static function imageExtensions()
+    {
+        return array_map(fn($val) => ".{$val}", self::EXTENSIONS['image']);
+    }
 }

@@ -96,6 +96,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->setAttributeLabels([
             'role_id' => 'Role',
+            'is_blocked' => 'Blocked'
         ]);
     }
 

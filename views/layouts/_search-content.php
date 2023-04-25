@@ -1,12 +1,11 @@
 <?php
 
-use app\widgets\Search;
 use app\widgets\ActiveForm;
 ?>
 <div class="row">
 	<div class="col-md-4">
 		<?php $form = ActiveForm::begin(['action' => $searchAction, 'method' => 'get']); ?>
-		    <?= Search::widget(['model' => $searchModel]) ?>
+		    <?= $form->search($searchModel) ?>
 	    <?php ActiveForm::end(); ?>
 	</div>
 	<div class="col-md-2">

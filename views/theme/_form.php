@@ -1,12 +1,7 @@
 <?php
 
-use app\helpers\Url;
 use app\models\File;
 use app\widgets\ActiveForm;
-use app\widgets\Anchor;
-use app\widgets\Dropzone;
-use app\widgets\JsonEditor;
-use app\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Theme */
@@ -30,32 +25,20 @@ $this->addJsFile('js/theme-form');
             <?= $form->field($model, 'bundles')
                 ->hiddenInput(['value' => ''])
                 ->label(false) ?>
-            <?= JsonEditor::widget([
-                'data' => $model->path_map,
-                'options' => [],
-                'id' => 'path_map',
-            ]); ?>
+
+            <?= $form->jsonEditor($model->path_map, 'path_map') ?>
+            
             <br>
-            <?= JsonEditor::widget([
-                'data' => $model->bundles,
-                'options' => [],
-                'id' => 'bundles',
-            ]); ?>
+            <?= $form->jsonEditor($model->bundles, 'bundles') ?>
         </div>
     </div>
     
     <p class="lead">Upload Images</p>
-    <?= Dropzone::widget([
-        'tag' => 'Theme',
+    <?= $form->dropzone($model, 'photos', 'Theme', [
         'files' => $model->imageFiles,
-        'model' => $model,
-        'attribute' => 'photos',
-        'acceptedFiles' => array_map(
-            function($val) { 
-                return ".{$val}"; 
-            }, File::EXTENSIONS['image']
-        )
+        'acceptedFiles' => File::imageExtensions()
     ]) ?>
+
 
     <div class="form-group"><br>
         <?= $form->buttons() ?>

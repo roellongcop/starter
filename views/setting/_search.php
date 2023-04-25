@@ -1,13 +1,6 @@
 <?php
 
 use app\widgets\ActiveForm;
-use app\widgets\DateRange;
-use app\widgets\Filter;
-use app\widgets\Pagination;
-use app\widgets\RecordStatusFilter;
-use app\widgets\Search;
-use app\widgets\SearchButton;
-
 /* @var $this yii\web\View */
 /* @var $model app\models\search\SettingSearch */
 /* @var $form app\widgets\ActiveForm */
@@ -17,15 +10,9 @@ use app\widgets\SearchButton;
     'method' => 'get',
     'id' => 'setting-search-form'
 ]); ?>
-    <?= Search::widget(['model' => $model]) ?>
-    <?= DateRange::widget(['model' => $model]) ?>
-    <?= RecordStatusFilter::widget([
-        'model' => $model,
-        'form' => $form,
-    ]) ?>
-    <?= Pagination::widget([
-        'model' => $model,
-        'form' => $form,
-    ]) ?>
-    <?= SearchButton::widget() ?>
+    <?= $form->search($model) ?>
+    <?= $form->dateRange($model) ?>
+    <?= $form->recordStatusFilter($model) ?>
+    <?= $form->pagination($model)  ?>
+    <?= $form->searchButton()  ?>
 <?php ActiveForm::end(); ?>

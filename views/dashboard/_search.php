@@ -2,12 +2,6 @@
 
 use app\helpers\App;
 use app\widgets\ActiveForm;
-use app\widgets\DateRange;
-use app\widgets\Filter;
-use app\widgets\Pagination;
-use app\widgets\RecordStatusFilter;
-use app\widgets\Search;
-use app\widgets\SearchButton;
 
 /* @var $this yii\web\View */
 /* @var $form app\widgets\ActiveForm */
@@ -21,9 +15,8 @@ ksort($modules);
     'method' => 'get',
     'options' => ['class' => 'kt-quick-search__form']
 ]); ?>
-    <?= Search::widget(['model' => $model]) ?>
-    <?= DateRange::widget([
-        'model' => $model,
+    <?= $form->search($model) ?>
+    <?= $form->dateRange($model, [
         'start' => $model->startDate(),
         'end' => $model->endDate(),
         'ranges' => [
@@ -37,21 +30,8 @@ ksort($modules);
             'Last Year',
         ]
     ]) ?>
-    <?= Filter::widget([
-        'data' => $modules,
-        'title' => 'Module',
-        'attribute' => 'modules',
-        'model' => $model,
-        'form' => $form,
-    ]) ?>
-    <?= RecordStatusFilter::widget([
-        'model' => $model,
-        'form' => $form,
-    ]) ?>
-    <?= Pagination::widget([
-        'model' => $model,
-        'form' => $form,
-        'title' => 'Limit',
-    ]) ?>
-    <?= SearchButton::widget() ?>
+    <?= $form->filter($model, 'modules', $modules, 'Module') ?>
+    <?= $form->recordStatusFilter($model) ?>
+    <?= $form->pagination($model, ['title' => 'Limit']) ?>
+    <?= $form->searchButton()  ?>
 <?php ActiveForm::end(); ?>

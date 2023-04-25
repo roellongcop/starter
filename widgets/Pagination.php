@@ -13,6 +13,7 @@ class Pagination extends BaseWidget
     public $paginations = [];
     public $name;
     public $label = false;
+    public $template = 'pagination/pagination-search';
 
     public function init()
     {
@@ -33,7 +34,7 @@ class Pagination extends BaseWidget
      */
     public function run()
     {
-        return $this->render('pagination', [
+        return $this->render($this->template, [
             'title' => $this->title,
             'form' => $this->form,
             'model' => $this->model,

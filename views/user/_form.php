@@ -2,12 +2,8 @@
 
 use app\helpers\App;
 use app\helpers\Html;
-use app\models\User;
 use app\models\search\RoleSearch;
 use app\widgets\ActiveForm;
-use app\widgets\BootstrapSelect;
-use app\widgets\ChangePhoto;
-use app\widgets\ImageGallery;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -16,12 +12,8 @@ use app\widgets\ImageGallery;
 <?php $form = ActiveForm::begin(['id' => 'user-form']); ?>
     <div class="row">
         <div class="col-md-5">
-            <?= BootstrapSelect::widget([
-                'attribute' => 'role_id',
-                'model' => $model,
-                'form' => $form,
-                'data' => RoleSearch::dropdown(),
-            ]) ?>
+            <?= $form->bootstrapSelect($model, 'role_id', RoleSearch::dropdown()) ?>
+           
             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
             
@@ -30,20 +22,14 @@ use app\widgets\ImageGallery;
                 $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true])
             ])) ?>
 
-            <?= BootstrapSelect::widget([
-                'attribute' => 'status',
+            <?= $form->bootstrapSelect($model, 'status', App::keyMapParams('user_status'), [
                 'searchable' => false,
-                'model' => $model,
-                'form' => $form,
-                'data' => App::keyMapParams('user_status'),
             ]) ?>
+
             <?= $form->recordStatus($model) ?>
-            <?= BootstrapSelect::widget([
-                'attribute' => 'is_blocked',
+
+            <?= $form->bootstrapSelect($model, 'is_blocked', App::keyMapParams('user_block_status'), [
                 'searchable' => false,
-                'model' => $model,
-                'form' => $form,
-                'data' => App::keyMapParams('user_block_status'),
             ]) ?>
         </div>
         <div class="col-md-7">
@@ -52,16 +38,13 @@ use app\widgets\ImageGallery;
                 'loading' => 'lazy',
             ] ) ?>
             <br>
-            <?= ImageGallery::widget([
-                'tag' => 'User',
-                'model' => $model,
-                'attribute' => 'photo',
+            <?= $form->imageGallery($model, 'photo', 'User', [
                 'ajaxSuccess' => "
                     if(s.status == 'success') {
                         $('.user-photo').attr('src', s.src);
                     }
                 ",
-            ]) ?> 
+            ]) ?>
         </div>
     </div>
     <div class="form-group"><br>

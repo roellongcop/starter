@@ -1,9 +1,7 @@
 <?php
 
 use app\helpers\App;
-use app\models\Ip;
 use app\widgets\ActiveForm;
-use app\widgets\BootstrapSelect;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ip */
@@ -14,12 +12,7 @@ use app\widgets\BootstrapSelect;
 		<div class="col-md-5">
 			<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 			<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-			<?= BootstrapSelect::widget([
-	            'attribute' => 'type',
-	            'model' => $model,
-	            'form' => $form,
-	            'data' => App::keyMapParams('ip_types'),
-	        ]) ?>
+			<?= $form->bootstrapSelect($model, 'type', App::keyMapParams('ip_types')) ?>
 	        <?= $form->recordStatus($model) ?>
 		</div>
 	</div>

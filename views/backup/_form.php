@@ -1,7 +1,6 @@
 <?php
 
 use app\helpers\App;
-use app\widgets\Checkbox;
 use app\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -28,13 +27,12 @@ $this->addJsFile('js/backup-form');
                 </label>
             </div>
             <br>
-            <?= Checkbox::widget([
-                'data' => App::component('general')->getAllTables(),
-                'name' => 'Backup[tables][]',
-                'checkedFunction' => function($key, $value) use ($model) {
-                    return $model->tables && in_array($key, $model->tables)? 'checked': '';
-                }
-            ]) ?>
+            <?= $form->checkbox(
+                App::component('general')->getAllTables(), 
+                'Backup[tables][]', 
+                fn($key, $value) => $model->tables && in_array($key, $model->tables)? 'checked': ''
+            ) ?>
+          
         </div>
     </div>
     <div class="form-group">
