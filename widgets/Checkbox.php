@@ -17,16 +17,16 @@ class Checkbox extends BaseWidget
         // your logic here
         parent::init();
 
-        if ($this->options) {
-            $link = [];
-            $options = is_array($this->options) ? $this->options: json_decode($this->options, true);
+        // if ($this->options) {
+        //     $link = [];
+        //     $options = is_array($this->options) ? $this->options: json_decode($this->options, true);
 
-            foreach ($options as $key => $value) {
-                $link[] = "{$key}='{$value}'";
-            }
+        //     foreach ($options as $key => $value) {
+        //         $link[] = "{$key}='{$value}'";
+        //     }
 
-            $this->options = implode(' ', $link);
-        }
+        //     $this->options = implode(' ', $link);
+        // }
     }
 
     /**

@@ -5,20 +5,17 @@ use app\helpers\Html;
 <?= Html::if($label, Html::tag('label', $label)) ?>
 <div class="<?= $wrapperClass ?>">
 	<?= Html::foreach($data, function($value, $key) use ($options, $name, $inputClass, $checkedFunction) {
-		$checked = (($checkedFunction)? call_user_func($checkedFunction, $key, $value): '');
+		$options['class'] = $inputClass;
+		$options['checked'] = ($checkedFunction)? call_user_func($checkedFunction, $key, $value): false;
 
-		return <<< HTML
-			<label class="checkbox">
-		        <input {$options} 
-		        	value="{$key}" 
-		        	name="{$name}" 
-		        	class="{$inputClass}" 
-		        	{$checked}
-		        	type="checkbox">
-		        <span></span>
-		        {$value}
-		    </label>
-		HTML;
+		return Html::tag('label', 
+			implode('', [
+				Html::input('checkbox', $name, $key, $options),
+				Html::tag('span'), 
+				$value
+			]), 
+			['class' => 'checkbox']
+		);
 	}) ?>
 </div>
 
