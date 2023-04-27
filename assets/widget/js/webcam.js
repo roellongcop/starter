@@ -1,4 +1,5 @@
 class WebcamWidget {
+    facingMode = 'user';
 
     constructor({widgetId, videoOptions, buttonOptions, canvasOptions, modelName, tag, ajaxSuccess}) {
         this.widgetId = widgetId;
@@ -12,8 +13,16 @@ class WebcamWidget {
         this.video = document.querySelector(`#${this.videoOptions.id}`);
         this.click_button = document.querySelector(`#${this.buttonOptions.id}`);
         this.canvas = document.querySelector(`#${this.canvasOptions.id}`);
+        this.btnSwitchCamera = document.querySelector(`#webcam-container-${widgetId} .btn-switch-camera`);
         this.loading = document.querySelector(`#webcam-container-${this.widgetId} .loading`);
         this.modelNameInput = $(`#webcam-container-${this.widgetId} .model-name-input`);
+
+        this.btnContainer = document.querySelector(`#webcam-container-${widgetId} .btn-container`);
+
+        this.btnContainer.style.display = 'flex';
+        this.btnContainer.style.justifyContent = 'center';
+        this.btnContainer.style.alignItems = 'baseline';
+        this.btnContainer.style.gap = '1rem';
     }
 
     async initCamera() {
@@ -25,7 +34,7 @@ class WebcamWidget {
                 video:  {
                     width: this.videoOptions.width, 
                     height: this.videoOptions.height, 
-                    facingMode: "user"
+                    facingMode: this.facingMode
                 }, 
                 audio: false, 
             });
@@ -40,7 +49,6 @@ class WebcamWidget {
         }
 
         this.video.srcObject = stream;
-
 
         this.video.style.display = 'block';
         this.click_button.style.display = 'block';
@@ -63,6 +71,11 @@ class WebcamWidget {
         let self = this;
 
         self.initCamera();
+
+        self.btnSwitchCamera.addEventListener('click', function(e) {
+            self.facingMode = self.facingMode == 'user' ? 'environment': 'user';
+            self.initCamera();
+        });
 
         self.click_button.addEventListener('click', function() {
             self.showLoading();

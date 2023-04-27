@@ -31,7 +31,14 @@ JS);
 		'required' => true
 	])) ?>
 
-	<?= YiiHtml::a($buttonOptions['value'], '#webcam-container-' . $widgetId, $buttonOptions) ?>
+	<div class="btn-container">
+		<div>
+			<?= YiiHtml::a($buttonOptions['value'], '#webcam-container-' . $widgetId, $buttonOptions) ?>
+		</div>
+		<div>
+			<?= Html::tag('a', 'Switch Camera', ['href' => '#', 'class' => 'btn btn-outline-secondary btn-switch-camera font-weight-bold mt-3']) ?>
+		</div>
+	</div>
 
 	<?= Html::tag('canvas', '', $canvasOptions) ?>
     <?= Html::if($withInput, function() use($model, $attribute) {

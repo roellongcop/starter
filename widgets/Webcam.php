@@ -28,7 +28,6 @@ class Webcam extends BaseWidget
     public $buttonOptions = [
         'class' => 'btn btn-primary btn-sm mt-3',
         'value' => 'Capture',
-        'style' => 'margin: 0 auto;max-width: 200px'
     ];
 
     public $canvasOptions = [
