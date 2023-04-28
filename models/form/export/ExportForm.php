@@ -55,14 +55,31 @@ class ExportForm extends \yii\base\Model
     {
         if ($searchModel->{$this->exportColumnsName}) {
             $columns = $searchModel->{$this->exportColumnsName};
+            $newColumns = [];
 
-            foreach ($columns as &$column) {
+            foreach ($columns as $column) {
                 if (is_array($column)) {
-                    $column['enableSorting'] = false;
+                    $newColumns[$key] = $column;
+                    $newColumns['enableSorting'] = false;
+                }
+                else {
+                    if (str_contains($column, ':')) {
+                        list($column_name, $format) = explode(':', $column);
+                    }
+                    else {
+                        $column_name = $column;
+                        $format = 'raw';
+                    }
+                    
+                    $newColumns[$column_name] = [
+                        'attribute' => $column_name,
+                        'format' => $format,
+                        'enableSorting' => false
+                    ];
                 }
             }
 
-            return $columns;
+            return $newColumns;
         }
 
         $ignoreAttributes = self::IGNORE_ATTRIBUTES;
