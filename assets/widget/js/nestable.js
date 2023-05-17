@@ -71,21 +71,22 @@ class NestableWidget {
 
 
     init() {
-        let self = this,
-            dd = $(`#dd-${self.widgetId}`);
+        const self = this;
+        const { widgetId } = this;
+        const dd = $(`#dd-${widgetId}`);
 
         dd.on('change', function() {
             $(this).nestable('createName');
         });
 
-        $(document).on('click', `#${self.widgetId} .btn-add-more-menu`, function(e) {
+        $(document).on('click', `#${widgetId} .btn-add-more-menu`, function(e) {
             e.preventDefault();
             self.index++;
             $(this).closest('li.dd-item').after(self.generateListItem());
             dd.trigger('change');
         });
 
-        $(document).on('click', `#${self.widgetId} .btn-remove-menu`, function(e) {
+        $(document).on('click', `#${widgetId} .btn-remove-menu`, function(e) {
             e.preventDefault();
             var confirm_dialog = confirm('Are you sure?');
             if (confirm_dialog) {
@@ -93,10 +94,10 @@ class NestableWidget {
             }
         });
 
-        $(`#add-main-navigation-${self.widgetId}`).on('click', function(e) {
+        $(`#add-main-navigation-${widgetId}`).on('click', function(e) {
             e.preventDefault();
             self.index++;
-            $(`#ol-dd-list-${self.widgetId}`).prepend(self.generateListItem());
+            $(`#ol-dd-list-${widgetId}`).prepend(self.generateListItem());
             dd.trigger('change');
         });
 
