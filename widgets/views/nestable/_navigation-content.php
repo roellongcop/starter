@@ -60,6 +60,9 @@ use app\helpers\Html;
                 <a href="#!" class="btn btn-danger btn-sm btn-icon mr-2 btn-remove-menu">
                     <i class="fa fa-trash"></i>
                 </a>
+                <a href="#!" class="btn btn-outline-secondary btn-sm btn-icon mr-2 btn-add-more-menu" title="Insert Below">
+                    <i class="fa fa-plus"></i>
+                </a>
             </span>
         </div>
     </div>
