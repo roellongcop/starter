@@ -57,7 +57,7 @@ class ExportForm extends \yii\base\Model
             $columns = $searchModel->{$this->exportColumnsName};
             $newColumns = [];
 
-            foreach ($columns as $column) {
+            foreach ($columns as $key => $column) {
                 if (is_array($column)) {
                     $newColumns[$key] = $column;
                     $newColumns['enableSorting'] = false;

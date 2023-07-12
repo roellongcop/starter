@@ -12,7 +12,7 @@ class Grid extends BaseWidget
     public $dataProvider;
     public $columns;
     public $options = ['class' => 'table-responsive'];
-    public $pager = ['class' => 'yii\widgets\LinkPager'];
+    public $pager = ['class' => 'app\widgets\LinkPager'];
     public $searchModel;
     public $template = ['view', 'update', 'duplicate', 'delete'];
     public $controller;
@@ -47,8 +47,8 @@ class Grid extends BaseWidget
 
     public function actionColumns()
     {
-        if (isset($searchModel->actionColumn)) {
-            return $searchModel->actionColumn;
+        if (isset($this->searchModel->actionColumn)) {
+            return $this->searchModel->actionColumn;
         }
 
         $controller = $this->controller ?: App::controllerID();

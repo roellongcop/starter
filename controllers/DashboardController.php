@@ -47,10 +47,6 @@ class DashboardController extends Controller
         return $this->asJson($data);
     }
 
-    /**
-     * Lists all Backup models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new DashboardSearch();

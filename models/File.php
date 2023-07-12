@@ -10,6 +10,7 @@ use Yii;
 use app\helpers\App;
 use app\helpers\Html;
 use yii\helpers\FileHelper;
+use yii\helpers\StringHelper;
 use app\helpers\Url;
 use app\widgets\Anchor;
 use app\widgets\FileTagFilter;
@@ -108,7 +109,7 @@ class File extends ActiveRecord
 
     public function getImageFiles()
     {
-        return Files::find()
+        return File::find()
             ->where(['extension' => self::EXTENSIONS['image']])
             ->all();
     }
