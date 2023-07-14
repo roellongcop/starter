@@ -13,6 +13,6 @@ use app\models\search\RoleSearch;
     'name' => 'Role[role_access][]',
     'inputClass' => 'checkbox role_access',
     'checkedFunction' => function($key, $value) use ($model) {
-        return isset($model->role_access) && in_array($key, $model->role_access) ? 'checked': '';
+        return isset($model->role_access) && in_array($key, $model->role_access);
     }
 ]) ?>

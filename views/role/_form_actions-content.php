@@ -36,7 +36,7 @@ use yii\helpers\Inflector;
                         'checkedFunction' => function($value) use ($model, $controller) {
                             return Html::if($model->module_access[$controller] ?? false, 
                                 function($moduleAccess) use($value) {
-                                    return in_array($value, $moduleAccess) ? 'checked': '';
+                                    return in_array($value, $moduleAccess);
                                 }
                             );
                         },
