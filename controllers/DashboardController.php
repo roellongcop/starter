@@ -34,9 +34,9 @@ class DashboardController extends Controller
             Session::findByKeywords($keywords, ['id', 'expire', 'ip', 'browser', 'os', 'device']),
             Setting::findByKeywords($keywords, ['name', 'value']),
             Theme::findByKeywords($keywords, ['name', 'description']),
-            User::findByKeywords($keywords, ['username', 'email']),
-            UserMeta::findByKeywords($keywords, ['name', 'value']),
-            VisitLog::findByKeywords($keywords, ['ip']),
+            User::findByKeywords($keywords, ['u.username', 'u.email']),
+            UserMeta::findByKeywords($keywords, ['um.name', 'um.value']),
+            VisitLog::findByKeywords($keywords, ['v.ip']),
             Visitor::findByKeywords($keywords, ['expire', 'cookie', 'ip', 'browser', 'os', 'device', 'location'])
         );
 
