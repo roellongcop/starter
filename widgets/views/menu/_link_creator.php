@@ -2,6 +2,7 @@
 
 use app\helpers\App;
 use app\helpers\Html;
+use app\helpers\Url;
 
 $controller = $this->params['controller'] ?? App::controllerID();
 ?>
@@ -46,7 +47,10 @@ $controller = $this->params['controller'] ?? App::controllerID();
                 ]);
 
                 $class = Html::if($viewParams['activeMenuLink'] ?? $viewParams['controllerLink'], function($activeMenuLink) use($menu) {
-                    return ($activeMenuLink == $menu['link']) ? 'menu-item-active': '';
+
+                    $url = filter_var($menu['link'] ?? '', FILTER_VALIDATE_URL)? $menu['link']: Url::toRoute($menu['link']);
+
+                    return ($activeMenuLink == $url) ? 'menu-item-active': '';
                 });
                 return <<< HTML
                     <li class="menu-item {$class}" aria-haspopup="true">
