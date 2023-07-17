@@ -1,6 +1,7 @@
 <?php
 
 use app\helpers\Html;
+use app\helpers\Url;
 use app\models\Setting;
 use app\models\search\SettingSearch;
 use app\widgets\Anchor;
@@ -13,7 +14,8 @@ $this->title = 'General Settings';
 $this->params['breadcrumbs'][] = 'Set Up';
 $this->params['breadcrumbs'][] = $setting_modules[$tab]['label'];
 $this->params['searchModel'] = new SettingSearch();
-$this->params['activeMenuLink'] = '/setting/general';
+$this->params['activeMenuLink'] = Url::toRoute(['setting/general']);
+
 ?>
 <div class="setting-general-page">
 	<p>

@@ -2,6 +2,7 @@
 
 use app\helpers\App;
 use app\helpers\Html;
+use app\helpers\Url;
 
 $controller = $this->params['controller'] ?? App::controllerID();
 ?>
@@ -25,7 +26,9 @@ $controller = $this->params['controller'] ?? App::controllerID();
     },
     function() use($menu, $controller, $withIcon) {
         $class = Html::ifElse($viewParams['activeMenuLink'] ?? false, function($activeMenuLink) use($menu) {
-            return ($activeMenuLink == $menu['link']) ? 'menu-item-active': '';
+            $url = filter_var($menu['link'] ?? '', FILTER_VALIDATE_URL)? $menu['link']: Url::toRoute($menu['link']);
+
+            return ($activeMenuLink == $url) ? 'menu-item-active': '';
         }, function() use($menu, $controller) {
             list($c, $a) = App::app()->createController($menu['link']);
             $controllerId = $c ? $c->id: '';
