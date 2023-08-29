@@ -342,6 +342,8 @@ class imageGalleryWidget {
             else {
                 alert('Select Image');
             }
+            // Reset the value of the file input to allow selecting the same file again
+            $(this).val('');
         });
 
         $(document).on('click', self.cropperTabLink, function() {
