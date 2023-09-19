@@ -35,11 +35,21 @@ toastr.options = {
  
 
 $(document).ready(function() { 
-    $('form').submit(function() {
-        KTApp.blockPage();
-        setTimeout(function() {
-            KTApp.unblockPage();
-        }, 2000);
+    $('form.form').submit(function() {
+        const form = $(this);
+        form.find('button[type="submit"]')
+            .addClass('spinner spinner-right')
+            .prop('disabled', true);
+
+       setTimeout(function() {
+            const hasError = form.find('.is-invalid').length;
+
+            if (hasError) {
+                form.find('button[type="submit"]')
+                    .removeClass('spinner spinner-right')
+                    .prop('disabled', false);
+            }
+        }, 500);
     });
     $('li.menu-item-active').parents('li').addClass('menu-item-here menu-item-open');
 
