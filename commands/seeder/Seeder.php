@@ -78,7 +78,7 @@ abstract class Seeder
         Console::output("\n");
     }
 
-    public function startProgress($done = 0, $total, $prefix = '', $width = 1)
+    public function startProgress($done = 0, $total = 0, $prefix = '', $width = 1)
     {
         if ($this->showProgress) {
             Console::startProgress($done, $total, $prefix, $width);
