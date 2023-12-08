@@ -26,7 +26,7 @@ class m200913_060425_create_logs_table extends \app\migrations\Migration
             'controller' => $this->string()->notNull(),
             'table_name' => $this->string()->notNull(),
             'model_name' => $this->string()->notNull(),
-            'ip' => $this->string(32)->notNull(),
+            'ip' => $this->string(128)->notNull(),
             'browser' => $this->string(128)->notNull(),
             'os' => $this->string(128)->notNull(),
             'device' => $this->string(128)->notNull(),

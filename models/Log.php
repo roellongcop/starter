@@ -63,9 +63,9 @@ class Log extends ActiveRecord
             [['url'], 'string'],
             [['request_data', 'change_attribute', 'server', 'ip', 'action', 'controller'], 'safe'],
             [['method', 'table_name', 'model_name', 'browser', 'os', 'device'], 'required'],
-            [['method', 'ip'], 'string', 'max' => 32],
+            [['method'], 'string', 'max' => 32],
             [['action', 'controller', 'table_name', 'model_name'], 'string', 'max' => 255],
-            [['browser', 'os', 'device'], 'string', 'max' => 128],
+            [['browser', 'os', 'device', 'ip'], 'string', 'max' => 128],
             [
                 'user_id',
                 'validateUserId',
