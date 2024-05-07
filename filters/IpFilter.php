@@ -19,12 +19,21 @@ class IpFilter extends \yii\base\ActionFilter
 
 
         if (!App::isControllerAction('site/error')) {
-            if (in_array($ip, IpSearch::blackList())) {
+            $blackList = Ip::findOne([
+                'name' => $ip,
+                'type' => Ip::TYPE_BLACKLIST
+            ]);
+            if ($blackList) {
                 throw new ForbiddenHttpException('IP is Blocked !');
             }
 
             if (App::setting('system')->whitelist_ip_only) {
-                if (!in_array($ip, IpSearch::whiteList())) {
+                $whiteList = Ip::findOne([
+                    'name' => $ip,
+                    'type' => Ip::TYPE_WHITELIST
+                ]);
+
+                if (!$whiteList) {
                     throw new ForbiddenHttpException('IP not WhiteListed.');
                 }
             }
