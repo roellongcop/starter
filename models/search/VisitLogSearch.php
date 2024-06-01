@@ -106,7 +106,6 @@ class VisitLogSearch extends VisitLog
         $query->daterange($this->date_range);
 
         $query->joinWith('user u');
-        $query->groupBy('vl.id');
         return $dataProvider;
     }
 }

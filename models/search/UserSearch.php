@@ -113,7 +113,6 @@ class UserSearch extends User
         $query->andWhere(['role_id' => App::identity('roleAccess')]);
 
         $query->joinWith('role r');
-        $query->groupBy('u.id');
 
         return $dataProvider;
     }

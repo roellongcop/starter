@@ -106,7 +106,6 @@ class UserMetaSearch extends UserMeta
         $query->daterange($this->date_range);
 
         $query->joinWith('user u');
-        $query->groupBy('um.id');
         return $dataProvider;
     }
 }
