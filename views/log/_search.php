@@ -18,7 +18,6 @@ use app\widgets\ActiveForm;
     <?= $form->search($model) ?>
     <?= $form->dateRange($model) ?>
     <br>
-    <?= $form->field($model, 'model_id')->textInput(['name' => 'model_id']) ?>
     <?= $form->filter($model, 'method', LogSearch::filter('method')) ?>
     <?= $form->filter($model, 'action', LogSearch::filter('action')) ?>
     <?= $form->filter($model, 'controller', LogSearch::filter('controller')) ?>
