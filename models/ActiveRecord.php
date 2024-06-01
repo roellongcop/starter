@@ -883,6 +883,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     public static function filter($key = 'id', $condition = [], $limit = false, $andFilterWhere = [])
     {
         $models = static::find()
+            ->select($key)
             ->andFilterWhere($condition)
             ->andFilterWhere($andFilterWhere)
             ->orderBy([$key => SORT_ASC])
