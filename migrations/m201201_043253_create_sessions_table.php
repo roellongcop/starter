@@ -30,6 +30,9 @@ class m201201_043253_create_sessions_table extends \app\migrations\Migration
 
         $this->createIndexes($this->tableName(), [
             'user_id' => 'user_id',
+            'browser' => 'browser',
+            'os' => 'os',
+            'device' => 'device',
         ]);
 
         $this->addPrimaryKey('id', $this->tableName(), ['id']);

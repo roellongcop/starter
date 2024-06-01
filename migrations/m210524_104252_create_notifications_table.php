@@ -26,6 +26,8 @@ class m210524_104252_create_notifications_table extends \app\migrations\Migratio
 
         $this->createIndexes($this->tableName(), [
             'user_id' => 'user_id',
+            'type' => 'type',
+            'status' => 'status',
         ]);
     }
 

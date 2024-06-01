@@ -20,6 +20,7 @@ class Migration extends \yii\db\Migration
         if ( ! is_object($table_to_check)) {
             parent::createTable($tableName, $columns, $options);
             $this->createIndexes($tableName, [
+                'record_status' => 'record_status',
                 'created_by' => 'created_by',
                 'updated_by' => 'updated_by',
             ]);

@@ -22,6 +22,11 @@ class m201111_135954_create_settings_table extends \app\migrations\Migration
             'type' => $this->string(128)->notNull(),
             'sort_order' => $this->integer(11)->notNull()->defaultValue(0),
         ]));
+
+        $this->createIndexes($this->tableName(), [
+            'type' => 'type',
+            'slug' => 'slug',
+        ]);
     }
 
     /**

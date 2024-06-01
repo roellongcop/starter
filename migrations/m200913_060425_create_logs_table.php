@@ -36,6 +36,14 @@ class m200913_060425_create_logs_table extends \app\migrations\Migration
         $this->createIndexes($this->tableName(), [
             'user_id' => 'user_id',
             'model_id' => 'model_id',
+            'method' => 'method',
+            'action' => 'action',
+            'controller' => 'controller',
+            'table_name' => 'table_name',
+            'model_name' => 'model_name',
+            'browser' => 'browser',
+            'os' => 'os',
+            'device' => 'device',
         ]);
     }
 

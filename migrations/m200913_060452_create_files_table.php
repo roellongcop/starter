@@ -23,6 +23,11 @@ class m200913_060452_create_files_table extends \app\migrations\Migration
             'location' => $this->text(),
             'token' => $this->string()->notNull()->unique(),
         ]));
+
+        $this->createIndexes($this->tableName(), [
+            'tag' => 'tag',
+            'extension' => 'extension',
+        ]);
     }
 
     /**

@@ -23,6 +23,7 @@ class m200913_060445_create_visit_logs_table extends \app\migrations\Migration
 
         $this->createIndexes($this->tableName(), [
             'user_id' => 'user_id',
+            'action' => 'action',
         ]);
     }
 

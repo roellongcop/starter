@@ -26,6 +26,12 @@ class m210924_002421_create_visitors_table extends \app\migrations\Migration
             'location' => $this->text(),
             'server' => $this->text(),
         ]));
+
+        $this->createIndexes($this->tableName(), [
+            'browser' => 'browser',
+            'os' => 'os',
+            'device' => 'device',
+        ]);
     }
 
     /**
