@@ -151,20 +151,27 @@ abstract class Seeder
             $this->startProgress(0, $this->rows, "Seeding: {$modelClass} ");
         }
 
+        // for ($i = 1; $i <= $this->rows; $i++) {
+        //     $model = Yii::createObject($this->modelClass);
+        //     $model->load([App::className($model) => $this->attributes()]);
+
+        //     if ($model->hasProperty('logAfterSave')) {
+        //         $model->logAfterSave = false;
+        //     }
+
+        //     $newModel = $this->save($model, $i);
+
+        //     if ($this->insert) {
+        //         call_user_func($this->insert, $newModel, $i);
+        //     }
+        // }
+
+        $model = Yii::createObject($this->modelClass);
+        $data = [];
         for ($i = 1; $i <= $this->rows; $i++) {
-            $model = Yii::createObject($this->modelClass);
-            $model->load([App::className($model) => $this->attributes()]);
-
-            if ($model->hasProperty('logAfterSave')) {
-                $model->logAfterSave = false;
-            }
-
-            $newModel = $this->save($model, $i);
-
-            if ($this->insert) {
-                call_user_func($this->insert, $newModel, $i);
-            }
+            $data[] = $this->attributes();
         }
+        $model::batchInsert($data);
 
         if ($this->showProgress) {
             if (method_exists($this, 'total')) {
