@@ -18,7 +18,7 @@ class NotificationSearchTest extends \Codeception\Test\Unit
         $searchModel = new NotificationSearch();
         $dataProviders = $searchModel->search(['NotificationSearch' => ['keywords' => '']]);
         expect_that($dataProviders);
-        expect($dataProviders->totalCount)->equals(3);
+        expect(count($dataProviders->models))->equals(3);
     }
 
     public function testSearchWithNoResult()

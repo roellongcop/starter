@@ -18,7 +18,7 @@ class ThemeSearchTest extends \Codeception\Test\Unit
         $searchModel = new ThemeSearch();
         $dataProviders = $searchModel->search(['ThemeSearch' => ['keywords' => '']]);
         expect_that($dataProviders);
-        expect($dataProviders->totalCount)->equals(14);
+        expect(count($dataProviders->models))->equals(14);
     }
 
     public function testSearchWithNoResult()

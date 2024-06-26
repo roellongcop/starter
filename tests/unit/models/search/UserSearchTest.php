@@ -18,7 +18,7 @@ class UserSearchTest extends \Codeception\Test\Unit
         $searchModel = new UserSearch();
         $dataProviders = $searchModel->search(['UserSearch' => ['keywords' => '']]);
         expect_that($dataProviders);
-        expect($dataProviders->totalCount)->equals(6);
+        expect(count($dataProviders->models))->equals(6);
     }
 
     public function testSearchWithNoResult()

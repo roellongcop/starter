@@ -18,7 +18,7 @@ class VisitLogSearchTest extends \Codeception\Test\Unit
         $searchModel = new VisitLogSearch();
         $dataProviders = $searchModel->search(['VisitLogSearch' => ['keywords' => '']]);
         expect_that($dataProviders);
-        expect($dataProviders->totalCount)->equals(4);
+        expect(count($dataProviders->models))->equals(4);
     }
 
     public function testSearchWithNoResult()
