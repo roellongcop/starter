@@ -44,39 +44,24 @@ jobs:
 
     - name: Apply migrations
       run: |
-        # export DB_HOST=127.0.0.1
-        # export DB_PORT=3306
-        # export DB_DATABASE=db_starter
-        # export DB_USERNAME=root
-        # export DB_PASSWORD=password
         php yii migrate --interactive=0
 
     - name: Run fixture
       run: |
-        # export DB_HOST=127.0.0.1
-        # export DB_PORT=3306
-        # export DB_DATABASE=db_starter
-        # export DB_USERNAME=root
-        # export DB_PASSWORD=password
-        php yii fixture Backup
-        php yii fixture File
-        php yii fixture Ip
-        php yii fixture Log
-        php yii fixture Notification
-        php yii fixture Queue
-        php yii fixture Role
-        php yii fixture Session
-        php yii fixture Setting
-        php yii fixture User
-        php yii fixture UserMeta
-        php yii fixture VisitLog
-        php yii fixture Visitor
+        php yii fixture Backup --interactive=0
+        php yii fixture File --interactive=0
+        php yii fixture Ip --interactive=0
+        php yii fixture Log --interactive=0
+        php yii fixture Notification --interactive=0
+        php yii fixture Queue --interactive=0
+        php yii fixture Role --interactive=0
+        php yii fixture Session --interactive=0
+        php yii fixture Setting --interactive=0
+        php yii fixture User --interactive=0
+        php yii fixture UserMeta --interactive=0
+        php yii fixture VisitLog --interactive=0
+        php yii fixture Visitor --interactive=0
 
     - name: Run tests
       run: |
-        # export DB_HOST=127.0.0.1
-        # export DB_PORT=3306
-        # export DB_DATABASE=db_starter
-        # export DB_USERNAME=root
-        # export DB_PASSWORD=password
         php vendor/bin/codecept run
