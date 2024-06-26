@@ -29,6 +29,6 @@ class SessionSearchTest extends \Codeception\Test\Unit
         ]);
 
         expect_that($dataProviders);
-        expect($dataProviders->totalCount)->equals(0);
+        expect(count($dataProviders->models))->equals(0);
     }
 }
