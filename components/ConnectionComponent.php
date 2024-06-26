@@ -14,4 +14,5 @@ class ConnectionComponent extends \yii\db\Connection
     //'enableSchemaCache' => true,
     //'schemaCacheDuration' => 60,
     //'schemaCache' => 'cache',
+    
 }
