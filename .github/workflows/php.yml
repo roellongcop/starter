@@ -41,7 +41,7 @@ jobs:
         while ! mysqladmin ping -h127.0.0.1 -uroot -ppassword --silent; do
           sleep 1
         done
-        
+
     - name: Apply migrations
       run: |
         export DB_HOST=127.0.0.1
@@ -58,7 +58,9 @@ jobs:
         export DB_DATABASE=db_starter
         export DB_USERNAME=root
         export DB_PASSWORD=password
-        php yii fixture *
+        php yii fixture Backup
+        php yii fixture File
+        php yii fixture Ip
 
     - name: Run tests
       run: |
