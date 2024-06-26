@@ -59,29 +59,17 @@ jobs:
         # export DB_USERNAME=root
         # export DB_PASSWORD=password
         php yii fixture Backup
-        y
         php yii fixture File
-        y
         php yii fixture Ip
-        y
         php yii fixture Log
-        y
         php yii fixture Notification
-        y
         php yii fixture Queue
-        y
         php yii fixture Role
-        y
         php yii fixture Session
-        y
         php yii fixture Setting
-        y
         php yii fixture User
-        y
         php yii fixture UserMeta
-        y
         php yii fixture VisitLog
-        y
         php yii fixture Visitor
 
     - name: Run tests
