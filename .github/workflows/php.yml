@@ -37,27 +37,25 @@ jobs:
       run: composer update --prefer-dist --no-progress --no-suggest
 
     - name: Wait for MySQL
-      env:
-        MYSQL_PWD: password
       run: |
-        while ! mysqladmin ping -h127.0.0.1 -uroot --silent; do
+        while ! mysqladmin ping -h127.0.0.1 -uroot -ppassword --silent; do
           sleep 1
         done
 
     - name: Apply migrations
-      env:
-        DB_HOST: 127.0.0.1
-        DB_PORT: 3306
-        DB_DATABASE: db_starter
-        DB_USERNAME: root
-        DB_PASSWORD: password
-      run: php yii migrate --interactive=0
+      run: |
+        export DB_HOST=127.0.0.1
+        export DB_PORT=3306
+        export DB_DATABASE=db_starter
+        export DB_USERNAME=root
+        export DB_PASSWORD=password
+        php yii migrate --interactive=0
 
     - name: Run tests
-      env:
-        DB_HOST: 127.0.0.1
-        DB_PORT: 3306
-        DB_DATABASE: db_starter
-        DB_USERNAME: root
-        DB_PASSWORD: password
-      run: php vendor/bin/codecept run
+      run: |
+        export DB_HOST=127.0.0.1
+        export DB_PORT=3306
+        export DB_DATABASE=db_starter
+        export DB_USERNAME=root
+        export DB_PASSWORD=password
+        php vendor/bin/codecept run
