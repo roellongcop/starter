@@ -13,11 +13,11 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: 
+          MYSQL_ROOT_PASSWORD: password  # Setting a password for the MySQL root user
           MYSQL_DATABASE: db_starter
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+        options: --health-cmd="mysqladmin ping -uroot -ppassword" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
     - name: Checkout code
@@ -30,16 +30,25 @@ jobs:
         extensions: mbstring, pdo_mysql
         coverage: pcov
 
+    - name: Install MySQL client
+      run: sudo apt-get install mysql-client
+
     - name: Install Composer dependencies
       run: composer update --prefer-dist --no-progress --no-suggest
 
     - name: Wait for MySQL
       run: |
-        while ! mysqladmin ping -h"127.0.0.1" --silent; do
+        while ! mysqladmin ping -h127.0.0.1 -uroot -ppassword --silent; do
           sleep 1
         done
 
     - name: Apply migrations
+      env:
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_DATABASE: db_starter
+        DB_USERNAME: root
+        DB_PASSWORD: password
       run: php yii migrate --interactive=0
 
     - name: Run tests
@@ -48,5 +57,5 @@ jobs:
         DB_PORT: 3306
         DB_DATABASE: db_starter
         DB_USERNAME: root
-        DB_PASSWORD: 
+        DB_PASSWORD: password
       run: php vendor/bin/codecept run
