@@ -10,8 +10,8 @@ class ConnectionComponent extends \yii\db\Connection
     public $charset = 'utf8';
     public $tablePrefix = 'tbl_';
 
-// Schema cache options (for production environment)
-//'enableSchemaCache' => true,
-//'schemaCacheDuration' => 60,
-//'schemaCache' => 'cache',
+    // Schema cache options (for production environment)
+    //'enableSchemaCache' => true,
+    //'schemaCacheDuration' => 60,
+    //'schemaCache' => 'cache',
 }
