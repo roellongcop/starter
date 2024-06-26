@@ -44,18 +44,12 @@ jobs:
 
     - name: Apply migrations
       run: |
-        export DB_HOST=127.0.0.1
-        export DB_PORT=3306
-        export DB_DATABASE=db_starter
-        export DB_USERNAME=root
-        export DB_PASSWORD=password
         php yii migrate --interactive=0
+
+      - name: Run fixture
+      run: |
+        php yii fixture *
 
     - name: Run tests
       run: |
-        export DB_HOST=127.0.0.1
-        export DB_PORT=3306
-        export DB_DATABASE=db_starter
-        export DB_USERNAME=root
-        export DB_PASSWORD=password
         php vendor/bin/codecept run
