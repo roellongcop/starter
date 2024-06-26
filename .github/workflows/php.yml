@@ -40,6 +40,7 @@ jobs:
         done
 
     - name: Apply migrations
+      working-directory: ./
       run: php yii migrate --interactive=0
 
     - name: Run tests
