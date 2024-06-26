@@ -13,8 +13,8 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: ""
+          MYSQL_DATABASE: db_starter
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
@@ -46,7 +46,7 @@ jobs:
       env:
         DB_HOST: 127.0.0.1
         DB_PORT: 3306
-        DB_DATABASE: testdb
+        DB_DATABASE: db_starter
         DB_USERNAME: root
-        DB_PASSWORD: password
+        DB_PASSWORD: ""
       run: php vendor/bin/codecept run
