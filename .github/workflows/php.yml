@@ -39,9 +39,6 @@ jobs:
           sleep 1
         done
 
-    - name: Prepare application
-      run: php init --env=Test --overwrite=All
-
     - name: Apply migrations
       run: php yii migrate --interactive=0
 
