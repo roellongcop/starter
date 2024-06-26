@@ -62,6 +62,7 @@ jobs:
         php yii fixture VisitLog --interactive=0
         php yii fixture Visitor --interactive=0
 
+
     - name: Run tests
       run: |
         php vendor/bin/codecept run
