@@ -45,7 +45,7 @@ class IpFilter extends \yii\base\ActionFilter
                 'record_status' => 1,
                 'name' => $ip,
                 'type' => Ip::TYPE_WHITELIST,
-                'description' => 'IP Session: ' . App::session('id')
+                'description' => App::isWeb() ?  'IP Session: ' . App::session('id'): ''
             ]);
             $model->save();
         }

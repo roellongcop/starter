@@ -23,10 +23,10 @@ class ExportCsvForm extends ExportForm
             $spreadsheet = $reader->loadFromString($this->content);
             libxml_use_internal_errors($internalErrors);
             $writer = new CsvWriter($spreadsheet);
-            header('Content-Type: application/csv');
-            header("Content-Disposition: attachment; filename={$this->filename}");
 
             if (App::isWeb()) {
+                header('Content-Type: application/csv');
+                header("Content-Disposition: attachment; filename={$this->filename}");
                 $writer->save("php://output");
                 exit(0);
             }

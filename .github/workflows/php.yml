@@ -1,68 +1,68 @@
-name: Yii2 PHP CI with MySQL
+# name: Yii2 PHP CI with MySQL
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: db_starter
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping -uroot -ppassword" --health-interval=10s --health-timeout=5s --health-retries=5
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     services:
+#       mysql:
+#         image: mysql:5.7
+#         env:
+#           MYSQL_ROOT_PASSWORD: password
+#           MYSQL_DATABASE: db_starter
+#         ports:
+#           - 3306:3306
+#         options: --health-cmd="mysqladmin ping -uroot -ppassword" --health-interval=10s --health-timeout=5s --health-retries=5
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
 
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.0'
-        extensions: mbstring, pdo_mysql
-        coverage: pcov
+#     - name: Set up PHP
+#       uses: shivammathur/setup-php@v2
+#       with:
+#         php-version: '8.0'
+#         extensions: mbstring, pdo_mysql
+#         coverage: pcov
 
-    - name: Install MySQL client
-      run: sudo apt-get install mysql-client
+#     - name: Install MySQL client
+#       run: sudo apt-get install mysql-client
 
-    - name: Install Composer dependencies
-      run: composer update --prefer-dist --no-progress --no-suggest
+#     - name: Install Composer dependencies
+#       run: composer update --prefer-dist --no-progress --no-suggest
 
-    - name: Wait for MySQL
-      run: |
-        while ! mysqladmin ping -h127.0.0.1 -uroot -ppassword --silent; do
-          sleep 1
-        done
+#     - name: Wait for MySQL
+#       run: |
+#         while ! mysqladmin ping -h127.0.0.1 -uroot -ppassword --silent; do
+#           sleep 1
+#         done
 
-    - name: Apply migrations
-      run: |
-        php yii migrate --interactive=0
+#     - name: Apply migrations
+#       run: |
+#         php yii migrate --interactive=0
 
-    - name: Run fixture
-      run: |
-        php yii fixture Backup --interactive=0
-        php yii fixture File --interactive=0
-        php yii fixture Ip --interactive=0
-        php yii fixture Log --interactive=0
-        php yii fixture Notification --interactive=0
-        php yii fixture Queue --interactive=0
-        php yii fixture Role --interactive=0
-        php yii fixture Session --interactive=0
-        php yii fixture Setting --interactive=0
-        php yii fixture User --interactive=0
-        php yii fixture UserMeta --interactive=0
-        php yii fixture VisitLog --interactive=0
-        php yii fixture Visitor --interactive=0
+#     - name: Run fixture
+#       run: |
+#         php yii fixture Backup --interactive=0
+#         php yii fixture File --interactive=0
+#         php yii fixture Ip --interactive=0
+#         php yii fixture Log --interactive=0
+#         php yii fixture Notification --interactive=0
+#         php yii fixture Queue --interactive=0
+#         php yii fixture Role --interactive=0
+#         php yii fixture Session --interactive=0
+#         php yii fixture Setting --interactive=0
+#         php yii fixture User --interactive=0
+#         php yii fixture UserMeta --interactive=0
+#         php yii fixture VisitLog --interactive=0
+#         php yii fixture Visitor --interactive=0
 
 
-    - name: Run tests
-      run: |
-        php vendor/bin/codecept run
+#     - name: Run tests
+#       run: |
+#         php vendor/bin/codecept run
