@@ -14,7 +14,7 @@ class QueueController extends Controller
     public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
-            Queue::findByKeywords($keywords, ['channel', 'job', 'pushed_at'])
+            Queue::findByKeywords($keywords, ['channel', 'job'])
         );
     }
 

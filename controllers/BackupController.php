@@ -16,7 +16,7 @@ class BackupController extends Controller
     public function actionFindByKeywords($keywords = '')
     {
         return $this->asJson(
-            Backup::findByKeywords($keywords, ['filename', 'tables', 'description'])
+            Backup::findByKeywords($keywords, ['filename', 'description'])
         );
     }
     /**

@@ -24,12 +24,12 @@ class DashboardController extends Controller
     public function actionFindByKeywords($keywords = '')
     {
         $data = array_merge(
-            File::findByKeywords($keywords, ['name', 'extension', 'token']),
-            Backup::findByKeywords($keywords, ['filename', 'tables', 'description']),
+            File::findByKeywords($keywords, ['name', 'extension']),
+            Backup::findByKeywords($keywords, ['filename', 'description']),
             Ip::findByKeywords($keywords, ['name', 'description']),
             Log::findByKeywords($keywords, ['method', 'action', 'controller', 'table_name', 'model_name']),
             Notification::findByKeywords($keywords, ['message']),
-            Queue::findByKeywords($keywords, ['channel', 'job', 'pushed_at']),
+            Queue::findByKeywords($keywords, ['channel', 'job']),
             Role::findByKeywords($keywords, ['name']),
             Session::findByKeywords($keywords, ['id', 'expire', 'ip', 'browser', 'os', 'device']),
             Setting::findByKeywords($keywords, ['name', 'value']),
