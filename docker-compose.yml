@@ -1,27 +1,41 @@
-version: '2'
+version: '3.8'
+
 services:
-  db:
-    image: mariadb:10.11.8
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: db_starter
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
-
-  php:
-    image: yiisoftware/yii2-php:8.1-apache
     volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
-    ports:
-      - "8000:80"
+      - mariadb_data:/var/lib/mysql
 
   phpmyadmin:
-    image: phpmyadmin:5.2.1
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
     environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: password
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: password
     ports:
       - "8080:80"
+
+  php:
+    image: php:apache
+    container_name: php
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
     depends_on:
-      - db
+      - mariadb
+
+volumes:
+  mariadb_data:
