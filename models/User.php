@@ -664,7 +664,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
                 ->alias('u')
                 ->joinWith('role r')
                 ->groupBy($attribute)
-                ->where(['LIKE', $attribute, $keywords])
+                ->where(['LIKE', $attribute, explode(' ', $keywords)])
                 ->andFilterWhere($andFilterWhere)
                 ->limit($limit)
                 ->asArray()

@@ -129,7 +129,7 @@ class UserMeta extends ActiveRecord
             ->alias('um')
             ->joinWith('user u')
             ->groupBy($attribute)
-            ->where(['LIKE', $attribute, $keywords])
+            ->where(['LIKE', $attribute, explode(' ', $keywords)])
             ->andFilterWhere($andFilterWhere)
             ->limit($limit)
             ->asArray()

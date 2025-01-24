@@ -962,7 +962,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         $data = [];
         foreach ($attributes as $attribute) {
             $data = array_merge($data, array_values(
-                static::filter($attribute, ['LIKE', $attribute, $keywords], $limit, $andFilterWhere)
+                static::filter($attribute, ['LIKE', $attribute, explode(' ', $keywords)], $limit, $andFilterWhere)
             )
             );
         }

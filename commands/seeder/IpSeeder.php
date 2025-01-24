@@ -14,6 +14,7 @@ class IpSeeder extends Seeder
 
 		return [
 			'name' => $this->faker->ipv4,
+			'slug' => $this->faker->ipv4 . rand(11111, 99999),
 			'description' => $this->faker->text,
 			'type' => $this->faker->randomElement([
 				Ip::TYPE_BLACKLIST,

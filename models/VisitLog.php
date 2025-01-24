@@ -144,7 +144,7 @@ class VisitLog extends ActiveRecord
                 ->alias('v')
                 ->joinWith('user u')
                 ->groupBy($attribute)
-                ->where(['LIKE', $attribute, $keywords])
+                ->where(['LIKE', $attribute, explode(' ', $keywords)])
                 ->andFilterWhere($andFilterWhere)
                 ->limit($limit)
                 ->asArray()

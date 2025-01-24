@@ -56,31 +56,58 @@ class AutoCompleteWidget {
 		}
 	}
 
-	createSuggestion(inp, a, val, arr=[]) {
-		const self = this;
-		for (let i = 0; i < arr.length; i++) {
-			if (arr[i].toLowerCase().includes(val.toLowerCase())) {
-				const myArray = arr[i].split(val);
-				let b = document.createElement("DIV");
-				/*make the matching letters bold:*/
-				b.innerHTML = myArray.join("<strong>" + val + "</strong>");
-				/*insert a input field that will hold the current array item's value:*/
-				b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-				/*execute a function when someone clicks on the item value (DIV element):*/
-				b.addEventListener("click", function(e) {
-					/*insert the value for the autocomplete text field:*/
-					self.inp.value = this.getElementsByTagName("input")[0].value;
-					/*close the list of autocompleted values,
-					(or any other open lists of autocompleted values:*/
-					// closeAllLists();
-					if(self.submitOnclick) {
-						$(this).closest('form').submit();
-					}
-				});
-				a.appendChild(b);
-			}
-		}
-	}
+  createSuggestion(inp, a, val, arr = []) {
+    const self = this;
+    const trimmedVal = val.trim(); // Trim spaces from the input
+    const searchTerms = trimmedVal.toLowerCase().split(/\s+/); // Split into individual terms
+
+    for (let i = 0; i < arr.length; i++) {
+      const originalItem = arr[i]; // Original suggestion
+      const itemLower = originalItem.toLowerCase();
+
+      // Check if all search terms exist in the suggestion
+      const matches = searchTerms.every(term => itemLower.includes(term));
+      if (matches) {
+        // Highlight each term while preserving the original order and structure
+        let highlightedItem = originalItem;
+
+        // Create a list of positions for each term to highlight correctly
+        const positions = [];
+        searchTerms.forEach(term => {
+          const regex = new RegExp(term, 'gi');
+          let match;
+          while ((match = regex.exec(itemLower)) !== null) {
+            positions.push({ start: match.index, end: match.index + term.length });
+          }
+        });
+
+        // Sort positions to avoid overlap and process from start to finish
+        positions.sort((a, b) => a.start - b.start);
+
+        // Build the highlighted string
+        let finalString = '';
+        let currentIndex = 0;
+        positions.forEach(({ start, end }) => {
+          finalString += originalItem.substring(currentIndex, start); // Add non-matching part
+          finalString += `<strong>${originalItem.substring(start, end)}</strong>`; // Add highlighted part
+          currentIndex = end;
+        });
+        finalString += originalItem.substring(currentIndex); // Add the remaining part
+
+        // Create suggestion element
+        let b = document.createElement("DIV");
+        b.innerHTML = finalString; // Insert the highlighted suggestion
+        b.innerHTML += `<input type='hidden' value='${originalItem}'>`;
+        b.addEventListener("click", function () {
+          self.inp.value = this.getElementsByTagName("input")[0].value;
+          if (self.submitOnclick) {
+            $(this).closest('form').submit();
+          }
+        });
+        a.appendChild(b);
+      }
+    }
+  }
 
 	init() {
 		const self = this;
