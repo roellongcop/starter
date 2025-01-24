@@ -6,7 +6,7 @@ class ConnectionComponent extends \yii\db\Connection
 {
     public $dsn = 'mysql:host=127.0.0.1;dbname=db_starter';
     public $username = 'root';
-    public $password = '';
+    public $password = 'password';
     public $charset = 'utf8';
     public $tablePrefix = 'tbl_';
 
