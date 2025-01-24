@@ -51,7 +51,7 @@ class Url extends \yii\helpers\Url
         return parent::to($url, $scheme);
     }
 
-    public static function toRoute($url = '', $scheme = false)
+    public static function toRoute($url, $scheme = false)
     {
         if (!App::isWeb()) {
             if ($scheme) {
@@ -61,7 +61,11 @@ class Url extends \yii\helpers\Url
             }
         }
 
-        return parent::toRoute($url, $scheme);
+        if(is_array($url)) {
+            return parent::toRoute($url, $scheme);
+        }
+
+        return $url;
     }
 
     public static function userCanRoute($link)
