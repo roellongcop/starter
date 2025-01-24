@@ -132,7 +132,7 @@ class AccessComponent extends \yii\base\Component
 	public function init()
 	{
 		parent::init();
-		$this->setSearhModels();
+		$this->setSearchModels();
 		$this->setControllerActions();
 		$this->setDefaultNavigation();
 	}
@@ -282,7 +282,7 @@ class AccessComponent extends \yii\base\Component
 		return $menus;
 	}
 
-	public function setSearhModels()
+	public function setSearchModels()
 	{
 		$searchModels = FileHelper::findFiles(Yii::getAlias('@app/models/search'), [
 			'recursive' => true
