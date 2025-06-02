@@ -96,15 +96,7 @@ the /web directory before running the command.
 docker-compose up --build -d
 ```
 
-If you want to dynamically see changes in your code:
-Install dependency directly on the windows using
-```bash
-composer install
-```
-Then run the following command to start the PHP server:
-```bash
-docker-compose up --build -d
-```
+
 Access the app in http://localhost:8000
 
 Access the PHP container to run commands if ever:
