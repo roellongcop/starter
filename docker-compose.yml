@@ -25,15 +25,35 @@ services:
       - "8080:80"
 
   php:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: php
     restart: always
     ports:
       - "8000:80"
-    volumes:
-      - ./:/var/www/html
     depends_on:
       - mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password   # so the php container can connect as root
+      MYSQL_DATABASE: db_starter
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root_password
+
+      # Yii Framework environment variables
+      YII_ENV: prod
+      YII_DEBUG: 0
+    # ──────────────────────────────────────────────────────────────────────────────
+    # IMPORTANT:
+    # We do NOT bind‐mount the entire host folder into /var/www/html,
+    # because we want “composer install” (and vendor/ from build) to stay intact.
+    #
+    # If you do want to bind‐mount for local development, move the "volumes:" line
+    # under a separate override file (e.g. docker-compose.override.yml) so that
+    # production builds aren’t masked by your host files.
+    # ──────────────────────────────────────────────────────────────────────────────
+  # volumes:
+  #   - ./:/var/www/html
 
 volumes:
   mariadb_data:

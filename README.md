@@ -90,15 +90,24 @@
 
 
 # Run in Docker
-Build and run the Docker containers using the following command:
+Build and run the Docker containers using the following command: You might need to delete all the image shortcuts in 
+the /web directory before running the command.
 ```bash 
 docker-compose up --build -d
 ```
-Access the PHP container to run migrations:
+
+If you want to dynamically see changes in your code:
+Install dependency directly on the windows using
+```bash
+composer install
+```
+Then run the following command to start the PHP server:
+```bash
+docker-compose up --build -d
+```
+Access the app in http://localhost:8000
+
+Access the PHP container to run commands if ever:
 ```bash 
 docker-compose exec php bash
-```
-Inside the PHP container, run the migrations:
-```bash 
-php yii migrate
 ```

@@ -1,0 +1,10 @@
+services:
+  php:
+    # 1) Override environment so Yii runs in “dev” mode
+    environment:
+      YII_ENV: dev
+      YII_DEBUG: 1
+
+    # 2) Bind-mount your host directory so you can edit code & have vendor/ on host
+    volumes:
+      - ./:/var/www/html
