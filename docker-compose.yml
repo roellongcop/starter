@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mariadb:
     image: mariadb:latest
@@ -22,12 +20,12 @@ services:
     environment:
       PMA_HOST: mariadb
       PMA_USER: root
-      PMA_PASSWORD: password
+      PMA_PASSWORD: root_password
     ports:
       - "8080:80"
 
   php:
-    image: php:apache
+    build: .
     container_name: php
     restart: always
     ports:

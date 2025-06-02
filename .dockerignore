@@ -1,0 +1,22 @@
+# ──────────────────────────────────────
+# 1) Ignore version control and related metadata
+.git
+.gitignore
+
+# 2) Ignore dependency folders that you rebuild inside the container
+vendor/
+node_modules/
+
+# 3) Ignore OS‐ and editor‐specific cruft (often with weird Windows file modes)
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+*.bak
+.DS_Store
+
+# 4) (Optional) IDE/editor folders—uncomment if you see them in your project
+.vscode
+.idea
+*.sublime*
+*.swp

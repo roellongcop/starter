@@ -87,3 +87,18 @@
 	* Themes
 * Notifications
 * Visitors
+
+
+# Run in Docker
+Build and run the Docker containers using the following command:
+```bash 
+docker-compose up --build -d
+```
+Access the PHP container to run migrations:
+```bash 
+docker-compose exec php bash
+```
+Inside the PHP container, run the migrations:
+```bash 
+php yii migrate
+```
