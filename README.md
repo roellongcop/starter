@@ -88,7 +88,6 @@
 * Notifications
 * Visitors
 
-
 # Run in Docker
 Build and run the Docker containers using the following command: You might need to delete all the image shortcuts in 
 the /web directory before running the command.
